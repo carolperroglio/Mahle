@@ -1,4 +1,4 @@
-
+﻿
 
 /*Configurações do header*/
 .header{            
@@ -28,6 +28,9 @@
     height: 10%;
     font-size: 10pt;  
     background-color: #F2FCFC;  
+    float: right;
+    left: 11.8%;
+    box-shadow: 3px 2px rgba(0,0,0,0.3);
 }
 .icons {
     position: relative;    
@@ -54,11 +57,10 @@
     float: left;
     width: 12%;
     top: 10%;
-    font-family: Arial, Helvetica, sans-serif;    
-    border-right: 1px solid rgba(0,0,0,0.2);   
+    font-family: Arial, Helvetica, sans-serif;           
     padding: 0em 0.5em 0em 0.5em;    
     background-color: #F2FCFC; 
-    box-shadow: 2px 2px #888888;
+    box-shadow: 2px 3px rgba(0,0,0,0.3);
      
 }
 .menu-lateral ul{
