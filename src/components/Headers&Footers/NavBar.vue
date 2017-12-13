@@ -1,4 +1,4 @@
-<template>
+                                                                                                                                                    <template>
     <div>
         <!--                                  -->
         <!--                                  -->
@@ -81,7 +81,7 @@
         <!--              -->
         <div class="menu-lateral">
             <img src="./../../assets/imagens/spi.jpg" class="col-sm-0 logo-system"/>
-            <h4 class="">
+            <h4 class="titulomenu" id="test">
                 Menu                            
             </h4>
             <div class="">
