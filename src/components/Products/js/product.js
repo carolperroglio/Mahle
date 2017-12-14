@@ -1,6 +1,7 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 es6promisse.polyfill();
+
 function paginacao(response, este){
     este.pageAtual=este.startat/20;                       
     este.total = response.data.total; 
