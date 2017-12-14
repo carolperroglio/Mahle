@@ -1,5 +1,6 @@
 import axios from '../../../.././node_modules/axios/index.js'
-
+import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
+es6promisse.polyfill();
 function paginacao(response, este){
     este.pageAtual=este.startat/20;                       
     este.total = response.data.total; 
@@ -26,7 +27,7 @@ export default {
             pageAtual:0,            
             produtos:[],
             produto: {},
-            url:'http://192.168.10.40:8003/api/products/',
+            url:'http://brsbap01:8003/api/products/',
             mensagem:'',
             mensagemSuc:'',
             orderField:'',
