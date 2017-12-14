@@ -66,15 +66,15 @@
         <div class="menu-lateral">
             <img src="./../../assets/imagens/spi.jpg" class="col-sm-0 logo-system"/>
             <h4 class="titulomenu" id="test">
-                Menu                            
+                <br>Menu                            
             </h4>
             <div class="">
                 <nav>
                     <ul>
-                        <li>Things</li>    
-                        <li>Receita</li>    
-                        <li>Parâmetros</li>    
-                        <li><router-link to="/generateProducts">Produtos</router-link></li>    
+                        <li><br>THINGS</li>    
+                        <li><br>RECEITA</li>    
+                        <li><br>PARÂMETROS</li>    
+                        <li><br><a href="#/generateProducts">PRODUTOS</a></li>    
                     </ul>          
                 </nav>
             </div>                                                                                                  
