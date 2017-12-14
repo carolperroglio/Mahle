@@ -34,8 +34,8 @@ input{
 .cadForm{
     position: fixed;
     float: right; 
-    z-index: -1; 
-    margin-top:15%;        
+    z-index: 1; 
+    margin-top:18%;        
     width: 15% !important;
     left: 83%;      
 }
@@ -48,7 +48,7 @@ input{
 .paginacao{        
     z-index: 100;
     text-align: center;    
-    width: 78%;
-    left: 12%;
+    width: 66.3%;
+    left: 15%;
     background-color: white;
 }

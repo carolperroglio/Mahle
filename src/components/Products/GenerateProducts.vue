@@ -39,7 +39,7 @@
                 <li class="nav-item col-md-3">
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control form-control-sm mr-sm-2 col-md-5" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                        <button class="btn btn-outline-primary-sm form-control-sm" @click="buscar(id)">Buscar produtos</button>
+                        <button class="btn btn-outline-primary-sm form-control-sm" @click.stop.prevent="buscar(id)">Buscar produtos</button>
                     </form>
                 </li>
             </ul>        
@@ -112,7 +112,7 @@
                             <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control" placeholder="gs1">
                             <br>
                             <div>
-                                <button class="btn btn-success"><i :disabled="produto.productName==undefined || produto.productName==''" @click="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i></button> 
+                                <button class="btn btn-success"><i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i></button> 
                                 <button class="btn btn-danger"><i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
                                 <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
                                     Limpar

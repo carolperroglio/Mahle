@@ -72,7 +72,7 @@
                 <a class="nav-link active" id="v-pills-things-tab" data-toggle="pill" href="#v-pills-things" role="tab" aria-controls="v-pills-things" aria-selected="true">THINGS</a>
                 <a class="nav-link" id="v-pills-receita-tab" data-toggle="pill" href="#v-pills-receita" role="tab" aria-controls="v-pills-receita" aria-selected="false">RECEITA</a>  
                 <a class="nav-link" id="v-pills-parametros-tab" data-toggle="pill" href="#v-pills-parametros" role="tab" aria-controls="v-pills-parametros" aria-selected="false">PARÂMETROS</a>
-                <a class="nav-link" id="v-pills-produtos-tab" data-toggle="pill" href="#/generateProducts" role="tab" aria-controls="v-pills-produtos" aria-selected="false">PRODUTOS</a>
+                <router-link to="/generateProducts" class="nav-link" id="v-pills-produtos-tab" data-toggle="pill" role="tab" aria-controls="v-pills-produtos" aria-selected="false">PRODUTOS</a>
             </div>                                                                                                        
         </div>        
         <router-view/>       
