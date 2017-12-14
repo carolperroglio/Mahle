@@ -12,7 +12,7 @@
         <div class="fixed-top nav-produtos">                                                         
             <ul class="nav justify-content-end">                                  
                 <li class="nav-item">                    
-                    <select class="form-control" v-model="orderField">                        
+                    <select class="form-control form-control-sm" v-model="orderField">                        
                         <option value="" selected disabled>Escolha o campo</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
@@ -21,14 +21,14 @@
                     </select>
                 </li>
                 <li class="nav-item">
-                    <select class="form-control" v-model="order">                        
+                    <select class="form-control form-control-sm" v-model="order">                        
                         <option value="" selected disabled>Crescente ou decrescente</option>
                         <option value="ascending">Crescente</option>                                          
                         <option value="descending">Decrescente</option>                                          
                     </select>
                 </li>                
                 <li class="nav-item">
-                    <select class="form-control" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                    <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Selecione o campo para buscar</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
@@ -38,7 +38,7 @@
                 </li>                                                              
                 <li class="nav-item">
                     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                        <input class="form-control form-control-sm mr-sm-2" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                         <button class="btn btn-outline-primary my-2 my-sm-0" @click="buscar(id)">Buscar produtos</button>
                     </form>
                 </li>
