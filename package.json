@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta",
+    "es6-promise": "^4.1.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "popper": "^1.0.1",

@@ -9,12 +9,12 @@
             <div class="row  mb-0">                
                 <div class="col-sm-10">
                     <img src="./../../assets/imagens/mahle_logo_azul_escuro.png" class="logo"/>                                      
-                </div>                
-                <a class="user col-sm-0 no-gutters" href="#">                
+                </div> 
+                <router-link to="/" class="user col-sm-0 no-gutters">                
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                     Operador 
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>                
-                </a>                                
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>                                
+                </router-link>
             </div>                                     
         </header>
         <!--                           -->
@@ -25,50 +25,34 @@
         <nav class="nav-menu fixed-top">
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" href="/#/">
+                    <router-link to="/" class="nav-link">                    
                         <center>
                             <img src="./../../assets/imagens/home.png" class="icons" />
                         </center>
-                        <p>Home</p>
-                    </a>
-                </li>
+                        <p>Home</p>                    
+                    </router-link>
+                </li>                                
                 <li class="nav-item">
-                    <a class="nav-link" href="">
-                        <center>
-                            <img src="./../../assets/imagens/contract.png" class="icons" />
-                        </center>
-                        <p>Cadastrar OP</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">
-                        <center>
-                            <img src="./../../assets/imagens/stick-man.png" class=" icons" />
-                        </center>
-                        <p>Acompanhamento</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <router-link class="nav-link" to="">
                         <center>
                             <img src="./../../assets/imagens/off-button.png" class="icons" />
                         </center>
                         <p>On/Off</p>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <router-link class="nav-link" to="">
                         <center>
                             <img src="./../../assets/imagens/flask.png" class="icons" />
                         </center>
                         <p>Análises Quimicas</p>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <router-link class="nav-link" to="">
                         <center><img src="./../../assets/imagens/computer.png" class="icons" /></center>
                         <p>Automação</p>
-                    </a>
+                    </router-link>
                 </li>
             </ul> 
         </nav>
@@ -90,7 +74,7 @@
                         <li>Things</li>    
                         <li>Receita</li>    
                         <li>Parâmetros</li>    
-                        <li><a href="#/generateProducts">Produtos</a></li>    
+                        <li><router-link to="/generateProducts">Produtos</router-link></li>    
                     </ul>          
                 </nav>
             </div>                                                                                                  

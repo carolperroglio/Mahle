@@ -39,7 +39,7 @@
                 <li class="nav-item">
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                        <button class="btn btn-outline-primary my-2 my-sm-0" @click="buscar(id)">Buscar produtos</button>
+                        <button class="btn btn-outline-primary my-2 my-sm-0" @click.stop.prevent="buscar(id)">Buscar produtos</button>
                     </form>
                 </li>
             </ul>        
@@ -67,7 +67,7 @@
                             <b>Descrição : </b>{{p.productDescription}}&nbsp;&nbsp;&nbsp;
                             <b>Código : </b>{{p.productCode}}&nbsp;&nbsp;&nbsp;
                             <b>GTIN : </b>{{p.productGTIN}}&nbsp;&nbsp;&nbsp;                    
-                            <i class="fa fa-check-square-o icon-right" @click="editar(p)" aria-hidden="true"></i>
+                            <i class="fa fa-check-square-o icon-right" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
                         </div>    
                     </div>                     
                 </div>
@@ -75,13 +75,13 @@
                     <nav aria-label="">
                         <ul class="pagination justify-content-center">
                             <li v-show="startat>0" class="page-item" >
-                                <a class="page-link" href="#" @click="buscar(startat-=20, quantityPage)">Previous</a>
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Previous</a>
                             </li>
                             <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
-                                <a class="page-link"  href="#" @click="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
+                                <a class="page-link"  href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
                             </li>                                                                                
                             <li class="page-item" v-show="pages.length>1 && startat+20<total">
-                                <a class="page-link" href="#" @click="buscar(startat+=20, quantityPage)">Next</a> 
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Next</a> 
                             </li>
                         </ul>
                     </nav>  
@@ -113,8 +113,8 @@
                             <br>
                             <div>
                                 <button class="btn btn-success"><i :disabled="produto.productName==undefined || produto.productName==''" @click="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i></button> 
-                                <button class="btn btn-danger"><i @click="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
-                                <div class="btn btn-primary pull-right" @click="produto={}">
+                                <button class="btn btn-danger"><i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
+                                <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
                                     Limpar
                                 </div>
                             </div>                            
