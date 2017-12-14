@@ -68,16 +68,12 @@
             <h4 class="titulomenu" id="test">
                 <br>Menu                            
             </h4>
-            <div class="">
-                <nav>
-                    <ul>
-                        <li><br>THINGS</li>    
-                        <li><br>RECEITA</li>    
-                        <li><br>PARÂMETROS</li>    
-                        <li><br><a href="#/generateProducts">PRODUTOS</a></li>    
-                    </ul>          
-                </nav>
-            </div>                                                                                                  
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-things-tab" data-toggle="pill" href="#v-pills-things" role="tab" aria-controls="v-pills-things" aria-selected="true">THINGS</a>
+                <a class="nav-link" id="v-pills-receita-tab" data-toggle="pill" href="#v-pills-receita" role="tab" aria-controls="v-pills-receita" aria-selected="false">RECEITA</a>  
+                <a class="nav-link" id="v-pills-parametros-tab" data-toggle="pill" href="#v-pills-parametros" role="tab" aria-controls="v-pills-parametros" aria-selected="false">PARÂMETROS</a>
+                <a class="nav-link" id="v-pills-produtos-tab" data-toggle="pill" href="#/generateProducts" role="tab" aria-controls="v-pills-produtos" aria-selected="false">PRODUTOS</a>
+            </div>                                                                                                        
         </div>        
         <router-view/>       
     </div>    
@@ -86,13 +82,11 @@
 </template>
 
 <script>
-
-
 export default {
-    props: ['nothing'],
-}
+  props: ["nothing"]
+};
 </script>
 
 <style>
-    @import url('./navBar.css');
+@import url("./navBar.css");
 </style>

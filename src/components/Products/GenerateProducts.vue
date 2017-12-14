@@ -39,7 +39,7 @@
                 <li class="nav-item col-md-3">
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control form-control-sm mr-sm-2 col-md-5" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                        <button class="btn btn-outline-primary my-2 my-sm-0 form-control-sm col-md-6" @click="buscar(id)">Buscar produtos</button>
+                        <button class="btn btn-outline-primary-sm form-control-sm" @click="buscar(id)">Buscar produtos</button>
                     </form>
                 </li>
             </ul>        

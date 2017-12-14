@@ -52,7 +52,7 @@
 /*Configurações do menu-lateral*/
 .titulomenu{
     text-align: center;
-    color: ##415865;
+    color:           #415865;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20pt;
     font-weight: normal;
@@ -70,6 +70,7 @@
     background-color: #F2FCFC; 
     box-shadow: 2px 3px rgba(0,0,0,0.1); 
      }
+
      
 .menu-lateral ul{
        list-style: none;
