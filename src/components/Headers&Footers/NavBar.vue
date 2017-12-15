@@ -6,57 +6,57 @@
         <!--                                  -->
         <!--                                  -->
         <header class="header fixed-top">
-            <div class="row  mb-0">                
-                <div class="col-sm-10">
-                    <img src="./../../assets/imagens/mahle_logo_azul_escuro.png" class="logo"/>                                      
-                </div> 
-                <router-link to="/" class="user col-sm-0 no-gutters">                
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                    Operador 
-                    <i class="fa fa-chevron-down" aria-hidden="true"></i>                                
-                </router-link>
-            </div>                                     
+            <img src="./../../assets/imagens/mahle_logo_azul_escuro.png" class="logo"/>                                      
+            <router-link to="/" class="user">                
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+                Operador 
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>                                
+            </router-link>                                
         </header>
         <!--                           -->
         <!--                           -->
         <!-- Menu navegação de atalhos -->
         <!--                           -->
         <!--                           -->
-        <nav class="nav-menu fixed-top">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <router-link to="/" class="nav-link">                    
+        <nav class="nav-menu fixed-top ">
+            <ul class="nav justify-content-end col-lg-12">
+                <li class="icons col-lg-3">
+                    <router-link to="/" class="">                    
                         <center>
-                            <img src="./../../assets/imagens/home.png" class="icons" />
+                            <img src="./../../assets/imagens/home.png" class="icons"/>
                         </center>
-                        <p>Home</p>                    
+                        <div class="texto-menu">Home</div>             
                     </router-link>
                 </li>                                
-                <li class="nav-item">
-                    <router-link class="nav-link" to="">
+                <li class="icons col-lg-3">
+                    <router-link class="" to="">
                         <center>
-                            <img src="./../../assets/imagens/off-button.png" class="icons" />
+                            <img src="./../../assets/imagens/off-button.png" class="icons"/>
                         </center>
-                        <p>On/Off</p>
+                        <div class="texto-menu">On/Off</div>
                     </router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="">
+                <li class="icons col-lg-3">
+                    <router-link class="" to="">
                         <center>
                             <img src="./../../assets/imagens/flask.png" class="icons" />
                         </center>
-                        <p>Análises Quimicas</p>
+                        <div class="texto-menu">Análises Químicas</div>
                     </router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="">
-                        <center><img src="./../../assets/imagens/computer.png" class="icons" /></center>
-                        <p>Automação</p>
-                    </router-link>
+                <li class="icons col-lg-3">
+                    <div>    
+                        <router-link class="" to="">
+                            <center>
+                            <img src="./../../assets/imagens/computer.png" class="icons"/>
+                            </center>
+                             <div class="texto-menu">Automação</div>
+                        </router-link>
+                    </div>    
                 </li>
             </ul> 
         </nav>
-                    
+
 
         <!--              -->
         <!--              -->
@@ -65,14 +65,14 @@
         <!--              -->
         <div class="menu-lateral">
             <img src="./../../assets/imagens/spi.jpg" class="col-sm-0 logo-system"/>
-            <h4 class="titulomenu" id="test">
+            <h4 class="titulomenu">
                 <br>Menu                            
             </h4>
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-things-tab" data-toggle="pill" href="#v-pills-things" role="tab" aria-controls="v-pills-things" aria-selected="true">THINGS</a>
                 <a class="nav-link" id="v-pills-receita-tab" data-toggle="pill" href="#v-pills-receita" role="tab" aria-controls="v-pills-receita" aria-selected="false">RECEITA</a>  
                 <a class="nav-link" id="v-pills-parametros-tab" data-toggle="pill" href="#v-pills-parametros" role="tab" aria-controls="v-pills-parametros" aria-selected="false">PARÂMETROS</a>
-                <router-link to="/generateProducts" class="nav-link" id="v-pills-produtos-tab" data-toggle="pill" role="tab" aria-controls="v-pills-produtos" aria-selected="false">PRODUTOS</a>
+                <router-link to="/generateProducts" class="nav-link" id="v-pills-produtos-tab" data-toggle="pill" role="tab" aria-controls="v-pills-produtos" aria-selected="false">PRODUTOS</router-link>
             </div>                                                                                                        
         </div>        
         <router-view/>       
