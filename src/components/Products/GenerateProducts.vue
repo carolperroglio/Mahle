@@ -9,37 +9,37 @@
         <!--                       -->
         <!--                       -->                     
         
-        <div class="fixed-top nav-produtos">                                                         
-            <ul class="nav justify-content-end">                                  
-                <li class="nav-item col-md-3">                    
-                    <select class="form-control form-control-sm" v-model="orderField">                        
-                        <option value="" selected disabled>Escolha o campo</option>
+        <div class="fixed-top nav-produtos col-md-12">                                                         
+            <ul class="nav ">                                  
+                <li class="nav-item">                    
+                    <select class="form-control form-control-sm col-md-auto" v-model="orderField">                        
+                        <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
                         <option value="productCode">código</option>
                         <option value="productGTIN">GTIN</option>                    
                     </select>
                 </li>
-                <li class="nav-item col-md-3">
-                    <select class="form-control form-control-sm" v-model="order">                        
-                        <option value="" selected disabled>Crescente ou decrescente</option>
+                <li class="nav-item">
+                    <select class="form-control form-control-sm col-md-auto" v-model="order">                        
+                        <option value="" selected disabled>Ordenação</option>
                         <option value="ascending">Crescente</option>                                          
                         <option value="descending">Decrescente</option>                                          
                     </select>
                 </li>                
-                <li class="nav-item col-md-3">
-                    <select class="form-control form-control-sm col-md-13" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
-                        <option value="" selected disabled>Selecione o campo para buscar</option>
+                <li class="nav-item">
+                    <select class="form-control form-control-sm col-md-auto" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                        <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
                         <option value="productCode">código</option>
                         <option value="productGTIN">GTIN</option>                    
                     </select>
                 </li>                                                              
-                <li class="nav-item col-md-3">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control form-control-sm mr-sm-2 col-md-5" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                        <button class="btn btn-outline-primary-sm form-control-sm" @click.stop.prevent="buscar(id)">Buscar produtos</button>
+                <li class="nav-item">
+                    <form class="form-inline my-2">
+                        <input class="form-control form-control-sm mr-sm-2 col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                        <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                     </form>
                 </li>
             </ul>        
@@ -103,13 +103,13 @@
                             <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                             <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>                                                                                                                                                                       
                             <label for="nome"><b>Nome : </b></label>
-                            <input type="text" placeholder="nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid">                                                    
+                            <input type="text" placeholder="nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid form-control-sm">                                                    
                             <label for="desc" ><b>Descrição : </b></label>
-                            <input type="text" id="desc" class="form-control" v-model="produto.productDescription" placeholder="descrição">                            
+                            <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="descrição">                            
                             <label for="cod" ><b>Código : </b></label>
-                            <input class="form-control" type="text" v-model="produto.productCode" placeholder="código" id="cod">                            
+                            <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="código" id="cod">                            
                             <label for="gs1" class=""><b>GS1 : </b></label>
-                            <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control" placeholder="gs1">
+                            <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="gs1">
                             <br>
                             <div>
                                 <button class="btn btn-success"><i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i></button> 
