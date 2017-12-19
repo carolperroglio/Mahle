@@ -1,5 +1,5 @@
-import axios from '../../../.././node_modules/axios/index.js'
-import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
+import axios from 'axios'
+import es6promisse from 'es6-promise'
 es6promisse.polyfill();
 
 function paginacao(response, este){
@@ -57,7 +57,6 @@ export default {
                       
         },
 
-
         put(produto){
             this.carregando = true;
             produto.enabled=true;                                 
@@ -78,7 +77,6 @@ export default {
             this.produto = produto;
         },
 
-
         excluir(produto){
             this.carregando = true; 
             axios.delete(this.url+produto.productId).then((r)=>{
@@ -93,7 +91,7 @@ export default {
             });            
         },        
 
-        buscar(id=""){    
+        buscar(id=""){              
             this.carregando = true;                                               
             var config = {
                 headers: {'Cache-Control':'no-cache'}
@@ -115,3 +113,6 @@ export default {
         }
     },     
 };
+
+
+ 

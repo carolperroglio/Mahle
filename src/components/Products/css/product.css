@@ -1,5 +1,5 @@
 
-    
+/* menu de navegação de produtos */   
 .nav-produtos{
     top: 20%;
     border-bottom: 1px solid rgba(0,0,0,0.2);
@@ -7,6 +7,8 @@
     left: 13%;
     background-color: white;
 }
+
+/*Listagem de produtos*/
 .icon-right{
     position: relative;
     float: right;
@@ -24,10 +26,7 @@ input{
     width: 60%;       
 }
 
-
-.panel-body{
-    text-align: left;    
-}
+/**/
 .cadForm{
     position: fixed;
     float: right; 
