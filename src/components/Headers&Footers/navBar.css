@@ -10,33 +10,70 @@
 .logo{
     position: relative;    
     margin-top: 0.9%;
-    height: 50%; 
-    width: 15%;  
-      }
+    height: 60%; 
+    width: 10%;  
+}
 .user, .user:visited, .user:hover{
-    position: relative;  
-    left: 7%;    
+    position: relative;
+    font-size: 18px;  
+    left: 78%;    
     text-decoration: none !important;
     color: white;      
-    margin-top: 1.5%;    
+    top: 10%;    
 }
+@media screen and (max-width : 801px){
+    .user{
+        left: 70%;
+        font-size:0.75em; 
+    }
+    .logo{
+    width: 7em;
+    height: 3em;  
+    padding-top: 0.1%;  
+    }
+}
+
 
 
 /*Configurações do menu-top*/
+.icons{
+    width:28%; 
+    height:28%;
+    padding-top: 0.50%;
+    padding-bottom: 0% !important;
+    }
 .nav-menu{
+    list-style-type: none;
+    display: inline;
+    background-color: #333333;
     top: 10%;
-    height: 10%;
-    font-size: 10pt;  
+    height: 9%;
     background-color: #F2FCFC;  
-    float: right;
-    left: 11.8%;
+    left: 12%;
     box-shadow: 3px 2px rgba(0,0,0,0.1);
 }
-.icons {
-    position: relative;    
-    height: 5%;
-    width: 2rem;        
+.texto-menu{
+    font-size: 12px;  
+    position: relative;
+    padding: 1%;
+    left: 30%;
+    
 }
+@media screen and (max-width : 801px){ 
+    .icons{
+    width:18%; 
+    height:18%;
+    padding-top: 0.1% !important; 
+    padding-bottom: 0% !important;
+    }
+    .texto-menu{
+    font-size: 0.6em;
+    align-content: left;
+    padding-top: 0.1% !important; 
+    padding-bottom: 0% !important;
+    }
+ }
+
 
 /*Logo do sistema*/
 .logo-system{    
@@ -51,14 +88,15 @@
 
 /*Configurações do menu-lateral*/
 .titulomenu{
+    font-size: 30px;
     text-align: center;
-    color: ##415865;
+    color:#415865;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 20pt;
     font-weight: normal;
     }
 .menu-lateral{
-    font-size: 12pt; color: #5C636E;
+    font-size: 17px;
+    color: #5C636E;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     position: fixed !important;            
     text-align: left;    
@@ -70,8 +108,14 @@
     background-color: #F2FCFC; 
     box-shadow: 2px 3px rgba(0,0,0,0.1); 
      }
-     
 .menu-lateral ul{
-       list-style: none;
-
+    list-style: none;
 }
+@media screen and (max-width : 801px){
+    .titulomenu{ 
+        font-size:1.5em;
+    }
+    .menu-lateral{
+        font-size: 0.75em;
+    }
+ }

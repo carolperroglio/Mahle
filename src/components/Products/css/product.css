@@ -1,14 +1,24 @@
 
 /* menu de navegação de produtos */   
 .nav-produtos{
-    top: 20%;        
+    top: 20%;
     border-bottom: 1px solid rgba(0,0,0,0.2);
-    z-index: 1;
-    left: 15%;
+    z-index: 2%;
+    left: 13%;
     background-color: white;
 }
 
 /*Listagem de produtos*/
+.icon-right{
+    position: relative;
+    float: right;
+}
+.panel-body{
+    text-align: left;    
+}
+input{
+    position: relative !important;
+}
 .produtos{
     position: relative;
     margin-top: 13%;           
@@ -21,7 +31,7 @@
     position: fixed;
     float: right; 
     z-index: 1; 
-    margin-top:18%;        
+    margin-top:16%;        
     width: 15% !important;
     left: 83%;      
 }
