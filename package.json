@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "autocomplete-vue": "^1.0.3",
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta",
     "es6-promise": "^4.1.1",
@@ -22,6 +23,7 @@
     "rijs.npm": "^2.0.0",
     "rijs.resdir": "^1.4.0",
     "vue": "^2.5.2",
+    "vue-autocompleter": "^0.3.17",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

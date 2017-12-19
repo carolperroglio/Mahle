@@ -7,8 +7,7 @@
         <!-- Menu de navegação de produtos -->
         <!--                       -->
         <!--                       -->
-        <!--                       -->                     
-        
+        <!--                       -->                             
         <div class="fixed-top nav-produtos">                                                         
             <ul class="nav">                                  
                 <li class="nav-item ">                    
@@ -59,6 +58,7 @@
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
+                
                 <div v-for="(p, index) in produtos" v-bind:key="index">
                     <div class="card">
                         <div class="card-header"><b></b></div>
