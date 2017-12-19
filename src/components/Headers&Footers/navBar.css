@@ -15,11 +15,11 @@
 }
 .user, .user:visited, .user:hover{
     position: relative;
-    font-size: 25px;  
-    left: 80%;    
+    font-size: 18px;  
+    left: 78%;    
     text-decoration: none !important;
     color: white;      
-    top: 12%;    
+    top: 10%;    
 }
 @media screen and (max-width : 801px){
     .user{
@@ -29,7 +29,7 @@
     .logo{
     width: 7em;
     height: 3em;  
-    padding-top: 0.5%;  
+    padding-top: 0.1%;  
     }
 }
 
@@ -37,9 +37,9 @@
 
 /*Configurações do menu-top*/
 .icons{
-    width:12%; 
-    height:12%;
-    padding-top: 0.15%;
+    width:28%; 
+    height:28%;
+    padding-top: 0.50%;
     padding-bottom: 0% !important;
     }
 .nav-menu{
@@ -53,9 +53,10 @@
     box-shadow: 3px 2px rgba(0,0,0,0.1);
 }
 .texto-menu{
-    font-size: 19px;  
+    font-size: 12px;  
     position: relative;
-    left: 43%;
+    padding: 1%;
+    left: 30%;
     
 }
 @media screen and (max-width : 801px){ 
@@ -87,14 +88,14 @@
 
 /*Configurações do menu-lateral*/
 .titulomenu{
-    font-size: 30pt;
+    font-size: 30px;
     text-align: center;
     color:#415865;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: normal;
     }
 .menu-lateral{
-    font-size: 20pt;
+    font-size: 17px;
     color: #5C636E;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     position: fixed !important;            
