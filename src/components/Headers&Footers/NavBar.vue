@@ -20,7 +20,7 @@
         <!--                           -->
         <nav class="nav-menu fixed-top ">
             <ul class="nav justify-content-end col-lg-12">
-                <li class="icons col-lg-3">
+                <li class="icons col-lg-1">
                     <router-link to="/" class="">                    
                         <center>
                             <img src="./../../assets/imagens/home.png" class="icons"/>
@@ -28,7 +28,7 @@
                         <div class="texto-menu">Home</div>             
                     </router-link>
                 </li>                                
-                <li class="icons col-lg-3">
+                <li class="icons col-lg-1">
                     <router-link class="" to="">
                         <center>
                             <img src="./../../assets/imagens/off-button.png" class="icons"/>
@@ -36,7 +36,7 @@
                         <div class="texto-menu">On/Off</div>
                     </router-link>
                 </li>
-                <li class="icons col-lg-3">
+                <li class="icons col-lg-1">
                     <router-link class="" to="">
                         <center>
                             <img src="./../../assets/imagens/flask.png" class="icons" />
@@ -44,7 +44,7 @@
                         <div class="texto-menu">Análises Químicas</div>
                     </router-link>
                 </li>
-                <li class="icons col-lg-3">
+                <li class="icons col-lg-1">
                     <div>    
                         <router-link class="" to="">
                             <center>
