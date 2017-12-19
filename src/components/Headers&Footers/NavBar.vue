@@ -1,4 +1,4 @@
-                                                                                                                                                    <template>
+                                                                                                                                       <template>
     <div>
         <!--                                  -->
         <!--                                  -->
@@ -58,25 +58,23 @@
         </nav>
 
 
-        <!--              -->
-        <!--              -->
-        <!-- Menu lateral -->
-        <!--              -->
-        <!--              -->
-        <div class="menu-lateral sidebar" role="navigation">
+       <div class="menu-lateral">
             <img src="./../../assets/imagens/spi.jpg" class="col-sm-0 logo-system"/>
             <h4 class="titulomenu">
                 <br>Menu                            
             </h4>
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-things-tab" data-toggle="pill" href="#v-pills-things" role="tab" aria-controls="v-pills-things" aria-selected="true">THINGS</a>
-                <router-link to="/phases" class="nav-link" id="v-pills-receita-tab" data-toggle="pill" href="#v-pills-receita" role="tab" aria-controls="v-pills-receita" aria-selected="false">RECEITA</router-link>  
-                <a class="nav-link" id="v-pills-parametros-tab" data-toggle="pill" href="#v-pills-parametros" role="tab" aria-controls="v-pills-parametros" aria-selected="false">PARÂMETROS</a>
-                <router-link to="/generateProducts" class="nav-link" id="v-pills-produtos-tab" data-toggle="pill" role="tab" aria-controls="v-pills-produtos" aria-selected="false">PRODUTOS</router-link>
+            <div class="texto-menu-lateral card-header" role="tab" id="headingOne">
+                    <a data-toggle="collapse" href=".collapseOne" aria-expanded="true" aria-controls="collapseOne">THINGS</a></br>
+                    <div id="collapseOne" class="sub-menu-lateral collapse collapseOne show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Gerenciar Things</div>
+                    <div id="collapseOne" class="sub-menu-lateral collapse collapseOne show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Criar grupo</div>
+                    <div id="collapseOne" class="sub-menu-lateral collapse collapseOne show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Hierarquia</div>
+                <router-link to="/phases" data-toggle="collapse" href="#v-pills-receita" aria-expanded="true" aria-controls="collapseOne">RECEITA</router-link><br>
+                <a data-toggle="collapse" href=".collapseOne" aria-expanded="true" aria-controls="collapseOne">PARÂMETROS</a><br>
+                <router-link to="/generateProducts" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">PRODUTOS</router-link><br>
             </div>                                                                                                        
         </div>        
         <router-view/>       
-    </div>    
+    </div>        
 
         
 </template>
