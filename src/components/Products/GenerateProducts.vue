@@ -7,27 +7,29 @@
         <!-- Menu de navegação de produtos -->
         <!--                       -->
         <!--                       -->
-        <!--                       -->                             
-        <div class="fixed-top nav-produtos">                                                         
-            <ul class="nav">                                  
-                <li class="nav-item ">                    
-                    <select class="btn btn-light col-md-12" v-model="orderField">                        
-                        <option value="" selected disabled>Campo para ordenação</option>
-                        <option value="productName">Nome</option>
-                        <option value="productDescription">Descrição</option>
-                        <option value="productCode">Código</option>
+
+        <div class="fixed-top nav-produtos col-md-12">    
+          <ul class="nav d-flex align-items-center">                                  
+                <li class="nav-item">                    
+                    <select class="form-control form-control-sm mr-sm-2" v-model="orderField">                        
+                        <option value="" selected disabled>Campo para busca</option>
+                        <option value="productName">nome</option>
+                        <option value="productDescription">descrição</option>
+                        <option value="productCode">código</option>
                         <option value="productGTIN">GTIN</option>                    
                     </select>
                 </li>
                 <li class="nav-item">
-                    <select class="btn btn-light col-md-auto" v-model="order">                        
+                    <select class="form-control form-control-sm mr-sm-2" v-model="order">                        
+
                         <option value="" selected disabled>Ordenação</option>
                         <option value="ascending">Crescente</option>                                          
                         <option value="descending">Decrescente</option>                                          
                     </select>
                 </li>                
-               <li class="nav-item">
-                    <select class="form-control form-control-sm col-md-auto" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                <li class="nav-item">
+                    <select class="form-control form-control-sm mr-sm-2" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
