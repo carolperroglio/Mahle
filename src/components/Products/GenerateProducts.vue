@@ -9,10 +9,10 @@
         <!--                       -->
         <!--                       -->                     
         
-        <div class="fixed-top nav-produtos col-md-12">                                                         
-            <ul class="nav ">                                  
+        <div class="fixed-top nav-produtos col-md-12">    
+          <ul class="nav d-flex align-items-center">                                  
                 <li class="nav-item">                    
-                    <select class="form-control form-control-sm col-md-auto" v-model="orderField">                        
+                    <select class="form-control form-control-sm mr-sm-2" v-model="orderField">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
@@ -21,14 +21,14 @@
                     </select>
                 </li>
                 <li class="nav-item">
-                    <select class="form-control form-control-sm col-md-auto" v-model="order">                        
+                    <select class="form-control form-control-sm mr-sm-2" v-model="order">                        
                         <option value="" selected disabled>Ordenação</option>
                         <option value="ascending">Crescente</option>                                          
                         <option value="descending">Decrescente</option>                                          
                     </select>
                 </li>                
                 <li class="nav-item">
-                    <select class="form-control form-control-sm col-md-auto" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                    <select class="form-control form-control-sm mr-sm-2" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
