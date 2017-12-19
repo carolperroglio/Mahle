@@ -7,8 +7,7 @@
         <!-- Menu de navegação de produtos -->
         <!--                       -->
         <!--                       -->
-        <!--                       -->                     
-        
+
         <div class="fixed-top nav-produtos col-md-12">    
           <ul class="nav d-flex align-items-center">                                  
                 <li class="nav-item">                    
@@ -22,6 +21,7 @@
                 </li>
                 <li class="nav-item">
                     <select class="form-control form-control-sm mr-sm-2" v-model="order">                        
+
                         <option value="" selected disabled>Ordenação</option>
                         <option value="ascending">Crescente</option>                                          
                         <option value="descending">Decrescente</option>                                          
@@ -29,16 +29,17 @@
                 </li>                
                 <li class="nav-item">
                     <select class="form-control form-control-sm mr-sm-2" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
                         <option value="productCode">código</option>
                         <option value="productGTIN">GTIN</option>                    
                     </select>
-                </li>                                                              
+                </li>                                                          
                 <li class="nav-item">
-                    <form class="form-inline my-2">
-                        <input class="form-control form-control-sm mr-sm-2 col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                    <form class="form-inline my-4">
+                        <input class="form-control relative" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                     </form>
                 </li>
@@ -53,11 +54,13 @@
         <!--                       -->
         <!--                       -->   
            
-        <div class="row conteudo">            
+        <div class="row conteudo" style="top:-400px;"> 
+                         
             <div class="produtos col-8">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
+                
                 <div v-for="(p, index) in produtos" v-bind:key="index">
                     <div class="card">
                         <div class="card-header"><b></b></div>

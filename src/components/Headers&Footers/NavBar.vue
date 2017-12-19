@@ -20,7 +20,7 @@
         <!--                           -->
         <nav class="nav-menu fixed-top ">
             <ul class="nav justify-content-end col-lg-12">
-                <li class="icons col-lg-3">
+                <li class="icons col-lg-1">
                     <router-link to="/" class="">                    
                         <center>
                             <img src="./../../assets/imagens/home.png" class="icons"/>
@@ -28,7 +28,7 @@
                         <div class="texto-menu">Home</div>             
                     </router-link>
                 </li>                                
-                <li class="icons col-lg-3">
+                <li class="icons col-lg-1">
                     <router-link class="" to="">
                         <center>
                             <img src="./../../assets/imagens/off-button.png" class="icons"/>
@@ -36,7 +36,7 @@
                         <div class="texto-menu">On/Off</div>
                     </router-link>
                 </li>
-                <li class="icons col-lg-3">
+                <li class="icons col-lg-1">
                     <router-link class="" to="">
                         <center>
                             <img src="./../../assets/imagens/flask.png" class="icons" />
@@ -44,7 +44,7 @@
                         <div class="texto-menu">Análises Químicas</div>
                     </router-link>
                 </li>
-                <li class="icons col-lg-3">
+                <li class="icons col-lg-1">
                     <div>    
                         <router-link class="" to="">
                             <center>
@@ -63,14 +63,14 @@
         <!-- Menu lateral -->
         <!--              -->
         <!--              -->
-        <div class="menu-lateral">
+        <div class="menu-lateral sidebar" role="navigation">
             <img src="./../../assets/imagens/spi.jpg" class="col-sm-0 logo-system"/>
             <h4 class="titulomenu">
                 <br>Menu                            
             </h4>
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-things-tab" data-toggle="pill" href="#v-pills-things" role="tab" aria-controls="v-pills-things" aria-selected="true">THINGS</a>
-                <a class="nav-link" id="v-pills-receita-tab" data-toggle="pill" href="#v-pills-receita" role="tab" aria-controls="v-pills-receita" aria-selected="false">RECEITA</a>  
+                <router-link to="/phases" class="nav-link" id="v-pills-receita-tab" data-toggle="pill" href="#v-pills-receita" role="tab" aria-controls="v-pills-receita" aria-selected="false">RECEITA</router-link>  
                 <a class="nav-link" id="v-pills-parametros-tab" data-toggle="pill" href="#v-pills-parametros" role="tab" aria-controls="v-pills-parametros" aria-selected="false">PARÂMETROS</a>
                 <router-link to="/generateProducts" class="nav-link" id="v-pills-produtos-tab" data-toggle="pill" role="tab" aria-controls="v-pills-produtos" aria-selected="false">PRODUTOS</router-link>
             </div>                                                                                                        
