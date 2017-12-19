@@ -63,7 +63,7 @@
         <!-- Menu lateral -->
         <!--              -->
         <!--              -->
-        <div class="menu-lateral">
+        <div class="menu-lateral sidebar" role="navigation">
             <img src="./../../assets/imagens/spi.jpg" class="col-sm-0 logo-system"/>
             <h4 class="titulomenu">
                 <br>Menu                            
