@@ -72,7 +72,7 @@
                 <nav>
                     <ul>
                         <li><br>THINGS</li>    
-                        <li><br>RECEITA</li>    
+                        <li><br><router-link to="/phases">RECEITA</router-link></li>    
                         <li><br>PARÂMETROS</li>    
                         <li><br><router-link to="/generateProducts">PRODUTOS</router-link></li>    
                     </ul>          

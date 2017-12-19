@@ -7,13 +7,12 @@
         <!-- Menu de navegação de produtos -->
         <!--                       -->
         <!--                       -->
-        <!--                       -->                     
-        
+        <!--                       -->                             
         <div class="fixed-top nav-produtos">                                                         
             <ul class="nav justify-content-end">                                  
                 <li class="nav-item col-md-3">                    
                     <select class="form-control form-control-sm" v-model="orderField">                        
-                        <option value="" selected disabled>Escolha o campo</option>
+                        <option value="" selected >Escolha o campo</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
                         <option value="productCode">código</option>
@@ -22,14 +21,14 @@
                 </li>
                 <li class="nav-item col-md-3">
                     <select class="form-control form-control-sm" v-model="order">                        
-                        <option value="" selected disabled>Crescente ou decrescente</option>
+                        <option value="" selected >Crescente ou decrescente</option>
                         <option value="ascending">Crescente</option>                                          
                         <option value="descending">Decrescente</option>                                          
                     </select>
                 </li>                
                 <li class="nav-item col-md-3">
                     <select class="form-control form-control-sm col-md-13" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
-                        <option value="" selected disabled>Selecione o campo para buscar</option>
+                        <option value="" selected >Selecione o campo para buscar</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
                         <option value="productCode">código</option>
@@ -58,6 +57,7 @@
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
+                
                 <div v-for="(p, index) in produtos" v-bind:key="index">
                     <div class="card">
                         <div class="card-header"><b></b></div>
