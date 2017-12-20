@@ -33,8 +33,6 @@
     }
 }
 
-
-
 /*Configurações do menu-top*/
 .icons{
     width:28%; 
@@ -59,7 +57,7 @@
     left: 30%;
     
 }
-@media screen and (max-width : 801px){ 
+@media screen and (max-width : 1000px){ 
     .icons{
     width:18%; 
     height:18%;
@@ -80,11 +78,10 @@
     position: relative;
     z-index: 100;
     width: 100%;
-    height: 12%;
-    width: 88%;
+    height: 15%;
+    width: 85%;
     border: 8px solid rgba(242, 252, 252, 1)        
 }
-
 
 /*Configurações do menu-lateral*/
 .titulomenu{
@@ -126,9 +123,13 @@
         font-size:1.5em;
     }
     .texto-menu-lateral{
-        font-size: 0.75em;
+        font-size: 0.70em;
     }
     .sub-menu-lateral{
-        font-size: 0.75em;
+        font-size: 0.70em;
+    }
+    .logo-system{
+        width: 5em;
+        height: 3.5em;
     }
  }
