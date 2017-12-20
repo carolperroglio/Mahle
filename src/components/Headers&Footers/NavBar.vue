@@ -5,6 +5,7 @@
         <!-- Cabeçalho da pagina, logo e user -->
         <!--                                  -->
         <!--                                  -->
+                         
         <header class="header fixed-top">
             <img src="./../../assets/imagens/mahle_logo_azul_escuro.png" class="logo"/>                                      
             <router-link to="/" class="user">                
@@ -64,12 +65,14 @@
                 <br>Menu                            
             </h4>
             <div class="texto-menu-lateral card-header" role="tab" id="headingOne">
-                    <a data-toggle="collapse" href=".collapseOne" aria-expanded="true" aria-controls="collapseOne">THINGS</a></br>
+                <a data-toggle="collapse" href=".collapseOne" aria-expanded="true" aria-controls="collapseOne">THINGS</a></br>
                     <div id="collapseOne" class="sub-menu-lateral collapse collapseOne show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Gerenciar Things</div>
                     <div id="collapseOne" class="sub-menu-lateral collapse collapseOne show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Criar grupo</div>
                     <div id="collapseOne" class="sub-menu-lateral collapse collapseOne show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Hierarquia</div>
-                <router-link to="/phases" data-toggle="collapse" href="#v-pills-receita" aria-expanded="true" aria-controls="collapseOne">RECEITA</router-link><br>
-                <a data-toggle="collapse" href=".collapseOne" aria-expanded="true" aria-controls="collapseOne">PARÂMETROS</a><br>
+                <a data-toggle="collapse"  href=".v-pills-receita" aria-expanded="true" router-link to="/phases"   aria-controls="collapseOne">RECEITA</a><br>
+                    <div id="v-pills-receita" class="v-pills-receita sub-menu-lateral collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Cadastrar Receita</div>
+                    <div id="v-pills-receita" class="v-pills-receita sub-menu-lateral collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Relatório de Receita</div>
+                <router-link to="" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">PARÂMETROS</router-link><br>
                 <router-link to="/generateProducts" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">PRODUTOS</router-link><br>
             </div>                                                                                                        
         </div>        
