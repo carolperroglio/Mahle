@@ -7,12 +7,12 @@
         <!-- Menu de navegação de produtos -->
         <!--                       -->
         <!--                       -->
-        <!--                       -->                             
-        <div class="fixed-top nav-produtos">                                                         
-            <ul class="nav">                                  
-                <li class="nav-item ">                    
-                    <select class="btn btn-light col-md-12" v-model="orderField">                        
-                        <option value="" selected disabled>Campo para ordenação</option>
+
+        <div class="fixed-top nav-produtos col-md-12">    
+          <ul class="nav d-flex align-items-center">                                  
+                <li class="nav-item">                    
+                    <select class="form-control form-control-sm mr-sm-2" v-model="orderField">                        
+                        <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">Nome</option>
                         <option value="productDescription">Descrição</option>
                         <option value="productCode">Código</option>
@@ -20,14 +20,15 @@
                     </select>
                 </li>
                 <li class="nav-item">
-                    <select class="btn btn-light col-md-auto" v-model="order">                        
+                    <select class="form-control form-control-sm mr-sm-2" v-model="order">                        
+
                         <option value="" selected disabled>Ordenação</option>
                         <option value="ascending">Crescente</option>                                          
                         <option value="descending">Decrescente</option>                                          
                     </select>
                 </li>                
-               <li class="nav-item">
-                    <select class="form-control form-control-sm col-md-auto" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                <li class="nav-item">
+                    <select class="form-control form-control-sm mr-sm-2" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
@@ -36,7 +37,7 @@
                     </select>
                 </li>                                                          
                 <li class="nav-item">
-                    <form class="form-inline my-4">
+                    <form class="form-inline my-3 form-control-sm mr-sm-5">
                         <input class="form-control relative" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                     </form>

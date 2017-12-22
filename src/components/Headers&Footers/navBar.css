@@ -9,7 +9,7 @@
 }
 .logo{
     position: relative;    
-    margin-top: 0.9%;
+    margin-top: 0.5%;
     height: 60%; 
     width: 10%;  
 }
@@ -33,13 +33,11 @@
     }
 }
 
-
-
 /*Configurações do menu-top*/
 .icons{
     width:28%; 
     height:28%;
-    padding-top: 0.50%;
+    padding-top: 0.90%;
     padding-bottom: 0% !important;
     }
 .nav-menu{
@@ -59,7 +57,7 @@
     left: 30%;
     
 }
-@media screen and (max-width : 801px){ 
+@media screen and (max-width : 1000px){ 
     .icons{
     width:18%; 
     height:18%;
@@ -80,24 +78,20 @@
     position: relative;
     z-index: 100;
     width: 100%;
-    height: 12%;
-    width: 88%;
+    height: 15%;
+    width: 85%;
     border: 8px solid rgba(242, 252, 252, 1)        
 }
 
-
 /*Configurações do menu-lateral*/
 .titulomenu{
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
     color:#415865;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: normal;
     }
 .menu-lateral{
-    font-size: 17px;
-    color: #5C636E;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     position: fixed !important;            
     text-align: left;    
     height: 100%;
@@ -108,23 +102,34 @@
     background-color: #F2FCFC; 
     box-shadow: 2px 3px rgba(0,0,0,0.1); 
      }
+.texto-menu-lateral{
+    padding-top: 10px;
+    padding-inline-start: 25px;
+    font-size: 20px;
+    color: #5C636E;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 .sub-menu-lateral{
-    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 3px;
+    font-size: 17px;
     color: #5C636E;
     font-family: Arial, Helvetica, sans-serif;
     padding-left: 2em;
 }
-.menu-lateral ul{
-    list-style: none;
-}
+
 @media screen and (max-width : 801px){
     .titulomenu{ 
         font-size:1.5em;
     }
-    .menu-lateral{
-        font-size: 0.75em;
+    .texto-menu-lateral{
+        font-size: 0.70em;
     }
     .sub-menu-lateral{
-        font-size: 0.75em;
+        font-size: 0.70em;
+    }
+    .logo-system{
+        width: 5em;
+        height: 3.5em;
     }
  }
