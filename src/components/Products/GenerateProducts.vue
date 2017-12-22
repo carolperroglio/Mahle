@@ -66,7 +66,7 @@
                             <label class="ls"><b>Descrição : </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls"><b>Código : </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls"><b>GTIN : </b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;                    
-                            <i class="fa fa-pencil icon-right" style="font-size:36px;" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
+                            <i class="fa fa-pencil icon-right" style="font-size:22px; cursor:pointer" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
                         </div>    
                     </div>                     
                 </div>
