@@ -70,10 +70,12 @@ input{
         }  
     } 
 
-
 .ls {
     width: 20%;
 }
+
+/* Relatório de Cadastro de Produtos */ 
+
 .card-body{
 font-family: Arial, Helvetica, sans-serif;
 font-size: 16px;
