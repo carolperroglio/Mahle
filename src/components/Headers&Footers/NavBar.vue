@@ -49,7 +49,7 @@
                     <div>    
                         <router-link class="" to="">
                             <center>
-                            <img src="./../../assets/imagens/computer.png" class="icons"/>
+                                <img src="./../../assets/imagens/computer.png" class="icons"/>
                             </center>
                              <div class="texto-menu">Automação</div>
                         </router-link>

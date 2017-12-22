@@ -58,8 +58,7 @@ export default {
         },
 
         put(produto){
-            this.carregando = true;
-            produto.enabled=true;                                 
+            this.carregando = true;                                            
             axios.put(this.url+produto.productId,produto).then((r)=>{
                 this.mensagem='';
                 this.mensagemSuc = "Produto " + produto.productName + " atualizado com sucesso"; 
