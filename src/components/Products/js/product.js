@@ -28,7 +28,7 @@ export default {
             pageAtual:0,            
             produtos:[],
             produto: {},
-            url:'http://brsbap01:8003/api/products/',
+            url:'http://192.168.11.160:8003/api/products/',
             mensagem:'',
             mensagemSuc:'',
             orderField:'',

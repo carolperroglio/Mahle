@@ -68,4 +68,20 @@ input{
         width: 15% !important;
         height: 60%;
         }  
-    }   
+    } 
+
+#nm {
+    width: 20%;
+}
+
+#dsc {
+    width: 20%;
+}
+
+#cd {
+    width: 20%;
+}
+
+#g {
+    width: 20%;
+}
