@@ -18,10 +18,10 @@
                         <input class="form-control mr-sm-2" required v-model="recipe.recipeCode" placeholder="Código da receita"/>
                     </li>
                     <li class="nav-item">                        
-                        <button type="button" class="btn btn-success" v-show="!recipeCadastrada" :disabled="carregando" @click.stop.prevent="createRecipe(recipe)">Cadastrar Receita</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" v-show="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">Enviar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </li> 
                     <li class="nav-item justify-content-end">                        
-                        <button type="button" class="btn btn-primary" :disabled="carregando || recipe.recipeName==undefined" @click.stop.prevent="displayCadPhase=true">Cadastrar Fase</button>                        
+                        <button type="button" class="btn btn-primary btn-sm" :disabled="carregando || !recipeCadastrada" @click.stop.prevent="displayCadPhase=true; displayCadProPhase=false">Cadastrar fase</button>                        
                     </li> 
                     <li class="nav-item">                     
                         <button type="button" class="btn btn-success fa fa-pencil" id="btnEditarRec" v-show="recipeCadastrada" @click.stop.prevent="putRecipe(recipe)"> Editar Receita</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -80,7 +80,9 @@
             <div class="listagem col-8">            
                 <div v-for="(pha, index) in phases">                        
                     <div class="card-body">
-                        Fase {{index}} Nome da fase = {{pha.phaseName}} --- Código da fase {{pha.phaseCode}} <i class="fa fa-check-square-o icon-right" @click.stop.prevent="phase=pha" aria-hidden="true"></i><i class="fa fa-check-square-o" @click.stop.prevent="" aria-hidden="true"></i>
+                        Fase {{index}} Nome da fase = {{pha.phaseName}} --- Código da fase {{pha.phaseCode}} <i class="fa fa-check-square-o icon-right" @click.stop.prevent="phase=pha" aria-hidden="true"></i>
+                        <button class="btn btn-primary btn-sm" @click.stop.prevent="expand==false?expand=true:expand=false">\/</button><button class="btn btn-primary btn-sm" @click.stop.prevent="displayCadProPhase=true; displayCadPhase=false">Cadastrar produto</button>
+                        <div v-show="expand" v-for="(pro, indexPro) in pha.products">Produtos</div>
                     </div>                                                                                                                                            
                 </div>
             </div>
@@ -102,8 +104,8 @@
                         <label for="inputPassword4">Código da fase</label>                            
                         <input type="text" class="form-control form-control-sm" v-model="phase.phaseCode" placeholder="Código">                    
                         <div>                                                    
-                            <button @click.stop.prevent="(phase.phaseId!=undefined) ? putPhase(phase) : createPhase(phase);" class="btn btn-success" :disabled="phase.phaseName==undefined || phase.phaseName=='' || phase.phaseCode==''"><i class="fa fa-check-square" aria-hidden="true"></i></button> 
-                            <button class="btn btn-danger"><i @click.stop.prevent="deletePhase(phase, recipe)" :disabled="phase.phaseId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
+                            <button @click.stop.prevent="(phase.phaseId!=undefined) ? putPhase(phase) : createPhase(phase);" class="btn btn-success" :disabled="phase.phaseName==undefined || phase.phaseName=='' || phase.phaseCode==undefined || phase.phaseCode==''"><i class="fa fa-check-square" aria-hidden="true"></i></button> 
+                            <button @click.stop.prevent="deletePhase(phase, recipe)" :disabled="phase.phaseId == undefined || phase.phaseId == ''" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button>
                             <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
                                 Limpar
                             </div>
@@ -111,6 +113,32 @@
                     </div>                                                                                                                                                       	                                            
                 </form>    
             </div>  
+            <!--                       --> 
+            <!--                       -->
+            <!--                       --> 
+            <!-- Cadastro da produtos  -->
+            <!--                       -->
+            <!--                       -->
+            <!--                       -->  
+            <div class="cadForm" v-show="displayCadProPhase">                                                          
+                <form>
+                    <div class="form-row">
+                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>                                                                                                                       
+                        <label for="">Nome do produto</label>
+                        <input type="text" class="form-control form-control-sm" v-model="phase.phaseName" placeholder="Nome">                                    
+                        <label for="inputPassword4">Código do produto</label>                            
+                        <input type="text" class="form-control form-control-sm" v-model="phase.phaseCode" placeholder="Código">                    
+                        <div>                                                    
+                            <button @click.stop.prevent="(phase.phaseId!=undefined) ? putPhase(phase) : createPhase(phase);" class="btn btn-success" :disabled="phase.phaseName==undefined || phase.phaseName=='' || phase.phaseCode==undefined || phase.phaseCode==''"><i class="fa fa-check-square" aria-hidden="true"></i></button> 
+                            <button @click.stop.prevent="deletePhase(phase, recipe)" :disabled="phase.phaseId == undefined || phase.phaseId == ''" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+                            <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
+                                Limpar
+                            </div>
+                        </div>                                   
+                    </div>                                                                                                                                                       	                                            
+                </form>    
+            </div>
         </div>                      
     </div>      
 </template>
