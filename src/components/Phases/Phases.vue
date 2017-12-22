@@ -9,13 +9,13 @@
         <!--               -->                         
         <div class="fixed-top nav-produtos">
             <form>                
-                <ul class="nav">                
-                    <li class="nav-item ">                    
+                <ul class="nav d-flex align-items-center">                
+                    <li class="nav-item">                    
                         <label class="mr-sm-2">Nome da receita : </label>
-                        <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" required placeholder="Nome da receita">                                                                                                       
+                        <input type="text" class="form-control mr-sm-2" v-model="recipe.recipeName" required placeholder="Nome da receita">                                                                                                       
                     <li class="nav-item">                        
                         <label class="mr-sm-2">Código : </label>
-                        <input class="form-control form-control-sm" required v-model="recipe.recipeCode" placeholder="Código da receita"/>
+                        <input class="form-control mr-sm-2" required v-model="recipe.recipeCode" placeholder="Código da receita"/>
                     </li>
                     <li class="nav-item">                        
                         <button type="button" class="btn btn-success" v-show="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">Enviar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -24,7 +24,7 @@
                         <button type="button" class="btn btn-primary btn-sm" :disabled="carregando || !recipeCadastrada" @click.stop.prevent="displayCadPhase=true; displayCadProPhase=false">Cadastrar fase</button>                        
                     </li> 
                     <li class="nav-item">                     
-                        <button type="button" class="btn btn-success fa fa-pencil" v-show="recipeCadastrada" @click.stop.prevent="putRecipe(recipe)"> editar receita</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success fa fa-pencil" id="btnEditarRec" v-show="recipeCadastrada" @click.stop.prevent="putRecipe(recipe)"> Editar Receita</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </li>
                     <li class="nav-item justify-content-end" v-show="json.stringify(recipeProductEnd) !== '{}'">                        
                         Produto : {{recipeProduct.productName}} | Quantidade do produto : {{recipeProductEnd.value+''+recipeProductEnd.measurementUnit}} | Tipo do produto : {{recipeProductEnd.phaseProductType}}  
@@ -39,22 +39,21 @@
             <!--               -->
             <!--               -->
             <!--               -->        
-            <div class="fixed-top nav-produtos nav-produto-final" v-show="recipeCadastrada">
-                <div class="input-group input-group-sm">                    
-                    <label class="mr-sm-2">Digite a quantidade : </label>
-                    <input class="form-control form-control-sm"  required v-model="recipeProductEnd.value" placeholder="Valor"/>
-                    <label class="mr-sm-2">Digite a unidade de medida : </label>
-                    <input class="form-control form-control-sm"  required v-model="recipeProductEnd.measurementUnit" placeholder="Ex.: kg"/>
-                    <label class="mr-sm-2">Digite o tipo de produto : </label>
-                    
-                    <select class="form-control form-control-sm" v-model="recipeProductEnd.phaseProductType">                        
+            <div class="row nav-produto-final" id="cadprodfinal" v-show="recipeCadastrada">                
+                    <label>Digite a quantidade : </label><br>
+                    <input class="fm form-control mr-sm-2"  required v-model="recipeProductEnd.value" placeholder="Valor"/>
+                    <label>Digite a unidade de medida : </label><br>
+                    <input class="fm form-control mr-sm-2"  required v-model="recipeProductEnd.measurementUnit" placeholder="Ex.: kg"/>
+                    <label>Digite o tipo de produto : </label><br>
+                    <select class="fm form-control mr-sm-2" v-model="recipeProductEnd.phaseProductType">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="scrap">Rejeito</option>
                         <option value="finished">Acabado</option>
                         <option value="semi_finished">Semi-Acabado</option>                   
                     </select>
-                    <label class="mr-sm-2">Digite o nome do produto : </label>                            
-
+                               
+                    <label class="fm mr-sm-2">Digite o nome do produto : </label>                            
+                    
                     <div class="dropdown">   
                         <input @keyup="recipeProducts=getProductFinal(productName)" v-model="productName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -64,7 +63,7 @@
                     </div>
 
                     <button @click.stop.prevent="createRecipeProduct(recipeProduct, recipeProductEnd)" :disabled="recipeProduct.productName==undefined">Ola mundo</button>
-                </div><br><br>                
+                <br><br>                
             </div>
         </div>
         <div class="progress fixed-top" v-show="carregando">
