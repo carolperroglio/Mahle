@@ -53,13 +53,11 @@
         <!--                       -->
         <!--                       -->   
            
-        <div class="row conteudo"> 
-                         
+        <div class="row conteudo" style="top:-400px;">                          
             <div class="produtos col-8">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                </div>
-                
+                </div>                
                 <div v-for="(p, index) in produtos" v-bind:key="index">
                     <div class="card">
                         <div class="card-header"><b></b></div>
@@ -98,29 +96,27 @@
             <!--                            -->
             <!--                            -->         
 
-            <div class="cadForm col-0 container">            
+            <div class="cadForm">            
                 <form>
-                    <div class="form-row">                                                                                                                                                                                                                                                          
-                        <div class="">                              
-                            <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                            <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>                                                                                                                                                                       
-                            <label for="nome"><b>Nome : </b></label>
-                            <input type="text" placeholder="nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid form-control-sm">                                                    
-                            <label for="desc" ><b>Descrição : </b></label>
-                            <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="descrição">                            
-                            <label for="cod" ><b>Código : </b></label>
-                            <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="código" id="cod">                            
-                            <label for="gs1" class=""><b>GS1 : </b></label>
-                            <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="gs1">
-                            <br>
-                            <div>
-                                <button class="btn btn-success"><i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i></button> 
-                                <button class="btn btn-danger"><i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
-                                <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
-                                    Limpar
-                                </div>
-                            </div>                            
-                        </div> 
+                    <div class="form-row">                                                                                                                                                                                                                                                                                                                
+                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>                                                                                                                                                                       
+                        <label for="nome"><b>Nome : </b></label>
+                        <input type="text" placeholder="nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid form-control-sm">                                                    
+                        <label for="desc" ><b>Descrição : </b></label>
+                        <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="descrição">                            
+                        <label for="cod" ><b>Código : </b></label>
+                        <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="código" id="cod">                            
+                        <label for="gs1" class=""><b>GS1 : </b></label>
+                        <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="gs1">
+                        <br>
+                        <div>
+                            <button class="btn btn-success"><i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i></button> 
+                            <button class="btn btn-danger"><i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
+                            <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
+                                Limpar
+                            </div>
+                        </div>                                                    
                     </div>                                                                                              
                 </form>                       
             </div>                        

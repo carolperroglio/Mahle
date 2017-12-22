@@ -5,3 +5,32 @@
     left: 15%;
     background-color: white;
 }
+.nav-produto-final{
+    top: 28% !important;
+    height: 5% !important; 
+}
+
+.cadForm{
+    position: fixed !important;
+    float: right; 
+    z-index: 1;             
+    width: 10% !important;
+    left: 85%;
+    margin-top: 17%;
+}
+
+.listagem{
+    position: relative;
+    margin-top: 20%;           
+    left: 15%;
+    width: 60% !important;
+}
+.produto-final{    
+    left: 15%;
+    margin-top: 15%;
+}
+
+.progress{
+    top: 38% !important; 
+    left: 15% !important;
+}
