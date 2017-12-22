@@ -30,9 +30,9 @@ export default {
             config : {
                 headers: {'Cache-Control':'no-cache'}
             },                                              
-            url:'http://brsbap01:8003/api/',                                 
-            ok:false,
+            url:'http://brsbap01:8003/api/',                                             
             recipeProduct:{},
+            recipeCadastrada: false,
             recipeProductEnd:{},
             recipeProducts: [],
             carregando:false,
@@ -45,31 +45,58 @@ export default {
             name:'',            
             displayCadPhase:false,
             phaseProduct:{},            
-            phaseProducts: [],                                 
+            phaseProducts: []                                           
         }
     },  
     computed:{       
 
     },      
     methods:{ 
-        createRecipe(){             
+
+        /*****************/
+        /*               */
+        /*               */
+        /*  CRUD Recipe  */
+        /*               */
+        /*               */
+        /*****************/
+        createRecipe(recipe){             
             this.mensagemSuc='';
             this.carregando=true;                       
-            axios.post(this.url+"recipes/",this.recipe).then((response)=>{
-                console.log(response.data);
+            axios.post(this.url+"recipes/",recipe).then((response)=>{
+                console.log(response.data);                
                 this.recipe=response.data;
+                this.carregando=false;
+                this.recipeCadastrada=true;
+            },(error)=>{
+                console.log(error);
+                this.carregando=false;
+            });
+        },          
+        putRecipe(recipe){
+            this.mensagemSuc='';
+            this.carregando=true;                       
+            axios.put(this.url+"recipes/"+recipe.recipeId,recipe).then((response)=>{
+                console.log(response.data);
+                recipe=response.data;
                 this.ok=true;
                 this.carregando=false;
             },(error)=>{
                 console.log(error);
                 this.carregando=false;
             });
-        },  
+        },
 
-        createRecipeProduct(){                        
+        /*****************/
+        /*               */        
+        /*  CRUD Recipe  */
+        /*   Product     */
+        /*               */
+        /*****************/
+        createRecipeProduct(recipeProduct, recipeProductEnd){                        
             this.carregando=true;            
-            this.recipeProductEnd.productId=this.recipeProduct.productId;            
-            axios.post(this.url+"recipes/product/"+this.recipe.recipeId,this.recipeProductEnd).then((response)=>{
+            recipeProductEnd.productId=recipeProduct.productId;            
+            axios.post(this.url+"recipes/product/"+this.recipe.recipeId,recipeProductEnd).then((response)=>{
                 console.log(response.data);                                
                 this.carregando=false;                                
                 alert('Cadastrado com sucesso');
@@ -81,11 +108,16 @@ export default {
         },
 
 
-
+        /*****************/
+        /*               */
+        /*               */
+        /*  CRUD Phase   */
+        /*               */
+        /*               */
+        /*****************/
         createPhase(phase){
             this.mensagemSuc='';
-            this.carregando=true;  
-            console.log(phase);
+            this.carregando=true;              
             axios.post(this.url+"phases/",phase).then((response)=>{
                 console.log(response.data);
                 phase=response.data;                              
@@ -96,19 +128,37 @@ export default {
                 this.carregando=false;
             });
         },
-        putPhase(){
-
+        putPhase(phase){
+            axios.delete(this.url+"phases/"+phase.phaseId,phase).then((response)=>{
+                this.mensagem='';
+                this.mensagemSuc= "Fase " + phase.phaseName + " atualizada com sucesso";                                           
+                console.log(response.data);                
+                this.phase={};
+                this.carregando=false;  
+            },(error)=>{
+                console.log(error);
+                this.carregando=false; 
+                this.mensagemSuc='Erro ao deletar : '+ error; 
+            })
         },
-        deletePhase(){
-
-        },   
-                
+        deletePhase(phase, recipe){ 
+            this.carregando=true;                         
+            axios.delete(this.url+"recipes/phases/"+recipe.recipeId,{data: phase}).then((response)=>{                                           
+                console.log(response.data);
+                this.phases = this.phases.filter(item => item !== phase); 
+                this.phase={};
+                this.carregando=false;  
+            },(error)=>{
+                console.log(error);
+                this.carregando=false; 
+                this.mensagemSuc='Erro ao deletar : '+ error; 
+            })
+        },                   
         relacionaFase(phase){  
             this.mensagemSuc='';                                  
             axios.post(this.url+"recipes/phases/"+this.recipe.recipeId,phase).then((response)=>{
-                console.log(response.data);
-                this.phase.products=[];
-                this.phases.push(this.phase);
+                console.log(response.data);                
+                this.phases.push(phase);
                 this.phase = {};                
                 this.mensagemSuc='Fase relacionada com sucesso';
                 this.ok=true;                
@@ -117,8 +167,24 @@ export default {
                 this.carregando=false;
             });
         },    
+        
+        /*****************/
+        /*               */
+        /*               */
+        /*  CRUD Phase   */
+        /*   Products    */
+        /*               */
+        /*****************/
+        
 
 
+        /*****************/
+        /*               */
+        /*               */
+        /*Busca Produtos */
+        /*               */
+        /*               */
+        /*****************/
         getResults(index){
             if(this.phases[index].productName.length<3){this.phases[index].products=[];return;}    
             this.phases[index].products=[];                                    
@@ -130,7 +196,6 @@ export default {
                 console.log(error);
             })
         },
-
         getProductFinal(name){            
             var array=[];                          
             if(name.length<3){return;}                

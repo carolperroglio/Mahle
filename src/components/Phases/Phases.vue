@@ -3,7 +3,7 @@
         <!--               -->
         <!--               -->
         <!--               -->
-        <!--Nav de produtos-->
+        <!--Nav de Receitas-->
         <!--               -->
         <!--               -->
         <!--               -->                         
@@ -12,17 +12,20 @@
                 <ul class="nav">                
                     <li class="nav-item ">                    
                         <label class="mr-sm-2">Nome da receita : </label>
-                        <input type="text" :disabled="ok" class="form-control form-control-sm" v-model="recipe.recipeName" required placeholder="Nome da receita">                                                                                                       
+                        <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" required placeholder="Nome da receita">                                                                                                       
                     <li class="nav-item">                        
                         <label class="mr-sm-2">Código : </label>
-                        <input class="form-control form-control-sm" :disabled="ok" required v-model="recipe.recipeCode" placeholder="Código da receita"/>
+                        <input class="form-control form-control-sm" required v-model="recipe.recipeCode" placeholder="Código da receita"/>
                     </li>
                     <li class="nav-item">                        
-                        <button type="button" class="btn btn-success" :disabled="carregando || recipe.recipeName==undefined" @click.stop.prevent="createRecipe()">Enviar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" v-show="!recipeCadastrada" :disabled="carregando" @click.stop.prevent="createRecipe(recipe)">Enviar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </li> 
                     <li class="nav-item justify-content-end">                        
-                        <button type="button" class="btn btn-primary" :disabled="carregando || recipe.recipeName==undefined" @click.stop.prevent="displayCadPhase=true">Cadastrar fase</button>                        
+                        <button type="button" class="btn btn-primary btn-sm" :disabled="carregando || recipe.recipeName==undefined" @click.stop.prevent="displayCadPhase=true">Cadastrar fase</button>                        
                     </li> 
+                    <li class="nav-item">                     
+                        <button type="button" class="btn btn-success fa fa-pencil" v-show="recipeCadastrada" @click.stop.prevent="putRecipe(recipe)"> editar receita</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </li>
                     <li class="nav-item justify-content-end" v-show="json.stringify(recipeProductEnd) !== '{}'">                        
                         Produto : {{recipeProduct.productName}} | Quantidade do produto : {{recipeProductEnd.value+''+recipeProductEnd.measurementUnit}} | Tipo do produto : {{recipeProductEnd.phaseProductType}}  
                     </li>                    
@@ -36,7 +39,7 @@
             <!--               -->
             <!--               -->
             <!--               -->        
-            <div class="fixed-top nav-produtos nav-produto-final" v-show="ok">
+            <div class="fixed-top nav-produtos nav-produto-final" v-show="recipeCadastrada">
                 <div class="input-group input-group-sm">                    
                     <label class="mr-sm-2">Digite a quantidade : </label>
                     <input class="form-control form-control-sm"  required v-model="recipeProductEnd.value" placeholder="Valor"/>
@@ -60,7 +63,7 @@
                         
                     </div>
 
-                    <button @click.stop.prevent="createRecipeProduct()" :disabled="recipeProduct.productName==undefined">Ola mundo</button>
+                    <button @click.stop.prevent="createRecipeProduct(recipeProduct, recipeProductEnd)" :disabled="recipeProduct.productName==undefined">Ola mundo</button>
                 </div><br><br>                
             </div>
         </div>
@@ -78,7 +81,7 @@
             <div class="listagem col-8">            
                 <div v-for="(pha, index) in phases">                        
                     <div class="card-body">
-                        Fase {{index}} Nome da fase = {{pha.phaseName}} --- Código da fase {{pha.phaseCode}} <i class="fa fa-check-square-o icon-right" @click.stop.prevent="phase=pha" aria-hidden="true"></i>
+                        Fase {{index}} Nome da fase = {{pha.phaseName}} --- Código da fase {{pha.phaseCode}} <i class="fa fa-check-square-o icon-right" @click.stop.prevent="phase=pha" aria-hidden="true"></i><i class="fa fa-check-square-o" @click.stop.prevent="" aria-hidden="true"></i>
                     </div>                                                                                                                                            
                 </div>
             </div>
@@ -100,8 +103,8 @@
                         <label for="inputPassword4">Código da fase</label>                            
                         <input type="text" class="form-control form-control-sm" v-model="phase.phaseCode" placeholder="Código">                    
                         <div>                                                    
-                            <button class="btn btn-success"><i :disabled="phase==undefined || json.stringify(phase) === '{}'" @click.stop.prevent="(phase.phaseId!=undefined) ? putPhase(phase) : createPhase(phase);" class="fa fa-check-square" aria-hidden="true"></i></button> 
-                            <button class="btn btn-danger"><i @click.stop.prevent="deletePhase(phase)" :disabled="phase.phaseId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
+                            <button @click.stop.prevent="(phase.phaseId!=undefined) ? putPhase(phase) : createPhase(phase);" class="btn btn-success" :disabled="phase.phaseName==undefined || phase.phaseName=='' || phase.phaseCode==''"><i class="fa fa-check-square" aria-hidden="true"></i></button> 
+                            <button class="btn btn-danger"><i @click.stop.prevent="deletePhase(phase, recipe)" :disabled="phase.phaseId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
                             <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
                                 Limpar
                             </div>
