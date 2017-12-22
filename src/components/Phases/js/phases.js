@@ -45,7 +45,9 @@ export default {
             name:'',            
             displayCadPhase:false,
             phaseProduct:{},            
-            phaseProducts: []                                           
+            phaseProducts: [],
+            expand:false,
+            displayCadProPhase:false                                           
         }
     },  
     computed:{       
@@ -93,7 +95,8 @@ export default {
         /*   Product     */
         /*               */
         /*****************/
-        createRecipeProduct(recipeProduct, recipeProductEnd){                        
+        createRecipeProduct(recipeProduct, recipeProductEnd){
+            this.mensagemSuc='';                                    
             this.carregando=true;            
             recipeProductEnd.productId=recipeProduct.productId;            
             axios.post(this.url+"recipes/product/"+this.recipe.recipeId,recipeProductEnd).then((response)=>{
@@ -129,6 +132,8 @@ export default {
             });
         },
         putPhase(phase){
+            this.mensagemSuc='';
+            this.carregando=true;
             axios.delete(this.url+"phases/"+phase.phaseId,phase).then((response)=>{
                 this.mensagem='';
                 this.mensagemSuc= "Fase " + phase.phaseName + " atualizada com sucesso";                                           
@@ -142,6 +147,7 @@ export default {
             })
         },
         deletePhase(phase, recipe){ 
+            this.mensagemSuc='';            
             this.carregando=true;                         
             axios.delete(this.url+"recipes/phases/"+recipe.recipeId,{data: phase}).then((response)=>{                                           
                 console.log(response.data);
@@ -154,8 +160,7 @@ export default {
                 this.mensagemSuc='Erro ao deletar : '+ error; 
             })
         },                   
-        relacionaFase(phase){  
-            this.mensagemSuc='';                                  
+        relacionaFase(phase){                                                                       
             axios.post(this.url+"recipes/phases/"+this.recipe.recipeId,phase).then((response)=>{
                 console.log(response.data);                
                 this.phases.push(phase);
@@ -175,8 +180,21 @@ export default {
         /*   Products    */
         /*               */
         /*****************/
-        
-
+        createPhaseProduct(index, product){
+            this.mensagemSuc='';
+            this.carregando=true;            
+            axios.post(this.url+"phases/products/"+this.phases[index].phaseId,product).then((response)=>{
+                console.log(response.data);                
+                this.phases[index].products.push(response.data);
+                this.phase = {};                
+                this.mensagemSuc='Fase relacionada com sucesso';
+                this.ok=true;                
+                this.carregando=false;
+            },(error)=>{
+                console.log(error);
+                this.carregando=false;
+            });
+        },
 
         /*****************/
         /*               */

@@ -34,7 +34,7 @@ input{
 @media screen and (max-width : 801px){
     .produtos{ 
         margin-top: 30%; 
-        }       
+    }       
 } 
 /**/
 .cadForm{
@@ -67,8 +67,8 @@ input{
         margin-top: 30%; 
         width: 15% !important;
         height: 60%;
-        }  
-    } 
+    }  
+} 
 
 
 .ls {
@@ -85,6 +85,6 @@ padding-bottom: 0.6%;
         font-size: 11px;
         padding-top: 0.6%;
         padding-bottom: 0.6%;
-        }  
-    } 
+    }  
+} 
 
