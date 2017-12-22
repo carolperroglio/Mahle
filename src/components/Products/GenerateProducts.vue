@@ -42,7 +42,7 @@
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                     </form>
                 </li>
-            </ul>        
+        </ul>        
         </div>    
          
         <!--                       --> 
@@ -62,12 +62,11 @@
                     <div class="card">
                         <div class="card-header"><b></b></div>
                         <div class="card-body">
-                            <b>Id : </b>{{p.productId}}&nbsp;&nbsp;&nbsp;  
-                            <b>Nome : </b>{{p.productName}}&nbsp;&nbsp;&nbsp;                     
-                            <b>Descrição : </b>{{p.productDescription}}&nbsp;&nbsp;&nbsp;
-                            <b>Código : </b>{{p.productCode}}&nbsp;&nbsp;&nbsp;
-                            <b>GTIN : </b>{{p.productGTIN}}&nbsp;&nbsp;&nbsp;                    
-                            <i class="fa fa-check-square-o icon-right" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
+                            <label id="nm"><b>Nome : </b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;                     
+                            <label id="dsc"><b>Descrição : </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
+                            <label id="cd"><b>Código : </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
+                            <label id="g"><b>GTIN : </b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;                    
+                            <i class="fa fa-pencil icon-right" style="font-size:36px;" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
                         </div>    
                     </div>                     
                 </div>
