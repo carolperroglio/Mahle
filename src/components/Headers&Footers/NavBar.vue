@@ -70,7 +70,7 @@
                     <div id="collapseOne" class="sub-menu-lateral collapse collapseOne in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Criar grupo</div>
                     <div id="collapseOne" class="sub-menu-lateral collapse collapseOne in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Hierarquia</div>
                 <a data-toggle="collapse"  href=".v-pills-receita" aria-expanded="true" router-link to="/phases"   aria-controls="collapseOne">RECEITA</a><br>
-                    <div id="v-pills-receita" class="v-pills-receita sub-menu-lateral collapse in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Cadastrar Receita</div>
+                    <div id="v-pills-receita" class="v-pills-receita sub-menu-lateral collapse in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion"><router-link to="/phases">Cadastrar Receita</router-link></div>
                     <div id="v-pills-receita" class="v-pills-receita sub-menu-lateral collapse in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Relatório de Receita</div>
                 <router-link to="" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">PARÂMETROS</router-link><br>
                 <router-link to="/generateProducts" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">PRODUTOS</router-link><br>
