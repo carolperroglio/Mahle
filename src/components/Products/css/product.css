@@ -70,18 +70,6 @@ input{
         }  
     } 
 
-#nm {
-    width: 20%;
-}
-
-#dsc {
-    width: 20%;
-}
-
-#cd {
-    width: 20%;
-}
-
-#g {
+.ls {
     width: 20%;
 }

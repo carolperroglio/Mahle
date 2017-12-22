@@ -62,10 +62,10 @@
                     <div class="card">
                         <div class="card-header"><b></b></div>
                         <div class="card-body">
-                            <label id="nm"><b>Nome : </b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;                     
-                            <label id="dsc"><b>Descrição : </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
-                            <label id="cd"><b>Código : </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
-                            <label id="g"><b>GTIN : </b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;                    
+                            <label class="ls"><b>Nome : </b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;                     
+                            <label class="ls"><b>Descrição : </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls"><b>Código : </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls"><b>GTIN : </b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;                    
                             <i class="fa fa-pencil icon-right" style="font-size:36px;" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
                         </div>    
                     </div>                     
