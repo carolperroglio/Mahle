@@ -9,10 +9,7 @@ export default {
             json:JSON, 
             config : {
                 headers: {'Cache-Control':'no-cache'}
-
-            },
-            //url:'http://brsbap01:8003/api/',                                              
-
+            },                                              
             url:'http://192.168.11.160:8003/api/',                                             
             recipeProduct:{},
             recipeCadastrada: false,
