@@ -83,7 +83,38 @@
                     <div class="card-body">
                         Fase {{index}} Nome da fase = {{pha.phaseName}} --- Código da fase {{pha.phaseCode}} <i class="fa fa-check-square-o icon-right" @click.stop.prevent="phase=pha" aria-hidden="true"></i>
                         <button class="btn btn-primary btn-sm" @click.stop.prevent="expand==false?expand=true:expand=false">\/</button><button class="btn btn-primary btn-sm" @click.stop.prevent="displayCadProPhase=true; displayCadPhase=false">Cadastrar Produto</button>
-                        <button class="btn btn-primary btn-sm" @click.stop.prevent="displayCadProPhase=true; displayCadPhase=false">Cadastrar Parâmetro</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Cadastro Parâmetros</button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Parâmetros de Fase</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body">
+                    <form>
+                    <div class="form-row">
+                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>                                                                                                                       
+                        <label for="">Set point</label>
+                        <input type="text" class="form-control form-control-sm" v-model="tag.setupValue" placeholder="Set point">                                    
+                        <label for="inputPassword4">Unidade de Medida</label>                            
+                        <input type="text" class="form-control form-control-sm" v-model="tag.measurementUnit" placeholder="Unidade de medida">                    
+                        <label for="inputPassword4">Valor mínimo</label>                            
+                        <input type="text" class="form-control form-control-sm" v-model="tag.minValue" placeholder="Valor mínimo">                    
+                        <label for="inputPassword4">Valor máximo</label>                            
+                        <input type="text" class="form-control form-control-sm" v-model="tag.maxValue" placeholder="Valor máximo">                    
+                        <div>
+                            <button @click.stop.prevent="createPhaseTag(index, tag)" class="btn btn-success"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+                        </div>                                   
+                    </div>                                                                                                                                                       	                                            
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
                         <div v-show="expand" v-for="(pro, indexPro) in pha.products">Produtos</div>
                     </div>                                                                                                                                            
                 </div>
@@ -118,7 +149,7 @@
             <!--                       --> 
             <!--                       -->
             <!--                       --> 
-            <!-- Cadastro da produtos  -->
+            <!-- Cadastro de produtos  -->
             <!--                       -->
             <!--                       -->
             <!--                       -->  
@@ -141,6 +172,15 @@
                     </div>                                                                                                                                                       	                                            
                 </form>    
             </div>
+            <!--                       --> 
+            <!--                       -->
+            <!--                       --> 
+            <!-- Cadastro de parâmetros-->
+            <!--                       -->
+            <!--                       -->
+            <!--                       -->  
+
+
         </div>                      
     </div>      
 </template>
@@ -149,45 +189,3 @@
 <style>
 @import url("./css/phases.css");
 </style> 
-<!--
-{
-  "phaseId": 1,
-  "phaseName": "cois2a",
-  "phaseCode": "xpto",
-  "inputProducts": [],
-  "outputProducts": [],
-  "predecessorPhaseId": 0,
-  "phaseProducts": [3, 2]
-}
-
-
-<div class="col-4">
-            <ul class="nav row">                                                      
-                <li class="nav-item col-md-3">
-                    <div class="form-group ">
-                        <label class="mr-sm-2">Digite o nome do produto : </label>
-                        <input class="dropdown-menu" @keyup="phaseProducts=getProductFinal(pha.name)" placeholder="Nome do produto"/>                            
-                        <a class="dropdown-item" v-for="phaPro in phaseProducts" @click.stop.prevent="">{{phaPro.productName}}</a>                                                                                                                                
-                    </div>    
-                </li>                                                                                            
-                <li class="nav-item col-md-3">
-                    <div class="form-group">
-                        <label class="mr-sm-2">Digite a unidade de medida : </label>value
-                        <input class="form-control form-control-sm" required  placeholder="Ex.: Kg"/>
-                    </div>    
-                </li>
-                <li class="nav-item col-md-2">
-                    <div class="form-group">
-                        <label class="mr-sm-2">Digite o valor : </label>
-                        <input type="text" placeholder="Valor" class="form-control form-control-sm">
-                    </div>    
-                </li>  
-                <li class="nav-item col-md-3">
-                    <div class="form-group">
-                        <label class="mr-sm-2">Digite o tipo do produto : </label>
-                    <input class="form-control form-control-sm" placeholder="Status" required/>
-                    </div>    
-                </li>                                                  
-            </ul> 
-            <button class="form-control btn-success">Enviar produto</button>
-        </div>               -->

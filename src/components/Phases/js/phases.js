@@ -19,6 +19,8 @@ export default {
             recipe:{},            
             phase:{},             
             phases:[],
+            tag:{},
+            tags:[],
             mensagem:'',
             mensagemSuc:'',
             productName:'',
@@ -28,6 +30,7 @@ export default {
             phaseProducts: [],
             expand:false,
             displayCadProPhase:false,
+            displayCadTagPhase: false,
             msgVis: true,                                          
         }
     },  
@@ -146,7 +149,8 @@ export default {
         },                   
         relacionaFase(phase){                                                                       
             axios.post(this.url+"recipes/phases/"+this.recipe.recipeId,phase).then((response)=>{
-                console.log(response.data);                
+                console.log(response.data);
+                phase.tags=[];                
                 this.phases.push(phase);
                 this.phase = {};                
                 this.mensagemSuc='Fase relacionada com sucesso';
@@ -157,6 +161,24 @@ export default {
             });
         },    
         
+        createPhaseTag(index, tag){
+            this.mensagemSuc='';
+            this.carregando=true; 
+            console.log(tag);           
+            axios.post(this.url+"phases/parameters/"+this.phases[index].phaseId,tag).then((response)=>{
+                console.log(response.data);   
+                debugger;             
+                this.phases[index].tags.push(response.data); 
+                this.tag = {};              
+                this.mensagemSuc='Fase relacionada com sucesso';
+                this.ok=true;                
+                this.carregando=false;
+            },(error)=>{
+                console.log(error);
+                this.carregando=false;
+            });
+        },
+
         /*****************/
         /*               */
         /*               */
