@@ -10,11 +10,13 @@ export default {
             config : {
                 headers: {'Cache-Control':'no-cache'}
             },                                              
-            url:'http://192.168.11.160:8003/api/',                                             
+            url:'http://192.168.11.160:8003/api/',                                            
             recipeProduct:{},
             recipeCadastrada: false,
             recipeProductEnd:{},
             recipeProducts: [],
+            phaseTags:[],
+            phaseTag:{},
             carregando:false,
             recipe:{},            
             phase:{},             
@@ -165,7 +167,7 @@ export default {
             this.mensagemSuc='';
             this.carregando=true; 
             console.log(tag);           
-            axios.post(this.url+"phases/parameters/"+this.phases[index].phaseId,tag).then((response)=>{
+            axios.post(this.url+"gateway/tags/"+this.phases[index].phaseId,tag).then((response)=>{
                 console.log(response.data);   
                 debugger;             
                 this.phases[index].tags.push(response.data); 
@@ -211,22 +213,11 @@ export default {
         /*               */
         /*****************/
 
-        getResults(index){
-            if(this.phases[index].productName.length<3){this.phases[index].products=[];return;}    
-            this.phases[index].products=[];                                    
-            axios.get(this.url+"/products?&fieldFilter=productName&fieldValue="+this.phases[index].productName,this.config).then((response)=>{                                           
-                response.data.values.forEach((pro) => {
-                    this.phases[index].products.push(pro);
-                });
-            },(error)=>{
-                console.log(error);
-            })
-        },
-
-        getProductFinal(name){            
+        
+        getResults(url, name){            
             var array=[];                          
             if(name.length<3){return;}                
-            axios.get(this.url+"/products?&fieldFilter=productName&fieldValue="+this.productName,this.config).then((response)=>{                                           
+            axios.get(url+name,this.config).then((response)=>{                                           
                 response.data.values.forEach((pro) => {
                     array.push(pro);                    
                 });
