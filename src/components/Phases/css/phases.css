@@ -8,7 +8,7 @@
     z-index: 1;
     left: 15%;
     background-color: white;
-    width: 85%;
+    width: 80%;
 }
 
 #cadprodfinal{
@@ -40,12 +40,12 @@
     z-index: 1;             
     width: 10% !important;
     left: 85%;
-    margin-top: 17%;
+    margin-top: 20%;
 }
 
 .listagem{
     position: relative;
-    margin-top: 20%;           
+    margin-top: 50%;           
     left: 15%;
     width: 60% !important;
 }
@@ -58,3 +58,19 @@
     top: 38% !important; 
     left: 15% !important;
 }
+
+@media only screen and (max-width : 801px) {
+
+    body, input, button { 
+       font-size: 10pt; 
+    }
+ 
+ }
+
+ @media only screen and (max-width : 801px) {
+
+    .cadForm { 
+       margin-top: 30%;
+    }
+ 
+ }
