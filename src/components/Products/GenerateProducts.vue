@@ -11,7 +11,7 @@
         <div class="fixed-top nav-produtos col-md-12">    
           <ul class="nav d-flex align-items-center">                                  
                 <li class="nav-item">                    
-                    <select class="form-control form-control-sm mr-sm-2" v-model="orderField">                        
+                    <select class="form-control form-control-sm mr-sm-2.5" v-model="orderField">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">Nome</option>
                         <option value="productDescription">Descrição</option>
@@ -20,7 +20,7 @@
                     </select>
                 </li>
                 <li class="nav-item">
-                    <select class="form-control form-control-sm mr-sm-2" v-model="order">                        
+                    <select class="form-control form-control-sm mr-sm-2.5" v-model="order">                        
 
                         <option value="" selected disabled>Ordenação</option>
                         <option value="ascending">Crescente</option>                                          
@@ -28,7 +28,7 @@
                     </select>
                 </li>                
                 <li class="nav-item">
-                    <select class="form-control form-control-sm mr-sm-2" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                    <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
@@ -37,9 +37,9 @@
                     </select>
                 </li>                                                          
                 <li class="nav-item">
-                    <form class="form-inline my-3 form-control-sm mr-sm-5">
-                        <input class="form-control relative" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                        <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                    <form class="form-inline my-3 form-control-sm mr-sm-4">
+                        <input class="form-control form-control-sm mr-sm-4" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                        <button type="button" button class="btn btn-primary btn-sm col-xs-offset-24" @click.stop.prevent="buscar(id)">Buscar</button>
                     </form>
                 </li>
         </ul>        
@@ -101,18 +101,18 @@
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>                                                                                                                                                                       
                         <label for="nome"><b>Nome : </b></label>
-                        <input type="text" placeholder="nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid form-control-sm">                                                    
+                        <input type="text" placeholder="Nome" required v-model="produto.productName" id="Nome" class="form-control danger is-invalid form-control-sm col-sm-12">                                                    
                         <label for="desc" ><b>Descrição : </b></label>
-                        <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="descrição">                            
+                        <input type="text" id="desc" class="form-control form-control-sm col-sm-12" v-model="produto.productDescription" placeholder="Descrição">                            
                         <label for="cod" ><b>Código : </b></label>
-                        <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="código" id="cod">                            
+                        <input class="form-control form-control-sm col-sm-12" type="text" v-model="produto.productCode" placeholder="Código" id="cod">                            
                         <label for="gs1" class=""><b>GS1 : </b></label>
-                        <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="gs1">
+                        <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm col-sm-12" placeholder="gs1">
                         <br>
                         <div>
-                            <button class="btn btn-success"><i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i></button> 
-                            <button class="btn btn-danger"><i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
-                            <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
+                            <button class="btn btn-success col-sm-2.5"><i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i></button> 
+                            <button class="btn btn-danger col-sm-2.5"><i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i></button>
+                            <div class="btn btn-primary col-xs-2.5 col-xs-offset-6" @click.stop.prevent="produto={}">
                                 Limpar
                             </div>
                         </div>                                                    
