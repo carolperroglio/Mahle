@@ -82,8 +82,10 @@
                 <div v-for="(pha, index) in phases">                        
                     <div class="card-body">
                         Fase {{index}} Nome da fase = {{pha.phaseName}} --- Código da fase {{pha.phaseCode}} <i class="fa fa-check-square-o icon-right" @click.stop.prevent="phase=pha" aria-hidden="true"></i>
+
                         <button class="btn btn-primary btn-sm" @click.stop.prevent="expand==false?expand=true:expand=false">\/</button>
                         <button class="btn btn-primary btn-sm" @click.stop.prevent="displayCadProPhase=true; displayCadPhase=false">Cadastrar Produto</button>
+
                         <button class="btn btn-primary btn-sm" @click.stop.prevent="displayCadProPhase=true; displayCadPhase=false">Cadastrar Parâmetro</button>
                         <div v-show="expand" v-for="(pro, indexPro) in pha.products">Produtos</div>
                     </div>                                                                                                                                            

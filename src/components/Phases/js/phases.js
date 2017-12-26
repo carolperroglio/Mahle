@@ -1,27 +1,7 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 es6promisse.polyfill();
-/*
-    Example json recipe!
-    {
-        "recipeId": 3,
-        "recipeName": "teste de receita",
-        "recipeCode": "5050505050",
-        "recipeProduct": {
-            "phaseProductId": 13,
-            "productId": 1,
-            "value": "50",
-            "measurementUnit": "kg",
-            "product": {
-            "productId": 1,
-            "producName": "Nome Teste 2",
-            "producCode": "TesteCode",
-            "productGTIN": "+9999999",
-            "childrenProductsIds": []
-        }
-        "phasesId": []
-    }
-*/
+
 export default {    
     name: "Phases",
     data(){
@@ -29,8 +9,10 @@ export default {
             json:JSON, 
             config : {
                 headers: {'Cache-Control':'no-cache'}
+
             },
             //url:'http://brsbap01:8003/api/',                                              
+
             url:'http://192.168.11.160:8003/api/',                                             
             recipeProduct:{},
             recipeCadastrada: false,
@@ -48,7 +30,8 @@ export default {
             phaseProduct:{},            
             phaseProducts: [],
             expand:false,
-            displayCadProPhase:false                                           
+            displayCadProPhase:false,
+            msgVis: true,                                          
         }
     },  
     computed:{       
@@ -63,6 +46,7 @@ export default {
         /*               */
         /*               */
         /*****************/
+        
         createRecipe(recipe){             
             this.mensagemSuc='';
             this.carregando=true;                       
@@ -96,6 +80,7 @@ export default {
         /*   Product     */
         /*               */
         /*****************/
+
         createRecipeProduct(recipeProduct, recipeProductEnd){
             this.mensagemSuc='';                                    
             this.carregando=true;            
@@ -119,6 +104,7 @@ export default {
         /*               */
         /*               */
         /*****************/
+
         createPhase(phase){
             this.mensagemSuc='';
             this.carregando=true;              
@@ -181,6 +167,7 @@ export default {
         /*   Products    */
         /*               */
         /*****************/
+
         createPhaseProduct(index, product){
             this.mensagemSuc='';
             this.carregando=true;            
@@ -204,6 +191,7 @@ export default {
         /*               */
         /*               */
         /*****************/
+
         getResults(index){
             if(this.phases[index].productName.length<3){this.phases[index].products=[];return;}    
             this.phases[index].products=[];                                    
@@ -215,6 +203,7 @@ export default {
                 console.log(error);
             })
         },
+
         getProductFinal(name){            
             var array=[];                          
             if(name.length<3){return;}                
