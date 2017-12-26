@@ -60,9 +60,11 @@
         </div>
         <div class="fixed-top nav-produtos col-md-12">
 
+
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item">
                     <select class="form-control form-control-sm mr-sm-2" v-model="orderField">
+
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">Nome</option>
                         <option value="productDescription">Descrição</option>
@@ -71,7 +73,10 @@
                     </select>
                 </li>
                 <li class="nav-item">
-                    <select class="form-control form-control-sm mr-sm-2" v-model="order">
+
+                   
+                    <select class="form-control form-control-sm mr-sm-2.5" v-model="order">                        
+
 
                         <option value="" selected disabled>Ordenação</option>
                         <option value="ascending">Crescente</option>
@@ -79,7 +84,9 @@
                     </select>
                 </li>
                 <li class="nav-item">
-                    <select class="form-control form-control-sm mr-sm-2" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
+
+                    <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">nome</option>
                         <option value="productDescription">descrição</option>
@@ -88,6 +95,7 @@
                     </select>
                 </li>
                 <li class="nav-item">
+
                     <form class="form-inline my-3 form-control-sm mr-sm-5">
                         <input class="form-control relative" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                         <div class="col-lg-2">
@@ -98,6 +106,7 @@
                                 Cadastrar Produto
                             </button>
                         </div>
+
                     </form>
                 </li>
             </ul>
@@ -163,6 +172,7 @@
                 <form>
                     <div class="form-row">
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                         <label for="nome">
                             <b>Nome : </b>
@@ -189,6 +199,7 @@
                                 <i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i>
                             </button>
                             <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
+
                                 Limpar
                             </div>
                         </div>
