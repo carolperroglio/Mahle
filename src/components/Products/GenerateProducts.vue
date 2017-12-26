@@ -58,51 +58,48 @@
                 </div>
             </div>
         </div>
-        <div class="fixed-top nav-produtos col-md-12">
 
-
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <!-- Busca de Produtos     -->
+        <!--                       -->
+        <!--                       -->
+        <div class="fixed-top nav-produtos  ">
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item">
-                    <select class="form-control form-control-sm mr-sm-2" v-model="orderField">
-
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="productName">Nome</option>
-                        <option value="productDescription">Descrição</option>
-                        <option value="productCode">Código</option>
-                        <option value="productGTIN">GTIN</option>
+                        <select class="form-control form-control-sm justify-content-between" v-model="orderField">
+                            <option value="" selected disabled>Campo para busca</option>
+                            <option value="productName">Nome</option>
+                            <option value="productDescription">Descrição</option>
+                            <option value="productCode">Código</option>
+                            <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
                 <li class="nav-item">
-
-                   
-                    <select class="form-control form-control-sm mr-sm-2.5" v-model="order">                        
-
-
-                        <option value="" selected disabled>Ordenação</option>
-                        <option value="ascending">Crescente</option>
-                        <option value="descending">Decrescente</option>
+                    <select class="form-control form-control-sm mr-sm-2.5 justify-content-between" v-model="order">                        
+                           <option value="" selected disabled>Ordenação</option>
+                            <option value="ascending">Crescente</option>
+                            <option value="descending">Decrescente</option>
                     </select>
                 </li>
                 <li class="nav-item">
-
-                    <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
-
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="productName">nome</option>
-                        <option value="productDescription">descrição</option>
-                        <option value="productCode">código</option>
-                        <option value="productGTIN">GTIN</option>
+                    <select class="form-control form-control-sm mr-sm-2.5 justify-content-between" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                            <option value="" selected disabled>Campo para busca</option>
+                            <option value="productName">nome</option>
+                            <option value="productDescription">descrição</option>
+                            <option value="productCode">código</option>
+                            <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
                 <li class="nav-item">
-
-                    <form class="form-inline my-3 form-control-sm mr-sm-5">
+                    <form class="form-inline my-3 form-control-sm mr-sm-12 d-flex flex-nowrap">
                         <input class="form-control relative" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                        <div class="col-lg-2">
-                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                    <div class="">
+                        <button type="button" button class="btn btn-primary btn-sm d-flex flex-nowrap" @click.stop.prevent="buscar(id)">Buscar</button>
                         </div>
-                        <div class="col-lg-2">
-                            <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-outline-success col-md-8" data-toggle="modal" data-target="#exampleModal">
                                 Cadastrar Produto
                             </button>
                         </div>
