@@ -57,7 +57,11 @@
                 </li>
             </ul> 
         </nav>
-
+        <!--                 -->
+        <!--                 -->
+        <!--   Menu lateral  -->
+        <!--                 -->
+        <!--                 -->
 
        <div class="menu-lateral">
             <img src="./../../assets/imagens/spi.jpg" class="col-sm-0 logo-system"/>
@@ -72,7 +76,7 @@
                 <a data-toggle="collapse"  href=".v-pills-receita" aria-expanded="true" router-link to="/phases"   aria-controls="collapseOne">RECEITA</a><br>
                     <div id="v-pills-receita" class="v-pills-receita sub-menu-lateral collapse in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion"><router-link to="/phases">Cadastrar Receita</router-link></div>
                     <div id="v-pills-receita" class="v-pills-receita sub-menu-lateral collapse in" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">Relatório de Receita</div>
-                <router-link to="" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">PARÂMETROS</router-link><br>
+                <router-link to="" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">TAG</router-link><br>
                 <router-link to="/generateProducts" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">PRODUTOS</router-link><br>
             </div>                                                                                                        
         </div>        
