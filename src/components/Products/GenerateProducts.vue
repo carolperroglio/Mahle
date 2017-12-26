@@ -99,7 +99,7 @@
                         <button type="button" button class="btn btn-primary btn-sm d-flex flex-nowrap" @click.stop.prevent="buscar(id)">Buscar</button>
                         </div>
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-outline-success col-md-8" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-outline-success btn-sm col-md-9" data-toggle="modal" data-target="#exampleModal">
                                 Cadastrar Produto
                             </button>
                         </div>
@@ -129,13 +129,13 @@
                         </div>
                         <div class="card-body">
                             <label class="ls">
-                                <b>Nome : </b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Nome: </font></b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
-                                <b>Descrição : </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Descrição: </font></b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
-                                <b>Código : </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Código: </font></b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
-                                <b>GTIN : </b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-pencil icon-right" style="font-size:22px; cursor:pointer" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
                         </div>
                     </div>
