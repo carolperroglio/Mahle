@@ -227,7 +227,12 @@
                 </div>
             </div>                                               
         </div>                      
-    </div>      
+    </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        </div>     
 </template>
 <script src="./js/phases.js">
 </script>
