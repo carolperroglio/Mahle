@@ -131,6 +131,7 @@
                                             <a class="dropdown-item" @click.stop.prevent="phaseProduct.productId=p.productId; productPhaseName=p.productName; pha.pros=[]" v-for="(p,index) in pha.pros">{{p.productName}}</a>                            
                                         </div>                            
                                     </div>
+                                    <!--Salva branch-->
                                 </div>
                                 <div class="modal-footer">                                                        
                                     <div>                                                    
