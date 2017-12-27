@@ -1,14 +1,22 @@
 
-.nav-produtos{    
-    padding-top: 1%;
-    padding-bottom: 1%;
+.nav-produtos{        
+    padding-top: 1%;    
     top: 20%;        
     border-bottom: 1px solid rgba(0,0,0,0.2);
+    box-sizing: border-box;    
     z-index: 1;
     left: 15%;
     background-color: white;
-    width: 80%;
+    width: 85%;
+    height: 8%;    
 }
+
+.nav-produtos ul li{
+    display: inline;
+    list-style: none;
+    margin-right: 2%;   
+}
+
 
 #cadprodfinal{
     padding-top: 1%;
@@ -53,7 +61,7 @@
 
 .listagem{
     position: relative;
-    margin-top: 25%;           
+    margin-top: 15%;           
     left: 15%;
     width: 60% !important;
 }
