@@ -1,27 +1,7 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 es6promisse.polyfill();
-/*
-    Example json recipe!
-    {
-        "recipeId": 3,
-        "recipeName": "teste de receita",
-        "recipeCode": "5050505050",
-        "recipeProduct": {
-            "phaseProductId": 13,
-            "productId": 1,
-            "value": "50",
-            "measurementUnit": "kg",
-            "product": {
-            "productId": 1,
-            "producName": "Nome Teste 2",
-            "producCode": "TesteCode",
-            "productGTIN": "+9999999",
-            "childrenProductsIds": []
-        }
-        "phasesId": []
-    }
-*/
+
 export default {    
     name: "Phases",
     data(){
@@ -30,12 +10,14 @@ export default {
             config : {
                 headers: {'Cache-Control':'no-cache'}
             },                                              
-            url:'http://brsbap01:8003/api/',                                             
+            url:'http://192.168.11.160:8003/api/',                                            
             recipeProduct:{},
             recipeProductDisplay:{}, 
             recipeProductName:'',           
             recipeCadastrada: false,            
             recipeProducts: [],
+            phaseTags:[],
+            phaseTag:{},
             carregando:false,
             recipe:{},            
             phase:{},             
@@ -61,6 +43,7 @@ export default {
         /*               */
         /*               */
         /*****************/
+        
         createRecipe(recipe){             
             this.mensagemSuc='';
             this.carregando=true;                       
@@ -94,6 +77,7 @@ export default {
         /*   Product     */
         /*               */
         /*****************/
+
         createRecipeProduct(recipeProduct, recipeProductEnd){
             this.mensagemSuc='';                                    
             this.carregando=true;                        
@@ -117,6 +101,7 @@ export default {
         /*               */
         /*               */
         /*****************/
+
         createPhase(phase){
             this.mensagemSuc='';
             this.carregando=true;              
@@ -173,6 +158,24 @@ export default {
             });
         },    
         
+        createPhaseTag(index, tag){
+            this.mensagemSuc='';
+            this.carregando=true; 
+            console.log(tag);           
+            axios.post(this.url+"gateway/tags/"+this.phases[index].phaseId,tag).then((response)=>{
+                console.log(response.data);   
+                debugger;             
+                this.phases[index].tags.push(response.data); 
+                this.tag = {};              
+                this.mensagemSuc='Fase relacionada com sucesso';
+                this.ok=true;                
+                this.carregando=false;
+            },(error)=>{
+                console.log(error);
+                this.carregando=false;
+            });
+        },
+
         /*****************/
         /*               */
         /*               */
@@ -180,6 +183,7 @@ export default {
         /*   Products    */
         /*               */
         /*****************/
+
         createPhaseProduct(index, product){
             this.mensagemSuc='';
             this.carregando=true;            

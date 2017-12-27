@@ -11,10 +11,10 @@
             <form>                
                 <ul class="nav d-flex align-items-center">                
                     <li class="nav-item">                    
-                        <label class="mr-sm-2">Nome da receita : </label>
+                        <label class="mr-sm-2">Nome da receita: </label>
                         <input type="text" class="form-control mr-sm-2" v-model="recipe.recipeName" required placeholder="Nome da receita">                                                                                                       
                     <li class="nav-item">                        
-                        <label class="mr-sm-2">Código : </label>
+                        <label class="mr-sm-2">Código: </label>
                         <input class="form-control mr-sm-2" required v-model="recipe.recipeCode" placeholder="Código da receita"/>
                     </li>
                     <li class="nav-item">                        
@@ -60,8 +60,7 @@
                         <input class="fm form-control mr-sm-2"  required v-model="recipeProduct.value" placeholder="Valor"/>
                         <label>Digite a unidade de medida : </label><br>
                         <input class="fm form-control mr-sm-2"  required v-model="recipeProduct.measurementUnit" placeholder="Ex.: kg"/>                                                   
-                        <label class="fm mr-sm-2">Digite o nome do produto : </label>                            
-                        
+                        <label class="fm mr-sm-2">Digite o nome do produto : </label>                                                    
                         <div class="dropdown">   
                             <input @keyup="recipeProducts=getResults('http://brsbap01:8003/api/products?&fieldFilter=productName&fieldValue=',recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -131,7 +130,6 @@
                                             <a class="dropdown-item" @click.stop.prevent="phaseProduct.productId=p.productId; productPhaseName=p.productName; pha.pros=[]" v-for="(p,index) in pha.pros">{{p.productName}}</a>                            
                                         </div>                            
                                     </div>
-                                    <!--Salva branch-->
                                 </div>
                                 <div class="modal-footer">                                                        
                                     <div>                                                    
@@ -147,7 +145,6 @@
                     </div>                                                                                                                                                                
                 </div>
             </div>
-
 
             <!--                       --> 
             <!--                       -->
@@ -183,8 +180,7 @@
                         </div>                        
                     </div>    
                 </div>
-            </div> 
-                                               
+            </div>                                               
         </div>                      
     </div>      
 </template>
@@ -193,45 +189,3 @@
 <style>
 @import url("./css/phases.css");
 </style> 
-<!--
-{
-  "phaseId": 1,
-  "phaseName": "cois2a",
-  "phaseCode": "xpto",
-  "inputProducts": [],
-  "outputProducts": [],
-  "predecessorPhaseId": 0,
-  "phaseProducts": [3, 2]
-}
-
-
-<div class="col-4">
-            <ul class="nav row">                                                      
-                <li class="nav-item col-md-3">
-                    <div class="form-group ">
-                        <label class="mr-sm-2">Digite o nome do produto : </label>
-                        <input class="dropdown-menu" @keyup="phaseProducts=getProductFinal(pha.name)" placeholder="Nome do produto"/>                            
-                        <a class="dropdown-item" v-for="phaPro in phaseProducts" @click.stop.prevent="">{{phaPro.productName}}</a>                                                                                                                                
-                    </div>    
-                </li>                                                                                            
-                <li class="nav-item col-md-3">
-                    <div class="form-group">
-                        <label class="mr-sm-2">Digite a unidade de medida : </label>value
-                        <input class="form-control form-control-sm" required  placeholder="Ex.: Kg"/>
-                    </div>    
-                </li>
-                <li class="nav-item col-md-2">
-                    <div class="form-group">
-                        <label class="mr-sm-2">Digite o valor : </label>
-                        <input type="text" placeholder="Valor" class="form-control form-control-sm">
-                    </div>    
-                </li>  
-                <li class="nav-item col-md-3">
-                    <div class="form-group">
-                        <label class="mr-sm-2">Digite o tipo do produto : </label>
-                    <input class="form-control form-control-sm" placeholder="Status" required/>
-                    </div>    
-                </li>                                                  
-            </ul> 
-            <button class="form-control btn-success">Enviar produto</button>
-        </div>               -->
