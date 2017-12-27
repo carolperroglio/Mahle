@@ -32,22 +32,21 @@ export default {
             },                                              
             url:'http://brsbap01:8003/api/',                                             
             recipeProduct:{},
-            recipeCadastrada: false,
-            recipeProductEnd:{},
+            recipeProductDisplay:{}, 
+            recipeProductName:'',           
+            recipeCadastrada: false,            
             recipeProducts: [],
             carregando:false,
             recipe:{},            
             phase:{},             
             phases:[],
+            phaseProduct:{},
+            productPhaseName:'',        
             mensagem:'',
             mensagemSuc:'',
             productName:'',
-            name:'',            
-            displayCadPhase:false,
-            phaseProduct:{},            
-            phaseProducts: [],
-            expand:false,
-            displayCadProPhase:false                                           
+            name:'',                                    
+            expand:false,            
         }
     },  
     computed:{       
@@ -82,7 +81,7 @@ export default {
                 console.log(response.data);
                 recipe=response.data;
                 this.ok=true;
-                this.carregando=false;
+                this.carregando=false;                
             },(error)=>{
                 console.log(error);
                 this.carregando=false;
@@ -97,13 +96,13 @@ export default {
         /*****************/
         createRecipeProduct(recipeProduct, recipeProductEnd){
             this.mensagemSuc='';                                    
-            this.carregando=true;            
-            recipeProductEnd.productId=recipeProduct.productId;            
-            axios.post(this.url+"recipes/product/"+this.recipe.recipeId,recipeProductEnd).then((response)=>{
+            this.carregando=true;                        
+            recipeProduct.phaseProductType='finished';          
+            axios.post(this.url+"recipes/product/"+this.recipe.recipeId,recipeProduct).then((response)=>{
                 console.log(response.data);                                
-                this.carregando=false;                                
-                alert('Cadastrado com sucesso');
-                this.displayCadPhase=true;
+                this.carregando=false;  
+                this.recipeProductDisplay = response.data;                              
+                alert('Cadastrado com sucesso');                
             },(error)=>{
                 console.log(error);
                 this.carregando=false;
@@ -163,6 +162,7 @@ export default {
         relacionaFase(phase){                                                                       
             axios.post(this.url+"recipes/phases/"+this.recipe.recipeId,phase).then((response)=>{
                 console.log(response.data);                
+                phase.products = [];
                 this.phases.push(phase);
                 this.phase = {};                
                 this.mensagemSuc='Fase relacionada com sucesso';
@@ -186,6 +186,21 @@ export default {
             axios.post(this.url+"phases/products/"+this.phases[index].phaseId,product).then((response)=>{
                 console.log(response.data);                
                 this.phases[index].products.push(response.data);
+                this.phaseProduct = {};                
+                this.mensagemSuc='Fase relacionada com sucesso';
+                this.ok=true;                
+                this.carregando=false;
+            },(error)=>{
+                console.log(error);
+                this.carregando=false;
+            });
+        },
+        deletePhaseProduct(index, product){
+            this.mensagemSuc='';
+            this.carregando=true;            
+            axios.delete(this.url+"phases/products/" + this.phases[index].phaseId,{data: phase}).then((response)=>{
+                console.log(response.data);                
+                this.phases[index].products.push(response.data);
                 this.phase = {};                
                 this.mensagemSuc='Fase relacionada com sucesso';
                 this.ok=true;                
@@ -195,29 +210,18 @@ export default {
                 this.carregando=false;
             });
         },
-
+        
         /*****************/
         /*               */
         /*               */
         /*Busca Produtos */
         /*               */
         /*               */
-        /*****************/
-        getResults(index){
-            if(this.phases[index].productName.length<3){this.phases[index].products=[];return;}    
-            this.phases[index].products=[];                                    
-            axios.get(this.url+"/products?&fieldFilter=productName&fieldValue="+this.phases[index].productName,this.config).then((response)=>{                                           
-                response.data.values.forEach((pro) => {
-                    this.phases[index].products.push(pro);
-                });
-            },(error)=>{
-                console.log(error);
-            })
-        },
-        getProductFinal(name){            
+        /*****************/        
+        getResults(url,name){            
             var array=[];                          
             if(name.length<3){return;}                
-            axios.get(this.url+"/products?&fieldFilter=productName&fieldValue="+this.productName,this.config).then((response)=>{                                           
+            axios.get(url+name,this.config).then((response)=>{                                           
                 response.data.values.forEach((pro) => {
                     array.push(pro);                    
                 });
@@ -225,8 +229,6 @@ export default {
                 console.log(error);
             })            
             return array;
-        }
+        }        
     }
-
- 
 }    
