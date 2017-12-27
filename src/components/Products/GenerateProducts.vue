@@ -1,13 +1,13 @@
 
 <template >
     <div>
-        <!--                       -->
-        <!--                       -->
-        <!--                       -->
-        <!-- Menu de navegação de produtos -->
-        <!--                       -->
-        <!--                       -->
-        <!-- Modal -->
+        <!--                                 -->
+        <!--                                 -->
+        <!--                                 -->
+        <!-- Menu de navegação de produtos   -->
+        <!--                                 -->
+        <!--                                 -->
+        <!--               Modal             -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -39,7 +39,7 @@
                                 </label>
                                 <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="gs1">
                                 <br>
-                            </div>
+                                </div>
                                 <div class="btn-group" role="group">
                                         <button class="btn btn-success">
                                             <i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i>
