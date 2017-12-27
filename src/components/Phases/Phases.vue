@@ -55,7 +55,7 @@
                     <label class="fm mr-sm-2">Nome do produto: </label>                            
                     
                     <div class="dropdown">   
-                        <input @keyup="recipeProducts=getProductFinal(productName)" v-model="productName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                        <input @keyup="recipeProducts=getResults(productName, 'products?&fieldFilter=productName&fieldValue=')" v-model="productName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                              <a class="dropdown-item" @click.stop.prevent="recipeProduct=p; productName=recipeProduct.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts">{{p.productName}}</a>                            
                         </div>                            
@@ -85,36 +85,50 @@
                         <button class="btn btn-primary btn-sm" @click.stop.prevent="expand==false?expand=true:expand=false">\/</button><button class="btn btn-primary btn-sm" @click.stop.prevent="displayCadProPhase=true; displayCadPhase=false">Cadastrar Produto</button>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Cadastro Parâmetros</button>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cadastrar Parâmetros de Fase</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                    <div class="modal-body">
-                    <form>
-                    <div class="form-row">
-                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>                                                                                                                       
-                        <label for="">Set point</label>
-                        <input type="text" class="form-control form-control-sm" v-model="tag.setupValue" placeholder="Set point">                                    
-                        <label for="inputPassword4">Unidade de Medida</label>                            
-                        <input type="text" class="form-control form-control-sm" v-model="tag.measurementUnit" placeholder="Unidade de medida">                    
-                        <label for="inputPassword4">Valor mínimo</label>                            
-                        <input type="text" class="form-control form-control-sm" v-model="tag.minValue" placeholder="Valor mínimo">                    
-                        <label for="inputPassword4">Valor máximo</label>                            
-                        <input type="text" class="form-control form-control-sm" v-model="tag.maxValue" placeholder="Valor máximo">                    
-                        <div>
-                            <button @click.stop.prevent="createPhaseTag(index, tag)" class="btn btn-success"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-                        </div>                                   
-                    </div>                                                                                                                                                       	                                            
-                </form>
-            </div>
-            </div>
-        </div>
-        </div>
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Cadastrar Parâmetros de Fase</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <!--                       --> 
+                                            <!--                       -->
+                                            <!--                       --> 
+                                            <!-- Cadastro de parâmetros-->
+                                            <!--                       -->
+                                            <!--                       -->
+                                            <!--                       -->  
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="form-row">
+                                                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                                                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>      
+                                                        <label for="">Nome</label>
+                                                        <div class="dropdown">   
+                                                        <input @keyup="phaseTags=getResults('http://192.168.11.160:8003/gateway/tags/', tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" @click.stop.prevent="phaseTag=p; tagName=phaseTag.tagName; phaseTags=[]" v-for="(p,index) in phaseTags">{{p.tagName}}</a>                            
+                                                        </div>                            
+                                                        </div>
+                                                        <label for="">Set Point</label>
+                                                        <input type="text" class="form-control form-control-sm" v-model="tag.setupValue" placeholder="Set Point">                                    
+                                                        <label for="inputPassword4">Unidade de Medida</label>                            
+                                                        <input type="text" class="form-control form-control-sm" v-model="tag.measurementUnit" placeholder="Unidade de Medida">                    
+                                                        <label for="inputPassword4">Valor Mínimo</label>                            
+                                                        <input type="text" class="form-control form-control-sm" v-model="tag.minValue" placeholder="Valor Mínimo">                    
+                                                        <label for="inputPassword4">Valor Máximo</label>                            
+                                                        <input type="text" class="form-control form-control-sm" v-model="tag.maxValue" placeholder="Valor Máximo">                    
+                                                        <div>
+                                                        <button @click.stop.prevent="createPhaseTag(index, tag)" class="btn btn-success"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+                                                        </div>                                   
+                                                        </div>                                                                                                                                                       	                                            
+                                                    </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
                         <div v-show="expand" v-for="(pro, indexPro) in pha.products">Produtos</div>
                     </div>                                                                                                                                            
                 </div>
@@ -172,13 +186,6 @@
                     </div>                                                                                                                                                       	                                            
                 </form>    
             </div>
-            <!--                       --> 
-            <!--                       -->
-            <!--                       --> 
-            <!-- Cadastro de parâmetros-->
-            <!--                       -->
-            <!--                       -->
-            <!--                       -->  
 
 
         </div>                      
