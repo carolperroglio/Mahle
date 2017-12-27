@@ -10,7 +10,8 @@ export default {
             config : {
                 headers: {'Cache-Control':'no-cache'}
             },                                              
-            url:'http://192.168.11.160:8003/api/',                                            
+            url:'http://192.168.11.160:8003/api/', 
+            product:{},                                           
             recipeProduct:{},
             recipeProductDisplay:{}, 
             recipeProductName:'',           
@@ -27,8 +28,7 @@ export default {
             mensagem:'',
             mensagemSuc:'',
             productName:'',
-            name:'',                                    
-            expand:false,            
+            name:'',                                                           
         }
     },  
     computed:{       
@@ -77,7 +77,6 @@ export default {
         /*   Product     */
         /*               */
         /*****************/
-
         createRecipeProduct(recipeProduct, recipeProductEnd){
             this.mensagemSuc='';                                    
             this.carregando=true;                        
@@ -101,7 +100,6 @@ export default {
         /*               */
         /*               */
         /*****************/
-
         createPhase(phase){
             this.mensagemSuc='';
             this.carregando=true;              
@@ -147,7 +145,9 @@ export default {
         relacionaFase(phase){                                                                       
             axios.post(this.url+"recipes/phases/"+this.recipe.recipeId,phase).then((response)=>{
                 console.log(response.data);                
-                phase.products = [];
+                phase.products = []
+                phase.tags = [];
+                phase.expand=false;
                 this.phases.push(phase);
                 this.phase = {};                
                 this.mensagemSuc='Fase relacionada com sucesso';
@@ -156,8 +156,7 @@ export default {
                 console.log(error);
                 this.carregando=false;
             });
-        },    
-        
+        },            
         createPhaseTag(index, tag){
             this.mensagemSuc='';
             this.carregando=true; 
@@ -183,13 +182,11 @@ export default {
         /*   Products    */
         /*               */
         /*****************/
-
-        createPhaseProduct(index, product){
+        createPhaseProduct(index, productPhase, product){
             this.mensagemSuc='';
             this.carregando=true;            
-            axios.post(this.url+"phases/products/"+this.phases[index].phaseId,product).then((response)=>{
-                console.log(response.data);                
-                this.phases[index].products.push(response.data);
+            axios.post(this.url+"phases/products/"+this.phases[index].phaseId,productPhase).then((response)=>{                            
+                this.phases[index].products.push(product);
                 this.phaseProduct = {};                
                 this.mensagemSuc='Fase relacionada com sucesso';
                 this.ok=true;                
