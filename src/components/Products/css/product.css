@@ -31,7 +31,7 @@ input{
     position: relative;
     margin-top: 16%;           
     left: 15%;
-    width: 60%;       
+       
 }
 @media screen and (max-width : 801px){
     .produtos{ 
