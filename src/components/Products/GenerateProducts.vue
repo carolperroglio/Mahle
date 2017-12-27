@@ -58,51 +58,48 @@
                 </div>
             </div>
         </div>
-        <div class="fixed-top nav-produtos col-md-12">
 
-
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <!-- Busca de Produtos     -->
+        <!--                       -->
+        <!--                       -->
+        <div class="fixed-top nav-produtos  ">
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item">
-                    <select class="form-control form-control-sm mr-sm-2" v-model="orderField">
-
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="productName">Nome</option>
-                        <option value="productDescription">Descrição</option>
-                        <option value="productCode">Código</option>
-                        <option value="productGTIN">GTIN</option>
+                        <select class="form-control form-control-sm" v-model="orderField">
+                            <option value="" selected disabled>Campo para busca</option>
+                            <option value="productName">Nome</option>
+                            <option value="productDescription">Descrição</option>
+                            <option value="productCode">Código</option>
+                            <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
                 <li class="nav-item">
-
-                   
-                    <select class="form-control form-control-sm mr-sm-2.5" v-model="order">                        
-
-
-                        <option value="" selected disabled>Ordenação</option>
-                        <option value="ascending">Crescente</option>
-                        <option value="descending">Decrescente</option>
+                    <select class="form-control form-control-sm mr-sm-2.5 " v-model="order">                        
+                           <option value="" selected disabled>Ordenação</option>
+                            <option value="ascending">Crescente</option>
+                            <option value="descending">Decrescente</option>
                     </select>
                 </li>
                 <li class="nav-item">
-
                     <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
-
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="productName">nome</option>
-                        <option value="productDescription">descrição</option>
-                        <option value="productCode">código</option>
-                        <option value="productGTIN">GTIN</option>
+                            <option value="" selected disabled>Campo para busca</option>
+                            <option value="productName">nome</option>
+                            <option value="productDescription">descrição</option>
+                            <option value="productCode">código</option>
+                            <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
                 <li class="nav-item">
-
-                    <form class="form-inline my-3 form-control-sm mr-sm-5">
-                        <input class="form-control relative" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                        <div class="col-lg-2">
-                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                    <form class="form-inline my-3 form-control-sm mr-sm-12">
+                        <input class="form-control relative btn-sm" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                    <div class="">
+                        <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                         </div>
-                        <div class="col-lg-2">
-                            <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    <div class="">
+                        <button type="button" class="btn btn-outline-success btn-sm col-md-12" data-toggle="modal" data-target="#exampleModal">
                                 Cadastrar Produto
                             </button>
                         </div>
@@ -132,13 +129,13 @@
                         </div>
                         <div class="card-body">
                             <label class="ls">
-                                <b>Nome : </b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Nome: </font></b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
-                                <b>Descrição : </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Descrição: </font></b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
-                                <b>Código : </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Código: </font></b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
-                                <b>GTIN : </b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-pencil icon-right" style="font-size:22px; cursor:pointer" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
                         </div>
                     </div>
