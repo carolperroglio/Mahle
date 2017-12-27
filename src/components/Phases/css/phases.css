@@ -1,6 +1,5 @@
 
-
-.nav-produtos{
+.nav-produtos{    
     padding-top: 1%;
     padding-bottom: 1%;
     top: 20%;        
@@ -43,13 +42,18 @@
     margin-top: 20%;
 }
 
+#btnEditarRec{
+    color: white;
+
+}
+
 .btn-group {
     margin-top: 2%;
 }
 
 .listagem{
     position: relative;
-    margin-top: 50%;           
+    margin-top: 25%;           
     left: 15%;
     width: 60% !important;
 }
@@ -64,17 +68,13 @@
 }
 
 @media only screen and (max-width : 801px) {
-
     body, input, button { 
        font-size: 10pt; 
     }
- 
- }
+}
 
- @media only screen and (max-width : 801px) {
-
+@media only screen and (max-width : 801px) {
     .cadForm { 
        margin-top: 30%;
     }
- 
- }
+}
