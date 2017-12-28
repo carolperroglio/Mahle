@@ -82,7 +82,9 @@
                 <i style="" class="fa">&#xf0da;</i></br>
                 <router-link to="/generateProducts" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">PRODUTOS</router-link>                          
                 <i style="" class="fa">&#xf0da;</i></br>
+
                 <router-link to="/prodOrder">OP</router-link>                          
+                <router-link to="/toolCreate" data-toggle="collapse" href="" aria-expanded="true" aria-controls="collapseOne">FERRAMENTAS</router-link>    
                 <i style="" class="fa">&#xf0da;</i></br>
             </div>                                                                                                        
         </div>        

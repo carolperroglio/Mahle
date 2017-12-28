@@ -65,9 +65,9 @@
         <!-- Busca de Produtos     -->
         <!--                       -->
         <!--                       -->
-        <div class="fixed-top nav-produtos  ">
+        <div class="fixed-top nav-produtos">
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item">
+                <li class="nav-item col-md-auto">
                         <select class="form-control form-control-sm" v-model="orderField">
                             <option value="" selected disabled>Campo para busca</option>
                             <option value="productName">Nome</option>
@@ -76,15 +76,15 @@
                             <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
-                <li class="nav-item">
-                    <select class="form-control form-control-sm mr-sm-2.5 " v-model="order">                        
+                <li class="nav-item col-md-auto">
+                    <select class="form-control form-control-sm" v-model="order">                        
                            <option value="" selected disabled>Ordenação</option>
                             <option value="ascending">Crescente</option>
                             <option value="descending">Decrescente</option>
                     </select>
                 </li>
-                <li class="nav-item">
-                    <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                <li class="nav-item col-md-auto">
+                    <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                             <option value="" selected disabled>Campo para busca</option>
                             <option value="productName">nome</option>
                             <option value="productDescription">descrição</option>
@@ -92,14 +92,14 @@
                             <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
-                <li class="nav-item">
-                    <form class="form-inline my-3 form-control-sm mr-sm-12">
-                        <input class="form-control relative btn-sm" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                    <div class="">
+                <li class="nav-item col">
+                    <form class="form-inline my-3 form-control-sm">
+                        <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                    <div class="col-md-auto">
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                         </div>
-                    <div class="">
-                        <button type="button" class="btn btn-outline-success btn-sm col-md-12" data-toggle="modal" data-target="#exampleModal">
+                    <div class="col-md-auto">
+                        <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#exampleModal">
                                 Cadastrar Produto
                             </button>
                         </div>
@@ -118,7 +118,7 @@
         <!--                       -->
 
         <div class="row conteudo" style="top:-400px;">
-            <div class="produtos col-8">
+            <div class="produtos col-10">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
