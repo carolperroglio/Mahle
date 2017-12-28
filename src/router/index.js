@@ -3,11 +3,11 @@ import Router from 'vue-router'
 import ThingCreate from '@/components/things/ThingCreate'
 import GenerateProducts from '@/components/Products/GenerateProducts'
 import Phases from '@/components/Phases/Phases'
+import ProductionOrder from '@/components/ProductionOrder/ProductionOrder'
 Vue.use(Router)
 
 export default new Router({
-    routes: [     
-        {
+    routes: [{
             path: '/createThings',
             name: 'ThingCreate',
             component: ThingCreate
@@ -21,6 +21,11 @@ export default new Router({
             path: '/phases',
             name: 'Phases',
             component: Phases
+        },
+        {
+            path: '/prodOrder',
+            name: 'ProductionOrder',
+            component: ProductionOrder
         },
     ]
 })
