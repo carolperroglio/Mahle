@@ -60,7 +60,7 @@ export default {
                 headers: {'Cache-Control':'no-cache'}
             };                               
             this.ferramentas = [];
-            axios.get(this.url).then((response)=>{                                               
+            axios.get(this.url, config).then((response)=>{                                               
             console.log(response.data);
             this.ferramentas =response.data;
             console.log(this.ferramentas);
@@ -71,22 +71,15 @@ export default {
             })                         
         },
         editar(ferramenta){              
-            this.carregando = true;                                
-            this.ferramentas[index];
+            this.carregando = true;   
             this.mensagemSuc = '';
-            console.log(this.ferramentas[index]);
-            /* axios.put(this.url).then((response)=>{                                               
+            axios.put(this.url, ferramenta).then((response)=>{                                               
             console.log(response.data);
-            this.ferramentas =response.data;
             console.log(this.ferramentas);
-                this.carregando = false;   
-                this.mensagem='';
-            this.mensagemSuc = "Ferramenta " + ferramenta.name + " arualizada com sucesso";         
-            },(error)=>{                  
+                },(error)=>{                  
                 this.mensagem = 'Erro no server ao buscar ' + error;                
                 this.carregando = false;  
-            }) 
-            */                        
+            })                       
         },
         buscaTipo(){
             axios.get(this.url+"type").then((response)=>{
@@ -108,6 +101,29 @@ export default {
                 $("#editarFerr").modal('show');
                 }
         },
+
+        /*
+        buscar(id = "") {
+            this.carregando = true;
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            this.produtos = [];
+            console.log(this.order, this.orderField)
+            axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                if (!response.data.values && response.data.productId)
+                    this.produtos[0] = response.data;
+                else {
+                    paginacao(response, this);
+                    this.produtos = response.data.values;
+                }
+                this.carregando = false;
+            }, (error) => {
+                this.mensagem = 'Erro no server ao buscar ' + error;
+                this.carregando = false;
+            })
+        }
+        */
        
 
     beforeMount: function(){
