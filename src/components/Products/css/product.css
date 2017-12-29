@@ -25,11 +25,11 @@
     text-align: left;    
 }
 input{
-    position: relative !important;
+    position: relative;
 }
 .produtos{
     position: relative;
-    margin-top: 16%;           
+    margin-top: 5%;           
     left: 15%;
        
 }
