@@ -31,21 +31,31 @@ export default {
             mensagem:'',
             mensagemSuc:'',  
             f:[],
-            tipos:[],        
+            tipos:[], 
+            orderField: '',
+            order: '',
+            fieldFilter: '',
+            fieldValue: '',
+            quantityPage: 20,
+            startat: 0,
+            total: 0,
+            pages: [],
+            pageAtual: 0,
+                   
         }
     },  
     computed:{       
     },      
     methods:{
         cadastrar(ferramenta){      
-            this.carregando = true; 
+           // this.carregando = true; 
             this.mensagem='';   
-            ferramenta.enabled=true;  
-            ferramenta.typeId = this.encontraObj(this.tipos, "name", ferramenta.typeName).id;                   
+            this.mensagemSuc= '';
+            ferramenta.typeId = this.encontraObj(this.tipos, "name", ferramenta.typeName).id;    
+            console.log(ferramenta);               
             axios.post(this.url,ferramenta).then((response)=>{
-                this.mensagemSuc = "Ferramenta " + ferramenta.name + " cadastrada com sucesso"; 
-                this.ferramenta={};  
-                console.log(response);             
+                this.mensagemSuc = 'Ferramenta ' + ferramenta.name + ' cadastrada com sucesso.'; 
+                this.ferramenta={};               
                 this.ferramentas.push(ferramenta);
                 this.carregando = false;        
             },(r)=>{                
@@ -55,29 +65,30 @@ export default {
                       
         },
         listar(){              
-            this.carregando = true;                                               
-            var config = {
-                headers: {'Cache-Control':'no-cache'}
-            };                               
+            this.carregando = true;                                                                             
             this.ferramentas = [];
-            axios.get(this.url, config).then((response)=>{                                               
-            console.log(response.data);
-            this.ferramentas =response.data;
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            axios.get(this.url+"?orderField="+this.orderField+"&order="+this.order+"&fieldFilter="+this.fieldFilter+"&fieldValue="+this.fieldValue+"&startat="+this.startat+"&quantity="+this.quantityPage).then((response)=>{     
+            this.ferramentas =response.data.values;
             console.log(this.ferramentas);
                 this.carregando = false;  
+                paginacao(response,this);
             },(error)=>{                  
-                this.mensagem = 'Erro no server ao buscar ' + error;                
+                this.mensagem = 'Erro no server ' + error;                
                 this.carregando = false;  
             })                         
         },
         editar(ferramenta){              
             this.carregando = true;   
-            this.mensagemSuc = '';
-            axios.put(this.url, ferramenta).then((response)=>{                                               
-            console.log(response.data);
-            console.log(this.ferramentas);
+            this.mensagem='';   
+            this.mensagemSuc= '';
+            axios.put(this.url+'/'+ferramenta.id, ferramenta).then((response)=>{  
+                this.mensagemSuc = 'Ferramenta ' + ferramenta.name + ' atualizada com sucesso.';
+                this.ferramenta={}; 
                 },(error)=>{                  
-                this.mensagem = 'Erro no server ao buscar ' + error;                
+                this.mensagem = 'Erro no server ' + error;                
                 this.carregando = false;  
             })                       
         },
@@ -96,35 +107,11 @@ export default {
                 }
                 return null;
             },
-            itemClicado(f){
+        itemClicado(f){
                 this.ferramenta=f;            
                 $("#editarFerr").modal('show');
                 }
-        },
-
-        /*
-        buscar(id = "") {
-            this.carregando = true;
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-            this.produtos = [];
-            console.log(this.order, this.orderField)
-            axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
-                if (!response.data.values && response.data.productId)
-                    this.produtos[0] = response.data;
-                else {
-                    paginacao(response, this);
-                    this.produtos = response.data.values;
-                }
-                this.carregando = false;
-            }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
-                this.carregando = false;
-            })
-        }
-        */
-       
+        },       
 
     beforeMount: function(){
         this.buscaTipo()

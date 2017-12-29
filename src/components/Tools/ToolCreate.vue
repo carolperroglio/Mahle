@@ -31,6 +31,46 @@
 
                     </form>
                 </li>
+                <li class="nav-item col-md-auto">
+                        <select class="form-control form-control-sm" v-model="orderField">
+                            <option value="" selected disabled="disabled">Ordenar por:</option>
+                            <option value="name">Nome</option>
+                            <option value="description">Descrição</option>
+                            <option value="serialNumber">Número serial</option>
+                            <option value="code">Código</option>
+                            <option value="lifeCycle">Life cycle</option>
+                            <option value="currentLife">Ciclo de vida atual</option>
+                            <option value="unitOfMeasurement">Unidade de Medida</option>
+                            <option value="typeName">Tipo</option>
+                            <option value="status">Status</option>
+                    </select>
+                </li>
+                <li class="nav-item col-md-auto">
+                    <select class="form-control form-control-sm" v-model="order">                        
+                           <option value="" selected disabled="disabled">Cresc./Decresc.</option>
+                            <option value="ascending">Crescente</option>
+                            <option value="descending">Decrescente</option>
+                    </select>
+                </li>
+                </ul>
+            <ul class="nav d-flex align-items-center">
+                <li class="nav-item col-md-auto">
+                        <select class="form-control form-control-sm" v-model="fieldFilter">
+                            <option value="" selected disabled="disabled">Buscar por campo:</option>
+                            <option value="name">Nome</option>
+                            <option value="description">Descrição</option>
+                            <option value="serialNumber">Número serial</option>
+                            <option value="code">Código</option>
+                            <option value="lifeCycle">Life cycle</option>
+                            <option value="currentLife">Ciclo de vida atual</option>
+                            <option value="unitOfMeasurement">Unidade de Medida</option>
+                            <option value="typeName">Tipo</option>
+                            <option value="status">Status</option>
+                    </select>
+                </li>
+                <li>
+                <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-sm" placeholder="Valor">                              
+                </li>
             </ul>
         </div>
 
@@ -63,11 +103,17 @@
                                     <b>Descrição: </b>
                                 </label>
                                 <input type="text" id="desc" class="form-control form-control-sm" v-model="ferramenta.description" placeholder="descrição">
-                                <label for="lifeC">
+                                <label>
+                                    <b>Número Serial: </b>
+                                </label>
+                                <input type="text" id="sernum" class="form-control form-control-sm" v-model="ferramenta.serialNumber" placeholder="serial number">                                    <label>
+                                    <b>Código: </b>
+                                </label>
+                                <label>
                                     <b>Life Cycle: </b>
                                 </label>
                                 <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="life cycle" id="lifec">
-                                <label for="currL">
+                                <label>
                                     <b>Vida útil atual: </b>
                                 </label>
                                 <input type="text" id="currL" v-model="ferramenta.currentLife" class="form-control form-control-sm" placeholder="vida útil atual" disabled>
@@ -75,7 +121,7 @@
                                 <label>
                                     <b>Unidade de Medida: </b>
                                 </label>
-                                <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control form-control-sm" placeholder="minuto">                              
+                                <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control form-control-sm" placeholder="Ex.: minutos">                              
                                 <label>
                                     <b>Tipo: </b>
                                 </label>
@@ -130,6 +176,10 @@
                             <label class="ls">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{f.description}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
+                                <b><font color="#9BA6A5">Número Serial: </font></b>{{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls">
+                                <b><font color="#9BA6A5">Code: </font></b>{{f.code}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Life Cycle: </font></b>{{f.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
                                 <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{f.currentLife}}</label>&nbsp;&nbsp;&nbsp;
@@ -145,7 +195,22 @@
                         </div>
                     </div>
                 </div>
-
+            
+                <div class="paginacao fixed-bottom" v-show="total>0">
+                    <nav aria-label="">
+                        <ul class="pagination justify-content-center">
+                            <li v-show="startat>0" class="page-item">
+                                <a class="page-link" href="#" @click.stop.prevent="listar(startat-=20, quantityPage)">Previous</a>
+                            </li>
+                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
+                                <a class="page-link" href="#" @click.stop.prevent="listar(startat=num*20, quantityPage)">{{num+1}}</a>
+                            </li>
+                            <li class="page-item" v-show="pages.length>1 && startat+20<total">
+                                <a class="page-link" href="#" @click.stop.prevent="listar(startat+=20, quantityPage)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
                 
             <!--                            -->
             <!--                            -->
@@ -178,11 +243,20 @@
                                             <b>Descrição: </b>
                                         </label>
                                         <input type="text" id="desc" class="form-control form-control-sm" v-model="ferramenta.description" placeholder="descrição">
-                                        <label for="lifeC">
+                                        <label>
+                                            <b>Número Serial: </b>
+                                        </label>
+                                        <input type="text" id="sernum" class="form-control form-control-sm" v-model="ferramenta.serialNumber" placeholder="serial number">
+                                         <label>
+                                            <b>Código: </b>
+                                        </label>
+                                        <input type="text" id="code" class="form-control form-control-sm" v-model="ferramenta.code" placeholder="código">
+                                                                                 
+                                        <label>
                                             <b>Life Cycle: </b>
                                         </label>
-                                        <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="life cycle" id="lifec">
-                                        <label for="currL">
+                                        <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="life cycle" id="lifec" disabled>
+                                        <label>
                                             <b>Vida útil atual: </b>
                                         </label>
                                         <input type="text" id="currL" v-model="ferramenta.currentLife" class="form-control form-control-sm" placeholder="vida útil atual" disabled>
@@ -190,17 +264,17 @@
                                         <label>
                                             <b>Unidade de Medida: </b>
                                         </label>
-                                        <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control form-control-sm" placeholder="minuto">                              
+                                        <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control form-control-sm" placeholder="Ex.: minutos" disabled>                              
                                         <label>
                                             <b>Tipo: </b>
                                         </label>
-                                            <select class="form-control form-control-sm" v-model="ferramenta.typeName">
+                                            <select class="form-control form-control-sm" v-model="ferramenta.typeName" disabled>
                                             <option v-for="tipo in tipos" :value="tipo.name">{{ tipo.name }}</option>
                                             </select>
                                         <label>
                                             <b>Status: </b>
                                         </label>
-                                        <select class="form-control form-control-sm" v-model="ferramenta.status">
+                                        <select class="form-control form-control-sm" v-model="ferramenta.status" disabled>
                                             <option value="active">Ativo</option>
                                             <option value="disabled">Não Ativo</option>
                                         </select>

@@ -88,7 +88,7 @@ export default {
                 this.carregando = false;
             });
         },
-
+        
         buscar(id = "") {
             this.carregando = true;
             var config = {
