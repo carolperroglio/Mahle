@@ -41,8 +41,8 @@ i{
     display: inline;
     box-sizing: border-box;
     padding: 1%;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 5px;
+    border: 0.1rem solid rgba(0,0,0,0.1);
+    border-radius: 1rem;
     background-color: rgb(146, 152, 170)!important;
     box-shadow:  0 0 10px #000000;    
 }
@@ -67,6 +67,14 @@ i{
 #show-phase-products{
     cursor: pointer;
     margin-left: 2%;
+}
+.itens-fase{
+    display: inline;
+    cursor: pointer;
+       
+}
+.container-itens-fase{
+    padding: 2% 0% 2% 0%; 
 }
 .progress{
     position: absolute;
