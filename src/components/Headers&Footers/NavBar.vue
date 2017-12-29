@@ -1,4 +1,3 @@
-
 <template>
     <div>
             <!--                                  -->
@@ -29,8 +28,7 @@
         <!--                        -->
         <!--   Menu lateral Novo    -->
         <!--                        -->
-        <!--                        -->    
-             
+        <!--                        -->             
         <div class="container-fluid fixed-top"> 
             <div class="row">
                 <div class="col-md-2 col-xs-1 p-l-0 p-r-0 collapse in" id="sidebar">
@@ -54,8 +52,10 @@
                             <router-link to="/phases" class="list-group-item" data-parent="#menu3">Cadastrar Receita</router-link>
                             <a href="#" class="list-group-item" data-parent="#menu3">Relatório de Receita</a>        
                         </div>            
+
                         <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-balance-scale"></i> <span class="hidden-sm-down">  PRODUTOS</span>
+                            <i class="fa fa-balance-scale"></i> 
+                            <span class="hidden-sm-down">  PRODUTOS</span>
                         </router-link>         
                         <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-building-o"></i> <span class="hidden-sm-down">   FERRAMENTAS</span>

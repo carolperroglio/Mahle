@@ -186,12 +186,13 @@ export default {
         /*   Products    */
         /*               */
         /*****************/
-        createPhaseProduct(index, productPhase, product){
+        createPhaseProduct(productPhase, phase){
             this.mensagemSuc='';
             this.carregando=true;            
-            axios.post(this.url+"phases/products/"+this.phases[index].phaseId,productPhase).then((response)=>{                            
-                this.phases[index].products.push(product);
-                this.phaseProduct = {};                
+            axios.post(this.url+"phases/products/"+phase.phaseId,productPhase).then((response)=>{                            
+                phase.products.push(productPhase.product);
+                this.phaseProduct = {}; 
+                this.productPhaseName               
                 this.mensagemSuc='Fase relacionada com sucesso';
                 this.ok=true;                
                 this.carregando=false;

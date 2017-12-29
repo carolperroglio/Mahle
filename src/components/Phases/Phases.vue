@@ -61,8 +61,15 @@
             <div v-for="(pha, index) in phases" class="phase">                                        
                 {{index+1}}° Fase<b> Id da fase =</b> {{pha.phaseId}} --- <b>Nome da fase = </b>{{pha.phaseName}} --- <b>Código da fase </b>{{pha.phaseCode}}                 
                 <i class="fa fa-pencil" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true"></i><span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products">\/<b>Expandir</b></span>
-                <div v-show="pha.expand" >
-                    <button class="btn btn-primary">Botao</button>
+                <div v-show="pha.expand">
+                    <div class="container-itens-fase">    
+                        <div data-toggle="modal" data-target="#cadProPhase" @click.stop.prevent="phaseProduct={};phase=pha;abreModal('#cadProPhase');" class="itens-fase" aria-hidden="true">
+                            <i class="fa fa-plus"></i><b> Adicionar produtos</b>
+                        </div>
+                        <div data-toggle="modal" data-target="#cadParam" @click.stop.prevent="phase={};abreModal('#cadParam');" class="itens-fase pull-right" aria-hidden="true">
+                            <i class="fa fa-plus"></i><b> Adicionar parametros</b>
+                        </div>                
+                    </div>   
                     <div v-for="(pro, indexPro) in pha.products">
                         Produtos [ nome : {{pro.productName}} id :  {{pro.productId}} ]
                     </div>
@@ -229,7 +236,7 @@
         <!--       produto         -->
         <!--       da fase         -->
         <!--        modal          -->  
-        <div class="modal fade" id="pha.phaseId" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="cadProPhase" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -251,16 +258,20 @@
                         </select>
                         <label class="fm mr-sm-2">Digite o nome do produto : </label>                            
                         <div class="dropdown">   
-                            <!--<input @keyup="pha.pros=getResults('http://brsbap01:8003/api/products?fieldFilter=productName&fieldValue=',productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                            <input @keyup="phase.pros=getResults('http://brsbap01:8003/api/products?fieldFilter=productName&fieldValue=',productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click.stop.prevent="product=p; phaseProduct.productId=p.productId; productPhaseName=p.productName; pha.pros=[]" v-for="(p,index) in pha.pros">{{p.productName}}</a>                            
-                            </div>-->                            
+                                <a class="dropdown-item" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; phase.pros=[];" v-for="(p,index) in phase.pros">{{p.productName}}</a>                            
+                            </div>                         
                         </div>
                     </div>
                     <div class="modal-footer">                                                        
                         <div>                                                    
-                            <button @click.stop.prevent="createPhaseProduct(index, phaseProduct, product);" class="btn btn-success btn-sm"><i class="fa fa-check-square" aria-hidden="true"></i></button>
-                            <button @click.stop.prevent="deletePhaseProduct(phase, recipe)" :disabled="phase.phaseId == undefined || phase.phaseId == ''" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+                            <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" class="btn btn-success btn-sm">
+                                <i class="fa fa-check-square" aria-hidden="true"></i>
+                            </button>
+                            <button @click.stop.prevent="deletePhaseProduct(phase, recipe)" class="btn btn-danger">
+                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                            </button>
                             <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
                                 Limpar
                             </div>
