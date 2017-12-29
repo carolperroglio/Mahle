@@ -34,11 +34,13 @@ export default {
             orderField:'',
             fieldValue:'',
             fieldFilter:'',
-            order:''            
+            order:'',
+                      
         }
     },  
     computed:{       
-    },      
+    },          
+
     methods:{
         cadastrar(produto){    
             this.carregando = true;    
@@ -110,7 +112,8 @@ export default {
                 this.carregando = false;  
             })                         
         }
-    },     
+    },
+    created: () => console.log(this.a)     
 };
 
 

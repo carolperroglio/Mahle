@@ -6,11 +6,11 @@ export default {
     name: "Phases",
     data(){
         return {
-            json:JSON, 
+            json:JSON,             
             config : {
                 headers: {'Cache-Control':'no-cache'}
             },                                              
-            url:'http://192.168.11.160:8003/api/', 
+            url:'http://192.168.11.80:8003/api/', 
             product:{},                                           
             recipeProduct:{},
             recipeProductDisplay:{}, 
@@ -33,8 +33,12 @@ export default {
     },  
     computed:{       
 
-    },      
+    },     
+        
     methods:{ 
+        abreModal(nome){
+            $(nome).modal('show');
+        },
 
         /*****************/
         /*               */
