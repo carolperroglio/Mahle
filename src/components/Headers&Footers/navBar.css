@@ -1,149 +1,40 @@
 ﻿/*Configurações do header*/
 
-.nav-item{
+.nav-item {
     position: relative;
     font-size: 15px;
     color: black;
     margin-top: 1%;
-    margin-left:2%;
+    margin-left: 2%;
     margin-bottom: 0.7%;
-    }
-    /*.logo{
-        position: fixed;
-        margin-top: 0.5%;
-        margin-left: 90%;
-        height: 5%; 
-        width: 8%;  
-    }*/
-    
-    /*.user, .user:visited, .user:hover{
-        position: relative;
-        font-size: 18px;  
-        left: 78%;    
-        text-decoration: none !important;
-        color: white;      
-        top: 10%;    
-    }*/
-    /*@media screen and (min-width : 800px max-width : 1024){
-        /*.user{
-            left: 70%;
-            font-size:0.75em; 
-        }
-        .logo{
-        height: 3em;  
-        width: 50em;
-        padding-top: 1%;  
-        }
-    }*/
-    
-    /*Configurações do menu-top*/
-    /*.icons{
-        width:28%; 
-        height:28%;
-        padding-top: 0.90%;
-        padding-bottom: 0% !important;
-        }
-    .nav-menu{
-        list-style-type: none;
-        display: inline;
-        background-color: #333333;
-        top: 10%;
-        height: 9%;
-        background-color: #F2FCFC;  
-        left: 12%;
-        box-shadow: 3px 2px rgba(0,0,0,0.1);
-    }
-    .texto-menu{
-        font-size: 12px;  
-        position: relative;
-        padding: 1%;
-        left: 30%;
-        
-    }
-    @media screen and (max-width : 1000px){ 
-        .icons{
-        width:18%; 
-        height:18%;
-        padding-top: 0.1% !important; 
-        padding-bottom: 0% !important;
-        }
-        .texto-menu{
-        font-size: 0.6em;
-        align-content: left;
-        padding-top: 0.1% !important; 
-        padding-bottom: 0% !important;
-        }
-     }*/
-    
-     /*Configurações do menu-lateral*/
-    /*.titulomenu{
-        font-size: 20px;
-        text-align: center;
-        color:#415865;
-        font-family: arial;
-        font-weight: normal;
-        }
-    .menu-lateral{
-        position: fixed !important;            
-        text-align: left;    
-        height: 100%;
-        float: left;
-        width: 12%;
-        top: 10%;      
-        padding: 0em 0.2em 0em 0.1em;    
-        background-color: #F2FCFC; 
-        box-shadow: 2px 3px rgba(0,0,0,0.1); 
-         }
-    .texto-menu-lateral{
-        padding-top: 10px;
-        padding-inline-start: 25px;
-        font-size:17px;
-        color: #5C636E;
-        font-family: arial;
-    }
-    .sub-menu-lateral{
-        padding-top: 10px;
-        padding-bottom: 3px;
-        font-size: 16px;
-        color: #5C636E;
-        font-family: Arial, Helvetica, sans-serif;
-        padding-left: 2em;
-    }
-    .fa{
-        font-size: 15px;
-    }
-    
-    @media screen and (max-width : 801px){
-        .titulomenu{ 
-            font-size:1.1em;
-        }
-        .texto-menu-lateral{
-            font-size: 0.50em;
-        }
-        .sub-menu-lateral{
-            font-size: 1em;
-        }
-        .logo-system{
-            width: 5em;
-            height: 3.5em;
-        }
-        .fa{
-            font-size: 1em;
-        }
-     }*/
-    
-     /*Logo do sistema*/
-    .logo-system{  
-        position: fixed;
-        margin-top: 0.4%;
-        margin-left: 90%;
-        height: 6%; 
-        width: 10%;    
-    }
-    
-.icon-navigate{
-    padding-top: 6%;
-        }
+}
+
+
+/*Configurações do menu lateral collapse*/
+
+
+/*Logo do sistema*/
+
+.logo-system {
+    position: fixed;
+    margin-top: 0.4%;
+    margin-left: 90%;
+    height: 6%;
+    width: 10%;
+}
+
+.icon-navigate {
+    font-size: 30px;
+    padding-top: 0.5%;
+    margin-top: 6%;
+}
+
+#sidebar {
+    padding-top: 3.7%;
+    padding-left: 0;
+    z-index: 100 !important;
+}
+
 #sidebar .list-group-item {
     border-radius: 0;
     background-color: #333;
@@ -152,81 +43,99 @@
     border-right: 0;
     border-color: #2c2c2c;
     white-space: nowrap;
-        }
-    #sidebar{
-        padding-top: 3.7%;
-        padding-left: 0;
-        z-index: 100 !important;
-    }
+}
+
+
 /* highlight active menu */
+
 #sidebar .list-group-item:not(.collapsed) {
     background-color: #222;
-                }
-    
-    /* closed state */
-    #sidebar .list-group .list-group-item[aria-expanded="false"]::after {
-      content: " \f0d7";
-      font-family: FontAwesome;
-      display: inline;
-      text-align: right;
-      padding-left: 5px;
-    }
-    
-    /* open state */
-    #sidebar .list-group .list-group-item[aria-expanded="true"] {
-      background-color: #222;
-     }
-    #sidebar .list-group .list-group-item[aria-expanded="true"]::after {
-      content: " \f0da";
-      font-family: FontAwesome;
-      display: inline;
-      text-align: right;
-      padding-left: 5px;
-    }
-    
-    /* level 1*/
-    #sidebar .list-group .collapse .list-group-item  {
-      padding-left: 20px;
-    }
-    
-    /* level 2*/
-    #sidebar .list-group .collapse > .collapse .list-group-item {
-      padding-left: 30px;
-    }
-    
-    @media (max-width:48em) {
-        /* overlay sub levels on small screens */
-        #sidebar .list-group .collapse.in, #sidebar .list-group .collapsing {
-            position: absolute;
-            z-index: 1;
-            width: 190px;
-        }
-        
-        /* hide caret icons of top level when collapsed */
-        #sidebar .list-group > .list-group-item[aria-expanded="true"]::after,
-        #sidebar .list-group > .list-group-item[aria-expanded="false"]::after {
-            display:none;
-        }
-    }
-    
-    /* change transition animation to width when entire sidebar is toggled */
-    #sidebar.collapse {
-      -webkit-transition-timing-function: ease;
-           -o-transition-timing-function: ease;
-              transition-timing-function: ease;
-      -webkit-transition-duration: .1s;
-           -o-transition-duration: .1s;
-              transition-duration: .1s;
-    }    
+}
 
-    #sidebar.collapsing {
-        opacity: 0.8;
-        width: 0;
-        -webkit-transition-timing-function: ease-in;
-             -o-transition-timing-function: ease-in;
-                transition-timing-function: ease-in;
-        -webkit-transition-property: width;
-             -o-transition-property: width;
-                transition-property: width;
-      
-      }
+
+/* closed state */
+
+#sidebar .list-group .list-group-item[aria-expanded="false"]::after {
+    content: " \f0d7";
+    font-family: FontAwesome;
+    display: inline;
+    text-align: right;
+    padding-left: 5px;
+}
+
+
+/* open state */
+
+#sidebar .list-group .list-group-item[aria-expanded="true"] {
+    background-color: #222;
+}
+
+#sidebar .list-group .list-group-item[aria-expanded="true"]::after {
+    content: " \f0da";
+    font-family: FontAwesome;
+    display: inline;
+    text-align: right;
+    padding-left: 5px;
+}
+
+
+/* level 1*/
+
+#sidebar .list-group .collapse .list-group-item {
+    padding-left: 20px;
+}
+
+
+/* level 2*/
+
+#sidebar .list-group .collapse>.collapse .list-group-item {
+    padding-left: 30px;
+}
+
+@media (min-width:800em) {
+    /* overlay sub levels on small screens */
+    #sidebar .list-group .collapse.in,
+    #sidebar .list-group .collapsing {
+        position: absolute;
+        z-index: 50;
+        width: 160px;
+    }
+    /* hide caret icons of top level when collapsed */
+    #sidebar .list-group>.list-group-item[aria-expanded="true"]::after,
+    #sidebar .list-group>.list-group-item[aria-expanded="false"]::after {
+        display: none;
+    }
+}
+
+
+/* change transition animation to width when entire sidebar is toggled */
+
+#sidebar.collapse {
+    -webkit-transition-timing-function: ease;
+    -o-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: .1s;
+    -o-transition-duration: .1s;
+    transition-duration: .1s;
+}
+
+#sidebar.collapsing {
+    opacity: 0.8;
+    width: 0;
+    -webkit-transition-timing-function: ease-in;
+    -o-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+    -webkit-transition-duration: .1s;
+    -o-transition-duration: .1s;
+    transition-duration: .1s;
+}
+
+@media screen and (max-width: 800px) {
+    #sidebar {
+        padding-top: 6.5%;
+    }
+    .icon-navigate {
+        font-size: 2em;
+        padding-top: 5%;
+    }
+}
