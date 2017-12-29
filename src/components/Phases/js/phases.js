@@ -6,7 +6,7 @@ export default {
     name: "Phases",
     data(){
         return {
-            json:JSON, 
+            json:JSON,             
             config : {
                 headers: {'Cache-Control':'no-cache'}
             },                                              
@@ -33,8 +33,12 @@ export default {
     },  
     computed:{       
 
-    },      
+    },     
+        
     methods:{ 
+        abreModal(nome){
+            $(nome).modal('show');
+        },
 
         /*****************/
         /*               */

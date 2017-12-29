@@ -28,15 +28,13 @@ export default {
             pageAtual: 0,
             produtos: [],
             produto: {},
-
-            url:'http://192.168.11.80:8003/api/products/',
-            mensagem:'',
-            mensagemSuc:'',
-            orderField:'',
-            fieldValue:'',
-            fieldFilter:'',
-            order:''            
-
+            url: 'http://192.168.11.80:8003/api/products/',
+            mensagem: '',
+            mensagemSuc: '',
+            orderField: '',
+            fieldValue: '',
+            fieldFilter: '',
+            order: ''
         }
     },
     computed: {},

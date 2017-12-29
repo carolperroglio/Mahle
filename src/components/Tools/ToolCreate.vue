@@ -146,6 +146,15 @@
                     </div>
                 </div>
 
+                
+            <!--                            -->
+            <!--                            -->
+            <!--                            -->
+            <!--      Editar Ferramentas    -->
+            <!--                            -->
+            <!--                            -->
+            <!--                            -->
+
                 <div class="modal fade" id="editarFerr" tabindex="-1" role="dialog" aria-labelledby="editarFerrLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -210,7 +219,6 @@
                     </div>
                 </div>
             </div>
-
             <br>
         </div>
 
