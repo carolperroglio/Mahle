@@ -1,0 +1,33 @@
+/* menu de navegação de OP */
+
+.nav-produtos {
+    padding-top: 0.1%;
+    padding-bottom: 0.01%;
+    top: 20%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    z-index: 2%;
+    left: 13%;
+    background-color: white;
+    width: 100%;
+}
+
+.nav-item {
+    margin-left: 3;
+    margin-right: 0.5%;
+}
+
+.collapse-color {
+    color: #6a7989;
+}
+
+a:hover {
+    color: #929fac;
+}
+
+.cadastro-op {
+    padding-right: 125px !important;
+}
+
+.modal-content {
+    width: 125%;
+}
