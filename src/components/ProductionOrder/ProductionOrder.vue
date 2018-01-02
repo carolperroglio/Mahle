@@ -165,16 +165,16 @@
         <!--                      -->
         <!--  Botão que inicia    -->
         <!--  o Modal de Criação da OP  -->
-        <div class="fixed-top nav-produtos">
+        <div class="fixed-top nav-op">
             <!-- Button trigger modal -->
             <div class="row">
                 <div class="col-lg-1">
-                    <button @click="getRecipes(); getOpType()" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#cadastrarOp">
+                    <button @click="getRecipes(); getOpType()" type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#cadastrarOp">
                         Cadastrar OP
                     </button>
                 </div>
                 <div class="col-lg-2">
-                    <button @click="getOp();" type="button" class="btn btn-outline-primary btn-sm">
+                    <button @click.prevent="getOp();" type="button" class="btn btn-outline-primary btn-sm">
                         Listar OPs
                     </button>
                 </div>
@@ -184,8 +184,8 @@
             <!--             -->
             <!--  LISTAR OPs -->
             <!--             -->
-            <div class="row conteudo" style="top:-400px;">
-                <div class="produtos col-10">
+            <div class="row conteudo">
+                <div class="col-10">
                     <div class="progress" v-show="carregando">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>

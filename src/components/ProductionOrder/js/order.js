@@ -87,19 +87,25 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
+            this.carregando = true;
+
             axios.get(this.urlOpType, config).then(response => {
                     // JSON responses are automatically parsed.
                     this.opTypeArray = response.data;
                     console.log(response);
+                    this.carregando = false;
                 })
                 .catch(e => {
                     this.errors.push(e)
                 })
         },
         getRecipeGateway: function(id) {
+            this.carregando = true;
+
             axios.get(this.urlGatewayRecipe + id).then(response => {
                     this.recipeObj = response.data;
                     console.log(response.data);
+                    this.carregando = false;
                 })
                 .catch(e => {
                     this.errors.push(e)
@@ -110,14 +116,6 @@ export default {
             this.recipeAdded = recipe;
 
             this.getRecipeGateway(id);
-            // axios.get(this.urlGatewayRecipe + id).then(response => {
-            //         this.recipeObj = response.data;
-            //         console.log(response.data);
-            //     })
-            //     .catch(e => {
-            //         this.errors.push(e)
-            //     })
-            // recipeObj.push(phase);
         },
         seeProduct: function(index) {
             debugger;
