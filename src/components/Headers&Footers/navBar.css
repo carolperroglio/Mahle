@@ -2,37 +2,40 @@
 
 .nav-item {
     position: relative;
+    margin-left: 2%;
     font-size: 15px;
     color: black;
     margin-top: 1%;
-    margin-left: 2%;
     margin-bottom: 0.7%;
+    text-align: center;
 }
-
-
-/*Configurações do menu lateral collapse*/
-
 
 /*Logo do sistema*/
-
 .logo-system {
     position: fixed;
-    margin-top: 0.4%;
+    margin-top: 0.8%;
     margin-left: 90%;
-    height: 6%;
-    width: 10%;
+    height: 8%;
+    width: 9%;
 }
 
+/*Configurações do menu lateral collapse*/
 .icon-navigate {
-    font-size: 30px;
-    padding-top: 0.5%;
-    margin-top: 6%;
-}
+    position: relative;
+    font-size: 40px;
+    padding-top: 50%;
+    margin-left: 45%;
+    color: white;
+    }
 
 #sidebar {
     padding-top: 3.7%;
-    padding-left: 0;
-    z-index: 100 !important;
+    padding-left: 15;
+    position: fixed;
+}
+
+#list-group{
+    position: relative;
 }
 
 #sidebar .list-group-item {
@@ -43,7 +46,7 @@
     border-right: 0;
     border-color: #2c2c2c;
     white-space: nowrap;
-}
+    }
 
 
 /* highlight active menu */
@@ -92,6 +95,10 @@
     padding-left: 30px;
 }
 
+#close{
+    display: none;
+}
+
 @media (min-width:800em) {
     /* overlay sub levels on small screens */
     #sidebar .list-group .collapse.in,
@@ -132,10 +139,19 @@
 
 @media screen and (max-width: 800px) {
     #sidebar {
-        padding-top: 6.5%;
+        padding-top:10%;
+        padding-left: 10;
+        position: fixed;
     }
     .icon-navigate {
         font-size: 2em;
-        padding-top: 5%;
+        padding-top: 150%;
     }
-}
+    .logo-system {
+    margin-top: 4%;
+    margin-left: 88%;
+    height: 5%;
+    width: 9%;
+    }
+} 
+
