@@ -52,11 +52,32 @@ export default {
             showProd: false,
             showParam: false,
             idProd: '',
-            show: false
+            show: false,
+            opCreated: false
         }
     },
     methods: {
         // Make a request for a user with a given ID
+        buscar(id = "") {
+            this.carregando = true;
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            this.produtos = [];
+            console.log(this.order, this.orderField)
+            axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                if (!response.data.values && response.data.productId)
+                    this.produtos[0] = response.data;
+                else {
+                    paginacao(response, this);
+                    this.produtos = response.data.values;
+                }
+                this.carregando = false;
+            }, (error) => {
+                this.mensagem = 'Erro no server ao buscar ' + error;
+                this.carregando = false;
+            })
+        },
         getRecipes: function() {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
@@ -114,7 +135,8 @@ export default {
         addRecipe: function(recipe, id) {
             // debugger;
             this.recipeAdded = recipe;
-
+            // inicializa phases para que não de erro no v-if de verificação
+            this.recipeObj.phases = '';
             this.getRecipeGateway(id);
         },
         seeProduct: function(index) {
@@ -138,6 +160,14 @@ export default {
             axios.get(this.urlOp, config).then(response => {
                     // JSON responses are automatically parsed.
                     this.opArray = response.data;
+                    for (var x = 0; x < this.opArray.length; x++) {
+                        if (this.opArray[x].recipe.recipeProduct == undefined) {
+                            this.opArray[x].hasProd = false;
+                        } else {
+                            this.opArray[x].hasProd = true;
+                        }
+
+                    }
                     console.log(response);
                     this.carregando = false;
                 })
@@ -153,7 +183,8 @@ export default {
                 console.log(data);
                 //////////////////////////////////////////////////
                 axios.post(this.urlOp, data).then(response => {
-                        this.opArray = response.data;
+                        //this.opArray = response.data;
+                        this.opCreated = true;
                     })
                     .catch(e => {
                         this.errors.push(e)
