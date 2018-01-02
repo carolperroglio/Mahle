@@ -2,7 +2,9 @@
 i{
     cursor: pointer;
 }
-
+.pointer{
+    cursor: pointer;
+}
 /*Menu de cadastro da receita*/
 .nav-produtos{  
     font-size: pt;             
@@ -62,20 +64,30 @@ i{
     border: 0.7px solid rgba(0,0,0,0.1);
     border-radius: 5px;
     box-sizing: border-box;
-    width: 50%;
+    width: 90%;
 }
 #show-phase-products{
     cursor: pointer;
     margin-left: 2%;
 }
 .itens-fase{
-    display: inline;
-    cursor: pointer;
-       
+    position: relative;
+    width: 50%;     
+    box-sizing: content-box;      
+           
+    display: inline-block;
 }
+.itens-fase-rigth{    
+    left:51%;    
+}
+
 .container-itens-fase{
-    padding: 2% 0% 2% 0%; 
+    position: relative;
+    width: 100%;
+    padding: 2% 0% 2% 0%;   
+    background-color: #dcdcdc;      
 }
+
 .progress{
     position: absolute;
     top: 28% !important; 

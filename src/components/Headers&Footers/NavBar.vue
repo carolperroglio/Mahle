@@ -1,29 +1,37 @@
 <template>
     <div>
-            <!--                                  -->
-            <!--                                  -->
-            <!-- Cabeçalho da pagina, logo e user -->
-            <!--                                  -->
-            <!--                                  -->
-    <div class="col-md-12">                   
-        <nav class="header fixed-top">
-            <img src="./../../assets/imagens/onyx.png" class="col-sm-12 logo-system"/> 
-            <ul class="nav nav-pills bg-primary">
-                <li class="nav-item">
-                    <a class="nav-link active" router-link to="/">Início</a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link active" router-link to="">Gerenciamento de Ordem</a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link active" router-link to="">Análises Químicas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" router-link to="">Automação</a>
-                </li>
-            </ul>    
-        </nav>
-    </div> 
+        <!--                                  -->
+        <!--                                  -->
+        <!-- Cabeçalho da pagina, logo e user -->
+        <!--                                  -->
+        <!--                                  -->
+        <div class="col-md-12">                   
+            <nav class="header fixed-top">
+                <img src="./../../assets/imagens/onyx.png" class="col-sm-12 logo-system"/> 
+                <ul class="nav nav-pills bg-primary"> 
+                    <li class="nav-item">
+                        <main class="col-md-9 col-xs-11 p-l-2 p-t-2">
+                            <a href="#sidebar" data-toggle="collapse">
+                                <i class="icon-navigate fa fa-navicon fa-lg"></i>
+                            </a>
+                            <hr>
+                        </main>    
+                    </li>                                       
+                    <li class="nav-item">
+                        <a class="nav-link active" router-link to="/">Início</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link active" router-link to="">Gerenciamento de Ordem</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link active" router-link to="">Análises Químicas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" router-link to="">Automação</a>
+                    </li>
+                </ul>    
+            </nav>
+        </div> 
         <!--                        -->
         <!--                        -->
         <!--   Menu lateral Novo    -->
@@ -62,11 +70,7 @@
                         </router-link>           
                     </div>
                 </div>
-                <main class="col-md-9 col-xs-11 p-l-2 p-t-2">
-                    <a href="#sidebar" data-toggle="collapse">
-                        <i class="icon-navigate fa fa-navicon fa-lg"></i></a>
-                    <hr>
-                </main>
+                
             </div>
         </div>
         <router-view/>
