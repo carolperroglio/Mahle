@@ -3,8 +3,8 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-    <nav-bar></nav-bar>    
-    
+    <nav-bar></nav-bar>
+
     <!--<router-view/>-->
   </div>
 </template>
@@ -20,5 +20,9 @@ export default {
 </script>
 
 <style>
-  
+.progress {
+  top: 38% !important;
+  left: 15% !important;
+  z-index: 1000;
+}
 </style>
