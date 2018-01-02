@@ -17,7 +17,7 @@ function paginacao(response, este) {
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://192.168.11.160:';
+var ipServer = 'http://192.168.11.80:';
 
 export default {
     name: 'ProductionOrder',
@@ -34,14 +34,14 @@ export default {
             opArray: [],
             opTypeArray: [],
             paramArray: [],
-            phaseObj: [],
+            recipeObj: {},
             productArray: [],
             recipeSelected: '',
             errors: [],
             opDesc: '',
             opSelected: '',
             phaseSelected: '',
-            newOp: {},
+            productionOrderObj: {},
             recipeAdded: '',
             carregando: false,
             quantityPage: 20,
@@ -49,6 +49,10 @@ export default {
             total: 0,
             pages: [],
             pageAtual: 0,
+            showProd: false,
+            showParam: false,
+            idProd: '',
+            show: false
         }
     },
     methods: {
@@ -57,73 +61,107 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
+            this.carregando = true;
             axios.get(this.urlRecipe, config).then(response => {
                     // JSON responses are automatically parsed.
                     this.recipeArray = response.data;
                     console.log(response);
+                    this.carregando = false;
                 })
                 .catch(e => {
                     this.errors.push(e)
                 })
 
         },
+        getId: function(index) {
+            this.idProd = 'verProdutosLista-' + index
+            console.log(this.idProd);
+            return this.idProd;
+        },
+        getIdPhase: function(index) {
+            this.idProd = 'verPhaseList-' + index
+            console.log(this.idProd);
+            return this.idProd;
+        },
         getOpType: function() {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
+            this.carregando = true;
+
             axios.get(this.urlOpType, config).then(response => {
                     // JSON responses are automatically parsed.
                     this.opTypeArray = response.data;
                     console.log(response);
+                    this.carregando = false;
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+        },
+        getRecipeGateway: function(id) {
+            this.carregando = true;
+
+            axios.get(this.urlGatewayRecipe + id).then(response => {
+                    this.recipeObj = response.data;
+                    console.log(response.data);
+                    this.carregando = false;
                 })
                 .catch(e => {
                     this.errors.push(e)
                 })
         },
         addRecipe: function(recipe, id) {
+            // debugger;
             this.recipeAdded = recipe;
-            // newOp.phases = [];
-            // if (newOp.phases.length != 0) {
-            //     newOp.phases.push(phase);
-            // }
-            axios.get(this.urlGatewayRecipe + id).then(response => {
-                    this.phaseObj = response.data;
-                    console.log(response.data);
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                })
-                // phaseObj.push(phase);
+
+            this.getRecipeGateway(id);
         },
         seeProduct: function(index) {
-            this.productArray = this.phaseObj.phases[index].phaseProducts;
+            debugger;
+            // getRecipeGateway(index);
+            this.productArray = this.recipeObj.phases[index].phaseProducts;
         },
         seeParam(index) {
-            this.paramArray = this.phaseObj.phases[index].phaseParameters;
+            this.paramArray = this.recipeObj.phases[index].phaseParameters;
         },
+        //      //
+        // CRUD //
+        //      //
         getOp: function() {
+            //productionOrderObj.recipe.recipeName = "";
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
-            axios.get(this.urlOpType, config).then(response => {
+            // ativa barra de load na tela
+            this.carregando = true;
+            axios.get(this.urlOp, config).then(response => {
                     // JSON responses are automatically parsed.
-                    this.opTypeArray = response.data;
+                    this.opArray = response.data;
                     console.log(response);
+                    this.carregando = false;
                 })
                 .catch(e => {
                     this.errors.push(e)
                 })
         },
         createOp: function(data) {
-            axios.post(this.urlOp, data).then(response => {
-                    // JSON responses are automatically parsed.
-                    this.opArray = response.data;
-                    console.log(response);
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                })
-        }
+                // adiciona propriedades necessárias na op que são mandatory
+                data.recipe = this.recipeObj;
+                data.productionOrderTypeId = this.opSelected;
+                data.typeDescription = this.filterDesc;
+                console.log(data);
+                //////////////////////////////////////////////////
+                axios.post(this.urlOp, data).then(response => {
+                        this.opArray = response.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    })
+            }
+            //           //
+            //  END CRUD //
+            //           //
     },
     computed: {
         filterDesc: function(value) {
