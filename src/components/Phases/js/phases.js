@@ -10,25 +10,28 @@ export default {
             config : {
                 headers: {'Cache-Control':'no-cache'}
             },                                              
-            url:'http://192.168.11.80:8003/api/', 
-            product:{},                                           
+            url:'http://brsbap01:8003/api/', 
+            url2:'http://brsbap01:8001/api/', 
+            carregando:false,                                          
             recipeProduct:{},
             recipeProductDisplay:{}, 
             recipeProductName:'',           
             recipeCadastrada: false,            
             recipeProducts: [],
-            phaseTags:[],
-            phaseTag:{},
-            carregando:false,
-            recipe:{},            
+            recipe:{},                                                         
             phase:{},             
             phases:[],
             phaseProduct:{},
-            productPhaseName:'',        
+            productPhaseName:'',            
+            phaseTag: {}, 
+            phaseParameter:{},
+            phaseTags:[],            
+            carregando:false,                    
             mensagem:'',
             mensagemSuc:'',
             productName:'',
-            name:'',                                                           
+            name:'',  
+            tagName: '',                                                                     
         }
     },  
     computed:{       
@@ -82,6 +85,19 @@ export default {
         /*               */
         /*****************/
         createRecipeProduct(recipeProduct, recipeProductEnd){
+            this.mensagemSuc='';                                    
+            this.carregando=true;                        
+            recipeProduct.phaseProductType='finished';          
+            axios.post(this.url+"recipes/product/"+this.recipe.recipeId,recipeProduct).then((response)=>{
+                console.log(response.data);                                
+                this.carregando=false;  
+                this.recipeProductDisplay = response.data;                              
+                alert('Cadastrado com sucesso');                
+            },(error)=>{
+                console.log(error);
+                this.carregando=false;
+            });
+        },deleteRecipeProduct(recipeProduct, recipeProductEnd){
             this.mensagemSuc='';                                    
             this.carregando=true;                        
             recipeProduct.phaseProductType='finished';          
@@ -149,8 +165,8 @@ export default {
         relacionaFase(phase){                                                                       
             axios.post(this.url+"recipes/phases/"+this.recipe.recipeId,phase).then((response)=>{
                 console.log(response.data);                
-                phase.products = []
-                phase.tags = [];
+                phase.products = [];                
+                phase.parameters = [];
                 phase.expand=false;
                 this.phases.push(phase);
                 this.phase = {};                
@@ -160,16 +176,38 @@ export default {
                 console.log(error);
                 this.carregando=false;
             });
-        },            
-        createPhaseTag(index, tag){
+        },                    
+
+        /*****************/
+        /*               */
+        /*               */
+        /*  CRUD Phase   */
+        /*   Products    */
+        /*               */
+        /*****************/
+        createPhaseProduct(productPhase, phase){
             this.mensagemSuc='';
-            this.carregando=true; 
-            console.log(tag);           
-            axios.post(this.url+"gateway/tags/"+this.phases[index].phaseId,tag).then((response)=>{
-                console.log(response.data);   
-                debugger;             
-                this.phases[index].tags.push(response.data); 
-                this.tag = {};              
+            this.carregando=true;            
+            axios.post(this.url+"phases/products/"+phase.phaseId,productPhase).then((response)=>{ 
+                productPhase.phaseProductId = response.data.phaseProductId;
+                phase.products.push(productPhase);   
+                this.phaseProduct = {};           
+                this.productPhaseName = '';             
+                this.mensagemSuc='Fase relacionada com sucesso';
+                this.ok=true;                
+                this.carregando=false;
+            },(error)=>{
+                console.log(error);
+                this.phaseProduct = {};           
+                this.productPhaseName = '';
+                this.carregando=false;
+            });
+        },
+        deletePhaseProduct(productPhase, phase){
+            this.mensagemSuc='';
+            this.carregando=true;            
+            axios.delete(this.url+"phases/products/" + phase.phaseId,{data: productPhase}).then((response)=>{                
+                phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);                            
                 this.mensagemSuc='Fase relacionada com sucesso';
                 this.ok=true;                
                 this.carregando=false;
@@ -183,36 +221,26 @@ export default {
         /*               */
         /*               */
         /*  CRUD Phase   */
-        /*   Products    */
+        /*   Parameters  */
         /*               */
         /*****************/
-        createPhaseProduct(productPhase, phase){
+        createPhaseParameter(phaseParameter, phase){
             this.mensagemSuc='';
-            this.carregando=true;            
-            axios.post(this.url+"phases/products/"+phase.phaseId,productPhase).then((response)=>{                            
-                phase.products.push(productPhase.product);
-                this.phaseProduct = {}; 
-                this.productPhaseName               
+            this.carregando=true;                      
+            console.log(phaseParameter);
+            console.log(phase);
+            axios.post(this.url+"phases/parameters/"+phase.phaseId,phaseParameter).then((response)=>{                
+                phaseParameter.phaseParameterId = response.data.phaseParameterId;                 
+                phase.parameters.push(phaseParameter);                
+                this.phaseParameter = {};                
+                this.tagName='';
                 this.mensagemSuc='Fase relacionada com sucesso';
                 this.ok=true;                
                 this.carregando=false;
             },(error)=>{
-                console.log(error);
-                this.carregando=false;
-            });
-        },
-        deletePhaseProduct(index, product){
-            this.mensagemSuc='';
-            this.carregando=true;            
-            axios.delete(this.url+"phases/products/" + this.phases[index].phaseId,{data: phase}).then((response)=>{
-                console.log(response.data);                
-                this.phases[index].products.push(response.data);
-                this.phase = {};                
-                this.mensagemSuc='Fase relacionada com sucesso';
-                this.ok=true;                
-                this.carregando=false;
-            },(error)=>{
-                console.log(error);
+                console.log(error);                
+                this.phaseParameter = {};
+                this.tagName='';
                 this.carregando=false;
             });
         },
