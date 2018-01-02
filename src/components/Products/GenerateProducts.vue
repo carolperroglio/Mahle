@@ -103,7 +103,6 @@
                                 Cadastrar Produto
                             </button>
                         </div>
-
                     </form>
                 </li>
             </ul>
@@ -136,7 +135,7 @@
                                 <b><font color="#9BA6A5">Código: </font></b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
                                 <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-pencil icon-right" style="font-size:22px; cursor:pointer" @click.stop.prevent="editar(p)" aria-hidden="true"></i>
+                            <i class="fa fa-pencil icon-right" style="font-size:22px; cursor:pointer" @click.prevent="editar(p)" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i>
                         </div>
                     </div>
                 </div>
