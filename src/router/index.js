@@ -5,6 +5,7 @@ import GenerateProducts from '@/components/Products/GenerateProducts'
 import Phases from '@/components/Phases/Phases'
 import ProductionOrder from '@/components/ProductionOrder/ProductionOrder'
 import ToolCreate from '@/components/Tools/ToolCreate'
+import StateManagement from '@/components/OPStateManagement/StateManagement'
 Vue.use(Router)
 
 export default new Router({
@@ -33,6 +34,12 @@ export default new Router({
             path: '/toolCreate',
             name: 'ToolCreate',
             component: ToolCreate
+
+        },
+        {
+            path: '/stateManagement',
+            name: 'StateManagement',
+            component: StateManagement
 
         },
     ]

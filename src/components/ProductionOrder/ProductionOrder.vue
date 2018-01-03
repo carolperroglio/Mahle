@@ -7,9 +7,9 @@
         <!--                -->
         <div class="modal fade cadastro-op" id="cadastrarOp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                
+
                 <div class="modal-content">
-                 <div class="progress" v-show="carregando">
+                    <div class="progress" v-show="carregando">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                     <div class="modal-header">
@@ -20,6 +20,9 @@
                     </div>
                     <div class="modal-body">
                         <form>
+                            <div class="alert alert-success" role="alert" v-if="opCreated">
+                                OP criada com sucesso !
+                            </div>
                             <div class="form-group row">
                                 <label for="op" class="col-sm-3 col-form-label">Ordem de Produção</label>
                                 <div class="col-sm-3">
@@ -31,11 +34,11 @@
                                 </div>
                             </div>
                             <!--<div class="form-group row">
-                                                                                        <label for="qtd" class="col-sm-4 col-form-label">Quantidade</label>
-                                                                                        <div class="col-sm-8">
-                                                                                            <input type="number" class="form-control" id="qtd" aria-describedby="qty" placeholder="">
-                                                                                        </div>
-                                                                                    </div>-->
+                                                                                                                <label for="qtd" class="col-sm-4 col-form-label">Quantidade</label>
+                                                                                                                <div class="col-sm-8">
+                                                                                                                    <input type="number" class="form-control" id="qtd" aria-describedby="qty" placeholder="">
+                                                                                                                </div>
+                                                                                                            </div>-->
                             <div class="form-group row">
                                 <label for="opType" class="col-sm-3 col-form-label">Tipo de Ordem</label>
                                 <div class="col-sm-3">
@@ -53,10 +56,10 @@
                             </div>
                             <div class="form-group row">
                                 <!--<label for="desc" class="col-sm-4 col-form-label">Descrição</label>
-                                                                                        <div class="col-sm-8">
-                                                                                            <input type="text" disabled class="form-control" id="desc" v-model="filterDesc" value="opDesc">
-                                                                                            <small id="descrip" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                                                                        </div>-->
+                                                                                                                <div class="col-sm-8">
+                                                                                                                    <input type="text" disabled class="form-control" id="desc" v-model="filterDesc" value="opDesc">
+                                                                                                                    <small id="descrip" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                                                                                                </div>-->
                             </div>
                             <div class="form-group row">
                                 <label for="opType" class="col-sm-3 col-form-label">Receita</label>
@@ -89,7 +92,7 @@
 
                                     <!--  Mostra as fases da Receita-->
                                     <div id="recipeAdded" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                        <div class="card-body" v-if="recipeObj.phases.length != 0">
+                                        <div class="card-body-op" v-if="recipeObj.phases.length != 0 || carregando == true">
                                             <h5>Fases</h5>
                                             <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases">
                                                 <li class="list-group-item" v-if="recipeAdded.length != 0">
@@ -102,7 +105,7 @@
                                                 </li>
                                                 <!-- Collapse de ver 'Produtos' -->
                                                 <div class="collapse" id="verProdutos">
-                                                    <div class="card card-body">
+                                                    <div class="card card-body-op">
                                                         <h6>Produtos</h6>
                                                         <ul class="list-group" v-for="product in productArray" v-bind:value="product">
                                                             <li class="list-group-item">
@@ -115,7 +118,7 @@
                                                 </div>
                                                 <!-- Collapse de ver 'Pârametros' -->
                                                 <div class="collapse" id="verPârametros">
-                                                    <div class="card card-body">
+                                                    <div class="card card-body-op">
                                                         <h6>Pârametros</h6>
                                                         <ul class="list-group" v-for="param in paramArray" v-bind:value="param">
                                                             <li class="list-group-item">
@@ -137,11 +140,11 @@
                             <!--  receita foi selecionada>          -->
 
                             <!--<div class="alert alert-warning" role="alert" v-if="recipeObj.phases.length == 0">
-                                                                        Não possui fases!
-                                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>-->
+                                                                                                Não possui fases!
+                                                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                            </div>-->
                         </form>
                     </div>
                     <!-- Botão que cria a OP-->
@@ -166,92 +169,126 @@
         <!--  Botão que inicia    -->
         <!--  o Modal de Criação da OP  -->
         <div class="fixed-top nav-op">
-            <!-- Button trigger modal -->
-            <div class="row">
-                <div class="col-lg-1">
-                    <button @click="getRecipes(); getOpType()" type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#cadastrarOp">
-                        Cadastrar OP
-                    </button>
-                </div>
-                <div class="col-lg-2">
-                    <button @click.prevent="getOp();" type="button" class="btn btn-outline-primary btn-sm">
-                        Listar OPs
-                    </button>
-                </div>
-            </div>
-            
-            <br>
-            <!--             -->
-            <!--  LISTAR OPs -->
-            <!--             -->
-            <div class="row conteudo">
-                <div class="col-10">
-                    <div class="progress" v-show="carregando">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                    </div>
-                    <div v-for="(op, index) in opArray" v-bind:key="index">
-                        <div class="card">
-                            <div class="card-header">
-                                <b></b>
-                            </div>
-                            <div class="card-body">
-                                <label class="ls">
-                                    <b>
-                                        <font color="#9BA6A5">Numero de Ordem: </font>
-                                    </b>{{op.productionOrderNumber}}
-                                </label>&nbsp;&nbsp;&nbsp;
-                                <label class="ls">
-                                    <b>
-                                        <font color="#9BA6A5">Descrição: </font>
-                                    </b>{{op.typeDescription}}
-                                </label>&nbsp;&nbsp;&nbsp;
-                                <label class="ls">
-                                    <b>
-                                        <font color="#9BA6A5">Quantidade: </font>
-                                    </b>{{op.quantity}}
-                                </label>&nbsp;&nbsp;&nbsp;
-                                <label class="ls">
-                                    <b>
-                                        <font color="#9BA6A5">Nome da Receita: </font>
-                                    </b>{{op.recipe.recipeName}}
-                                </label>&nbsp;&nbsp;&nbsp;
-                                <label class="ls">
-                                    <b>
-                                        <font color="#9BA6A5">Cod. da Receita: </font>
-                                    </b>{{op.recipe.recipeCode}}
-                                </label>&nbsp;&nbsp;&nbsp;
-                                <label class="ls">
-                                    <b>
-                                        <font color="#9BA6A5">Nome do Produto: </font>
-                                    </b>{{op.recipe.recipeProduct.product.productName}}
-                                </label>&nbsp;&nbsp;&nbsp;
-                                </br>
+            <ul class="nav d-flex align-items-center">
+                
+                <li class="col-md-auto">
+                    <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
+                        <option value="" selected disabled>Buscar por:</option>
+                        <option value="productionOrderNumber">Nº Ordem de Produção</option>
+                        <option value="typeDescription">Descrição</option>
+                        <option value="quantity">Quantidade</option>
+                        <option value="currentStatus">Status</option>
+                    </select>
+                </li>
+                <li class="col-md-auto">
+                    <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                </li>
+                <li class="col-md-auto">
+                    <select class="form-control form-control-sm" v-model="orderField">
+                        <option value="" selected disabled>Campo para busca</option>
+                        <option value="productionOrderNumber">Nº Ordem de Produção</option>
+                        <option value="typeDescription">Descrição</option>
+                        <option value="quantity">Quantidade</option>
+                        <option value="currentStatus">Status</option>
+                    </select>
+                </li>
+                <li class="col-md-auto">
+                    <select class="form-control form-control-sm" v-model="order">
+                        <option value="" selected disabled>Ordenação</option>
+                        <option value="ascending">Crescente</option>
+                        <option value="descending">Decrescente</option>
+                    </select>
+                </li>
 
-                                <!--Botão para procurar as fases de uma determinada op-->
-                                <!--<button type="button" class="btn btn-outline-info btn-sm" data-toggle="collapse" :data-target="getIdPhase(index)">Fases</button>-->
-                                <!--Botão para procurar os produtos de uma determinada fase-->
+                <li class="col">
+                    <form class="form-inline my-3 form-control-sm">
+                        <div class="col-md-auto">
+                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <div class="col-md-auto">
+                            <button @click="getRecipes(); getOpType()" type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#cadastrarOp">
+                                Cadastrar OP
+                            </button>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <!--             -->
+        <!--  LISTAR OPs -->
+        <!--             -->
+        <div class="row conteudo" style="top:-400px;">
+            <div class="op col-md-10">
+                <div class="progress" v-show="carregando">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div v-for="(op, index) in opArray.values" v-bind:key="index">
+                    <div class="card card-margin">
+                        <div class="card-header">
+                            <b></b>
+                        </div>
+                        <div class="card-body-op">
+                            <label class="ls">
+                                <b>
+                                    <font color="#9BA6A5">Numero de Ordem: </font>
+                                </b>{{op.productionOrderNumber}}
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls">
+                                <b>
+                                    <font color="#9BA6A5">Descrição: </font>
+                                </b>{{op.typeDescription}}
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls">
+                                <b>
+                                    <font color="#9BA6A5">Quantidade: </font>
+                                </b>{{op.quantity}}
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls">
+                                <b>
+                                    <font color="#9BA6A5">Nome da Receita: </font>
+                                </b>{{op.recipe.recipeName}}
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls">
+                                <b>
+                                    <font color="#9BA6A5">Cod. da Receita: </font>
+                                </b>{{op.recipe.recipeCode}}
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls" v-if="op.hasProd == true">
+                                <b>
+                                    <font color="#9BA6A5">Nome do Produto: </font>
+                                </b>{{op.recipe.recipeProduct.product.productName}}
+                            </label>
 
-                            </div>
+                            </br>
+
+                            <!--Botão para procurar as fases de uma determinada op-->
+                            <!--<button type="button" class="btn btn-outline-info btn-sm" data-toggle="collapse" :data-target="getIdPhase(index)">Fases</button>-->
+                            <!--Botão para procurar os produtos de uma determinada fase-->
+
                         </div>
                     </div>
-                    <!--<div class="paginacao fixed-bottom" v-show="total>0">
-                                                    <nav aria-label="">
-                                                        <ul class="pagination justify-content-center">
-                                                            <li v-show="startat>0" class="page-item">
-                                                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Previous</a>
-                                                            </li>
-                                                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
-                                                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
-                                                            </li>
-                                                            <li class="page-item" v-show="pages.length>1 && startat+20<total">
-                                                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Next</a>
-                                                            </li>
-                                                        </ul>
-                                                    </nav>
-                                                </div>-->
+                </div>
+                <div class="paginacao-op fixed-bottom" v-show="total>0">
+                    <nav aria-label="">
+                        <ul class="pagination justify-content-center">
+                            <li v-show="startat>0" class="page-item">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Previous</a>
+                            </li>
+                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
+                            </li>
+                            <li class="page-item" v-show="pages.length>1 && startat+20<total">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </template>
 <script src="./js/order.js">

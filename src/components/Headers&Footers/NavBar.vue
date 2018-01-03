@@ -9,22 +9,22 @@
         <nav class="header fixed-top">
                 <img src="./../../assets/imagens/onyx.png" class="logo-system"/>
             <ul class="nav nav-pills bg-primary">
-                <li class="nav-item col-md-2">
+                <li class="nav-item-cab col-md-2">
                     <a class="" router-link to="/"></a>
                 </li> 
-                <li class="nav-item col-md-2">
+                <li class="nav-item-cab col-md-2">
                     <a class="nav-link active" router-link to="/">Início</a>
                 </li> 
-                <li class="nav-item col-md-2">
+                <li class="nav-item-cab col-md-2">
                     <a class="nav-link active" router-link to="">Gerenciamento de Ordem</a>
                 </li> 
-                 <li class="nav-item col-md-2">
+                 <li class="nav-item-cab col-md-2">
                     <a class="nav-link active" router-link to="">Gerenciamento de Ferramentas</a>
                 </li> 
-                <!--<li class="nav-item">
+                <!--<li class="nav-item-cab">
                     <a class="nav-link active" router-link to="">Análises Químicas</a>
                 </li>-->
-                <!--<li class="nav-item">
+                <!--<li class="nav-item-cab">
                     <a class="nav-link active" router-link to="">Automação</a>
                 </li>-->
             </ul>    
@@ -71,7 +71,10 @@
                         </router-link>
                         <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP</span>
-                        </router-link>            
+                        </router-link>
+                        <router-link to="/stateManagement" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP Status Management</span>
+                        </router-link>          
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">

@@ -11,11 +11,6 @@
     width: 100%;
 }
 
-.nav-item {
-    margin-left: 3;
-    margin-right: 0.5%;
-}
-
 .collapse-color {
     color: #6a7989;
 }
@@ -32,6 +27,68 @@ a:hover {
     width: 125%;
 }
 
-@media only screen and (max-width: 801px) {
-    margin-top: 20% !important;
+.icon-right {
+    position: relative;
+    float: right;
+}
+
+.panel-body {
+    text-align: left;
+}
+
+input {
+    position: relative;
+}
+
+.op {
+    position: relative;
+    margin-top: 20%;
+    left: 12%
+}
+
+.paginacao-op {
+    z-index: 100;
+    text-align: center;
+    width: 66.3%;
+    left: 15%;
+    background-color: white;
+}
+
+.cadForm {
+    position: fixed;
+    float: right;
+    z-index: 10%;
+    margin-top: 18%;
+    width: 15% !important;
+    left: 83%;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 10%;
+    padding: 2%;
+}
+
+.card-body-op {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding-top: 0.6%;
+    padding-bottom: 0.6%;
+}
+
+.card-margin {
+    margin-bottom: 1%;
+}
+
+@media screen and (max-width: 801px) {
+    .cadForm {
+        margin-top: 30%;
+        width: 15% !important;
+        height: 60%;
+    }
+}
+
+@media screen and (max-width: 801px) {
+    .card-body-op {
+        font-size: 11px;
+        padding-top: 0.6%;
+        padding-bottom: 0.6%;
+    }
 }
