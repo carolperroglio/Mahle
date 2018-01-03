@@ -1,5 +1,7 @@
 <template>
     <div>
+
+        
         <!--               -->
         <!--               -->
         <!--               -->
@@ -26,7 +28,7 @@
                     <div data-toggle="modal" v-if="!(carregando || !recipeCadastrada)" data-target="#modalPro"><i class="fa fa-check" aria-hidden="true"></i> Cadastrar produto</div>
                 </li>    
                 <li class="nav-item justify-content-end" v-if="json.stringify(recipeProduct) !== '{}'">                        
-                    Produto : {{recipeProduct.productName}} | Quantidade do produto : {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} | Tipo do produto : {{recipeProductDisplay.phaseProductType}}  
+                    Produto : {{recipeProduct.productName}} | Quantidade do produto : {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} | Tipo do produto : {{recipeProductDisplay.phaseProductType}}  <i class="fa fa-window-close" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);"></i>
                 </li>                    
             </ul>                                                                                                                     
         </nav>        
@@ -50,30 +52,35 @@
         <!--   Listagem de fase    -->
         <!--                       -->
         <!--                       -->
-        <!--                       -->                    
-        <div class="conteudo" v-show="recipeCadastrada">    
+        <!--                       -->                  
+        <div class="conteudo" v-show="recipeCadastrada">   
             <div class="cabecalhoPhase">
                 <h3>Fases da receita : </h3>
                 <div data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
                     <i class="fa fa-plus"></i><b> Adicionar fase</b>
                 </div>
             </div>   
-            <div v-for="(pha, index) in phases" class="phase">                                        
-                {{index+1}}° Fase<b> Id da fase =</b> {{pha.phaseId}} --- <b>Nome da fase = </b>{{pha.phaseName}} --- <b>Código da fase </b>{{pha.phaseCode}}                 
-                <i class="fa fa-pencil" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true"></i><span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products">\/<b>Expandir</b></span>
-                <div v-show="pha.expand">
-                    <div class="container-itens-fase">    
-                        <div data-toggle="modal" data-target="#cadProPhase" @click.stop.prevent="phaseProduct={};phase=pha;abreModal('#cadProPhase');" class="itens-fase" aria-hidden="true">
+            <div v-for="(pha, index) in phases" class="phase">                                    
+                <h3>{{index+1}}° Fase</h3><br><b> Id da fase : </b> {{pha.phaseId}} --- <b>Nome da fase : </b>{{pha.phaseName}} --- <b>Código da fase : </b>{{pha.phaseCode}}                 
+                &nbsp;&nbsp;<i class="fa fa-pencil" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true"></i><b>Editar </b><span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products"><b>\/Expandir</b></span><br>                
+                <div class="container-itens-fase" v-show="pha.expand">    
+                    <div class="itens-fase">
+                        <span data-toggle="modal" data-target="#cadProPhase" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" class="pointer" aria-hidden="true">
                             <i class="fa fa-plus"></i><b> Adicionar produtos</b>
-                        </div>
-                        <div data-toggle="modal" data-target="#cadParam" @click.stop.prevent="phase={};abreModal('#cadParam');" class="itens-fase pull-right" aria-hidden="true">
-                            <i class="fa fa-plus"></i><b> Adicionar parametros</b>
-                        </div>                
-                    </div>   
-                    <div v-for="(pro, indexPro) in pha.products">
-                        Produtos [ nome : {{pro.productName}} id :  {{pro.productId}} ]
+                        </span>
+                        <div v-for="(pro, indexPro) in pha.products">
+                            <b>VALOR : </b>{{pro.value}} {{pro.measurementUnit}} <b>TIPO DE PRODUTO : </b>{{pro.phaseProductType}} <b>PRODUTO : </b>{{pro.product.productName}}&nbsp;&nbsp;<i class="fa fa-window-close" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);"></i>
+                        </div>                                                
                     </div>
-                </div>                                                                                                                                                                
+                    <div class="itens-fase pull-right">                            
+                        <span class="pointer" data-toggle="modal" data-target="#modalCadParam" @click.stop.prevent="tagName='';phaseParameter={};phase=pha;abreModal('#modalCadParam');" aria-hidden="true">
+                            <i class="fa fa-plus"></i><b> Adicionar parametros</b>
+                        </span> 
+                        <div v-for="(par, indexPro) in pha.parameters">
+                            <b>POINTER : </b>{{par.setupValue}} {{par.measurementUnit}} <b>VALOR MIN. : </b>{{par.minValue}} <b>VALOR MAX. : </b>{{par.maxValue}} <b>TAG : </b>{{par.tag.tagName}}
+                        </div>                                                           
+                    </div>                                                        
+                </div>                                                                                                                                                                                                      
             </div>                                                                       
         </div>
 
@@ -227,7 +234,6 @@
         </div>                
                 
 
-
         
         <!--                       --> 
         <!--                       -->
@@ -265,22 +271,64 @@
                         </div>
                     </div>
                     <div class="modal-footer">                                                        
-                        <div>                                                    
-                            <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" class="btn btn-success btn-sm">
-                                <i class="fa fa-check-square" aria-hidden="true"></i>
-                            </button>
-                            <button @click.stop.prevent="deletePhaseProduct(phase, recipe)" class="btn btn-danger">
-                                <i class="fa fa-window-close" aria-hidden="true"></i>
-                            </button>
-                            <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
-                                Limpar
-                            </div>
+                        <div>   
+                            <div class="btn-group" role="group">                                                 
+                                <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" class="btn btn-success">
+                                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                                </button>                                
+                                <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
+                                    Limpar
+                                </div>
+                            </div>    
                         </div>
                     </div>
                 </div>
             </div>                                            
         </div> 
 
+
+        <!--    Modal da Flavia    --> 
+        <!--                       -->
+        <!--                       --> 
+        <!-- Cadastro de parâmetros-->
+        <!--                       -->
+        <!--                       -->
+        <!--         Modal         -->
+        <div class="modal fade" id="modalCadParam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Parâmetros de Fase</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>                                      
+                    <div class="modal-body">                                                    
+                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>                                                                                     
+                        <label for="">Set Point</label>
+                        <input type="text" class="form-control form-control-sm" v-model="phaseParameter.setupValue" placeholder="Set Point">                                    
+                        <label for="inputPassword4">Unidade de Medida</label>                            
+                        <input type="text" class="form-control form-control-sm" v-model="phaseParameter.measurementUnit" placeholder="Ex.: Kg">                    
+                        <label for="inputPassword4">Valor Mínimo</label>                            
+                        <input type="text" class="form-control form-control-sm" v-model="phaseParameter.minValue" placeholder="Valor Mínimo">                    
+                        <label for="inputPassword4">Valor Máximo</label>                            
+                        <input type="text" class="form-control form-control-sm" v-model="phaseParameter.maxValue" placeholder="Valor Máximo"><br>
+                        <label for="mr-sm-2">Nome : </label><br>
+                        <div class="dropdown">   
+                            <input @keyup="phaseTags=getResults('http://brsbap01:8001/api/tags?fieldFilter=tagName&fieldValue=', tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags">{{p.tagName}}</a>                            
+                            </div>                            
+                        </div> 
+                        <div class="btn-group" role="group">
+                            <button @click.stop.prevent="createPhaseParameter(phaseParameter, phase)" class="btn btn-success"><i class="fa fa-check-square" aria-hidden="true"></i></button>
+                            <button @click.stop.prevent="deletePhaseParameter(index, tag)" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+                        </div>                                       
+                    </div>
+                </div>
+            </div>                                
+        </div>
     </div>                  
 </template>
 <script src="./js/phases.js">
@@ -289,49 +337,5 @@
 @import url("./css/phases.css");
 </style> 
 
-<!--     Moda da Flavia    --> 
-<!--                       -->
-<!--                       --> 
-<!-- Cadastro de parâmetros-->
-<!--                       -->
-<!--                       -->
-<!--         Modal         -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastrar Parâmetros de Fase</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>                                      
-            <div class="modal-body">
-                <form>
-                    <div class="form-row">
-                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>      
-                        <label for="">Nome</label>
-                        <div class="dropdown">   
-                        <input @keyup="phaseTags=getResults('http://192.168.11.160:8003/gateway/tags/', tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" @click.stop.prevent="phaseTag=p; tagName=phaseTag.tagName; phaseTags=[]" v-for="(p,index) in phaseTags">{{p.tagName}}</a>                            
-                        </div>                            
-                        </div>                                                
-                        <label for="">Set Point</label>
-                        <input type="text" class="form-control form-control-sm" v-model="tag.setupValue" placeholder="Set Point">                                    
-                        <label for="inputPassword4">Unidade de Medida</label>                            
-                        <input type="text" class="form-control form-control-sm" v-model="tag.measurementUnit" placeholder="Unidade de Medida">                    
-                        <label for="inputPassword4">Valor Mínimo</label>                            
-                        <input type="text" class="form-control form-control-sm" v-model="tag.minValue" placeholder="Valor Mínimo">                    
-                        <label for="inputPassword4">Valor Máximo</label>                            
-                        <input type="text" class="form-control form-control-sm" v-model="tag.maxValue" placeholder="Valor Máximo">
-                        <div class="btn-group" role="group">
-                            <button @click.stop.prevent="createPhaseTag(index, tag)" class="btn btn-success"><i class="fa fa-check-square" aria-hidden="true"></i></button>
-                            <button @click.stop.prevent="deletePhaseTag(index, tag)" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-                        </div>                    
-                    </div>                                                                                                                                            	                                            
-                </form>
-            </div>
-        </div>
-    </div>                                
-</div>-->
+
+<!-- -->

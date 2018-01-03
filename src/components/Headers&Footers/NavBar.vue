@@ -68,7 +68,10 @@
                         </router-link>
                         <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP</span>
-                        </router-link>            
+                        </router-link>
+                        <router-link to="/stateManagement" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP Status Management</span>
+                        </router-link>          
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">

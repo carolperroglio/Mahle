@@ -1,3 +1,4 @@
+/* menu de navegação de produtos */
 
 /* menu de navegação de produtos */   
 .nav-produtos{
@@ -25,21 +26,23 @@
     position: fixed;
     top: 9.3%;
     margin-left: 0.5%;
-
 }
 
 /*Listagem de produtos*/
 .icon-right{
+position: relative;
+float: right;
+}
+
+.panel-body {
+    text-align: left;
+}
+
+input {
     position: relative;
-    float: right;
 }
-.panel-body{
-    text-align: left;    
-}
-input{
-    position: relative;
-}
-.produtos{
+
+.produtos {
     position: relative;
     margin-top: 12%;           
     left: 3%;
@@ -48,14 +51,14 @@ input{
     background-color: white;
 }
 
-.msg{
-    position: relative!important; 
+.msg {
+    position: relative!important;
     width: 70%!important;
 }
 
-.paginacao{        
+.paginacao {
     z-index: 100;
-    text-align: center;    
+    text-align: center;
     width: 66.3%;
     left: 15%;
     background-color: white;
@@ -63,8 +66,6 @@ input{
 .ls {
     width: 23%;
 }
-
-/* Relatório de Cadastro de Produtos */ 
 
 .card-body{
 font-family: sans-serif;
