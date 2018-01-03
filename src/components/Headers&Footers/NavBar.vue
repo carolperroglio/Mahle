@@ -62,7 +62,10 @@
                         </router-link>
                         <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP</span>
-                        </router-link>            
+                        </router-link>
+                        <router-link to="/stateManagement" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP Status Management</span>
+                        </router-link>          
                     </div>
                 </div>
                 <main class="col-md-9 col-xs-11 p-l-2 p-t-2">

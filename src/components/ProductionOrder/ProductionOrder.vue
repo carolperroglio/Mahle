@@ -176,11 +176,6 @@
                         Cadastrar OP
                     </button>
                 </div>
-                <div class="col-lg-2">
-                    <button @click.prevent="getOp();" type="button" class="btn btn-outline-primary btn-sm">
-                        Listar OPs
-                    </button>
-                </div>
             </div>
         </div>
         <br>

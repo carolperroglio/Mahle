@@ -205,19 +205,7 @@ export default {
             return this.opDesc
         }
     },
-    watch: {
-        // updatePhaseSelected: function(id) {
-        //     var config = {
-        //         headers: { 'Cache-Control': 'no-cache' }
-        //     };
-        //     axios.get(this.urlPhases + id, config).then(response => {
-        //             // JSON responses are automatically parsed.
-        //             this.opArray = response.data;
-        //             console.log(response);
-        //         })
-        //         .catch(e => {
-        //             this.errors.push(e)
-        //         })
-        // }
-    }
+    beforeMount() {
+        this.getOp();
+    },
 }
