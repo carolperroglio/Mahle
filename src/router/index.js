@@ -5,9 +5,12 @@ import GenerateProducts from '@/components/Products/GenerateProducts'
 import Phases from '@/components/Phases/Phases'
 import ProductionOrder from '@/components/ProductionOrder/ProductionOrder'
 import ToolCreate from '@/components/Tools/ToolCreate'
+import HistorianProduction from '@/components/HistorianProduction/HistorianProduction'
+import historianProduction from '../components/HistorianProduction/js/historianProduction';
 Vue.use(Router)
 
 export default new Router({
+    mode: 'history',
     routes: [{
             path: '/createThings',
             name: 'ThingCreate',
@@ -33,6 +36,12 @@ export default new Router({
             path: '/toolCreate',
             name: 'ToolCreate',
             component: ToolCreate
+
+        },
+        {
+            path: '/historianProduction',
+            name: 'HistorianProduction',
+            component: HistorianProduction
 
         },
     ]
