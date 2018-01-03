@@ -1,94 +1,103 @@
+/* menu de navegação de produtos */
 
-/* menu de navegação de produtos */   
-.nav-produtos{
-    padding-top:0.1%;
+.nav-produtos {
+    padding-top: 0.1%;
     padding-bottom: 0.01%;
     top: 20%;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     z-index: 1;
     left: 13%;
     background-color: white;
     width: 100%;
-    }
-.nav-item{
+}
+
+.nav-item {
     margin-left: 3;
     margin-right: 0.5%;
-    }
+}
+
 
 /*Listagem de produtos*/
 
-.icon-right{
+.icon-right {
     position: relative;
     float: right;
 }
-.panel-body{
-    text-align: left;    
-}
-input{
-    position: relative;
-}
-.produtos{
-    position: relative;
-    margin-top: 20%;           
-    left: 15%;
-       
-}
-@media screen and (max-width : 801px){
-    .produtos{ 
-        margin-top: 30%; 
-    }       
-} 
-/**/
-.cadForm{
-    position: fixed;
-    float: right; 
-    z-index: 10%; 
-    margin-top:18%;        
-    width: 15% !important;
-    left: 83%;      
-    border: 1px solid rgb(223, 223, 223);
-    border-radius: 10%;  
-    padding: 2%;  
+
+.panel-body {
+    text-align: left;
 }
 
-.msg{
-    position: relative!important; 
+input {
+    position: relative;
+}
+
+.produtos {
+    position: relative;
+    margin-top: 20%;
+    left: 15%;
+}
+
+@media screen and (max-width: 801px) {
+    .produtos {
+        margin-top: 30%;
+    }
+}
+
+
+/**/
+
+.cadForm {
+    position: fixed;
+    float: right;
+    z-index: 10%;
+    margin-top: 18%;
+    width: 15% !important;
+    left: 83%;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 10%;
+    padding: 2%;
+}
+
+.msg {
+    position: relative!important;
     width: 70%!important;
 }
 
-.paginacao{        
+.paginacao {
     z-index: 100;
-    text-align: center;    
+    text-align: center;
     width: 66.3%;
     left: 15%;
     background-color: white;
 }
 
-@media screen and (max-width : 801px){
-    .cadForm{ 
-        margin-top: 30%; 
+@media screen and (max-width: 801px) {
+    .cadForm {
+        margin-top: 30%;
         width: 15% !important;
         height: 60%;
-    }  
-} 
+    }
+}
 
 .ls {
     width: 20%;
 }
 
-/* Relatório de Cadastro de Produtos */ 
 
-.card-body{
-font-family: Arial, Helvetica, sans-serif;
-font-size: 16px;
-padding-top: 0.6%;
-padding-bottom: 0.6%;
+/* Relatório de Cadastro de Produtos */
+
+.card-body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding-top: 0.6%;
+    padding-bottom: 0.6%;
 }
-@media screen and (max-width : 801px){
-    .card-body{ 
+
+@media screen and (max-width: 801px) {
+    .card-body {
         font-size: 11px;
         padding-top: 0.6%;
         padding-bottom: 0.6%;
-    }  
-} 
-
+    }
+}
