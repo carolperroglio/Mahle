@@ -1,109 +1,148 @@
+i {
+    cursor: pointer;
+}
 
-i{
+.pointer {
     cursor: pointer;
 }
-.pointer{
-    cursor: pointer;
-}
+
+
 /*Menu de cadastro da receita*/
-.nav-produtos-ph{  
-    font-size: pt;             
-    top: 20%;        
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-    box-sizing: border-box;    
+
+
+.nav-recipe {
+    font-size: pt;
+    top: 20%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+
     z-index: 1;
     left: 12.4%;
     background-color: white;
     width: 87.5%;
-    height: 5%;    
+    height: 5%;
 }
-.nav-produtos-ph ul li{
+.nav-recipe ul li {
+
     margin-left: 0%;
     display: inline;
     list-style: none;
-    margin-right: 1%;   
+    margin-right: 1%;
 }
 
-#addPhase{
+#addPhase {
     cursor: pointer;
     display: inline;
 }
 
-.nav-produtos-ph ul li div{
-    border: 0px solid rgba(250,20,35,0.1);
+
+.nav-recipe ul li div {
+    border: 0px solid rgba(250, 20, 35, 0.1);
     display: inline;
     border-radius: 5px;
-    box-sizing: border-box;      
+    box-sizing: border-box;
     cursor: pointer;
-    text-decoration: none;    
+    text-decoration: none;
 }
 
+
 /*Listagen de phases*/
-.cabecalhoPhase{
+
+.card-margin {
+    margin-top: 19%;
+}
+
+.cabecalhoPhase {
     display: inline;
     box-sizing: border-box;
     padding: 1%;
-    border: 0.1rem solid rgba(0,0,0,0.1);
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     background-color: rgb(146, 152, 170)!important;
-    box-shadow:  0 0 10px #000000;    
+    box-shadow: 0 0 10px #000000;
 }
-.conteudo{ 
+
+.conteudo {
     margin-top: 13% !important;
-    position: relative;       
-    left: 15%;    
-    width: 80%;    
-    box-sizing: border-box;            
-}  
-.conteudo h3{
+    position: relative;
+    left: 15%;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.conteudo h3 {
     display: inline;
     color: rgb(41, 39, 39);
 }
-.phase{
-    margin-top: 2%;    
-    border: 0.7px solid rgba(0,0,0,0.1);
+
+.phase {
+    margin-top: 2%;
+    border: 0.7px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     box-sizing: border-box;
     width: 90%;
 }
-#show-phase-products{
+
+#show-phase-products {
     cursor: pointer;
     margin-left: 2%;
 }
-.itens-fase{
+
+.itens-fase {
     position: relative;
-    width: 50%;     
-    box-sizing: content-box;      
-           
+    width: 50%;
+    box-sizing: content-box;
     display: inline-block;
 }
-.itens-fase-rigth{    
-    left:51%;    
+
+.itens-fase-rigth {
+    left: 51%;
 }
 
-.container-itens-fase{
+.container-itens-fase {
     position: relative;
     width: 100%;
-    padding: 2% 0% 2% 0%;   
-    background-color: #dcdcdc;      
+    padding: 2% 0% 2% 0%;
+    background-color: #dcdcdc;
 }
 
-.progress{
+.progress {
     position: absolute;
-    top: 28% !important; 
+    top: 28% !important;
     left: 15% !important;
     box-sizing: border-box;
 }
 
-@media only screen and (max-width : 801px) {
-    body, input, button { 
-       font-size: 10pt; 
-    }
-    .conteudo{ 
-        margin-top: 20% !important;
-    }  
-    .cadForm { 
-        margin-top: 30%;
-    }  
+.title-page {
+    text-align: left;
+    color: #5C636E;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 22px;
+    text-shadow: 1px 1px #F9F9F9;
+    position: fixed;
+    top: 9.3%;
+    margin-left: 0.5%;
 }
 
+@media only screen and (max-width: 801px) {
+    body,
+    input,
+    button {
+        font-size: 10pt;
+    }
+    .conteudo {
+        margin-top: 20% !important;
+    }
+    .cadForm {
+        margin-top: 30%;
+    }
+    .title-page {
+        text-align: left;
+        text-shadow: 1px 2px #F9F9F9;
+        color: #5C636E;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 20px;
+        position: fixed;
+        top: 19%;
+    }
+}
