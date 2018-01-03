@@ -34,11 +34,11 @@
                                 </div>
                             </div>
                             <!--<div class="form-group row">
-                                                                                                        <label for="qtd" class="col-sm-4 col-form-label">Quantidade</label>
-                                                                                                        <div class="col-sm-8">
-                                                                                                            <input type="number" class="form-control" id="qtd" aria-describedby="qty" placeholder="">
-                                                                                                        </div>
-                                                                                                    </div>-->
+                                                                                                                <label for="qtd" class="col-sm-4 col-form-label">Quantidade</label>
+                                                                                                                <div class="col-sm-8">
+                                                                                                                    <input type="number" class="form-control" id="qtd" aria-describedby="qty" placeholder="">
+                                                                                                                </div>
+                                                                                                            </div>-->
                             <div class="form-group row">
                                 <label for="opType" class="col-sm-3 col-form-label">Tipo de Ordem</label>
                                 <div class="col-sm-3">
@@ -56,10 +56,10 @@
                             </div>
                             <div class="form-group row">
                                 <!--<label for="desc" class="col-sm-4 col-form-label">Descrição</label>
-                                                                                                        <div class="col-sm-8">
-                                                                                                            <input type="text" disabled class="form-control" id="desc" v-model="filterDesc" value="opDesc">
-                                                                                                            <small id="descrip" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                                                                                        </div>-->
+                                                                                                                <div class="col-sm-8">
+                                                                                                                    <input type="text" disabled class="form-control" id="desc" v-model="filterDesc" value="opDesc">
+                                                                                                                    <small id="descrip" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                                                                                                </div>-->
                             </div>
                             <div class="form-group row">
                                 <label for="opType" class="col-sm-3 col-form-label">Receita</label>
@@ -140,11 +140,11 @@
                             <!--  receita foi selecionada>          -->
 
                             <!--<div class="alert alert-warning" role="alert" v-if="recipeObj.phases.length == 0">
-                                                                                        Não possui fases!
-                                                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                                            <span aria-hidden="true">&times;</span>
-                                                                                        </button>
-                                                                                    </div>-->
+                                                                                                Não possui fases!
+                                                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                            </div>-->
                         </form>
                     </div>
                     <!-- Botão que cria a OP-->
@@ -169,14 +169,51 @@
         <!--  Botão que inicia    -->
         <!--  o Modal de Criação da OP  -->
         <div class="fixed-top nav-op">
-            <!-- Button trigger modal -->
-            <div class="row">
-                <div class="col-lg-1">
-                    <button @click="getRecipes(); getOpType()" type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#cadastrarOp">
-                        Cadastrar OP
-                    </button>
-                </div>
-            </div>
+            <ul class="nav d-flex align-items-center">
+                
+                <li class="col-md-auto">
+                    <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
+                        <option value="" selected disabled>Buscar por:</option>
+                        <option value="productionOrderNumber">Nº Ordem de Produção</option>
+                        <option value="typeDescription">Descrição</option>
+                        <option value="quantity">Quantidade</option>
+                        <option value="currentStatus">Status</option>
+                    </select>
+                </li>
+                <li class="col-md-auto">
+                    <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                </li>
+                <li class="col-md-auto">
+                    <select class="form-control form-control-sm" v-model="orderField">
+                        <option value="" selected disabled>Campo para busca</option>
+                        <option value="productionOrderNumber">Nº Ordem de Produção</option>
+                        <option value="typeDescription">Descrição</option>
+                        <option value="quantity">Quantidade</option>
+                        <option value="currentStatus">Status</option>
+                    </select>
+                </li>
+                <li class="col-md-auto">
+                    <select class="form-control form-control-sm" v-model="order">
+                        <option value="" selected disabled>Ordenação</option>
+                        <option value="ascending">Crescente</option>
+                        <option value="descending">Decrescente</option>
+                    </select>
+                </li>
+
+                <li class="col">
+                    <form class="form-inline my-3 form-control-sm">
+                        <div class="col-md-auto">
+                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <div class="col-md-auto">
+                            <button @click="getRecipes(); getOpType()" type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#cadastrarOp">
+                                Cadastrar OP
+                            </button>
+                        </div>
+                    </form>
+                </li>
+            </ul>
         </div>
         <br>
         <!--             -->
@@ -187,7 +224,7 @@
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
-                <div v-for="(op, index) in opArray" v-bind:key="index">
+                <div v-for="(op, index) in opArray.values" v-bind:key="index">
                     <div class="card card-margin">
                         <div class="card-header">
                             <b></b>
