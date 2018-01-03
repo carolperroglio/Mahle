@@ -25,15 +25,15 @@
                                 <label for="nome">
                                     <b>Nome : </b>
                                 </label>
-                                <input type="text" placeholder="nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid form-control-sm">
+                                <input type="text" placeholder="Nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid form-control-sm">
                                 <label for="desc">
                                     <b>Descrição : </b>
                                 </label>
-                                <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="descrição">
+                                <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Descrição">
                                 <label for="cod">
                                     <b>Código : </b>
                                 </label>
-                                <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="código" id="cod">
+                                <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Código" id="cod">
                                 <label for="gs1" class="">
                                     <b>GS1 : </b>
                                 </label>

@@ -7,31 +7,15 @@
         <!--Nav de Receitas-->
         <!--               -->
         <!--               -->
-        <!--               -->
-        <nav class="fixed-top nav-produtos">
-            <div class="form-row">
-                <div class="col">
-                    <label>
-                        <b>Nome da receita : </b>
-                    </label>
-                    <input type="text" class="form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
-                </div>
-            </div>
-            <ul class="nav d-flex align-items-center">
-
-                <li class="nav-item col-md-auto">
-                    <form class="form-inline my-3 form-control-sm">
-                        <label>
-                            <b>Nome da receita : </b>
-                        </label>
-                        <input type="text" class="form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
-                    </form>
-                </li>
-                <li class="nav-item col-md-auto">
-                    <label>
-                        <b>Código : </b>
-                    </label>
-                    <input class="form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita" />
+        <!--               -->                         
+        <nav class="fixed-top nav-produtos-ph">                           
+            <ul>                
+                <li>                    
+                    <label><b>Nome da receita : </b></label>
+                    <input type="text" class="form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">                                                                                                       
+                <li>                        
+                    <label><b>Código : </b></label>
+                    <input class="form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita"/>
                 </li>
                 <li class="nav-item col-md-auto">
                     <button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">Enviar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
