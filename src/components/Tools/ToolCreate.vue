@@ -24,7 +24,7 @@
                 <li class="nav-item">
                     <form class="form-inline my-3 form-control-sm mr-sm-12">
                     <div class="">
-                        <button type="button" class="btn btn-outline-success btn-sm col-md-12" @click.stop.prevent="listar()">
+                        <button type="button" class="btn btn-outline-primary btn-sm col-md-12" @click.stop.prevent="listar()">
                                 Listar Ferramentas
                             </button>
                         </div>

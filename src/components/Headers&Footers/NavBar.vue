@@ -66,6 +66,9 @@
                         <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-building-o"></i> <span class="hidden-sm-down">   FERRAMENTAS</span>
                         </router-link>
+                        <router-link to="/historianProduction" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-building-o"></i> <span class="hidden-sm-down">   APONTAMENTOS</span>
+                        </router-link>
                         <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP</span>
                         </router-link>            
