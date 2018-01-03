@@ -92,7 +92,7 @@
 
                                     <!--  Mostra as fases da Receita-->
                                     <div id="recipeAdded" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                        <div class="card-body" v-if="recipeObj.phases.length != 0 || carregando == true">
+                                        <div class="card-body-op" v-if="recipeObj.phases.length != 0 || carregando == true">
                                             <h5>Fases</h5>
                                             <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases">
                                                 <li class="list-group-item" v-if="recipeAdded.length != 0">
@@ -105,7 +105,7 @@
                                                 </li>
                                                 <!-- Collapse de ver 'Produtos' -->
                                                 <div class="collapse" id="verProdutos">
-                                                    <div class="card card-body">
+                                                    <div class="card card-body-op">
                                                         <h6>Produtos</h6>
                                                         <ul class="list-group" v-for="product in productArray" v-bind:value="product">
                                                             <li class="list-group-item">
@@ -118,7 +118,7 @@
                                                 </div>
                                                 <!-- Collapse de ver 'Pârametros' -->
                                                 <div class="collapse" id="verPârametros">
-                                                    <div class="card card-body">
+                                                    <div class="card card-body-op">
                                                         <h6>Pârametros</h6>
                                                         <ul class="list-group" v-for="param in paramArray" v-bind:value="param">
                                                             <li class="list-group-item">
@@ -192,7 +192,7 @@
                         <div class="card-header">
                             <b></b>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body-op">
                             <label class="ls">
                                 <b>
                                     <font color="#9BA6A5">Numero de Ordem: </font>
@@ -233,7 +233,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="paginacao fixed-bottom" v-show="total>0">
+                <div class="paginacao-op fixed-bottom" v-show="total>0">
                     <nav aria-label="">
                         <ul class="pagination justify-content-center">
                             <li v-show="startat>0" class="page-item">

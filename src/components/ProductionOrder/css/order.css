@@ -51,7 +51,7 @@ input {
     left: 12%
 }
 
-.paginacao {
+.paginacao-op {
     z-index: 100;
     text-align: center;
     width: 66.3%;
@@ -71,7 +71,7 @@ input {
     padding: 2%;
 }
 
-.card-body {
+.card-body-op {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     padding-top: 0.6%;
@@ -91,7 +91,7 @@ input {
 }
 
 @media screen and (max-width: 801px) {
-    .card-body {
+    .card-body-op {
         font-size: 11px;
         padding-top: 0.6%;
         padding-bottom: 0.6%;
