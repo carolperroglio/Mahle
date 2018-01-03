@@ -9,22 +9,22 @@
         <nav class="header fixed-top">
                 <img src="./../../assets/imagens/onyx.png" class="logo-system"/>
             <ul class="nav nav-pills bg-primary">
-                <li class="nav-item col-md-2">
+                <li class="nav-item-cab col-md-2">
                     <a class="" router-link to="/"></a>
                 </li> 
-                <li class="nav-item col-md-2">
+                <li class="nav-item-cab col-md-2">
                     <a class="nav-link active" router-link to="/">Início</a>
                 </li> 
-                <li class="nav-item col-md-2">
+                <li class="nav-item-cab col-md-2">
                     <a class="nav-link active" router-link to="">Gerenciamento de Ordem</a>
                 </li> 
-                 <li class="nav-item col-md-2">
+                 <li class="nav-item-cab col-md-2">
                     <a class="nav-link active" router-link to="">Gerenciamento de Ferramentas</a>
                 </li> 
-                <!--<li class="nav-item">
+                <!--<li class="nav-item-cab">
                     <a class="nav-link active" router-link to="">Análises Químicas</a>
                 </li>-->
-                <!--<li class="nav-item">
+                <!--<li class="nav-item-cab">
                     <a class="nav-link active" router-link to="">Automação</a>
                 </li>-->
             </ul>    
