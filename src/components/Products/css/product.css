@@ -1,30 +1,30 @@
-/* menu de navegação de produtos */
-
 /* menu de navegação de produtos */   
 .nav-produtos{
     position: fixed;
-    padding-bottom: 0.05%;
-    top: 8%;
+    top: 9%;
     z-index: 1;
-    background-color: #F6F6F6; 
+    background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251));
+    /*background-color: #F6F6F6; */
     width: 100%;
-    height: 12%;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+    height: 13%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
+
 /* menu de navegação de produtos - busca de produtos*/   
 .nav-item{
     margin-left: 0.5%;
     padding-top: 3%;
     }
+    
 /* menu de navegação de produtos - título busca de produtos*/ 
 .title-page{
     text-align: left;
-    color: #5C636E;
+    color: rgb(82, 84, 87);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 22px;
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
-    top: 9.3%;
+    top: 11%;
     margin-left: 0.5%;
 }
 
@@ -34,21 +34,14 @@ position: relative;
 float: right;
 }
 
-.panel-body {
-    text-align: left;
-}
-
 input {
     position: relative;
 }
 
 .produtos {
-    position: relative;
+    position: absolute;
     margin-top: 12%;           
     left: 3%;
-}
-.card-body{
-    background-color: white;
 }
 
 .msg {
@@ -72,6 +65,7 @@ font-family: sans-serif;
 font-size: 16px;
 padding-top: 0.6%;
 padding-bottom: 0.5%;
+background-color: white;
 }
 
 

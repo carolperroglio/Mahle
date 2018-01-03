@@ -1,27 +1,58 @@
+/* menu de navegação de ferramentas */ 
 .nav-ferramentas{
-    padding-top: 1%;
-    padding-bottom: 1%;
-    top: 20%;        
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+    position: fixed;
+    top: 9%;
     z-index: 1;
-    left: 15%;
-    background-color: white;
-    width: 80%;
+    background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251));
+    /*background-color: #F6F6F6; */
+    width: 100%;
+    height: 13%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+
+/* menu de navegação de ferramentas - busca de ferramentas*/   
+.card-body2{
+    margin-left: 0.3%;
+    padding-top: 0.5%;
+    }
+
+/* menu de navegação de produtos - título busca de produtos*/ 
+.title-page-tool{
+    text-align: left;
+    color: rgb(82, 84, 87);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 22px;
+    text-shadow: 1px 1px #F9F9F9;
+    position: fixed;
+    top: 11%;
+    margin-left: 0.5%;
+}
+
+/*Listagem de ferramentas*/
+.icon-right2{
+    position: relative;
+    float: right;
+    }
+
+.ferramentas {
+        position: relative;
+        top: 15%;           
+        left: 3%;
+    }    
 
 .btn-warning{
     color: white;
-
 }
 
-.nav-item{
-    margin-left: 3;
-    margin-right: 0.5%;
+.nav-item-tool{
+    margin-left: 1%;
+    padding-top: 3%;
     }
 
 /*Listagem de ferramentas*/
 
-.icon-right{
+.icon-right2{
     position: relative;
     float: right;
 }
@@ -37,7 +68,7 @@ input{
     width: 80%;       
 }
 
-.ls{
+.ls2{
     width: 10%;
 }
 
