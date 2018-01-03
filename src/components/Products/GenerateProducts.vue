@@ -51,8 +51,6 @@
                                     <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
                                         Limpar
                                     </div>
-                                <!--</div>-->
-                            <!--</div>-->
                         </form>
                     </div>
                 </div>
@@ -67,7 +65,8 @@
         <!--                       -->
         <div class="fixed-top nav-produtos">
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item col-md-auto">
+                <li class="nav-item col-sm-1.5">
+                    <h1 class="title-page"> Cadastro de Produtos </h1>
                         <select class="form-control form-control-sm" v-model="orderField">
                             <option value="" selected disabled>Campo para busca</option>
                             <option value="productName">Nome</option>
@@ -76,14 +75,14 @@
                             <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
-                <li class="nav-item col-md-auto">
+                <li class="nav-item col-sm-1.5">
                     <select class="form-control form-control-sm" v-model="order">                        
                            <option value="" selected disabled>Ordenação</option>
                             <option value="ascending">Crescente</option>
                             <option value="descending">Decrescente</option>
                     </select>
                 </li>
-                <li class="nav-item col-md-auto">
+                <li class="nav-item col-sm-1.5">
                     <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                             <option value="" selected disabled>Campo para busca</option>
                             <option value="productName">nome</option>
@@ -92,18 +91,16 @@
                             <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
-                <li class="nav-item col">
-                    <form class="form-inline my-3 form-control-sm">
-                        <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                    <div class="col-md-auto">
+                <li class="nav-item col-sm-2">
+                        <input class="form-control btn-sm" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                </li>
+                <li class="nav-item  col-sm-1.5 col-sm-offset-1.5">
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
-                        </div>
-                    <div class="col-md-auto">
-                        <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                Cadastrar Produto
-                            </button>
-                        </div>
-                    </form>
+                </li>
+                <li class="nav-item col-sm-1 col-sm-offset-1">
+                    <button type="button" class="btn btn-success btn-sm btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                Novo Produto
+                    </button>
                 </li>
             </ul>
         </div>
@@ -119,7 +116,7 @@
         <div class="row conteudo" style="top:-400px;">
             <div class="produtos col-10">
                 <div class="progress" v-show="carregando">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
                 <div v-for="(p, index) in produtos" v-bind:key="index">
                     <div class="card">
@@ -135,7 +132,7 @@
                                 <b><font color="#9BA6A5">Código: </font></b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
                                 <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-pencil icon-right" style="font-size:22px; cursor:pointer" @click.prevent="editar(p)" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i>
+                            <i class="fa fa-edit icon-right" style="font-size:22px; cursor:pointer" @click.prevent="editar(p)" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i>
                         </div>
                     </div>
                 </div>
@@ -156,54 +153,8 @@
                 </div>
             </div>
 
-            <!--                            -->
-            <!--                            -->
-            <!--                            -->
-            <!-- Div do formulario cadastro -->
-            <!--                            -->
-            <!--                            -->
-            <!--                            -->
-
-            <!--<div class="cadForm">
-                <form>
-                    <div class="form-row">
-                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-
-                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                        <label for="nome">
-                            <b>Nome : </b>
-                        </label>
-                        <input type="text" placeholder="nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid form-control-sm">
-                        <label for="desc">
-                            <b>Descrição : </b>
-                        </label>
-                        <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="descrição">
-                        <label for="cod">
-                            <b>Código : </b>
-                        </label>
-                        <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="código" id="cod">
-                        <label for="gs1" class="">
-                            <b>GS1 : </b>
-                        </label>
-                        <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="gs1">
-                        <br>
-                        <div>
-                            <button class="btn btn-success">
-                                <i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-danger">
-                                <i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i>
-                            </button>
-                            <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
-
-                                Limpar
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>-->
+            
             <br>
-            <!-- <br><br> -->
         </div>
     </div>
 </template>

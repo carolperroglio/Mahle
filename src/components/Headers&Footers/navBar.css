@@ -1,11 +1,11 @@
 ﻿/*Configurações do header*/
 
-.nav-item {
+.nav-item-cab {
     position: relative;
     margin-left: 2%;
-    font-size: 15px;
+    font-size: 13px;
     color: black;
-    margin-top: 1%;
+    margin-top: 1.1%;
     margin-bottom: 0.7%;
     text-align: center;
 }
@@ -13,10 +13,10 @@
 /*Logo do sistema*/
 .logo-system {
     position: fixed;
-    margin-top: 0.8%;
-    margin-left: 90%;
-    height: 8%;
-    width: 9%;
+    margin-top: 0.5%;
+    margin-left: 92%;
+    height: 5%;
+    width: 7%;
 }
 
 /*Configurações do menu lateral collapse*/
