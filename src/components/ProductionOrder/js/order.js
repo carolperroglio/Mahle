@@ -28,7 +28,7 @@ export default {
             urlRecipe: ipServer + '8003/api/recipes/',
             urlOpType: ipServer + '8005/api/productionordertypes/',
             urlPhases: ipServer + '8003/api/phases/',
-            urlOp: ipServer + '8005/api/productionorders/',
+            urlOp: ipServer + '8005/api/productionorders',
             urlGatewayRecipe: ipServer + '8005/gateway/recipes/',
             recipeArray: [],
             opArray: [],
@@ -53,7 +53,12 @@ export default {
             showParam: false,
             idProd: '',
             show: false,
-            opCreated: false
+            opCreated: false,
+            orderField: '',
+            order: '',
+            fieldFilter: '',
+            fieldValue: '',
+            id: ''
         }
     },
     methods: {
@@ -63,20 +68,23 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
-            this.produtos = [];
+            this.opArray = [];
             console.log(this.order, this.orderField)
-            axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+            axios.get(this.urlOp + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                 if (!response.data.values && response.data.productId)
-                    this.produtos[0] = response.data;
+                    this.opArray[0] = response.data;
                 else {
                     paginacao(response, this);
-                    this.produtos = response.data.values;
+                    this.opArray = response.data;
+                    console.log(this.opArray);
+
                 }
                 this.carregando = false;
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
             })
+            console.log(this.opArray);
         },
         getRecipes: function() {
             var config = {

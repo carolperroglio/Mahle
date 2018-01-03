@@ -101,6 +101,7 @@
                     <button type="button" class="btn btn-success btn-sm btn-sm" data-toggle="modal" data-target="#exampleModal">
                                 Novo Produto
                     </button>
+
                 </li>
             </ul>
         </div>
@@ -125,12 +126,19 @@
                         </div>
                         <div class="card-body">
                             <label class="ls">
-                                <b><font color="#9BA6A5">Nome: </font></b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;
+                                <b>
+                                    <font color="#9BA6A5">Nome: </font>
+                                </b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
-                                <b><font color="#9BA6A5">Descrição: </font></b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
+                                <b>
+                                    <font color="#9BA6A5">Descrição: </font>
+                                </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
-                                <b><font color="#9BA6A5">Código: </font></b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
+                                <b>
+                                    <font color="#9BA6A5">Código: </font>
+                                </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
+
                                 <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-edit icon-right" style="font-size:22px; cursor:pointer" @click.prevent="editar(p)" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i>
                         </div>
@@ -152,8 +160,6 @@
                     </nav>
                 </div>
             </div>
-
-            
             <br>
         </div>
     </div>
