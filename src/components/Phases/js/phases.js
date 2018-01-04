@@ -37,8 +37,17 @@ export default {
             tagName: '',
         }
     },
-    computed: {
-
+    filters: {
+        prodTypeName: function(productTypeName) {
+            // productTypeName = '';
+            if (productTypeName == 'scrap') {
+                return productTypeName = "Rejeito";
+            } else if (productTypeName == 'finished') {
+                return productTypeName = "Acabado";
+            } else if (productTypeName == 'semi_finished') {
+                return productTypeName = "Semi Acabado";
+            } else if (productTypeName == null) {}
+        }
     },
 
     methods: {
@@ -256,10 +265,10 @@ export default {
         /*               */
         /*               */
         /*****************/
-        getResults(name) {
+        getResults(url, name) {
             var array = [];
             if (name.length < 3) { return; }
-            axios.get(this.urlProducts + name, this.config).then((response) => {
+            axios.get(url + name, this.config).then((response) => {
                 response.data.values.forEach((pro) => {
                     array.push(pro);
                 });

@@ -74,24 +74,26 @@
                         <b> Adicionar fase</b>
                     </i>
                     <!-- <div data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
-                                            <i class="fa fa-plus"></i>
-                                            <b> Adicionar fase</b>
-                                        </div> -->
+                                                                                            <i class="fa fa-plus"></i>
+                                                                                            <b> Adicionar fase</b>
+                                                                                        </div> -->
                 </h5>
                 <div class="card-body">
                     <div v-for="(pha, index) in phases" class="phase">
-                        <h5>{{index+1}}° Fase</h5>
-                        <b> Id da fase : </b> {{pha.phaseId}} -
-                        <b>Nome da fase : </b>{{pha.phaseName}} -
-                        <b>Código da fase : </b>{{pha.phaseCode}} &nbsp;&nbsp;
-                        <i class="fa fa-edit" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
-                            <b> Editar </b>
-                        </i>
-                        <span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products">
-                            <i class="fa fa-expand">
-                                <b> Expandir</b>
+                        <div class="card-header">
+                            <h5>{{index+1}}° Fase</h5>
+                            <b> Id da fase : </b> {{pha.phaseId}} -
+                            <b>Nome da fase : </b>{{pha.phaseName}} -
+                            <b>Código da fase : </b>{{pha.phaseCode}} &nbsp;&nbsp;
+                            <i class="fa fa-edit" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
+                                <b> Editar </b>
                             </i>
-                        </span><br>
+                            <span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products">
+                                <i class="fa fa-expand">
+                                    <b> Expandir</b>
+                                </i>
+                            </span><br>
+                        </div>
                         <div class="list-group-item" v-show="pha.expand">
                             <div class="itens-fase">
                                 <span data-toggle="modal" data-target="#cadProPhase" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" class="pointer" aria-hidden="true">
@@ -101,7 +103,7 @@
                                 <ul class="list-group list-group-flush" v-for="(pro, indexPro) in pha.products">
                                     <li class="list-group-item">
                                         <b>VALOR : </b>{{pro.value}} {{pro.measurementUnit}}
-                                        <b>TIPO DE PRODUTO : </b>{{pro.phaseProductType}}
+                                        <b>TIPO DE PRODUTO : </b>{{pro.phaseProductType | prodTypeName}}
                                         <b>PRODUTO : </b>{{pro.product.productName}}&nbsp;&nbsp;
                                         <i class="fa fa-window-close" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);"></i>
                                     </li>
@@ -117,7 +119,7 @@
                                         <b>POINTER : </b>{{par.setupValue}} {{par.measurementUnit}}
                                         <b>VALOR MIN. : </b>{{par.minValue}}
                                         <b>VALOR MAX. : </b>{{par.maxValue}}
-                                        <b>TAG : </b>{{par.tag.tagName}} {{ par }}
+                                        <b>TAG : </b>{{par.tag.tagName}}
                                     </li>
                                 </ul>
                             </div>
@@ -128,51 +130,51 @@
         </div>
         <!-- Listagem Antiga Phases -->
         <!-- <div class="conteudo" v-show="recipeCadastrada">
-                                            <div class="cabecalhoPhase">
-                                                <h3>Fases da receita : </h3>
-                                                <div data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
-                                                    <i class="fa fa-plus"></i>
-                                                    <b> Adicionar fase</b>
-                                                </div>
-                                            </div>
-                                            <div v-for="(pha, index) in phases" class="phase">
-                                                <h3>{{index+1}}° Fase</h3><br>
-                                                <b> Id da fase : </b> {{pha.phaseId}} ---
-                                                <b>Nome da fase : </b>{{pha.phaseName}} ---
-                                                <b>Código da fase : </b>{{pha.phaseCode}} &nbsp;&nbsp;
-                                                <i class="fa fa-pencil" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true"></i>
-                                                <b>Editar </b>
-                                                <span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products">
-                                                    <b>\/Expandir</b>
-                                                </span><br>
-                                                <div class="container-itens-fase" v-show="pha.expand">
-                                                    <div class="itens-fase">
-                                                        <span data-toggle="modal" data-target="#cadProPhase" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" class="pointer" aria-hidden="true">
-                                                            <i class="fa fa-plus"></i>
-                                                            <b> Adicionar produtos</b>
-                                                        </span>
-                                                        <div v-for="(pro, indexPro) in pha.products">
-                                                            <b>VALOR : </b>{{pro.value}} {{pro.measurementUnit}}
-                                                            <b>TIPO DE PRODUTO : </b>{{pro.phaseProductType}}
-                                                            <b>PRODUTO : </b>{{pro.product.productName}}&nbsp;&nbsp;
-                                                            <i class="fa fa-window-close" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="itens-fase pull-right">
-                                                        <span class="pointer" data-toggle="modal" data-target="#modalCadParam" @click.stop.prevent="tagName='';phaseParameter={};phase=pha;abreModal('#modalCadParam');" aria-hidden="true">
-                                                            <i class="fa fa-plus"></i>
-                                                            <b> Adicionar parametros</b>
-                                                        </span>
-                                                        <div v-for="(par, indexPro) in pha.parameters">
-                                                            <b>POINTER : </b>{{par.setupValue}} {{par.measurementUnit}}
-                                                            <b>VALOR MIN. : </b>{{par.minValue}}
-                                                            <b>VALOR MAX. : </b>{{par.maxValue}}
-                                                            <b>TAG : </b>{{par.tag.tagName}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                                                                            <div class="cabecalhoPhase">
+                                                                                                <h3>Fases da receita : </h3>
+                                                                                                <div data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
+                                                                                                    <i class="fa fa-plus"></i>
+                                                                                                    <b> Adicionar fase</b>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div v-for="(pha, index) in phases" class="phase">
+                                                                                                <h3>{{index+1}}° Fase</h3><br>
+                                                                                                <b> Id da fase : </b> {{pha.phaseId}} ---
+                                                                                                <b>Nome da fase : </b>{{pha.phaseName}} ---
+                                                                                                <b>Código da fase : </b>{{pha.phaseCode}} &nbsp;&nbsp;
+                                                                                                <i class="fa fa-pencil" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true"></i>
+                                                                                                <b>Editar </b>
+                                                                                                <span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products">
+                                                                                                    <b>\/Expandir</b>
+                                                                                                </span><br>
+                                                                                                <div class="container-itens-fase" v-show="pha.expand">
+                                                                                                    <div class="itens-fase">
+                                                                                                        <span data-toggle="modal" data-target="#cadProPhase" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" class="pointer" aria-hidden="true">
+                                                                                                            <i class="fa fa-plus"></i>
+                                                                                                            <b> Adicionar produtos</b>
+                                                                                                        </span>
+                                                                                                        <div v-for="(pro, indexPro) in pha.products">
+                                                                                                            <b>VALOR : </b>{{pro.value}} {{pro.measurementUnit}}
+                                                                                                            <b>TIPO DE PRODUTO : </b>{{pro.phaseProductType}}
+                                                                                                            <b>PRODUTO : </b>{{pro.product.productName}}&nbsp;&nbsp;
+                                                                                                            <i class="fa fa-window-close" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);"></i>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="itens-fase pull-right">
+                                                                                                        <span class="pointer" data-toggle="modal" data-target="#modalCadParam" @click.stop.prevent="tagName='';phaseParameter={};phase=pha;abreModal('#modalCadParam');" aria-hidden="true">
+                                                                                                            <i class="fa fa-plus"></i>
+                                                                                                            <b> Adicionar parametros</b>
+                                                                                                        </span>
+                                                                                                        <div v-for="(par, indexPro) in pha.parameters">
+                                                                                                            <b>POINTER : </b>{{par.setupValue}} {{par.measurementUnit}}
+                                                                                                            <b>VALOR MIN. : </b>{{par.minValue}}
+                                                                                                            <b>VALOR MAX. : </b>{{par.maxValue}}
+                                                                                                            <b>TAG : </b>{{par.tag.tagName}}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div> -->
 
         <!--                       -->
         <!--                       -->
@@ -229,18 +231,31 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label>Digite a quantidade : </label><br>
-                        <input class="fm form-control mr-sm-2" required v-model="recipeProduct.value" placeholder="Valor" />
-                        <label>Digite a unidade de medida : </label><br>
-                        <input class="fm form-control mr-sm-2" required v-model="recipeProduct.measurementUnit" placeholder="Ex.: kg" />
-                        <label class="fm mr-sm-2">Digite o nome do produto : </label>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Digite a quantidade : </label>
+                                <input class="form-control mr-sm-2" required v-model="recipeProduct.value" placeholder="Valor" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Digite a unidade de medida : </label><br>
+                                <input class="form-control mr-sm-2" required v-model="recipeProduct.measurementUnit" placeholder="Ex.: kg" />
+                            </div>
+                        </div>
+                        <label class="mr-sm-2">Digite o nome do produto : </label>
                         <div class="dropdown">
                             <!-- <v-autocomplete :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems">
                             </v-autocomplete> -->
-                            <input @keyup.enter="recipeProducts=getResults(recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts">{{p.productName}}</a>
-                            </div>
+                            <input @keyup.enter="recipeProducts=getResults('http://brsbap01:8003/api/products?&fieldFilter=productName&fieldValue=',recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                            <select class="form-control form-control-sm" v-model="recipeProductName">
+                                <option value="" selected disabled></option>
+                                <option v-for="(p,index) in recipeProducts" v-bind:value="opType.productionOrderTypeId">
+                                    {{p.productName}}
+                                </option>
+                            </select>
+                            <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                        <a class="dropdown-item" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts">{{p.productName}}</a>
+                                                                    </div> -->
+                            {{ recipeProductName }}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -350,17 +365,26 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label>Digite a quantidade : </label><br>
-                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.value" placeholder="Valor" />
-                        <label>Digite a unidade de medida : </label><br>
-                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.measurementUnit" placeholder="Ex.: kg" />
-                        <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
-                            <option value="" selected disabled>Campo para busca</option>
-                            <option value="scrap">Rejeito</option>
-                            <option value="finished">Acabado</option>
-                            <option value="semi_finished">Semi-Acabado</option>
-                        </select>
-                        <label class="fm mr-sm-2">Digite o nome do produto : </label>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>Quantidade : </label><br>
+                                <input class="fm form-control mr-sm-2" v-model="phaseProduct.value" placeholder="Valor" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Unidade de medida : </label><br>
+                                <input class="fm form-control mr-sm-2" v-model="phaseProduct.measurementUnit" placeholder="Ex.: kg" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Fase:</label>
+                                <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
+                                    <option value="" selected disabled>Campo para busca</option>
+                                    <option value="scrap">Rejeito</option>
+                                    <option value="finished">Acabado</option>
+                                    <option value="semi_finished">Semi-Acabado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label class="fm mr-sm-2">Nome do produto : </label>
                         <div class="dropdown">
                             <input @keyup="phase.pros=getResults('http://brsbap01:8003/api/products?fieldFilter=productName&fieldValue=',productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -371,7 +395,7 @@
                     <div class="modal-footer">
                         <div>
                             <div class="btn-group" role="group">
-                                <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" class="btn btn-success">
+                                <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" class="btn btn-success" :disabled="!phaseProduct.phaseProductType || !phaseProduct.measurementUnit || !phaseProduct.value || !productPhaseName">
                                     <i class="fa fa-check-square" aria-hidden="true"></i>
                                 </button>
                                 <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
@@ -403,19 +427,35 @@
                     <div class="modal-body">
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                        <label for="">Set Point</label>
-                        <input type="text" class="form-control form-control-sm" v-model="phaseParameter.setupValue" placeholder="Set Point">
-                        <label for="inputPassword4">Unidade de Medida</label>
-                        <input type="text" class="form-control form-control-sm" v-model="phaseParameter.measurementUnit" placeholder="Ex.: Kg">
-                        <label for="inputPassword4">Valor Mínimo</label>
-                        <input type="text" class="form-control form-control-sm" v-model="phaseParameter.minValue" placeholder="Valor Mínimo">
-                        <label for="inputPassword4">Valor Máximo</label>
-                        <input type="text" class="form-control form-control-sm" v-model="phaseParameter.maxValue" placeholder="Valor Máximo"><br>
-                        <label for="mr-sm-2">Nome : </label><br>
-                        <div class="dropdown">
-                            <input @keyup="phaseTags=getResults('http://brsbap01:8001/api/tags?fieldFilter=tagName&fieldValue=', tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags">{{p.tagName}}</a>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Set Point</label>
+                                <input type="text" class="form-control form-control-sm" v-model="phaseParameter.setupValue" placeholder="Set Point">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputPassword4">Unidade de Medida</label>
+                                <input type="text" class="form-control form-control-sm" v-model="phaseParameter.measurementUnit" placeholder="Ex.: Kg">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="inputPassword4">Valor Mínimo</label>
+                                <input type="text" class="form-control form-control-sm" v-model="phaseParameter.minValue" placeholder="Valor Mínimo">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputPassword4">Valor Máximo</label>
+                                <input type="text" class="form-control form-control-sm" v-model="phaseParameter.maxValue" placeholder="Valor Máximo"><br>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="mr-sm-2">Nome : </label><br>
+                                <div class="dropdown">
+                                    <input @keyup="phaseTags=getResults('http://brsbap01:8001/api/tags?fieldFilter=tagName&fieldValue=', tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags">{{p.tagName}}</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="btn-group" role="group">

@@ -36,7 +36,7 @@
                 </li>
                 <li class="nav-item-tool col-sm-1.5">
                         <select class="form-control form-control-sm" v-model="fieldFilter">
-                            <option value="" selected disabled="disabled">Buscar por campo:</option>
+                            <option value=""selected disabled="disabled">Buscar por campo:</option>
                             <option value="name">Nome</option>
                             <option value="description">Descrição</option>
                             <option value="serialNumber">Número serial</option>
@@ -156,36 +156,40 @@
             <!--                            -->
 
         <div class="row conteudo" style="top:-400px;">
-            <div class="ferramentas col-10">
-                <!-- <div class="progress" v-show="carregando">
+            <div class="ferramentas col-">
+                <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                </div> -->
+                </div>
                 <div v-for="(f, index) in ferramentas" v-bind:key="index">
                     <div class="card">
                         <div class="card-header">
                             <b> </b>
                         </div>
+
                         <div class="card-body">
                             <label class="ls2">
+
                                 <b><font color="#9BA6A5">Nome: </font></b>{{f.name}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls2">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{f.description}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls2">
-                                <b><font color="#9BA6A5">Número Serial: </font></b>{{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls2">
+                            <label class="ls">
+                                <b><font color="#9BA6A5">Serial: </font></b>{{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Code: </font></b>{{f.code}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls2">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Life Cycle: </font></b>{{f.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls2">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{f.currentLife}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls2">
-                                <b><font color="#9BA6A5">Unindade de Medida: </font></b>{{f.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls2">
+                            <label class="ls">
+                                <b><font color="#9BA6A5">UM: </font></b>{{f.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{f.typeName}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls2">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">status: </font></b>{{f.status}}</label>&nbsp;&nbsp;&nbsp;
                                 <button @click.stop.prevent="itemClicado(f)">
+
                             <i class="fa fa-edit" style="font-size:22px; cursor:pointer"></i>
+
                                 </button>
                         </div>
                     </div>
