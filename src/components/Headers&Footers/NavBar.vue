@@ -7,19 +7,19 @@
             <!--                                  -->
     <div class="container fluid">  
         <nav class="header fixed-top">
-                <img src="./../../assets/imagens/onyx.png" class="logo-system"/>
-            <ul class="nav nav-pills bg-primary">
+                <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
+            <ul class="nav nav-pills bg-dark">
                 <li class="nav-item-cab col-md-3">
-                    <a class="nav-link active" router-link to="/stateManagement">OP Status Management </a>
+                    <a class="nav-link bg-dark active" router-link to="/stateManagement">OP Status Management </a>
                 </li> 
                 <li class="nav-item-cab col-md-2">
-                    <a class="nav-link active" router-link to="/">Início</a>
+                    <a class="nav-link bg-dark active" router-link to="/">Início</a>
                 </li> 
                 <li class="nav-item-cab col-md-2">
-                    <a class="nav-link active" router-link to="">Gerenciamento de Ordem</a>
+                    <a class="nav-link bg-dark active" router-link to="">Gerenciamento de Ordem</a>
                 </li> 
                  <li class="nav-item-cab col-md-2">
-                    <a class="nav-link active" router-link to="">Gerenciamento de Ferramentas</a>
+                    <a class="nav-link bg-dark active" router-link to="">Gerenciamento de Ferramentas</a>
                 </li> 
                 <!--<li class="nav-item-cab">
                     <a class="nav-link active" router-link to="">Análises Químicas</a>
@@ -30,6 +30,15 @@
             </ul>    
         </nav>
     </div> 
+
+        <!--                        -->
+        <!--   Rodapé da Página     -->
+        <!--                        -->
+    <footer>
+        <div class="footer-text"> Sistema Onyx V1.0</div>
+    </footer>
+        <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/>
+        <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
         <!--                        -->
         <!--                        -->
         <!--   Menu lateral Novo    -->
@@ -86,9 +95,9 @@
             </div>
             </div>
         <router-view/>
-    </div>         
-
+    </div>  
 </template>
+
 
 <script>
 export default {
