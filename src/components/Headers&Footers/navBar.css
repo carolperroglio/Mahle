@@ -14,9 +14,9 @@
 .logo-system {
     position: fixed;
     margin-top: 0.5%;
-    margin-left: 92%;
-    height: 5%;
-    width: 7%;
+    margin-left: 91%;
+    height: 7%;
+    width: 8%;
 }
 
 /*Configurações do menu lateral collapse*/
@@ -98,6 +98,43 @@
 #close{
     display: none;
 }
+
+footer{
+position:fixed;
+z-index: 5;
+left:0px;
+bottom:0px;
+height:40px;
+width:100%;
+background: #222;
+}
+
+.footer-text{
+font-size: 12px; color: white;
+font-family: sans-serif;
+text-align: center; 
+padding-top: 1%;
+padding-right: 0.9%;
+text-shadow: 1px 1px rgb(124, 114, 114);
+}
+
+.logo-mahle{
+    position: fixed;
+    bottom: 1.5%;
+    width: 6%;
+    height: 2.2%;
+    z-index: 6;
+    left: 0.5%;
+}
+
+.logo-spi{
+    position: fixed;
+    top: 95%;
+    z-index: 7;
+    right: 0.4%;
+    width: 7%;
+    height: 5%;
+    }
 
 @media (min-width:800em) {
     /* overlay sub levels on small screens */
