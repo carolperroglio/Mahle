@@ -1,10 +1,10 @@
 /* menu de navegação de ferramentas */ 
 .nav-ferramentas{
     position: fixed;
-    top: 9%;
+    top: 10%;
     z-index: 1;
-    background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251));
-    /*background-color: #F6F6F6; */
+    /* background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251)); */
+    background-color: #F6F6F6;  
     width: 100%;
     height: 13%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -37,8 +37,8 @@
 
 .ferramentas {
         position: relative;
-        top: 15%;           
-        left: 3%;
+        top: 10%;           
+        left: 2%;
     }    
 
 .btn-warning{
@@ -63,9 +63,9 @@ input{
 
 .ferramentas{
     position: relative;
-    margin-top: 16%;           
-    left: 15%;
-    width: 80%;       
+    margin-top: 14%;           
+    left: 8%;
+    width: 90%;       
 }
 
 .ls2{
@@ -75,5 +75,23 @@ input{
 @media screen and (max-width : 801px){
     .ferramentas{ 
         margin-top: 30%; 
-    }       
+    }  
+    
+.nav-ferramentas{
+    top: 15%;
+    z-index: 1;
+    /* background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251)); */
+    background-color: #F6F6F6;  
+    width: 100%;
+    height: 25%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.title-page-tool{
+    font-size: 19px;
+    padding-top: 4%;
+}
+.nav-item-tool{
+    margin-left: 1%;
+    padding-top: 5%;
+    }
 } 
