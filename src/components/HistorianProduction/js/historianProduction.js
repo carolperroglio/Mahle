@@ -2,6 +2,13 @@ import axios from 'axios'
 import es6promisse from 'es6-promise'
 es6promisse.polyfill();
 
+function displayTime(ticksInSecs) {
+    var ticks = ticksInSecs;
+    data = new Date(ticks);
+    test = data.ToString("dd/MM/yyyy hh:mm TTy");
+    return test;
+}
+
 export default {    
     name: "HistorianProduction", 
     data(){
@@ -17,17 +24,18 @@ export default {
             productionOrdersRecipe: {},
             orderPhaseProducts: [],
             phaseProducts: [],
+            orderHistorian: [],
+            productionOrderId: '',
             POs: [],
             op: '',
             mensagem:'',
-            mensagemSuc:'',  
-            orderField: '',
-            order: '',
+            mensagemSuc:'',
             fieldFilter: '',
             fieldValue: '' ,
             phaseIndex: '',
             pReceita: false,
             pFase: false,
+            lista: false,
             url:'http://brsbap01:8007/',
 
         }
@@ -37,14 +45,24 @@ export default {
     },      
     methods:{
 
+        teste(){
+            
+            console.log(displayTime(633896886277130000));
+        },
+
         cadastrarApont(ordem){    
             this.mensagem='';   
             this.mensagemSuc= '';
            
             console.log(ordem);               
-            axios.post(this.url,ordem).then((response)=>{
-                this.mensagemSuc = 'Apontamento efeituado com sucesso.';    
-                this.carregando = false;        
+            axios.post(this.url+'api/producthistorian',ordem).then((response)=>{
+                this.mensagemSuc = 'Produto apontado com sucesso.'; 
+                this.productionOrderId = this.ordem.productionOrderId;
+                this.carregando = false;     
+                this.pReceita = false;
+                this.pFase = false;
+                this.ordem={};   
+                console.log(response);
             },(r)=>{                
                 this.mensagem = 'Erro no server ' + r;                
                 this.carregando = false;
@@ -52,7 +70,23 @@ export default {
                       
         },
 
+        listar(){            
+            this.lista = true;              
+            axios.get(this.url+'api/OrderHistorian/'+this.productionOrderId).then((response)=>{   
+                this.carregando = false;        
+                console.log(response);
+                this.orderHistorian = response.data;
+                console.log();
+            },(r)=>{                
+                this.mensagem = 'Erro no server ' + r;                
+                this.carregando = false;
+            }) 
+               
+        },
+
         getOrderProducts(){
+            this.mensagem='';   
+            this.mensagemSuc= '';
             $("#OPApont").modal('show'); 
 
             if(this.ordem.type==="output"){

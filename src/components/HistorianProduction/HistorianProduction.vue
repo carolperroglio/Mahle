@@ -8,7 +8,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-         <div class="fixed-top nav-ferramentas">
+         <div class="fixed-top nav-OP">
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item">
                     <label class="fm mr-sm-2">Número da OP: </label>   
@@ -28,6 +28,9 @@
                         <button type="button" class="btn btn-outline-primary btn-sm col-md-12" @click.stop.prevent="listaOp()">
                             Selecionar
                         </button>
+                        <button type="button" class="btn btn-outline-primary btn-sm col-md-12" @click.stop.prevent="teste()">
+                            Teste
+                        </button>
                     </div>
 
                     </form>
@@ -37,35 +40,84 @@
 
 
         <div id="order" class="row conteudo" style="display: none">
-            <div class="ferramentas col-8">
+            <div class="orderHistorian col-8">
                     <div class="card">
                         <div class="card-header">
-                            <b></b>
-                        </div>
-                        <div class="card-body">
-                            <label class="ls">
+                            <b><label class="ls">
                                 <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
                                 <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            </b>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                            <div class="col">
+                            <label>
                                 <b><font color="#9BA6A5">Tipo:</font></b>
                             </label> 
-                                <select required v-model="ordem.type" class="ls form-control form-control-sm">
+                                <select required v-model="ordem.type" class="form-control form-control-sm-">
                                     <option value="input">Input</option>
                                     <option value="output">Output</option>
-                                </select>   
+                                </select>
+                            </div>   
+                            <div class="col">
                             <button type="button" class="btn btn-outline-success btn-sm" @click.stop.prevent="getOrderProducts()">
                             Registrar Produto
                             </button>
+                            </div>
+                            <div class="col">
+                            <button type="button" class="btn btn-outline-success btn-sm" @click.stop.prevent="listar()">
+                            Listar Produtos
+                            </button>
+                            </div>
+                            </div>
                         </div>
-                    </div>
+                            <div v-show="lista">
+                                
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <b>Produtos de entrada</b>
+                                        </div>
+                                        <div class="card-body">
+                                        <div v-for="(o, index) in orderHistorian.productsInput" v-bind:key="index">
+                                            <label class="ls2">
+                                                <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;&nbsp;&nbsp;
+                                            <label class="ls2">
+                                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;&nbsp;&nbsp;
+                                            <label class="ls2">
+                                                <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;&nbsp;&nbsp;
+                                            <label class="ls2">
+                                                <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;&nbsp;&nbsp;
+                                        </div>
+                                        </div>
+                                    </div>
+                                      
+                                        <div class="card-header">
+                                            <b>Produto de saída</b>
+                                        </div>
+                                        <div class="card-body">
+                                            <div v-for="(o, index) in orderHistorian.productsOutput" v-bind:key="index">
+                                            <label class="ls2">
+                                                <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;&nbsp;&nbsp;
+                                            <label class="ls2">
+                                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;&nbsp;&nbsp;
+                                            <label class="ls2">
+                                                <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;&nbsp;&nbsp;
+                                            <label class="ls2">
+                                                <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;&nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                               
+                            </div>
+                        </div>
+                    
             </div>
          </div>
 
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-        <!--     Cadastro de Ferramentas     -->
+        <!--   Cadastro de orderHistorian    -->
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->

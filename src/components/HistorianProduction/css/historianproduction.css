@@ -1,4 +1,4 @@
-.nav-ferramentas{
+.nav-OP{
     padding-top: 1%;
     padding-bottom: 1%;
     top: 20%;        
@@ -19,7 +19,7 @@
     margin-right: 0.5%;
     }
 
-/*Listagem de ferramentas*/
+/*Listagem de orderHistorian*/
 
 .icon-right{
     position: relative;
@@ -30,19 +30,24 @@ input{
     position: relative !important;
 }
 
-.ferramentas{
+.orderHistorian{
     position: relative;
     margin-top: 22%;           
     left: 15%;
     width: 80%;       
 }
 
+
 .ls{
     width: 20%;
 }
 
+.ls2{
+    width: 22%;
+}
+
 @media screen and (max-width : 801px){
-    .ferramentas{ 
+    .orderHistorian{ 
         margin-top: 30%; 
     }       
 } 

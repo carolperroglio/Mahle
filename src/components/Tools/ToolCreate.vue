@@ -124,8 +124,11 @@
                                     <b>Status: </b>
                                 </label>
                                 <select class="form-control form-control-sm" v-model="ferramenta.status">
-                                    <option value="active">Ativo</option>
-                                    <option value="disabled">Não Ativo</option>
+                                    <option value="available">Disponível</option>
+                                    <option value="in_use">Em uso</option>
+                                    <option value="in_maintenance">Em manutenção</option>
+                                    <option value="not_available">Indisponível</option>
+                                    <option value="inactive">Inativo</option>
                                 </select>
                                 </div>
                                 <div class="btn-group" role="group">
@@ -159,11 +162,13 @@
                 </div>
                 <div v-for="(f, index) in ferramentas" v-bind:key="index">
                     <div class="card">
-                        <div class="card-header2">
-                            <b></b>
+                        <div class="card-header">
+                            <b> </b>
                         </div>
-                        <div class="card-body2">
-                            <label class="ls">
+
+                        <div class="card-body">
+                            <label class="ls2">
+
                                 <b><font color="#9BA6A5">Nome: </font></b>{{f.name}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{f.description}}</label>&nbsp;&nbsp;&nbsp;
@@ -182,7 +187,9 @@
                             <label class="ls">
                                 <b><font color="#9BA6A5">status: </font></b>{{f.status}}</label>&nbsp;&nbsp;&nbsp;
                                 <button @click.stop.prevent="itemClicado(f)">
-                            <i class="fa fa-edit icon-right" style="font-size:22px; cursor:pointer"></i>
+
+                            <i class="fa fa-edit" style="font-size:22px; cursor:pointer"></i>
+
                                 </button>
                         </div>
                     </div>
@@ -267,8 +274,11 @@
                                             <b>Status: </b>
                                         </label>
                                         <select class="form-control form-control-sm" v-model="ferramenta.status" disabled>
-                                            <option value="active">Ativo</option>
-                                            <option value="disabled">Não Ativo</option>
+                                            <option value="available">Disponível</option>
+                                            <option value="in_use">Em uso</option>
+                                            <option value="in_maintenance">Em manutenção</option>
+                                            <option value="not_available">Indisponível</option>
+                                            <option value="inactive">Inativo</option>
                                         </select>
                                         </div>
                                         <div class="btn-group" role="group">
