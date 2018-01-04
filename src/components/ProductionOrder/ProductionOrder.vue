@@ -170,8 +170,8 @@
         <!--  o Modal de Criação da OP  -->
         <div class="fixed-top nav-op">
             <ul class="nav d-flex align-items-center">
-                
-                <li class="col-md-auto">
+            <li class="nav-prod col-sm-1.5">
+                    <h1 class="title-page-op"> Cadastro de Ordem de Produção </h1>
                     <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
                         <option value="" selected disabled>Buscar por:</option>
                         <option value="productionOrderNumber">Nº Ordem de Produção</option>
@@ -180,10 +180,10 @@
                         <option value="currentStatus">Status</option>
                     </select>
                 </li>
-                <li class="col-md-auto">
+                <li class="nav-prod col-sm-1.5">
                     <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                 </li>
-                <li class="col-md-auto">
+                <li class="nav-prod col-sm-1.5">
                     <select class="form-control form-control-sm" v-model="orderField">
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productionOrderNumber">Nº Ordem de Produção</option>
@@ -192,7 +192,7 @@
                         <option value="currentStatus">Status</option>
                     </select>
                 </li>
-                <li class="col-md-auto">
+                <li class="nav-prod col-sm-1.5">
                     <select class="form-control form-control-sm" v-model="order">
                         <option value="" selected disabled>Ordenação</option>
                         <option value="ascending">Crescente</option>
@@ -200,15 +200,15 @@
                     </select>
                 </li>
 
-                <li class="col">
+                <li class="nav-prod col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <div class="col-md-auto">
-                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Listar Ordens</button>
                         </div>
                         <!-- Button trigger modal -->
-                        <div class="col-md-auto">
-                            <button @click="getRecipes(); getOpType()" type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#cadastrarOp">
-                                Cadastrar OP
+                        <div class="col-sm-1.5">
+                            <button @click="getRecipes(); getOpType()" type="button" class="btn btn-success btn-sm btn-sm" data-toggle="modal" data-target="#cadastrarOp">
+                                Cadastrar Ordem
                             </button>
                         </div>
                     </form>
@@ -232,7 +232,7 @@
                         <div class="card-body-op">
                             <label class="ls">
                                 <b>
-                                    <font color="#9BA6A5">Numero de Ordem: </font>
+                                    <font color="#9BA6A5">Ordem: </font>
                                 </b>{{op.productionOrderNumber}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
@@ -247,17 +247,17 @@
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
                                 <b>
-                                    <font color="#9BA6A5">Nome da Receita: </font>
+                                    <font color="#9BA6A5">Nome Receita: </font>
                                 </b>{{op.recipe.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls">
                                 <b>
-                                    <font color="#9BA6A5">Cod. da Receita: </font>
+                                    <font color="#9BA6A5">Cod. Receita: </font>
                                 </b>{{op.recipe.recipeCode}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls" v-if="op.hasProd == true">
                                 <b>
-                                    <font color="#9BA6A5">Nome do Produto: </font>
+                                    <font color="#9BA6A5">Nome Produto: </font>
                                 </b>{{op.recipe.recipeProduct.product.productName}}
                             </label>
 

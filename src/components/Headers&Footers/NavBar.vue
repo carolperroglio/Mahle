@@ -9,8 +9,8 @@
         <nav class="header fixed-top">
                 <img src="./../../assets/imagens/onyx.png" class="logo-system"/>
             <ul class="nav nav-pills bg-primary">
-                <li class="nav-item-cab col-md-2">
-                    <a class="" router-link to="/"></a>
+                <li class="nav-item-cab col-md-3">
+                    <a class="nav-link active" router-link to="/stateManagement">OP Status Management </a>
                 </li> 
                 <li class="nav-item-cab col-md-2">
                     <a class="nav-link active" router-link to="/">Início</a>
@@ -66,15 +66,15 @@
                         <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-building-o"></i> <span class="hidden-sm-down">   FERRAMENTAS</span>
                         </router-link>
+                        <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   ORDEM DE PRODUÇÃO</span>
+                        </router-link>
                         <router-link to="/historianProduction" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-building-o"></i> <span class="hidden-sm-down">   APONTAMENTOS</span>
                         </router-link>
-                        <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP</span>
-                        </router-link>
-                        <router-link to="/stateManagement" class="list-group-item collapsed" data-parent="#sidebar">
+                        <!--<router-link to="/stateManagement" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP Status Management</span>
-                        </router-link>          
+                        </router-link>-->          
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">
