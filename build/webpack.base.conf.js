@@ -48,7 +48,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('axios')]
+        include: [resolve('src'), resolve('test'), resolve('axios')],
+        query: {
+          presets: ['es2015']
+      }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
