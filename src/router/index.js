@@ -7,6 +7,7 @@ import ProductionOrder from '@/components/ProductionOrder/ProductionOrder'
 import ToolCreate from '@/components/Tools/ToolCreate'
 import HistorianProduction from '@/components/HistorianProduction/HistorianProduction'
 import historianProduction from '../components/HistorianProduction/js/historianProduction';
+import StateManagement from '@/components/OPStateManagement/StateManagement'
 Vue.use(Router)
 
 export default new Router({
@@ -42,7 +43,11 @@ export default new Router({
             path: '/historianProduction',
             name: 'HistorianProduction',
             component: HistorianProduction
-
         },
+        {
+            path: '/stateManagement',
+            name: 'StateManagement',
+            component: StateManagement
+        }
     ]
 })

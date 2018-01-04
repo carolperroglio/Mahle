@@ -23,6 +23,7 @@
     "rijs": "^0.8.2",
     "rijs.npm": "^2.0.0",
     "rijs.resdir": "^1.4.0",
+    "v-autocomplete": "^1.8.1",
     "vue": "^2.5.2",
     "vue-autocompleter": "^0.3.17",
     "vue-router": "^3.0.1"

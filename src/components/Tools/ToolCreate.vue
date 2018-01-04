@@ -11,27 +11,9 @@
         <!--               Modal             -->
          <div class="fixed-top nav-ferramentas">
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item">
-                    <form class="form-inline my-3 form-control-sm mr-sm-12">
-                    <div class="">
-                        <button type="button" class="btn btn-outline-success btn-sm col-md-12" data-toggle="modal" data-target="#ToolCreateModal">
-                             Cadastrar Ferramenta
-                        </button>
-                    </div>
-
-                    </form>
-                </li>
-                <li class="nav-item">
-                    <form class="form-inline my-3 form-control-sm mr-sm-12">
-                    <div class="">
-                        <button type="button" class="btn btn-outline-primary btn-sm col-md-12" @click.stop.prevent="listar()">
-                                Listar Ferramentas
-                            </button>
-                        </div>
-
-                    </form>
-                </li>
-                <li class="nav-item col-md-auto">
+                </li>    
+                <li class="nav-item-tool col-sm-1.5">
+                    <h1 class="title-page-tool"> Cadastro de Ferramentas </h1>
                         <select class="form-control form-control-sm" v-model="orderField">
                             <option value="" selected disabled="disabled">Ordenar por:</option>
                             <option value="name">Nome</option>
@@ -45,16 +27,14 @@
                             <option value="status">Status</option>
                     </select>
                 </li>
-                <li class="nav-item col-md-auto">
+                <li class="nav-item-tool col-sm.1.5">
                     <select class="form-control form-control-sm" v-model="order">                        
                            <option value="" selected disabled="disabled">Cresc./Decresc.</option>
                             <option value="ascending">Crescente</option>
                             <option value="descending">Decrescente</option>
                     </select>
                 </li>
-                </ul>
-            <ul class="nav d-flex align-items-center">
-                <li class="nav-item col-md-auto">
+                <li class="nav-item-tool col-sm-1.5">
                         <select class="form-control form-control-sm" v-model="fieldFilter">
                             <option value="" selected disabled="disabled">Buscar por campo:</option>
                             <option value="name">Nome</option>
@@ -67,10 +47,21 @@
                             <option value="typeName">Tipo</option>
                             <option value="status">Status</option>
                     </select>
-                </li>
-                <li>
+                </li>    
+                <li class="nav-item-tool col-sm-1.5">
                 <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-sm" placeholder="Valor">                              
+                </li> 
+                <li class="nav-item-tool col-sm-1.5">        
+                        <button type="button" class="btn btn-primary btn-sm" @click.stop.prevent="listar()">
+                                Listar Ferramentas
+                        </button>
+                <li class="nav-item-tool col-sm-1.5">
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ToolCreateModal">
+                             Cadastrar Ferramenta
+                        </button>
                 </li>
+
+
             </ul>
         </div>
 
@@ -162,36 +153,36 @@
             <!--                            -->
 
         <div class="row conteudo" style="top:-400px;">
-            <div class="ferramentas col-8">
+            <div class="ferramentas col-10">
                 <!-- <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div> -->
                 <div v-for="(f, index) in ferramentas" v-bind:key="index">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header2">
                             <b></b>
                         </div>
-                        <div class="card-body">
-                            <label class="ls">
+                        <div class="card-body2">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">Nome: </font></b>{{f.name}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{f.description}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">Número Serial: </font></b>{{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">Code: </font></b>{{f.code}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">Life Cycle: </font></b>{{f.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{f.currentLife}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">Unindade de Medida: </font></b>{{f.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{f.typeName}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls2">
                                 <b><font color="#9BA6A5">status: </font></b>{{f.status}}</label>&nbsp;&nbsp;&nbsp;
                                 <button @click.stop.prevent="itemClicado(f)">
-                            <i class="fa fa-pencil icon-right" style="font-size:22px; cursor:pointer"></i>
+                            <i class="fa fa-edit icon-right2" style="font-size:22px; cursor:pointer"></i>
                                 </button>
                         </div>
                     </div>
