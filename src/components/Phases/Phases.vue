@@ -250,35 +250,40 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>Digite a quantidade : </label>
+                                <label>Quantidade : </label>
                                 <input class="form-control mr-sm-2" required v-model="recipeProduct.value" placeholder="Valor" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Digite a unidade de medida : </label><br>
+                                <label>Unidade de medida : </label><br>
                                 <input class="form-control mr-sm-2" required v-model="recipeProduct.measurementUnit" placeholder="Ex.: kg" />
                             </div>
                         </div>
-                        <label class="mr-sm-2">Digite o nome do produto : </label>
+                        <label class="mr-sm-2">Nome do produto : </label>
                         <div class="dropdown">
                             <!-- <v-autocomplete :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems">
                                     </v-autocomplete> -->
-                            <input @keyup.enter="recipeProducts=getResults('http://brsbap01:8003/api/products?&fieldFilter=productName&fieldValue=',recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                            <select class="form-control form-control-sm" v-model="recipeProductName">
+                            <input @keyup="recipeProducts=getResults('http://brsbap01:8003/api/products?&fieldFilter=productName&fieldValue=',recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                            <!-- <select class="form-control form-control-sm" v-model="recipeProductName">
                                 <option value="" selected disabled></option>
                                 <option v-for="(p,index) in recipeProducts" v-bind:value="opType.productionOrderTypeId">
                                     {{p.productName}}
                                 </option>
-                            </select>
-                            <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                <a class="dropdown-item" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts">{{p.productName}}</a>
-                                                                            </div> -->
+                            </select> -->
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts" v-bind:key="index">{{p.productName}}</a>
+                            </div>
                             {{ recipeProductName }}
+                            <br>
+                            <small>Digite no minimo 3 letras para busca do produto</small>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="button" @click.stop.prevent="createRecipeProduct(recipeProduct)" :disabled="recipeProduct.productId=='' || recipeProduct.productId==undefined" class="btn btn-primary">Cadastrar</button>
+                            <button type="button" @click.stop.prevent="createRecipeProduct(recipeProduct)" 
+                            :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || recipeProductName" class="btn btn-success">
+                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -407,6 +412,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; phase.pros=[];" v-for="(p,index) in phase.pros">{{p.productName}}</a>
                             </div>
+                            <small>Digite no minimo 3 letras para busca do produto</small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -473,6 +479,7 @@
                                         <a class="dropdown-item" @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags">{{p.tagName}}</a>
                                     </div>
                                 </div>
+                            <small>Digite no minimo 3 letras para busca da tag</small>
                             </div>
                         </div>
                         <div class="btn-group" role="group">

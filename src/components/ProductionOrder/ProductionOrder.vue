@@ -288,8 +288,6 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
 </template>
 <script src="./js/order.js">
 </script>
