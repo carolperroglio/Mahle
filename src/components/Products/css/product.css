@@ -31,6 +31,7 @@
 /*Listagem de produtos*/
 .icon-right{
 position: relative;
+align-content: center;
 float: right;
 }
 
@@ -42,6 +43,7 @@ input {
     position: absolute;
     margin-top: 12%;           
     left: 3%;
+    width: 93%;
 }
 
 .msg {
@@ -49,8 +51,21 @@ input {
     width: 70%!important;
 }
 
+.card-body{
+    font-family: sans-serif;
+    font-size: 16px;
+    padding-top: 0.1%;
+    padding-bottom: 0.1%;
+    background-color: white;
+    }
+    
+    .card-header{
+        padding-top: 0.6%;
+        padding-bottom: 0.6%;   
+    }
+
 .paginacao {
-    z-index: 2;
+    z-index: 1;
     text-align: center;
     width: 66.3%;
     left: 15%;
@@ -60,13 +75,7 @@ input {
     width: 23%;
 }
 
-.card-body{
-font-family: sans-serif;
-font-size: 16px;
-padding-top: 0.6%;
-padding-bottom: 0.5%;
-background-color: white;
-}
+
 
 
 /* Menu Superior para busca de Produtos 800X600 */ 
@@ -92,8 +101,8 @@ background-color: white;
     }
     .card-body{ 
         font-size: 11px;
-        padding-top: 0.6%;
-        padding-bottom: 0.6%;
+        padding-top: 0.1%;
+        padding-bottom: 0.1%;
     } 
     .produtos{ 
         margin-top: 30%; 

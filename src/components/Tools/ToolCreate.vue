@@ -53,7 +53,7 @@
                 </li> 
                 <li class="nav-item-tool col-sm-1.5">        
                         <button type="button" class="btn btn-primary btn-sm" @click.stop.prevent="listar()">
-                                Listar Ferramentas
+                                Buscar
                         </button>
                 <li class="nav-item-tool col-sm-1.5">
                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ToolCreateModal">

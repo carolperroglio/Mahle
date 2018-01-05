@@ -203,7 +203,7 @@
                 <li class="nav-prod col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <div class="col-md-auto">
-                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Listar Ordens</button>
+                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                         </div>
                         <!-- Button trigger modal -->
                         <div class="col-sm-1.5">
