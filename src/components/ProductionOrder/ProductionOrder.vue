@@ -82,7 +82,7 @@
                             <!--  receita foi selecionada      -->
                             <div id="accordion" role="tablist" v-if="recipeAdded">
                                 <div class="card">
-                                    <div class="card-header" role="tab" id="headingOne">
+                                    <div class="card-header card-header-op" role="tab" id="headingOne">
                                         <h5 class="mb-0">
                                             <a class="collapse-color" data-toggle="collapse" href="#recipeAdded" aria-expanded="true" aria-controls="recipeAdded">
                                                 {{recipeAdded}}
@@ -92,7 +92,7 @@
 
                                     <!--  Mostra as fases da Receita-->
                                     <div id="recipeAdded" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                        <div class="card-body-op" v-if="recipeObj.phases.length != 0 || carregando == true">
+                                        <div class="card-body card-body-op" v-if="recipeObj.phases.length != 0 || carregando == true">
                                             <h5>Fases</h5>
                                             <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases">
                                                 <li class="list-group-item" v-if="recipeAdded.length != 0">
@@ -219,7 +219,7 @@
         <!--             -->
         <!--  LISTAR OPs -->
         <!--             -->
-        <div class="row conteudo" style="top:-400px;">
+        <div class="" style="">
             <div class="op col-md-10">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
@@ -230,32 +230,32 @@
                             <b></b>
                         </div>
                         <div class="card-body-op">
-                            <label class="ls">
+                            <label class="ls ls1">
                                 <b>
                                     <font color="#9BA6A5">Ordem: </font>
                                 </b>{{op.productionOrderNumber}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls1">
                                 <b>
                                     <font color="#9BA6A5">Descrição: </font>
                                 </b>{{op.typeDescription}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls1">
                                 <b>
                                     <font color="#9BA6A5">Quantidade: </font>
                                 </b>{{op.quantity}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls1">
                                 <b>
                                     <font color="#9BA6A5">Nome Receita: </font>
                                 </b>{{op.recipe.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls1">
                                 <b>
                                     <font color="#9BA6A5">Cod. Receita: </font>
                                 </b>{{op.recipe.recipeCode}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls" v-if="op.hasProd == true">
+                            <label class="ls ls1" v-if="op.hasProd == true">
                                 <b>
                                     <font color="#9BA6A5">Nome Produto: </font>
                                 </b>{{op.recipe.recipeProduct.product.productName}}

@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <div class="container-fluid col-md-9">
-                        <div class="card card-margin">
+                        <div class="card card-margin2">
                             <div class="card-header">
                                 <b></b>
                             </div>

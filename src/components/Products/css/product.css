@@ -3,79 +3,78 @@
     position: fixed;
     top: 9%;
     z-index: 1;
-   /*background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251));*/
-    background-color: #F6F6F6;
+    background: linear-gradient(rgb(249, 249, 250), hsla(204, 60%, 69%, 0.767)); 
     width: 100%;
     height: 13%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
 /* menu de navegação de produtos - busca de produtos*/   
-.nav-item{
-    margin-left: 0.5%;
+.nav-item{ 
+    margin-left: 1%;
     padding-top: 3%;
     }
     
 /* menu de navegação de produtos - título busca de produtos*/ 
 .title-page{
     text-align: left;
-    color: rgb(82, 84, 87);
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(68, 68, 70);
+    font-family: sans-serif;
     font-size: 22px;
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
-    margin-left: 0.5%;
+    left: 0.5%;
     top: 11%;
 }
 
 /*Listagem de produtos*/
 .icon-right{
-position: relative;
-align-content: center;
-float: right;
-}
+    position: relative;
+    float: right;
+   /* align-content: right;
+    padding-bottom: 0.1%;*/
+    }
 
 input {
     position: relative;
 }
 
 .produtos {
-    position: absolute;
-    margin-top: 12%;           
-    left: 3%;
-    width: 93%;
+    position: relative;
+    padding-top: 13%;           
+    left: 1%;
+    width: 100%;
 }
 
 .msg {
-    position: relative!important;
-    width: 70%!important;
+    position: relative;
+    width: 50%;
 }
 
 .card-body{
-    font-family: sans-serif;
-    font-size: 16px;
     padding-top: 0.1%;
     padding-bottom: 0.1%;
-    background-color: white;
+    padding-left: 1.1%;
     }
     
-    .card-header{
-        padding-top: 0.6%;
-        padding-bottom: 0.6%;   
-    }
+.card-header{
+    padding-top: 0.6%;
+    padding-bottom: 0.6%;   
+}
 
 .paginacao {
-    z-index: 1;
+    z-index: 2;
     text-align: center;
     width: 66.3%;
     left: 15%;
     background-color: white;
 }
-.ls {
-    width: 23%;
+
+.ls2 {
+    width: 21%;
+    font-family: sans-serif;
+    font-size: 14px;
 }
-
-
 
 
 /* Menu Superior para busca de Produtos 800X600 */ 
@@ -105,6 +104,12 @@ input {
         padding-bottom: 0.1%;
     } 
     .produtos{ 
-        margin-top: 30%; 
+        margin-top: 30%;
+        width: 100%; 
+    }
+    .ls2 {
+        width: 20% !important;
+        font-family: sans-serif;
+        font-size: 11px;
     }
 }

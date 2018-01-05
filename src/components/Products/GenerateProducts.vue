@@ -94,10 +94,10 @@
                 <li class="nav-item col-sm-2">
                         <input class="form-control btn-sm" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                 </li>
-                <li class="nav-item  col-sm-1.5 col-sm-offset-1.5">
+                <li class="nav-item  col-sm-1.5">
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                 </li>
-                <li class="nav-item col-sm-1 col-sm-offset-1">
+                <li class="nav-item col-sm-1">
                     <button type="button" class="btn btn-success btn-sm btn-sm" data-toggle="modal" data-target="#exampleModal">
                                 Novo Produto
                     </button>
@@ -114,8 +114,8 @@
         <!--                       -->
         <!--                       -->
 
-        <div class="row conteudo" style="top:-400px;">
-            <div class="produtos col-10">
+        <div class="" style="">
+            <div class="produtos col-11">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
@@ -125,22 +125,22 @@
                             <b></b>
                         </div>
                         <div class="card-body">
-                            <label class="ls">
+                            <label class="ls ls2">
                                 <b>
                                     <font color="#9BA6A5">Nome: </font>
                                 </b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls2">
                                 <b>
                                     <font color="#9BA6A5">Descrição: </font>
                                 </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls2">
                                 <b>
                                     <font color="#9BA6A5">Código: </font>
                                 </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls2">
 
                                 <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-edit icon-right" style="font-size:22px; cursor:pointer" @click.prevent="editar(p)" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i>
+                            <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.prevent="editar(p)" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i>
                         </div>
                     </div>
                 </div>
