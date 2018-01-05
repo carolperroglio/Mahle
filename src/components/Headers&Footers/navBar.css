@@ -100,13 +100,13 @@
 }
 
 footer{
-position:fixed;
-z-index: 5;
-left:0px;
-bottom:0px;
-height:40px;
-width:100%;
-background: #222;
+    position:fixed;
+    z-index: 5;
+    left:0px;
+    bottom:0px;
+    height:40px;
+    width:100%;
+    background: #222;
 }
 
 .footer-text{

@@ -68,7 +68,7 @@
         <!--                       -->
         <!--                       -->
         <div class="container-fluid col-md-9" v-show="recipeCadastrada">
-            <div class="card card-margin">
+            <div class="card card-margin2">
                 <h5 class="card-header">
                     <h3>Fases da receita : </h3>
                     <i class="fa fa-plus pull-right" data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
