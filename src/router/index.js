@@ -8,6 +8,7 @@ import ToolCreate from '@/components/Tools/ToolCreate'
 import HistorianProduction from '@/components/HistorianProduction/HistorianProduction'
 import historianProduction from '../components/HistorianProduction/js/historianProduction';
 import StateManagement from '@/components/OPStateManagement/StateManagement'
+import ListRecipes from '@/components/Phases/ListRecipes'
 Vue.use(Router)
 
 export default new Router({
@@ -23,9 +24,10 @@ export default new Router({
             component: GenerateProducts
         },
         {
-            path: '/phases',
+            path: '/phases/:id',
             name: 'Phases',
-            component: Phases
+            component: Phases,
+            props: true
         },
         {
 
@@ -48,6 +50,11 @@ export default new Router({
             path: '/stateManagement',
             name: 'StateManagement',
             component: StateManagement
+        },
+        {
+            path: '/listRecipes',
+            name: 'ListRecipes',
+            component: ListRecipes
         }
     ]
 })
