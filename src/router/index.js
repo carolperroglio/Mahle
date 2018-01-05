@@ -9,6 +9,7 @@ import HistorianProduction from '@/components/HistorianProduction/HistorianProdu
 import historianProduction from '../components/HistorianProduction/js/historianProduction';
 import StateManagement from '@/components/OPStateManagement/StateManagement'
 import ListRecipes from '@/components/Phases/ListRecipes'
+import AssociateTool from '@/components/AssociateTool/AssociateTool'
 Vue.use(Router)
 
 export default new Router({
@@ -55,6 +56,11 @@ export default new Router({
             path: '/listRecipes',
             name: 'ListRecipes',
             component: ListRecipes
+        },
+        {
+            path: '/associateTool',
+            name: 'AssociateTool',
+            component: AssociateTool
         }
     ]
 })
