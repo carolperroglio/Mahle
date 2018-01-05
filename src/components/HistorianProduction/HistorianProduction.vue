@@ -28,9 +28,7 @@
                         <button type="button" class="btn btn-outline-primary btn-sm col-md-12" @click.stop.prevent="listaOp()">
                             Selecionar
                         </button>
-                        <button type="button" class="btn btn-outline-primary btn-sm col-md-12" @click.stop.prevent="teste()">
-                            Teste
-                        </button>
+                             
                     </div>
 
                     </form>
