@@ -65,9 +65,9 @@
                         <a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-book"></i> <span class="hidden-sm-down">RECEITA </span></a>          
                         <div class="collapse" id="menu3">
                             <router-link to="/phases" class="list-group-item" data-parent="#menu3">Cadastrar Receita</router-link>
-                            <a href="#" class="list-group-item" data-parent="#menu3">Relatório de Receita</a>        
+                            <router-link to="/listRecipes" class="list-group-item" data-parent="#menu3">Relatório de Receita</router-link>
+                            <!-- <a href="#" class="list-group-item" data-parent="#menu3">Relatório de Receita</a>         -->
                         </div>            
-
                         <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-balance-scale"></i> 
                             <span class="hidden-sm-down">  PRODUTOS</span>
