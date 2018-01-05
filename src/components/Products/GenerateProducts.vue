@@ -95,7 +95,7 @@
                         <input class="form-control btn-sm" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                 </li>
                 <li class="nav-item  col-sm-1.5 col-sm-offset-1.5">
-                        <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Listar Produtos</button>
+                        <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                 </li>
                 <li class="nav-item col-sm-1 col-sm-offset-1">
                     <button type="button" class="btn btn-success btn-sm btn-sm" data-toggle="modal" data-target="#exampleModal">
