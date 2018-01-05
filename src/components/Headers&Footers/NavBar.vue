@@ -7,7 +7,7 @@
             <!--                                  -->
     <div class="container fluid">  
         <nav class="header fixed-top">
-                <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
+            <!--    <img src="./../../assets/imagens/onyx3.png" class="logo-system"/> -->
             <ul class="nav nav-pills bg-dark">
                 <li class="nav-item-cab col-md-3">
                     <a class="nav-link bg-dark active" router-link to="/stateManagement">OP Status Management </a>
@@ -37,8 +37,8 @@
     <footer>
         <div class="footer-text"> Sistema Onyx V1.0</div>
     </footer>
-        <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/>
-        <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
+        <!-- <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/> -->
+        <!-- <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/> -->
         <!--                        -->
         <!--                        -->
         <!--   Menu lateral Novo    -->

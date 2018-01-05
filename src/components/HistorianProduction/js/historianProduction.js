@@ -2,13 +2,6 @@ import axios from 'axios'
 import es6promisse from 'es6-promise'
 es6promisse.polyfill();
 
-function displayTime(ticksInSecs) {
-    var ticks = ticksInSecs;
-    data = new Date(ticks);
-    test = data.ToString("dd/MM/yyyy hh:mm TTy");
-    return test;
-}
-
 export default {    
     name: "HistorianProduction", 
     data(){
@@ -44,12 +37,6 @@ export default {
        
     },      
     methods:{
-
-        teste(){
-            
-            console.log(displayTime(633896886277130000));
-        },
-
         cadastrarApont(ordem){    
             this.mensagem='';   
             this.mensagemSuc= '';
@@ -63,25 +50,31 @@ export default {
                 this.pFase = false;
                 this.ordem={};   
                 console.log(response);
+                
             },(r)=>{                
                 this.mensagem = 'Erro no server ' + r;                
                 this.carregando = false;
-            }) 
+            })
                       
         },
 
         listar(){            
-            this.lista = true;              
+            this.lista = true;  
             axios.get(this.url+'api/OrderHistorian/'+this.productionOrderId).then((response)=>{   
                 this.carregando = false;        
-                console.log(response);
+                console.log(response.data);
                 this.orderHistorian = response.data;
-                console.log();
+                for (var i = 0; i < this.orderHistorian.productsInput.length; i++){
+                    this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
+                }
+                for (var i = 0; i < this.orderHistorian.productsOutput.length; i++){
+                    this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
+                }  
             },(r)=>{                
                 this.mensagem = 'Erro no server ' + r;                
                 this.carregando = false;
-            }) 
-               
+            })            
+                  
         },
 
         getOrderProducts(){
@@ -99,6 +92,7 @@ export default {
                 this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                 this.orderPhaseProducts = this.productionOrdersRecipe.phases;
             }   
+            
         },
 
         buscarOrdens(){
@@ -129,6 +123,17 @@ export default {
                     console.log(error);
                 })            
                     return array;
-                }   
+                },
+        dataConvert(dataTicks){
+            var epochTicks = 621355968000000000,
+            ticksPerMillisecond = 10000,  
+            jsTicks = 0,          
+            jsDate;
+               
+            jsTicks = (dataTicks - epochTicks) / ticksPerMillisecond;
+            jsDate = new Date(jsTicks);
+            console.log(jsDate);
+            return jsDate;
+            }   
         }
 };
