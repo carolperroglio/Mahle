@@ -13,7 +13,7 @@
                             Cadastrar Receita
                         </router-link>
                     </form>
-                    {{"id: " + id }}
+                    <!-- {{"id: " + id }} -->
                 </li>
             </ul>
         </nav>
@@ -24,11 +24,11 @@
                 </div>
                 <div>
                     <div class="container-fluid col-md-9">
-                        <div class="card card-margin">
-                            <div class="card-header">
+                        <div class="card" v-for="(recipe,index) in recipes">
+                            <div class="card-header" >
                                 <b></b>
                             </div>
-                            <div class="card-body -op" v-for="(recipe,index) in recipes">
+                            <div class="card-body -op" >
                                 <b>Nome da Receita: </b> {{recipe.recipeName}} -
                                 <b>Código da Receita: </b>{{recipe.recipeCode}} -
                                 <router-link :to="{ name: 'Phases',params: { id: recipe.recipeId }}">
@@ -37,10 +37,26 @@
                                     </i>
                                 </router-link>
                             </div>
+                            <div class="paginacao-op fixed-bottom" v-show="total>0">
+                    <nav aria-label="">
+                        <ul class="pagination justify-content-center">
+                            <li v-show="startat>0" class="page-item">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Previous</a>
+                            </li>
+                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
+                            </li>
+                            <li class="page-item" v-show="pages.length>1 && startat+20<total">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </template>
