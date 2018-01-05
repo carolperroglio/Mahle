@@ -70,7 +70,7 @@ export default {
             };
             this.opArray = [];
             console.log(this.order, this.orderField)
-            axios.get(this.urlOp + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+            axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                 if (!response.data.values && response.data.productId)
                     this.opArray[0] = response.data;
                 else {
@@ -174,7 +174,6 @@ export default {
                         } else {
                             this.opArray[x].hasProd = true;
                         }
-
                     }
                     console.log(response);
                     this.carregando = false;

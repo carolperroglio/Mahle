@@ -37,8 +37,10 @@
     <footer>
         <div class="footer-text"> Sistema Onyx V1.0</div>
     </footer>
-        <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/> 
+
+        <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/>
         <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
+
         <!--                        -->
         <!--                        -->
         <!--   Menu lateral Novo    -->
@@ -62,18 +64,26 @@
                                 </div>
                             </div> 
                         </div>
-                        <a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-book"></i> <span class="hidden-sm-down">RECEITA </span></a>          
-                        <div class="collapse" id="menu3">
+                        <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar">
+                            <i class="fa fa-book"></i> 
+                            <span class="hidden-sm-down">  RECEITA</span>
+                        </router-link>
+                        <!-- <div class="collapse" id="menu3">
                             <router-link to="/phases" class="list-group-item" data-parent="#menu3">Cadastrar Receita</router-link>
                             <router-link to="/listRecipes" class="list-group-item" data-parent="#menu3">Relatório de Receita</router-link>
-                            <!-- <a href="#" class="list-group-item" data-parent="#menu3">Relatório de Receita</a>         -->
-                        </div>            
+                             <a href="#" class="list-group-item" data-parent="#menu3">Relatório de Receita</a>
+                        </div>  
+                        <router-link to="/listRecipes" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-book"></i> <span class="hidden-sm-down">   RECEITAS</span>
+                        </router-link> -->         
                         <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-balance-scale"></i> 
                             <span class="hidden-sm-down">  PRODUTOS</span>
                         </router-link>         
                         <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-cog"></i> <span class="hidden-sm-down">   FERRAMENTAS</span>
+
+                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">    FERRAMENTAS</span>
+
                         </router-link>
                         <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   ORDEM DE PRODUÇÃO</span>

@@ -22,7 +22,7 @@
 /*Configurações do menu lateral collapse*/
 .icon-navigate {
     position: relative;
-    font-size: 40px;
+    font-size: 30px;
     padding-top: 80%;
     margin-left: 45%;
     color: white;
@@ -100,13 +100,13 @@
 }
 
 footer{
-position:fixed;
-z-index: 5;
-left:0px;
-bottom:0px;
-height:40px;
-width:100%;
-background: #222;
+    position:fixed;
+    z-index: 5;
+    left:0px;
+    bottom:0px;
+    height:40px;
+    width:100%;
+    background: #222;
 }
 
 .footer-text{

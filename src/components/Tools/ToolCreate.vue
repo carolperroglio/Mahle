@@ -155,42 +155,36 @@
             <!--                            -->
             <!--                            -->
 
-        <div class="row conteudo" style="top:-400px;">
-            <div class="ferramentas col-">
+        <div class="" style="">
+            <div class="ferramentas col">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
                 <div v-for="(f, index) in ferramentas" v-bind:key="index">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header card-header2">
                             <b> </b>
                         </div>
-
-                        <div class="card-body">
-                            <label class="ls2">
-
+                        <div class="card-body card-body2">
+                            <label class="ls ls3">
                                 <b><font color="#9BA6A5">Nome: </font></b>{{f.name}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls3">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{f.description}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls3">
                                 <b><font color="#9BA6A5">Serial: </font></b>{{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls3">
                                 <b><font color="#9BA6A5">Code: </font></b>{{f.code}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls3">
                                 <b><font color="#9BA6A5">Life Cycle: </font></b>{{f.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls3">
                                 <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{f.currentLife}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls3">
                                 <b><font color="#9BA6A5">UM: </font></b>{{f.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls3">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{f.typeName}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
-                                <b><font color="#9BA6A5">status: </font></b>{{f.status}}</label>&nbsp;&nbsp;&nbsp;
-                                <button @click.stop.prevent="itemClicado(f)">
-
-                            <i class="fa fa-edit" style="font-size:22px; cursor:pointer"></i>
-
-                                </button>
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Status: </font></b>{{f.status}}</label>&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
                         </div>
                     </div>
                 </div>
