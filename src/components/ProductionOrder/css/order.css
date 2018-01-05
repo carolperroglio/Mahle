@@ -20,12 +20,12 @@
 .title-page-op{
     text-align: left;
     color: rgb(68, 68, 70);
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: sans-serif;
     font-size: 22px;
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
-    top: 11%;
-    left: 0.8%;
+    top: 11.5%;
+    left: 0.9%;
 }
 
 .collapse-color {
@@ -59,7 +59,8 @@ input {
 
 .op {
     position: relative;
-    margin-top: 11%;
+    padding-top: 11%;
+    padding-bottom: 5%;              
     left: 3%;
     width: 100%;
 }
@@ -71,11 +72,10 @@ input {
     }
 
 .paginacao-op {
+    position: fixed;
     z-index: 2;
     text-align: center;
-    width: 66.3%;
-    left: 15%;
-    background-color: white;
+    width: 100%;
 }
 
 .cadForm {
