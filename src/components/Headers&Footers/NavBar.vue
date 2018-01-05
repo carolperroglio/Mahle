@@ -37,8 +37,9 @@
     <footer>
         <div class="footer-text"> Sistema Onyx V1.0</div>
     </footer>
-        <!-- <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/> -->
-        <!-- <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/> -->
+        <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/>
+        <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
+
         <!--                        -->
         <!--                        -->
         <!--   Menu lateral Novo    -->
