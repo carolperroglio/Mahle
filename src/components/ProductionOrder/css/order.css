@@ -59,9 +59,9 @@ input {
 
 .op {
     position: relative;
-    padding-top: 11%;
+    padding-top: 13%;
     padding-bottom: 5%;              
-    left: 3%;
+    left: 1%;
     width: 100%;
 }
 
@@ -76,6 +76,7 @@ input {
     z-index: 2;
     text-align: center;
     width: 100%;
+    bottom: 5%;
 }
 
 .cadForm {

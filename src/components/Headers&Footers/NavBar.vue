@@ -10,7 +10,7 @@
             <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
             <ul class="nav nav-pills nav-justified bg-dark">
                 <li class="nav-item-cab col-md-3">
-                    <a class="nav-link bg-dark active" router-link to="/stateManagement">OP Status Management </a>
+                    <a class="nav-link active bg-dark" router-link to="/stateManagement">OP Status Management </a>
                 </li> 
                 <li class="nav-item-cab col-md-2">
                     <a class="nav-link bg-dark active" router-link to="/">Início</a>
@@ -46,7 +46,7 @@
         <!--   Menu lateral Novo    -->
         <!--                        -->
         <!--                        -->             
-        <div class="container-fluid fixed-top"> 
+        <div class="container-fluid fixed-top menu-btn"> 
             <div class="row">
                 <div class="col-xs-1 p-l-0 p-r-0 collapse in" id="sidebar">
                     <div class="list-group panel">
