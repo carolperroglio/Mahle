@@ -7,8 +7,8 @@
             <!--                                  -->
     <div class="container fluid">  
         <nav class="header fixed-top">
-            <!--    <img src="./../../assets/imagens/onyx3.png" class="logo-system"/> -->
-            <ul class="nav nav-pills bg-dark">
+            <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
+            <ul class="nav nav-pills nav-justified bg-dark">
                 <li class="nav-item-cab col-md-3">
                     <a class="nav-link bg-dark active" router-link to="/stateManagement">OP Status Management </a>
                 </li> 
