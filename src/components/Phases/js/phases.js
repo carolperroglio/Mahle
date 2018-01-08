@@ -14,6 +14,7 @@ export default {
             url: ipServer + '8003/api/',
             url2: ipServer + '8001/api/',
             urlProducts: ipServer + '8003/api/products?&fieldFilter=productName&fieldValue=',
+            urlRecipeSearch: 'http://brsbap01:8001/api/tags?fieldFilter=tagName&fieldValue=',
             urlRecipes: ipServer + '8003/api/recipes/',
             urlGatewayRecipes: ipServer + '8005/gateway/recipes/',
             carregando: false,
@@ -39,7 +40,7 @@ export default {
             name: '',
             tagName: '',
             editarActivate: false,
-            phaseOk: false
+            expand: []
         }
     },
     filters: {
@@ -67,14 +68,24 @@ export default {
         /*               */
         /*               */
         /*****************/
-        getGatewayRecipe: function(id) {
-            id = this.$route.params.id;
+        changeView: function(pha) {
+            if (pha.expand == false) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        getGatewayRecipe: function() {
+            var id = this.$route.params.id;
             if (id != 0) {
                 this.carregando = true;
                 axios.get(this.urlGatewayRecipes + id).then(response => {
                     this.recipe = response.data;
                     this.phases = response.data.phases;
-                    this.phaseOk = true;
+                    for (var i = 0; i < this.phases.length; i++) {
+                        this.expand[i] = false;
+                        console.log(this.expand[i]);
+                    }
                     this.recipeCadastrada = true;
                     this.carregando = false;
                     this.editarActivate = true;
@@ -83,7 +94,6 @@ export default {
                     this.carregando = false;
                 })
             }
-
         },
         createRecipe(recipe) {
             this.mensagemSuc = '';
@@ -160,7 +170,6 @@ export default {
             this.mensagemSuc = '';
             this.carregando = true;
             axios.post(this.url + "phases/", phase).then((response) => {
-                phaseOk = true;
                 console.log(response.data);
                 phase = response.data;
                 this.relacionaFase(phase);
@@ -302,8 +311,8 @@ export default {
             return array;
         }
     },
-    beforeMount() {
+    mounted() {
         // if()
-        this.getGatewayRecipe(this.idRecipe);
+        this.getGatewayRecipe();
     }
 }

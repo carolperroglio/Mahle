@@ -6,11 +6,12 @@ function paginacao(response, este) {
     este.pageAtual = este.startat / 20;
     este.total = response.data.total;
     let fim = Math.ceil(este.total / 20);
+    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
     if (este.pageAtual > 11) {
-        for (var i = this.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
+        for (var i = este.pageAtual - 5; i < num; i++)
             este.pages[i] = i;
     } else {
-        for (var i = 0; i < fim; i++)
+        for (var i = 0; i < num; i++)
             este.pages[i] = i;
     }
 }

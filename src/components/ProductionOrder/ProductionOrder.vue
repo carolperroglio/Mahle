@@ -63,20 +63,23 @@
                             </div>
                             <div class="form-group row">
                                 <label for="opType" class="col-sm-3 col-form-label">Receita</label>
-                                <div class="col-sm-5">
+                                <input @keypress.capture="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName" placeholder="Ex: Receita1" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</a>
+                                </div>
+                                <!-- <div class="col-sm-5">
                                     <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="recipeSelected">
                                         <option value="" selected disabled>Selecione uma receita</option>
                                         <option v-for="recipe in recipeArray" v-bind:value="recipe">
                                             {{ recipe.recipeName }}
                                         </option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="col-sm-2">
                                     <button class="btn btn-outline-success btn-sm" @click="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <!--{{ recipeSelected }}-->
                             </div>
                             <!--  Acordion que mostra qual     -->
                             <!--  receita foi selecionada      -->
@@ -260,8 +263,7 @@
                                     <font color="#9BA6A5">Nome Produto: </font>
                                 </b>{{op.recipe.recipeProduct.product.productName}}
                             </label>
-
-                            </br>
+                            <br>
 
                             <!--Botão para procurar as fases de uma determinada op-->
                             <!--<button type="button" class="btn btn-outline-info btn-sm" data-toggle="collapse" :data-target="getIdPhase(index)">Fases</button>-->
@@ -292,5 +294,5 @@
 <script src="./js/order.js">
 </script>
 <style>
-@import url('./css/order.css');
+@import url("./css/order.css");
 </style>

@@ -7,24 +7,25 @@ function paginacao(response, este) {
     este.pageAtual = este.startat / 20;
     este.total = response.data.total;
     let fim = Math.ceil(este.total / 20);
+    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
     if (este.pageAtual > 11) {
-        for (var i = this.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
+        for (var i = este.pageAtual - 5; i < num; i++)
             este.pages[i] = i;
     } else {
-        for (var i = 0; i < fim; i++)
+        for (var i = 0; i < num; i++)
             este.pages[i] = i;
     }
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://192.168.11.80:';
+var ipServer = 'http://brsbap01:';
 
 export default {
     name: 'ProductionOrder',
     data() {
         return {
-            // ipServer: 'http://192.168.11.160:',
             opId: '',
+            urlRecipeSearch: ipServer + '8003/api/recipes?fieldFilter=recipeName&fieldValue=',
             urlRecipe: ipServer + '8003/api/recipes/',
             urlOpType: ipServer + '8005/api/productionordertypes/',
             urlPhases: ipServer + '8003/api/phases/',
@@ -58,10 +59,28 @@ export default {
             order: '',
             fieldFilter: '',
             fieldValue: '',
-            id: ''
+            id: '',
+            recipeName: ''
         }
     },
     methods: {
+        /*****************/
+        /*               */
+        /*Busca OP       */
+        /*               */
+        /*****************/
+        getResults(url, name) {
+            var array = [];
+            if (name.length < 3) { return; }
+            axios.get(url + name, this.config).then((response) => {
+                response.data.values.forEach((pro) => {
+                    array.push(pro);
+                });
+            }, (error) => {
+                console.log(error);
+            })
+            return array;
+        },
         // Make a request for a user with a given ID
         buscar(id = "") {
             this.carregando = true;
@@ -70,7 +89,7 @@ export default {
             };
             this.opArray = [];
             console.log(this.order, this.orderField)
-            axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+            axios.get(this.urlOp + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                 if (!response.data.values && response.data.productId)
                     this.opArray[0] = response.data;
                 else {
@@ -213,6 +232,7 @@ export default {
         }
     },
     beforeMount() {
-        this.getOp();
+        // this.getOp();
+        this.buscar();
     },
 }
