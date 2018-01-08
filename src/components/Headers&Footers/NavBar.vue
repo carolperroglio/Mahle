@@ -37,6 +37,7 @@
     <footer>
         <div class="footer-text"> Sistema Onyx V1.0</div>
     </footer>
+
         <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/>
         <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
 
@@ -80,13 +81,18 @@
                             <span class="hidden-sm-down">  PRODUTOS</span>
                         </router-link>         
                         <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
+
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">    FERRAMENTAS</span>
+
                         </router-link>
                         <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   ORDEM DE PRODUÇÃO</span>
                         </router-link>
                         <router-link to="/historianProduction" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-building-o"></i> <span class="hidden-sm-down">   APONTAMENTOS</span>
+                            <i class="fa fa-database"></i> <span class="hidden-sm-down">   APONTAMENTOS</span>
+                        </router-link>
+                        <router-link to="/associateTool" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   ASSOCIAÇÃO DE FERRAMENTAS</span>
                         </router-link>
                         <!--<router-link to="/stateManagement" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP Status Management</span>

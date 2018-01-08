@@ -1,0 +1,65 @@
+.nav-OP{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    top: 20%;        
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 15%;
+    background-color: white;
+    width: 80%;
+}
+
+.btn-warning{
+    color: white;
+
+}
+
+.card-body{
+    margin-left: 0.3%;
+    padding-top: 0.5%;
+    }
+
+.tools{
+    position: relative;
+    margin-top: 22%;           
+    left: 8%;
+    width: 90%;       
+}
+
+.nav-item{
+    margin-left: 3%;
+    margin-right: 3%;
+    }
+
+/*Listagem de orderHistorian*/
+
+.icon-right{
+    position: relative;
+    float: right;
+}
+
+input{
+    position: relative !important;
+}
+
+.orderHistorian{
+    position: relative;
+    margin-top: 22%;           
+    left: 15%;
+    width: 80%;       
+}
+
+
+.ls{
+    width: 20%;
+}
+
+.ls2{
+    width: 23%;
+}
+
+@media screen and (max-width : 801px){
+    .orderHistorian{ 
+        margin-top: 30%; 
+    }       
+} 
