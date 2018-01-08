@@ -8,11 +8,14 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-         <div class="fixed-top nav-OP">
+         <div class="fixed-top nav-HP">
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item">
+            <h1 class="title-page"> Apontamentos de OP </h1>
+                <li class="nav-item col-sm-1.5">
                     <label class="fm mr-sm-2">Número da OP: </label>   
-                     <div class="dropdown">   
+                </li>
+                <li class="nav-item col-sm-1.5"> 
+                    <div class="dropdown">   
                             <input @keyup="POs=getResults(op)" v-model="op" placeholder="número da ordem" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click.stop.prevent="productionOrder.productionOrderNumber=p.productionOrderNumber; 
@@ -22,10 +25,10 @@
                             </div>                            
                         </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm mr-sm-12">
                     <div class="">
-                        <button type="button" class="btn btn-outline-primary btn-sm col-md-12" @click.stop.prevent="listaOp()">
+                        <button type="button" class="btn btn-primary btn-sm col-md-12" @click.stop.prevent="listaOp()">
                             Selecionar
                         </button>
                              
@@ -37,8 +40,8 @@
         </div>
 
 
-        <div id="order" class="row conteudo" style="display: none">
-            <div class="orderHistorian col-8">
+        <div id="order" class="row" style="display: none">
+            <div class="orderHistorian col-11">
                     <div class="card">
                         <div class="card-header">
                             <b><label class="ls">
@@ -47,24 +50,26 @@
                                 <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>&nbsp;&nbsp;&nbsp;
                             </b>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" id="tipo">
                             <div class="row">
-                            <div class="col">
+                            <div class="col-1">
                             <label>
                                 <b><font color="#9BA6A5">Tipo:</font></b>
                             </label> 
+                            </div>
+                            <div class="col-2">
                                 <select required v-model="ordem.type" class="form-control form-control-sm-">
                                     <option value="input">Input</option>
                                     <option value="output">Output</option>
                                 </select>
                             </div>   
-                            <div class="col">
-                            <button type="button" class="btn btn-outline-success btn-sm" @click.stop.prevent="getOrderProducts()">
+                            <div class="col-2">
+                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="getOrderProducts()">
                             Registrar Produto
                             </button>
                             </div>
-                            <div class="col">
-                            <button type="button" class="btn btn-outline-success btn-sm" @click.stop.prevent="listar()">
+                            <div class="col-2">
+                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="listar()">
                             Listar Produtos
                             </button>
                             </div>
