@@ -40,7 +40,7 @@
         </div>
 
 
-        <div id="order" class="row" style="display: none">
+        <div style="display: none">
             <div class="orderHistorian col-11">
                     <div class="card">
                         <div class="card-header">
@@ -64,7 +64,7 @@
                                 </select>
                             </div>   
                             <div class="col-2">
-                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="getOrderProducts()">
+                            <button type="button" class="btn btn-primary btn-sm" @click.stop.prevent="getOrderProducts()">
                             Registrar Produto
                             </button>
                             </div>
@@ -83,14 +83,15 @@
                                         </div>
                                         <div class="card-body">
                                         <div v-for="(o, index) in orderHistorian.productsInput" v-bind:key="index">
+                                            <label class="ls">
+                                                <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;
+                                            <label class="ls">
+                                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
+                                            <label class="ls">
+                                                <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;
                                             <label class="ls2">
-                                                <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;&nbsp;&nbsp;
-                                            <label class="ls2">
-                                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;&nbsp;&nbsp;
-                                            <label class="ls2">
-                                                <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;&nbsp;&nbsp;
-                                            <label class="ls2">
-                                                <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;&nbsp;&nbsp;
+                                                <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
+                                                
                                         </div>
                                         </div>
                                     </div>
@@ -100,14 +101,14 @@
                                         </div>
                                         <div class="card-body">
                                             <div v-for="(o, index) in orderHistorian.productsOutput" v-bind:key="index">
+                                            <label class="ls">
+                                                <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;
+                                            <label class="ls">
+                                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
+                                            <label class="ls">
+                                                <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;
                                             <label class="ls2">
-                                                <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;&nbsp;&nbsp;
-                                            <label class="ls2">
-                                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;&nbsp;&nbsp;
-                                            <label class="ls2">
-                                                <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;&nbsp;&nbsp;
-                                            <label class="ls2">
-                                                <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;&nbsp;&nbsp;
+                                                <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
                                         </div>
                                     </div>
                                
