@@ -29,6 +29,11 @@
 
 }
 
+#dropdownMenuButton{
+    background-color: white;
+    color: black;
+}
+
 /*Listagem de orderHistorian*/
 
 .icon-right{

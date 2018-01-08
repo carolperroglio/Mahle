@@ -9,16 +9,21 @@ export default {
         return { 
             carregando: false,    
             Tools: [],
+            Groups: [],
             Things: [],
             AssocTool: [],
+            AssocThing: [],
             tool: '',
             toolName: '',
             toolId: '',
             thingId: '',
+            typeId: '',
+            groupId: '',
             mensagem:'',
             mensagemSuc:'',
             fieldFilter: '',
             fieldValue: '' ,
+            group: false,
             thing: false,
             lista: false,
             url:'http://brsbap01:8004/',
@@ -39,29 +44,61 @@ export default {
             })            
                 return array;
             },
-            openSelectThings(){
-                this.thing=true;               
-                axios.get(this.url+'gateway/thinggroups/'+this.toolId).then((response)=>{   
-                this.Things = response.data.things;
+            openSelectGroup(){
+                this.group=true;               
+                axios.get(this.url+'api/tooltype/'+this.typeId).then((response)=>{   
+                this.Groups = response.data.thingGroups;
+                console.log(this.Groups);
             },(error)=>{
                     console.log(error);
                 })            
 
             },
-            assocTool(){
-                this.lista = true;
+            openSelectThings(){
+                this.thing=true;               
+                axios.get(this.url+'gateway/thinggroups/'+this.groupId).then((response)=>{   
+                this.Things = response.data.things;
+                console.log(this.Things);
+            },(error)=>{
+                    console.log(error);
+                })            
+
+            },
+            getAssoc(){
                 axios.get(this.url+'api/tool/AssociateTool?thingId='+this.thingId+'&toolid='+this.toolId).then((response)=>{
                     this.mensagemSuc = 'Produto apontado com sucesso.'; 
                     this.AssocTool = response.data;
                     console.log(this.AssocTool);
-                    console.log(this.AssocTool.name);
-                    console.log(this.AssocTool.currentThing);
-                    console.log(this.AssocTool.currentThing.thingName)
+                    switch(response.data.status){
+                        case "available":
+                        this.AssocTool.status = "Disponível";
+                        break;
+                        case "in_use":                    
+                        this.AssocTool.status = "Em uso";
+                        break;
+                        case "in_maintenance":
+                        this.AssocTool.status = "Em manutenção";
+                        break;
+                        case "not_available":
+                        this.AssocTool.status = "Indisponível";
+                        break;
+                        case "inactive":
+                        this.AssocTool.status = "Inativo";
+                        break;
+                        case "active":
+                        this.AssocTool.status = "Disponível";
+                        break;
+                    }
+                    this.AssocThing = response.data.currentThing;
+                    console.log(this.AssocTool);
                 },(r)=>{                
                     this.mensagem = 'Erro no server ' + r;                
                     this.carregando = false;
                 })
 
+            },
+            assocTool(){
+                this.lista = true;
             }
     }
 };
