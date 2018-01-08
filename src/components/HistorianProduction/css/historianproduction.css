@@ -42,6 +42,7 @@ input{
 
 .orderHistorian{
     position: relative;
+    padding-top: 15%;
     padding-bottom: 5%;              
     left: 1%;
     width: 100%;
@@ -67,7 +68,7 @@ input{
 }
 
 .ls2{
-    width: 23%;
+    width: 30%;
 }
 
 @media screen and (max-width : 801px){
