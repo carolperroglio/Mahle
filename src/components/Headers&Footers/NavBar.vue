@@ -94,6 +94,9 @@
                         <router-link to="/associateTool" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   ASSOCIAÇÃO DE FERRAMENTAS</span>
                         </router-link>
+                        <router-link to="/toolType" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   TIPO DE FERRAMENTAS</span>
+                        </router-link>
                         <!--<router-link to="/stateManagement" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP Status Management</span>
                         </router-link>-->          
