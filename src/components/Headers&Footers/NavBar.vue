@@ -67,15 +67,7 @@
                         <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar">
                             <i class="fa fa-book"></i> 
                             <span class="hidden-sm-down">  RECEITA</span>
-                        </router-link>
-                        <!-- <div class="collapse" id="menu3">
-                            <router-link to="/phases" class="list-group-item" data-parent="#menu3">Cadastrar Receita</router-link>
-                            <router-link to="/listRecipes" class="list-group-item" data-parent="#menu3">Relatório de Receita</router-link>
-                             <a href="#" class="list-group-item" data-parent="#menu3">Relatório de Receita</a>
-                        </div>  
-                        <router-link to="/listRecipes" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-book"></i> <span class="hidden-sm-down">   RECEITAS</span>
-                        </router-link> -->         
+                        </router-link>        
                         <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-balance-scale"></i> 
                             <span class="hidden-sm-down">  PRODUTOS</span>
@@ -94,12 +86,12 @@
                         <router-link to="/associateTool" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   ASSOCIAÇÃO DE FERRAMENTAS</span>
                         </router-link>
+                        <router-link to="/stateTransitionHistory" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-file-o"></i> <span class="hidden-sm-down">    HISTÓRICOS</span>
+                        </router-link>          
                         <router-link to="/toolType" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   TIPO DE FERRAMENTAS</span>
                         </router-link>
-                        <!--<router-link to="/stateManagement" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   OP Status Management</span>
-                        </router-link>-->          
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">

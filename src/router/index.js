@@ -6,12 +6,13 @@ import Phases from '@/components/Phases/Phases'
 import ProductionOrder from '@/components/ProductionOrder/ProductionOrder'
 import ToolCreate from '@/components/Tools/ToolCreate'
 import HistorianProduction from '@/components/HistorianProduction/HistorianProduction'
-import historianProduction from '../components/HistorianProduction/js/historianProduction'
+import StateTransitionHistory from '@/components/StateTransitionHistory/StateTransitionHistory'
 import StateManagement from '@/components/OPStateManagement/StateManagement'
 import ListRecipes from '@/components/Phases/ListRecipes'
 import AssociateTool from '@/components/AssociateTool/AssociateTool'
 import ToolType from '@/components/ToolType/ToolType'
 // import Teste from '@/components/Teste/Teste'
+
 Vue.use(Router)
 
 export default new Router({
@@ -65,9 +66,13 @@ export default new Router({
             component: AssociateTool
         },
         {
+            path: '/stateTransitionHistory',
+            name: 'StateTransitionHistory',
+            component: StateTransitionHistory
+        },
             path: '/toolType',
             name: 'ToolType',
             component: ToolType
-        },
+        }
     ]
 })
