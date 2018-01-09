@@ -96,6 +96,7 @@
                         </div>
                 </div>      
             </div>
+            <br>
              <div v-show="lista2" class="card">
                     <div class="card-header">
                         <b>Thing Associada</b>
