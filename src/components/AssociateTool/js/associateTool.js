@@ -121,7 +121,7 @@ export default {
                     this.lista2 = true;
                     this.mensagemSuc = 'Ferramenta associada com sucesso.';
                 },(r)=>{                
-                    this.mensagem = r;                
+                    this.mensagem = r.response.data;      
                     this.carregando = false;
                 })
 

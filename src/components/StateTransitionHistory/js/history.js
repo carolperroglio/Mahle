@@ -13,7 +13,6 @@ export default {
         return { 
             date: new Date(),
             datef: new Date(),
-            oi: new Date(),
             config: {
             format: 'MM DD YYYY',
             useCurrent: false,
@@ -62,17 +61,26 @@ export default {
             },
             getHistory(){   
                 var Ini = this.date.toString()+' '+this.timeIni.HH+':'+this.timeIni.mm;
-                var dateIni = new Date(Ini);      
-                var ticksI = ((dateIni.getTime()*1000) + 621355968000000000);
+                var dateIni = new Date(Ini);  
+                var ticksI = ((dateIni.getTime() * 1000) + 621355968000000000)- (dateIni.getTimezoneOffset() * 600000000);
                 var Fim = this.date.toString()+' '+this.timeFim.HH+':'+this.timeFim.mm;
                 var dateFim = new Date(Fim);
-                var ticksF = ((dateFim.getTime()*1000) + 621355968000000000);
+                var ticksF = ((dateFim.getTime() * 1000) + 621355968000000000);
                 console.log('I: '+ticksI);
                 console.log('F: '+ticksF);
-                axios.get(this.url+'api/tool/StateTransitionHistory/'+this.toolId+'/&').then((response)=>{                                           
+                /*axios.get(this.url+'api/tool/StateTransitionHistory/'+this.toolId+'?&from='+this.ticksI+'&to='+this.ticksF).then((response)=>{                                           
                     this.history = response.data;
+                    console.log(response.data);
                 },(error)=>{
-                    console.log(error);
+                    console.log(error);                    
+                    console.log(response.data);
+                })*/
+                axios.get(this.url+'api/tool/StateTransitionHistory/'+this.toolId+'?&from='+'636511056858281249'+'&to='+'636511056858281249').then((response)=>{                                           
+                    this.history = response.data;
+                    console.log(response.data);
+                },(error)=>{
+                    console.log(error);                    
+                    console.log(response.data);
                 })
             },
     }
