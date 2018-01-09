@@ -9,7 +9,8 @@
         <!--                       -->
         <!--        modal          -->
         <div class="progress fixed-top" v-if="carregando">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+            </div>
         </div>
 
         <!--               -->
@@ -23,23 +24,23 @@
             <!-- {{ 'idRecipe' + $route.params.id }} -->
             <li class="title-recipe">Gerenciamento de Receita</li>
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item">
-                    <form class="form-row title-cad">
+                <li class="">
+                    <form class="form-row title-cad col-md-12">
                         <label class="">
-                            <b>Nome da receita: </b>
+                            <b>Nome da receita:</b>
                         </label>
                         <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
                     </form>
                 </li>
-                <li class="nav-item">
-                    <form class="form-row title-cad">
+                <li class="">
+                    <form class="form-row title-cad col-md-12">
                         <label class="">
-                            <b>Código: </b>
+                            <b>Código:</b>
                         </label>
-                        <input class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita" />
+                        <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita">
                     </form>
                 </li>
-                <li class="nav-item"> 
+                <li class=""> 
                     <br><br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">Enviar
                     </button>
                  </li>
@@ -58,8 +59,10 @@
                         
                     </div>
                 </li>
-                <li class="nav-phase" v-if="json.stringify(recipeProduct) !== '{}'">
-                        <br><b> 
+            
+         
+                <li class="nav-phase col-md-3" v-if="json.stringify(recipeProduct) !== '{}'">
+                        <b> 
                     <font color="#9BA6A5">
                         Produto:
                     </font></b>
@@ -73,7 +76,8 @@
                     <br><button type="button" class="btn btn-danger btn-sm" style="font-size:12px;" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);">  Remover Produto</button>
                 </li>
             </ul>
-        </nav>
+            </nav>
+        
 
         <!--                       -->
         <!--                       -->
@@ -83,12 +87,13 @@
         <!--                       -->
         <!--                       -->
     <div class="container-fluid card-header-phase" v-show="recipeCadastrada">
-        <br><div class="card card-margin2">
+        <br>
+        <div class="card card-margin2">
                 <h3> 
                     <b>Fases da receita:</b>  
                 </h3>
                     <h2>
-                        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="" aria-hidden="true">
+                        <br><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="" aria-hidden="true">
                          Adicionar fase
                         </button>
                     </h2>
@@ -99,7 +104,7 @@
                      
         </div>
                 <div class="card-body">
-                    <div v-for="(pha, index) in phases" class="phase">
+                    <div v-for="(pha, index) in phases" class="phase" :key="index">
                         <div class="card-header card-header-recipe">
                             <h6><b>
                                 {{index+1}}° Fase
@@ -114,17 +119,14 @@
                             <b> Id da fase: </b> {{pha.phaseId}} 
                             </label>-->
                             <span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products">
-                                <button type="button" class="btn btn-secondary btn-sm col-md-1.5 col-md-1.5">
+                                <button type="button" class="btn btn-secondary btn-sm col-sm-1.5">
                                     <b> Expandir </b> {{ pha.expand }}
                                 </button>
                                 </span>
-                                <i class="btn btn-warning btn-edit btn-sm col-md-1" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
+                                <i class="btn btn-warning btn-edit btn-sm col-sm-1.2" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
                                         Editar Fase
                                  </i>   
                                      
-                            </button>
-                            
-                           
                                                         
                         </div>
                         <!-- v-if para verificar se o usuário está editando ou cadastrando uma fase -->
@@ -176,6 +178,8 @@
                     </div>
                 </div>
             </div>
+            
+            
         
         <!--                       -->
         <!--                       -->

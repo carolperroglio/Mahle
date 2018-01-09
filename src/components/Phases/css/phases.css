@@ -1,10 +1,13 @@
+/*Ícone editar do relatório de Receitas*/
 i {
     cursor: pointer;
     margin-left: 5%;
 }
-
 .pointer {
     cursor: pointer;
+}
+.card-header{
+    padding: 1%;
 }
 
 
@@ -23,26 +26,30 @@ i {
     height: 18%;
 }
 
-
-
+/*Botões superiores do menu de Cadastro de Receitas*/
 .nav-recipe ul  {
-    margin-left: 1%;
     display: inline;
     list-style: none;
     margin-right: 1%;
 }
-
 li{
     margin-left: 1%;   
 }
-
 .nav-item{
-    width: 11%;
+    width :10%;
+}
+.nav-phase li{
+    list-style: none;
+    margin-left: 75%;
+    margin-top: 1%;
+    width: 40%;
+   
 }
 
+
+/*Título menu superior da tela de receita*/
 .title-recipe{
     list-style: none;
-    margin-top: 0.2%;
     font-family: sans-serif;
     font-size: 22px;
     color: rgb(68, 68, 70);
@@ -50,36 +57,46 @@ li{
     margin-left: 1.5%;
 }
 
+/*Título dos botões de input do menu superior da tela de receita*/
 .title-cad{
     font-size: 14px;
-    margin-top: 10%;
     font-family: sans-serif;
+    margin-top: 7%;
 }
-
 #addPhase {
     cursor: pointer;
     display: inline;
 }
-
 .nav-recipe ul li div {
-    border: 0px solid rgba(250, 20, 35, 0.1);
-    display: inline;
-    border-radius: 5px;
-    box-sizing: border-box;
-    cursor: pointer;
-    text-decoration: none;
-}
+    display: inline; 
+    box-sizing: border-box; 
+    cursor: pointer; 
+    text-decoration: none; 
+} 
 
-.nav-phase{ 
-    list-style: none;
-    margin-left: 70%;
-    padding-top: 0.21%;
-    position: fixed;
+/*Título dos botões de edit-recipe e cadastrar produto da receita*/
+.edit-text{
+    font-size: 13px;
     font-family: sans-serif;
-    font-size: 15px;
+    color: #524c4c;
 }
 
 /*Header Fases da Receita - AddFase*/
+.card-header-recipe{
+    padding-top: 0.5%;
+    padding-bottom: 0.1%;
+}
+h2{
+    margin-left: 0.2%;
+}
+h3 {
+    position: fixed;
+    display: inline;
+    font-size: 18px;
+    font-family: sans-serif;
+    color: rgb(61, 56, 56);
+    margin-left: 0.1%;
+}
 .card-margin2 {
     padding-top: 1%;
     padding-left: 1%;
@@ -90,107 +107,54 @@ li{
     width: 100%;
 }
 
-.ls4 {
-    width: 40%;
-    padding: 0.1%;
-    font-family: sans-serif;
-    font-size: 14px;
-}
-
-.phases{
-    position: relative;
-    width: 100%;
-    padding-top: 15%;
-    margin-left: 3%;
-    padding-right: 5%;
-    padding-bottom: 9%;
-}
-
-.cabecalhoPhase {
-    display: inline;
-    box-sizing: border-box;
-    padding: 5%;
-    border: 0.1rem solid rgba(0, 0, 0, 0.1);
-    border-radius: 5rem;
-    background-color: rgb(146, 152, 170)!important;
-    box-shadow: 0 0 10px #000000;
-}
-
-.conteudo {
-    margin-top: 10% !important;
-    position: relative;
-    left: 15%;
-    width: 80%;
-    box-sizing: border-box;
-}
-
-h2{
-    padding-left: 90%;
-}
-
-h3 {
-    position: fixed;
-    display: inline;
-    font-size: 18px;
-    font-family: sans-serif;
-    color: rgb(61, 56, 56);
-    margin-left: 0.1%;
-}
-
-h5{
-    padding-left: 2%;
-}
-
+/*Título do número das fases*/
 h6{
-    font-size: 16px;
+    font-size: 20px;
     font-family: sans-serif;
     color: rgb(37, 107, 199);
 }
 
-.fase2{
-    left: 70%;
-}
-
+/*Box das Fases*/
 .phase {
-    border-radius: 7px;
+    border-radius: 15px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.137);
 }
-
 #show-phase-products {
     cursor: pointer;
     margin-left: 2%;
 }
-
 .itens-fase {
     position: relative;
     width: 50%;
     box-sizing: content-box;
     display: inline-block;
 }
-
-.card-header-recipe{
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
-}
-
-.itens-fase-rigth {
-    left: 51%;
-}
-
-.edit-text{
-    font-size: 13px;
+.ls5{
+    width: 20%;
+    padding-bottom: 1%;
     font-family: sans-serif;
-    color: #524c4c;
+    font-size: 14px;   
 }
 
-.container-itens-fase {
+
+/*Relatório de Receitas - Configuração da listagem*/
+.ls4 {
+    width: 40%;
+    padding-right: 1%;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.phases{
     position: relative;
     width: 100%;
-    padding: 2% 0% 2% 0%;
-    background-color: #dcdcdc;
+    padding-top: 15%;
+    margin-left: 3%;
+    padding-right: 15%;
+    padding-bottom: 9%;
 }
 
+/*Barra - Progress*/
 .progress {
     position: absolute;
     top: 30% !important;
@@ -198,6 +162,7 @@ h6{
     box-sizing: border-box;
 }
 
+/*Paginação*/
 .paginacao-phase{
     position: fixed;
     z-index: 2;
@@ -206,12 +171,43 @@ h6{
     bottom: 5%;
 }
 
-.ls5{
-    width: 38%;
-    padding-bottom: 1%;
-    font-family: sans-serif;
-    font-size: 14px;   
-}
+
+/* .container-itens-fase {
+    position: relative;
+    width: 100%;
+    padding: 2% 0% 2% 0%;
+    background-color: #dcdcdc;
+} */
+
+/* .cabecalhoPhase {
+    display: inline;
+    box-sizing: border-box;
+    padding: 5%;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 5rem;
+    background-color: rgb(146, 152, 170)!important;
+    box-shadow: 0 0 10px #000000;
+} */
+
+/* .conteudo {
+    margin-top: 10% !important;
+    position: relative;
+    left: 15%;
+    width: 80%;
+    box-sizing: border-box;
+} */
+
+/* h5{
+    padding-left: 50%;
+} */
+
+/* .fase2{
+    left: 10%;
+} */
+
+/* .itens-fase-rigth {
+    left: 10%;
+} */
 
 
 @media only screen and (max-width: 801px) {
@@ -226,4 +222,73 @@ h6{
     .cadForm {
         margin-top: 30%;
     }
+/*Menu de cadastro da receita*/
+.nav-recipe {
+    top: 14%;
+    font-size: 9pt;    
+    background-color: white;
+    height: 20%;
+    }
+/*Botões superiores do menu de Cadastro de Receitas*/
+.nav-item{
+    width: 4%;
+}
+/*Título menu superior da tela de receita*/
+.title-recipe{
+    font-size: 16px;
+    margin-top: 1.1%;
+}
+    /*Título dos botões de input do menu superior da tela de receita*/
+.title-cad{
+    font-size: 13px;
+    margin-top: 5%;
+}
+/*Título dos botões de edit-recipe e cadastrar produto da receita*/
+.edit-text{
+    font-size: 11px;
+}
+/*Header Fases da Receita - AddFase*/
+.card-header-phase{
+    margin-top: 25%;
+}
+h2{
+    padding-left: 82%;
+}
+.card-header-recipe{
+    margin-top: 0.1%;
+    padding-bottom: 0.1%;
+    
+}
+
+h3 {
+    position: fixed;
+    display: inline;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+/*Título do número das fases*/
+h6{
+    font-size: 14px;
+}
+/*Box das Fases*/
+.ls5{
+    width: 30%;
+    font-size: 13px;  
+    }
+
+    /*Relatório de Receitas - Configuração da listagem*/
+.ls4 {
+    padding-right: 1%;
+    font-size: 12px;
+}
+.phases{
+    padding-top: 28%;
+    padding-right: 4%;
+    padding-bottom: 10%;
+}
+.card-header{
+    padding: 0.2%;
+}
+
 }
