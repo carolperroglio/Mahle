@@ -70,6 +70,7 @@ export default new Router({
             name: 'StateTransitionHistory',
             component: StateTransitionHistory
         },
+        {
             path: '/toolType',
             name: 'ToolType',
             component: ToolType
