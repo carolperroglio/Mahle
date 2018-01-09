@@ -89,6 +89,9 @@
                         <router-link to="/stateTransitionHistory" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-file-o"></i> <span class="hidden-sm-down">    HISTÓRICOS</span>
                         </router-link>          
+                        <router-link to="/toolType" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   TIPO DE FERRAMENTAS</span>
+                        </router-link>
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">
