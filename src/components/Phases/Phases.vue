@@ -21,13 +21,14 @@
         <!--               -->
         <nav class="fixed-top nav-recipe">
             <!-- {{ 'idRecipe' + $route.params.id }} -->
+            <li class="title-recipe">Gerenciamento de Receita</li>
             <ul class="nav d-flex align-items-center">
-                <li class="nav-recipe-2">
+                <li class="nav-item">
                     <form class="form-row title-cad">
                         <label class="">
                             <b>Nome da receita: </b>
                         </label>
-                        <input type="text" class="form-control form-control-sm col-md-12" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
+                        <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
                     </form>
                 </li>
                 <li class="nav-item">
@@ -39,7 +40,7 @@
                     </form>
                 </li>
                 <li class="nav-item"> 
-                    <br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">Enviar
+                    <br><br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">Enviar
                     </button>
                  </li>
                <li class="nav-item">
@@ -52,14 +53,22 @@
                 <li class="nav-item col-md-2">
                     <div data-toggle="modal" v-if="!(carregando || !recipeCadastrada)" data-target="#modalPro">
                        <br>  <i class="fa fa-plus" aria-hidden="true" style="font-size:22px; cursor:pointer"> 
-                            <div class="edit-text">   <b> Cadastrar produto</b></div>
+                            <div class="edit-text">   <b> Cadastrar produto da Receita</b></div>
                         </i>
                         
                     </div>
                 </li>
-                <li class="nav-phase col-md-12" v-if="json.stringify(recipeProduct) !== '{}'">
-                    <br><b> <font color="#9BA6A5">Produto:</font></b> {{recipeProduct.productName}}
-                    <br><b>Quantidade do produto:</b> {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} 
+                <li class="nav-phase" v-if="json.stringify(recipeProduct) !== '{}'">
+                        <br><b> 
+                    <font color="#9BA6A5">
+                        Produto:
+                    </font></b>
+                         {{recipeProduct.productName}}
+                        <br><b>
+                    <font color="#9BA6A5">
+                        Quantidade do produto:
+                    </font></b> 
+                        {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} 
                      <!--<br>Tipo do produto: {{recipeProductDisplay.phaseProductType}}-->
                     <br><button type="button" class="btn btn-danger btn-sm" style="font-size:12px;" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);">  Remover Produto</button>
                 </li>
@@ -73,46 +82,57 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <div class="container-fluid card-header-phase" v-show="recipeCadastrada">
-            <br><div class="card card-margin2">
-                <h5 class="">
-                    <h3> <b>
-                        Fases da receita : 
-                        </b>  
-                    </h3>
-                    <h5>
-                       <br><br> <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="" aria-hidden="true">
-                        Adicionar fase
+    <div class="container-fluid card-header-phase" v-show="recipeCadastrada">
+        <br><div class="card card-margin2">
+                <h3> 
+                    <b>Fases da receita:</b>  
+                </h3>
+                    <h2>
+                        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="" aria-hidden="true">
+                         Adicionar fase
                         </button>
-                    </h5>
-                    <!-- <div data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
-                                                                                                    <i class="fa fa-plus"></i>
-                                                                                                    <b> Adicionar fase</b>
-                                                                                                </div> -->
-                </h5>
-            </div>
+                    </h2>
+                <!-- <div data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
+                                                                                                <i class="fa fa-plus"></i>
+                                                                                                <b> Adicionar fase</b>
+                                                                                           </div> -->
+                     
+        </div>
                 <div class="card-body">
                     <div v-for="(pha, index) in phases" class="phase">
-                        <div class="card-header">
-                            <h5>{{index+1}}° Fase</h5>
-                            <b> Id da fase : </b> {{pha.phaseId}} -
-                            <b>Nome da fase : </b>{{pha.phaseName}} -
-                            <b>Código da fase : </b>{{pha.phaseCode}} &nbsp;&nbsp;
-                            <i class="fa fa-edit" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
-                                <b> Editar </b>
-                            </i>
+                        <div class="card-header card-header-recipe">
+                            <h6><b>
+                                {{index+1}}° Fase
+                            </b></h6>
+                            <label class="ls5">
+                            <b>Código da fase: </b>{{pha.phaseCode}} &nbsp;&nbsp;
+                            </label>
+                            <label class="ls5">
+                            <b>Nome da fase: </b>{{pha.phaseName}} 
+                            </label>
+                            <!--<label class="ls5">
+                            <b> Id da fase: </b> {{pha.phaseId}} 
+                            </label>-->
                             <span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products">
-                                <i class="fa fa-expand">
-                                    <b> Expandir</b> {{ pha.expand }}
-                                </i>
-                            </span><br>
+                                <button type="button" class="btn btn-secondary btn-sm col-md-1.5 col-md-1.5">
+                                    <b> Expandir </b> {{ pha.expand }}
+                                </button>
+                                </span>
+                                <i class="btn btn-warning btn-edit btn-sm col-md-1" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
+                                        Editar Fase
+                                 </i>   
+                                     
+                            </button>
+                            
+                           
+                                                        
                         </div>
                         <!-- v-if para verificar se o usuário está editando ou cadastrando uma fase -->
                         <div class="list-group-item" v-show="pha.expand">
                             <div class="itens-fase">
                                 <span data-toggle="modal" data-target="#cadProPhase" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" class="pointer" aria-hidden="true">
-                                    <i class="fa fa-plus"></i>
-                                    <b> Adicionar produtos</b>
+                                    <button type="button" class="btn btn-link">
+                                    <b> Adicionar produtos</b></button>
                                 </span>
                                 <!-- v-else -->
                                 <div v-if="editarActivate">
@@ -140,8 +160,8 @@
                             </div>
                             <div class="itens-fase pull-right">
                                 <span class="pointer" data-toggle="modal" data-target="#modalCadParam" @click.stop.prevent="tagName='';phaseParameter={};phase=pha;abreModal('#modalCadParam');" aria-hidden="true">
-                                    <i class="fa fa-plus"></i>
-                                    <b> Adicionar parametros</b>
+                                    <button type="button" class="btn btn-link">
+                                    <b> Adicionar parametros</b></button>
                                 </span>
                                 <ul class="list-group list-group-flush" v-for="(par, indexPro) in pha.parameters">
                                     <li class="list-group-item">
@@ -168,7 +188,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar receita</h5>
+                        <h7 class="modal-title" id="exampleModalLabel">Editar receita</h7>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -186,7 +206,7 @@
                                 <i @click.stop.prevent="putRecipe(recipe)" class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button class="btn btn-danger">
-                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -206,7 +226,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar produto da receita {{recipe.recipeName}}</h5>
+                        <h7 class="modal-title" id="exampleModalLabel">Cadastrar produto da receita {{recipe.recipeName}}</h7>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -283,7 +303,7 @@
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button @click.stop.prevent="deletePhase(phase, recipe)" :disabled="phase.phaseId == undefined || phase.phaseId == ''" class="btn btn-danger">
-                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                             <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
                                 Limpar
@@ -323,7 +343,7 @@
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button @click.stop.prevent="deletePhase(phase, recipe)" :disabled="phase.phaseId == undefined || phase.phaseId == ''" class="btn btn-danger">
-                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                             <div class="btn btn-primary pull-right" @click.stop.prevent="phase.phaseName='';phase.phaseCode=''">
                                 Limpar
@@ -361,7 +381,7 @@
                                 <input class="fm form-control mr-sm-2" v-model="phaseProduct.measurementUnit" placeholder="Ex.: kg" />
                             </div>
                             <div class="form-group col-md-4">
-                                <label>Fase:</label>
+                                <label>Tipo de Produto:</label>
                                 <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
                                     <option value="" selected disabled>Campo para busca</option>
                                     <option value="scrap">Rejeito</option>
@@ -451,7 +471,7 @@
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button @click.stop.prevent="deletePhaseParameter(index, tag)" class="btn btn-danger">
-                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>

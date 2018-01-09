@@ -27,14 +27,13 @@
                     <div class="container-fluid col-md-12">
                         <div class="card" v-for="(recipe,index) in recipes">
                             <div class="card-header">
-                                <b></b>
                             </div>
                             <div class="">
                             <label class="ls ls4">
-                                <b><font color="#9BA6A5">Nome da Receita: </font></b> {{recipe.recipeName}} -
+                                <b><font color="#9BA6A5">Nome da Receita: </font></b> {{recipe.recipeName}}
                             </label>
                             <label class="ls ls4">
-                                <b><font color="#9BA6A5">Código da Receita: </font></b>{{recipe.recipeCode}} -
+                                <b><font color="#9BA6A5">Código da Receita: </font></b>{{recipe.recipeCode}}
                             </label>
                                 <router-link :to="{ name: 'Phases',params: { id: recipe.recipeId }}">
                                     <i class="fa fa-edit" @click="id = recipe.recipeId">
