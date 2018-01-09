@@ -11,6 +11,7 @@ import StateManagement from '@/components/OPStateManagement/StateManagement'
 import ListRecipes from '@/components/Phases/ListRecipes'
 import AssociateTool from '@/components/AssociateTool/AssociateTool'
 import ToolType from '@/components/ToolType/ToolType'
+import StatusManagement from '@/components/ToolsManagement/ToolsManagement'
 // import Teste from '@/components/Teste/Teste'
 
 Vue.use(Router)
@@ -74,6 +75,11 @@ export default new Router({
             path: '/toolType',
             name: 'ToolType',
             component: ToolType
+        },
+        {
+            path: '/statusManagement',
+            name: 'StatusManagement',
+            component: StatusManagement
         }
     ]
 })

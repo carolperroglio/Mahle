@@ -2,36 +2,6 @@
   <div>
         <nav class="fixed-top nav-tool-type">
             <ul class="nav d-flex align-items-center">
-            <!-- <li class="nav-prod col-sm-1.5">
-                    <h1 class="title-page-op"> Cadastro de Ordem de Produção </h1>
-                    <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
-                        <option value="" selected disabled>Buscar por:</option>
-                        <option value="productionOrderNumber">Nº Ordem de Produção</option>
-                        <option value="typeDescription">Descrição</option>
-                        <option value="quantity">Quantidade</option>
-                        <option value="currentStatus">Status</option>
-                    </select>
-                </li>
-                <li class="nav-prod col-sm-1.5">
-                    <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
-                </li>
-                <li class="nav-prod col-sm-1.5">
-                    <select class="form-control form-control-sm" v-model="orderField">
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="productionOrderNumber">Nº Ordem de Produção</option>
-                        <option value="typeDescription">Descrição</option>
-                        <option value="quantity">Quantidade</option>
-                        <option value="currentStatus">Status</option>
-                    </select>
-                </li>
-                <li class="nav-prod col-sm-1.5">
-                    <select class="form-control form-control-sm" v-model="order">
-                        <option value="" selected disabled>Ordenação</option>
-                        <option value="ascending">Crescente</option>
-                        <option value="descending">Decrescente</option>
-                    </select>
-                </li> -->
-
                 <li class="nav-tt col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <!-- <div class="col-md-auto">
