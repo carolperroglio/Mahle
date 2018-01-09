@@ -73,9 +73,7 @@
                             <span class="hidden-sm-down">  PRODUTOS</span>
                         </router-link>         
                         <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
-
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">    FERRAMENTAS</span>
-
                         </router-link>
                         <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   ORDEM DE PRODUÇÃO</span>
