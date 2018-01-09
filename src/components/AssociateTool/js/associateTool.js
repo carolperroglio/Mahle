@@ -2,7 +2,6 @@ import axios from 'axios'
 import es6promisse from 'es6-promise'
 es6promisse.polyfill();
 
-
 export default {
     name: "AssociateTool",
     data() {
@@ -11,8 +10,8 @@ export default {
             Tools: [],
             Groups: [],
             Things: [],
-            AssocTool: [],
-            AssocThing: [],
+            Tool: [],
+            Thing: [],
             tool: '',
             toolName: '',
             toolId: '',
@@ -26,6 +25,7 @@ export default {
             group: false,
             thing: false,
             lista: false,
+            lista2: false,
             url:'http://brsbap01:8004/',
          }
     },
@@ -45,12 +45,39 @@ export default {
                 return array;
             },
             openSelectGroup(){
-                this.group=true;               
+                this.group = true;               
                 axios.get(this.url+'api/tooltype/'+this.typeId).then((response)=>{   
-                this.Groups = response.data.thingGroups;
-                console.log(this.Groups);
-            },(error)=>{
-                    console.log(error);
+                    this.Groups = response.data.thingGroups;
+                        },(error)=>{
+                                console.log(error);
+                        })
+                this.lista = true;
+                axios.get(this.url+'api/tool/'+this.toolId).then((response)=>{
+                    this.Tool = response.data;
+                    console.log(response.data);
+                    switch(response.data.status){
+                        case "available":
+                        this.Tool.status = "Disponível";
+                        break;
+                        case "in_use":                    
+                        this.Tool.status = "Em uso";
+                        break;
+                        case "in_maintenance":
+                        this.Tool.status = "Em manutenção";
+                        break;
+                        case "not_available":
+                        this.Tool.status = "Indisponível";
+                        break;
+                        case "inactive":
+                        this.Tool.status = "Inativo";
+                        break;
+                        case "active":
+                        this.Tool.status = "Disponível";
+                        break;
+                    }                                        
+                },(r)=>{                
+                    this.mensagem = r;                
+                    this.carregando = false;
                 })            
 
             },
@@ -65,40 +92,39 @@ export default {
 
             },
             getAssoc(){
-                axios.get(this.url+'api/tool/AssociateTool?thingId='+this.thingId+'&toolid='+this.toolId).then((response)=>{
-                    this.mensagemSuc = 'Produto apontado com sucesso.'; 
-                    this.AssocTool = response.data;
-                    console.log(this.AssocTool);
+                this.mensagemSuc = '';
+                this.mensagem = '';
+                axios.put(this.url+'api/tool/AssociateTool/associate?thingId='+this.thingId+'&toolid='+this.toolId).then((response)=>{
+                    this.Tool = response.data;
+                    console.log(response.data);
                     switch(response.data.status){
                         case "available":
-                        this.AssocTool.status = "Disponível";
+                        this.Tool.status = "Disponível";
                         break;
                         case "in_use":                    
-                        this.AssocTool.status = "Em uso";
+                        this.Tool.status = "Em uso";
                         break;
                         case "in_maintenance":
-                        this.AssocTool.status = "Em manutenção";
+                        this.Tool.status = "Em manutenção";
                         break;
                         case "not_available":
-                        this.AssocTool.status = "Indisponível";
+                        this.Tool.status = "Indisponível";
                         break;
                         case "inactive":
-                        this.AssocTool.status = "Inativo";
+                        this.Tool.status = "Inativo";
                         break;
                         case "active":
-                        this.AssocTool.status = "Disponível";
+                        this.Tool.status = "Disponível";
                         break;
                     }
-                    this.AssocThing = response.data.currentThing;
-                    console.log(this.AssocTool);
+                    this.Thing = response.data.currentThing;
+                    this.lista2 = true;
+                    this.mensagemSuc = 'Ferramenta associada com sucesso.';
                 },(r)=>{                
-                    this.mensagem = 'Erro no server ' + r;                
+                    this.mensagem = r;                
                     this.carregando = false;
                 })
 
-            },
-            assocTool(){
-                this.lista = true;
             }
     }
 };

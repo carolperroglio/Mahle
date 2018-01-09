@@ -39,12 +39,12 @@
                        <label>
                         <b>Thing: </b>
                     </label> 
-                    <select class="form-control-outline-secondary form-control" v-model="thingId" v-on:change="getAssoc()">
+                    <select class="form-control-outline-secondary form-control" v-model="thingId">
                     <option v-for="(t,index) in Things" :value="t.thingId">{{ t.thingName }}</option>
                     </select>    
                 </li>
                 <li class="nav-item col-sm-1.5"  v-if="thing || groupId != ''">
-                    <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="assocTool()">
+                    <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="getAssoc()">
                         Associar Ferramenta
                     </button>
                 </li>
@@ -61,50 +61,55 @@
         <!--                                 -->
 
         <div class="ferAssoc col-11">    
-            <div v-show="lista || AssocTool.length > 0">      
+            <div v-show="lista || Tool.length > 0">      
                 <div class="card">
                     <div class="card-header">
                         <b>Ferramenta Associada</b>
                     </div>
                         <div class="card-body">
+                            <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                            <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                                
                             <label class="ls">
                                 <b><font color="#9BA6A5">Nome: </font></b></label>
-                            <label class="ls">{{ AssocTool.name }}</label>
+                            <label class="ls">{{ Tool.name }}</label>
                             <br>
                             <label class="ls">
                                 <b><font color="#9BA6A5">No Serial: </font></b></label>
-                            <label class="ls">{{ AssocTool.serialNumber }}</label>                          
+                            <label class="ls">{{ Tool.serialNumber }}</label>                          
                             <br>
                             <label class="ls">
                                 <b><font color="#9BA6A5">Status: </font></b></label>
-                            <label class="ls">{{ AssocTool.status }}</label>
+                            <label class="ls">{{ Tool.status }}</label>
                             <br>
                             <label class="ls">
                                 <b><font color="#9BA6A5">Tipo: </font></b></label>
-                            <label class="ls">{{ AssocTool.typeName }}</label>
+                            <label class="ls">{{ Tool.typeName }}</label>
                             <br>
                             <label class="ls">
                                 <b><font color="#9BA6A5">Unidade de Medida: </font></b></label>
-                            <label class="ls">{{ AssocTool.unitOfMeasurement }}</label>
+                            <label class="ls">{{ Tool.unitOfMeasurement }}</label>
                             <br>
                             <label class="ls">
                                 <b><font color="#9BA6A5">Vida Atual: </font></b></label>
-                            <label class="ls">{{ AssocTool.currentLife }}</label>
+                            <label class="ls">{{ Tool.currentLife }}</label>
                         </div>
+                </div>      
+            </div>
+             <div v-show="lista2" class="card">
                     <div class="card-header">
                         <b>Thing Associada</b>
                     </div>
                     <div class="card-body">
                         <label class="ls">
                             <b><font color="#9BA6A5">Código: </font></b></label>
-                        <label class="ls">{{AssocThing.thingCode}}</label>
+                        <label class="ls">{{Thing.thingCode}}</label>
                         <br>
                         <label class="ls">
                             <b><font color="#9BA6A5">Nome: </font></b></label>
-                        <label class="ls">{{AssocThing.thingName}}</label>
+                        <label class="ls">{{Thing.thingName}}</label>
                     </div>
-                </div>      
-            </div>
+                    </div>
         </div>
     </div>  
 </template>
