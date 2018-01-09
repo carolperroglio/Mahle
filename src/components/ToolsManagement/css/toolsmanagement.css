@@ -1,0 +1,37 @@
+.nav-tool-management {
+    font-size: pt;
+    top: 20%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    z-index: 1;
+    left: 12.4%;
+    background-color: white;
+    width: 87.5%;
+    height: 5%;
+}
+
+.conteudo-tm {
+    margin-top: 16% !important;
+    position: relative;
+    left: 15%;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.conteudo-tm h3 {
+    display: inline;
+    color: rgb(41, 39, 39);
+}
+
+.nav-tm {
+    position: fixed;
+    top: 9%;
+    z-index: 1;
+    /* background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251)); */
+    /* background-color: #F6F6F6; */
+    background: linear-gradient(rgb(249, 249, 250), hsla(204, 60%, 69%, 0.767));
+    width: 100%;
+    height: 13%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 2%;
+}

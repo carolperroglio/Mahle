@@ -19,7 +19,7 @@
                     <a class="nav-link bg-dark active" router-link to="">Gerenciamento de Ordem</a>
                 </li> 
                  <li class="nav-item-cab col-md-2">
-                    <a class="nav-link bg-dark active" router-link to="">Gerenciamento de Ferramentas</a>
+                    <a class="nav-link bg-dark active" router-link to="/statusManagement">Gerenciamento de Ferramentas</a>
                 </li> 
                 <!--<li class="nav-item-cab">
                     <a class="nav-link active" router-link to="">Análises Químicas</a>
@@ -90,6 +90,9 @@
                         <router-link to="/toolType" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   TIPO DE FERRAMENTAS</span>
                         </router-link>
+                        <!-- <router-link to="/statusManagement" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   GERENCIAMENTO DE FERRAMENTAS</span>
+                        </router-link> -->
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">
