@@ -1,4 +1,4 @@
-.nav-OP{
+.nav-ass-tool{
     position: fixed;
     top: 9%;
     z-index: 1;
@@ -8,13 +8,13 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item{
+.nav-item-ass-tool {
     margin-left: 3%;
     margin-right: 3%;
     padding-top: 3%;
 }
 
-.title-page{
+.title-page-ass-tool{
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
@@ -43,13 +43,13 @@
     color: black;
 }
 
-.card-body{
+.card-body-ass-tool{
     padding-top: 0.1%;
     padding-bottom: 0.1%;
     padding-left: 1.1%;
 }
 
-.card-header{
+.card-header-ass-tool{
         padding-top: 0.6%;
         padding-bottom: 0.6%;   
 }
@@ -65,7 +65,7 @@ input{
     position: relative !important;
 }
 
-.ls{
+.ls11{
     width: 25%;
 }
 

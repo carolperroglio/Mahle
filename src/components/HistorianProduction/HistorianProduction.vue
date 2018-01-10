@@ -11,7 +11,7 @@
          <div class="fixed-top nav-HP">
             <ul class="nav d-flex align-items-center">
             <h1 class="title-page"> Apontamentos de OP </h1>
-                <li class="nav-item col-sm-1.5">
+                <li class="nav-item-hp col-sm-1.5">
                     <label class="fm mr-sm-2">Número da OP: </label>   
                 </li>
                 <li class="nav-item col-sm-1.5"> 
@@ -43,14 +43,14 @@
         <div id="order" style="display: none">
             <div class="orderHistorian col-11">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header card-header-hp">
                             <b><label class="ls">
                                 <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls ls10">
                                 <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>&nbsp;&nbsp;&nbsp;
                             </b>
                         </div>
-                        <div class="card-body" id="tipo">
+                        <div class="card-body card-body-hp" id="tipo">
                             <div class="row">
                             <div class="col-1">
                             <label>
@@ -78,36 +78,36 @@
                             <div v-show="lista">
                                 
                                     <div class="card">
-                                        <div class="card-header">
+                                        <div class="card-header card-header-hp">
                                             <b>Produtos de entrada</b>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body card-body-hp">
                                         <div v-for="(o, index) in orderHistorian.productsInput" v-bind:key="index">
-                                            <label class="ls">
+                                            <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;
-                                            <label class="ls">
+                                            <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
-                                            <label class="ls">
+                                            <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;
-                                            <label class="ls2">
+                                            <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
                                                 
                                         </div>
                                         </div>
                                     </div>
                                       
-                                        <div class="card-header">
+                                        <div class="card-header card-header-hp">
                                             <b>Produto de saída</b>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body card-body-hp">
                                             <div v-for="(o, index) in orderHistorian.productsOutput" v-bind:key="index">
-                                            <label class="ls">
+                                            <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;
-                                            <label class="ls">
+                                            <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
-                                            <label class="ls">
+                                            <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;
-                                            <label class="ls2">
+                                            <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
                                         </div>
                                     </div>
