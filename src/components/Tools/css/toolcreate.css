@@ -76,14 +76,14 @@ input{
 }
 
 /*Listagem de ferramentas*/
-.icon-style{
-     
-}
+/* .icon-style{
+    position: relative;
+    } */
 
 .ls3{
     font-family: sans-serif;
     font-size: 12px;
-    width: 12%;
+    width: 9.5%;
 }
 
 @media screen and (max-width : 801px){
@@ -111,7 +111,7 @@ input{
     }
 .icon-style{
     position: absolute;
-    padding-left: 68%;
+    padding-left: 60%;
     top: 50%;
     }
 .ls3{
