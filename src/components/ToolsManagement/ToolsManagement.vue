@@ -1,4 +1,12 @@
 <template>
+<div>
+    <div class="fixed-top nav-tm">
+            <ul class="nav d-flex align-items-center">
+            <li class="nav-prod col-sm-1.5">
+                    <h1 class="title-page-tm"> Gerenciamento de Ferramentas </h1>
+            </li>
+            </ul>
+        </div>
   <div class="row conteudo-tm">
             <div class="op col-md-10">
                 <div class="progress" v-show="carregando">
@@ -6,6 +14,9 @@
                 </div>
                 <div>
                     <div class="container-fluid col-md-9">
+                        <div class="card-header">
+                                <b>Lista de Ferramentas</b>
+                            </div>
                         <div class="card" v-for="(t,index) in tools" :key="index">
                             <div class="card-header">
                                 <b></b>
@@ -84,6 +95,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 </template>
 
