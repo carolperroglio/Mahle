@@ -59,8 +59,6 @@
                         
                     </div>
                 </li>
-            
-         
                 <li class="nav-phase col-md-3" v-if="json.stringify(recipeProduct) !== '{}'">
                         <b> 
                     <font color="#9BA6A5">
@@ -68,6 +66,7 @@
                     </font></b>
                          {{recipeProduct.productName}}
                         <br><b>
+                            <!-- {{ recipeProduct }} -->
                     <font color="#9BA6A5">
                         Quantidade do produto:
                     </font></b> 
@@ -192,7 +191,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h7 class="modal-title" id="exampleModalLabel">Editar receita</h7>
+                        <h6 class="modal-title" id="exampleModalLabel">Editar receita</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -208,9 +207,6 @@
                         <div class="btn-group" role="group">
                             <button class="btn btn-primary">
                                 <i @click.stop.prevent="putRecipe(recipe)" class="fa fa-check-square" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
@@ -248,15 +244,8 @@
                         </div>
                         <label class="mr-sm-2">Nome do produto : </label>
                         <div class="dropdown">
-                            <!-- <v-autocomplete :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems">
-                                    </v-autocomplete> -->
+                            
                             <input @keypress.capture="recipeProducts=getResults(urlProducts,recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                            <!-- <select class="form-control form-control-sm" v-model="recipeProductName">
-                                <option value="" selected disabled></option>
-                                <option v-for="(p,index) in recipeProducts" v-bind:value="opType.productionOrderTypeId">
-                                    {{p.productName}}
-                                </option>
-                            </select> -->
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts" v-bind:key="index">{{p.productName}}</a>
                             </div>
@@ -269,7 +258,7 @@
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             <button type="button" @click.stop.prevent="createRecipeProduct(recipeProduct)" 
-                            :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || recipeProductName" class="btn btn-success">
+                            :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -289,7 +278,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar fase</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Fase</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
