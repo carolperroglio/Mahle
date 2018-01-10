@@ -157,8 +157,8 @@ h6{
 /*Barra - Progress*/
 .progress {
     position: absolute;
-    top: 30% !important;
-    left: 1% !important;
+    top: 30%;
+    left: 1%;
     box-sizing: border-box;
 }
 
