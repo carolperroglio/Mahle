@@ -26,7 +26,7 @@ export default {
                 mm: "59"
             },
             carregando: false,  
-            history: [],  
+            history: [], 
             Tools: [],
             toolName: '',
             toolId: '',
@@ -60,23 +60,39 @@ export default {
                 return array;
             },
             getHistory(){   
-                var Ini = this.date.toString()+' '+this.timeIni.HH+':'+this.timeIni.mm;
-                var dateIni = new Date(Ini);
-                console.log(dateIni);  
-                var ticksI = ((dateIni.getTime() * 10000) + 621355968000000000) - (dateIni.getTimezoneOffset() * 600000000);
+                this.lista = true;
+                var Ini = this.date.toString()+' '+this.timeIni.HH+':'+this.timeIni.mm;  
+                var ticksI = this.dateToTicks(Ini);
                 var Fim = this.date.toString()+' '+this.timeFim.HH+':'+this.timeFim.mm;
-                var dateFim = new Date(Fim);
-                var ticksF = ((dateFim.getTime() * 10000) + 621355968000000000) - (dateFim.getTimezoneOffset() * 600000000);
+                var ticksF = this.dateToTicks(Fim);
                 console.log('I: '+ticksI);
                 console.log('F: '+ticksF);
                 axios.get(this.url+'api/tool/StateTransitionHistory/'+this.toolId+'?&from='+this.ticksI+'&to='+this.ticksF).then((response)=>{                                           
                     this.history = response.data;
                     console.log(response.data);
+                    var times = this.ticksToDate(response.data.timeStampTicks);
+                    this.history.timeStampTicks = times;
+                    console.log(this.history);
                 },(error)=>{
                     console.log(error);                    
                     console.log(response.data);
                 })
             },
+            ticksToDate(dateTicks){
+                var epochTicks = 621355968000000000,
+                ticksPerMillisecond = 10000,  
+                jsTicks = 0,          
+                jsDate;
+                jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
+                jsDate = new Date(jsTicks);
+                console.log(jsDate);
+                return jsDate;
+                },
+            dateToTicks(dateTime){
+                var date = new Date(dateTime); 
+                var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
+                return ticks;
+            }
     }
 };
 
