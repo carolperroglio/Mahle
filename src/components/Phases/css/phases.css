@@ -7,9 +7,14 @@ i {
     cursor: pointer;
 }
 .card-header{
-    padding: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%; 
 }
 
+.icon-right2{
+    color: black;
+    position: relative;
+}
 
 /*Menu de cadastro da receita*/
 .nav-recipe {
@@ -236,7 +241,7 @@ h6{
 /*Título menu superior da tela de receita*/
 .title-recipe{
     font-size: 16px;
-    margin-top: 1.1%;
+    margin-top: 2%;
 }
     /*Título dos botões de input do menu superior da tela de receita*/
 .title-cad{

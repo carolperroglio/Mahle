@@ -66,8 +66,9 @@ input{
     }
 
 .card-header2{
-    padding-top: 0.6%;
-    padding-bottom: 0.6%;   
+    padding-top: 0.5%;
+    padding-bottom: 0.5%; 
+    border-bottom: 5%; 
 }
 
 .btn-warning{
@@ -76,9 +77,7 @@ input{
 
 /*Listagem de ferramentas*/
 .icon-style{
-    position: absolute;
-    padding-left: 70%;
-    top: 50%;
+     
 }
 
 .ls3{
@@ -89,7 +88,8 @@ input{
 
 @media screen and (max-width : 801px){
     .ferramentas{ 
-        margin-top: 30%; 
+        margin-top: 20%; 
+        margin-bottom: 5%;
     }  
     
 .nav-ferramentas{
@@ -117,6 +117,7 @@ input{
 .ls3{
     font-family: sans-serif;
     font-size: 11px;
-    width: 12%;
+    width: 11%;
+    height: 50%;
     }
 } 

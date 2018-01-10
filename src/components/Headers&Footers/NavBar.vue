@@ -10,16 +10,16 @@
             <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
             <ul class="nav nav-pills nav-justified bg-dark">
                 <li class="nav-item-cab col-md-3">
-                    <a class="nav-link active bg-dark" router-link to="/stateManagement">OP Status Management </a>
+                    <router-link class="nav-link active bg-dark" router-link to="/stateManagement">OP Status Management </router-link>
                 </li> 
                 <li class="nav-item-cab col-md-2">
-                    <a class="nav-link bg-dark active" router-link to="/">Início</a>
+                    <router-link class="nav-link bg-dark active" router-link to="/">Início</router-link>
                 </li> 
                 <li class="nav-item-cab col-md-2">
-                    <a class="nav-link bg-dark active" router-link to="">Gerenciamento de Ordem</a>
+                    <router-link class="nav-link bg-dark active" router-link to="">Gerenciamento de Ordem</router-link>
                 </li> 
                  <li class="nav-item-cab col-md-2">
-                    <a class="nav-link bg-dark active" router-link to="/statusManagement">Gerenciamento de Ferramentas</a>
+                    <router-link class="nav-link bg-dark active" router-link to="/statusManagement">Gerenciamento de Ferramentas</router-link>
                 </li> 
                 <!--<li class="nav-item-cab">
                     <a class="nav-link active" router-link to="">Análises Químicas</a>

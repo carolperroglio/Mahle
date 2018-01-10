@@ -10,11 +10,22 @@
     height: 5%;
 }
 
+.title-page-tm {
+    text-align: left;
+    color: rgb(68, 68, 70);
+    font-family: sans-serif;
+    font-size: 22px;
+    text-shadow: 1px 1px #F9F9F9;
+    position: fixed;
+    top: 11.5%;
+    left: 0.9%;
+}
+
 .conteudo-tm {
-    margin-top: 16% !important;
+    margin-top: 13%;
     position: relative;
     left: 15%;
-    width: 80%;
+    width: 85%;
     box-sizing: border-box;
 }
 
