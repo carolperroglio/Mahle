@@ -2,6 +2,7 @@
   <div>
         <nav class="fixed-top nav-tool-type">
             <ul class="nav d-flex align-items-center">
+                <li class="title-tool-type">Tipo de Ferramentas</li>
                 <li class="nav-tt col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <!-- <div class="col-md-auto">
@@ -9,7 +10,7 @@
                         </div> -->
                         <!-- Button trigger modal -->
                         <div class="col-sm-1.5">
-                            <button type="button" class="btn btn-outline-primary btn-sm btn-sm" data-toggle="modal" data-target="#cadastrar-tt">
+                            <br><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cadastrar-tt">
                                 Cadastrar Tipo de Ferramenta
                             </button>
                         </div>
@@ -18,24 +19,30 @@
             </ul>
         </nav>
         <div class="row conteudo-tt">
-            <div class="op col-md-10">
+            <div class="col-md-12">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
                 <div>
-                    <div class="container-fluid col-md-9">
+                    <div class="container-fluid col-md-12">
                         <div class="card" v-for="(ttype,index) in toolsType" :key="index">
-                            <div class="card-header">
+                            <div class="card-header card-header7">
                                 <b></b>
                             </div>
-                            <div class="card-body">
-                                <b>Nome: </b> {{ttype.name}} -
-                                <b>Descrição: </b>{{ttype.description}} -
-                                <b>Status: </b>{{ttype.description}} -
+                            <div class="card-body card-body7">
+                                <label class="ls ls7">
+                                    <b><font color="#9BA6A5">Nome:</font></b> {{ttype.name}}
+                                </label>
+                                <label class="ls ls7">
+                                    <b><font color="#9BA6A5">Descrição:</font> </b>{{ttype.description}}
+                                </label>
+                                <label class="ls ls7">
+                                    <b><font color="#9BA6A5">Status:</font> </b>{{ttype.description}}
+                                </label>
                                 <!-- <b>Grupo: </b>{{ttype.thingGroups}} - -->
-                                <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="catchObjToUpdate(ttype)" data-toggle="modal" data-target="#editar-tt">
-                                Editar
-                                </button>
+                                
+                                <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.prevent="catchObjToUpdate(ttype)" data-toggle="modal" data-target="#editar-tt">
+                                </i>
                                     <!-- <i class="fa fa-edit" @click="updateToolType(ttype)">
                                         Editar
                                     </i> -->

@@ -45,8 +45,7 @@
                                     <b><font color="#9BA6A5">Código da Receita: </font></b>{{recipe.recipeCode}}
                                 </label>
                                 <router-link :to="{ name: 'Phases',params: { id: recipe.recipeId }}">
-                                    <i class="fa fa-edit" @click="id = recipe.recipeId">
-                                    Editar
+                                    <i class="fa fa-edit icon-right2 icon-style" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">
                                     </i>
                                 </router-link>
                             </div>

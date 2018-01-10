@@ -44,7 +44,7 @@ input {
     padding-top: 13%;
     padding-bottom: 5%;              
     left: 1%;
-    width: 100%;
+    width: 95%;
 }
 
 .msg {
@@ -52,16 +52,18 @@ input {
     width: 50%;
 }
 
-.card-body{
+.card-body5{
+    font-family: sans-serif;
     padding-top: 0.1%;
     padding-bottom: 0.1%;
-    padding-left: 1.1%;
     }
     
-.card-header{
-    padding-top: 0.6%;
-    padding-bottom: 0.6%;   
+.card-header5{
+    padding-top: 0.5%;
+    padding-bottom: 0.5%; 
 }
+
+    
 
 .paginacao {
     position: fixed;
@@ -99,13 +101,13 @@ input {
         top: 18%;
         
     }
-    .card-body{ 
+    .card-body5{ 
         font-size: 11px;
         padding-top: 0.1%;
         padding-bottom: 0.1%;
     } 
     .produtos{ 
-        margin-top: 30%;
+        margin-top: 17%;
         width: 100%; 
     }
     .ls2 {
