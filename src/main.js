@@ -9,9 +9,9 @@ import jquery from '.././node_modules/jquery/src/jquery.js'
 import Bootstrap from '.././node_modules/bootstrap/dist/css/bootstrap.min.css'
 import BootstrapJs from '.././node_modules/bootstrap/dist/js/bootstrap.min.js'
 import icones from '.././node_modules/font-awesome/css/font-awesome.min.css'
-import VAutocomplete from '.././node_modules/v-autocomplete/dist/v-autocomplete.js'
+//import VAutocomplete from '.././node_modules/v-autocomplete/dist/v-autocomplete.js'
 Vue.config.productionTip = false
-Vue.use(VAutocomplete)
+//Vue.use(VAutocomplete)
 
 
 /* eslint-disable no-new */

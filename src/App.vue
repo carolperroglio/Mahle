@@ -11,10 +11,10 @@
 
 <script>
 import NavBar from './components/Headers&Footers/NavBar.vue'
-import Autocomplete from 'v-autocomplete'
+// import Autocomplete from 'v-autocomplete'
 import Vue from 'vue'
-import 'v-autocomplete/dist/v-autocomplete.css'
-Vue.use(Autocomplete)
+// import 'v-autocomplete/dist/v-autocomplete.css'
+// Vue.use(Autocomplete)
 
 export default {
   name: 'app',
