@@ -16,16 +16,11 @@ function paginacao(response, este) {
     }
 }
 
-var ipServer = 'http://brsbap01:';
-
 export default {
-    name: "Phases",
+    name: "InUseTools",
     data() {
         return {
-            urlRecipes: ipServer + '8003/api/recipes',
-            urlPhases: ipServer + '8003/api/phases',
-            recipes: [],
-            phases: [],
+            tools: [],
             carregando: false,
             quantityPage: 20,
             startat: 0,
@@ -36,7 +31,8 @@ export default {
             order: '',
             fieldFilter: '',
             fieldValue: '',
-            id: ''
+            id: '',
+            url: 'http://brsbap01:8004/api/tool/inuse'
         }
     },
     methods: {
@@ -45,24 +41,41 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
-            this.recipes = [];
-            console.log(this.order, this.orderField)
-            axios.get(this.urlRecipes + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+            this.tools = [];
+            axios.get(this.url).then((response) => {
                 paginacao(response, this);
-                this.recipes = response.data.values;
-                console.log('this.recipes');
-                console.log(this.recipes);
-
+                this.tools = response.data;
+                for (var index in response.data){
+                    switch(response.data[index].status){
+                        case "available":
+                        this.tools[index].status = "Disponível";
+                        break;
+                        case "in_use":                    
+                        this.tools[index].status = "Em uso";
+                        break;
+                        case "in_maintenance":
+                        this.tools[index].status = "Em manutenção";
+                        break;
+                        case "not_available":
+                        this.tools[index].status = "Indisponível";
+                        break;
+                        case "inactive":
+                        this.tools[index].status = "Inativo";
+                        break;
+                        case "active":
+                        this.tools[index].status = "Disponível";
+                        break;
+                    }
+                }
+                console.log(this.tools);
                 this.carregando = false;
-            }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
+            }, (response) => {
+                this.mensagem = response.data;
                 this.carregando = false;
             })
-            console.log(this.recipes);
         },
     },
     beforeMount() {
         this.buscar();
-        // this.getPhasesById();
     }
 }

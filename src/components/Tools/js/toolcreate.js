@@ -74,28 +74,28 @@ export default {
             this.ferramentas =response.data.values;
             console.log(this.ferramentas);
             for (var index in response.data.values){
-                    switch(response.data.values[index].status){
-                        case "available":
-                        this.ferramentas[index].status = "Disponível";
-                        break;
-                        case "in_use":                    
-                        this.ferramentas[index].status = "Em uso";
-                        break;
-                        case "in_maintenance":
-                        this.ferramentas[index].status = "Em manutenção";
-                        break;
-                        case "not_available":
-                        this.ferramentas[index].status = "Indisponível";
-                        break;
-                        case "inactive":
-                        this.ferramentas[index].status = "Inativo";
-                        break;
-                        case "active":
-                        this.ferramentas[index].status = "Disponível";
-                        break;
-                    }
+                switch(response.data.values[index].status){
+                    case "available":
+                    this.ferramentas[index].status = "Disponível";
+                    break;
+                    case "in_use":                    
+                    this.ferramentas[index].status = "Em uso";
+                    break;
+                    case "in_maintenance":
+                    this.ferramentas[index].status = "Em manutenção";
+                    break;
+                    case "not_available":
+                    this.ferramentas[index].status = "Indisponível";
+                    break;
+                    case "inactive":
+                    this.ferramentas[index].status = "Inativo";
+                    break;
+                    case "active":
+                    this.ferramentas[index].status = "Disponível";
+                    break;
                 }
-                this.carregando = false;  
+            }
+            this.carregando = false;  
                 paginacao(response,this);
             },(error)=>{                  
                 this.mensagem = 'Erro no server ' + error;                

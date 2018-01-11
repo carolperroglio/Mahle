@@ -23,22 +23,34 @@
                 </div>
                     </div>
                         <div class="container-fluid col-md-12">
-                                <div class="card" v-for="(recipe,index) in recipes">
+                            <div v-for="(t,index) in tools" v-bind:key="index">
+                                <div class="card">
                             <div class="card-header">
                                 </div>
-                            <div class="">
-                                <label class="ls ls4">
-                                    <b><font color="#9BA6A5">Nome da Receita: </font></b> {{recipe.recipeName}}
-                                </label>
-                                <label class="ls ls4">
-                                    <b><font color="#9BA6A5">Código da Receita: </font></b>{{recipe.recipeCode}}
-                                </label>
-                                <router-link :to="{ name: 'Phases',params: { id: recipe.recipeId }}">
-                                    <i class="fa fa-edit icon-right2 icon-style" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">
-                                    </i>
-                                </router-link>
+                            <div class="card-body">
+                                 <label class="ls ls3">
+                                <b><font color="#9BA6A5">Nome: </font></b>{{t.name}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Descrição: </font></b>{{t.description}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Serial: </font></b>{{t.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Code: </font></b>{{t.code}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Life Cycle: </font></b>{{t.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{t.currentLife}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">UM: </font></b>{{t.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Tipo: </font></b>{{t.typeName}}</label>&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Status: </font></b>{{t.status}}</label>&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer"></i>
+                            </label>
                             </div>
-                           
+                        </div>   
                         </div>
                          <div class="paginacao-phase" v-show="total>0">
                                 <nav aria-label="">

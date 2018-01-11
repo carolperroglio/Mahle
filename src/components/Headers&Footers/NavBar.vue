@@ -85,7 +85,7 @@
                         </router-link>
 
                         <a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
-                            <i class="fa fa-gavel"></i> 
+                            <i class="fa fa-cogs"></i> 
                                 <span class="hidden-sm-down">   
                                 FERRAMENTAS
                                 </span> 
