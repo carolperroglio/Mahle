@@ -10,28 +10,29 @@
     margin-top: 1.1%;
     margin-bottom: 1.5%;
     text-align: center;
+    cursor: pointer;
 }
 
 /*Logo do sistema*/
 .logo-system {
     position: fixed;
-    margin-top: 0.5%;
+    margin-top: 1.5%;
     margin-left: 91%;
     height: 7%;
     width: 8%;
 }
 
-/*Configurações do menu lateral collapse*/
+/*Configurações do ícone do menu lateral collapse*/
 .icon-navigate {
     position: relative;
     font-size: 30px;
-    padding-top: 80%;
+    padding-top: 150%;
     margin-left: 45%;
     color: white;
     }
 
 #sidebar {
-    padding-top: 3.7%;
+    padding-top: 6.5%;
     padding-left: 15;
     position: fixed;
 }
@@ -138,6 +139,11 @@ text-shadow: 1px 1px rgb(124, 114, 114);
     height: 5%;
     }
 
+.refactor-class-row{
+    height:0;
+    width:0;
+}
+
 @media (min-width:800em) {
     /* overlay sub levels on small screens */
     #sidebar .list-group .collapse.in,
@@ -178,16 +184,16 @@ text-shadow: 1px 1px rgb(124, 114, 114);
 
 @media screen and (max-width: 800px) {
     #sidebar {
-        padding-top:10%;
+        padding-top:14%;
         padding-left: 10;
         position: fixed;
     }
     .icon-navigate {
         font-size: 2em;
-        padding-top: 150%;
+        padding-top: 180%;
     }
     .logo-system {
-    margin-top: 4%;
+    margin-top: 6%;
     margin-left: 88%;
     height: 5%;
     width: 9%;

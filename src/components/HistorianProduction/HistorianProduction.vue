@@ -8,15 +8,16 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-         <div class="fixed-top nav-HP">
+         <div class="fixed-top nav-hp">
             <ul class="nav d-flex align-items-center">
             <h1 class="title-page"> Apontamentos de OP </h1>
                 <li class="nav-item col-sm-1.5">
                     <label class="fm mr-sm-2">Número da OP: </label>   
+
                 </li>
-                <li class="nav-item col-sm-1.5"> 
+                <li class=""> 
                     <div class="dropdown">   
-                            <input @keyup="POs=getResults(op)" v-model="op" placeholder="número da ordem" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                            <br><br><input @keyup="POs=getResults(op)" v-model="op" placeholder="número da ordem" class="btn btn-outline-secondary dropdown-toggle col-sm-10" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click.stop.prevent="productionOrder.productionOrderNumber=p.productionOrderNumber; 
                                                                               productionOrder.productionOrderId=p.productionOrderId; 
@@ -25,10 +26,10 @@
                             </div>                            
                         </div>
                 </li>
-                <li class="nav-item col-sm-1.5">
-                    <form class="form-inline my-3 form-control-sm mr-sm-12">
-                    <div class="">
-                        <button type="button" class="btn btn-primary btn-sm col-md-12" @click.stop.prevent="listaOp()">
+                <li class="">
+                    <form class="">
+                    <div class="dropdown">
+                        <br><br><button type="button" class="btn btn-primary btn-sm col-md-12 col-sm-1" @click.stop.prevent="listaOp()">
                             Selecionar
                         </button>
                              

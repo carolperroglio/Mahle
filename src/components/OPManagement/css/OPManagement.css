@@ -1,7 +1,7 @@
 /* menu de navegação de produtos */   
 .nav-produtos{
     position: fixed;
-    top: 9%;
+    top: 15%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;

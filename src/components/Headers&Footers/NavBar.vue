@@ -1,43 +1,43 @@
 <template>
     <div>
-            <!--                                  -->
-            <!--                                  -->
-            <!-- Cabeçalho da pagina, logo e user -->
-            <!--                                  -->
-            <!--                                  -->
-    <div class="container fluid">  
-        <nav class="header fixed-top">
-            <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
-            <ul class="nav nav-pills nav-justified bg-dark">
-                <li class="nav-item-cab col-md-3">
-                    <router-link class="nav-link active bg-dark" router-link to="/stateManagement">OP Status Management </router-link>
-                </li> 
-                <li class="nav-item-cab col-md-2">
-                    <router-link class="nav-link bg-dark active" router-link to="/">Início</router-link>
-                </li> 
-                <li class="nav-item-cab col-md-2">
-                    <router-link class="nav-link bg-dark active" router-link to="">Gerenciamento de Ordem</router-link>
-                </li> 
-                 <li class="nav-item-cab col-md-2">
-                    <router-link class="nav-link bg-dark active" router-link to="/statusManagement">Gerenciamento de Ferramentas</router-link>
-                </li> 
-                
-                <!--<li class="nav-item-cab">
-                    <a class="nav-link active" router-link to="">Análises Químicas</a>
-                </li>-->
-                <!--<li class="nav-item-cab">
-                    <a class="nav-link active" router-link to="">Automação</a>
-                </li>-->
-            </ul>    
-        </nav>
-    </div> 
+
+        <!--                                  -->
+        <!--                                  -->
+        <!-- Cabeçalho da pagina, logo e user -->
+        <!--                                  -->
+        <!--                                  -->
+        <div class="container fluid">  
+            <nav class="header fixed-top">
+                <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
+                <ul class="nav nav-pills nav-justified bg-dark">
+                    <li class="nav-item-cab col-md-2">
+                        <router-link class="nav-link bg-dark active" router-link to="/"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
+                    </li> 
+                    <li class="nav-item-cab col-md-3">
+                        <router-link class="nav-link active bg-dark" router-link to="/stateManagement"><i class= "fa fa-power-off" style="font-size:25px; cursor:pointer"></i>  <br>OP Status Management </router-link>
+                    </li> 
+                    <li class="nav-item-cab col-md-2">
+                        <router-link class="nav-link bg-dark active" router-link to="/OPManagement"><i class= "fa fa-industry" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ordem</router-link>
+                    </li> 
+                    <li class="nav-item-cab col-md-2">
+                        <router-link class="nav-link bg-dark active" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas</router-link>
+                    </li> 
+                    <!--<li class="nav-item-cab">
+                        <a class="nav-link active" router-link to="">Análises Químicas</a>
+                    </li>-->
+                    <!--<li class="nav-item-cab">
+                        <a class="nav-link active" router-link to="">Automação</a>
+                    </li>-->
+                </ul>    
+            </nav>
+        </div> 
 
         <!--                        -->
         <!--   Rodapé da Página     -->
         <!--                        -->
-    <footer>
-        <div class="footer-text"> Sistema Onyx V1.0</div>
-    </footer>
+        <footer>
+            <div class="footer-text"> Sistema Onyx V1.0</div>
+        </footer>
 
         <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/>
         <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
@@ -48,15 +48,21 @@
         <!--                        -->
         <!--                        -->             
         <div class="container-fluid fixed-top menu-btn"> 
-            <div class="row">
+            <div class="row refactor-class-row">
                 <div class="col-xs-1 p-l-0 p-r-0 collapse in" id="sidebar">
                     <div class="list-group panel">
-                        <a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-odnoklassniki"></i> <span class="hidden-sm-down">   OPERADOR</span> </a>
+                        <a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-odnoklassniki">
+                            </i> 
+                        <span class="hidden-sm-down">   
+                            OPERADOR
+                        </span> 
+                        </a>
                         <div class="collapse" id="menu2">
-                            <a href="#" class="list-group-item" data-parent="#menu1"> Logout </a>
+                            <router-link to="#" class="list-group-item" data-parent="#menu1"> Logout </router-link>
                         </div>
-                        <a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-wpforms"></i> <span class="hidden-sm-down">   THINGS</span> </a>
-                        <div class="collapse" id="menu1">
+                        <!-- <a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-wpforms"></i> 
+                        <span class="hidden-sm-down">   THINGS</span> </a> -->
+                        <!-- <div class="collapse" id="menu1">
                             <a href="#" class="list-group-item" data-parent="#menu1"> Gerenciar Things </a>
                             <a href="#" class="list-group-item" data-parent="#menu1"> Criar grupo</a>
                             <a href="#" class="list-group-item" data-parent="#menu1"> Hierarquia </a>
@@ -64,42 +70,68 @@
                                 <div class="collapse" id="menu1sub1">
                                 </div>
                             </div> 
-                        </div>
+                        </div> -->
+                        <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-barcode"></i> 
+                            <span class="hidden-sm-down">  
+                                MATERIAIS
+                            </span>
+                        </router-link>
                         <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar">
                             <i class="fa fa-book"></i> 
-                            <span class="hidden-sm-down">  RECEITA</span>
-                        </router-link>        
-                        <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-balance-scale"></i> 
-                            <span class="hidden-sm-down">  PRODUTOS</span>
-                        </router-link>         
-                        <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">    FERRAMENTAS</span>
+                            <span class="hidden-sm-down">  
+                                RECEITA
+                            </span>
                         </router-link>
+
+                        <a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+                            <i class="fa fa-gavel"></i> 
+                                <span class="hidden-sm-down">   
+                                FERRAMENTAS
+                                </span> 
+                        </a>  
+                        <div class="collapse" id="menu1">
+                            <router-link to="/toolCreate" class="list-group-item" data-parent="#menu1"> 
+                                Cadastro de Ferramentas 
+                            </router-link>
+                            <router-link to="/toolType" class="list-group-item" data-parent="#menu1"> 
+                                Tipo de Ferramentas 
+                            </router-link>
+                            <router-link to="/associateTool" class="list-group-item" data-parent="#menu1"> 
+                                Associação de Ferramentas 
+                            </router-link>
+                            <div class="collapse" id="menu1sub1">
+                                <div class="collapse" id="menu1sub1">
+                                </div>
+                            </div> 
+                        </div>         
+                        <!-- <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">    FERRAMENTAS</span>
+                        </router-link> -->
                         <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   ORDEM DE PRODUÇÃO</span>
                         </router-link>
                         <router-link to="/historianProduction" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-database"></i> <span class="hidden-sm-down">   APONTAMENTOS</span>
                         </router-link>
-                        <router-link to="/associateTool" class="list-group-item collapsed" data-parent="#sidebar">
+                        <!-- <router-link to="/associateTool" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   ASSOCIAÇÃO DE FERRAMENTAS</span>
-                        </router-link>
+                        </router-link> -->
                         <router-link to="/AssociateOP" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   ASSOCIAÇÃO DE OP</span>
                         </router-link> 
                         <router-link to="/stateTransitionHistory" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-file-o"></i> <span class="hidden-sm-down">    HISTÓRICOS</span>
                         </router-link>          
-                        <router-link to="/toolType" class="list-group-item collapsed" data-parent="#sidebar">
+                        <!-- <router-link to="/toolType" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   TIPO DE FERRAMENTAS</span>
-                        </router-link>
+                        </router-link> -->
                         <!-- <router-link to="/statusManagement" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   GERENCIAMENTO DE FERRAMENTAS</span>
                         </router-link> -->
-                        <router-link to="/OPManagement" class="list-group-item collapsed" data-parent="#sidebar">
+                        <!-- <router-link to="/OPManagement" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   GERENCIAMENTO DE OP</span>
-                        </router-link> 
+                        </router-link>  -->
                         <router-link to="/opType" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   TIPO DE OP</span>
                         </router-link> 

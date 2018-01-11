@@ -8,27 +8,38 @@
             </ul>
         </div>
   <div class="row conteudo-tm">
-            <div class="op col-md-10">
+            <div class="tools-manag col-md-12">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
                 <div>
-                    <div class="container-fluid col-md-9">
-                        <div class="card-header">
-                                <b>Lista de Ferramentas</b>
+                    <div class="container-fluid col-md-12">
+                        <div class="card-header card-header-tools-manag">
+                                <b>Lista de Ferramentas</font></b>
                             </div>
                         <div class="card" v-for="(t,index) in tools" :key="index">
                             <div class="card-header">
                                 <b></b>
                             </div>
-                            <div class="card-body">
-                                <b>Nome: </b> {{t.name}} -
-                                <b>Descrição: </b>{{t.description}} -
-                                <b>Serial Number: </b>{{t.description}} -
-                                <b>Status: </b>{{t.status | StatusName}} -
-                                <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t)" data-target="#editarStatus" data-toggle="modal" >
-                                Mudar Status
+                            <div class="card-body card-body-tools-manag">
+                                <label class="ls ls20">
+                                    <b>Nome: </b> {{t.name}}
+                                </label>
+                                <label class="ls ls20">
+                                    <b>Descrição: </b>{{t.description}}
+                                </label>
+                                <label class="ls ls20">
+                                    <b>Serial Number: </b>{{t.description}}
+                                </label>
+                                <label class="ls ls20">
+                                    <b>Status: </b>{{t.status | StatusName}}
+                                </label>
+                                <label class="ls ls20">
+                                    <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t)" data-target="#editarStatus" data-toggle="modal" >
+                                    Mudar Status
                                 </button>
+                                </label>
+                                
                     </div>
                         </div>
                     </div>

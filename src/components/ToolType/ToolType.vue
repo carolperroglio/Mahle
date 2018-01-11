@@ -2,9 +2,10 @@
   <div>
         <nav class="fixed-top nav-tool-type">
             <ul class="nav d-flex align-items-center">
+                <li class="title-tool-type"></li>
                 <li class="nav-tt col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
-                        <h1 class="title-page">Tipo de Ferramenta</h1>
+                        <h1 class="title-page"><b>Tipo de Ferramentas</b></h1>
                 
                         <div class="col-sm-1.5">
                             <button type="button" class="btn btn-primary cadFer" data-toggle="modal" data-target="#cadastrar-tt">
