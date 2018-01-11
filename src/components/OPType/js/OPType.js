@@ -3,7 +3,7 @@ import es6promisse from 'es6-promise'
 es6promisse.polyfill();
 
 export default {
-    name: "AssociateOP",
+    name: "OPType",
     data() {
         return { 
             carregando: false,    
@@ -12,6 +12,7 @@ export default {
             Groups: [],
             Things: [],
             Thing: [],
+            Types: [],
             numOP: '',
             OPId: '',
             thingId: '',
@@ -25,7 +26,7 @@ export default {
             thing: false,
             lista: false,
             lista2: false,
-            url:'http://brsbap01:8005/api/productionorders',
+            url:'http://brsbap01:8005/api/',
             urlThing: 'http://brsbap01:8001/api/',
             urlTool: 'http://brsbap01:8004/api/'
          }
@@ -137,6 +138,17 @@ export default {
                     this.mensagem = r.response.data;      
                     this.carregando = false;
                 }) 
+            },
+            getTipos(){               
+            axios.get(this.url+'productionordertypes/').then((response)=>{                                           
+                this.Types = response.data;
+                console.log(response.data);
+            },(error)=>{
+                console.log(error);
+            })
             }
+        },
+    beforeMount() {
+        this.getTipos();
     }
 };

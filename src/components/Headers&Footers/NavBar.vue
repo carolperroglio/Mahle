@@ -99,6 +99,9 @@
                         <router-link to="/OPManagement" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   GERENCIAMENTO DE OP</span>
                         </router-link> 
+                        <router-link to="/opType" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   TIPO DE OP</span>
+                        </router-link> 
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">

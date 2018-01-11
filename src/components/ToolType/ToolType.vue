@@ -4,12 +4,10 @@
             <ul class="nav d-flex align-items-center">
                 <li class="nav-tt col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
-                        <!-- <div class="col-md-auto">
-                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
-                        </div> -->
-                        <!-- Button trigger modal -->
+                        <h1 class="title-page">Tipo de Ferramenta</h1>
+                
                         <div class="col-sm-1.5">
-                            <button type="button" class="btn btn-outline-primary btn-sm btn-sm" data-toggle="modal" data-target="#cadastrar-tt">
+                            <button type="button" class="btn btn-primary btn-sm btn-sm cadFer" data-toggle="modal" data-target="#cadastrar-tt">
                                 Cadastrar Tipo de Ferramenta
                             </button>
                         </div>
@@ -17,34 +15,23 @@
                 </li>
             </ul>
         </nav>
-        <div class="row conteudo-tt">
             <div class="op col-md-10">
-                <div class="progress" v-show="carregando">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                </div>
-                <div>
                     <div class="container-fluid col-md-9">
                         <div class="card" v-for="(ttype,index) in toolsType" :key="index">
                             <div class="card-header">
                                 <b></b>
                             </div>
                             <div class="card-body">
-                                <b>Nome: </b> {{ttype.name}} -
-                                <b>Descrição: </b>{{ttype.description}} -
-                                <b>Status: </b>{{ttype.description}} -
-                                <!-- <b>Grupo: </b>{{ttype.thingGroups}} - -->
+                                <label class="ls"><b>Nome: </b> {{ttype.name}}</label>
+                                <label class="ls"><b>Descrição: </b>{{ttype.description}}</label>
+                                <label class="ls"><b>Status: </b>{{ttype.description}}</label>
                                 <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="catchObjToUpdate(ttype)" data-toggle="modal" data-target="#editar-tt">
                                 Editar
                                 </button>
-                                    <!-- <i class="fa fa-edit" @click="updateToolType(ttype)">
-                                        Editar
-                                    </i> -->
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
-        </div>
         <!--                       -->
         <!--                       -->
         <!--                       -->

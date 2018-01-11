@@ -58,11 +58,11 @@ export default {
                 $("#editarOP").modal('show');                
         },
         editar(OP){
-            axios.put(this.url+'statemanagement?productionordernumber='+this.OP.productionOrderNumber+'&state='+this.newStatus).then((response)=>{
+            axios.put(this.url+'statemanagement/id?productionOrderId='+this.OP.productionOrderId+'&state='+this.newStatus).then((response)=>{
                 this.OP.currentStatus = this.newStatus;
                 this.mensagemSuc = 'Status alterado com sucesso.';
             },(error)=>{   
-                this.mensagem = r.response.data;               
+                this.mensagem = error.response.data;               
             }) 
         }
     },

@@ -39,7 +39,7 @@
                         <b>Thing: </b>
                     </label> 
                     <select class="form-control-outline-secondary form-control" v-model="thingId">
-                        <option v-for="(t,index) in Things" :value="t.thingId">{{ t.thingName }}</option>
+                        <option v-for="(t,index) in Things" :value="t.thingId">{{ t.thingName }} : {{t.thingId}}</option>
                     </select>    
                 </li>
                 <li class="nav-item col-sm-1.5"  v-if="thing || groupId != ''">
