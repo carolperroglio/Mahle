@@ -8,147 +8,95 @@ export default {
         return { 
             carregando: false,    
             OPs: [],
-            OP: [],
-            Groups: [],
-            Things: [],
-            Thing: [],
+            OP: {},
+            thingsGroup: [],
             Types: [],
+            Type: {},
+            TG: {},
+            add: '',
             numOP: '',
             OPId: '',
+            OPDesc: '',
             thingId: '',
             typeId: '',
-            groupId: '',
+            groupName: '',
             mensagem:'',
             mensagemSuc:'',
             fieldFilter: '',
             fieldValue: '' ,
-            group: false,
-            thing: false,
             lista: false,
-            lista2: false,
             url:'http://brsbap01:8005/api/',
             urlThing: 'http://brsbap01:8001/api/',
-            urlTool: 'http://brsbap01:8004/api/'
+            urlOP: 'http://brsbap01:8005/api/productionorders' 
          }
     },
     computed: {},
     methods: {
-
-           getOPs(numOP){            
+            getOPs(numOP){            
             var array=[];                          
-            if(numOP.length<3){return;}                
-            axios.get(this.url+'?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
-                response.data.values.forEach((pro) => {
-                    array.push(pro);                    
-                });
-            },(error)=>{
-                console.log(error);
-            })            
+            if(numOP.length<3){return;} 
+            this.mensagemSuc = '';
+            this.mensagemSuc = '';               
+                axios.get(this.urlOP+'?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
+                    response.data.values.forEach((pro) => {
+                        array.push(pro);                    
+                    });
+                },(error)=>{
+                    console.log(error);
+                })            
                 return array;
             },
-            openSelectGroup(){
-                this.group = true;  
-                             
-                axios.get(this.urlTool+'tooltype/'+this.typeId).then((response)=>{   
-                    this.Groups = response.data.thingGroups;
-                        },(error)=>{
-                                console.log(error);
-                        })
-                this.lista = true;
-                axios.get(this.url+'/'+this.OPId).then((response)=>{
-                    this.OP = response.data;
+            editType(){
+                mensagemSuc = '';
+                mensagem = '';
+                var index = this.thingsGroup.findIndex(index => index.groupName == this.groupName); 
+                this.TG.thingGroupId = this.thingsGroup[index].thingGroupId;
+                this.TG.groupName = this.thingsGroup[index].groupName;
+                this.TG.groupCode = this.thingsGroup[index].groupCode;
+                this.Type.thingGroups.push(this.TG);
+                this.Type.thingGroupIds.push(this.thingsGroup[index].thingGroupId);
+                console.log(this.Type);
+                axios.put(this.url+'productionordertypes/'+this.Type.productionOrderTypeId, this.Type).then((response)=>{                                           
                     console.log(response.data);
-                    switch(response.data.currentStatus){
-                        case "created":
-                        this.OP.currentStatus = "Criada";
-                        break;
-                        case "active":                    
-                        this.OP.currentStatuss = "Ativa";
-                        break;
-                        case "inactive":
-                        this.OP.currentStatus = "Inativa";
-                        break;
-                        case "paused":
-                        this.OP.currentStatus = "Pausada";
-                        break;
-                        case "ended":
-                        this.OP.currentStatus = "Encerrada";
-                        break;
-                        case "waiting_approval":
-                        this.OP.currentStatus = "Aguardando Aprovação";
-                        break;
-                        case "approved":
-                        this.OP.currentStatus = "Aprovada";
-                        break;
-                        case "reproved":
-                        this.OP.currentStatus = "Reprovada";
-                        break;                    
-                    }                                        
-                },(r)=>{                
-                    this.mensagem = r;                
-                    this.carregando = false;
-                })           
+                    this.mensagemSuc = 'Tipo alterado com sucesso!';
+                },(error)=>{
+                    console.log(error);
+                    this.mensagem = error.data;
+                })
+                this.Type = [];
+            },
+            openGroups(){
+                this.lista = true;
 
             },
-            openSelectThings(){
-                this.thing=true;             
-                axios.get(this.urlThing+'thinggroups/'+this.groupId).then((response)=>{   
-                this.Things = response.data.things;
-                console.log(this.Things);
-            },(error)=>{
-                    console.log(error);
-                })  
-            },
-            getAssoc(){
-                this.mensagemSuc = '';
-                this.mensagem = ''; 
-                axios.put(this.url+'AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
-                    this.Tool = response.data;
-                    console.log(response.data);
-                    switch(response.data.currentStatus){
-                        case "created":
-                        this.OP.currentStatus = "Criada";
-                        break;
-                        case "active":                    
-                        this.OP.currentStatuss = "Ativa";
-                        break;
-                        case "inactive":
-                        this.OP.currentStatus = "Inativa";
-                        break;
-                        case "paused":
-                        this.OP.currentStatus = "Pausada";
-                        break;
-                        case "ended":
-                        this.OP.currentStatus = "Encerrada";
-                        break;
-                        case "waiting_approval":
-                        this.OP.currentStatus = "Aguardando Aprovação";
-                        break;
-                        case "approved":
-                        this.OP.currentStatus = "Aprovada";
-                        break;
-                        case "reproved":
-                        this.OP.currentStatus = "Reprovada";
-                        break;  
-                    }
-                    this.Thing = response.data.currentThing;
-                    this.lista2 = true;
-                    this.mensagemSuc = 'Ferramenta associada com sucesso.';
-                },(r)=>{                
-                    this.mensagem = r.response.data;      
-                    this.carregando = false;
-                }) 
-            },
-            getTipos(){               
-            axios.get(this.url+'productionordertypes/').then((response)=>{                                           
-                this.Types = response.data;
-                console.log(response.data);
-            },(error)=>{
+            getThingsGroup: function() {
+            axios.get(this.urlThing+'thinggroups/').then(response => {
+                this.thingsGroup = response.data;
+                console.log(this.thingsGroup);
+            }).catch(error => {
                 console.log(error);
             })
+            },
+            getTypes(){               
+                axios.get(this.url+'productionordertypes/').then((response)=>{                                           
+                    this.Types = response.data;
+                    console.log(response.data);
+                    console.log(this.Types);
+                },(error)=>{
+                    console.log(error);
+                })
+            },
+            openEditModal(type){
+                this.Type = type;
+                $("#editar").modal('show');
+                console.log(this.Type);
+            },
+            redirect(){
+                
             }
         },
     beforeMount() {
-        this.getTipos();
+        this.getTypes();
+        this.getThingsGroup();
     }
 };
