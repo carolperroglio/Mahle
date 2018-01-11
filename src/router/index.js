@@ -15,7 +15,7 @@ import StatusManagement from '@/components/ToolsManagement/ToolsManagement'
 import OPManagement from '@/components/OPManagement/OPManagement'
 import AssociateOP from '@/components/AssociateOP/AssociateOP'
 import OPType from '@/components/OPType/OPType'
-// import Teste from '@/components/Teste/Teste'
+import InUseTools from '@/components/InUseTools/InUseTools'
 
 Vue.use(Router)
 
@@ -98,6 +98,11 @@ export default new Router({
             path: '/opType',
             name: 'OPType',
             component: OPType
+        },
+        {
+            path:'/inUseTools',
+            name: 'InUseTools',
+            component: InUseTools
         }
     ]
 })

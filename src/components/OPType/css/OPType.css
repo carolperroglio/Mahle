@@ -8,10 +8,10 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item{
+.nav-item-op{
     margin-left: 3%;
     margin-right: 3%;
-    padding-top: 3%;
+    padding-top: 6%;
 }
 
 .cadType {
@@ -26,7 +26,7 @@
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
     left: 0.9%;
-    top: 15%;
+    top: 11%;
 }
 
 .ferAssoc{

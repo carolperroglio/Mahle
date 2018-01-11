@@ -91,9 +91,6 @@ export default {
                 $("#editar").modal('show');
                 console.log(this.Type);
             },
-            redirect(){
-                
-            }
         },
     beforeMount() {
         this.getTypes();
