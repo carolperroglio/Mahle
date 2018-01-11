@@ -56,8 +56,26 @@
                 </li>
             </ul>
         </div>
-
-            
+    <div v-show="lista">
+        <div class="card">
+            <div class="card-header">
+                <b>Produtos de entrada</b>
+            </div>
+            <div class="card-body">
+                <label class="ls">
+                   <b><font color="#9BA6A5">Justificativa: </font></b>{{history.justificationNeeded}}</label>&nbsp;
+                <label class="ls">
+                   <b><font color="#9BA6A5">Justificativa: </font></b>{{history.justification}}</label>&nbsp;
+                <label class="ls">
+                   <b><font color="#9BA6A5">Estado anterior: </font></b>{{history.previousState}}</label>&nbsp;
+                <label class="ls2">
+                   <b><font color="#9BA6A5">Ciclo de vida anterior: </font></b>{{history.previoustLife}}</label>&nbsp;
+                <label class="ls2">
+                   <b><font color="#9BA6A5">Data: </font></b>{{history.timeStampTicks}}</label>&nbsp;
+            </div>
+        </div>
+    </div>
+                                           
     </div>  
 </template>
 
