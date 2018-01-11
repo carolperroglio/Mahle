@@ -8,7 +8,7 @@
                         <h1 class="title-page"><b>Tipo de Ferramentas</b></h1>
                 
                         <div class="col-sm-1.5">
-                            <button type="button" class="btn btn-primary btn-sm btn-sm cadFer" data-toggle="modal" data-target="#cadastrar-tt">
+                            <button type="button" class="btn btn-primary cadFer" data-toggle="modal" data-target="#cadastrar-tt">
                              Cadastrar Tipo de Ferramenta
                             </button>
                         </div>
