@@ -4,7 +4,10 @@
        <nav class="fixed-top nav-OP">
             <ul class="nav d-flex align-items-center">
                 <h1 class="title-page">Tipo de Ordem de Produção</h1>
-                <li class="nav-item col-sm-1.5 bt">
+                <li class="nav-item-op col-sm-1.5">
+                    <router-link class="btn btn-primary btn" :to="{ name: 'HistorianProduction'}" >
+                    Apontamentos
+                    </router-link>
                 </li>
             </ul>
         </nav>
@@ -26,9 +29,6 @@
                             <div class="btn-group" role="group">
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" @click.stop.prevent="openEditModal(t)">
                             Editar
-                            </button>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" @click.stop.prevent="redirect()">
-                            Apontamentos
                             </button>
                             </div>
                             </label>

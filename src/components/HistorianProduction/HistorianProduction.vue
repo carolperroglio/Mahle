@@ -10,9 +10,10 @@
         <!--                                 -->
          <div class="fixed-top nav-hp">
             <ul class="nav d-flex align-items-center">
-            <h1 class="title-page-ass-op"> <b>Apontamentos de OP </b></h1>
-                <li class="nav-item-hp">
-                    <br><label class="fm mr-sm-4">Número da OP: </label>   
+            <h1 class="title-page"> Apontamentos de OP </h1>
+                <li class="nav-item col-sm-1.5">
+                    <label class="fm mr-sm-2">Número da OP: </label>   
+
                 </li>
                 <li class=""> 
                     <div class="dropdown">   

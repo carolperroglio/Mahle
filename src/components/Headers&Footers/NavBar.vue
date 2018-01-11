@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <!--                                  -->
         <!--                                  -->
         <!-- Cabeçalho da pagina, logo e user -->
@@ -134,6 +135,9 @@
                         <router-link to="/opType" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-industry"></i> <span class="hidden-sm-down">   TIPO DE OP</span>
                         </router-link> 
+                        <router-link to="/inUseTools" class="list-group-item collapsed" data-parent="#sidebar">
+                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   FERRAMENTAS EM USO</span>
+                        </router-link>
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">
