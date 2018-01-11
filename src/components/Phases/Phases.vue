@@ -23,17 +23,17 @@
         <nav class="fixed-top nav-recipe">
             <!-- {{ 'idRecipe' + $route.params.id }} -->
             <li class="title-recipe">
-                Gerenciamento de Receita
+                <b>Gerenciamento de Receita</b>
             </li>
                 <ul class="nav d-flex">
                     <li class="form-group nav-phases col-md-2">
-                        <label class="ls ls12">
+                        <label class="">
                             <b>Nome da receita:</b>
                         </label>
                             <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
                     </li>
                     <li class="form-group nav-phases col-md-2">
-                        <label class="ls ls12">
+                        <label class="">
                             <b>Código:</b>
                         </label>
                             <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita">
@@ -99,8 +99,9 @@
                     <b style="font-size:20px; font-family: sans-serif;">
                         Fases da receita: 
                     </b>  
-                    <br><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="" aria-hidden="true">
-                        Adicionar fase
+                    <br>
+                    <button type="button" class="btn btn-primary btn-sm config-button" data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="" aria-hidden="true">
+                        <i class= "fa fa-plus-square" style="font-size:18px; cursor:pointer"></i> Adicionar fase  
                     </button>
                 </h2>
                 <!-- <div data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
@@ -128,6 +129,7 @@
                                 Nome da fase: 
                             </b>
                                 {{pha.phaseName}} 
+    
                     </label>
                         <!--<label class="ls5">
                         <b> Id da fase: </b> {{pha.phaseId}} 
@@ -138,15 +140,15 @@
                             </button> -->
                             <!-- </span> -->
                         <label class="btn btn-warning btn-edit btn-sm config-button" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
-                            <i class= "fa fa-edit" style="font-size:18px; cursor:pointer"></i>              Editar Fase
+                            <i class= "fa fa-edit" style="font-size:18px; cursor:pointer"></i> Editar Fase
 
                         </label> 
                         <label class="btn btn-primary btn-edit btn-sm config-button" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" aria-hidden="true">
-                            <i class= "fa fa-plus-circle" style="font-size:18px; cursor:pointer"></i>       Adicionar materiais
+                            <i class= "fa fa-plus-circle" style="font-size:22px; cursor:pointer"></i> Materiais
 
                         </label> 
                         <label class="btn btn-info btn-edit btn-sm config-button" @click.stop.prevent="tagName='';phaseParameter={};phase=pha;abreModal('#modalCadParam');" aria-hidden="true">
-                            <i class= "fa fa-plus-circle" style="font-size:18px; cursor:pointer"></i>       Adicionar parâmetros   
+                            <i class= "fa fa-plus-circle" style="font-size:22px; cursor:pointer"></i> Parâmetros   
                         </label> 
                     </form>
 

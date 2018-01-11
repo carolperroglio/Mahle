@@ -11,7 +11,7 @@
         
          <div class="fixed-top nav-OP">
             <ul class="nav d-flex align-items-center">
-                 <h1 class="title-page"> Associação de OP</h1>
+                 <h1 class="title-page"> <b>Associação de OP</b></h1>
                    
                 <li class="nav-item col-sm-1.5">  
                      <label><b>Número da Ordem: </b></label>     

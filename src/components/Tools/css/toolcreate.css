@@ -1,11 +1,11 @@
 /* menu de navegação de ferramentas */ 
 .nav-ferramentas{
     position: fixed;
-    top: 9%;
+    top: 12%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
-    height: 13%;
+    height: 14%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .nav-item-tool{
@@ -20,7 +20,7 @@
     font-size: 22px;
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
-    top: 11%;
+    top: 15%;
     margin-left: 0.5%;
 }
 
@@ -32,7 +32,7 @@ input{
 
 .ferramentas {
     position: relative;
-    padding-top: 12%; 
+    padding-top: 14%; 
     padding-bottom: 5%;           
     left: 1%;
     width: 98%;
@@ -86,7 +86,7 @@ input{
 
 @media screen and (max-width : 801px){
     .ferramentas{ 
-        margin-top: 20%; 
+        margin-top: 25%; 
         margin-bottom: 5%;
     }  
     
@@ -96,12 +96,12 @@ input{
     /* background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251)); */
     background-color: #F6F6F6;  
     width: 100%;
-    height: 25%;
+    height: 30%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .title-page-tool{
     font-size: 19px;
-    padding-top: 4%;
+    padding-top: 1%;
 }
 .nav-item-tool{
     margin-left: 1%;

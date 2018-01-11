@@ -3,12 +3,13 @@
 }
 .cadFer{
     margin-top: 17%;
-    margin-left: 8%;
+
 }
+
 
 .nav-tool-type {
     position: fixed;
-    top: 9%;
+    top: 12%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
@@ -23,7 +24,7 @@
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
     left: 0.9%;
-    top: 11%;
+    top: 14.5%;
 }
 
 .conteudo-tt h3 {
@@ -34,3 +35,17 @@
     width: 25%;
 }
 
+@media screen and (max-width: 800px) {
+    .nav-tool-type {
+        background-color: rgba(249, 247, 247, 1);
+        position: fixed;
+        top: 16%;
+        z-index: 1;
+        width: 100%;
+        height: 20%;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
+    .title-page{
+        top: 20%;
+    }
+}
