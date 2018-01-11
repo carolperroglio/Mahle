@@ -26,9 +26,8 @@ export default {
             lista: false,
             lista2: false,
             url:'http://brsbap01:8005/api/productionorders',
-            urlThing: 'http://brsbap01:8001/api/',
-            urlTool: 'http://brsbap01:8004/api/'
-         }
+            urlThing: 'http://brsbap01:8001/api/'
+            }
     },
     computed: {},
     methods: {
@@ -48,7 +47,7 @@ export default {
             openSelectGroup(){
                 this.group = true;  
                              
-                axios.get(this.urlTool+'tooltype/'+this.typeId).then((response)=>{   
+                axios.get(this.urlThing+'thinggroups/'+this.typeId).then((response)=>{   
                     this.Groups = response.data.thingGroups;
                         },(error)=>{
                                 console.log(error);
@@ -91,7 +90,7 @@ export default {
             },
             openSelectThings(){
                 this.thing=true;             
-                axios.get(this.urlThing+'thinggroups/'+this.groupId).then((response)=>{   
+                axios.get(this.urlThing+'thinggroups/attachedthings/'+this.groupId).then((response)=>{   
                 this.Things = response.data.things;
                 console.log(this.Things);
             },(error)=>{
