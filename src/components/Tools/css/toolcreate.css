@@ -66,8 +66,9 @@ input{
     }
 
 .card-header2{
-    padding-top: 0.6%;
-    padding-bottom: 0.6%;   
+    padding-top: 0.5%;
+    padding-bottom: 0.5%; 
+    border-bottom: 5%; 
 }
 
 .btn-warning{
@@ -75,21 +76,20 @@ input{
 }
 
 /*Listagem de ferramentas*/
-.icon-style{
-    position: absolute;
-    padding-left: 70%;
-    top: 50%;
-}
+/* .icon-style{
+    position: relative;
+    } */
 
 .ls3{
     font-family: sans-serif;
     font-size: 12px;
-    width: 12%;
+    width: 9.5%;
 }
 
 @media screen and (max-width : 801px){
     .ferramentas{ 
-        margin-top: 30%; 
+        margin-top: 20%; 
+        margin-bottom: 5%;
     }  
     
 .nav-ferramentas{
@@ -111,12 +111,13 @@ input{
     }
 .icon-style{
     position: absolute;
-    padding-left: 68%;
+    padding-left: 60%;
     top: 50%;
     }
 .ls3{
     font-family: sans-serif;
     font-size: 11px;
-    width: 12%;
+    width: 11%;
+    height: 50%;
     }
 } 

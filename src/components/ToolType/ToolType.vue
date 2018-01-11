@@ -2,13 +2,14 @@
   <div>
         <nav class="fixed-top nav-tool-type">
             <ul class="nav d-flex align-items-center">
+                <li class="title-tool-type">Tipo de Ferramentas</li>
                 <li class="nav-tt col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <h1 class="title-page">Tipo de Ferramenta</h1>
                 
                         <div class="col-sm-1.5">
                             <button type="button" class="btn btn-primary btn-sm btn-sm cadFer" data-toggle="modal" data-target="#cadastrar-tt">
-                                Cadastrar Tipo de Ferramenta
+                             Cadastrar Tipo de Ferramenta
                             </button>
                         </div>
                     </form>
@@ -18,7 +19,7 @@
             <div class="op col-md-10">
                     <div class="container-fluid col-md-9">
                         <div class="card" v-for="(ttype,index) in toolsType" :key="index">
-                            <div class="card-header">
+                            <div class="card-header card-header7">
                                 <b></b>
                             </div>
                             <div class="card-body">

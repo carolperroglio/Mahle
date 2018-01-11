@@ -7,15 +7,20 @@ i {
     cursor: pointer;
 }
 .card-header{
-    padding: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%; 
 }
 
+.icon-right2{
+    color: black;
+    position: relative;
+}
 
 /*Menu de cadastro da receita*/
 .nav-recipe {
     position: fixed;
-    top: 11%;
-    background: linear-gradient(rgb(249, 249, 250), hsla(204, 60%, 69%, 0.767)); 
+    top: 10%;
+    background: linear-gradient(rgb(249, 249, 250), hsla(202, 25%, 94%, 0.767)); 
     font-size: 11pt;    
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
@@ -35,8 +40,9 @@ i {
 li{
     margin-left: 1%;   
 }
-.nav-item{
-    width :10%;
+.nav-phases{
+    width: 10%;
+    padding-top: 1%;
 }
 .nav-phase li{
     list-style: none;
@@ -55,6 +61,7 @@ li{
     color: rgb(68, 68, 70);
     text-shadow: 1px 1px #F9F9F9;
     margin-left: 1.5%;
+    margin-top:1%;
 }
 
 /*Título dos botões de input do menu superior da tela de receita*/
@@ -78,16 +85,20 @@ li{
 .edit-text{
     font-size: 13px;
     font-family: sans-serif;
-    color: #524c4c;
+    color: #524c4c96;
 }
-
+hr{
+    margin-top: 0.1%;
+    margin-bottom: 0.1%;
+}
 /*Header Fases da Receita - AddFase*/
 .card-header-recipe{
+    background-color: rgba(224, 234, 240, 0.486);
     padding-top: 0.5%;
     padding-bottom: 0.1%;
 }
 h2{
-    margin-left: 0.2%;
+    margin-left: 0.2%;  
 }
 h3 {
     position: fixed;
@@ -97,8 +108,9 @@ h3 {
     color: rgb(61, 56, 56);
     margin-left: 0.1%;
 }
-.card-margin2 {
-    padding-top: 1%;
+.card-margin2 { 
+    padding-top: 0.4%;
+    padding-bottom: 0.4%;
     padding-left: 1%;
     background-color: rgba(229, 238, 240, 0.356);
 }
@@ -109,6 +121,7 @@ h3 {
 
 /*Título do número das fases*/
 h6{
+    margin-top: 0.5%;
     font-size: 20px;
     font-family: sans-serif;
     color: rgb(37, 107, 199);
@@ -117,6 +130,8 @@ h6{
 /*Box das Fases*/
 .phase {
     border-radius: 15px;
+    padding-top: 0.1%;
+    padding-bottom: 2%;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.137);
 }
@@ -131,10 +146,27 @@ h6{
     display: inline-block;
 }
 .ls5{
-    width: 20%;
-    padding-bottom: 1%;
+    width: 100%;
     font-family: sans-serif;
-    font-size: 14px;   
+    font-size: 20px;   
+}
+.ls14{
+    margin-top: 0.3%;
+    margin-bottom: 0.1%;
+    width: 25%;
+}
+.ls15{
+    font-size: 18px;
+}
+.ls16{
+    margin-top: 0.3%;
+    margin-bottom: 0.1%;
+    width: 20%;
+}
+.icon-delete{
+    position: relative;
+    
+    cursor: pointer;
 }
 
 
@@ -171,7 +203,16 @@ h6{
     bottom: 5%;
 }
 
-
+.list-group-item-3{
+    padding-top: 0.1%;
+    padding-bottom:0.1;
+    background-color: rgb(255, 255, 255);
+}
+.list-group-item-4{
+    padding-top: 0.1%;
+    padding-bottom:0.1;
+    background-color: rgb(228, 232, 240);
+}
 /* .container-itens-fase {
     position: relative;
     width: 100%;
@@ -231,31 +272,31 @@ h6{
     }
 /*Botões superiores do menu de Cadastro de Receitas*/
 .nav-item{
-    width: 4%;
+    width: 5%;
 }
 /*Título menu superior da tela de receita*/
 .title-recipe{
     font-size: 16px;
-    margin-top: 1.1%;
+    margin-top: 2%;
 }
+
+
     /*Título dos botões de input do menu superior da tela de receita*/
 .title-cad{
     font-size: 13px;
-    margin-top: 5%;
+    margin-top: 10%;
 }
 /*Título dos botões de edit-recipe e cadastrar produto da receita*/
 .edit-text{
-    font-size: 11px;
+    font-size: 9px;
 }
 /*Header Fases da Receita - AddFase*/
 .card-header-phase{
     margin-top: 25%;
 }
-h2{
-    padding-left: 82%;
-}
+
 .card-header-recipe{
-    margin-top: 0.1%;
+    padding-top: 0.1%;
     padding-bottom: 0.1%;
     
 }
@@ -269,11 +310,11 @@ h3 {
 
 /*Título do número das fases*/
 h6{
-    font-size: 14px;
+    font-size: 13px;
 }
 /*Box das Fases*/
 .ls5{
-    width: 30%;
+    width: 25%;
     font-size: 13px;  
     }
 
@@ -287,8 +328,14 @@ h6{
     padding-right: 4%;
     padding-bottom: 10%;
 }
+.nav-phases{
+    width: 14%;
+    padding-top: 0.5%;
+}
 .card-header{
     padding: 0.2%;
 }
-
+.nav-phase{
+    font-size: 11px;
+}
 }

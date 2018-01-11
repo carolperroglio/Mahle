@@ -8,7 +8,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item{
+.nav-item-hp{
     margin-left: 1%;
     padding-top: 3%;
 }
@@ -53,7 +53,7 @@ input{
     width: 100%;
 }
 
-.card-body{
+.card-body-hp{
     padding-top: 0.1%;
     padding-bottom: 0.1%;
     padding-left: 1.1%;
@@ -64,16 +64,14 @@ input{
     padding-bottom: 2%; 
 }
 
-.card-header{
+.card-header-hp{
     padding-top: 0.6%;
     padding-bottom: 0.6%;   
 }
-.ls{
-    width: 20%;
-}
 
-.ls2{
-    width: 30%;
+
+.ls10{
+    width: 40%;
 }
 
 @media screen and (max-width : 801px){
