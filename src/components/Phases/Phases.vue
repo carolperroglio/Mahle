@@ -77,8 +77,8 @@
                                 {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} 
                             <!--<br>Tipo do produto: {{recipeProductDisplay.phaseProductType}}-->
                             <br>
-                        <button type="button" class="btn btn-danger btn-sm" style="font-size:12px;" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);">
-                            Remover Produto
+                        <button type="button" class="btn btn-danger btn-sm config-button2" style="font-size:12px;" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);">
+                            <i class= "fa fa-trash-o" style="font-size:18px; cursor:pointer"></i> Remover Produto
                         </button>
                     </li>
                 </ul>
@@ -137,14 +137,16 @@
                                 <b> Expandir </b> {{ pha.expand }}
                             </button> -->
                             <!-- </span> -->
-                        <label class="btn btn-warning btn-edit btn-sm" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
-                            Editar Fase
+                        <label class="btn btn-warning btn-edit btn-sm config-button" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
+                            <i class= "fa fa-edit" style="font-size:18px; cursor:pointer"></i>              Editar Fase
+
                         </label> 
-                        <label class="btn btn-primary btn-edit btn-sm" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" aria-hidden="true">
-                            Adicionar produtos
+                        <label class="btn btn-primary btn-edit btn-sm config-button" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" aria-hidden="true">
+                            <i class= "fa fa-plus-circle" style="font-size:18px; cursor:pointer"></i>       Adicionar materiais
+
                         </label> 
-                        <label class="btn btn-primary btn-edit btn-sm" @click.stop.prevent="tagName='';phaseParameter={};phase=pha;abreModal('#modalCadParam');" aria-hidden="true">
-                            Adicionar parâmetros
+                        <label class="btn btn-info btn-edit btn-sm config-button" @click.stop.prevent="tagName='';phaseParameter={};phase=pha;abreModal('#modalCadParam');" aria-hidden="true">
+                            <i class= "fa fa-plus-circle" style="font-size:18px; cursor:pointer"></i>       Adicionar parâmetros   
                         </label> 
                     </form>
 
@@ -159,40 +161,43 @@
                             </label>
                             <label class="ls ls14">
                                 <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
-                            <i class="fa fa-window-close" style="font-size:30px; cursor:pointer" aria-hidden="true" cursor="" @click.stop.prevent="deletePhaseProduct(pro, pha);"></i>
+                            <i class="fa fa-window-close" style="font-size:30px; cursor:pointer" aria-hidden="true" cursor="pointer" @click.stop.prevent="deletePhaseProduct(pro, pha);"></i>
                             </label>
                         </li>
                     </ul>
+
                 </div>
                 <!-- Fim v-else -->
                                 
                 <div v-else>
-                    <label class="ls ls15">
+                    <!-- <label class="ls ls15">
                             <b> Materiais </b>
-                            </label>
+                            </label> -->
                     <a class="list-group" v-for="(pro, indexPro) in pha.products">
                             <div class="list-group-item list-group-item-3">
-                            
                             <label class="ls ls14">
-                            <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
+                                <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
                             </label>
                             <label class="ls ls14">
-                            <b>Quantidade : </b>{{pro.value}} {{pro.measurementUnit}}
+                                <b>Quantidade : </b>{{pro.value}} {{pro.measurementUnit}}
                             </label>
-                            <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
                             <label class="ls ls14">
-                            <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o icon-delete"  aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);"></button>
+                                <b>Tipo de Material: </b>{{pro.phaseProductType | prodTypeName}}
+                            </label>
+                            <label class="ls ls14">
+                                <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
                             </button>
                             </label>
+                            
                         </div>
                     </a>
                 </div>
 
 
                 <br>
-                <div class="ls ls15">
+                <!-- <div class="ls ls15">
                     <b> Parâmetros </b>
-                </div>             
+                </div>              -->
                     <a class="list-group" v-for="(par, indexPro) in pha.parameters">
                         <div class="list-group-item list-group-item-4">
                             <label class="ls ls14">
@@ -463,7 +468,7 @@
                                 <label>Tipo de Produto:</label>
                                 <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
                                     <option value="" selected disabled>Campo para busca</option>
-                                    <option value="scrap">Rejeito</option>
+                                    <option value="scrap">Rejeitado</option>
                                     <option value="finished">Acabado</option>
                                     <option value="semi_finished">Semi-Acabado</option>
                                 </select>
