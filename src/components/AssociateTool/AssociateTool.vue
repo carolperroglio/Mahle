@@ -11,10 +11,10 @@
         
          <div class="fixed-top nav-ass-tool">
             <ul class="nav d-flex align-items-center">
-                 <h1 class="title-page-ass-tool"> Associação de Ferramenta</h1>
+                 <h1 class="title-page-ass-tool"> <b>Associação de Ferramenta</b></h1>
                    
                 <li class="nav-item-ass-tool col-sm-1.5">  
-                     <label><b>Nome da ferramenta: </b></label>     
+                     <label><br><b>Nome da ferramenta: </b></label>     
                      <div class="dropdown">   
                             <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

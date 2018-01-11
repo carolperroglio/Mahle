@@ -174,7 +174,7 @@
         <div class="fixed-top nav-op">
             <ul class="nav d-flex align-items-center">
             <li class="nav-prod col-sm-1.5">
-                    <h1 class="title-page-op"> Cadastro de Ordem de Produção </h1>
+                    <h1 class="title-page-op"> <b>Cadastro de Ordem de Produção</b> </h1>
                     <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
                         <option value="" selected disabled>Buscar por:</option>
                         <option value="productionOrderNumber">Nº Ordem de Produção</option>

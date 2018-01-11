@@ -66,7 +66,7 @@
         <div class="fixed-top nav-produtos">
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item col-sm-1.5">
-                    <h1 class="title-page"> Cadastro de Produtos </h1>
+                    <h1 class="title-page"> <b>Cadastro de Materiais</b> </h1>
                         <select class="form-control form-control-sm" v-model="orderField">
                             <option value="" selected disabled>Campo para busca</option>
                             <option value="productName">Nome</option>

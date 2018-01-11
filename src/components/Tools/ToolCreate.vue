@@ -12,9 +12,9 @@
          <div class="fixed-top nav-ferramentas">
             <ul class="nav d-flex align-items-center">
                 </li>    
-                <li class="nav-item-tool col-sm-1.5">
-                    <h1 class="title-page-tool"> Cadastro de Ferramentas </h1>
-                        <select class="form-control form-control-sm" v-model="orderField">
+                <li class="nav-item-tool">
+                    <h1 class="title-page-tool"> <b>Cadastro de Ferramentas</b> </h1>
+                            <select class="form-control form-control-sm" v-model="orderField">
                             <option value="" selected disabled="disabled">Ordenar por:</option>
                             <option value="name">Nome</option>
                             <option value="description">Descrição</option>
@@ -27,15 +27,15 @@
                             <option value="status">Status</option>
                     </select>
                 </li>
-                <li class="nav-item-tool col-sm.1.5">
-                    <select class="form-control form-control-sm" v-model="order">                        
+                <li class="nav-item-tool">
+                        <select class="form-control form-control-sm" v-model="order">                        
                            <option value="" selected disabled="disabled">Cresc./Decresc.</option>
                             <option value="ascending">Crescente</option>
                             <option value="descending">Decrescente</option>
                     </select>
                 </li>
-                <li class="nav-item-tool col-sm-1.5">
-                        <select class="form-control form-control-sm" v-model="fieldFilter">
+                <li class="nav-item-tool">
+                            <select class="form-control form-control-sm" v-model="fieldFilter">
                             <option value=""selected disabled="disabled">Buscar por campo:</option>
                             <option value="name">Nome</option>
                             <option value="description">Descrição</option>
@@ -48,14 +48,14 @@
                             <option value="status">Status</option>
                     </select>
                 </li>    
-                <li class="nav-item-tool col-sm-1.5">
-                <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-sm" placeholder="Valor">                              
+                <li class="nav-item-tool">
+                    <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-sm" placeholder="Valor">                              
                 </li> 
-                <li class="nav-item-tool col-sm-1.5">        
+                <li class="nav-item-tool">        
                         <button type="button" class="btn btn-primary btn-sm" @click.stop.prevent="listar()">
                                 Buscar
                         </button>
-                <li class="nav-item-tool col-sm-1.5">
+                <li class="nav-item-tool">
                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ToolCreateModal">
                              Cadastrar Ferramenta
                         </button>
