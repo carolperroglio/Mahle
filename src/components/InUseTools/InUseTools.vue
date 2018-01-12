@@ -17,7 +17,7 @@
 <!--                         -->
       
         <div class="">
-            <div class="phases">
+            <div class="tools">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                 </div>
@@ -26,28 +26,25 @@
                             <div v-for="(t,index) in tools" v-bind:key="index">
                                 <div class="card">
                             <div class="card-header">
+                                <b><font color="#262626">{{t.name}}</font></b></label>&nbsp;&nbsp;&nbsp;
                                 </div>
                             <div class="card-body">
-                                 <label class="ls ls3">
+                                 <label class="ls">
                                 <b><font color="#9BA6A5">Nome: </font></b>{{t.name}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{t.description}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Serial: </font></b>{{t.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Code: </font></b>{{t.code}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Life Cycle: </font></b>{{t.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{t.currentLife}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">UM: </font></b>{{t.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{t.typeName}}</label>&nbsp;&nbsp;&nbsp;
-                            </label>
-                            <label class="ls ls3">
-                                <b><font color="#9BA6A5">Status: </font></b>{{t.status}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer"></i>
                             </label>
                             </div>
                         </div>   

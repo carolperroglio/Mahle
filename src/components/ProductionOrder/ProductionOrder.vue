@@ -33,12 +33,6 @@
                                     <input type="number" class="form-control form-control-sm" id="qtd" v-model="productionOrderObj.quantity">
                                 </div>
                             </div>
-                            <!--<div class="form-group row">
-                                                                                                                <label for="qtd" class="col-sm-4 col-form-label">Quantidade</label>
-                                                                                                                <div class="col-sm-8">
-                                                                                                                    <input type="number" class="form-control" id="qtd" aria-describedby="qty" placeholder="">
-                                                                                                                </div>
-                                                                                                            </div>-->
                             <div class="form-group row">
                                 <label for="opType" class="col-sm-3 col-form-label">Tipo de Ordem</label>
                                 <div class="col-sm-3">
@@ -55,11 +49,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <!--<label for="desc" class="col-sm-4 col-form-label">Descrição</label>
-                                                                                                                <div class="col-sm-8">
-                                                                                                                    <input type="text" disabled class="form-control" id="desc" v-model="filterDesc" value="opDesc">
-                                                                                                                    <small id="descrip" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                                                                                                </div>-->
                             </div>
                             <div class="form-group row">
                                 <label for="opType" class="col-sm-3 col-form-label">Receita</label>
@@ -67,14 +56,6 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</a>
                                 </div>
-                                <!-- <div class="col-sm-5">
-                                    <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="recipeSelected">
-                                        <option value="" selected disabled>Selecione uma receita</option>
-                                        <option v-for="recipe in recipeArray" v-bind:value="recipe">
-                                            {{ recipe.recipeName }}
-                                        </option>
-                                    </select>
-                                </div> -->
                                 <div class="col-sm-2">
                                     <button class="btn btn-outline-success btn-sm" @click="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -139,15 +120,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--  Fim - </Acordion que mostra qual  -->
-                            <!--  receita foi selecionada>          -->
-
-                            <!--<div class="alert alert-warning" role="alert" v-if="recipeObj.phases.length == 0">
-                                                                                                Não possui fases!
-                                                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                                </button>
-                                                                                            </div>-->
+                           
                         </form>
                     </div>
                     <!-- Botão que cria a OP-->
@@ -264,10 +237,6 @@
                                 </b>{{op.recipe.recipeProduct.product.productName}}
                             </label>
                             <br>
-
-                            <!--Botão para procurar as fases de uma determinada op-->
-                            <!--<button type="button" class="btn btn-outline-info btn-sm" data-toggle="collapse" :data-target="getIdPhase(index)">Fases</button>-->
-                            <!--Botão para procurar os produtos de uma determinada fase-->
 
                         </div>
                     </div>
