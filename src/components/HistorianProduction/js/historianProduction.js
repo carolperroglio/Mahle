@@ -52,7 +52,7 @@ export default {
                 console.log(response);
                 
             },(r)=>{                
-                this.mensagem = 'Erro no server ' + r;                
+                this.mensagem = r.response.data;                
                 this.carregando = false;
             })
                       
@@ -60,7 +60,7 @@ export default {
 
         listar(){            
             this.lista = true;  
-            axios.get(this.url+'api/OrderHistorian/'+this.productionOrderId).then((response)=>{   
+            axios.get(this.url+'api/OrderHistorian/'+this.productionOrder.productionOrderId).then((response)=>{   
                 this.carregando = false;        
                 console.log(response.data);
                 this.orderHistorian = response.data;

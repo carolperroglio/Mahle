@@ -138,6 +138,46 @@ export default {
                     this.mensagem = r.response.data;      
                     this.carregando = false;
                 }) 
+            },
+            getDisAssoc(){
+                this.mensagemSuc = '';
+                this.mensagem = ''; 
+                axios.put(this.url+'api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
+                    this.Tool = response.data;
+                    console.log(response.data);
+                    switch(response.data.currentStatus){
+                        case "created":
+                        this.OP.currentStatus = "Criada";
+                        break;
+                        case "active":                    
+                        this.OP.currentStatuss = "Ativa";
+                        break;
+                        case "inactive":
+                        this.OP.currentStatus = "Inativa";
+                        break;
+                        case "paused":
+                        this.OP.currentStatus = "Pausada";
+                        break;
+                        case "ended":
+                        this.OP.currentStatus = "Encerrada";
+                        break;
+                        case "waiting_approval":
+                        this.OP.currentStatus = "Aguardando Aprovação";
+                        break;
+                        case "approved":
+                        this.OP.currentStatus = "Aprovada";
+                        break;
+                        case "reproved":
+                        this.OP.currentStatus = "Reprovada";
+                        break;  
+                    }
+                    this.Thing = response.data.currentThing;
+                    this.lista2 = true;
+                    this.mensagemSuc = 'Ferramenta associada com sucesso.';
+                },(r)=>{                
+                    this.mensagem = r.response.data;      
+                    this.carregando = false;
+                }) 
             }
     }
 };

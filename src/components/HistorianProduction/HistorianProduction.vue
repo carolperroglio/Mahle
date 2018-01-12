@@ -11,31 +11,24 @@
          <div class="fixed-top nav-hp">
             <ul class="nav d-flex align-items-center">
             <h1 class="title-page"> Apontamentos de OP </h1>
+             <li class="nav-item col-sm-1.5">
+                <label>Número da OP: </label> 
+             </li>  
                 <li class="nav-item col-sm-1.5">
-                    <label class="fm mr-sm-2">Número da OP: </label>   
-
-                </li>
-                <li class=""> 
-                    <div class="dropdown">   
-                            <br><br><input @keyup="POs=getResults(op)" v-model="op" placeholder="número da ordem" class="btn btn-outline-secondary dropdown-toggle col-sm-10" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                     <div class="dropdown">   
+                         <input @keyup="POs=getResults(op)" v-model="op" placeholder="número da ordem" class="btn btn-outline-secondary dropdown-toggle col-sm-10" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click.stop.prevent="productionOrder.productionOrderNumber=p.productionOrderNumber; 
                                                                               productionOrder.productionOrderId=p.productionOrderId; 
                                                                               op=p.productionOrderNumber;
-                                                                              productionOrderRecipe=p.recipe" v-for="(p,index) in POs">{{p.productionOrderNumber}}</a>                            
+                                                                              productionOrderRecipe=p.recipe" v-for="(p,index) in POs" v-bind:key="index">{{p.productionOrderNumber}}</a>                            
                             </div>                            
                         </div>
                 </li>
-                <li class="">
-                    <form class="">
-                    <div class="dropdown">
-                        <br><br><button type="button" class="btn btn-primary btn-sm col-md-12 col-sm-1" @click.stop.prevent="listaOp()">
+                <li class="nav-item col-sm-1.5">
+                        <button type="button" class="btn btn-primary btn-sm col-md-12 col-sm-1" @click.stop.prevent="listaOp()">
                             Selecionar
                         </button>
-                             
-                    </div>
-
-                    </form>
                 </li>
             </ul>
         </div>
@@ -155,14 +148,14 @@
                                     <b>Fase: </b>
                                 </label>
                                     <select class="form-control form-control-sm" v-model="phaseIndex">
-                                    <option v-for="(p,index) in orderPhaseProducts" :value="index" >{{ p.phaseName }}</option>
+                                    <option v-for="(p,index) in orderPhaseProducts" :value="index" v-bind:key="index">{{ p.phaseName }}</option>
                                     </select>
                                 <div v-if="phaseIndex != '' || phaseIndex == '0' && orderPhaseProducts[phaseIndex].lenght !== '0'">
                                 <label>
                                     <b>Produtos: </b>
                                 </label>
                                     <select class="form-control form-control-sm" v-model="ordem.productId">
-                                    <option v-for="(p,index) in orderPhaseProducts[phaseIndex].phaseProducts" :value="p.product.productId">{{ p.product.productName }}</option>
+                                    <option v-for="(p,index) in orderPhaseProducts[phaseIndex].phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
                                     </select>
                                 </div>
                                 </div>

@@ -1,19 +1,19 @@
 .nav-hp{
     position: fixed;
-    top: 18%;
+    top: 15%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
-    height: 14%;
+    height: 15%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav-item{
     margin-left: 1%;
-    margin-top: 3%;
+    margin-top: 4%;
 }
 
-.title-page-ass-op{
+.title-page{
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
@@ -21,7 +21,7 @@
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
     left: 0.9%;
-    top: 18%;
+    top: 15%;
 }
 
 .btn-warning{
@@ -47,7 +47,7 @@ input{
 
 .orderHistorian{
     position: relative;
-    padding-top: 15%;
+    padding-top: 21%;
     padding-bottom: 5%;              
     left: 1%;
     width: 100%;

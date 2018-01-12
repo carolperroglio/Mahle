@@ -38,7 +38,7 @@
                                 <div class="col-sm-3">
                                     <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="opSelected">
                                         <option value="" selected disabled>Tipo de Ordem</option>
-                                        <option v-for="opType in opTypeArray" v-bind:value="opType.productionOrderTypeId">
+                                        <option v-for="(opType,index) in opTypeArray" v-bind:value="opType.productionOrderTypeId" v-bind:key="index">
                                             {{ opType.productionOrderTypeId }}
                                         </option>
                                     </select>
