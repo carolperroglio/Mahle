@@ -22,12 +22,6 @@
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas</router-link>
                     </li> 
-                    <!--<li class="nav-item-cab">
-                        <a class="nav-link active" router-link to="">Análises Químicas</a>
-                    </li>-->
-                    <!--<li class="nav-item-cab">
-                        <a class="nav-link active" router-link to="">Automação</a>
-                    </li>-->
                 </ul>    
             </nav>
         </div> 
@@ -60,17 +54,7 @@
                         <div class="collapse" id="menu2">
                             <router-link to="#" class="list-group-item" data-parent="#menu1"> Logout </router-link>
                         </div>
-                        <!-- <a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-wpforms"></i> 
-                        <span class="hidden-sm-down">   THINGS</span> </a> -->
-                        <!-- <div class="collapse" id="menu1">
-                            <a href="#" class="list-group-item" data-parent="#menu1"> Gerenciar Things </a>
-                            <a href="#" class="list-group-item" data-parent="#menu1"> Criar grupo</a>
-                            <a href="#" class="list-group-item" data-parent="#menu1"> Hierarquia </a>
-                            <div class="collapse" id="menu1sub1">
-                                <div class="collapse" id="menu1sub1">
-                                </div>
-                            </div> 
-                        </div> -->
+                        
                         <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-barcode"></i> 
                             <span class="hidden-sm-down">  
@@ -100,43 +84,39 @@
                             <router-link to="/associateTool" class="list-group-item" data-parent="#menu1"> 
                                 Associação de Ferramentas 
                             </router-link>
+                             <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1"> 
+                                Ferramentas em uso
+                            </router-link>
                             <div class="collapse" id="menu1sub1">
                                 <div class="collapse" id="menu1sub1">
                                 </div>
                             </div> 
                         </div>         
-                        <!-- <router-link to="/toolCreate" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">    FERRAMENTAS</span>
-                        </router-link> -->
-                        <router-link to="/prodOrder" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   ORDEM DE PRODUÇÃO</span>
-                        </router-link>
+
+                        <a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+                            <i class="fa fa-industry"></i> 
+                                <span class="hidden-sm-down">   
+                                 ORDEM DE PRODUÇÃO
+                                </span> 
+                        </a>  
+                        <div class="collapse" id="menu3">
+                            <router-link to="/prodOrder" class="list-group-item" data-parent="#menu3"> 
+                                Cadastro de Ordem de Produção
+                            </router-link>
+                            <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
+                                Tipo de Ordem de Produção 
+                            </router-link>
+                            <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
+                                Associação de Ordem de Produção
+                            </router-link>
+                            <div class="collapse" id="menu3sub1">
+                                <div class="collapse" id="menu3sub1">
+                                </div>
+                            </div> 
+                        </div>
+                      
                         <router-link to="/historianProduction" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-database"></i> <span class="hidden-sm-down">   APONTAMENTOS</span>
-                        </router-link>
-                        <!-- <router-link to="/associateTool" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   ASSOCIAÇÃO DE FERRAMENTAS</span>
-                        </router-link> -->
-                        <router-link to="/AssociateOP" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   ASSOCIAÇÃO DE OP</span>
-                        </router-link> 
-                        <router-link to="/stateTransitionHistory" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-file-o"></i> <span class="hidden-sm-down">    HISTÓRICOS</span>
-                        </router-link>          
-                        <!-- <router-link to="/toolType" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   TIPO DE FERRAMENTAS</span>
-                        </router-link> -->
-                        <!-- <router-link to="/statusManagement" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   GERENCIAMENTO DE FERRAMENTAS</span>
-                        </router-link> -->
-                        <!-- <router-link to="/OPManagement" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   GERENCIAMENTO DE OP</span>
-                        </router-link>  -->
-                        <router-link to="/opType" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-industry"></i> <span class="hidden-sm-down">   TIPO DE OP</span>
-                        </router-link> 
-                        <router-link to="/inUseTools" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-cogs"></i> <span class="hidden-sm-down">   FERRAMENTAS EM USO</span>
                         </router-link>
                     </div>
                 </div>

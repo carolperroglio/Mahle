@@ -12,7 +12,7 @@
             <ul class="nav d-flex align-items-center">
                 <li class="col-md-1.5">
                     <br> 
-                    <form class="form-row">
+                    <form class="form-row" id="cadReceita">
                      <router-link :to="{ name: 'Phases',params: { id: 0 }}" class="btn btn-primary">
                         Cadastrar Receita
                     </router-link>
@@ -34,7 +34,7 @@
                 </div>
                     </div>
                         <div class="container-fluid col-md-12">
-                                <div class="card" v-for="(recipe,index) in recipes">
+                                <div class="card" v-for="(recipe,index) in recipes" v-bind:key="index">
                             <div class="card-header">
                                 </div>
                             <div class="">
