@@ -16,6 +16,10 @@ i {
     position: relative;
 }
 
+#cadReceita {
+    margin-left: 8%;
+}
+
 /*Menu de cadastro da receita*/
 .nav-recipe {
     position: fixed;
@@ -177,7 +181,7 @@ h6{
 .phases{
     position: relative;
     width: 100%;
-    padding-top: 16%;
+    padding-top: 22%;
     margin-left: 3%;
     padding-right: 15%;
     padding-bottom: 8%;
