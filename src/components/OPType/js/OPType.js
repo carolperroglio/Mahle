@@ -24,10 +24,9 @@ export default {
             mensagemSuc:'',
             fieldFilter: '',
             fieldValue: '' ,
-            lista: false,
-            url:'http://brsbap01:8005/api/',
-            urlThing: 'http://brsbap01:8001/api/',
-            urlOP: 'http://brsbap01:8005/api/productionorders' 
+            select: false,
+            carregando: true,
+            url:'http://brsbap01:8005/',
          }
     },
     computed: {},
@@ -37,7 +36,7 @@ export default {
             if(numOP.length<3){return;} 
             this.mensagemSuc = '';
             this.mensagemSuc = '';               
-                axios.get(this.urlOP+'?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
+                axios.get(this.url+'api/productionorders?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
                     response.data.values.forEach((pro) => {
                         array.push(pro);                    
                     });
@@ -47,16 +46,26 @@ export default {
                 return array;
             },
             editType(){
-                mensagemSuc = '';
-                mensagem = '';
+                this.mensagemSuc = '';
+                this.mensagem = '';
+
                 var index = this.thingsGroup.findIndex(index => index.groupName == this.groupName); 
+
                 this.TG.thingGroupId = this.thingsGroup[index].thingGroupId;
                 this.TG.groupName = this.thingsGroup[index].groupName;
                 this.TG.groupCode = this.thingsGroup[index].groupCode;
+
                 this.Type.thingGroups.push(this.TG);
-                this.Type.thingGroupIds.push(this.thingsGroup[index].thingGroupId);
-                console.log(this.Type);
-                axios.put(this.url+'productionordertypes/'+this.Type.productionOrderTypeId, this.Type).then((response)=>{                                           
+
+                var enc = this.Type.thingGroupIds.findIndex(enc => this.thingsGroup[index].thingGroupId);
+                console.log(enc);
+
+                if (enc === -1) { 
+                    this.Type.thingGroupIds.push(this.thingsGroup[index].thingGroupId); 
+                }
+                
+                console.log(JSON.stringify(this.Type, undefined, 4));
+                axios.put(this.url+'api/productionordertypes/'+this.Type.productionOrderTypeId, this.Type).then((response)=>{                                           
                     console.log(response.data);
                     this.mensagemSuc = 'Tipo alterado com sucesso!';
                 },(error)=>{
@@ -64,13 +73,11 @@ export default {
                     this.mensagem = error.data;
                 })
                 this.Type = [];
-            },
-            openGroups(){
-                this.lista = true;
-
+                this.TG = {};
+                this.select = false;
             },
             getThingsGroup: function() {
-            axios.get(this.urlThing+'thinggroups/').then(response => {
+            axios.get(this.url+'gateway/thinggroups/').then(response => {
                 this.thingsGroup = response.data;
                 console.log(this.thingsGroup);
             }).catch(error => {
@@ -78,10 +85,11 @@ export default {
             })
             },
             getTypes(){               
-                axios.get(this.url+'productionordertypes/').then((response)=>{                                           
+                axios.get(this.url+'api/productionordertypes/').then((response)=>{                                           
                     this.Types = response.data;
                     console.log(response.data);
                     console.log(this.Types);
+                    this.carregando = false;
                 },(error)=>{
                     console.log(error);
                 })
@@ -91,6 +99,9 @@ export default {
                 $("#editar").modal('show');
                 console.log(this.Type);
             },
+            setSelect(){
+                this.select = true;
+            }
         },
     beforeMount() {
         this.getTypes();
