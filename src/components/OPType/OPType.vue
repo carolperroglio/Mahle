@@ -15,24 +15,44 @@
         <div class="row conteudo-tt">
             <div class="op col-md-10">
                     <div class="container-fluid col-md-9">
-                     <div class="card">
+                        <div class="progress" v-show="carregando">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        </div>
+                            </div>
+                     <div class="card types">
                         <div v-for="(t, index) in Types" v-bind:key="index">
                         <div class="card-header">
-                        <b>Tipo {{ t.productionOrderTypeId }} de Ordem de Produção</b>
+                        <b>Tipo {{ t.productionOrderTypeId }}</b>
                         </div> 
                         <div class="card-body"> 
                             <label class="ls">
                             <b><font color="#9BA6A5">Tipo: </font></b>{{t.typeDescription}}</label>&nbsp;
                             <label class="ls">
                             <b><font color="#9BA6A5">Ecopo: </font></b>{{t.typeScope}}</label>&nbsp;
+                            </div>
+                            
+                        <div class="card-header" id="group">
+                            <b>Grupos Associados</b>
+                        </div> 
+                        <div class="card-body"> 
+
+                            <div v-for="(tg, index) in t.thingGroups" v-bind:key="index">
+
+                            <label class="ls">
+                            <b><font color="#9BA6A5">Código: </font></b>{{tg.groupCode}}</label>&nbsp;
+                            <label class="ls">
+                            <b><font color="#9BA6A5">Nome: </font></b>{{tg.groupName}}</label>&nbsp;
+                        
+                            </div>
+
                             <label class="ls1">
                             <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" @click.stop.prevent="openEditModal(t)">
+                            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="openEditModal(t)">
                             Editar
                             </button>
                             </div>
                             </label>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -61,37 +81,46 @@
                         <div class="row">
                         <div class="col-md-6 editOP">
                             <label>Descrição</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Descrição" v-model="Type.typeDescription" disabled>
+                            <input type="text" class="form-control" placeholder="Descrição" v-model="Type.typeDescription" disabled>
                             </div>
-                        </div>
+                        
                         <div class="col-md-6 editOP">
                             <label>Escopo</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Descrição" v-model="Type.typeScope" disabled>
+                            <input type="text" class="form-control" placeholder="Descrição" v-model="Type.typeScope" disabled>
                         </div>
+
+                        </div>
+                        </br>
                         <div class="form-row">
                             <div class="col-md-2">
                            <label for="opType" class="col-form-label">Grupo</label>
                             </div>
                            <div class="col-md-6">
-                            <select class="form-control-outline-secondary form-control" v-model="groupName">
-                            <option v-for="(t,index) in thingsGroup" :value="t.groupName">{{ t.groupName }}</option>
+                            <select class="form-control-outline-secondary form-control" v-model="groupName" v-if="select">
+                            <option v-for="(t,index) in thingsGroup" :value="t.groupName" v-bind:key="index">{{ t.groupName }}</option>
                             </select>
+                             <div v-for="(t, index) in Type.thingGroups" v-bind:key="index" >
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                    <b>{{t.groupName}}</b></li>
+                                </ul>
+                                </div>
+                           </div>
+                           <div class="col-md-2">
+                               <button class="btn btn-outline-secondary">
+                                    <i class="fa fa-plus-square" aria-hidden="true" @click.stop.prevent="setSelect()"></i>
+                                </button>
                            </div>
                         </div>
+                        
                     </div>
 
                     <div class="modal-footer">
+                       
                         <button class="btn btn-success" v-if="groupName != ''">
                             <i class="fa fa-check-square" aria-hidden="true" @click.stop.prevent="editType()"></i>
                         </button>
-                        <div class="form-row" v-if="lista">
-                        <div v-for="(t, index) in Type.thingGroups" v-bind:key="index">
-                            <div class="card">    
-                                <label class="ls">
-                                <b><font color="#9BA6A5">Tipo: </font></b>{{t.groupName}}</label>&nbsp;
-                            </div>
-                        </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

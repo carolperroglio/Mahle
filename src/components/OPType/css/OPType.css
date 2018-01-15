@@ -1,4 +1,4 @@
-.nav-OP{
+.nav-OP {
     position: fixed;
     top: 14%;
     z-index: 1;
@@ -8,7 +8,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item-op{
+.nav-item-op {
     margin-left: 3%;
     margin-right: 3%;
     padding-top: 6%;
@@ -18,7 +18,7 @@
     margin-top: 10%;
 }
 
-.title-page{
+.title-page {
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
@@ -26,10 +26,10 @@
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
     left: 0.9%;
-    top: 11%;
+    top: 15%;
 }
 
-.ferAssoc{
+.ferAssoc {
     position: relative;
     padding-top: 17%;
     padding-bottom: 5%;              
@@ -37,39 +37,44 @@
     width: 100%;
 }
 
-.btn-warning{
+.btn-warning {
     color: white;
 }
 
+#group {
+    background-color: white; 
+    border-top: 1px dashed rgb(199, 199, 199);
+}
 
-#dropdownMenuButton{
+
+#dropdownMenuButton {
     background-color: white;
     color: black;
 }
 
-.card-body{
+.card-body {
     padding-top: 0.1%;
     padding-bottom: 0.1%;
     padding-left: 1.1%;
 }
 
-.card-header{
+.card-header {
         padding-top: 0.6%;
         padding-bottom: 0.6%;   
 }
 
 /*Listagem de orderHistorian*/
 
-.icon-right{
+.icon-right {
     position: relative;
     float: right;
 }
 
-input{
+input {
     position: relative !important;
 }
 
-.ls{
+.ls {
     padding-left: 2%;
     width: 35%;
 }
@@ -78,11 +83,22 @@ input{
     width: 7%;
 }
 
-
-.conteudo-tt {
-    margin-top: 17%;
+.ls2{
+    width: 100%;
 }
 
+.types {
+    width: 125%;
+}
+
+.conteudo-tt {
+    margin-top: 21%;
+    width: 100%;
+}
+
+.pull-right{
+    float:right;
+  }
 
 @media screen and (max-width : 801px){
     .orderHistorian{ 

@@ -14,8 +14,9 @@
                 </div>
                 <div>
                     <div class="container-fluid col-md-12">
-                        <!-- <div class="card-header card-header-tools-manag">
-                                <!-- <b>Lista de Ferramentas</font></b> -->
+
+                        <div class="card-header card-header-tools-manag">
+                                <b>Lista de Ferramentas</b>
                             </div>
                         <div class="table table-striped" v-for="(t,index) in tools" :key="index">
                             <div class="card">

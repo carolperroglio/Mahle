@@ -20,7 +20,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click.stop.prevent="toolName = t.name;
                                                                               toolId = t.id;
-                                                                              tool = t.name" v-for="(t,index) in Tools">{{t.name}}</a>                            
+                                                                              tool = t.name" v-for="(t,index) in Tools" v-bind:key="index">{{t.name}}</a>                            
                             </div>                            
                         </div>
                      </div>                    

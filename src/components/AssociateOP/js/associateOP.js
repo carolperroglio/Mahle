@@ -25,8 +25,8 @@ export default {
             thing: false,
             lista: false,
             lista2: false,
-            url:'http://brsbap01:8005/api/productionorders',
-            urlThing: 'http://brsbap01:8001/api/'
+            carregando: false,
+            url:'http://brsbap01:8005/',
             }
     },
     computed: {},
@@ -35,7 +35,7 @@ export default {
            getOPs(numOP){            
             var array=[];                          
             if(numOP.length<3){return;}                
-            axios.get(this.url+'?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
+            axios.get(this.url+'api/productionorders?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
                 response.data.values.forEach((pro) => {
                     array.push(pro);                    
                 });
@@ -46,14 +46,15 @@ export default {
             },
             openSelectGroup(){
                 this.group = true;  
-                             
-                axios.get(this.urlThing+'thinggroups/'+this.typeId).then((response)=>{   
-                    this.Groups = response.data.thingGroups;
+                this.carregando = true;             
+                axios.get(this.url+'gateway/thinggroups/').then((response)=>{ 
+                    console.log(response.data); 
+                    this.Groups = response.data;
                         },(error)=>{
                                 console.log(error);
                         })
                 this.lista = true;
-                axios.get(this.url+'/'+this.OPId).then((response)=>{
+                axios.get(this.url+'api/productionorders/'+this.OPId).then((response)=>{
                     this.OP = response.data;
                     console.log(response.data);
                     switch(response.data.currentStatus){
@@ -80,8 +81,9 @@ export default {
                         break;
                         case "reproved":
                         this.OP.currentStatus = "Reprovada";
-                        break;                    
-                    }                                        
+                        break;               
+                    }
+                    this.carregando = false;                                        
                 },(r)=>{                
                     this.mensagem = r;                
                     this.carregando = false;
@@ -90,8 +92,8 @@ export default {
             },
             openSelectThings(){
                 this.thing=true;             
-                axios.get(this.urlThing+'thinggroups/attachedthings/'+this.groupId).then((response)=>{   
-                this.Things = response.data.things;
+                axios.get(this.url+'gateway/thinggroups/attachedthings/'+this.groupId).then((response)=>{   
+                this.Things = response.data;
                 console.log(this.Things);
             },(error)=>{
                     console.log(error);
@@ -100,7 +102,47 @@ export default {
             getAssoc(){
                 this.mensagemSuc = '';
                 this.mensagem = ''; 
-                axios.put(this.url+'AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
+                axios.put(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
+                    this.Tool = response.data;
+                    console.log(response.data);
+                    switch(response.data.currentStatus){
+                        case "created":
+                        this.OP.currentStatus = "Criada";
+                        break;
+                        case "active":                    
+                        this.OP.currentStatuss = "Ativa";
+                        break;
+                        case "inactive":
+                        this.OP.currentStatus = "Inativa";
+                        break;
+                        case "paused":
+                        this.OP.currentStatus = "Pausada";
+                        break;
+                        case "ended":
+                        this.OP.currentStatus = "Encerrada";
+                        break;
+                        case "waiting_approval":
+                        this.OP.currentStatus = "Aguardando Aprovação";
+                        break;
+                        case "approved":
+                        this.OP.currentStatus = "Aprovada";
+                        break;
+                        case "reproved":
+                        this.OP.currentStatus = "Reprovada";
+                        break;  
+                    }
+                    this.Thing = response.data.currentThing;
+                    this.lista2 = true;
+                    this.mensagemSuc = 'Ferramenta associada com sucesso.';
+                },(r)=>{                
+                    this.mensagem = r.response.data;      
+                    this.carregando = false;
+                }) 
+            },
+            getDisAssoc(){
+                this.mensagemSuc = '';
+                this.mensagem = ''; 
+                axios.put(this.url+'api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
                     this.Tool = response.data;
                     console.log(response.data);
                     switch(response.data.currentStatus){

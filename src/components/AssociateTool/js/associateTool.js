@@ -26,6 +26,7 @@ export default {
             thing: false,
             lista: false,
             lista2: false,
+            carregando: false,
             url:'http://brsbap01:8004/',
          }
     },
@@ -45,6 +46,7 @@ export default {
                 return array;
             },
             openSelectGroup(){
+                this.carregando = true;
                 this.group = true;               
                 axios.get(this.url+'api/tooltype/'+this.typeId).then((response)=>{   
                     this.Groups = response.data.thingGroups;
@@ -74,7 +76,8 @@ export default {
                         case "active":
                         this.Tool.status = "Disponível";
                         break;
-                    }                                        
+                    }  
+                this.carregando = false;                                      
                 },(r)=>{                
                     this.mensagem = r;                
                     this.carregando = false;

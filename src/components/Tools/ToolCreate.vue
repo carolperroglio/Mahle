@@ -117,8 +117,7 @@
                                     <b>Tipo: </b>
                                 </label>
                                     <select class="form-control form-control-sm" v-model="ferramenta.typeName">
-                                    <!-- <option value="" selected disabled="disabled">Tipo </option> -->
-                                    <option v-for="tipo in tipos" :value="tipo.name">{{ tipo.name }}</option>
+                                    <option v-for="(tipo, index) in tipos" :value="tipo.name" v-bind:key="index">{{ tipo.name }}</option>
                                     </select>
                                 <label>
                                     <b>Status: </b>

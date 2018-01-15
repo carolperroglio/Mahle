@@ -13,6 +13,14 @@
     height: 12%;
 }
 
+.tools {
+    padding-top: 15%; 
+}
+
+.ls{
+    width: 15%;
+}
+
 .nav-recipe ul  {
     display: inline;
     list-style: none;
@@ -48,10 +56,7 @@ li{
     font-family: sans-serif;
     margin-top: 7%;
 }
-#addPhase {
-    cursor: pointer;
-    display: inline;
-}
+
 .nav-recipe ul li div {
     display: inline; 
     box-sizing: border-box; 
