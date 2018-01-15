@@ -57,16 +57,16 @@ input{
 .card-body2{
     font-family: sans-serif;
     font-size: 12px;
-    padding-top: 0.1%;
-    padding-bottom: 0.1%;
-    background-color: white;
+    /* padding-top: 0.1%; */
+    /* padding-bottom: 0.1%; */
+    /* background-color: white; */
 
     }
 
 .card-header2{
-    padding-top: 0.5%;
-    padding-bottom: 0.5%; 
-    border-bottom: 5%; 
+    padding-top: 0;
+    padding-bottom: 0; 
+    border-bottom: 0; 
 }
 
 .btn-warning{
@@ -83,6 +83,7 @@ input{
     font-size: 12px;
     width: 9.5%;
 }
+
 
 @media screen and (max-width : 801px){
     .ferramentas{ 

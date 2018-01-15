@@ -1,0 +1,20 @@
+.fundo-home{
+    background: linear-gradient(rgba(244, 244, 245, 0.384), rgba(98, 163, 201, 0.438)); 
+    z-index: 5;
+}
+
+
+.img-fundo{
+    z-index: 1;
+    padding-top: 15%;
+    padding-left: 15%;
+    padding-bottom: 15%;
+}
+
+@media screen and (max-width: 800px) {
+   
+    .img-fundo{
+        padding-top: 80;
+        
+    }
+}

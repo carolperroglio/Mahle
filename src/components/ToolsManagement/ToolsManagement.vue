@@ -3,7 +3,7 @@
     <div class="fixed-top nav-tm">
             <ul class="nav d-flex align-items-center">
             <li class="nav-prod col-sm-1.5">
-                    <h1 class="title-page-tm"> Gerenciamento de Ferramentas </h1>
+                    <h1 class="title-page-tm"> <b>Gerenciamento de Ferramentas </b></h1>
             </li>
             </ul>
         </div>
@@ -14,11 +14,11 @@
                 </div>
                 <div>
                     <div class="container-fluid col-md-12">
-                        <div class="card-header card-header-tools-manag">
-                                <b>Lista de Ferramentas</font></b>
+                        <!-- <div class="card-header card-header-tools-manag">
+                                <!-- <b>Lista de Ferramentas</font></b> -->
                             </div>
-                        <div class="card" v-for="(t,index) in tools" :key="index">
-                            <div class="card-header">
+                        <div class="table table-striped" v-for="(t,index) in tools" :key="index">
+                            <div class="card">
                                 <b></b>
                             </div>
                             <div class="card-body card-body-tools-manag">
