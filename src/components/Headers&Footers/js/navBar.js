@@ -1,3 +1,4 @@
+import { Dropdown } from 'bootstrap-vue/es/components';
 
 export default {
     name: "NavBar",

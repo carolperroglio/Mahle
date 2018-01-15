@@ -39,8 +39,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': require('../config/dev.env')
+      'process.env': require('../config/dev.env'),
     }),
+
+    new webpack.DefinePlugin({
+      $: "jquery",
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery'
+    }),
+
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
@@ -54,7 +62,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      $: 'jquery',
+      jquery: 'jquery',
       Popper: ['popper.js', 'default'],
       // In case you imported plugins individually, you must also require them here:
       Util: "exports-loader?Util!bootstrap/js/dist/util",

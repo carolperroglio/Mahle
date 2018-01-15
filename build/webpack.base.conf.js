@@ -41,6 +41,14 @@ module.exports = {
   },
   module: {
     rules: [
+      { 
+        test: /[\/]jquery\.js$/, 
+        loader: 'expose-loader'
+      },      
+      { 
+        test: /vendor\/.+\.(jsx|js)$/,
+        loader: 'imports?jQuery=jquery,$=jquery,this=>window'
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -77,7 +85,7 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
     ]
   },
   node: {
