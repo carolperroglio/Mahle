@@ -2,16 +2,22 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
 import Vue from 'vue'
+import Bootstrap from 'bootstrap-vue'
 import App from './App'
 import router from './router'
+
+Vue.use({
+    install: function(Vue, options){
+        Vue.prototype.$jQuery = require('jquery'); // you'll have this.$jQuery anywhere in your vue project
+    }
+})
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import popper from '.././node_modules/popper.js/dist/umd/popper.js'
-import jquery from '.././node_modules/jquery/src/jquery.js'
-import Bootstrap from '.././node_modules/bootstrap/dist/css/bootstrap.min.css'
-import BootstrapJs from '.././node_modules/bootstrap/dist/js/bootstrap.min.js'
 import icones from '.././node_modules/font-awesome/css/font-awesome.min.css'
-//import VAutocomplete from '.././node_modules/v-autocomplete/dist/v-autocomplete.js'
 Vue.config.productionTip = false
-//Vue.use(VAutocomplete)
 
 
 /* eslint-disable no-new */
