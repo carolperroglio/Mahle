@@ -120,11 +120,11 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
                 <div v-for="(p, index) in produtos" v-bind:key="index">
-                    <div class="card">
+                    <div class="table table-striped">
                         <div class="card-header card-header5">
                             <b></b>
                         </div>
-                        <div class="card-body card-body5">
+                        <div class="">
                             <label class="ls ls2">
                                 <b>
                                     <font color="#9BA6A5">Nome: </font>

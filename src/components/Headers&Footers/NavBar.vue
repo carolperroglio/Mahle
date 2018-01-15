@@ -11,20 +11,22 @@
                 <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
                     <li class="nav-item-cab col-md-2">
-                        <router-link class="nav-link bg-dark active" router-link to="/"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
-                    </li> 
-                    <li class="nav-item-cab col-md-3">
-                        <router-link class="nav-link active bg-dark" router-link to="/stateManagement"><i class= "fa fa-power-off" style="font-size:25px; cursor:pointer"></i>  <br>OP Status Management </router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
-                        <router-link class="nav-link bg-dark active" router-link to="/OPManagement"><i class= "fa fa-industry" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ordem</router-link>
+                        <router-link class="nav-link active bg-dark btn-config" router-link to="/stateManagement"><i class= "fa fa-power-off" style="font-size:25px; cursor:pointer"></i>  <br>OP Status Management </router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
-                        <router-link class="nav-link bg-dark active" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/OPManagement"><i class= "fa fa-industry" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ordem</router-link>
+                    </li> 
+                    <li class="nav-item-cab col-md-2">
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas</router-link>
                     </li> 
                 </ul>    
             </nav>
         </div> 
+
+       
 
         <!--                        -->
         <!--   Rodapé da Página     -->

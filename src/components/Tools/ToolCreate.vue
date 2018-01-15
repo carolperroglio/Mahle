@@ -160,11 +160,11 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
                 <div v-for="(f, index) in ferramentas" v-bind:key="index">
-                    <div class="card">
-                        <div class="card-header card-header2">
+                    <div class="">
+                        <div class="card">
                             <b> </b>
                         </div>
-                        <div class="card-body card-body2">
+                        <div class="table table-striped card-header2">
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Nome: </font></b>{{f.name}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls3">

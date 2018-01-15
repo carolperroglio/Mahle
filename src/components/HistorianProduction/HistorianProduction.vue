@@ -11,12 +11,14 @@
          <div class="fixed-top nav-hp">
             <ul class="nav d-flex align-items-center">
             <h1 class="title-page"> Apontamentos de OP </h1>
-             <li class="nav-item col-sm-1.5">
-                <label>Número da OP: </label> 
-             </li>  
-                <li class="nav-item col-sm-1.5">
-                     <div class="dropdown">   
-                         <input @keyup="POs=getResults(op)" v-model="op" placeholder="número da ordem" class="btn btn-outline-secondary dropdown-toggle col-sm-10" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+
+                <li class="nav-item nav-item-hp col-sm-1.5">
+                    <label class="fm mr-sm-2">Número da OP: </label>   
+
+                </li>
+                <li class=""> 
+                    <div class="dropdown">   
+                            <br><br><input @keyup="POs=getResults(op)" v-model="op" placeholder="número da ordem" class="btn btn-outline-secondary dropdown-toggle col-sm-10" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" @click.stop.prevent="productionOrder.productionOrderNumber=p.productionOrderNumber; 
                                                                               productionOrder.productionOrderId=p.productionOrderId; 
