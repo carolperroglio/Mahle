@@ -8,17 +8,10 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Produto</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
+         
+                <b-modal ref="myModalRef" hide-footer title="Cadastro de Produtos">
+                    
+                    <form>
                             <div class="form-group">
                                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
@@ -52,10 +45,7 @@
                                         Limpar
                                     </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </b-modal>
 
         <!--                       -->
         <!--                       -->
@@ -65,6 +55,7 @@
         <!--                       -->
         <div class="fixed-top nav-produtos">
             <ul class="nav d-flex align-items-center">
+
                 <li class="nav-item col-sm-1.5">
                     <h1 class="title-page"> <b>Cadastro de Materiais</b> </h1>
                         <select class="form-control form-control-sm" v-model="orderField">
@@ -97,10 +88,8 @@
                 <li class="nav-item  col-sm-1.5">
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                 </li>
-                <li class="nav-item col-sm-1">
-                    <button type="button" class="btn btn-success btn-sm btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                Novo Produto
-                    </button>
+                <li class="nav-item col-sm-3">
+                    <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal">Novo Produto</button>
 
                 </li>
             </ul>
@@ -115,6 +104,7 @@
         <!--                       -->
 
         <div class="" style="">
+            
             <div class="produtos col">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>

@@ -1,14 +1,24 @@
+body, html {
+    height: 100%;
+}
+
+
 .fundo-home{
     background: linear-gradient(rgba(244, 244, 245, 0.384), rgba(98, 163, 201, 0.438)); 
-    z-index: 5;
+
+    height: 100%; 
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 
 .img-fundo{
     z-index: 1;
-    padding-top: 15%;
-    padding-left: 15%;
-    padding-bottom: 15%;
+    padding-top: 10%;
+    padding-left: 10%;
+    padding-bottom: 10%;
 }
 
 @media screen and (max-width: 800px) {
