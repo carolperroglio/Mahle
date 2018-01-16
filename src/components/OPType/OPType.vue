@@ -1,55 +1,57 @@
 <template>
     <div>
             
-       <nav class="fixed-top nav-OP">
+       <nav class="fixed-top nav-optype">
             <ul class="nav d-flex align-items-center">
-                <h1 class="title-page">Tipo de Ordem de Produção</h1>
+                <h1 class="title-page-optype"><b>Tipos de Ordem de Produção</b></h1>
                 <li class="nav-item-op col-sm-1.5">
                     <router-link class="btn btn-primary btn" :to="{ name: 'HistorianProduction'}" >
-                    Apontamentos
+                      Ir para Apontamentos <i class= "fa fa-hand-o-right" style="font-size:22px; cursor:pointer"></i>
                     </router-link>
                 </li>
             </ul>
         </nav>
 
         <div class="row conteudo-tt">
-            <div class="op col-md-10">
-                    <div class="container-fluid col-md-9">
+            <div class=" col-md-12">
+                    <div class="container-fluid">
                         <div class="progress" v-show="carregando">
                             <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                             </div>
                      <div class="card types">
                         <div v-for="(t, index) in Types" v-bind:key="index">
-                        <div class="card-header">
-                        <b>Tipo {{ t.productionOrderTypeId }}</b>
+                        <div class="card-header card-header-optype">
+                        <i class= "fa fa-file-text" style="font-size:22px; cursor:pointer"></i><b>&nbsp&nbsp&nbspTipo {{ t.productionOrderTypeId }}</b> 
                         </div> 
                         <div class="card-body"> 
-                            <label class="ls">
-                            <b><font color="#9BA6A5">Tipo: </font></b>{{t.typeDescription}}</label>&nbsp;
-                            <label class="ls">
+                            <label class="ls lsoptype">
+                            <b><font color="#9BA6A5"> Tipo: </font></b>{{t.typeDescription}}</label>&nbsp;
+                            <label class="ls lsoptype">
                             <b><font color="#9BA6A5">Ecopo: </font></b>{{t.typeScope}}</label>&nbsp;
                             </div>
                             
-                        <div class="card-header" id="group">
+                        <div class="card-header card-header-optype" id="group">
                             <b>Grupos Associados</b>
                         </div> 
                         <div class="card-body"> 
 
                             <div v-for="(tg, index) in t.thingGroups" v-bind:key="index">
 
-                            <label class="ls">
+                            <label class="ls lsoptype2">
                             <b><font color="#9BA6A5">Código: </font></b>{{tg.groupCode}}</label>&nbsp;
-                            <label class="ls">
+                            <label class="ls lsoptype2">
                             <b><font color="#9BA6A5">Nome: </font></b>{{tg.groupName}}</label>&nbsp;
                         
                             </div>
 
-                            <label class="ls1">
+                            <label class="ls lsoptype2">
                             <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="showModal(t)">
-                            Editar
-                            </button>
+
+                            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="openEditModal(t)">
+                            Editar&nbsp&nbsp <font size="4">&#x270d  </font>   
+                            </button>   
+
                             </div>
                             </label>
                         </div>

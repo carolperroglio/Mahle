@@ -1,6 +1,6 @@
-.nav-OP {
+.nav-optype {
     position: fixed;
-    top: 14%;
+    top: 13%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
@@ -11,14 +11,14 @@
 .nav-item-op {
     margin-left: 3%;
     margin-right: 3%;
-    padding-top: 6%;
+    padding-top: 4%;
 }
 
 .cadType {
     margin-top: 10%;
 }
 
-.title-page {
+.title-page-optype {
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
@@ -58,9 +58,12 @@
     padding-left: 1.1%;
 }
 
-.card-header {
+.card-header-optype {
+        font-size: 17px;
         padding-top: 0.6%;
         padding-bottom: 0.6%;   
+        background-color: hsla(204, 27%, 60%, 0.2);
+        color: #3c3c3c;
 }
 
 /*Listagem de orderHistorian*/
@@ -79,21 +82,26 @@ input {
     width: 35%;
 } */
 
-.ls1{
-    width: 7%;
+.lsoptype{
+    width: 20%;
+    margin-left: 2%;
 }
 
-.ls2{
-    width: 100%;
+.lsoptype2{
+    margin-left: 2%;
+    width: 50%;
 }
 
 .types {
-    width: 125%;
+    width: 95%;
+    margin-left: 5%;
+    
 }
 
 .conteudo-tt {
-    margin-top: 21%;
+    margin-top: 18%;
     width: 100%;
+    padding-bottom: 5%;
 }
 
 .pull-right{
@@ -101,6 +109,30 @@ input {
   }
 
 @media screen and (max-width : 801px){
+    .nav-optype {
+        top: 20%;
+        height: 17%;
+    }
+    .nav-item-op {
+        margin-left: 3%;
+        margin-right: 3%;
+        padding-top: 7%;
+    }
+    .title-page-optype {
+        top: 22%;
+        font-size: 18px;
+    }
+   
+    .conteudo-tt {
+        margin-top: 30%;
+        padding-bottom: 6%;
+        font-size: 12px;
+    }
+    .card-header-optype {
+        font-size: 14px;
+}
+
+
     .orderHistorian{ 
         margin-top: 30%; 
     }       
