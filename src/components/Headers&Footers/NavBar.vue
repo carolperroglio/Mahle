@@ -48,7 +48,7 @@
         <!--                        -->             
         <div class="container-fluid fixed-top menu-btn"> 
             <div class="row refactor-class-row">
-                <div class="col-xs-1 p-l-0 p-r-0 collapse in" id="sidebar">
+                <div class="col-xs-1 p-l-0 p-r-0 collapse in" id="sidebar" v-if="show">
                     <div class="list-group panel">
                         <a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-odnoklassniki">
                             </i> 
@@ -125,10 +125,10 @@
                         </router-link> -->
                     </div>
                 </div>
-                    <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">
+                    <a data-toggle="collapse" id="open" @click="open()">
                         <i class="icon-navigate fa fa-navicon fa-lg"></i>
                     </a>
-                    <a href="#sidebar" data-toggle="collapse" id="close" @click="close()">
+                    <a data-toggle="collapse" id="close" @click="close()">
                         <i class="icon-navigate fa fa-close fa-lg"></i>
                     </a>
             </div>
