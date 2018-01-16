@@ -18,7 +18,7 @@
     color: rgb(68, 68, 70);
     font-family: sans-serif;
     font-size: 22px;
-    text-shadow: 1px 1px #F9F9F9;
+    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     position: fixed;
     top: 15%;
     margin-left: 0.5%;
@@ -64,10 +64,14 @@ input{
     }
 
 .card-header2{
-    padding-top: 0;
-    padding-bottom: 0; 
-    border-bottom: 0; 
+    padding-top: 0.1%;
+    padding-bottom: 0.1%; 
 }
+.card-tool{
+    padding-top: 0.1%;
+    padding-bottom: 0.1%;
+    background-color: #DCDCDC;
+    }
 
 .btn-warning{
     color: white;
@@ -78,10 +82,10 @@ input{
     position: relative;
     } */
 
-.ls3{
+.ls30{
     font-family: sans-serif;
     font-size: 12px;
-    width: 9.5%;
+    width: 9%;
 }
 
 
@@ -113,7 +117,7 @@ input{
     padding-left: 60%;
     top: 50%;
     }
-.ls3{
+.ls30{
     font-family: sans-serif;
     font-size: 11px;
     width: 11%;

@@ -16,16 +16,16 @@
 <!--        Fases            --> 
 <!--                         -->
       
-        <div class="">
+        <div class="" style="">
             <div class="tools">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                 </div>
                     </div>
-                        <div class="container-fluid col-md-12">
+                        <div class="table table-striped">
                             <div v-for="(t,index) in tools" v-bind:key="index">
-                                <div class="card">
-                            <div class="card-header">
+                                <div class="">
+                            <div class="card-header card-header8">
                                 <b><font color="#262626">{{t.name}}</font></b></label>&nbsp;&nbsp;&nbsp;
                                 </div>
                             <div class="card-body">

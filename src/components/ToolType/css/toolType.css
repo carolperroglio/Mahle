@@ -3,9 +3,7 @@
 }
 .cadFer{
     margin-top: 17%;
-
 }
-
 
 .nav-tool-type {
     position: fixed;
@@ -21,22 +19,38 @@
     color: rgb(68, 68, 70);
     font-family: sans-serif;
     font-size: 22px;
-    text-shadow: 1px 1px #F9F9F9;
+    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     position: fixed;
     left: 0.9%;
     top: 14.5%;
+}
+
+.tool-type{
+    margin-left: 3%;
+    padding-top: 16%;
+    padding-bottom: 5%;
+    width: 95%;
+}
+
+.card-header7{ 
+    margin-top: 0.3%;
+    margin-bottom: 0.3%;
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
+}
+
+.ls21{
+    width: 28%;
 }
 
 .conteudo-tt h3 {
     color: rgb(41, 39, 39);
 }
 
-.ls{
-    width: 25%;
-}
+
 
 @media screen and (max-width: 800px) {
-    .nav-tool-type {
+.nav-tool-type {
         background-color: rgba(249, 247, 247, 1);
         position: fixed;
         top: 16%;
@@ -45,7 +59,17 @@
         height: 20%;
         border-bottom: 1px solid rgba(0,0,0,0.2);
     }
-    .title-page{
-        top: 20%;
+.title-page{
+        font-size: 17px;
+        top: 21%;
     }
+.tool-type{
+    padding-top: 30%;
+    padding-bottom: 7%;
+    }
+.ls21{
+    width: 28%;
+    font-size: 12px;
+}
+
 }

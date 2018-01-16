@@ -1,3 +1,4 @@
+
 body, html {
     height: 100%;
 }
@@ -13,18 +14,27 @@ body, html {
     background-size: cover;
 }
 
-
 .img-fundo{
-    z-index: 1;
-    padding-top: 10%;
-    padding-left: 10%;
-    padding-bottom: 10%;
+    position: absolute;
+    left: 20%;
+    top: 30%;
+  }
+
+.circle:hover
+{
+        border-radius: 50%;
 }
 
 @media screen and (max-width: 800px) {
    
     .img-fundo{
-        padding-top: 80;
-        
-    }
+        position: absolute;
+        width: 75%;
+        left: 15%;
+        top: 40%;
+      }
+      .circle:hover
+      {
+              border-radius: 50%;
+      }
 }

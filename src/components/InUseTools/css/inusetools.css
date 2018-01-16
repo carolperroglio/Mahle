@@ -17,9 +17,9 @@
     padding-top: 15%; 
 }
 
-.ls{
+/* .ls{
     width: 15%;
-}
+} */
 
 .nav-recipe ul  {
     display: inline;
@@ -46,7 +46,7 @@ li{
     font-family: sans-serif;
     font-size: 22px;
     color: rgb(68, 68, 70);
-    text-shadow: 1px 1px #F9F9F9;
+    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     margin-left: 1.5%;
     margin-top: 3%;
 }
