@@ -1,5 +1,7 @@
 import axios from 'axios'
 import es6promisse from 'es6-promise'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 es6promisse.polyfill();
 
 function paginacao(response, este){
@@ -45,8 +47,20 @@ export default {
         }
     },  
     computed:{       
-    },      
+    },   
+    components: {
+        'b-modal': bModal
+    },
+    directives: {
+        'b-modal': bModalDirective
+    },     
     methods:{
+        showModal () {
+            this.$refs.myModalRef.show()
+          },
+          hideModal () {
+            this.$refs.myModalRef.hide()
+          },
         cadastrar(ferramenta){      
            // this.carregando = true; 
             this.mensagem='';   

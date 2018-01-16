@@ -36,7 +36,7 @@
                 </li>
                 <li class="nav-item-tool">
                             <select class="form-control form-control-sm" v-model="fieldFilter">
-                            <option value=""selected disabled="disabled">Buscar por campo:</option>
+                            <option value="" selected disabled="disabled">Buscar por campo:</option>
                             <option value="name">Nome</option>
                             <option value="description">Descrição</option>
                             <option value="serialNumber">Número serial</option>
@@ -56,7 +56,7 @@
                                 Buscar
                         </button>
                 <li class="nav-item-tool">
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ToolCreateModal">
+                        <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="showModal">
                              Cadastrar Ferramenta
                         </button>
                 </li>
@@ -72,16 +72,8 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-        <div class="modal fade" id="ToolCreateModal" tabindex="-1" role="dialog" aria-labelledby="ToolCreateModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ToolCreateModalLabel">Cadastrar Ferramenta</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+        
+                <b-modal ref="myModalRef" hide-footer title="Cadastro de Produtos">
                         <form>
                             <div class="form-group">
                                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
@@ -140,12 +132,7 @@
                                         Limpar
                                     </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
+                </b-modal>         
             <!--                            -->
             <!--                            -->
             <!--                            -->

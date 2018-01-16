@@ -1,5 +1,10 @@
 import axios from 'axios'
 import es6promisse from 'es6-promise'
+import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
+import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+
 es6promisse.polyfill();
 
 export default {    
@@ -35,8 +40,36 @@ export default {
     },  
     computed:{  
        
-    },      
+    },  
+    components: {
+        'b-dropdown': bDropdown,
+        'b-dropdown-item': bDropdownItem,
+        'b-modal': bModal
+    },
+    directives: {
+        'b-modal': bModalDirective
+    }, 
     methods:{
+            showModal () {
+                this.mensagem='';   
+                this.mensagemSuc= '';
+            this.$refs.myModalRef.show()
+            
+            if(this.ordem.type==="output"){
+                this.pReceita = true;
+                this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;  
+                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
+                this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
+            }else{
+                this.pFase = true;
+                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
+                this.orderPhaseProducts = this.productionOrdersRecipe.phases;
+            }
+          },
+            hideModal () {
+            this.$refs.myModalRef.hide()
+          },
+
         cadastrarApont(ordem){    
             this.mensagem='';   
             this.mensagemSuc= '';
@@ -76,25 +109,6 @@ export default {
             })            
                   
         },
-
-        getOrderProducts(){
-            this.mensagem='';   
-            this.mensagemSuc= '';
-            $("#OPApont").modal('show'); 
-
-            if(this.ordem.type==="output"){
-                this.pReceita = true;
-                this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;  
-                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
-            }else{
-                this.pFase = true;
-                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                this.orderPhaseProducts = this.productionOrdersRecipe.phases;
-            }   
-            
-        },
-
         buscarOrdens(){
             axios.get(this.urlOp).then((response)=>{  
                 console.log(response.data.values); 
