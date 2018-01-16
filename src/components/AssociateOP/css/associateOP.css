@@ -65,9 +65,9 @@ input{
     position: relative !important;
 }
 
-.ls{
+/* .ls{
     width: 25%;
-}
+} */
 
 
 @media screen and (max-width : 801px){

@@ -16,16 +16,22 @@
                 </li>
             </ul>
         </nav>
-            <div class="op col-md-10">
-                    <div class="container-fluid col-md-9">
-                        <div class="card" v-for="(ttype,index) in toolsType" :key="index">
-                            <div class="card-header card-header7">
+            <div class="" style="">
+                    <div class="tool-type col-md-12">
+                        <div class="" v-for="(ttype,index) in toolsType" :key="index">
+                            <div class="table table-striped card-header card-header7">
                                 <b></b>
                             </div>
-                            <div class="card-body">
-                                <label class="ls"><b>Nome: </b> {{ttype.name}}</label>
-                                <label class="ls"><b>Descrição: </b>{{ttype.description}}</label>
-                                <label class="ls"><b>Status: </b>{{ttype.description}}</label>
+                            <div class="card-body7">
+                                <label class="ls ls21">
+                                    <b>Nome: </b> {{ttype.name}}
+                                </label>
+                                <label class="ls ls21">
+                                    <b>Descrição: </b>{{ttype.description}}
+                                </label>
+                                <label class="ls ls21">
+                                    <b>Status: </b>{{ttype.description}}
+                                </label>
                                 <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="catchObjToUpdate(ttype)" data-toggle="modal" data-target="#editar-tt">
                                 Editar
                                 </button>
