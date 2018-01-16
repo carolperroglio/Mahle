@@ -21,7 +21,6 @@
         <!--               -->
         <!--               -->
         <nav class="fixed-top nav-recipe">
-            <!-- {{ 'idRecipe' + $route.params.id }} -->
             <li class="title-recipe">
                 <b>Gerenciamento de Receita</b>
             </li>
@@ -38,6 +37,7 @@
                         </label>
                             <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita">
                     </li>
+                    <li class="form-group nav-phases col-md-2">
                         <form row>
                             <br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">
                                 Enviar
@@ -70,12 +70,10 @@
                             </font></b>
                                 {{recipeProduct.productName}}
                             <br><b>
-                            <!-- {{ recipeProduct }} -->
                             <font color="#9BA6A5">
                                 Quantidade do produto:
                             </font></b> 
                                 {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} 
-                            <!--<br>Tipo do produto: {{recipeProductDisplay.phaseProductType}}-->
                             <br>
                         <button type="button" class="btn btn-danger btn-sm config-button2" style="font-size:12px;" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);">
                             <i class= "fa fa-trash-o" style="font-size:18px; cursor:pointer"></i> Remover Produto
@@ -104,10 +102,6 @@
                         <i class= "fa fa-plus-square" style="font-size:18px; cursor:pointer"></i> Adicionar fase  
                     </button>
                 </h2>
-                <!-- <div data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="margin-left:40%;" aria-hidden="true">
-                    <i class="fa fa-plus"></i>
-                        <b> Adicionar fase</b>
-                    </div> -->
             </div>         
         <div class="card-body">
             <div v-for="(pha, index) in phases" class="phase" :key="index">
@@ -131,14 +125,6 @@
                                 {{pha.phaseName}} 
     
                     </label>
-                        <!--<label class="ls5">
-                        <b> Id da fase: </b> {{pha.phaseId}} 
-                        </label>-->
-                        <!-- <span @click.stop.prevent="pha.expand==false?pha.expand=true:pha.expand=false" id="show-phase-products"> -->
-                            <!-- <button type="button" class="btn btn-secondary btn-sm col-sm-1.5">
-                                <b> Expandir </b> {{ pha.expand }}
-                            </button> -->
-                            <!-- </span> -->
                         <label class="btn btn-warning btn-edit btn-sm config-button" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
                             <i class= "fa fa-edit" style="font-size:18px; cursor:pointer"></i> Editar Fase
 
@@ -172,9 +158,6 @@
                 <!-- Fim v-else -->
                                 
                 <div v-else>
-                    <!-- <label class="ls ls15">
-                            <b> Materiais </b>
-                            </label> -->
                     <a class="list-group" v-for="(pro, indexPro) in pha.products" :key="indexPro">
                             <div class="list-group-item list-group-item-3">
                             <label class="ls ls14">
@@ -197,9 +180,6 @@
 
 
                 <br>
-                <!-- <div class="ls ls15">
-                    <b> Parâmetros </b>
-                </div>              -->
                     <a class="list-group" v-for="(par, indexPro) in pha.parameters" v-bind:key="indexPro">
                         <div class="list-group-item list-group-item-4">
                             <label class="ls ls14">

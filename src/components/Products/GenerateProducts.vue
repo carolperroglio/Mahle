@@ -9,7 +9,7 @@
         <!--                                 -->
         <!--               Modal             -->
          
-                <b-modal ref="myModalRef" hide-footer title="Cadastro de Produtos">
+                <b-modal ref="myModalRef" hide-footer title="Cadastro de Ferramentas">
                     
                     <form>
                             <div class="form-group">

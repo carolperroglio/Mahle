@@ -47,7 +47,7 @@
 
                             <label class="ls1">
                             <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="openEditModal(t)">
+                            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="showModal(t)">
                             Editar
                             </button>
                             </div>
@@ -66,16 +66,9 @@
         <!--                       -->
         <!--                       -->
         <!--        modal          -->
-        <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Criar Tipo de Ordem de Produção</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+         <b-modal ref="myModalRef" hide-footer title="Cadastro de Produtos">
+   
+                   <div class="modal-body">
                          <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                             <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                         <div class="row">
@@ -122,9 +115,8 @@
                         </button>
                         
                     </div>
-                </div>
-            </div>
-        </div>
+          
+        </b-modal>
 
     </div>              
 </template>
