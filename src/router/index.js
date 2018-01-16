@@ -98,8 +98,8 @@ export default new Router({
             path:'/inUseTools',
             name: 'InUseTools',
             component: InUseTools
-        },
-        {
+            },
+            {
             path:'/home',
             name: 'HomePage',
             component: HomePage

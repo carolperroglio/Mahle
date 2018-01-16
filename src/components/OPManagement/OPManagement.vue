@@ -1,17 +1,16 @@
 <template>
         <div>
-         <div class="fixed-top nav-produtos">
+         <div class="fixed-top op-management">
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item col-sm-1.5">
-                    <h1 class="title-page"> Gerenciamento de Ordem de Produção </h1>
+                <li class="nav-item nav-item-opmanagement col-sm-1.5">
+                    <h1 class="title-page-opmanagement"> <b>Gerenciamento de Ordem de Produção</b> </h1>
                 </li>
             </ul>
         </div>
-        <div class="OP">
+        <div class="table table-striped">
                <div v-for="(o, index) in OPs" v-bind:key="index">
-                    <div class="card">
+                    <div class="">
                         <div class="card-header card-header2">
-                            <b> </b>
                         </div>
                         <div class="card-body card-body2">
                             <label class="ls ls3">

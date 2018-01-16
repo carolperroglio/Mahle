@@ -161,28 +161,28 @@
                 </div>
                 <div v-for="(f, index) in ferramentas" v-bind:key="index">
                     <div class="">
-                        <div class="card">
+                        <div class="card-tool">
                             <b> </b>
                         </div>
                         <div class="table table-striped card-header2">
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">Nome: </font></b>{{f.name}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{f.description}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">Serial: </font></b>{{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">Code: </font></b>{{f.code}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">Life Cycle: </font></b>{{f.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{f.currentLife}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">UM: </font></b>{{f.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{f.typeName}}</label>&nbsp;&nbsp;&nbsp;
                                 </label>
-                            <label class="ls ls3">
+                            <label class="ls ls30">
                                 <b><font color="#9BA6A5">Status: </font></b>{{f.status}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
                             </label>

@@ -27,17 +27,17 @@
 <!--        Fases            --> 
 <!--                         -->
       
-        <div class="">
-            <div class="phases">
+        <div class="" style="">
+            <div class="phases ">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                 </div>
                     </div>
-                        <div class="container-fluid col-md-12">
-                                <div class="card" v-for="(recipe,index) in recipes" v-bind:key="index">
-                            <div class="card-header">
+                        <div class="table table-striped phases">
+                                <div class="" v-for="(recipe,index) in recipes" v-bind:key="index">
+                            <div class="card-header card-header-recipe col-sm-12">
                                 </div>
-                            <div class="">
+                            <div class="table table-striped card-header card-header-recipe">
                                 <label class="ls ls4">
                                     <b><font color="#9BA6A5">Nome da Receita: </font></b> {{recipe.recipeName}}
                                 </label>
