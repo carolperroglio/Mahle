@@ -6,8 +6,8 @@
         <!--                                 -->
         <!--                                 -->
     <div class="fundo-home">
-        <div class="img-fundo">
-            <img src="./../../assets/imagens/fundo.jpg"/>
+        <div class="threed ">
+            <img src="./../../assets/imagens/fundo.jpg" class="circle img-fundo">
         </div>
     </div>
 </div>

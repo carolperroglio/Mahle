@@ -10,7 +10,7 @@
             <nav class="header fixed-top">
                 <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
-                    <li class="nav-item-cab col-md-2">
+                    <li class="nav-item-cab col-md-1 col-md-offset-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
@@ -21,6 +21,9 @@
                     </li> 
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas</router-link>
+                    </li> 
+                    <li class="nav-item-cab col-md-1.5">
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProduction"><i class= "fa fa-keyboard-o" style="font-size:25px; cursor:pointer"></i>  <br>Apontamentos</router-link>
                     </li> 
                 </ul>    
             </nav>
@@ -117,9 +120,9 @@
                             </div> 
                         </div>
                       
-                        <router-link to="/historianProduction" class="list-group-item collapsed" data-parent="#sidebar">
+                        <!-- <router-link to="/historianProduction" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-database"></i> <span class="hidden-sm-down">   APONTAMENTOS</span>
-                        </router-link>
+                        </router-link> -->
                     </div>
                 </div>
                     <a href="#sidebar" data-toggle="collapse" id="open" @click="open()">

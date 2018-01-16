@@ -1,20 +1,30 @@
-.fundo-home{
+/* .fundo-home{
     background: linear-gradient(rgba(244, 244, 245, 0.384), rgba(98, 163, 201, 0.438)); 
     z-index: 5;
-}
+} */
 
 
 .img-fundo{
-    z-index: 1;
-    padding-top: 15%;
-    padding-left: 15%;
-    padding-bottom: 15%;
+    position: absolute;
+    left: 20%;
+    top: 30%;
+  }
+
+  .circle:hover
+{
+        border-radius: 50%;
 }
 
 @media screen and (max-width: 800px) {
    
     .img-fundo{
-        padding-top: 80;
-        
-    }
+        position: absolute;
+        width: 75%;
+        left: 15%;
+        top: 40%;
+      }
+      .circle:hover
+      {
+              border-radius: 50%;
+      }
 }
