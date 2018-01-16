@@ -1,5 +1,8 @@
 import axios from 'axios'
 import es6promisse from 'es6-promise'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+
 es6promisse.polyfill();
 
 export default {
@@ -30,7 +33,21 @@ export default {
          }
     },
     computed: {},
+    components: {
+        'b-modal': bModal
+    },
+    directives: {
+        'b-modal': bModalDirective
+    },
     methods: {
+        showModal(type) {
+            this.Type = type;
+            console.log(this.Type);
+            this.$refs.myModalRef.show()
+          },
+          hideModal () {
+            this.$refs.myModalRef.hide()
+          },
             getOPs(numOP){            
             var array=[];                          
             if(numOP.length<3){return;} 
@@ -93,11 +110,6 @@ export default {
                 },(error)=>{
                     console.log(error);
                 })
-            },
-            openEditModal(type){
-                this.Type = type;
-                $("#editar").modal('show');
-                console.log(this.Type);
             },
             setSelect(){
                 this.select = true;
