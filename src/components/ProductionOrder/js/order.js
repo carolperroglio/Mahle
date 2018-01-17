@@ -1,5 +1,9 @@
 import axios from 'axios'
 import es6promisse from 'es6-promise'
+import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
+import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 es6promisse.polyfill();
 
 
@@ -63,7 +67,21 @@ export default {
             recipeName: ''
         }
     },
+    components: {
+        'b-dropdown': bDropdown,
+        'b-dropdown-item': bDropdownItem,
+        'b-modal': bModal
+    },
+    directives: {
+        'b-modal': bModalDirective
+    }, 
     methods: {
+        showModal() {
+        this.$refs.modalCadOP.show()
+        },
+        hideModal() {
+        this.$refs.modalCadOP.hide()
+        },
         /*****************/
         /*               */
         /*Busca OP       */

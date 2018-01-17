@@ -8,6 +8,10 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.dropdown-item{
+    background-color: white;
+}
+
 .nav-item-ass-tool {
     margin-left: 3%;
     margin-right: 3%;

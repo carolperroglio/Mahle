@@ -14,17 +14,13 @@
                  <h1 class="title-page"> <b>Associação de OP</b></h1>
                    
                 <li class="nav-item col-sm-1.5">  
-                     <label><b>Número da Ordem: </b></label>     
-                     <div class="dropdown">   
+                     <label><b>Número da Ordem: </b></label>        
                             <input @keyup="OPs=getOPs(numOP)" v-model="numOP" placeholder="Número" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click.stop.prevent="OPId = o.productionOrderId;
+                             <b-dropdown-item class="dropdown-item" v-if="notSelected" @click.stop.prevent="OPId = o.productionOrderId;
                                                                               numOP = o.productionOrderNumber;
                                                                               typeId = o.productionOrderTypeId;
-                                                                              openSelectGroup()" v-for="(o,index) in OPs" v-bind:key="index">{{o.productionOrderNumber}}</a>                            
-                            </div>                            
-                        </div>
-                    
+                                                                              notSelected = false;
+                                                                              openSelectGroup()" v-for="(o,index) in OPs" v-bind:key="index">{{o.productionOrderNumber}}</b-dropdown-item>                                                     
                 </li>
                 <li class="nav-item col-sm-1.5"  v-if="group"> 
                     <label>

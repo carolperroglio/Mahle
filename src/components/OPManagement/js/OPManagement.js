@@ -1,5 +1,9 @@
 import axios from 'axios'
 import es6promisse from 'es6-promise'
+import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
+import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 es6promisse.polyfill();
 
 export default {
@@ -15,7 +19,22 @@ export default {
             url: 'http://brsbap01:8005/api/productionorders/' 
         }
     },
+    components: {
+        'b-dropdown': bDropdown,
+        'b-dropdown-item': bDropdownItem,
+        'b-modal': bModal
+    },
+    directives: {
+        'b-modal': bModalDirective
+    }, 
     methods: {
+        showModal (o) {
+            this.OP=o; 
+        this.$refs.modalGerOP.show()
+      },
+        hideModal () {
+        this.$refs.modalGerOP.hide()
+      },
         buscaOP(){
             axios.get(this.url).then((response)=>{
                     
@@ -52,10 +71,6 @@ export default {
                     });
                 },(error)=>{                   
                 }) 
-        },
-        itemClicado(o){
-            this.OP=o;            
-                $("#editarOP").modal('show');                
         },
         editar(OP){
             axios.put(this.url+'statemanagement/id?productionOrderId='+this.OP.productionOrderId+'&state='+this.newStatus).then((response)=>{
