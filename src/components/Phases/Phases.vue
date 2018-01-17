@@ -45,7 +45,7 @@
                         </form>
                     </li>
                     <li class="nav-phases col-md-2">
-                        <div data-toggle="modal" data-target="#modalEdiReceita" v-if="recipeCadastrada">
+                        <div @click.stop.prevent="showModalEditRecipe()" v-if="recipeCadastrada">
                             <br>
                             <i class="fa fa-edit" style="font-size:22px; cursor:pointer"> 
                                 <div class="edit-text">   
@@ -55,7 +55,7 @@
                         </div>
                     </li>
                     <li class="nav-phases col-md-2">
-                        <div data-toggle="modal" v-if="!(carregando || !recipeCadastrada)" data-target="#modalPro">
+                        <div v-if="!(carregando || !recipeCadastrada)" @click.stop.prevent="showModalAddProdFin()">
                             <br>
                             <i class="fa fa-plus" aria-hidden="true" style="font-size:22px; cursor:pointer"> 
                                 <div class="edit-text">
@@ -64,7 +64,7 @@
                             </i>
                         </div>
                     </li>
-                    <li class="nav-phase col-md-3" v-if="json.stringify(recipeProduct) !== '{}'">
+                    <li class="nav-phase col-md-2" v-if="json.stringify(recipeProduct) !== '{}'">
                             <b><font color="#9BA6A5">
                                 Produto:
                             </font></b>
@@ -75,7 +75,7 @@
                             </font></b> 
                                 {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} 
                             <br>
-                        <button type="button" class="btn btn-danger btn-sm config-button2" style="font-size:12px;" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);">
+                        <button type="button" class="btn btn-danger config-button2" style="font-size:12px;" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);">
                             <i class= "fa fa-trash-o" style="font-size:18px; cursor:pointer"></i> Remover Produto
                         </button>
                     </li>
@@ -98,7 +98,7 @@
                         Fases da receita: 
                     </b>  
                     <br>
-                    <button type="button" class="btn btn-primary btn-sm config-button" data-toggle="modal" data-target="#modalCadFase" id="addPhase" @click.stop.prevent="phase={};abreModal('#modalCadFase');" style="" aria-hidden="true">
+                    <button type="button" class="btn btn-primary btn-sm config-button" id="addPhase" @click.stop.prevent="showModalCadFase();phase={};" style="" aria-hidden="true">
                         <i class= "fa fa-plus-square" style="font-size:18px; cursor:pointer"></i> Adicionar fase  
                     </button>
                 </h2>
@@ -125,15 +125,15 @@
                                 {{pha.phaseName}} 
     
                     </label>
-                        <label class="btn btn-warning btn-edit btn-sm config-button" @click.stop.prevent="phase=pha;abreModal('#modalEditFase')" data-toggle="modal" aria-hidden="true">
+                        <label class="btn btn-warning btn-edit btn-sm config-button" style="color: white" @click.stop.prevent="showModalEditFase();phase=pha" aria-hidden="true">
                             <i class= "fa fa-edit" style="font-size:18px; cursor:pointer"></i> Editar Fase
 
                         </label> 
-                        <label class="btn btn-primary btn-edit btn-sm config-button" @click.stop.prevent="productPhaseName='';phaseProduct={};phase=pha;abreModal('#cadProPhase');" aria-hidden="true">
+                        <label class="btn btn-primary btn-edit btn-sm config-button" @click.stop.prevent="showModalAddProd();phase=pha;" aria-hidden="true">
                             <i class= "fa fa-plus-circle" style="font-size:22px; cursor:pointer"></i> Materiais
 
                         </label> 
-                        <label class="btn btn-info btn-edit btn-sm config-button" @click.stop.prevent="tagName='';phaseParameter={};phase=pha;abreModal('#modalCadParam');" aria-hidden="true">
+                        <label class="btn btn-info btn-edit btn-sm config-button" @click.stop.prevent="showModalAddParam();phase=pha;" aria-hidden="true">
                             <i class= "fa fa-plus-circle" style="font-size:22px; cursor:pointer"></i> Parâmetros   
                         </label> 
                     </form>
@@ -209,36 +209,28 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <!--    Editar de receita  -->
+        <!--    Editar receita     -->
         <!--                       -->
         <!--                       -->
         <!--        modal          -->
-        <div class="modal fade" id="modalEdiReceita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="modal-title" id="exampleModalLabel">Editar receita</h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="">Nome da fase</label>
-                        <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" placeholder="Nome">
-                        <label for="inputPassword4">Código da fase</label>
-                        <input type="text" class="form-control form-control-sm" v-model="recipe.recipeCode" placeholder="Código">
-                    </div>
 
-                    <div class="modal-footer">
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-primary">
-                                <i @click.stop.prevent="putRecipe(recipe)" class="fa fa-check-square" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
+        <b-modal ref="modalEditRecipe" hide-footer title="Editar Receita">
+            
+            <div class="modal-body">
+                <label for="">Nome da fase</label>
+                <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" placeholder="Nome">
+                <label for="inputPassword4">Código da fase</label>
+                <input type="text" class="form-control form-control-sm" v-model="recipe.recipeCode" placeholder="Código">
+            </div>
+
+            <div class="modal-footer">
+                <div class="btn-group" role="group">
+                   <button class="btn btn-primary">
+                        <i @click.stop.prevent="putRecipe(recipe)" class="fa fa-check-square" aria-hidden="true"></i>
+                   </button>
                 </div>
             </div>
-        </div>
+        </b-modal>
 
         <!--                  -->
         <!--                  -->
@@ -248,15 +240,7 @@
         <!--                  -->
         <!--                  -->
         <!--      Modal       -->
-        <div class="modal fade" id="modalPro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h7 class="modal-title" id="exampleModalLabel">Cadastrar produto da receita {{recipe.recipeName}}</h7>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+         <b-modal ref="modalProFinal" hide-footer title="Cadastro de Produto Final">
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -269,17 +253,14 @@
                             </div>
                         </div>
                         <label class="mr-sm-2">Nome do produto : </label>
-                        <div class="dropdown">
                             
-                            <input @keypress.capture="recipeProducts=getResults(urlProducts,recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts" v-bind:key="index">{{p.productName}}</a>
-                            </div>
-                            {{ recipeProductName }}
+                            <input @keyup="recipeProducts=getResults(urlProducts,recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                            <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts" v-bind:key="index">{{p.productName}}</b-dropdown-item>
+                              {{ recipeProductName }}
                             <br>
                             <small>Digite no minimo 3 letras para busca do produto</small>
                         </div>
-                    </div>
+                 
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -289,10 +270,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
+         </b-modal>           
         <!--                       -->
         <!--                       -->
         <!--                       -->
@@ -300,15 +278,9 @@
         <!--                       -->
         <!--                       -->
         <!--        modal          -->
-        <div class="modal fade" id="modalEditFase" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Fase</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+
+        <b-modal ref="modalEditFase" hide-footer title="Editar Fase">
+
                     <div class="modal-body">
                         <label for="">Nome da fase</label>
                         <input type="text" class="form-control form-control-sm" v-model="phase.phaseName" placeholder="Nome">
@@ -329,10 +301,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
+        </b-modal>
         <!--                       -->
         <!--                       -->
         <!--                       -->
@@ -340,15 +309,8 @@
         <!--                       -->
         <!--                       -->
         <!--        modal          -->
-        <div class="modal fade" id="modalCadFase" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar fase</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+
+        <b-modal ref="myModalRefCF" hide-footer title="Cadastrar fase">
                     <div class="modal-body">
                         <label for="">Nome da fase</label>
                         <input type="text" class="form-control form-control-sm" v-model="phase.phaseName" placeholder="Nome">
@@ -369,10 +331,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
+        </b-modal>
         <!--                       -->
         <!--                       -->
         <!--                       -->
@@ -380,15 +339,9 @@
         <!--       produto         -->
         <!--       da fase         -->
         <!--        modal          -->
-        <div class="modal fade" id="cadProPhase" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar produto da fase</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+        
+         <b-modal ref="modalcadProPhase" hide-footer title="Cadastrar produto">
+                  
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-3">
@@ -410,13 +363,9 @@
                             </div>
                         </div>
                         <label class="fm mr-sm-2">Nome do produto : </label>
-                        <div class="dropdown">
-                            <input @keypress.capture="phase.pros=getResults(urlProducts,productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; phase.pros=[];" v-for="(p,index) in phase.pros" v-bind:key="index">{{p.productName}}</a>
-                            </div>
+                            <input @keyup="phase.pros=getResults(urlProducts,productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton"/>
+                                <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; phase.pros=[];" v-for="(p,index) in phase.pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>
                             <small>Digite no minimo 3 letras para busca do produto</small>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <div>
@@ -430,10 +379,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
+         </b-modal>
         <!--    Modal da Flavia    -->
         <!--                       -->
         <!--                       -->
@@ -441,16 +387,9 @@
         <!--                       -->
         <!--                       -->
         <!--         Modal         -->
-        <div class="modal fade" id="modalCadParam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Parâmetros de Fase</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+        <b-modal ref="modalCadParam" hide-footer title="Cadastrar Parâmetro">
+                 
+                        <div class="modal-body">
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                         <div class="form-row">
@@ -478,9 +417,7 @@
                                 <label for="mr-sm-2">Nome : </label><br>
                                 <div class="dropdown">
                                     <input @keypress.capture="phaseTags=getResults(urlRecipeSearch, tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags" v-bind:key="index">{{p.tagName}}</a>
-                                    </div>
+                                        <b-dropdown-item @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags" v-bind:key="index">{{p.tagName}}</b-dropdown-item>
                                 </div>
                             <small>Digite no minimo 3 letras para busca da tag</small>
                             </div>
@@ -494,9 +431,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+        </b-modal>
     </div>
 </template>
 <script src="./js/phases.js">

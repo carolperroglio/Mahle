@@ -130,7 +130,7 @@
                             <label class="ls ls2">
 
                                 <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.prevent="editar(p)" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i>
+                            <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>

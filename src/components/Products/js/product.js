@@ -51,11 +51,15 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
-        showModal () {
+          showModal () {
             this.$refs.myModalRef.show()
           },
           hideModal () {
             this.$refs.myModalRef.hide()
+          },
+          showModal2(produto) {
+            this.produto = produto;
+            this.$refs.myModalRef.show()
           },
         cadastrar(produto) {
             this.carregando = true;
@@ -86,11 +90,6 @@ export default {
                 this.mensagem = 'Erro no server ' + r;
             })
 
-        },
-
-
-        editar(produto) {
-            this.produto = produto;
         },
 
         excluir(produto) {
