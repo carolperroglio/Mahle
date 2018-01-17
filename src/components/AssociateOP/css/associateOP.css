@@ -36,7 +36,9 @@
 .btn-warning{
     color: white;
 }
-
+.dropdown-item{
+    background-color: white;
+}
 
 #dropdownMenuButton{
     background-color: white;

@@ -21,38 +21,29 @@
                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{o.typeDescription}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(o)"></i>
+                            <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="showModal(o)"></i>
                         </div>
                     </div>
                 </div>
         </div>
-        <div class="modal fade" id="editarOP" tabindex="-1" role="dialog" aria-labelledby="editarOPLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editarOPLabel">Editar Status</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                                        <label>
-                                            <b>Status:</b>
-                                        </label>
-                                            <select class="form-control form-control-sm" v-model="newStatus">
-                                                    <option value="created">Criada</option>
-                                                    <option value="active">Ativa</option>
-                                                    <option value="inactive">Inativa</option>
-                                                    <option value="paused">Pausada</option>
-                                                    <option value="ended">Encerrada</option>
-                                                    <option value="waiting_approval">Aguardando Aprovação</option>
-                                                    <option value="approved">Aprovada</option>
-                                                    <option value="reproved">Reprovada</option>
-                                            </select>
+        <b-modal ref="modalGerOP" hide-footer title="Registrar Produto">
+                    <form>
+                        <div class="form-group">
+                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                            <label>
+                                <b>Status:</b>
+                            </label>
+                            <select class="form-control form-control-sm" v-model="newStatus">
+                                <option value="created">Criada</option>
+                                <option value="active">Ativa</option>
+                                <option value="inactive">Inativa</option>
+                                <option value="paused">Pausada</option>
+                                <option value="ended">Encerrada</option>
+                                <option value="waiting_approval">Aguardando Aprovação</option>
+                                <option value="approved">Aprovada</option>
+                                <option value="reproved">Reprovada</option>
+                            </select>
                                         <label>
                                             <b>Production Order no: </b>
                                         </label>
@@ -76,10 +67,7 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </b-modal>
     </div>        
 </template>
 <script src="./js/OpManagement.js">

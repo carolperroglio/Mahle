@@ -5,19 +5,11 @@
         <!-- Formulário de  -->
         <!-- Criação de OP  -->
         <!--                -->
-        <div class="modal fade cadastro-op" id="cadastrarOp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-
-                <div class="modal-content">
-                    <div class="progress" v-show="carregando">
+        <b-modal ref="modalCadOP" hide-footer title="Cadastrar OP">
+                   <div class="progress" v-show="carregando">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar OP</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    
                     <div class="modal-body">
                         <form>
                             <div class="alert alert-success" role="alert" v-if="opCreated">
@@ -51,19 +43,19 @@
                             <div class="form-group row">
                             </div>
                             <div class="form-group row">
-                                <label for="opType" class="col-sm-3 col-form-label">Receita</label>
-                                <input @keypress.capture="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName" placeholder="Ex: Receita1" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</a>
-                                </div>
+                                <label for="opType" class="col-sm-2 col-form-label">Receita</label>
+                                <input @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                                <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</b-dropdown-item>
                                 <div class="col-sm-2">
                                     <button class="btn btn-outline-success btn-sm" @click="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </div>
-                            <!--  Acordion que mostra qual     -->
-                            <!--  receita foi selecionada      -->
+
+                            <!--  Acordion que mostra qual   -->
+                            <!--  receita foi selecionada    -->
+                            
                             <div id="accordion" role="tablist" v-if="recipeAdded">
                                 <div class="card">
                                     <div class="card-header card-header-op" role="tab" id="headingOne">
@@ -134,9 +126,8 @@
                     </div>
                     <!--</Botão que cria a OP -->
                     <!--                      -->
-                </div>
-            </div>
-        </div>
+              
+              </b-modal>
         <!-- Fechamento do Modal  -->
         <!-- Do formulário de     -->
         <!-- Criação de OP        -->
@@ -183,7 +174,7 @@
                         </div>
                         <!-- Button trigger modal -->
                         <div class="col-sm-1.5">
-                            <button @click="getRecipes(); getOpType()" type="button" class="btn btn-success btn-sm btn-sm" data-toggle="modal" data-target="#cadastrarOp">
+                            <button @click="showModal(); getRecipes(); getOpType()" type="button" class="btn btn-success btn-sm btn-sm">
                                 Cadastrar Ordem
                             </button>
                         </div>

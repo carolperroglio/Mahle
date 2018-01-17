@@ -15,17 +15,13 @@
                    
                 <li class="nav-item-ass-tool col-sm-1.5">  
                      <label><br><b>Nome da ferramenta: </b></label>     
-                     <div class="dropdown">   
-                            <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" @click.stop.prevent="toolName = t.name;
+                       <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                           <b-dropdown-item class="dropdown-item" v-if="notSelected" @click.stop.prevent="toolName = t.name;
                                                                               toolId = t.id;
                                                                               tool = t.name;
                                                                               typeId = t.typeId;
-                                                                              openSelectGroup()" v-for="(t,index) in Tools" v-bind:key="index">{{t.name}}</a>                            
-                            </div>                            
-                        </div>
-                    
+                                                                              notSelected = false;  
+                                                                              openSelectGroup()" v-for="(t,index) in Tools" v-bind:key="index">{{t.name}}</b-dropdown-item>                              
                 </li>
                 <li class="nav-item-ass-tool  col-sm-1.5"  v-if="group"> 
                     <label>
