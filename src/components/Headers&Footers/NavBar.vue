@@ -45,21 +45,21 @@
         <!--                        -->
         <!--   Menu lateral Novo    -->
         <!--                        -->
-        <!--                        -->             
+        <!--                        -->  
+        
         <div class="container-fluid fixed-top menu-btn"> 
-            <div class="row refactor-class-row">
-                <div class="col-xs-1 p-l-0 p-r-0 collapse in" id="sidebar" v-if="show">
-                    <div class="list-group panel">
-                        <a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-odnoklassniki">
-                            </i> 
-                        <span class="hidden-sm-down">   
-                            OPERADOR
-                        </span> 
-                        </a>
-                        <div class="collapse" id="menu2">
-                            <router-link to="#" class="list-group-item" data-parent="#menu1"> Logout </router-link>
-                        </div>
+             <b-button v-b-toggle.sidebar id="open" >
+                <i class="icon-navigate fa fa-navicon fa-lg"></i>
+            </b-button>       
+        </div>   
+                <b-collapse class="fixed-top col-md-3 p-l-0 p-r-0" id="sidebar" flush>
+                        <div class="list-group-item collapsed"  v-b-toggle.menu2><i class="fa fa-odnoklassniki">
+                            </i> OPERADOR </div>
                         
+                        <b-collapse id="menu2">                      
+                            <router-link to="#" data-parent="#menu1" class="list-group-item collapsed"> Logout </router-link>
+                        </b-collapse>
+
                         <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
                             <i class="fa fa-barcode"></i> 
                             <span class="hidden-sm-down">  
@@ -73,13 +73,14 @@
                             </span>
                         </router-link>
 
-                        <a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+                        <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1>
                             <i class="fa fa-cogs"></i> 
                                 <span class="hidden-sm-down">   
                                 FERRAMENTAS
                                 </span> 
-                        </a>  
-                        <div class="collapse" id="menu1">
+                             <i class="fa fa-chevron-down pull-right"></i> 
+                        </div>  
+                        <b-collapse id="menu1">
                             <router-link to="/toolCreate" class="list-group-item" data-parent="#menu1"> 
                                 Cadastro de Ferramentas 
                             </router-link>
@@ -96,15 +97,16 @@
                                 <div class="collapse" id="menu1sub1">
                                 </div>
                             </div> 
-                        </div>         
+                        </b-collapse>         
 
-                        <a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+                        <a class="list-group-item collapsed"  v-b-toggle.menu3>
                             <i class="fa fa-industry"></i> 
                                 <span class="hidden-sm-down">   
                                  ORDEM DE PRODUÇÃO
                                 </span> 
+                             <i class="fa fa-chevron-down pull-right"></i> 
                         </a>  
-                        <div class="collapse" id="menu3">
+                        <b-collapse id="menu3">
                             <router-link to="/prodOrder" class="list-group-item" data-parent="#menu3"> 
                                 Cadastro de Ordem de Produção
                             </router-link>
@@ -118,22 +120,10 @@
                                 <div class="collapse" id="menu3sub1">
                                 </div>
                             </div> 
-                        </div>
-                      
-                        <!-- <router-link to="/historianProduction" class="list-group-item collapsed" data-parent="#sidebar">
-                            <i class="fa fa-database"></i> <span class="hidden-sm-down">   APONTAMENTOS</span>
-                        </router-link> -->
-                    </div>
-                </div>
-                    <a data-toggle="collapse" id="open" @click="open()">
-                        <i class="icon-navigate fa fa-navicon fa-lg"></i>
-                    </a>
-                    <a data-toggle="collapse" id="close" @click="close()">
-                        <i class="icon-navigate fa fa-close fa-lg"></i>
-                    </a>
-            </div>
-            </div>
+                        </b-collapse>
+             </b-collapse>        
         <router-view/>
+
     </div>  
 </template>
 

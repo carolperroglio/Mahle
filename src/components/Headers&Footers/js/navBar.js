@@ -1,26 +1,36 @@
 'use strict'
-import { Dropdown } from 'bootstrap-vue/es/components';
+import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
+import vBToggle from 'bootstrap-vue/es/directives/toggle/toggle'
+import bButton from 'bootstrap-vue/es/components/button/button'
+import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
+import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
 
 export default {
     name: "NavBar",
     data() {
         return { 
-            show: false
+          
          }
     },
     computed: {},
-    methods: {
-        open() {
-            document.getElementById("open").style.display="none";
-            document.getElementById("close").style.display="block";
-            this.show = true;
-        },
-        close() {
-            document.getElementById("open").style.display="block";
-            document.getElementById("close").style.display="none";
-            this.show = false;
-        }
-        
+    components: {
+        'b-collapse': bCollapse,
+        'b-button': bButton,
+        'b-list-group': bListGroup,
+        'b-list-group': bListGroupItem
     },
+    directives: {
+        'b-toggle': vBToggle
+    },
+    methods: {
+    },
+    beforeMount: function(){
+        var divToHide = document.getElementById('sidebar');
+        document.onclick = function(e){
+            if(e.target.id !== 'sidebar'){
+            divToHide.style.display = 'none';
+            }
+        };
+    }
  };
 
