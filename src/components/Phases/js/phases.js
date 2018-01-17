@@ -1,5 +1,10 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
+import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
+import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+
 es6promisse.polyfill();
 var ipServer = 'http://brsbap01:';
 
@@ -55,12 +60,64 @@ export default {
             } else if (productTypeName == null) {}
         }
     },
-
+    components: {
+        'b-dropdown': bDropdown,
+        'b-dropdown-item': bDropdownItem,
+        'b-modal': bModal
+    },
+    directives: {
+        'b-modal': bModalDirective
+    },     
     methods: {
-        abreModal(nome) {
-            $(nome).modal('show');
-        },
 
+        /************************/
+        /*                      */
+        /*                      */
+        /*  Métodos dos Modals  */
+        /*                      */
+        /*                      */
+        /************************/
+
+          showModalCadFase() {
+            this.$refs.myModalRefCF.show()
+          },
+          hideModalCadFase() {
+            this.$refs.myModalRefCF.hide()
+          },
+          showModalEditFase() {
+            this.$refs.modalEditFase.show()
+          },
+          hideModalEditFase() {
+            this.$refs.modalEditFase.hide()
+          },
+          showModalEditRecipe() {
+            this.$refs.modalEditRecipe.show()
+          },
+          hideModalEditRecipe() {
+            this.$refs.modalEditRecipe.hide()
+          },
+          showModalAddProd() {
+            this.phaseProduct={};
+            this.$refs.modalcadProPhase.show()
+          },
+          hideModalAddProd() {
+            this.$refs.modalcadProPhase.hide()
+          },
+          showModalAddParam() {
+            this.phaseParameter={};
+            this.tagName='';
+            this.$refs.modalCadParam.show()
+          },
+          hideModalAddParam() {
+            this.$refs.modalCadParam.hide()
+          },
+          showModalAddProdFin() {
+            this.$refs.modalProFinal.show()
+          },
+          hideModalAddProdFin() {
+            this.$refs.modalProFinal.hide()
+          },
+          
         /*****************/
         /*               */
         /*               */
@@ -68,6 +125,7 @@ export default {
         /*               */
         /*               */
         /*****************/
+
         changeView: function(pha) {
             if (pha.expand == false) {
                 return true;

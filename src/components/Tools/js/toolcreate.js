@@ -17,7 +17,6 @@ function paginacao(response, este){
     }                  
 }
 
-
 export default {    
     name: "ToolCreate", 
     data(){
@@ -55,7 +54,7 @@ export default {
         'b-modal': bModalDirective
     },     
     methods:{
-        showModal () {
+          showModal () {
             this.$refs.myModalRef.show()
           },
           hideModal () {
