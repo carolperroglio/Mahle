@@ -3,6 +3,9 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -39,6 +42,26 @@ module.exports = {
       'vue$':'vue/dist/vue.common.js'
     }
   },
+
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery',
+      Popper: ['popper.js', 'default'],
+      Util: "exports-loader?Util!bootstrap/js/dist/util",
+      Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
+      Vue: ['vue/dist/vue.esm.js', 'default'],
+      moment: 'moment'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true
+    }),
+  ],
+
   module: {
     rules: [
       { 
@@ -86,7 +109,7 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-    ]
+    ]   
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
