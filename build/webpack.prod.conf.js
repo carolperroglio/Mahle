@@ -30,7 +30,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
-    // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
     }),
@@ -38,7 +37,12 @@ const webpackConfig = merge(baseWebpackConfig, {
       $: "jquery",
       jquery: 'jquery',
       'window.jQuery': 'jquery',
-      jQuery: 'jquery'
+      jQuery: 'jquery',
+      Popper: ['popper.js', 'default'],
+      Util: "exports-loader?Util!bootstrap/js/dist/util",
+      Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
+      Vue: ['vue/dist/vue.esm.js', 'default'],
+      moment: 'moment'
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
