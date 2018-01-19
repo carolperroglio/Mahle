@@ -1,6 +1,5 @@
 ﻿/*Configurações do header*/
 
-
 .nav-item-cab {
     position: relative;
     margin-left: 4%;
@@ -10,12 +9,13 @@
     margin-bottom: 1.5%;
     text-align: center;
     cursor: pointer;
-    
+    z-index: 10;
 }
 
-/* .btn-config{
-    width: 80%;
-} */
+.menu-btn{
+
+}
+
 
 /*Logo do sistema*/
 .logo-system {
@@ -24,7 +24,7 @@
     margin-left: 91%;
     height: 7%;
     width: 8%;
-    z-index: 100;
+    z-index: 50;
 }
 
 /*Configurações do ícone do menu lateral collapse*/
@@ -34,13 +34,15 @@
     padding-top: 150%;
     margin-left: 45%;
     color: white;
+    cursor: pointer;
+    z-index: 100;
     }
 
 #sidebar {
-    padding-top: 9%;
+    padding-top: 6.5%;
     padding-left: 15;
     position:fixed;
-    z-index:30;
+    z-index: 100;
 }
 
 #list-group{
