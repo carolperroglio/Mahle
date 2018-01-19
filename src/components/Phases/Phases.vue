@@ -20,8 +20,8 @@
         <!--               -->
         <!--               -->
         <!--               -->
-        <nav class="fixed-top nav-recipe">
-            <li class="title-recipe">
+        <nav class="fixed-top nav-recipeP">
+            <li class="title-recipeP">
                 <b>Gerenciamento de Receita</b>
             </li>
                 <ul class="nav d-flex">

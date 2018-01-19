@@ -1,7 +1,21 @@
 /*Menu de cadastro da receita*/
 .nav-recipe {
     position: fixed;
-    top: 13%;
+    margin-top: 9.7%;
+    background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
+    font-size: 11pt;    
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    z-index: 1;
+    left: 0%;
+    background-color: white;
+    width: 100%;
+    height: 20%;
+}
+
+.nav-recipeP {
+    position: fixed;
+    margin-top: 9.7%;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     font-size: 11pt;    
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -93,8 +107,9 @@ h3 {
 }
 
 /*Bloco Fases da Receita*/
+
 .card-header-phase{
-    margin-top: 15%;
+    margin-top: 20%;
     width: 100%;
 }
 
@@ -212,12 +227,11 @@ h6{
 }
 
 
-
-@media only screen and (max-width: 801px) {
+@media only screen and (max-width: 800px) {
 /*Titulo da receita*/
 .title-recipe{
     font-size: 16px;
-    margin-top: 5%;
+    margin-top: 1%;
 }
  /*Título dos botões de input do menu superior da tela de receita*/
 .title-cad{
@@ -235,18 +249,28 @@ h6{
     padding-bottom: 10%;
 }
 /**/
+
+.card-header-phase{
+    margin-top: 13%;
+    width: 100%;
+}
+
+.nav-recipeP{
+    height: 20%;
+}
+
 #cadReceita{
-    padding-top: 0.1%;
     padding-left: 15%;
 }
-/*Box cabeçalho do gerenciamento da receita*/
+
 .nav-recipe {
-    top: 14%;
-    font-size: 9pt;    
-    background-color: white;
-    height: 25%;
-    }
-/**/
+    height: 18%;
+}
+
+.title-recipeP {
+    margin-top: 1%;
+}
+
 .nav-phases{
     width: 19%;
     padding-top: 0.2%;
