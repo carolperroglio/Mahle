@@ -6,13 +6,14 @@
         <!--                                 -->
         <!--                                 -->
         <nav class="fixed-top nav-recipe">
-            <li class="title-recipe">
+            
+            <ul class="nav d-flex align-items-center">
+                <li class="title-recipe col-md-1.5">
                 Gerenciamento de Receita
             </li>
-            <ul class="nav d-flex align-items-center">
                 <li class="col-md-1.5">
                     <br> 
-                    <form class="form-row" id="cadReceita">
+                    <form id="cadReceita">
                      <router-link :to="{ name: 'Phases',params: { id: 0 }}" class="btn btn-primary">
                         Cadastrar Receita
                     </router-link>
@@ -36,7 +37,6 @@
                           <div class="" v-for="(recipe,index) in recipes" v-bind:key="index">
                             <div class="card-header card-header-recipe col-sm-12">
                                 </div>
-                            <div class="table table-striped card-header card-header-recipe">
                                 <label class="ls ls4">
                                     <b><font color="#9BA6A5">Nome da Receita: </font></b> {{recipe.recipeName}}
                                 </label>
@@ -47,7 +47,6 @@
                                     <i class="fa fa-edit icon-right2 icon-style" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">
                                     </i>
                                 </router-link>
-                            </div>
                             <div class="paginacao-phase" v-show="total>0">
                                 <nav aria-label="">
                                     <ul class="pagination justify-content-center">
