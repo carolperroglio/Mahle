@@ -13,7 +13,8 @@
 }
 
 .menu-btn{
-
+    box-sizing: content-box;
+    width: 10%;
 }
 
 

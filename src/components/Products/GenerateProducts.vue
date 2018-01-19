@@ -56,7 +56,7 @@
         <div class="fixed-top nav-produtos">
             <ul class="nav d-flex align-items-center">
 
-                <li class="nav-item col-sm-1.5">
+                <li class="nav-item nav-item-products col-sm-1.5">
                     <h1 class="title-page"> <b>Cadastro de Materiais</b> </h1>
                         <select class="form-control form-control-sm" v-model="orderField">
                             <option value="" selected disabled>Campo para busca</option>
@@ -66,14 +66,14 @@
                             <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
-                <li class="nav-item col-sm-1.5">
+                <li class="nav-item nav-item-products col-sm-1.5">
                     <select class="form-control form-control-sm" v-model="order">                        
                            <option value="" selected disabled>Ordenação</option>
                             <option value="ascending">Crescente</option>
                             <option value="descending">Decrescente</option>
                     </select>
                 </li>
-                <li class="nav-item col-sm-1.5">
+                <li class="nav-item nav-item-products col-sm-1.5">
                     <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                             <option value="" selected disabled>Campo para busca</option>
                             <option value="productName">nome</option>
@@ -82,13 +82,13 @@
                             <option value="productGTIN">GTIN</option>
                     </select>
                 </li>
-                <li class="nav-item col-sm-2">
+                <li class="nav-item nav-item-products col-sm-2">
                         <input class="form-control btn-sm" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                 </li>
-                <li class="nav-item  col-sm-1.5">
+                <li class="nav-item  nav-item-products col-sm-1.5">
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                 </li>
-                <li class="nav-item col-sm-3">
+                <li class="nav-item nav-item-products col-sm-3">
                     <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal">Novo Produto</button>
 
                 </li>

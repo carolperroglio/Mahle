@@ -25,6 +25,9 @@ body, html {
         border-radius: 50%;
 }
 
+.circle{
+    transition: border-radius 3s;
+}
 @media screen and (max-width: 800px) {
    
     .img-fundo{
