@@ -2,27 +2,26 @@
   <div>
         <nav class="fixed-top nav-tool-type">
             <ul class="nav d-flex align-items-center">
-                <li class="title-tool-type"></li>
+                <li class="title-tool-type">
+                 <h1 class="title-page-TT"><b>Tipo de Ferramentas</b></h1>
+                </li>
                 <li class="nav-tt col-sm-1.5">
-                    <form class="form-inline my-3 form-control-sm">
-                        <h1 class="title-page"><b>Tipo de Ferramentas</b></h1>
-                
-                        <div class="col-sm-1.5">
-                            <button type="button" class="btn btn-primary cadFer" data-toggle="modal" data-target="#cadastrar-tt">
+                        <div class="col-sm-1.5 cadbtn">
+                            <button type="button" class="btn btn-primary cadFer" @click.stop.prevent="showModal()">
                              Cadastrar Tipo de Ferramenta
                             </button>
                         </div>
-                    </form>
                 </li>
             </ul>
         </nav>
-            <div class="" style="">
+        <div class="row conteudo-tt">
+              <div class="container-fluid">
                     <div class="tool-type col-md-12">
                         <div class="" v-for="(ttype,index) in toolsType" :key="index">
-                            <div class="table table-striped card-header card-header7">
+                            <div class="card-header card-header7">
                                 <b></b>
                             </div>
-                            <div class="card-body7">
+                            <div class="card-body card-tt">
                                 <label class="ls ls21">
                                     <b>Nome: </b> {{ttype.name}}
                                 </label>
@@ -32,12 +31,13 @@
                                 <label class="ls ls21">
                                     <b>Status: </b>{{ttype.description}}
                                 </label>
-                                <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="catchObjToUpdate(ttype)" data-toggle="modal" data-target="#editar-tt">
+                                <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="showModalEdit();catchObjToUpdate(ttype)">
                                 Editar
                                 </button>
                             </div>
                         </div>
                     </div>
+            </div>
             </div>
         <!--                       -->
         <!--                       -->
@@ -46,15 +46,9 @@
         <!--                       -->
         <!--                       -->
         <!--        modal          -->
-        <div class="modal fade" id="cadastrar-tt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Criar Tipo de Ferramenta</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+
+        <b-modal ref="myModalRef" hide-footer title="Criar Tipo de Ferramenta">
+                
                     <div class="modal-body">
                         <div class="alert alert-success" role="alert" v-show="ttCreated">
                             Tipo de Ferramenta cadastrada com sucesso !
@@ -101,9 +95,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+        </b-modal>
         <!-- 
             /FIM CRIAR TOOLSTIP MODAL
          -->
@@ -111,15 +103,8 @@
          <!-- 
              EDITAR TOOLSTIP
           -->
-        <div class="modal fade" id="editar-tt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Tipo de Ferramenta</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+       <b-modal ref="myModalEdit" hide-footer title="Editar Tipo de Ferramenta">
+         
                     <div class="modal-body">
                         <div class="alert alert-success" role="alert" v-show="ttUpdated">
                             Tipo de Ferramenta atualizada com sucesso !
@@ -168,9 +153,8 @@
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    </b-modal>
+         
         <!--
              /FIM CRIAR TOOLSTIP MODAL
          -->

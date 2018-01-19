@@ -33,8 +33,7 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                 </div>
                     </div>
-                        <div class="table table-striped phases">
-                                <div class="" v-for="(recipe,index) in recipes" v-bind:key="index">
+                          <div class="" v-for="(recipe,index) in recipes" v-bind:key="index">
                             <div class="card-header card-header-recipe col-sm-12">
                                 </div>
                             <div class="table table-striped card-header card-header-recipe">
@@ -65,7 +64,6 @@
                                 </nav>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
