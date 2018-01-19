@@ -1,6 +1,6 @@
-.nav-ass-tool{
+.nav-item-ass-tool{
     position: fixed;
-    top: 12%;
+    margin-top: 5%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
@@ -12,11 +12,6 @@
     background-color: white;
 }
 
-.nav-item-ass-tool {
-    margin-left: 3%;
-    margin-right: 3%;
-    padding-top: 3%;
-}
 
 .title-page-ass-tool{
     text-align: left;
@@ -25,15 +20,16 @@
     font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     position: fixed;
-    left: 0.9%;
-    top: 14.5%;
+    margin-left: 0.9%;
+    margin-top: 2%;
+    z-index: 2;
 }
 
 .ferAssoc{
     position: relative;
-    padding-top: 22%;
-    padding-bottom: 5%;              
-    left: 1%;
+    margin-top: 22%;
+    margin-bottom: 5%;              
+    margin-left: 1%;
     width: 100%;
 }
 
@@ -48,14 +44,14 @@
 }
 
 .card-body-ass-tool{
-    padding-top: 0.1%;
-    padding-bottom: 0.1%;
-    padding-left: 1.1%;
+    margin-top: 0.1%;
+    margin-bottom: 0.1%;
+    margin-left: 1.1%;
 }
 
 .card-header-ass-tool{
-        padding-top: 0.6%;
-        padding-bottom: 0.6%;   
+        margin-top: 0.6%;
+        margin-bottom: 0.6%;   
 }
 
 /*Listagem de orderHistorian*/
@@ -78,11 +74,11 @@ input{
     .orderHistorian{ 
         margin-top: 30%; 
     }   
-    .nav-ass-tool{
-        top: 20%;
+    .nav-item-ass-tool{
+        margin-top: 11%;
     }
     .title-page-ass-tool{
-        font-size: 22px;
-        top: 22%;
+        font-size: 20px;
+        margin-top: 5%;
     }        
 } 

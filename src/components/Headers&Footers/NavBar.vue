@@ -48,32 +48,35 @@
         <!--                        -->  
         
         <div class="container-fluid fixed-top menu-btn"> 
+            
              <b-button v-b-toggle.sidebar id="open" >
                 <i class="icon-navigate fa fa-navicon fa-lg"></i>
             </b-button>       
         </div>   
                 <b-collapse class="fixed-top col-md-3 p-l-0 p-r-0" id="sidebar" flush>
-                        <div class="list-group-item collapsed"  v-b-toggle.menu2><i class="fa fa-odnoklassniki">
-                            </i> OPERADOR </div>
+                        <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2 ><i class="fa fa-odnoklassniki">
+                            
+                           </i> OPERADOR <i class="fa fa-chevron-down pull-right"></i></div> 
+                            
                         
                         <b-collapse id="menu2">                      
-                            <router-link to="#" data-parent="#menu1" class="list-group-item collapsed"> Logout </router-link>
+                            <router-link to="#" data-parent="#menu1" class="list-group-item collapsed" cursor="pointer"> Logout </router-link>
                         </b-collapse>
 
-                        <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar">
+                        <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar" >
                             <i class="fa fa-barcode"></i> 
                             <span class="hidden-sm-down">  
                                 MATERIAIS
                             </span>
                         </router-link>
-                        <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar">
+                        <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-book"></i> 
                             <span class="hidden-sm-down">  
                                 RECEITA
                             </span>
                         </router-link>
 
-                        <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1>
+                        <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1 cursor="pointer">
                             <i class="fa fa-cogs"></i> 
                                 <span class="hidden-sm-down">   
                                 FERRAMENTAS
@@ -118,12 +121,13 @@
                             </router-link>
                             <div class="collapse" id="menu3sub1">
                                 <div class="collapse" id="menu3sub1">
+                                    
                                 </div>
+                                
                             </div> 
                         </b-collapse>
-             </b-collapse>        
+                    </b-collapse>        
         <router-view/>
-
     </div>  
 </template>
 
