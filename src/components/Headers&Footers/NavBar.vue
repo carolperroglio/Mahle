@@ -10,10 +10,10 @@
             <nav class="header fixed-top">
                 <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
-                    <li class="nav-item-cab col-md-1 col-md-offset-2">
+                    <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
                     </li> 
-                    <li class="nav-item-cab col-md-2">
+                    <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link active bg-dark btn-config" router-link to="/stateManagement"><i class= "fa fa-power-off" style="font-size:25px; cursor:pointer"></i>  <br>OP Status Management </router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
@@ -47,7 +47,7 @@
         <!--                        -->
         <!--                        -->  
         
-        <div class="container-fluid fixed-top menu-btn"> 
+        <div class="row fixed-top menu-btn"> 
             
              <b-button v-b-toggle.sidebar id="open" >
                 <i class="icon-navigate fa fa-navicon fa-lg"></i>
@@ -55,7 +55,7 @@
         </div>   
 
                 <b-collapse class="fixed-top col-md-4 p-l-0 p-r-0" id="sidebar" flush>
-                        <div class="list-group-item collapsed"  v-b-toggle.menu2><i class="fa fa-odnoklassniki">
+                        <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki">
                             </i> OPERADOR </div>
 
                         

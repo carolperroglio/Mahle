@@ -8,7 +8,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item-op {
+.nav-item-optype {
     margin-left: 3%;
     margin-right: 3%;
     padding-top: 4%;
@@ -113,7 +113,7 @@ input {
         top: 20%;
         height: 17%;
     }
-    .nav-item-op {
+    .nav-item-optype {
         margin-left: 3%;
         margin-right: 3%;
         padding-top: 7%;
