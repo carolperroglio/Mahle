@@ -114,7 +114,7 @@
                         <div class="card-header card-header5">
                             <b></b>
                         </div>
-                        <div class="">
+                        <div class="card-body">
                             <label class="ls ls2">
                                 <b>
                                     <font color="#9BA6A5">Nome: </font>

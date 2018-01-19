@@ -52,7 +52,7 @@
                 <i class="icon-navigate fa fa-navicon fa-lg"></i>
             </b-button>       
         </div>   
-                <b-collapse class="fixed-top col-md-3 p-l-0 p-r-0" id="sidebar" flush>
+                <b-collapse class="fixed-top col-md-4 p-l-0 p-r-0" id="sidebar" flush>
                         <div class="list-group-item collapsed"  v-b-toggle.menu2><i class="fa fa-odnoklassniki">
                             </i> OPERADOR </div>
                         
