@@ -12,7 +12,7 @@
             </ul>
         </nav>
 
-        <div class="row conteudo-tt">
+        <div class="row conteudo-opt">
             <div class=" col-md-12">
                     <div class="container-fluid">
                         <div class="progress" v-show="carregando">

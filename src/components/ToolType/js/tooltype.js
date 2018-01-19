@@ -1,6 +1,9 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 import { setTimeout } from 'timers';
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -47,7 +50,26 @@ export default {
             id: ''
         }
     },
+    components: {
+        'b-modal': bModal
+    },
+    directives: {
+        'b-modal': bModalDirective
+    },
     methods: {
+
+        showModal () {
+            this.$refs.myModalRef.show()
+          },
+        hideModal () {
+            this.$refs.myModalRef.hide()
+          },
+        showModalEdit () {
+            this.$refs.myModalEdit.show()
+          },
+        hideModalEdit () {
+            this.$refs.myModalEdit.hide()
+          },
         //
         // GET THINGSGROUP
         //

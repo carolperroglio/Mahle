@@ -53,11 +53,11 @@
                 <i class="icon-navigate fa fa-navicon fa-lg"></i>
             </b-button>       
         </div>   
-                <b-collapse class="fixed-top col-md-3 p-l-0 p-r-0" id="sidebar" flush>
-                        <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2 ><i class="fa fa-odnoklassniki">
-                            
-                           </i> OPERADOR <i class="fa fa-chevron-down pull-right"></i></div> 
-                            
+
+                <b-collapse class="fixed-top col-md-4 p-l-0 p-r-0" id="sidebar" flush>
+                        <div class="list-group-item collapsed"  v-b-toggle.menu2><i class="fa fa-odnoklassniki">
+                            </i> OPERADOR </div>
+
                         
                         <b-collapse id="menu2">                      
                             <router-link to="#" data-parent="#menu1" class="list-group-item collapsed" cursor="pointer"> Logout </router-link>

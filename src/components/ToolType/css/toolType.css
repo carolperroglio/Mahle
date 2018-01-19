@@ -1,42 +1,50 @@
 .btn-add-tt {
     padding-top: 38px;
 }
-.cadFer{
-    margin-top: 17%;
-}
 
 .nav-tool-type {
     position: fixed;
-    top: 12%;
+    margin-top: 9.7%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
     height: 16%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.title-page{
+
+.conteudo-tt {
+    width: 100%;
+    padding-bottom: 5%;
+}
+
+.card-tt {
+    height: 10%;
+}
+
+.title-page-TT{
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
     font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-    position: fixed;
     left: 0.9%;
-    top: 14.5%;
+    top: 2%;
 }
 
 .tool-type{
     margin-left: 3%;
-    padding-top: 16%;
-    padding-bottom: 5%;
     width: 95%;
+}
+
+.cadbtn {
+    margin-top: 10%;
 }
 
 .card-header7{ 
     margin-top: 0.3%;
     margin-bottom: 0.3%;
-    padding-top: 0.2%;
-    padding-bottom: 0.2%;
+    margin-top: 0.2%;
+    margin-bottom: 0.2%;
 }
 
 .ls21{
@@ -49,12 +57,12 @@
 
 
 
-@media screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) {
 .nav-tool-type {
         background-color: rgba(249, 247, 247, 1);
         position: fixed;
-        top: 16%;
         z-index: 1;
+        margin-top: 15%;
         width: 100%;
         height: 20%;
         border-bottom: 1px solid rgba(0,0,0,0.2);
@@ -64,7 +72,7 @@
         top: 21%;
     }
 .tool-type{
-    padding-top: 30%;
+    padding-top: 7%;
     padding-bottom: 7%;
     }
 .ls21{
