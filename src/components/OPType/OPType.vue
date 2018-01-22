@@ -49,7 +49,7 @@
                             <div class="btn-group" role="group">
 
                             <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="openEditModal(t)">
-                            Editar&nbsp&nbsp <font size="4">&#x270d  </font>   
+                            Editar &nbsp&nbsp <font size="4">&#x270d  </font>   
                             </button>   
 
                             </div>

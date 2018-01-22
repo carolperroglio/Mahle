@@ -12,8 +12,6 @@
             <ul class="nav d-flex align-items-center">
             <h1 class="title-page-hp"><b> Apontamentos de OP</b> </h1>
                 <li class="nav-item-hp col-sm-1.5">
-                </li>
-                <li class="nav-item-hp col-sm-1.5">
                     <label class="fm mr-sm-2">Número da OP: </label>   
 
                 </li>
@@ -24,7 +22,7 @@
                                                                               op=p.productionOrderNumber;
                                                                               productionOrderRecipe=p.recipe" v-for="(p,index) in POs" v-bind:key="index">{{p.productionOrderNumber}}</b-dropdown-item>                            
                 </li>
-                <li class="nav-item-hp  col-sm-2">
+                <li class="nav-item-hp col-sm-2">
                         <button type="button" class="btn btn-primary btn-sm col-md-12 col-sm-1" @click.stop.prevent="listaOp()">
                             Selecionar
                         </button>
