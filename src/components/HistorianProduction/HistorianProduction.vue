@@ -56,16 +56,16 @@
                             </div>
                             <div class="col-2">
                                 <select required v-model="ordem.type" class="form-control form-control-sm-">
-                                    <option value="input">Input</option>
-                                    <option value="output">Output</option>
+                                    <option value="input">Consumo</option>
+                                    <option value="output">Produção</option>
                                 </select>
                             </div> 
                             <div class="btn-group btn-sm" role="group" aria-label="Basic example"> 
                             <button type="button" class="btn btn-success" @click.stop.prevent="showModal">
-                            Registrar Produto
+                            Registrar material
                             </button>
                             <button type="button" class="btn btn-secondary" @click.stop.prevent="listar()">
-                            Listar Produtos
+                            Listar materiais
                             </button>
                             </div>
                            
@@ -75,12 +75,12 @@
                                 
                                     <div class="card">
                                         <div class="card-header card-header-hp">
-                                            <b>Produtos de entrada</b>
+                                            <b>Materiais consumidos</b>
                                         </div>
                                         <div class="card-body card-body-hp">
                                         <div v-for="(o, index) in orderHistorian.productsInput" v-bind:key="index">
                                             <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;
+                                                <b><font color="#9BA6A5">Material: </font></b>{{o.product}}</label>&nbsp;
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
                                             <label class="ls ls10">
@@ -93,12 +93,12 @@
                                     </div>
                                       
                                         <div class="card-header card-header-hp">
-                                            <b>Produto de saída</b>
+                                            <b>Materiais apontados</b>
                                         </div>
                                         <div class="card-body card-body-hp">
                                             <div v-for="(o, index) in orderHistorian.productsOutput" v-bind:key="index">
                                             <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Produto: </font></b>{{o.product}}</label>&nbsp;
+                                                <b><font color="#9BA6A5">Material: </font></b>{{o.product}}</label>&nbsp;
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
                                             <label class="ls ls10">
@@ -121,14 +121,14 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-        <b-modal ref="myModalRef" hide-footer title="Registrar Produto">
+        <b-modal ref="myModalRef" hide-footer title="Registrar Material">
                         <form>
                             <div class="form-group">
                                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                                 <div v-show="pReceita">
                                 <label>
-                                    <b>Produto: </b>
+                                    <b>Material: </b>
                                 </label>
                                 <input type="text" id="prodReceita" placeholder="nome" required v-model="ordem.productName" class="form-control form-control-sm" disabled>
                                 </div>
@@ -141,7 +141,7 @@
                                     </select>
                                 <div v-if="phaseIndex != '' || phaseIndex == '0' && orderPhaseProducts[phaseIndex].lenght !== '0'">
                                 <label>
-                                    <b>Produtos: </b>
+                                    <b>Materiais: </b>
                                 </label>
                                     <select class="form-control form-control-sm" v-model="ordem.productId">
                                     <option v-for="(p,index) in orderPhaseProducts[phaseIndex].phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>

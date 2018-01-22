@@ -14,7 +14,7 @@
          <b>Associação de Ferramenta</b></h1>
             <ul class="nav d-flex align-items-center">
                  <li class="nav-item nav-item-ass-tool col-sm-1.5">  
-                     <label><br><br><br><b>&nbsp&nbsp&nbsp Nome da ferramenta: </b></label>     
+                    <label><br><br><br><b>&nbsp&nbsp&nbsp Nome da ferramenta: </b></label>     
                        <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                            <b-dropdown-item class="dropdown-item" v-if="notSelected" @click.stop.prevent="toolName = t.name;
                                                                               toolId = t.id;

@@ -14,7 +14,7 @@
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
-                        <router-link class="nav-link active bg-dark btn-config" router-link to="/stateManagement"><i class= "fa fa-power-off" style="font-size:25px; cursor:pointer"></i>  <br>OP Status Management </router-link>
+                        <router-link class="nav-link active bg-dark btn-config" router-link to="/AssociateOP"><i class= "fa fa-clone" style="font-size:25px; cursor:pointer"></i>  <br>Associação de OP </router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/OPManagement"><i class= "fa fa-industry" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ordem</router-link>
@@ -116,9 +116,9 @@
                             <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 
                             </router-link>
-                            <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
+                            <!-- <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
                                 Associação de Ordem de Produção
-                            </router-link>
+                            </router-link> -->
                             <div class="collapse" id="menu3sub1">
                                 <div class="collapse" id="menu3sub1">
                                     
