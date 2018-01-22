@@ -1,15 +1,15 @@
 /* menu de navegação de OP */
 
-/* .nav-op {
+ .nav-op {
     position: fixed;
-    top: 12%;
+    margin-top: 9.7%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
-    height: 14%;
+    height: 16%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 3%;
-} */
+} 
 
 .nav-prod{
     padding-left: 0.5%;
@@ -57,7 +57,7 @@ input {
 
 .op {
     position: relative;
-    padding-top: 17%;
+    margin-top: 22%;
     padding-bottom: 8%;              
     left: 1%;
     width: 95%;
@@ -65,7 +65,7 @@ input {
 
 .card-body-op {
     padding-top: 0.1%;
-    padding-bottom: 0.1%;
+    margin-bottom: 1%;
     padding-left: 0.8%;
     }
 
@@ -74,7 +74,7 @@ input {
     z-index: 2;
     text-align: center;
     width: 100%;
-    bottom: 5%;
+    margin-bottom: 5%;
 }
 
 .cadForm {
@@ -109,6 +109,17 @@ input {
 
 
 @media screen and (max-width: 801px) {
+    .nav-op {
+        position: fixed;
+        margin-top: 15%;
+        z-index: 1;
+        background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
+        width: 100%;
+        height: 20%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-top: 3%;
+    } 
+
     .cadForm {
         margin-top: 30%;
         width: 15%;
@@ -128,13 +139,13 @@ input {
     font-size: 16px;
     text-shadow: 1px 1px #F9F9F9;
     position: fixed;
-    top: 23%;
+    top: 20%;
     margin-left: 0.5%;
     }
 
     .op {
     position: relative;
-    margin-top: 23%;
+    margin-top: 28%;
     margin-bottom: 5%;
     left: 1%;
     width: 100%;
