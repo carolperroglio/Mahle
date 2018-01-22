@@ -9,7 +9,7 @@
             
             <ul class="nav d-flex align-items-center">
                 <li class="title-recipe col-md-1.5">
-                Gerenciamento de Receita
+                <b>Gerenciamento de Receita</b>
             </li>
                 <li class="col-md-1.5">
                     <br> 

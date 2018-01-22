@@ -137,7 +137,6 @@
                             <i class= "fa fa-plus-circle" style="font-size:22px; cursor:pointer"></i> Parâmetros   
                         </label> 
                     </form>
-
                 <div v-if="editarActivate">
                     <ul class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
                         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">

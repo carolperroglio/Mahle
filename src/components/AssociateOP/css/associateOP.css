@@ -1,7 +1,7 @@
 /*Barra de Navegação de ordem de produção*/
 .nav-OP{
     position: fixed;
-    margin-top: 10%;
+    margin-top: 9.7%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
@@ -18,8 +18,8 @@
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     position: fixed;
     margin-left: 0.9%;
-    margin-top: -1.5%;
-    z-index: 2;
+    margin-top: -2.5%;
+
 }
 
 /*Campo para inserir ordem de produção*/
