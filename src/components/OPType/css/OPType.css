@@ -8,16 +8,6 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item-optype {
-    margin-left: 3%;
-    margin-right: 3%;
-    padding-top: 4%;
-}
-
-.cadType {
-    margin-top: 10%;
-}
-
 .title-page-optype {
     text-align: left;
     color: rgb(68, 68, 70);
@@ -27,14 +17,6 @@
     position: fixed;
     left: 0.9%;
     top: 15%;
-}
-
-.ferAssoc {
-    position: relative;
-    padding-top: 17%;
-    padding-bottom: 5%;              
-    left: 1%;
-    width: 100%;
 }
 
 .btn-warning {
@@ -52,10 +34,10 @@
     color: black;
 }
 
-.card-body {
+.card-body-optype {
     padding-top: 0.1%;
     padding-bottom: 0.1%;
-    padding-left: 1.1%;
+    margin-left: 1%;
 }
 
 .card-header-optype {
@@ -110,7 +92,7 @@ input {
 
 @media screen and (max-width : 801px){
     .nav-optype {
-        top: 20%;
+        margin-top: 2%;
         height: 17%;
     }
     .nav-item-optype {
@@ -119,7 +101,7 @@ input {
         padding-top: 7%;
     }
     .title-page-optype {
-        top: 22%;
+        margin-top: 1%;
         font-size: 18px;
     }
    
@@ -131,9 +113,13 @@ input {
     .card-header-optype {
         font-size: 14px;
 }
-
-
     .orderHistorian{ 
         margin-top: 30%; 
-    }       
+    }    
+    
+.conteudo-opt {
+    margin-top: 28%;
+    margin-bottom: 5%;
+    font-size: 13px;
+}   
 } 

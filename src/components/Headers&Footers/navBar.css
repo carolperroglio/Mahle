@@ -32,7 +32,7 @@
 .icon-navigate {
     position: relative;
     font-size: 30px;
-    padding-top: 150%;
+    margin-top: 150%;
     margin-left: 45%;
     color: white;
     cursor: pointer;
@@ -40,8 +40,7 @@
     }
 
 #sidebar {
-    padding-top: 6.5%;
-    padding-left: 15;
+    margin-top: 6.5%;
     position:fixed;
     z-index: 100;
 }
@@ -71,7 +70,7 @@
     font-family: FontAwesome;
     display: inline;
     text-align: right;
-    padding-left: 5px;
+    margin-left: 5px;
 }
 
 
@@ -86,27 +85,26 @@
     font-family: FontAwesome;
     display: inline;
     text-align: right;
-    padding-left: 5px;
+    margin-left: 5px;
 }
 
 
 /* level 1*/
 
 #sidebar .list-group .collapse .list-group-item {
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 
 /* level 2*/
 
 #sidebar .list-group .collapse>.collapse .list-group-item {
-    padding-left: 30px;
+    margin-left: 30px;
 }
 
 footer{
     position:fixed;
     z-index: 5;
-    left:0px;
     bottom:0px;
     height:40px;
     width:100%;
@@ -114,12 +112,12 @@ footer{
 }
 
 .footer-text{
-font-size: 12px; color: white;
-font-family: sans-serif;
-text-align: center; 
-padding-top: 1%;
-padding-right: 0.9%;
-text-shadow: 1px 1px rgb(124, 114, 114);
+    font-size: 12px; color: white;
+    font-family: sans-serif;
+    text-align: center; 
+    margin-top: 1%;
+    margin-right: 0.9%;
+    text-shadow: 1px 1px rgb(124, 114, 114);
 }
 
 .logo-mahle{
@@ -194,19 +192,26 @@ text-shadow: 1px 1px rgb(124, 114, 114);
 
 @media screen and (max-width: 800px) {
     #sidebar {
-        padding-top:14%;
-        padding-left: 10;
+        margin-top: 10%;
+        margin-left: 0;
         position: fixed;
     }
     .icon-navigate {
         font-size: 2em;
-        padding-top: 180%;
-    }
+        margin-top: 80%;
+       }
     .logo-system {
-    margin-top: 6%;
+    margin-top: 3%;
     margin-left: 92%;
     height: 5%;
     width: 8%;
     }
+    .nav-item-cab{
+        font-size: 0.5em;
+        width: 10%;
+    }
+    #sidebar .list-group-item {
+       font-size: 13px;
+        }
 } 
 

@@ -7,7 +7,7 @@
                 </li>
             </ul>
         </div>
-        <div class="table table-striped">
+        <div class="">
                <div v-for="(o, index) in OPs" v-bind:key="index">
                     <div class="">
                         <div class="card-header card-header2">

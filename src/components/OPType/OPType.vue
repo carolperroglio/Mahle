@@ -4,8 +4,8 @@
        <nav class="fixed-top nav-optype">
             <ul class="nav d-flex align-items-center">
                 <h1 class="title-page-optype"><b>Tipos de Ordem de Produção</b></h1>
-                <li class="nav-item-op col-sm-1.5">
-                    <router-link class="btn btn-primary btn" :to="{ name: 'HistorianProduction'}" >
+                <li class="nav-item-op col-sm-2">
+                    <br><br><router-link class="btn btn-primary btn" :to="{ name: 'HistorianProduction'}" >
                       Ir para Apontamentos <i class= "fa fa-hand-o-right" style="font-size:22px; cursor:pointer"></i>
                     </router-link>
                 </li>
@@ -24,7 +24,7 @@
                         <div class="card-header card-header-optype">
                         <i class= "fa fa-file-text" style="font-size:22px; cursor:pointer"></i><b>&nbsp&nbsp&nbspTipo {{ t.productionOrderTypeId }}</b> 
                         </div> 
-                        <div class="card-body"> 
+                        <div class="card-body card-body-optype"> 
                             <label class="ls lsoptype">
                             <b><font color="#9BA6A5"> Tipo: </font></b>{{t.typeDescription}}</label>&nbsp;
                             <label class="ls lsoptype">

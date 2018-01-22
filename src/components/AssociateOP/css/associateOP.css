@@ -81,7 +81,7 @@ input{
     }
     /*Barra de Navegação de ordem de produção*/
     .nav-OP{
-        margin-top: 18%;
+        margin-top: 15%;
         height: 15%;
         } 
         /*Título da página*/
@@ -96,7 +96,7 @@ input{
         width: 17%;
         } 
     .OPAssoc{
-        margin-top: 32%;
+        margin-top: 28%;
         margin-left: 1%;
         width: 100%;
         }
