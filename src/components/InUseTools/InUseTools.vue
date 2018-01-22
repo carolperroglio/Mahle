@@ -5,9 +5,9 @@
         <!--Redireciona p/página de cad nova -->
         <!--                                 -->
         <!--                                 -->
-        <nav class="fixed-top nav-recipe">
-            <li class="title-recipe">
-                Ferramentas em uso
+        <nav class="fixed-top nav-InUseTools">
+            <li class="title-InUseTools">
+                <b>Ferramentas em uso</b>
             </li>
         </nav>
 
@@ -17,7 +17,7 @@
 <!--                         -->
       
         <div class="" style="">
-            <div class="tools">
+            <div class="InUseTools">
                 <div class="progress" v-show="carregando">
                     <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                 </div>
@@ -29,21 +29,21 @@
                                 <b><font color="#262626">{{t.name}}</font></b></label>&nbsp;&nbsp;&nbsp;
                                 </div>
                             <div class="card-body">
-                                 <label class="ls">
+                                 <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Nome: </font></b>{{t.name}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{t.description}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Serial: </font></b>{{t.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Code: </font></b>{{t.code}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Life Cycle: </font></b>{{t.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{t.currentLife}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">UM: </font></b>{{t.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
+                            <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{t.typeName}}</label>&nbsp;&nbsp;&nbsp;
                             </label>
                             </div>

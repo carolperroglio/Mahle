@@ -10,7 +10,7 @@
         <!--                                 -->
          <div class="fixed-top nav-hp">
             <ul class="nav d-flex align-items-center">
-            <h1 class="title-page"><b> Apontamentos de OP</b> </h1>
+            <h1 class="title-page-hp"><b> Apontamentos de OP</b> </h1>
                 <li class="nav-item-hp col-sm-1.5">
                 </li>
                 <li class="nav-item-hp col-sm-1.5">
@@ -59,18 +59,17 @@
                                     <option value="input">Input</option>
                                     <option value="output">Output</option>
                                 </select>
-                            </div>   
-                            <div class="col-2">
-                            <button type="button" class="btn btn-primary btn-sm" @click.stop.prevent="showModal">
+                            </div> 
+                            <div class="btn-group btn-sm" role="group" aria-label="Basic example"> 
+                            <button type="button" class="btn btn-success" @click.stop.prevent="showModal">
                             Registrar Produto
                             </button>
-                            </div>
-                            <div class="col-2">
-                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="listar()">
+                            <button type="button" class="btn btn-secondary" @click.stop.prevent="listar()">
                             Listar Produtos
                             </button>
                             </div>
-                            </div>
+                           
+                            </div> 
                         </div>
                             <div v-show="lista">
                                 
