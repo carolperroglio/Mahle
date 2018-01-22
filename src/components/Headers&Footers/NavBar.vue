@@ -96,6 +96,9 @@
                              <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1"> 
                                 Ferramentas em uso
                             </router-link>
+                            <router-link to="/ToolsManagement" class="list-group-item" data-parent="#menu1"> 
+                                Gerenciamento de Ferramentas
+                            </router-link>
                             <div class="collapse" id="menu1sub1">
                                 <div class="collapse" id="menu1sub1">
                                 </div>
@@ -118,6 +121,9 @@
                             </router-link>
                             <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
                                 Associação de Ordem de Produção
+                            </router-link>
+                             <router-link to="/OPManagement" class="list-group-item" data-parent="#menu1"> 
+                                Gerenciamento de Ordem de Produção
                             </router-link>
                             <div class="collapse" id="menu3sub1">
                                 <div class="collapse" id="menu3sub1">

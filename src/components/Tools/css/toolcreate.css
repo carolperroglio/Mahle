@@ -1,7 +1,7 @@
 /* menu de navegação de ferramentas */ 
 .nav-ferramentas{
     position: fixed;
-    top: 12%;
+    margin-top: 9.7%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
@@ -20,7 +20,7 @@
     font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     position: fixed;
-    top: 15%;
+    top: 13%;
     margin-left: 0.5%;
 }
 
@@ -38,12 +38,12 @@ input{
     width: 98%;
 } 
 
-.paginacao {
+.paginacao2 {
     position: fixed;
     z-index: 2;
     text-align: center;
     width: 100%;
-    bottom: 5%;
+    margin-bottom: 5%;
 }
 
 
@@ -57,10 +57,6 @@ input{
 .card-body2{
     font-family: sans-serif;
     font-size: 12px;
-    /* padding-top: 0.1%; */
-    /* padding-bottom: 0.1%; */
-    /* background-color: white; */
-
     }
 
 .card-header2{
@@ -70,7 +66,6 @@ input{
 .card-tool{
     padding-top: 0.1%;
     padding-bottom: 0.1%;
-    background-color: #DCDCDC;
     }
 
 .btn-warning{
@@ -89,16 +84,15 @@ input{
 }
 
 
-@media screen and (max-width : 801px){
+@media only screen and (max-width : 801px){
     .ferramentas{ 
         margin-top: 25%; 
         margin-bottom: 5%;
     }  
     
 .nav-ferramentas{
-    top: 15%;
+    margin-top: 15%;
     z-index: 1;
-    /* background: -ms-linear-gradient(top, rgb(235, 245, 248), rgb(252, 251, 251)); */
     background-color: #F6F6F6;  
     width: 100%;
     height: 30%;
@@ -106,11 +100,11 @@ input{
 }
 .title-page-tool{
     font-size: 19px;
-    padding-top: 1%;
+    padding-top: 5%;
 }
 .nav-item-tool{
     margin-left: 1%;
-    padding-top: 5%;
+    top: 21%;
     }
 .icon-style{
     position: absolute;

@@ -18,6 +18,7 @@ import AssociateOP from '@/components/AssociateOP/AssociateOP'
 import OPType from '@/components/OPType/OPType'
 import InUseTools from '@/components/InUseTools/InUseTools'
 import HomePage from '@/components/HomePage/home'
+import ToolsManagement from '@/components/ToolsManagement/ToolsManagement'
 
 Vue.use(Router)
 
@@ -85,6 +86,11 @@ export default new Router({
             path: '/OPManagement',
             name: 'OPManagement',
             component: OPManagement
+        },
+        {
+            path: '/ToolsManagement',
+            name: 'ToolsManagement',
+            component: ToolsManagement
         },
         {
             path: '/associateOP',
