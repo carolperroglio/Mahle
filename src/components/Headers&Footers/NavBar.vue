@@ -96,6 +96,9 @@
                              <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1"> 
                                 Ferramentas em uso
                             </router-link>
+                            <router-link to="/ToolsManagement" class="list-group-item" data-parent="#menu1"> 
+                                Gerenciamento de Ferramentas
+                            </router-link>
                             <div class="collapse" id="menu1sub1">
                                 <div class="collapse" id="menu1sub1">
                                 </div>

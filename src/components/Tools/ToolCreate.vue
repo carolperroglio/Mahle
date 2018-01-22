@@ -147,11 +147,9 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
                 <div v-for="(f, index) in ferramentas" v-bind:key="index">
-                    <div class="">
-                        <div class="card-tool">
-                            <b> </b>
-                        </div>
-                        <div class="table table-striped card-header2">
+                    <div class= "card-header">
+                    </div>
+                    <div class="card-body">
                             <label class="ls ls30">
                                 <b><font color="#9BA6A5">Nome: </font></b>{{f.name}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30">
@@ -173,11 +171,10 @@
                                 <b><font color="#9BA6A5">Status: </font></b>{{f.status}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
                             </label>
-                        </div>
                     </div>
                 </div>
             
-                <div class="paginacao fixed-bottom" v-show="total>0">
+                <div class="paginacao2 fixed-bottom" v-show="total>0">
                     <nav aria-label="">
                         <ul class="pagination justify-content-center">
                             <li v-show="startat>0" class="page-item">
@@ -250,7 +247,7 @@
                                             <b>Tipo: </b>
                                         </label>
                                             <select class="form-control form-control-sm" v-model="ferramenta.typeName" disabled>
-                                            <option v-for="tipo in tipos" :value="tipo.name">{{ tipo.name }}</option>
+                                            <option v-for="tipo in tipos" :value="tipo.name" v-bind:key="tipo">{{ tipo.name }}</option>
                                             </select>
                                         <label>
                                             <b>Status: </b>

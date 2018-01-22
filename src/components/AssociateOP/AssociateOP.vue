@@ -15,7 +15,7 @@
             </h1>
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item nav-item-assop col-sm-1.5">
-                    <b>&nbsp&nbsp&nbspNúmero da Ordem:</b>
+                    <b>&nbsp&nbsp&nbsp Número da Ordem:</b>
                         <input @keyup="OPs=getOPs(numOP)" v-model="numOP" placeholder="Número" class="btn btn-outline-secondary dropdown-toggle btn-sm" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <b-dropdown-item class="dropdown-item" v-if="notSelected" @click.stop.prevent="OPId = o.productionOrderId;
                                 numOP = o.productionOrderNumber;

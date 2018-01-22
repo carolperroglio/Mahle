@@ -53,11 +53,12 @@
         <!-- Busca de Produtos     -->
         <!--                       -->
         <!--                       -->
+        
         <div class="fixed-top nav-produtos">
+             <h1 class="title-page-gp"> <b>Cadastro de Materiais</b> </h1>
             <ul class="nav d-flex align-items-center">
-
                 <li class="nav-item nav-item-products col-sm-1.5">
-                    <h1 class="title-page"> <b>Cadastro de Materiais</b> </h1>
+                    
                         <select class="form-control form-control-sm" v-model="orderField">
                             <option value="" selected disabled>Campo para busca</option>
                             <option value="productName">Nome</option>
@@ -110,8 +111,7 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
                 <div v-for="(p, index) in produtos" v-bind:key="index">
-                    <div class="table table-striped">
-                        <div class="card-header card-header5">
+                      <div class="card-header card-header5">
                             <b></b>
                         </div>
                         <div class="card-body">
@@ -132,7 +132,6 @@
                                 <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2" aria-hidden="true"></i>
                         </div>
-                    </div>
                 </div>
                 <div class="paginacao" v-show="total>0">
                     <nav aria-label="">

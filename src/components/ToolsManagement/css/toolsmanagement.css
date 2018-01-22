@@ -18,7 +18,7 @@
 
 .nav-tool-management {
     font-size: pt;
-    top: 10%;
+    margin-top: 9.7%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     z-index: 1;
@@ -40,7 +40,7 @@
 }
 
 .conteudo-tm {
-    margin-top: 13%;
+    margin-top: 18%;
     padding-bottom: 6%;
     position: relative;
     left: 5%;
@@ -49,26 +49,27 @@
 }
 
 .conteudo-tm h3 {
-    display: inline;
+    /*display: inline;*/
     color: rgb(41, 39, 39);
+    top: 10%;
 }
 
 .nav-tm {
     position: fixed;
-    top: 9%;
+    margin-top: 9.7%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
-    height: 13%;
+    height: 10%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 2%;
 }
 
 
-@media screen and (max-width: 800px) {
+@media  only screen and (max-width: 800px) {
     .nav-tm {
-    top: 18%;
-    height: 13%;
+    margin-top: 18%;
+    height: 10%;
     }
     .title-page-tm {
         font-size: 18px;

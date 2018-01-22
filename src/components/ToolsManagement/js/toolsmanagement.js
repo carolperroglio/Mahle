@@ -1,6 +1,10 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 import { setTimeout } from 'timers';
+import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
+import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -48,7 +52,18 @@ export default {
             id: ''
         }
     },
+    components: {
+        'b-dropdown': bDropdown,
+        'b-dropdown-item': bDropdownItem,
+        'b-modal': bModal
+    },
+    directives: {
+        'b-modal': bModalDirective
+    }, 
     methods: {
+        hideModal () {
+        this.$refs.modalGerT.hide()
+      },
         getStateConfig: function() {
             axios.get(this.urlStateConfig).then(response => {
                 this.statesConfig = response.data.states;
@@ -80,6 +95,7 @@ export default {
             console.log(obj);
         },
         catchToolToChange: function(tool) {
+            this.$refs.modalGerT.show()
             this.buttons = {};
             var obj = {};
             var count = 0;
