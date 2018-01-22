@@ -18,7 +18,7 @@
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     position: fixed;
     margin-left: 0.9%;
-    margin-top: -2.5%;
+    margin-top: -1.5%;
     z-index: 2;
 }
 
@@ -30,7 +30,7 @@
 
 .OPAssoc{
     position: relative;
-    margin-top: 16%;
+    margin-top: 18%;
     margin-bottom: 5%;              
     margin-left: 1%;
     width: 100%;
@@ -75,7 +75,7 @@ input{
 } 
 
 
-@media screen and (max-width : 801px){
+@media only screen and (max-width : 801px){
     .orderHistorian{ 
         margin-top: 30%; 
     }
