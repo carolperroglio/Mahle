@@ -64,7 +64,7 @@
                             </i>
                         </div>
                     </li>
-                    <li class="nav-phase col-md-2" v-if="json.stringify(recipeProduct) !== '{}'">
+                    <li class="nav-phases col-md-2" id="produtoR" v-if="json.stringify(recipeProduct) !== '{}'">
                             <b><font color="#9BA6A5">
                                 Produto:
                             </font></b>
@@ -75,8 +75,8 @@
                             </font></b> 
                                 {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} 
                             <br>
-                        <button type="button" class="btn btn-danger config-button2" style="font-size:12px;" aria-hidden="true" @click.stop.prevent="deleteRecipeProduct(pro, pha);">
-                            <i class= "fa fa-trash-o" style="font-size:18px; cursor:pointer"></i> Remover Produto
+                        <button type="button" class="btn btn-danger config-button2" aria-hidden="true" id="removerP" @click.stop.prevent="deleteRecipeProduct(pro, pha);">
+                            <i class= "fa fa-trash-o"></i> Remover
                         </button>
                     </li>
                 </ul>
@@ -98,7 +98,7 @@
                         Fases da receita: 
                     </b>  
                     <br>
-                    <button type="button" class="btn btn-primary btn-sm config-button" id="addPhase" @click.stop.prevent="showModalCadFase();phase={};" style="" aria-hidden="true">
+                    <button type="button" class="btn btn-primary btn-sm config-button" id="addPhase" @click.stop.prevent="showModalCadFase();phase={};" aria-hidden="true">
                         <i class= "fa fa-plus-square" style="font-size:18px; cursor:pointer"></i> Adicionar fase  
                     </button>
                 </h2>
@@ -399,16 +399,6 @@
                             <div class="form-group col-md-4">
                                 <label for="inputPassword4">Unidade de Medida</label>
                                 <input type="text" class="form-control form-control-sm" v-model="phaseParameter.measurementUnit" placeholder="Ex.: Kg">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="inputPassword4">Valor Mínimo</label>
-                                <input type="text" class="form-control form-control-sm" v-model="phaseParameter.minValue" placeholder="Valor Mínimo">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputPassword4">Valor Máximo</label>
-                                <input type="text" class="form-control form-control-sm" v-model="phaseParameter.maxValue" placeholder="Valor Máximo"><br>
                             </div>
                         </div>
                         <div class="form-row">

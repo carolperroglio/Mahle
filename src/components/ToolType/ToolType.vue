@@ -1,16 +1,12 @@
 <template>
   <div>
         <nav class="fixed-top nav-tool-type">
+            <h1 class="title-page-TT"><b>Tipo de Ferramentas</b></h1>
             <ul class="nav d-flex align-items-center">
-                <li class="title-tool-type">
-                 <h1 class="title-page-TT"><b>Tipo de Ferramentas</b></h1>
-                </li>
-                <li class="nav-tt col-sm-1.5">
-                        <div class="col-sm-1.5 cadbtn">
-                            <button type="button" class="btn btn-primary cadFer" @click.stop.prevent="showModal()">
-                             Cadastrar Tipo de Ferramenta
-                            </button>
-                        </div>
+                 <li class="nav-item-tt">
+                    <button type="button" class="btn btn-primary cadFer" @click.stop.prevent="showModal()">
+                        Cadastrar Tipo de Ferramenta
+                    </button>
                 </li>
             </ul>
         </nav>

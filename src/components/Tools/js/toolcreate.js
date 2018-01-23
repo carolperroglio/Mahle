@@ -107,8 +107,7 @@ export default {
                     this.ferramentas[index].status = "Disponível";
                     break;
                 }
-            }
-            this.carregando = false;  
+            } 
                 paginacao(response,this);
             },(error)=>{                  
                 this.mensagem = 'Erro no server ' + error;                
