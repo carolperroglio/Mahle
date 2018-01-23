@@ -13,7 +13,7 @@
 }
 
 .InUseTools {
-    margin-top: 17%; 
+    margin-top: 11%; 
     width: 95%;
     margin-left: 2%;
 }
@@ -25,7 +25,7 @@
     color: rgb(68, 68, 70);
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     margin-left: 1.5%;
-    margin-top: -1%;
+    margin-top: 0%;
 }
 
 .lsinuse{

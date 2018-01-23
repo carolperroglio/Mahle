@@ -1,59 +1,68 @@
-.nav-status {
+.btn-add-tt {
+    padding-top: 38px;
+}
+
+.nav-tool-type {
     position: fixed;
     margin-top: 5%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
-    height: 12%;
+    height: 16%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item-stat {
+.nav-item-tt {
     margin-top: 2%;
     margin-left: 1%;
 }
 
-.conteudo-status {
-    margin-top: 15%;
+.conteudo-tt {
+    margin-top: 17%;
     width: 100%;
     padding-bottom: 5%;
 }
 
-.card-s {
+.card-tt {
     height: 10%;
 }
 
-.title-page-status{
+.title-page-TT{
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
     font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     margin-left: 1%;
-    margin-top: 1%;
+    top: 2%;
+}
+
+.tool-type{
+    margin-left: 3%;
+    width: 95%;
 }
 
 .cadbtn {
     margin-top: 10%;
 }
 
-.card-header-stat{ 
+.card-header7{ 
     margin-top: 0.3%;
     margin-bottom: 0.3%;
     margin-top: 0.2%;
     margin-bottom: 0.2%;
 }
 
-.ls22 {
+.ls21{
     width: 28%;
 }
 
-.onteudo-status h3 {
+.conteudo-tt h3 {
     color: rgb(41, 39, 39);
 }
 
 @media only screen and (max-width: 800px) {
-.nav-status {
+.nav-tool-type {
         background-color: rgba(249, 247, 247, 1);
         position: fixed;
         z-index: 1;
@@ -63,16 +72,21 @@
         border-bottom: 1px solid rgba(0,0,0,0.2);
     }
 
-.conteudo-status {
-    margin-top: 22%;
+.conteudo-tt {
+    margin-top: 19%;
 }
 
-.nav-item-stat {
+.title-page{
         font-size: 16px;
         top: 21%;
     }
 
-.ls22 {
+.tool-type{
+    padding-top: 7%;
+    padding-bottom: 7%;
+    }
+
+.ls21{
     width: 28%;
     font-size: 12px;
 }
