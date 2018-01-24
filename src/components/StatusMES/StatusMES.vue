@@ -9,28 +9,50 @@
         </nav>
         <div class="row conteudo-status">
               <div class="container-fluid">
-                    <div class="status col-md-12">
+                  <div class="progress" v-show="carregando">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                  </div>
+                    <div class="status row">
+
+                        <div v-for="(s, index) in status" v-bind:key="index">
+
+                            <div class="col-sm-6">
                            <div class="card-header card-header-stat">
-                                <b></b>
+                                <b>Status da thing </b>{{s.thingId}}
                             </div>
                             <div class="card-body card-s">
                                 <label class="ls ls22">
-                                    <b>Nome: </b> 
-                                </label>
+                                    <b>Nome: </b>{{s.thing.thingName}}
+                               </label>
                                 <label class="ls ls22">
-                                    <b>Descrição: </b>
+                                    <b>Código: </b>{{s.thing.thingCode}}
                                 </label>
-                                <label class="ls ls22">
-                                    <b>Status: </b>
-                                </label>
-                                <button type="button" class="btn btn-outline-primary btn-sm btn-sm">
-                                Editar
+                                <button type="button" class="btn btn-outline-primary btn-sm btn-sm" v-b-toggle.cont>
+                                Contextos
                                 </button>
+                            
+                           <hr class="style3">
+
+                            <b-collapse v-for="(c, index) in s.statusContexts" v-bind:key="index" id="cont">
+
+                                <label class="ls ls22">
+                                    <b>Contexto: </b>{{c.context}}
+                               </label>
+                                <label class="ls ls23">
+                                    <b>Status: </b>{{c.statusName}}
+                                </label>
+                                <label class="ls ls24">
+                                    <b>Valor: </b>{{c.value}}
+                                </label>
+                                
+                        </b-collapse>
                             </div>
+                        <hr class="style13">
                     </div>
+                </div>
             </div>
             </div>
-        
+        </div>
   </div>
 </template>
 

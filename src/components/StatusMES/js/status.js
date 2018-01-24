@@ -1,6 +1,9 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 import { setTimeout } from 'timers';
+import bCollapse from 'bootstrap-vue/es/components/collapse/collapse';
+import bButton from 'bootstrap-vue/es/components/button/button'
+import vBToggle from 'bootstrap-vue/es/directives/toggle/toggle'
 
 es6promisse.polyfill();
 
@@ -27,25 +30,37 @@ export default {
             quantityPage: 20,
             startat: 0,
             total: 0,
+            status: [],
             pages: [],
             pageAtual: 0,
             orderField: '',
             order: '',
             fieldFilter: '',
             fieldValue: '',
-            id: ''
+            id: '',
+           
         }
     },
+    components: {
+        'b-collapse': bCollapse,
+        'b-button': bButton,
+    },
+    directives: {
+        'b-toggle': vBToggle
+    },
     methods: {
-        getThingsGroup: function() {
-            axios.get(this.urlThingsGroup).then(response => {
-                console.log(response);
+        getStatus(){
+            this.carregando = true;
+            axios.get(this.url).then(response => {
+                this.status = response.data;
+                console.log(this.status);
+                this.carregando = false;
             }).catch(error => {
                 console.log(error);
             })
         }
     },
-    beforeMount() {
-        this.getThingsGroup();
+    beforeMount: function() {
+        this.getStatus();
     }
 }
