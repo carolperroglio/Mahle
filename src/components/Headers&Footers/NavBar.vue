@@ -54,7 +54,7 @@
             </b-button>       
         </div>   
 
-                <b-collapse class="fixed-top col-md-4 p-l-0 p-r-0" id="sidebar" flush>
+                <b-collapse class="fixed-top col-md-6 p-l-0 p-r-0" id="sidebar" flush>
                         <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki">
                             </i> OPERADOR </div>
 
@@ -62,6 +62,13 @@
                         <b-collapse id="menu2">                      
                             <router-link to="#" data-parent="#menu1" class="list-group-item collapsed" cursor="pointer"> Logout </router-link>
                         </b-collapse>
+
+                        <router-link to="/statusMES" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                            <i class="fa fa-bar-chart"></i> 
+                            <span class="hidden-sm-down">  
+                                STATUS DO MES
+                            </span>
+                        </router-link>
 
                         <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar" >
                             <i class="fa fa-barcode"></i> 
@@ -75,7 +82,6 @@
                                 RECEITA
                             </span>
                         </router-link>
-
                         <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1 cursor="pointer">
                             <i class="fa fa-cogs"></i> 
                                 <span class="hidden-sm-down">   
@@ -119,15 +125,12 @@
                             <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 
                             </router-link>
-                            <!-- <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
+                            <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
                                 Associação de Ordem de Produção
-                            </router-link> -->
-                            <div class="collapse" id="menu3sub1">
-                                <div class="collapse" id="menu3sub1">
-                                    
-                                </div>
-                                
-                            </div> 
+                            </router-link>
+                            <router-link to="/OPManagement" class="list-group-item" data-parent="#menu3"> 
+                                Gerenciamento de Ordem de Produção
+                            </router-link>
                         </b-collapse>
                     </b-collapse>        
         <router-view/>
