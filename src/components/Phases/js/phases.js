@@ -140,6 +140,8 @@ export default {
                 axios.get(this.urlGatewayRecipes + id).then(response => {
                     this.recipe = response.data;
                     this.phases = response.data.phases;
+                    console.log(this.phases);
+                    console.log(id);
                     for (var i = 0; i < this.phases.length; i++) {
                         this.expand[i] = false;
                         console.log(this.expand[i]);
@@ -292,6 +294,12 @@ export default {
         createPhaseProduct(productPhase, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
+            console.log("produto da fase");
+            console.log(productPhase);
+            console.log("fase");
+            console.log(phase);
+            console.log("Fases");
+            console.log(this.phases);
             axios.post(this.url + "phases/products/" + phase.phaseId, productPhase).then((response) => {
                 productPhase.phaseProductId = response.data.phaseProductId;
                 phase.products.push(productPhase);
@@ -300,6 +308,7 @@ export default {
                 this.mensagemSuc = 'Fase relacionada com sucesso';
                 this.ok = true;
                 this.carregando = false;
+                
             }, (error) => {
                 console.log(error);
                 this.phaseProduct = {};
@@ -310,11 +319,16 @@ export default {
         deletePhaseProduct(productPhase, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
+            console.log("produto da fase");
+            console.log(productPhase);
+            console.log("fase");
+            console.log(phase.phaseId);
             axios.delete(this.url + "phases/products/" + phase.phaseId, { data: productPhase }).then((response) => {
                 phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);
                 this.mensagemSuc = 'Fase relacionada com sucesso';
                 this.ok = true;
                 this.carregando = false;
+                console.log(response);
             }, (error) => {
                 console.log(error);
                 this.carregando = false;

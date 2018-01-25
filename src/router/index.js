@@ -20,6 +20,7 @@ import InUseTools from '@/components/InUseTools/InUseTools'
 import HomePage from '@/components/HomePage/home'
 import ToolsManagement from '@/components/ToolsManagement/ToolsManagement'
 import StatusMES from '@/components/StatusMES/StatusMES'
+import Historian from '@/components/Historian/Historian'
 
 Vue.use(Router)
 
@@ -117,6 +118,11 @@ export default new Router({
             path:'/statusMES',
             name: 'StatusMES',
             component: StatusMES
+        },
+        {
+            path: '/historian',
+            name: 'Historian',
+            component: Historian
         }
     ]
 })

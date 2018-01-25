@@ -70,6 +70,13 @@
                             </span>
                         </router-link>
 
+                        <router-link to="/historian" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                            <i class="fa fa-clock-o"></i> 
+                            <span class="hidden-sm-down">  
+                                HISTÓRICOS
+                            </span>
+                        </router-link>
+
                         <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar" >
                             <i class="fa fa-barcode"></i> 
                             <span class="hidden-sm-down">  
