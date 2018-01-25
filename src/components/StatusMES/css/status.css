@@ -1,10 +1,17 @@
+
+body {
+    font-family: "Lucida Sans Unicode";
+}
+.status {
+    margin-left: 10%;
+}
 .nav-status {
     position: fixed;
     margin-top: 5%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
-    height: 15%;
+    height: 10%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -14,9 +21,64 @@
 }
 
 .conteudo-status {
-    margin-top: 15%;
+    margin-top: 12%;
     width: 100%;
     padding-bottom: 5%;
+    margin-left: 5%;
+}
+
+.theme1 {
+    padding: 2%;
+    background-color: rgb(107, 10, 10);
+    color: white;
+    -webkit-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+  }
+   
+  .theme2 {
+    padding: 2%;
+    background-color: rgb(15, 107, 1);
+    color: white;
+    -webkit-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+  }
+   
+  .theme3 {
+    padding: 2%;
+    background-color: #00377e;
+    color: white;
+    -webkit-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+  }
+   
+  .theme4 {
+    padding: 2%;
+    background-color: rgb(213, 181, 0);
+    color: white;
+    -webkit-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+  }
+   
+  .theme5 {
+    padding: 2%;     
+    background-color: rgb(82, 23, 94);
+    color: white;
+    -webkit-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+  }
+
+  #constat {
+    padding: 0.5%;
+ }
+
+
+.ls23 {
+    width: 100%;
 }
 
 .card-s {
@@ -40,7 +102,7 @@ hr.style3 {
     font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     margin-left: 1%;
-    margin-top: 1%;
+    margin-top: 3%;
 }
 
 .cadbtn {
@@ -55,23 +117,11 @@ hr.style3 {
     margin-bottom: 0.2%;
 }
 
-.ls22 {
-    width: 35%;
-}
-.ls23 {
-    width: 40%;
-}
-.ls24 {
-    width: 34%;
-}
-
 .onteudo-status h3 {
     color: rgb(41, 39, 39);
 }
 
-.status {
-    margin-left: 10%;
-}
+
 
 @media only screen and (max-width: 800px) {
 .nav-status {
@@ -96,14 +146,7 @@ hr.style3 {
     font-size: 12px;
 }
 .ls22 {
-    width: 24%;
-}
-.ls23 {
     width: 40%;
 }
-.ls24 {
-    width: 34%;
-}
-
 
 }

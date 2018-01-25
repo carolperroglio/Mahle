@@ -1,9 +1,13 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
-import { setTimeout } from 'timers';
-import bCollapse from 'bootstrap-vue/es/components/collapse/collapse';
+import { setTimeout } from 'timers'
 import bButton from 'bootstrap-vue/es/components/button/button'
 import vBToggle from 'bootstrap-vue/es/directives/toggle/toggle'
+import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
+import Vue from 'vue'
+import VueTiles from 'vue-tiles'
+import 'vue-tiles/dist/vue-tiles.css'
+import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
 
 es6promisse.polyfill();
 
@@ -31,35 +35,52 @@ export default {
             startat: 0,
             total: 0,
             status: [],
+            stat: {},
             pages: [],
             pageAtual: 0,
             orderField: '',
             order: '',
             fieldFilter: '',
             fieldValue: '',
-            id: '',
-           
+            bottom: 'bottom',
+            idstat: '',
+            idstatcollpse: '',
+            themeArr: ['theme1', 'theme2', 'theme3', 'theme4', 'theme5'],
+            selectedTheme: [],           
         }
     },
     components: {
-        'b-collapse': bCollapse,
         'b-button': bButton,
+        'link-tile': LinkTile,
+        'content-sm': ContentSm,
+        'content-md': ContentMd,
+        'content-lg': ContentLg,
+        'b-collapse': bCollapse
     },
     directives: {
-        'b-toggle': vBToggle
+        'b-toggle': vBToggle,
+        'v-b-toggle': vBToggle
     },
     methods: {
+        onEnable(s) {
+            this.stat = {};
+            this.stat = s;
+        },
         getStatus(){
             this.carregando = true;
-            axios.get(this.url).then(response => {
-                this.status = response.data;
-                console.log(this.status);
-                this.carregando = false;
-            }).catch(error => {
-                console.log(error);
-            })
+            setTimeout(() => {
+                axios.get(this.url).then(response => {
+                    this.status = response.data;
+                    for(var i = 0; i < this.status.length; i++){
+                        this.selectedTheme[i] = this.themeArr[Math.floor(Math.random() *  this.themeArr.length)];
+                    }
+                    this.carregando = false;
+                }).catch(error => {
+                    console.log(error);
+                })
+            }, 200);
         }
-    },
+        },
     beforeMount: function() {
         this.getStatus();
     }
