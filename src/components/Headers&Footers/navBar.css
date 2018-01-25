@@ -1,5 +1,7 @@
 ﻿/*Configurações do header*/
-
+body {
+    font-family: "Lucida Sans Unicode";
+}
 .nav-item-cab {
     position: relative;
     margin-left: 4%;
