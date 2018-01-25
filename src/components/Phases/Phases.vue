@@ -141,14 +141,17 @@
                     <ul class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
                         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
                             <label class="ls ls14">
-                                Produto:{{pro.product.productName}}&nbsp;&nbsp;
+                                <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
                             </label>
                             <label class="ls ls14">
                                 <b>Quantidade: </b>{{pro.value}} {{pro.measurementUnit}}
                             </label>
                             <label class="ls ls14">
                                 <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
-                            <i class="fa fa-window-close" style="font-size:30px; cursor:pointer" aria-hidden="true" cursor="pointer" @click.stop.prevent="deletePhaseProduct(pro, pha);"></i>
+                            </label>
+                            <label class="ls ls14">
+                            <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
+                            </button>
                             </label>
                         </li>
                     </ul>
