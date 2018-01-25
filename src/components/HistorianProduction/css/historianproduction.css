@@ -16,12 +16,12 @@
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     position: fixed;
     margin-left: 1.5%;
-    margin-top: -1%;
+    margin-top: 1.5%;
 }
 
 .nav-item-hp{
     margin-left: 1%;
-    margin-top: 2%;
+    margin-top: 4%;
 }
 
 
@@ -75,10 +75,13 @@ input{
     .nav-hp{
         margin-top: 18%;
         height: 8%;
-    }     
+    }  
+    .nav-item-hp {
+        margin-top: -2%;
+    }   
     .title-page-hp{
         font-size: 18px;
-        margin-top: -5%;
+        margin-top: -6%;
     }
     .orderHistorian{
         margin-top: 26%;
