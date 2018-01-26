@@ -106,6 +106,7 @@ export default {
           showModalAddParam() {
             this.phaseParameter={};
             this.tagName='';
+            this.mensagemSuc='';
             this.$refs.modalCadParam.show()
           },
           hideModalAddParam() {
@@ -352,7 +353,7 @@ export default {
                 phase.parameters.push(phaseParameter);
                 this.phaseParameter = {};
                 this.tagName = '';
-                this.mensagemSuc = 'Fase relacionada com sucesso';
+                this.mensagemSuc = 'Parâmetro cadastrado com sucesso!';
                 this.ok = true;
                 this.carregando = false;
             }, (error) => {

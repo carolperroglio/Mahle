@@ -127,4 +127,7 @@ export default {
             })
         }
     },
+    beforeMount: function(){
+        this.buscar();
+    }
 };
