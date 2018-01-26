@@ -11,7 +11,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "amcharts3": "github:amcharts/amcharts3",
     "autocomplete-vue": "^1.0.3",
+    "awesome-charts": "^1.0.0",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
@@ -23,6 +25,7 @@
     "jquery": "^3.2.1",
     "moment": "^2.20.1",
     "moment-timezone": "^0.5.14",
+    "momentjs": "^2.0.0",
     "popper": "^1.0.1",
     "popper.js": "^1.12.9",
     "rijs": "^0.8.2",

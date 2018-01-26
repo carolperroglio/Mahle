@@ -15,18 +15,28 @@
                   </div>
                   <div class="history">
                     <div class="row">
-                       <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="showModal()">
-                      Editar Período
-                    </button>
-                    </div>
+                        <div class="col-sm-8">
+                          <h3>Thing nº: {{thingId}}</h3>
+                        </div>
+                        <div class="col-sm-4">
+                       <button type="button" class="btn btn-secondary btn-sm btn-sm" @click.prevent="showModal()">
+                            Editar Período
+                       </button>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="col-lg-11">
+                            <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+                        </div>
               </div>
             </div>
         </div>
+        </div>
 
         <b-modal ref="myModalEdit" hide-footer title="Selecionar Período">
-         
                     <div class="modal-body">
-                      <label><b>Thing: </b></label>  
+                       
+                    <label><b>Thing: </b></label>  
                     <div class="row">
                       <div class="col-md-9">
                        <select class="form-control-outline-secondary" v-model="thingId">    
