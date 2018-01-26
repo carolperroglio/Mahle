@@ -18,6 +18,7 @@ export default {
             Thing: [],
             numOP: '',
             OPId: '',
+            ProductionOrders: [],
             thingId: '',
             typeId: '',
             groupId: '',
@@ -30,6 +31,7 @@ export default {
             thing: false,
             lista: false,
             lista2: false,
+            listaOPs: false,
             carregando: false,
             url:'http://brsbap01:8005/',
             }
@@ -57,6 +59,21 @@ export default {
             })            
                 return array;
             },
+            getOPList(){  
+                this.carregando = true;        
+                setTimeout(() => {
+                    axios.get(this.url+'api/productionorders').then((response)=>{                                           
+                        this.ProductionOrders = response.data.values;
+                        console.log(this.ProductionOrders);
+                        this.listaOPs = true;
+                        this.carregando = false;
+                    },(error)=>{
+                        console.log(error);
+                        this.carregando = false;
+                    })
+                }, 200);                
+                          
+            },
             openSelectGroup(){
                 this.group = true;  
                 this.carregando = true;             
@@ -66,6 +83,7 @@ export default {
                         },(error)=>{
                                 console.log(error);
                         })
+                this.listaOPs = false;
                 this.lista = true;
                 axios.get(this.url+'api/productionorders/'+this.OPId).then((response)=>{
                     this.OP = response.data;
@@ -115,8 +133,11 @@ export default {
             getAssoc(){
                 this.mensagemSuc = '';
                 this.mensagem = ''; 
+                console.log(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
+                    
                 axios.put(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
                     this.Tool = response.data;
+                    console.log(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
                     console.log(response.data);
                     switch(response.data.currentStatus){
                         case "created":
@@ -192,5 +213,9 @@ export default {
                     this.carregando = false;
                 }) 
             }
+    },
+    beforeMount: function(){
+        this.getOPList();
     }
+
 };

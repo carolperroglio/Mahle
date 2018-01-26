@@ -48,7 +48,7 @@
                             <label class="ls lsoptype2">
                             <div class="btn-group" role="group">
 
-                            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="openEditModal(t)">
+                            <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="showModal(t)">
                             Editar &nbsp&nbsp <font size="4">&#x270d  </font>   
                             </button>   
 

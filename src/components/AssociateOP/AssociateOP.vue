@@ -64,18 +64,45 @@
                             <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         </div>
                             </div>    
+
+             <div> 
+                 <div v-show="listaOPs"> 
+                 <div v-for="(op, index) in ProductionOrders" v-bind:key="index">   
+                <div class="card">
+                    <div class="card-header card-header-ass-op">
+                        <b>Ordem de Produção {{op.productionOrderNumber}}</b>
+                    </div>
+                        <div class="card-body card-body-ass-op">
+                           <label class="ls ls3">
+                                <b><font color="#9BA6A5">Status: </font></b>{{op.currentStatus}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Quantidade: </font></b>{{op.quantity}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls3">
+                                <b><font color="#9BA6A5">Descrição: </font></b>{{op.typeDescription}}</label>&nbsp;&nbsp;&nbsp;
+                            <div class="btn-group">
+                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="getAssoc()">
+                                Associar OP   
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#DisAssocModal">
+                                Desassociar OP
+                            </button>
+                            </div> 
+                        </div>
+                </div>  
+                 </div> 
+             </div>   
+            </div>
+            
             <div v-show="lista || OP.length > 0">      
                 <div class="card">
                     <div class="card-header card-header-ass-op">
-                        <b>Ferramenta Associada</b>
+                        <b>Ordem de Produção {{OP.productionOrderNumber}}</b>
                     </div>
                         <div class="card-body card-body-ass-op">
                             <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                             <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Status: </font></b>{{OP.currentStatus}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
-                                <b><font color="#9BA6A5">Production Order no: </font></b>{{OP.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{OP.quantity}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls3">
