@@ -34,6 +34,7 @@
     "vue": "^2.5.2",
     "vue-autocompleter": "^0.3.17",
     "vue-bootstrap-datetimepicker": "^4.1.2",
+    "vue-clickaway": "^2.1.0",
     "vue-i18n-plugin": "^0.2.2",
     "vue-router": "^3.0.1",
     "vue-tiles": "0.0.2",

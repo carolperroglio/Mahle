@@ -4,6 +4,7 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import { concat } from 'bootstrap-vue/es/utils/array';
 es6promisse.polyfill();
 
 export default {
@@ -19,6 +20,7 @@ export default {
             numOP: '',
             OPId: '',
             ProductionOrders: [],
+            selectedOP: '',
             thingId: '',
             typeId: '',
             groupId: '',
@@ -47,6 +49,9 @@ export default {
     },
     methods: {
 
+            desAssoc(){
+                this.$refs.modalDesassoc.show();
+            },
            getOPs(numOP){            
             var array=[];                          
             if(numOP.length<3){return;}                
@@ -74,17 +79,22 @@ export default {
                 }, 200);                
                           
             },
-            openSelectGroup(){
+            openSelectGroup(op){
                 this.group = true;  
-                this.carregando = true;             
-                axios.get(this.url+'gateway/thinggroups/').then((response)=>{ 
+                this.carregando = true;  
+                
+                this.OPId = op.productionOrderId;
+                this.numOP = op.productionOrderNumber;
+                this.typeId = op.productionOrderTypeId;           
+                axios.get(this.url+'api/productionordertypes/'+this.typeId).then((response)=>{ 
                     console.log(response.data); 
-                    this.Groups = response.data;
+                    this.Groups = response.data.thingGroups;
+                    console.log(this.Groups);
                         },(error)=>{
                                 console.log(error);
                         })
-                this.listaOPs = false;
-                this.lista = true;
+                        this.listaOPs = false;
+                        this.lista = true;
                 axios.get(this.url+'api/productionorders/'+this.OPId).then((response)=>{
                     this.OP = response.data;
                     console.log(response.data);
@@ -176,6 +186,10 @@ export default {
             getDisAssoc(){
                 this.mensagemSuc = '';
                 this.mensagem = ''; 
+                this.listaOPs = false;
+                this.lista = true;
+                this.OPId = op.productionOrderId;
+                this.numOP = op.productionOrderNumber;
                 axios.put(this.url+'api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
                     this.Tool = response.data;
                     console.log(response.data);
