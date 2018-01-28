@@ -46,15 +46,16 @@
         <!--   Menu lateral Novo    -->
         <!--                        -->
         <!--                        -->  
-        
+         <div v-on-clickaway="away" id="divside">
         <div class="row fixed-top menu-btn"> 
             
              <b-button v-b-toggle.sidebar id="open" >
                 <i class="icon-navigate fa fa-navicon fa-lg"></i>
             </b-button>       
         </div>   
-
+            
                 <b-collapse class="fixed-top col-md-6 p-l-0 p-r-0" id="sidebar" flush>
+                   
                         <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki">
                             </i> OPERADOR </div>
 
@@ -139,9 +140,11 @@
                                 Gerenciamento de Ordem de Produção
                             </router-link>
                         </b-collapse>
-                    </b-collapse>        
+                    </b-collapse>      
+                    </div>   
         <router-view/>
-    </div>  
+            </div>
+
 </template>
 
 

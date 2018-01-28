@@ -21,7 +21,7 @@
                                 numOP = o.productionOrderNumber;
                                 typeId = o.productionOrderTypeId;
                                 notSelected = false;
-                                openSelectGroup()" v-for="(o,index) in OPs" v-bind:key="index">{{o.productionOrderNumber}}
+                                openSelectGroup(o)" v-for="(o,index) in OPs" v-bind:key="index">{{o.productionOrderNumber}}
                             </b-dropdown-item>
                 </li>                                                          
                 <li class="nav-item nav-item-assop col-sm-1.5" v-if="group">                                                                                                              
@@ -43,7 +43,7 @@
                         <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="getAssoc()">
                             Associar OP   
                         </button>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#DisAssocModal">
+                        <button type="button" class="btn btn-danger btn-sm" @click.stop.prevent="desAssoc()">
                             Desassociar OP
                         </button>
                     </div>    
@@ -80,10 +80,10 @@
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{op.typeDescription}}</label>&nbsp;&nbsp;&nbsp;
                             <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="getAssoc()">
+                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="openSelectGroup(op)">
                                 Associar OP   
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#DisAssocModal">
+                            <button type="button" class="btn btn-danger btn-sm" @click.stop.prevent="desAssoc(op)">
                                 Desassociar OP
                             </button>
                             </div> 
@@ -134,15 +134,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-        <div class="modal fade" id="DisAssocModal" tabindex="-1" role="dialog" aria-labelledby="DisAssocModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="DisAssocModalLabel">Cadastrar Ferramenta</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+        <b-modal ref="modalDesassoc" hide-footer title="Desassociar OP">
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
@@ -202,9 +194,7 @@
                                     </div>
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
+        </b-modal>
 
 
     </div>  

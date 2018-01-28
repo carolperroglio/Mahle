@@ -4,6 +4,7 @@ import vBToggle from 'bootstrap-vue/es/directives/toggle/toggle'
 import bButton from 'bootstrap-vue/es/components/button/button'
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
 import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
+import { directive as onClickaway } from 'vue-clickaway';
 
 export default {
     name: "NavBar",
@@ -20,17 +21,14 @@ export default {
         'b-list-group': bListGroupItem
     },
     directives: {
-        'b-toggle': vBToggle
+        'b-toggle': vBToggle,
+        onClickaway: onClickaway
     },
     methods: {
-    },
-    beforeMount: function(){
-        var divToHide = document.getElementById('sidebar');
-        document.onclick = function(e){
-            if(e.target.id !== 'sidebar'){
-            divToHide.style.display = 'none';
-            }
-        };
+        away: function() {
+            var divToHide = document.getElementById('sidebar');
+               divToHide.style.display = 'none';
+          }
     }
  };
 
