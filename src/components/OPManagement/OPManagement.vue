@@ -7,28 +7,32 @@
                 </li>
             </ul>
         </div>
-        <div class="">
+            <div class="contentMOP">
                <div v-for="(o, index) in OPs" v-bind:key="index">
-                    <div class="">
-                        <div class="card-header card-header2">
+                        <div class="card-header">
                         </div>
-                        <div class="card-body card-body2">
+                        <div class="card-body">
+                            <label class="ls lsactive">
+                                <b><font color="#9BA6A5">Status: </font></b>{{o.currentStatus}}</label>
                             <label class="ls ls3">
-                                <b><font color="#9BA6A5">Status: </font></b>{{o.currentStatus}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Production Order no: </font></b>{{o.productionOrderNumber}}</label>
+                            <label class="ls lsquant">
+                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>
                             <label class="ls ls3">
-                                <b><font color="#9BA6A5">Production Order no: </font></b>{{o.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Descrição: </font></b>{{o.typeDescription}}</label>
                             <label class="ls ls3">
-                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls3">
-                                <b><font color="#9BA6A5">Descrição: </font></b>{{o.typeDescription}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="showModal(o)"></i>
+                                <button class="btn btn-sm btn-success" @click.stop.prevent="showModal(o)">Editar Status</button>
+                            </label>
+                            
                         </div>
-                    </div>
                 </div>
-        </div>
+            </div>
         <b-modal ref="modalGerOP" hide-footer title="Registrar Produto">
+            
                     <form>
                         <div class="form-group">
+                             <div class="progress-bar progress-bar-striped progress-bar-animated" v-if="carregando" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            </div>
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                             <label>
