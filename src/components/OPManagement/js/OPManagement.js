@@ -16,7 +16,12 @@ export default {
             newStatus: '',
             mensagem: '',
             mensagemSuc: '',
-            url: 'http://34.239.125.82:8003/api/productionorders/' 
+            states: [],
+            state: '',
+            nextstates: [],
+            carregando: false,
+            url: 'http://34.239.125.82:8003/api/productionorders/',
+            url2: 'http://34.239.125.82:8003/api/productionordertypes/'
         }
     },
     components: {
@@ -30,7 +35,41 @@ export default {
     methods: {
         showModal (o) {
             this.OP=o; 
-        this.$refs.modalGerOP.show()
+        this.$refs.modalGerOP.show();
+            this.carregando = true;
+
+        setTimeout(() => {
+            axios.get(this.url+this.OP.productionOrderId).then((response)=>{
+                this.state = response.data.currentStatus;
+                console.log(this.state);
+            },(error)=>{                   
+            });
+            axios.get(this.url2+this.OP.productionOrderTypeId).then((response)=>{
+                this.states = response.data.stateConfiguration.states;
+                console.log(this.states);
+                    switch(this.state){
+                        case "created":
+                        this.nextstates = this.states[0].possibleNextStates;
+                        break;
+                        case "active":                    
+                        this.nextstates = this.states[1].possibleNextStates;
+                        break;
+                        case "paused":
+                        this.nextstates = this.states[2].possibleNextStates;
+                        break;
+                        case "ended":
+                        this.nextstates = this.states[3].possibleNextStates;
+                        break;
+                        case "inactive":
+                        this.nextstates = this.states[4].possibleNextStates;
+                        break;                    
+                    }                    
+                console.log(this.nextstates);
+                this.carregando = false;
+            },(error)=>{
+                this.carregando = false;                   
+            })
+        }, 200);
       },
         hideModal () {
         this.$refs.modalGerOP.hide()
