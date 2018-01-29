@@ -43,7 +43,7 @@ body {
     }
 
 #sidebar {
-    margin-top: 6.5%;
+    margin-top: 5.5%;
     position:fixed;
     z-index: 5555;
 }
@@ -195,7 +195,7 @@ footer{
 
 @media screen and (max-width: 800px) {
     #sidebar {
-        margin-top: 10%;
+        margin-top: 7%;
         margin-left: 0;
         position: fixed;
     }

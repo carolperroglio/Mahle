@@ -35,6 +35,8 @@ export default {
             lista2: false,
             listaOPs: false,
             carregando: false,
+            assoc: false,
+            disassoc: false,
             url:'http://brsbap01:8005/',
             }
     },
@@ -49,9 +51,6 @@ export default {
     },
     methods: {
 
-            desAssoc(){
-                this.$refs.modalDesassoc.show();
-            },
            getOPs(numOP){            
             var array=[];                          
             if(numOP.length<3){return;}                
@@ -82,7 +81,7 @@ export default {
             openSelectGroup(op){
                 this.group = true;  
                 this.carregando = true;  
-                
+                this.OP = op;
                 this.OPId = op.productionOrderId;
                 this.numOP = op.productionOrderNumber;
                 this.typeId = op.productionOrderTypeId;           
@@ -142,9 +141,7 @@ export default {
             },
             getAssoc(){
                 this.mensagemSuc = '';
-                this.mensagem = ''; 
-                console.log(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
-                    
+                this.mensagem = '';     
                 axios.put(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
                     this.Tool = response.data;
                     console.log(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
@@ -186,11 +183,7 @@ export default {
             getDisAssoc(){
                 this.mensagemSuc = '';
                 this.mensagem = ''; 
-                this.listaOPs = false;
-                this.lista = true;
-                this.OPId = op.productionOrderId;
-                this.numOP = op.productionOrderNumber;
-                axios.put(this.url+'api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
+                axios.put(this.url+'api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId, this.OP).then((response)=>{
                     this.Tool = response.data;
                     console.log(response.data);
                     switch(response.data.currentStatus){

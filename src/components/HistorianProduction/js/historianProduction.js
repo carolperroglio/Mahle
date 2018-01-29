@@ -32,9 +32,10 @@ export default {
             fieldValue: '' ,
             phaseIndex: '',
             pReceita: false,
+            sel: true,
             pFase: false,
             lista: false,
-            url:'http://brsbap01:8007/',
+            url:'http://34.239.125.82:8006/',
 
         }
     },  
@@ -121,6 +122,7 @@ export default {
         },
 
         listaOp(){
+            this.sel = false;
             console.log(this.POs);              
             this.productionOrdersRecipe = this.POs[0].recipe;            
             document.getElementById("order").style.display="block";

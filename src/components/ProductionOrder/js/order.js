@@ -22,19 +22,19 @@ function paginacao(response, este) {
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://brsbap01:';
+var ipServer = 'http://34.239.125.82:';
 
 export default {
     name: 'ProductionOrder',
     data() {
         return {
             opId: '',
-            urlRecipeSearch: ipServer + '8003/api/recipes?fieldFilter=recipeName&fieldValue=',
-            urlRecipe: ipServer + '8003/api/recipes/',
-            urlOpType: ipServer + '8005/api/productionordertypes/',
-            urlPhases: ipServer + '8003/api/phases/',
-            urlOp: ipServer + '8005/api/productionorders',
-            urlGatewayRecipe: ipServer + '8005/gateway/recipes/',
+            urlRecipeSearch: ipServer + '8002/api/recipes?fieldFilter=recipeName&fieldValue=',
+            urlRecipe: ipServer + '8002/api/recipes/',
+            urlOpType: ipServer + '8003//api/productionordertypes/',
+            urlPhases: ipServer + '8002/api/phases/',
+            urlOp: ipServer + '8003/api/productionorders',
+            urlGatewayRecipe: ipServer + '8003/gateway/recipes/',
             recipeArray: [],
             opArray: [],
             opTypeArray: [],

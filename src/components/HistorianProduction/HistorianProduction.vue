@@ -10,7 +10,7 @@
         <!--                                 -->
          <div class="fixed-top nav-hp">
              <h1 class="title-page-hp"><b> Apontamentos de OP</b> </h1>
-            <ul class="nav d-flex align-items-center">
+            <ul class="nav d-flex align-items-center" v-if="sel">
                 <li class="nav-item-hp col-sm-1.5">
                     <label class="fm mr-sm-2">Número da OP: </label>   
 
