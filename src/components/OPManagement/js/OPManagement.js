@@ -16,7 +16,7 @@ export default {
             newStatus: '',
             mensagem: '',
             mensagemSuc: '',
-            url: 'http://brsbap01:8005/api/productionorders/' 
+            url: 'http://34.239.125.82:8003/api/productionorders/' 
         }
     },
     components: {

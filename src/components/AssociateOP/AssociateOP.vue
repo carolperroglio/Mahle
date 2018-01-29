@@ -38,15 +38,17 @@
                             </option>
                         </select>
                 </li>   
-                <li class="nav-item nav-item-assop"  v-if="thing || groupId != ''">    
-                    <div class="btn-group">
+                <li class="nav-item nav-item-assop"  v-if="thing || groupId != ''">  
+                    <div v-if="assoc">
                         <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="getAssoc()">
                             Associar OP   
                         </button>
-                        <button type="button" class="btn btn-danger btn-sm" @click.stop.prevent="desAssoc()">
+                    </div>
+                    <div  v-if="disassoc">
+                        <button type="button" class="btn btn-danger btn-sm" @click.stop.prevent="getDisAssoc()">
                             Desassociar OP
                         </button>
-                    </div>    
+                    </div>
                 </li>    
             </ul>        
         </div> 
@@ -80,10 +82,10 @@
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{op.typeDescription}}</label>&nbsp;&nbsp;&nbsp;
                             <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="openSelectGroup(op)">
+                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="openSelectGroup(op)" v-on:click="assoc=true">
                                 Associar OP   
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" @click.stop.prevent="desAssoc(op)">
+                            <button type="button" class="btn btn-danger btn-sm" @click.stop.prevent="openSelectGroup(op)" v-on:click="disassoc=true">
                                 Desassociar OP
                             </button>
                             </div> 
@@ -127,75 +129,6 @@
                     </div>
                     </div>
         </div>
-        <!--                                 -->
-        <!--                                 -->
-        <!--                                 -->
-        <!--    Modal de Desassociações      -->
-        <!--                                 -->
-        <!--                                 -->
-        <!--                                 -->
-        <b-modal ref="modalDesassoc" hide-footer title="Desassociar OP">
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                                <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                                <label>
-                                    <b>Nome: </b>
-                                </label>
-                                <input type="text" placeholder="nome"  id="nome" class="form-control danger is-invalid form-control-sm">
-                                <label>
-                                    <b>Descrição: </b>
-                                </label>
-                                <input type="text" id="desc" class="form-control form-control-sm" placeholder="descrição">
-                                <label>
-                                    <b>Número Serial: </b>
-                                </label>
-                                <input type="text" id="sernum" class="form-control form-control-sm" placeholder="serial number">                                    <label>
-                                    <b>Código: </b>
-                                </label>
-                                <label>
-                                    <b>Life Cycle: </b>
-                                </label>
-                                <input class="form-control form-control-sm" type="text" placeholder="life cycle" id="lifec">
-                                <label>
-                                    <b>Vida útil atual: </b>
-                                </label>
-                                <input type="text" id="currL" class="form-control form-control-sm" placeholder="vida útil atual" disabled>
-                            
-                                <label>
-                                    <b>Unidade de Medida: </b>
-                                </label>
-                                <input type="text" id="unitMeas" class="form-control form-control-sm" placeholder="Ex.: minutos">                              
-                                <label>
-                                    <b>Tipo: </b>
-                                </label>
-                                    <select class="form-control form-control-sm" >
-                                    </select>
-                                <label>
-                                    <b>Status: </b>
-                                </label>
-                                <select class="form-control form-control-sm">
-                                    <option value="available">Disponível</option>
-                                    <option value="in_use">Em uso</option>
-                                    <option value="in_maintenance">Em manutenção</option>
-                                    <option value="not_available">Indisponível</option>
-                                    <option value="inactive">Inativo</option>
-                                </select>
-                                </div>
-                                <div class="btn-group" role="group">
-                                        <button class="btn btn-success">
-                                            <i class="fa fa-check-square" aria-hidden="true"></i>
-                                        </button>
-                                        
-                                </div>
-                                    <div class="btn btn-primary pull-right" >
-                                        Limpar
-                                    </div>
-                        </form>
-                    </div>
-        </b-modal>
-
 
     </div>  
 </template>

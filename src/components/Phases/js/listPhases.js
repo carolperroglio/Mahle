@@ -16,14 +16,14 @@ function paginacao(response, este) {
     }
 }
 
-var ipServer = 'http://brsbap01:';
+var ipServer = 'http://34.239.125.82:';
 
 export default {
     name: "Phases",
     data() {
         return {
-            urlRecipes: ipServer + '8003/api/recipes',
-            urlPhases: ipServer + '8003/api/phases',
+            urlRecipes: ipServer + '8002/api/recipes',
+            urlPhases: ipServer + '8002/api/phases',
             recipes: [],
             phases: [],
             carregando: false,

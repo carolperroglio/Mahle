@@ -6,7 +6,7 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 
 es6promisse.polyfill();
-var ipServer = 'http://brsbap01:';
+var ipServer = 'http://34.239.125.82:';
 
 export default {
     name: "Phases",
@@ -16,12 +16,12 @@ export default {
             config: {
                 headers: { 'Cache-Control': 'no-cache' }
             },
-            url: ipServer + '8003/api/',
+            url: ipServer + '8002/api/',
             url2: ipServer + '8001/api/',
-            urlProducts: ipServer + '8003/api/products?&fieldFilter=productName&fieldValue=',
+            urlProducts: ipServer + '8002/api/products?&fieldFilter=productName&fieldValue=',
             urlRecipeSearch: 'http://brsbap01:8001/api/tags?fieldFilter=tagName&fieldValue=',
-            urlRecipes: ipServer + '8003/api/recipes/',
-            urlGatewayRecipes: ipServer + '8005/gateway/recipes/',
+            urlRecipes: ipServer + '8002/api/recipes/',
+            urlGatewayRecipes: ipServer + '8006/gateway/recipes/',
             carregando: false,
             recipeProduct: {},
             recipeProductDisplay: {},
@@ -194,25 +194,27 @@ export default {
             this.mensagemSuc = '';
             this.carregando = true;
             recipeProduct.phaseProductType = 'finished';
+            console.log(recipeProduct);
+            console.log(this.url + "recipes/product/" + this.recipe.recipeId);
             axios.post(this.url + "recipes/product/" + this.recipe.recipeId, recipeProduct).then((response) => {
                 console.log(response.data);
                 this.carregando = false;
                 this.recipeProductDisplay = response.data;
-                alert('Cadastrado com sucesso');
             }, (error) => {
                 console.log(error);
                 this.carregando = false;
             });
         },
-        deleteRecipeProduct(recipeProduct, recipeProductEnd) {
+        deleteRecipeProduct(recipeProduct) {
             this.mensagemSuc = '';
             this.carregando = true;
-            recipeProduct.phaseProductType = 'finished';
-            axios.post(this.url + "recipes/product/" + this.recipe.recipeId, recipeProduct).then((response) => {
+            console.log(recipeProduct);
+            console.log(this.url + "recipes/product/" + this.recipe.recipeId);
+            axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,recipeProduct).then((response) => {
                 console.log(response.data);
                 this.carregando = false;
                 this.recipeProductDisplay = response.data;
-                alert('Cadastrado com sucesso');
+                alert("Deletado!!");
             }, (error) => {
                 console.log(error);
                 this.carregando = false;

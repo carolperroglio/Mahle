@@ -75,7 +75,7 @@
                             </font></b> 
                                 {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} 
                             <br>
-                        <button type="button" class="btn btn-danger config-button2" aria-hidden="true" id="removerP" @click.stop.prevent="deleteRecipeProduct(pro, pha);">
+                        <button type="button" class="btn btn-danger config-button2" aria-hidden="true" id="removerP" @click.stop.prevent="deleteRecipeProduct(recipeProduct);">
                             <i class= "fa fa-trash-o"></i> Remover
                         </button>
                     </li>
