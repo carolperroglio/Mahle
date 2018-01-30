@@ -27,26 +27,23 @@
                         </div>
                 </div>
             </div>
-        <b-modal ref="modalGerOP" hide-footer title="Registrar Produto">
+        <b-modal ref="modalGerOP" hide-footer title="Editar Status">
             
                     <form>
                         <div class="form-group">
-                             <div class="progress-bar progress-bar-striped progress-bar-animated" v-if="carregando" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            </div>
+                             
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                            
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" v-if="carregando" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            </div>
+
                             <label>
                                 <b>Status:</b>
                             </label>
-                            <select class="form-control form-control-sm" v-model="newStatus">
-                                <option value="created">Criada</option>
-                                <option value="active">Ativa</option>
-                                <option value="inactive">Inativa</option>
-                                <option value="paused">Pausada</option>
-                                <option value="ended">Encerrada</option>
-                                <option value="waiting_approval">Aguardando Aprovação</option>
-                                <option value="approved">Aprovada</option>
-                                <option value="reproved">Reprovada</option>
+                            <select class="form-control form-control-sm" v-model="newStatus" >
+                            <option v-for="(n,index) in nextstates" :value="n" v-bind:key="index">{{ n }}
+                            </option>
                             </select>
                                         <label>
                                             <b>Production Order no: </b>

@@ -20,8 +20,8 @@ export default {
             state: '',
             nextstates: [],
             carregando: false,
-            url: 'http://34.239.125.82:8003/api/productionorders/',
-            url2: 'http://34.239.125.82:8003/api/productionordertypes/'
+            url: 'http://brsbap01:8005/api/productionorders/',
+            url2: 'http://brsbap01:8005/api/productionordertypes/'
         }
     },
     components: {
@@ -36,9 +36,9 @@ export default {
         showModal (o) {
             this.OP=o; 
         this.$refs.modalGerOP.show();
-            this.carregando = true;
 
-        setTimeout(() => {
+        this.carregando = true;
+            
             axios.get(this.url+this.OP.productionOrderId).then((response)=>{
                 this.state = response.data.currentStatus;
                 console.log(this.state);
@@ -63,13 +63,12 @@ export default {
                         case "inactive":
                         this.nextstates = this.states[4].possibleNextStates;
                         break;                    
-                    }                    
+                    }            
                 console.log(this.nextstates);
                 this.carregando = false;
             },(error)=>{
                 this.carregando = false;                   
             })
-        }, 200);
       },
         hideModal () {
         this.$refs.modalGerOP.hide()

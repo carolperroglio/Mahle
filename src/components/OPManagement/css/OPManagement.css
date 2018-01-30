@@ -32,6 +32,9 @@
     top: 17%;
 }
 
+.contentMOP {
+    margin-top: 16%;
+}
 
 
 /*Listagem de produtos*/
@@ -65,11 +68,24 @@ input {
     width: 100%;
     bottom: 5%;
 }
+
  .ls3 {
-        width: 22%;
-        font-family: sans-serif;
-        font-size: 14px;
+    width: 22%;
+    font-family: sans-serif;
+    font-size: 14px;
     }
+
+ .lsactive {
+    width: 15%;
+    font-family: sans-serif;
+    font-size: 14px;
+ }
+
+ .lsquant {
+    width: 15%;
+    font-family: sans-serif;
+    font-size: 14px;
+ }
 
 /* Menu Superior para busca de Produtos 800X600 */ 
 
