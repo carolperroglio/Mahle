@@ -16,6 +16,7 @@ import 'vue-tiles/dist/vue-tiles.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
+import { array } from 'bootstrap-vue/es/utils';
 
 es6promisse.polyfill();
 
@@ -66,6 +67,7 @@ export default {
             pageAtual: 0,
             orderField: '',
             order: '',
+            obj: {},
             ticksIni: '',
             ticksFim: '',
             fieldFilter: '',
@@ -76,7 +78,8 @@ export default {
             idstat: '',
             idstatcollpse: '',
             themeArr: ['theme1', 'theme2', 'theme3', 'theme4', 'theme5'],
-            selectedTheme: []
+            selectedTheme: [],
+            provider: []
              }
     },
     components: {
@@ -120,13 +123,27 @@ export default {
                 console.log('F: '+ticksF);
                 console.log(this.url+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
                 axios.get(this.url+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then(response => {
-                    this.history = response.data;
-                    console.log(this.history);
-                    this.carregando = false;
+                    var hist = response.data;     
+                    var temp = [];              
+                    hist.forEach((R) => {
+                            var dataObj = {};
+                            var tag = R.tag;
+                            this.obj["category"] = this.ticksToDate(R.date);
+                            this.obj[tag] = R.value;
+                            dataObj = Object.assign(this.obj);
+                            console.log(dataObj);
+                            temp.push(dataObj);
+                    });
+                    console.log(temp);
+
                 }).catch(error => {
                     console.log(error);
-                })
+                });
             }, 200);
+            setTimeout(() => {
+                this.carregando = false;
+                this.created();
+            }, 300);            
         },
         ticksToDate(dateTicks){
             var epochTicks = 621355968000000000,
@@ -135,7 +152,8 @@ export default {
             jsDate;
             jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
             jsDate = new Date(jsTicks);
-            return jsDate;
+            var hours = jsDate.toString().slice(4,21);
+            return hours;
             },
         dateToTicks(dateTime){
             var date = new Date(dateTime); 
@@ -150,7 +168,6 @@ export default {
         },
         hideModal() {
             this.$refs.myModalEdit.hide();
-            this.created();
         },
         created() {
             window.AmCharts.makeChart("chartdiv",
@@ -182,9 +199,9 @@ export default {
                         "lineAlpha": 1,
                         "lineThickness": 3,
                         "tabIndex": -3,
-                        "title": "graph 1",
+                        "title": "setpLL_ET-1002_read",
                         "type": "smoothedLine",
-                        "valueField": "set_ll"
+                        "valueField": "setpLL_ET-1002_read"
                     },
                     {
                         "balloonColor": "#8EE8EB",
@@ -195,8 +212,8 @@ export default {
                         "id": "AmGraph-2",
                         "lineThickness": 3,
                         "type": "smoothedLine",
-                        "title": "graph 2",
-                        "valueField": "set_l"
+                        "title": "setpL_ET-1002_read",
+                        "valueField": "setpL_ET-1002_read"
                     },
                     {
                         "balloonColor": "#8EE8EB",
@@ -205,10 +222,10 @@ export default {
                         "bulletSize": 10,
                         "color": "#000000",
                         "id": "AmGraph-3",
-                        "title": "graph 3",
+                        "title": "setpHH_ET-1002_read",
                         "lineThickness": 3,
                         "type": "smoothedLine",
-                        "valueField": "set_hh"
+                        "valueField": "setpHH_ET-1002_read"
                     },
                     {
                         "balloonColor": "#8EE8EB",
@@ -217,10 +234,10 @@ export default {
                         "bulletSize": 10,
                         "color": "#000000",
                         "id": "AmGraph-4",
-                        "title": "graph 4",
+                        "title": "setpH_ET-1002_read",
                         "lineThickness": 3,
                         "type": "smoothedLine",
-                        "valueField": "set_h"
+                        "valueField": "setpH_ET-1002_read"
                     },
                     {
                         "balloonColor": "#8EE8EB",
@@ -229,13 +246,16 @@ export default {
                         "bulletSize": 10,
                         "color": "#000000",
                         "id": "AmGraph-5",
-                        "title": "graph 5",
+                        "title": "medicao_ET-1002_read",
                         "lineThickness": 3,
                         "type": "smoothedLine",
-                        "valueField": "medicao"
+                        "valueField": "medicao_ET-1002_read"
                     }
                 ],
                 "guides": [],
+                "legend": {
+                    "enabled": true
+                },
                 "valueAxes": [
                     {
                         "id": "ValueAxis-1",
@@ -245,64 +265,7 @@ export default {
                 "allLabels": [],
                 "balloon": {},
                 "titles": [],
-                "dataProvider": [
-                    {
-                        "category": "category 1",
-                        "set_ll": 8,
-                        "set_l": "35",
-                        "set_hh": 69,
-                        "set_h": 16,
-                        "medicao": 74
-                    },
-                    {
-                        "category": "category 2",
-                        "set_ll": 6,
-                        "set_l": 52,
-                        "set_hh": 69,
-                        "set_h": 61,
-                        "medicao": 13
-                    },
-                    {
-                        "category": "category 3",
-                        "set_ll": 2,
-                        "set_l": 26,
-                        "set_hh": 20,
-                        "set_h": 22,
-                        "medicao": 35
-                    },
-                    {
-                        "category": "category 4",
-                        "set_ll": 1,
-                        "set_l": 10,
-                        "set_hh": 7,
-                        "set_h": 89,
-                        "medicao": 16
-                    },
-                    {
-                        "category": "category 5",
-                        "set_ll": 2,
-                        "set_l": 88,
-                        "set_hh": 30,
-                        "set_h": 87,
-                        "medicao": 96
-                    },
-                    {
-                        "category": "category 6",
-                        "set_ll": 3,
-                        "set_l": 18,
-                        "set_hh": 26,
-                        "set_h": 24,
-                        "medicao": 3
-                    },
-                    {
-                        "category": "category 7",
-                        "set_ll": 6,
-                        "set_l": 3,
-                        "set_hh": 50,
-                        "set_h": 52,
-                        "medicao": 42
-                    }
-                ]
+                "dataProvider": this.provider
             }
             );
           }
