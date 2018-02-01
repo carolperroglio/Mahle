@@ -17,7 +17,7 @@
                         <router-link class="nav-link active bg-dark btn-config" router-link to="/AssociateOP"><i class= "fa fa-clone" style="font-size:25px; cursor:pointer"></i>  <br>Associação de OP </router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/OPManagement"><i class= "fa fa-industry" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ordem</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:25px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas</router-link>
@@ -65,16 +65,9 @@
                         </b-collapse>
 
                         <router-link to="/statusMES" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
-                            <i class="fa fa-bar-chart"></i> 
+                            <i class="fa fa-check-square"></i> 
                             <span class="hidden-sm-down">  
                                 STATUS DO MES
-                            </span>
-                        </router-link>
-
-                        <router-link to="/historian" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
-                            <i class="fa fa-clock-o"></i> 
-                            <span class="hidden-sm-down">  
-                                HISTÓRICOS
                             </span>
                         </router-link>
 
