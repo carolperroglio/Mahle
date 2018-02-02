@@ -2,6 +2,7 @@ import axios from 'axios'
 import es6promisse from 'es6-promise'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
 
@@ -34,7 +35,8 @@ export default {
     },
     computed: {},
     components: {
-        'b-modal': bModal
+        'b-modal': bModal,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective

@@ -8,6 +8,7 @@ import Vue from 'vue'
 import VueTiles from 'vue-tiles'
 import 'vue-tiles/dist/vue-tiles.css'
 import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
+import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
 
@@ -55,7 +56,8 @@ export default {
         'content-sm': ContentSm,
         'content-md': ContentMd,
         'content-lg': ContentLg,
-        'b-collapse': bCollapse
+        'b-collapse': bCollapse,
+        Stretch
     },
     directives: {
         'b-toggle': vBToggle,

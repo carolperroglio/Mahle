@@ -4,6 +4,7 @@ import axios from 'axios'
 import es6promisse from 'es6-promise'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
 
@@ -45,7 +46,8 @@ export default {
     computed: {
     },
     components: {
-        'b-modal': bModal
+        'b-modal': bModal,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective
@@ -106,25 +108,28 @@ export default {
             });
         },
         
-        buscar(id = "") {
+        buscar() {
             this.carregando = true;
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.produtos = [];
-            console.log(this.order, this.orderField)
-            axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
-                if (!response.data.values && response.data.productId)
-                    this.produtos[0] = response.data;
-                else {
-                    paginacao(response, this);
-                    this.produtos = response.data.values;
-                }
-                this.carregando = false;
-            }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
-                this.carregando = false;
-            })
+            console.log(this.order, this.orderField);
+            setTimeout(() => {
+                axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                    if (!response.data.values && response.data.productId)
+                        this.produtos[0] = response.data;
+                    else {
+                        paginacao(response, this);
+                        this.produtos = response.data.values;
+                    }
+                    this.carregando = false;
+                }, (error) => {
+                    this.mensagem = 'Erro no server ao buscar ' + error;
+                    this.carregando = false;
+                })
+            }, 2000);
+            
         }
     },
     beforeMount: function(){

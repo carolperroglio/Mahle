@@ -12,6 +12,10 @@
     height: 8%;
     }
 
+#loader {
+        left: 50%;
+}
+
 /* menu de navegação de produtos - busca de produtos*/   
 .card-header2 {
     border: #707070;
@@ -74,6 +78,7 @@ input {
     font-family: sans-serif;
     font-size: 14px;
     }
+
 
  .lsactive {
     width: 15%;

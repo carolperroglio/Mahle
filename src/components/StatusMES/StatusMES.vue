@@ -9,9 +9,9 @@
         </nav>
         <div class="row conteudo-status">
               <div class="container-fluid">
-                  <div class="progress" v-show="carregando">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                  </div>
+                <div id="load" v-show="carregando">
+                    <stretch background="#4d4d4d"></stretch>
+                </div> 
                   <div class="status">
                     <div class="row">
                         <div v-for="(s, index) in status" v-bind:key="index" id="constat">

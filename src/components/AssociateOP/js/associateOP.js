@@ -4,7 +4,9 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-import { concat } from 'bootstrap-vue/es/utils/array';
+import { concat } from 'bootstrap-vue/es/utils/array'
+import { Stretch } from 'vue-loading-spinner'
+
 es6promisse.polyfill();
 
 export default {
@@ -44,7 +46,8 @@ export default {
     components: {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
-        'b-modal': bModal
+        'b-modal': bModal,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective
@@ -80,7 +83,7 @@ export default {
                         console.log(error);
                         this.carregando = false;
                     })
-                }, 200);                
+                }, 2000);                
                           
             },
             openSelectGroup(op){

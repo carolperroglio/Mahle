@@ -8,6 +8,9 @@
             </ul>
         </div>
             <div class="contentMOP">
+                <div id="load" v-show="carregando">
+                        <stretch background="#4d4d4d"></stretch>
+                        </div> 
                <div v-for="(o, index) in OPs" v-bind:key="index">
                         <div class="card-header">
                         </div>
@@ -35,8 +38,9 @@
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                             
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" v-if="carregando" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            </div>
+                            <div id="load" v-show="carregando">
+                        <stretch background="#4d4d4d"></stretch>
+                        </div> 
 
                             <label>
                                 <b>Status:</b>

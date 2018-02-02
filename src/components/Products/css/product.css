@@ -13,6 +13,10 @@
     padding-top: 4%;
     }
     
+#load {
+    margin-left: 50%;
+}
+
 /* menu de navegação de produtos - título busca de produtos*/ 
 .title-page-gp{
     text-align: left;
