@@ -38,8 +38,8 @@ export default {
     name: "Historian",
     data() {
         return {
-            url: 'http://brsbap01:8010/api/Historian?',
-            urlThing: 'http://brsbap01:8001/api/things',
+            url: 'http://34.239.125.82:8006/api/Historian?',
+            urlThing: 'http://34.239.125.82:8006/api/things',
             carregando: false,
             date:'',
             datef: '',

@@ -32,7 +32,7 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             id: '',
-            url: 'http://brsbap01:8004/api/tool/inuse'
+            url: 'http://34.239.125.82:8005/api/tool/inuse'
         }
     },
     methods: {

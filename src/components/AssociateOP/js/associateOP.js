@@ -37,7 +37,7 @@ export default {
             carregando: false,
             assoc: false,
             disassoc: false,
-            url:'http://brsbap01:8005/',
+            url:'http://34.239.125.82:8003/',
             }
     },
     computed: {},
