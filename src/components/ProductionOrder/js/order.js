@@ -4,6 +4,8 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import { Stretch } from 'vue-loading-spinner'
+
 es6promisse.polyfill();
 
 
@@ -22,19 +24,19 @@ function paginacao(response, este) {
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://brsbap01:8005';
+var ipServer = 'http://brsbap01:';
 
 export default {
     name: 'ProductionOrder',
     data() {
         return {
             opId: '',
-            urlRecipeSearch: ipServer + '8002/api/recipes?fieldFilter=recipeName&fieldValue=',
-            urlRecipe: ipServer + '8002/api/recipes/',
-            urlOpType: ipServer + '8003//api/productionordertypes/',
-            urlPhases: ipServer + '8002/api/phases/',
-            urlOp: ipServer + '8003/api/productionorders',
-            urlGatewayRecipe: ipServer + '8003/gateway/recipes/',
+            urlRecipeSearch: ipServer + '8003/api/recipes?fieldFilter=recipeName&fieldValue=',
+            urlRecipe: ipServer + '8003/api/recipes/',
+            urlOpType: ipServer + '8005//api/productionordertypes/',
+            urlPhases: ipServer + '8003/api/phases/',
+            urlOp: ipServer + '8005/api/productionorders',
+            urlGatewayRecipe: ipServer + '8005/gateway/recipes/',
             recipeArray: [],
             opArray: [],
             opTypeArray: [],
@@ -70,7 +72,8 @@ export default {
     components: {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
-        'b-modal': bModal
+        'b-modal': bModal,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective
@@ -100,27 +103,25 @@ export default {
             return array;
         },
         // Make a request for a user with a given ID
-        buscar(id = "") {
+        buscar() {
             this.carregando = true;
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.opArray = [];
             console.log(this.order, this.orderField)
-            axios.get(this.urlOp + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
-                if (!response.data.values && response.data.productId)
-                    this.opArray[0] = response.data;
-                else {
+            setTimeout(() => {
+                axios.get(this.urlOp + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                     paginacao(response, this);
                     this.opArray = response.data;
                     console.log(this.opArray);
-
-                }
                 this.carregando = false;
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
             })
+            }, 1000);
+            
             console.log(this.opArray);
         },
         getRecipes: function() {
@@ -249,8 +250,7 @@ export default {
             return this.opDesc
         }
     },
-    beforeMount() {
-        // this.getOp();
+    beforeMount: function() {
         this.buscar();
     },
 }

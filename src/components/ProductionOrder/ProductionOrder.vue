@@ -6,10 +6,7 @@
         <!-- Criação de OP  -->
         <!--                -->
         <b-modal ref="modalCadOP" hide-footer title="Cadastrar OP">
-                   <div class="progress" v-show="carregando">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                    </div>
-                    
+                                       
                     <div class="modal-body">
                         <form>
                             <div class="alert alert-success" role="alert" v-if="opCreated">
@@ -188,9 +185,9 @@
         <!--             -->
         <div class="" style="">
             <div class="op col-md-12">
-                <div class="progress" v-show="carregando">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                </div>
+                <div id="load" v-show="carregando">
+                    <stretch background="#4d4d4d"></stretch>
+                    </div> 
                 <div v-for="(op, index) in opArray.values" v-bind:key="index">
                     <div class="card card-margin">
                         <div class="card-header">

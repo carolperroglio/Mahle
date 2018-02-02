@@ -17,6 +17,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
 import { array } from 'bootstrap-vue/es/utils';
+import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
 
@@ -91,7 +92,8 @@ export default {
         'b-collapse': bCollapse,
         'b-modal': bModal,
         'date-picker': datePicker,
-        'vue-timepicker': VueTimepicker
+        'vue-timepicker': VueTimepicker,
+        Stretch
     },
     directives: {
         'b-toggle': vBToggle,

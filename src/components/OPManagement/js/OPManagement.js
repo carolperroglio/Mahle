@@ -4,6 +4,8 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import { Stretch } from 'vue-loading-spinner'
+
 es6promisse.polyfill();
 
 export default {
@@ -27,7 +29,8 @@ export default {
     components: {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
-        'b-modal': bModal
+        'b-modal': bModal,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective
@@ -63,8 +66,38 @@ export default {
                         case "inactive":
                         this.nextstates = this.states[4].possibleNextStates;
                         break;                    
-                    }            
-                console.log(this.nextstates);
+                    }
+                    this.nextstates.map( state => {
+                        console.log("oi");
+                        switch(state){
+                            case "created":
+                            state = "Criada";
+                            break;
+                            case "active":                    
+                            state = "Ativa";
+                            break;
+                            case "inactive":
+                            state = "Inativa";
+                            break;
+                            case "paused":
+                            state = "Pausada";
+                            break;
+                            case "ended":
+                            state = "Encerrada";
+                            break;
+                            case "waiting_approval":
+                            state = "Aguardando Aprovação";
+                            break;
+                            case "approved":
+                            state = "Aprovada";
+                            break;
+                            case "reproved":
+                            state = "Reprovada";
+                            break;    
+                        }    
+                    });
+                    
+                    console.log(this.nextstates);
                 this.carregando = false;
             },(error)=>{
                 this.carregando = false;                   
@@ -74,7 +107,9 @@ export default {
         this.$refs.modalGerOP.hide()
       },
         buscaOP(){
-            axios.get(this.url).then((response)=>{
+            this.carregando = true;
+            setTimeout(() => {
+                axios.get(this.url).then((response)=>{
                     
                     this.OPs=response.data.values;
                     console.log(this.OPs);
@@ -107,8 +142,11 @@ export default {
                                 break;                    
                             }
                     });
-                },(error)=>{                   
+                    this.carregando = false;
+                },(error)=>{            
+                    this.carregando = false;       
                 }) 
+            }, 1000);
         },
         editar(OP){
             axios.put(this.url+'statemanagement/id?productionOrderId='+this.OP.productionOrderId+'&state='+this.newStatus).then((response)=>{

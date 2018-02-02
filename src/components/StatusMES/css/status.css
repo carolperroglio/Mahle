@@ -15,9 +15,17 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+#load {
+    margin-left: 45%;
+}
+
 .nav-item-stat {
     margin-top: 2%;
     margin-left: 1%;
+}
+
+.progress {
+    margin-top: 10%;
 }
 
 .conteudo-status {
