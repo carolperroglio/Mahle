@@ -10,22 +10,17 @@
         <!--                                 -->
          <div class="fixed-top nav-hp">
              <h1 class="title-page-hp"><b> Apontamentos de OP</b> </h1>
-            <ul class="nav d-flex align-items-center" v-if="sel">
-                <li class="nav-item-hp col-sm-1.5">
-                    <label class="fm mr-sm-2">Número da OP: </label>   
-
-                </li>
+            <ul class="nav d-flex align-items-center">
+               
                 <li class="nav-item-hp col-sm-2">
-                    <input @keyup="POs=getResults(op)" v-model="op" placeholder="Número da ordem" class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton"/>
-                          <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="productionOrder.productionOrderNumber=p.productionOrderNumber; 
+                    <b-dropdown id="ddown-buttons" text="Número da ordem" class="m-2">
+                        <b-dropdown-item :disabled="btndisable" v-for="(p,index) in OPs" v-bind:key="index" id="dropdownMenuButton" 
+                                                                              @click.stop.prevent="productionOrder.productionOrderNumber=p.productionOrderNumber; 
                                                                               productionOrder.productionOrderId=p.productionOrderId; 
                                                                               op=p.productionOrderNumber;
-                                                                              productionOrderRecipe=p.recipe" v-for="(p,index) in POs" v-bind:key="index">{{p.productionOrderNumber}}</b-dropdown-item>                            
-                </li>
-                <li class="nav-item-hp col-sm-2">
-                        <button type="button" class="btn btn-primary btn-sm col-md-12 col-sm-1" @click.stop.prevent="listaOp()">
-                            Selecionar
-                        </button>
+                                                                              listaOp();
+                                                                              productionOrderRecipe=p.recipe" >{{p.productionOrderNumber}}</b-dropdown-item>          
+                    </b-dropdown>                                                  
                 </li>
             </ul>
         </div>

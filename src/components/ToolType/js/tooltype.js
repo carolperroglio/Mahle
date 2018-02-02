@@ -20,14 +20,14 @@ function paginacao(response, este) {
     }
 }
 
-var ipServer = 'http://34.239.125.82:';
+var ipServer = 'http://brsbap01:';
 
 export default {
     name: "ToolType",
     data() {
         return {
-            urlToolType: ipServer + '8005/api/tooltype/',
-            urlThingsGroup: ipServer + '8005/gateway/thinggroups',
+            urlToolType: ipServer + '8004/api/tooltype/',
+            urlThingsGroup: ipServer + '8004/gateway/thinggroups',
             toolsType: [],
             tooltype: {},
             tooltypeUp: {},

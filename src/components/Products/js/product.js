@@ -33,7 +33,7 @@ export default {
             pageAtual: 0,
             produtos: [],
             produto: {},
-            url: 'http://34.239.125.82:8002/api/products/',
+            url: 'http://brsbap01:8003/api/products/',
             mensagem: '',
             mensagemSuc: '',
             orderField: '',
