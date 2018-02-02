@@ -6,7 +6,7 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 
 es6promisse.polyfill();
-var ipServer = 'http://34.239.125.82:';
+var ipServer = 'http://brsbap01:';
 
 export default {
     name: "Phases",
@@ -16,12 +16,13 @@ export default {
             config: {
                 headers: { 'Cache-Control': 'no-cache' }
             },
-            url: ipServer + '8002/api/',
+            url: ipServer + '8003/api/',
             url2: ipServer + '8001/api/',
             urlProducts: ipServer + '8002/api/products?&fieldFilter=productName&fieldValue=',
             urlRecipeSearch: 'http://34.239.125.82:8002/api/tags?fieldFilter=tagName&fieldValue=',
             urlRecipes: ipServer + '8002/api/recipes/',
             urlGatewayRecipes: ipServer + '8006/gateway/recipes/',
+
             carregando: false,
             recipeProduct: {},
             recipeProductDisplay: {},
@@ -31,6 +32,7 @@ export default {
             recipe: {},
             idRecipe: '',
             recipes: [],
+            RP: '',
             phase: {},
             phases: [],
             phaseProduct: {},
@@ -208,9 +210,19 @@ export default {
         deleteRecipeProduct(recipeProduct) {
             this.mensagemSuc = '';
             this.carregando = true;
-            console.log(recipeProduct);
+            this.pID = recipeProduct.productId;
+            axios.get(this.url+'products/'+this.pID).then(response => {
+                console.log("JSON -->>>");
+                console.log(response.data);
+                this.RP = response.data;
+            }).catch(error => {
+                console.log(error);
+                this.carregando = false;
+            })
+            console.log("JSON de produto da receita");
+            console.log(this.RP);
             console.log(this.url + "recipes/product/" + this.recipe.recipeId);
-            axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,recipeProduct).then((response) => {
+            axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,this.RP).then((response) => {
                 console.log(response.data);
                 this.carregando = false;
                 this.recipeProductDisplay = response.data;

@@ -40,12 +40,12 @@
                 </li>   
                 <li class="nav-item nav-item-assop"  v-if="thing || groupId != ''">  
                     <div v-if="assoc">
-                        <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="getAssoc()">
+                        <button type="button" class="btn btn-success buttonassoc btn-sm" @click.stop.prevent="getAssoc()">
                             Associar OP   
                         </button>
                     </div>
                     <div  v-if="disassoc">
-                        <button type="button" class="btn btn-danger btn-sm" @click.stop.prevent="getDisAssoc()">
+                        <button type="button" class="btn btn-danger buttondisassoc btn-sm" @click.stop.prevent="getDisAssoc()">
                             Desassociar OP
                         </button>
                     </div>
@@ -81,14 +81,12 @@
                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{op.quantity}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{op.typeDescription}}</label>&nbsp;&nbsp;&nbsp;
-                            <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="openSelectGroup(op)" v-on:click="assoc=true">
+                              <button type="button" v-if="typeof op.currentThingId === 'undefined'" class="btn btn-success btn-sm" @click.stop.prevent="openSelectGroup(op)" v-on:click="assoc=true">
                                 Associar OP   
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" @click.stop.prevent="openSelectGroup(op)" v-on:click="disassoc=true">
+                            <button type="button" v-if="typeof op.currentThingId !== 'undefined'" class="btn btn-danger btn-sm" @click.stop.prevent="openSelectGroup(op)" v-on:click="disassoc=true">
                                 Desassociar OP
                             </button>
-                            </div> 
                         </div>
                 </div>  
                  </div> 
@@ -115,6 +113,23 @@
             </div>
             <br>
              <div v-show="lista2" class="card">
+                    <div class="card-header card-header-ass-op">
+                        <b>Thing Associada</b>
+                    </div>
+                    <div class="card-body card-body-ass-op">
+                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                
+                        <label class="ls ls3">
+                            <b><font color="#9BA6A5">Código: </font></b></label>
+                        <label class="ls ls3">{{Thing.thingCode}}</label>
+                        <br>
+                        <label class="ls ls3">
+                            <b><font color="#9BA6A5">Nome: </font></b></label>
+                        <label class="ls ls3">{{Thing.thingName}}</label>
+                    </div>
+                    </div>
+                     <div v-show="lista2" class="card">
                     <div class="card-header card-header-ass-op">
                         <b>Thing Associada</b>
                     </div>
