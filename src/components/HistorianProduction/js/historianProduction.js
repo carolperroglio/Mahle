@@ -6,6 +6,7 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 
 es6promisse.polyfill();
+const IP = 'http://brsbap01:';
 
 export default {    
     name: "HistorianProduction", 
@@ -19,24 +20,25 @@ export default {
             ordens:[],
             ordem: {},
             productionOrder: {},
+            ProductionOrders:[],
             productionOrdersRecipe: {},
             orderPhaseProducts: [],
             phaseProducts: [],
             orderHistorian: [],
             productionOrderId: '',
-            POs: [],
+            OPs: [],
             op: '',
             mensagem:'',
             mensagemSuc:'',
             fieldFilter: '',
             fieldValue: '' ,
             phaseIndex: '',
+            btndisable: false,
             pReceita: false,
             sel: true,
             pFase: false,
             lista: false,
-            url:'http://34.239.125.82:8006/',
-
+            url: IP + '8007/'
         }
     },  
     computed:{  
@@ -122,23 +124,23 @@ export default {
         },
 
         listaOp(){
-            this.sel = false;
-            console.log(this.POs);              
-            this.productionOrdersRecipe = this.POs[0].recipe;            
+            this.btndisable = true;
+            console.log(this.OPs);              
+            this.productionOrdersRecipe = this.OPs[0].recipe;            
             document.getElementById("order").style.display="block";
         },
 
-        getResults(name){            
-                var array=[];                          
-                if(name.length<3){return;}                
-                axios.get(this.url+'gateway/productionorders?fieldFilter=productionOrderNumber&fieldValue='+name).then((response)=>{                                           
+        getResults(){             
+                axios.get(this.url+'gateway/productionorders').then((response)=>{                                           
                     response.data.forEach((pro) => {
-                        array.push(pro);                    
+                        if (pro.currentStatus == "active"){
+                        this.OPs.push(pro);      
+                        }              
                     });
+                    console.log(this.OPs);
                 },(error)=>{
                     console.log(error);
-                })            
-                    return array;
+                })
                 },
         dataConvert(dataTicks){
             var epochTicks = 621355968000000000,
@@ -151,5 +153,8 @@ export default {
             console.log(jsDate);
             return jsDate;
             }   
+        },
+        beforeMount: function(){
+            this.getResults();
         }
 };

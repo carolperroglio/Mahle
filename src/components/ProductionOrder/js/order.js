@@ -22,7 +22,7 @@ function paginacao(response, este) {
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://34.239.125.82:';
+var ipServer = 'http://brsbap01:8005';
 
 export default {
     name: 'ProductionOrder',
