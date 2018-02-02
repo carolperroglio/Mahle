@@ -19,7 +19,7 @@ export default {
             url: ipServer + '8002/api/',
             url2: ipServer + '8001/api/',
             urlProducts: ipServer + '8002/api/products?&fieldFilter=productName&fieldValue=',
-            urlRecipeSearch: 'http://brsbap01:8001/api/tags?fieldFilter=tagName&fieldValue=',
+            urlRecipeSearch: 'http://34.239.125.82:8002/api/tags?fieldFilter=tagName&fieldValue=',
             urlRecipes: ipServer + '8002/api/recipes/',
             urlGatewayRecipes: ipServer + '8006/gateway/recipes/',
             carregando: false,

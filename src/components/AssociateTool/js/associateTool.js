@@ -32,7 +32,7 @@ export default {
             lista: false,
             lista2: false,
             carregando: false,
-            url:'http://brsbap01:8004/',
+            url:'http://34.239.125.82:8005/',
          }
     },
     computed: {},
