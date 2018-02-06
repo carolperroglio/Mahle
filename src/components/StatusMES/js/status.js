@@ -30,7 +30,7 @@ export default {
     name: "StatusMES",
     data() {
         return {
-            url: 'http://brsbap01:8006/api/thingstatus/',
+            url: 'http://34.239.125.82:8004/api/thingstatus/',
             carregando: false,
             quantityPage: 20,
             startat: 0,

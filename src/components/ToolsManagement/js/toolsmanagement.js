@@ -21,16 +21,16 @@ function paginacao(response, este) {
     }
 }
 
-var ipServer = 'http://brsbap01:';
+var ipServer = 'http://34.239.125.82:';
 
 export default {
     name: "ToolsManagement",
     data() {
         return {
-            urlTool: ipServer + '8004/api/tool/',
+            urlTool: ipServer + '8005/api/tool/',
             urlToolManagement: ipServer + '',
-            urlStateConfig: ipServer + '8004/api/tool/stateconfiguration/',
-            urlStateManagement: ipServer + '8004/api/tool/statemanagement/id?toolid=',
+            urlStateConfig: ipServer + '8005/api/tool/stateconfiguration/',
+            urlStateManagement: ipServer + '8005/api/tool/statemanagement/id?toolid=',
             tools: [],
             tool: {},
             tooltype: {},

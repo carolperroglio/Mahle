@@ -24,19 +24,19 @@ function paginacao(response, este) {
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://brsbap01:';
+var ipServer = 'http://34.239.125.82:';
 
 export default {
     name: 'ProductionOrder',
     data() {
         return {
             opId: '',
-            urlRecipeSearch: ipServer + '8003/api/recipes?fieldFilter=recipeName&fieldValue=',
-            urlRecipe: ipServer + '8003/api/recipes/',
-            urlOpType: ipServer + '8005//api/productionordertypes/',
-            urlPhases: ipServer + '8003/api/phases/',
-            urlOp: ipServer + '8005/api/productionorders',
-            urlGatewayRecipe: ipServer + '8005/gateway/recipes/',
+            urlRecipeSearch: ipServer + '8002/api/recipes?fieldFilter=recipeName&fieldValue=',
+            urlRecipe: ipServer + '8002/api/recipes/',
+            urlOpType: ipServer + '8003/api/productionordertypes/',
+            urlPhases: ipServer + '8002/api/phases/',
+            urlOp: ipServer + '8003/api/productionorders',
+            urlGatewayRecipe: ipServer + '8003/gateway/recipes/',
             recipeArray: [],
             opArray: [],
             opTypeArray: [],
@@ -130,7 +130,6 @@ export default {
             };
             this.carregando = true;
             axios.get(this.urlRecipe, config).then(response => {
-                    // JSON responses are automatically parsed.
                     this.recipeArray = response.data;
                     console.log(response);
                     this.carregando = false;
@@ -171,6 +170,7 @@ export default {
 
             axios.get(this.urlGatewayRecipe + id).then(response => {
                     this.recipeObj = response.data;
+                    console.log('Receita Escolhida!!!!!!')
                     console.log(response.data);
                     this.carregando = false;
                 })
@@ -223,9 +223,12 @@ export default {
         createOp: function(data) {
                 // adiciona propriedades necessárias na op que são mandatory
                 data.recipe = this.recipeObj;
+                console.log(this.recipeObj);
                 data.productionOrderTypeId = this.opSelected;
                 data.typeDescription = this.filterDesc;
+                console.log('OP sendo criada!!!!!!!!');
                 console.log(data);
+                console.log(this.urlOp);
                 //////////////////////////////////////////////////
                 axios.post(this.urlOp, data).then(response => {
                         //this.opArray = response.data;

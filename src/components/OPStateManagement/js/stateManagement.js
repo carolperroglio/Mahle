@@ -17,14 +17,14 @@ function paginacao(response, este) {
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://brsbap01:';
+var ipServer = 'http://34.239.125.82:';
 
 export default {
     name: 'StateManagement',
     data() {
         return {
-            urlState: ipServer + '8005/api/stateconfiguration/',
-            urlOp: ipServer + '8005/api/productionorders/',
+            urlState: ipServer + '8003/api/stateconfiguration/',
+            urlOp: ipServer + '8003/api/productionorders/',
             opSelected: '',
             opArray: [],
             carregando: false

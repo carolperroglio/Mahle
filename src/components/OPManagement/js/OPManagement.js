@@ -23,8 +23,8 @@ export default {
             state: '',
             nextstates: [],
             carregando: false,
-            url: 'http://brsbap01:8005/api/productionorders/',
-            url2: 'http://brsbap01:8005/api/productionordertypes/'
+            url: 'http://34.239.125.82:8003/api/productionorders/',
+            url2: 'http://34.239.125.82:8003/api/productionordertypes/'
         }
     },
     components: {
@@ -40,7 +40,7 @@ export default {
         showModal (o) {
             this.OP=o; 
         this.$refs.modalGerOP.show();
-
+        this.newNextSt = [];
         this.carregando = true;
             
             axios.get(this.url+this.OP.productionOrderId).then((response)=>{
@@ -99,7 +99,7 @@ export default {
                     });
                     console.log(this.newNextSt);
                     console.log(this.nextstates);
-                this.carregando = false;
+                    this.carregando = false;
             },(error)=>{
                 this.carregando = false;                   
             })
@@ -150,12 +150,39 @@ export default {
             }, 1000);
         },
         editar(OP){
-            axios.put(this.url+'statemanagement/id?productionOrderId='+this.OP.productionOrderId+'&state='+this.newStatus).then((response)=>{
-                this.OP.currentStatus = this.newStatus;
+            var stat = '';
+            switch(this.newStatus){
+                case "Criada":
+                stat = "created";
+                break;
+                case "Ativa":                    
+                stat = "active";
+                break;
+                case "Inativa":
+                stat = "inactive";
+                break;
+                case "Pausada":
+                stat = "paused";
+                break;
+                case "Encerrada":
+                stat = "ended";
+                break;
+                case "Aguardando Aprovação":
+                stat = "waiting_approval";
+                break;
+                case "Aprovada":
+                stat = "approved";
+                break;
+                case "Reprovada":
+                stat = "reproved";
+                break;                    
+            }
+            axios.put(this.url+'statemanagement/id?productionOrderId='+this.OP.productionOrderId+'&state='+stat).then((response)=>{
+                this.OP.currentStatus = stat;
                 this.mensagemSuc = 'Status alterado com sucesso.';
             },(error)=>{   
                 this.mensagem = error.response.data;               
-            }) 
+            })   
         }
     },
     beforeMount: function(){

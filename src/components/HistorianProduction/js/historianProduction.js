@@ -4,16 +4,17 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import bBadge from 'bootstrap-vue/es/components/badge/badge'
 
 es6promisse.polyfill();
-const IP = 'http://brsbap01:';
+const IP = 'http://34.239.125.82:';
 
 export default {    
     name: "HistorianProduction", 
     data(){
         return {  
             config: {
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                headers: {'Content-Type':'application/x-www-form-urlencoded'}
             },                      
             id:"",
             carregando: false,    
@@ -26,6 +27,7 @@ export default {
             phaseProducts: [],
             orderHistorian: [],
             productionOrderId: '',
+            consumo: false,
             OPs: [],
             op: '',
             mensagem:'',
@@ -38,8 +40,8 @@ export default {
             sel: true,
             pFase: false,
             lista: false,
-            url: IP + '8007/',
-            urlOP: 'http://brsbap01:8005/api/productionorders'
+            url: IP + '8006/',
+            urlOP: IP + '8006/gateway/productionorders'
         }
     },  
     computed:{  
@@ -48,7 +50,8 @@ export default {
     components: {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
-        'b-modal': bModal
+        'b-modal': bModal,
+        'b-badge': bBadge 
     },
     directives: {
         'b-modal': bModalDirective
@@ -57,27 +60,41 @@ export default {
             showModal () {
                 this.mensagem='';   
                 this.mensagemSuc= '';
-            this.$refs.myModalRef.show()
+            setTimeout(() => {
+                if(this.ordem.type==="output"){
+                    this.pReceita = true;
+                    this.consumo = false;
+                    this.pFase = false;
+                    console.log(this.productionOrdersRecipe);
+                    console.log(this.productionOrder);
+                    this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;  
+                    this.ordem.productionOrderId = this.productionOrder.productionOrderId;
+                    this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
+                }else{
+                    this.consumo = true;
+                    this.pReceita = false;
+                    this.pFase = true;
+                    this.ordem.productionOrderId = this.productionOrder.productionOrderId;
+                    this.orderPhaseProducts = this.productionOrdersRecipe.phases;
+                }
+            }, 100);
             
-            if(this.ordem.type==="output"){
-                this.pReceita = true;
-                this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;  
-                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
-            }else{
-                this.pFase = true;
-                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                this.orderPhaseProducts = this.productionOrdersRecipe.phases;
-            }
+            setTimeout(() => {
+                this.$refs.myModalRef.show();
+            }, 150);
+            
           },
             hideModal () {
-            this.$refs.myModalRef.hide()
+            this.$refs.myModalRef.hide();
+            this.pReceita = false;
+            this.consumo = false;
           },
 
         cadastrarApont(ordem){    
+
             this.mensagem='';   
             this.mensagemSuc= '';
-           
+            
             console.log(ordem);    
             console.log(this.url+'api/producthistorian');           
             axios.post(this.url+'api/producthistorian',ordem).then((response)=>{
@@ -93,7 +110,8 @@ export default {
                 this.mensagem = r.response.data;                
                 this.carregando = false;
             })
-                      
+            this.pReceita = false;
+            this.consumo = false;       
         },
 
         listar(){            
@@ -115,18 +133,18 @@ export default {
                   
         },
 
-        listaOp(){
+        listaOp(p){
             this.btndisable = true;
-            console.log(this.OPs);              
-            this.productionOrdersRecipe = this.OPs[0].recipe;            
+            console.log(p);              
+            this.productionOrdersRecipe = this.p.recipe;            
             document.getElementById("order").style.display="block";
         },
 
         getResults(){    
             console.log(this.urlOP);         
                 axios.get(this.urlOP).then((response)=>{          
-                    console.log(response.data.values);                                 
-                    response.data.values.forEach((pro) => {
+                    console.log(response.data);                                 
+                    response.data.forEach((pro) => {
                         if (pro.currentStatus == "active"){
                         this.OPs.push(pro);      
                         }              
