@@ -38,7 +38,8 @@ export default {
             sel: true,
             pFase: false,
             lista: false,
-            url: IP + '8007/'
+            url: IP + '8007/',
+            urlOP: 'http://brsbap01:8005/api/productionorders'
         }
     },  
     computed:{  
@@ -77,7 +78,8 @@ export default {
             this.mensagem='';   
             this.mensagemSuc= '';
            
-            console.log(ordem);               
+            console.log(ordem);    
+            console.log(this.url+'api/producthistorian');           
             axios.post(this.url+'api/producthistorian',ordem).then((response)=>{
                 this.mensagemSuc = 'Produto apontado com sucesso.'; 
                 this.productionOrderId = this.ordem.productionOrderId;
@@ -112,16 +114,6 @@ export default {
             })            
                   
         },
-        buscarOrdens(){
-            axios.get(this.urlOp).then((response)=>{  
-                console.log(response.data.values); 
-                console.log(response.data.total);
-                this.productionOrders = response.data;
-                console.log(this.productionOrders);
-                },(error)=>{                  
-                    this.mensagem = 'Erro no server ' + error;            
-                })  
-        },
 
         listaOp(){
             this.btndisable = true;
@@ -130,9 +122,11 @@ export default {
             document.getElementById("order").style.display="block";
         },
 
-        getResults(){             
-                axios.get(this.url+'gateway/productionorders').then((response)=>{                                           
-                    response.data.forEach((pro) => {
+        getResults(){    
+            console.log(this.urlOP);         
+                axios.get(this.urlOP).then((response)=>{          
+                    console.log(response.data.values);                                 
+                    response.data.values.forEach((pro) => {
                         if (pro.currentStatus == "active"){
                         this.OPs.push(pro);      
                         }              

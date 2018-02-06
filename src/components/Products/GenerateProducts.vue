@@ -9,7 +9,7 @@
         <!--                                 -->
         <!--               Modal             -->
          
-                <b-modal ref="myModalRef" hide-footer title="Cadastro de Produtos">
+                <b-modal ref="myModalRef" hide-footer title="Cadastro de Materiais">
                     
                     <form>
                             <div class="form-group">
@@ -28,9 +28,9 @@
                                 </label>
                                 <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Código" id="cod">
                                 <label for="gs1" class="">
-                                    <b>GS1 : </b>
+                                    <b>Código de barras : </b>
                                 </label>
-                                <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="gs1">
+                                <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="código de barras">
                                 <br>
                                 </div>
                                 <div class="btn-group" role="group">
@@ -57,23 +57,7 @@
         <div class="fixed-top nav-produtos">
              <h1 class="title-page-gp"> <b>Cadastro de Materiais</b> </h1>
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item nav-item-products col-sm-1.5">
-                    
-                        <select class="form-control form-control-sm" v-model="orderField">
-                            <option value="" selected disabled>Campo para busca</option>
-                            <option value="productName">Nome</option>
-                            <option value="productDescription">Descrição</option>
-                            <option value="productCode">Código</option>
-                            <option value="productGTIN">GTIN</option>
-                    </select>
-                </li>
-                <li class="nav-item nav-item-products col-sm-1.5">
-                    <select class="form-control form-control-sm" v-model="order">                        
-                           <option value="" selected disabled>Ordenação</option>
-                            <option value="ascending">Crescente</option>
-                            <option value="descending">Decrescente</option>
-                    </select>
-                </li>
+               
                 <li class="nav-item nav-item-products col-sm-1.5">
                     <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                             <option value="" selected disabled>Campo para busca</option>
@@ -90,7 +74,7 @@
                         <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                 </li>
                 <li class="nav-item nav-item-products col-sm-3">
-                    <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal">Novo Produto</button>
+                    <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal">Novo Material</button>
 
                 </li>
             </ul>

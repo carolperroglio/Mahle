@@ -18,6 +18,7 @@ export default {
             newStatus: '',
             mensagem: '',
             mensagemSuc: '',
+            newNextSt: [],
             states: [],
             state: '',
             nextstates: [],
@@ -71,32 +72,32 @@ export default {
                         console.log("oi");
                         switch(state){
                             case "created":
-                            state = "Criada";
+                            this.newNextSt.push("Criada");
                             break;
                             case "active":                    
-                            state = "Ativa";
+                            this.newNextSt.push("Ativa");
                             break;
                             case "inactive":
-                            state = "Inativa";
+                            this.newNextSt.push("Inativa");
                             break;
                             case "paused":
-                            state = "Pausada";
+                            this.newNextSt.push("Pausada");
                             break;
                             case "ended":
-                            state = "Encerrada";
+                            this.newNextSt.push("Encerrada");
                             break;
                             case "waiting_approval":
-                            state = "Aguardando Aprovação";
+                            this.newNextSt.push("Aguardando Aprovação");
                             break;
                             case "approved":
-                            state = "Aprovada";
+                            this.newNextSt.push("Aprovada");
                             break;
                             case "reproved":
-                            state = "Reprovada";
+                            this.newNextSt.push("Reprovada");
                             break;    
                         }    
                     });
-                    
+                    console.log(this.newNextSt);
                     console.log(this.nextstates);
                 this.carregando = false;
             },(error)=>{

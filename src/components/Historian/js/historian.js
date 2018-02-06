@@ -78,7 +78,6 @@ export default {
             bottom: 'bottom',
             idstat: '',
             idstatcollpse: '',
-            themeArr: ['theme1', 'theme2', 'theme3', 'theme4', 'theme5'],
             selectedTheme: [],
             provider: []
              }
@@ -125,18 +124,17 @@ export default {
                 console.log('F: '+ticksF);
                 console.log(this.url+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
                 axios.get(this.url+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then(response => {
-                    var hist = response.data;     
-                    var temp = [];              
-                    hist.forEach((R) => {
+                    
+                    response.data.forEach((R) => {
                             var dataObj = {};
                             var tag = R.tag;
                             this.obj["category"] = this.ticksToDate(R.date);
                             this.obj[tag] = R.value;
                             dataObj = Object.assign(this.obj);
                             console.log(dataObj);
-                            temp.push(dataObj);
+                            this.provider.push(dataObj);
                     });
-                    console.log(temp);
+                    console.log(this.provider);
 
                 }).catch(error => {
                     console.log(error);
