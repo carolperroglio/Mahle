@@ -18,9 +18,9 @@ export default {
             },
             url: ipServer + '8003/api/',
             url2: ipServer + '8001/api/',
-            urlProducts: ipServer + '8002/api/products?&fieldFilter=productName&fieldValue=',
-            urlRecipeSearch: 'http://34.239.125.82:8002/api/tags?fieldFilter=tagName&fieldValue=',
-            urlRecipes: ipServer + '8002/api/recipes/',
+            urlProducts: ipServer + '8003/api/products?&fieldFilter=productName&fieldValue=',
+            urlRecipeSearch: 'http://brsbap01:8003/api/tags?fieldFilter=tagName&fieldValue=',
+            urlRecipes: ipServer + '8003/api/recipes/',
             urlGatewayRecipes: ipServer + '8006/gateway/recipes/',
 
             carregando: false,
@@ -162,6 +162,8 @@ export default {
             this.mensagemSuc = '';
             this.carregando = true;
             this.editarActivate = false;
+            console.log(recipe);
+            console.log(this.url + "recipes/");
             axios.post(this.url + "recipes/", recipe).then((response) => {
                 console.log(response.data);
                 this.recipe = response.data;

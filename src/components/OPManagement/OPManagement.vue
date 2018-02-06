@@ -46,7 +46,7 @@
                                 <b>Status:</b>
                             </label>
                             <select class="form-control form-control-sm" v-model="newStatus" >
-                            <option v-for="(n,index) in nextstates" :value="n" v-bind:key="index">{{ n }}
+                            <option v-for="(n,index) in newNextSt" :value="n" v-bind:key="index">{{ n }}
                             </option>
                             </select>
                                         <label>

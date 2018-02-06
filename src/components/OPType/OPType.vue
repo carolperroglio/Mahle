@@ -27,7 +27,7 @@
                             <label class="ls lsoptype">
                             <b><font color="#9BA6A5"> Tipo: </font></b>{{t.typeDescription}}</label>&nbsp;
                             <label class="ls lsoptype">
-                            <b><font color="#9BA6A5">Ecopo: </font></b>{{t.typeScope}}</label>&nbsp;
+                            <b><font color="#9BA6A5">Escopo: </font></b>{{t.typeScope}}</label>&nbsp;
                             </div>
                             
                         <div class="card-header card-header-optype" id="group">

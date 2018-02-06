@@ -28,7 +28,7 @@
                                     <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="opSelected">
                                         <option value="" selected disabled>Tipo de Ordem</option>
                                         <option v-for="(opType,index) in opTypeArray" v-bind:value="opType.productionOrderTypeId" v-bind:key="index">
-                                            {{ opType.productionOrderTypeId }}
+                                            {{ opType.typeDescription }}
                                         </option>
                                     </select>
                                 </div>
@@ -148,23 +148,6 @@
                     <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                 </li>
                 <li class="nav-prod col-sm-1.5">
-                    <select class="form-control form-control-sm" v-model="orderField">
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="productionOrderNumber">Nº Ordem de Produção</option>
-                        <option value="typeDescription">Descrição</option>
-                        <option value="quantity">Quantidade</option>
-                        <option value="currentStatus">Status</option>
-                    </select>
-                </li>
-                <li class="nav-prod col-sm-1.5">
-                    <select class="form-control form-control-sm" v-model="order">
-                        <option value="" selected disabled>Ordenação</option>
-                        <option value="ascending">Crescente</option>
-                        <option value="descending">Decrescente</option>
-                    </select>
-                </li>
-
-                <li class="nav-prod col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <div class="col-md-auto">
                             <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
@@ -216,7 +199,7 @@
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1">
                                 <b>
-                                    <font color="#9BA6A5">Cod. Receita: </font>
+                                    <font color="#9BA6A5">Cód. da Tira: </font>
                                 </b>{{op.recipe.recipeCode}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1" v-if="op.hasProd == true">
