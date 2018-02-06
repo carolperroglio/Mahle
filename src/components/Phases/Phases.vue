@@ -254,6 +254,15 @@
                                 <input class="form-control mr-sm-2" required v-model="recipeProduct.measurementUnit" placeholder="Ex.: kg" />
                             </div>
                         </div>
+                        <div class="form-row">
+                                <label>Tolerância : </label><br>
+                                <template slot-scope="tooltip">
+                                <div class="diy-tooltip">
+                                    <img :src="tooltip.index === 1 ? black_cat : orange_cat" :width="tooltip.value"></img>
+                                    {{ tooltip.value }}
+                                </div>
+                                </template>
+                            </div>
                         <label class="mr-sm-2">Nome do produto : </label>
                             
                             <input @keyup="recipeProducts=getResults(urlProducts,recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />

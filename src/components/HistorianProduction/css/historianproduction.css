@@ -8,6 +8,11 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.badge {
+    color: #707070;
+    font-size: 12pt;
+}
+
 .title-page-hp{
     text-align: left;
     color: rgb(68, 68, 70);

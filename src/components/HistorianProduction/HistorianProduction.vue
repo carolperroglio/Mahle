@@ -9,19 +9,21 @@
         <!--                                 -->
         <!--                                 -->
          <div class="fixed-top nav-hp">
-             <h1 class="title-page-hp"><b> Apontamentos de OP</b> </h1>
+             <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção</b> </h1>
             <ul class="nav d-flex align-items-center">
-               
-                <li class="nav-item-hp col-sm-2">
-                    <b-dropdown id="ddown-buttons" text="Número da ordem" class="m-2">
+               <li class="nav-item-hp col-2.5">
+                   <div class="badge pull-right">Clique para escolher uma ordem de produção <i class="fa fa-arrow-right" id="seta"></i></div>
+               </li>
+                <li class="nav-item-hp col-3">
+                    <b-dropdown id="ddown-buttons" text="Número da ordem" class="m-2 pull-left">
                         <b-dropdown-item :disabled="btndisable" v-for="(p,index) in OPs" v-bind:key="index" id="dropdownMenuButton" 
                                                                               @click.stop.prevent="productionOrder.productionOrderNumber=p.productionOrderNumber; 
                                                                               productionOrder.productionOrderId=p.productionOrderId; 
                                                                               op=p.productionOrderNumber;
-                                                                              listaOp();
+                                                                              listaOp(p);
                                                                               productionOrderRecipe=p.recipe" >{{p.productionOrderNumber}}</b-dropdown-item>          
                     </b-dropdown>                                                  
-                </li>
+                </li>                
             </ul>
         </div>
 
@@ -44,13 +46,13 @@
                             <div class="row">
                             <div class="col-1">
                             <label>
-                                <b><font color="#9BA6A5">Tipo:</font></b>
+                                <b><font color="#9BA6A5">Apontar:</font></b>
                             </label> 
                             </div>
                             <div class="col-2">
                                 <select required v-model="ordem.type" class="form-control form-control-sm-">
-                                    <option value="input">Consumo</option>
-                                    <option value="output">Produção</option>
+                                    <option value="input">Matéria Prima</option>
+                                    <option value="output">Rolo de Tira</option>
                                 </select>
                             </div> 
                             <div class="btn-group btn-sm" role="group" aria-label="Basic example"> 
@@ -132,7 +134,7 @@
                                     <select class="form-control form-control-sm" v-model="phaseIndex">
                                     <option v-for="(p,index) in orderPhaseProducts" :value="index" v-bind:key="index">{{ p.phaseName }}</option>
                                     </select>
-                                <div v-if="phaseIndex != '' || phaseIndex == '0' && orderPhaseProducts[phaseIndex].lenght !== '0'">
+                                <div v-if="consumo = true && phaseIndex != '' || phaseIndex == '0' && orderPhaseProducts[phaseIndex].lenght !== '0'">
                                 <label>
                                     <b>Materiais: </b>
                                 </label>
