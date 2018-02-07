@@ -54,6 +54,7 @@ export default {
     },
     methods: {
           showModal () {
+            this.mensagemSuc = '';
             this.$refs.myModalRef.show()
           },
           hideModal () {

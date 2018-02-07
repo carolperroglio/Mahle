@@ -5,6 +5,7 @@ import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import bBadge from 'bootstrap-vue/es/components/badge/badge'
+import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
 const IP = 'http://34.239.125.82:';
@@ -28,6 +29,7 @@ export default {
             orderHistorian: [],
             productionOrderId: '',
             consumo: false,
+            rolo: 0,
             OPs: [],
             op: '',
             mensagem:'',
@@ -38,6 +40,7 @@ export default {
             btndisable: false,
             pReceita: false,
             sel: true,
+            order: false,
             pFase: false,
             lista: false,
             url: IP + '8006/',
@@ -51,7 +54,8 @@ export default {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
         'b-modal': bModal,
-        'b-badge': bBadge 
+        'b-badge': bBadge,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective
@@ -94,15 +98,17 @@ export default {
 
             this.mensagem='';   
             this.mensagemSuc= '';
-            
+            ordem.batch = this.rolo;
             console.log(ordem);    
-            console.log(this.url+'api/producthistorian');           
+            console.log(this.url+'api/producthistorian');      
+            confirm("Confirma apontamento?");     
             axios.post(this.url+'api/producthistorian',ordem).then((response)=>{
                 this.mensagemSuc = 'Produto apontado com sucesso.'; 
                 this.productionOrderId = this.ordem.productionOrderId;
                 this.carregando = false;     
                 this.pReceita = false;
                 this.pFase = false;
+                this.rolo = ordem.batch + 1;
                 this.ordem={};   
                 console.log(response);
                 
@@ -117,7 +123,7 @@ export default {
         listar(){            
             this.lista = true;  
             axios.get(this.url+'api/OrderHistorian/'+this.productionOrder.productionOrderId).then((response)=>{   
-                this.carregando = false;        
+                     
                 console.log(response.data);
                 this.orderHistorian = response.data;
                 for (var i = 0; i < this.orderHistorian.productsInput.length; i++){
@@ -126,6 +132,8 @@ export default {
                 for (var i = 0; i < this.orderHistorian.productsOutput.length; i++){
                     this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
                 }  
+
+                this.carregando = false;   
             },(r)=>{                
                 this.mensagem = 'Erro no server ' + r;                
                 this.carregando = false;
@@ -134,10 +142,13 @@ export default {
         },
 
         listaOp(p){
-            this.btndisable = true;
             console.log(p);              
-            this.productionOrdersRecipe = this.p.recipe;            
-            document.getElementById("order").style.display="block";
+            this.productionOrdersRecipe = p.recipe;  
+            this.order = true;
+            this.carregando = true;  
+            setTimeout(() => {
+                this.listar();
+            }, 1000);
         },
 
         getResults(){    

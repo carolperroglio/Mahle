@@ -12,11 +12,11 @@
              <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção</b> </h1>
             <ul class="nav d-flex align-items-center">
                <li class="nav-item-hp col-2.5">
-                   <div class="badge pull-right">Clique para escolher uma ordem de produção <i class="fa fa-arrow-right" id="seta"></i></div>
+                   <div class="badge pull-right">Clique para escolher uma ordem de produção   <i class="fa fa-arrow-right" id="seta"></i></div>
                </li>
                 <li class="nav-item-hp col-3">
                     <b-dropdown id="ddown-buttons" text="Número da ordem" class="m-2 pull-left">
-                        <b-dropdown-item :disabled="btndisable" v-for="(p,index) in OPs" v-bind:key="index" id="dropdownMenuButton" 
+                        <b-dropdown-item v-for="(p,index) in OPs" v-bind:key="index" id="dropdownMenuButton" 
                                                                               @click.stop.prevent="productionOrder.productionOrderNumber=p.productionOrderNumber; 
                                                                               productionOrder.productionOrderId=p.productionOrderId; 
                                                                               op=p.productionOrderNumber;
@@ -28,14 +28,11 @@
         </div>
 
 
-        <div id="order" style="display: none">
+        <div id="order" v-show="order" style="display: none">
             <div class="orderHistorian col-11">
-                <div class="progress" v-show="carregando">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        </div>
-                            </div>
                     <div class="card">
                         <div class="card-header card-header-hp">
+                            
                             <b><label class="ls">
                                 <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls10">
@@ -44,6 +41,7 @@
                         </div>
                         <div class="card-body card-body-hp" id="tipo">
                             <div class="row">
+                                   
                             <div class="col-1">
                             <label>
                                 <b><font color="#9BA6A5">Apontar:</font></b>
@@ -69,17 +67,21 @@
                             <div v-show="lista">
                                 
                                     <div class="card">
+                                        
                                         <div class="card-header card-header-hp">
                                             <b>Materiais consumidos</b>
                                         </div>
                                         <div class="card-body card-body-hp">
+                                        <div id="load" v-show="carregando">
+                                          <stretch background="#4d4d4d"></stretch>
+                                        </div> 
                                         <div v-for="(o, index) in orderHistorian.productsInput" v-bind:key="index">
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Material: </font></b>{{o.product}}</label>&nbsp;
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
                                             <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;
+                                                <b><font color="#9BA6A5">Rolo: </font></b>{{o.batch}}</label>&nbsp;
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
                                                 
@@ -97,7 +99,7 @@
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
                                             <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;
+                                                <b><font color="#9BA6A5">Rolo: </font></b>{{o.batch}}</label>&nbsp;
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
                                         </div>
@@ -132,7 +134,7 @@
                                     <b>Fase: </b>
                                 </label>
                                     <select class="form-control form-control-sm" v-model="phaseIndex">
-                                    <option v-for="(p,index) in orderPhaseProducts" :value="index" v-bind:key="index">{{ p.phaseName }}</option>
+                                     <option v-for="(p,index) in orderPhaseProducts" :value="index" v-bind:key="index">{{ p.phaseName }}</option>
                                     </select>
                                 <div v-if="consumo = true && phaseIndex != '' || phaseIndex == '0' && orderPhaseProducts[phaseIndex].lenght !== '0'">
                                 <label>
@@ -148,9 +150,9 @@
                                 </label>
                                 <input type="text" required v-model="ordem.quantity" placeholder="quantidade" class="form-control form-control-sm">
                                 <label>
-                                    <b>Lote: </b>
+                                    <b>Rolo: </b>
                                 </label>
-                                <input type="text" required v-model="ordem.batch"  placeholder="lote" class="form-control form-control-sm">
+                                <input type="text" required v-model="rolo" :disabled="true" class="form-control form-control-sm">
                             </div>
                             <button type="button" class="btn btn-outline-success btn-sm" @click.stop.prevent="cadastrarApont(ordem)">
                             Cadastrar

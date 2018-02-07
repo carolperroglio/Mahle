@@ -9,8 +9,14 @@
 }
 
 .badge {
-    color: #707070;
-    font-size: 12pt;
+    color: #ffffff;
+    font-size: 14pt;
+    padding: 3%;
+    background-color: #28a745;
+}
+
+#load {
+    left: 50%;
 }
 
 .title-page-hp{

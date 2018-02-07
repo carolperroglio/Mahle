@@ -131,7 +131,8 @@ export default {
             this.carregando = true;
             axios.get(this.urlRecipe, config).then(response => {
                     this.recipeArray = response.data;
-                    console.log(response);
+                    console.log("RecipeArray");
+                    console.log(this.recipeArray);
                     this.carregando = false;
                 })
                 .catch(e => {
@@ -156,9 +157,9 @@ export default {
             this.carregando = true;
 
             axios.get(this.urlOpType, config).then(response => {
-                    // JSON responses are automatically parsed.
                     this.opTypeArray = response.data;
-                    console.log(response);
+                    console.log("this.opTypeArray");
+                    console.log(this.opTypeArray);
                     this.carregando = false;
                 })
                 .catch(e => {
@@ -167,11 +168,11 @@ export default {
         },
         getRecipeGateway: function(id) {
             this.carregando = true;
-
+             console.log(this.urlGatewayRecipe + id);
             axios.get(this.urlGatewayRecipe + id).then(response => {
                     this.recipeObj = response.data;
                     console.log('Receita Escolhida!!!!!!')
-                    console.log(response.data);
+                    console.log(this.recipeObj);
                     this.carregando = false;
                 })
                 .catch(e => {
@@ -182,6 +183,8 @@ export default {
             // debugger;
             this.recipeAdded = recipe;
             // inicializa phases para que não de erro no v-if de verificação
+            console.log("recipe");
+            console.log(recipe);
             this.recipeObj.phases = '';
             this.getRecipeGateway(id);
         },

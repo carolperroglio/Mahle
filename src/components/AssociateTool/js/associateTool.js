@@ -14,6 +14,7 @@ export default {
         return { 
             carregando: false,    
             Tools: [],
+            AllTools: [],
             Groups: [],
             Things: [],
             Tool: [],
@@ -34,7 +35,7 @@ export default {
             lista: false,
             lista2: false,
             carregando: false,
-            url:'http://brsbap01:8004',
+            url:'http://34.239.125.82:8005',
          }
     },
     computed: {},
@@ -61,6 +62,16 @@ export default {
             })            
                 return array;
             },
+            getAllTools(){            
+                axios.get(this.url+'/api/tool').then((response)=>{                                           
+                    response.data.values.forEach((pro) => {
+                        this.AllTools.push(pro);                    
+                    });
+                    console.log(this.AllTools);
+                },(error)=>{
+                    console.log(error);
+                })            
+                },
             openSelectGroup(){
                 this.carregando = true;
                 this.group = true;               
@@ -145,5 +156,8 @@ export default {
                 })
 
             }
+    },
+    beforeMount: function(){
+        this.getAllTools();
     }
 };
