@@ -74,6 +74,9 @@ export default {
                             if (op.currentStatus == "active"){
                                 this.ProductionOrders.push(op);
                             }
+                            })
+                            this.ProductionOrders.map(op =>{
+                                op.currentStatus ="Ativa";
                         })
                         console.log('ProductionOrders');
                         console.log(this.ProductionOrders);                        
@@ -105,32 +108,6 @@ export default {
                 axios.get(this.url+'api/productionorders/'+this.OPId).then((response)=>{
                     this.OP = response.data;
                     console.log(response.data);
-                    switch(response.data.currentStatus){
-                        case "created":
-                        this.OP.currentStatus = "Criada";
-                        break;
-                        case "active":                    
-                        this.OP.currentStatuss = "Ativa";
-                        break;
-                        case "inactive":
-                        this.OP.currentStatus = "Inativa";
-                        break;
-                        case "paused":
-                        this.OP.currentStatus = "Pausada";
-                        break;
-                        case "ended":
-                        this.OP.currentStatus = "Encerrada";
-                        break;
-                        case "waiting_approval":
-                        this.OP.currentStatus = "Aguardando Aprovação";
-                        break;
-                        case "approved":
-                        this.OP.currentStatus = "Aprovada";
-                        break;
-                        case "reproved":
-                        this.OP.currentStatus = "Reprovada";
-                        break;               
-                    }
                     this.carregando = false;                                        
                 },(r)=>{                
                     this.mensagem = r;                
@@ -150,12 +127,13 @@ export default {
             getAssoc(){
                 this.mensagemSuc = '';
                 this.mensagem = '';     
+                confirm("Confirma associação?");
                 axios.put(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
                     console.log(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
                     console.log(response.data);
                     this.Thing = response.data.currentThing;
                     this.lista2 = true;
-                    this.mensagemSuc = 'Ferramenta associada com sucesso.';
+                    this.mensagemSuc = 'Ordem associada com sucesso.';
                 },(r)=>{                
                     this.mensagem = r.response.data;      
                     this.carregando = false;
@@ -164,17 +142,16 @@ export default {
             getDisAssoc(){
                 this.mensagemSuc = '';
                 this.mensagem = ''; 
-                console.log(this.url+'api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
-                console.log(this.OP);
                 axios.put(this.url+'api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId, this.OP).then((response)=>{
-                    this.Tool = response.data;
                     console.log(response.data);
-                    this.Thing = response.data.currentThing;
-                    this.mensagemSuc = 'Production Order desassociada com sucesso.';
+                    this.mensagemSuc = 'Ordem desassociada com sucesso.';
                 },(r)=>{                
                     this.mensagem = r.response.data;      
                     this.carregando = false;
                 }) 
+            },
+            main(){
+                location.reload();
             }
     },
     beforeMount: function(){

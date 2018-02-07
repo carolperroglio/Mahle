@@ -115,10 +115,7 @@
                     <div class="card-header card-header-ass-op">
                         <b>Thing Associada</b>
                     </div>
-                    <div class="card-body card-body-ass-op">
-                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                
+                    <div class="card-body card-body-ass-op">                
                         <label class="ls ls3">
                             <b><font color="#9BA6A5">Código: </font></b></label>
                         <label class="ls ls3">{{Thing.thingCode}}</label>
@@ -126,20 +123,9 @@
                         <label class="ls ls3">
                             <b><font color="#9BA6A5">Nome: </font></b></label>
                         <label class="ls ls3">{{Thing.thingName}}</label>
-                    </div>
-                    </div>
-                     <div v-show="lista2" class="card">
-                    <div class="card-header card-header-ass-op">
-                        <b>Thing Associada</b>
-                    </div>
-                    <div class="card-body card-body-ass-op">
                         <label class="ls ls3">
-                            <b><font color="#9BA6A5">Código: </font></b></label>
-                        <label class="ls ls3">{{Thing.thingCode}}</label>
-                        <br>
-                        <label class="ls ls3">
-                            <b><font color="#9BA6A5">Nome: </font></b></label>
-                        <label class="ls ls3">{{Thing.thingName}}</label>
+                            <button class="btn-lg btn-primary" @click.stop.prevent="main()">Voltar</button>
+                        </label>
                     </div>
                     </div>
         </div>

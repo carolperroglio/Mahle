@@ -8,11 +8,9 @@
         <!--                       -->
         <!--                       -->
         <!--        modal          -->
-        <div class="progress fixed-top" v-if="carregando">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-            </div>
-        </div>
-
+        <div id="load" v-show="carregando">
+            <stretch background="#4d4d4d"></stretch>
+        </div>  
         <!--               -->
         <!--               -->
         <!--               -->
@@ -64,17 +62,12 @@
                             </i>
                         </div>
                     </li>
-                    <li class="nav-phases col-md-2" id="produtoR" v-if="json.stringify(recipeProduct) !== '{}'">
+                    <li class="nav-phases col-md-2" id="produtoR" v-if="recipe.recipeProduct !== '{}' || json.stringify(recipeProduct) !== '{}'">
                             <b><font color="#9BA6A5">
                                 Produto:
                             </font></b>
-                                {{recipeProduct.productName}}
-                            <br><b>
-                            <font color="#9BA6A5">
-                                Quantidade do produto:
-                            </font></b> 
-                                {{recipeProductDisplay.value+''+recipeProductDisplay.measurementUnit}} 
-                            <br>
+                                {{recipe.recipeProduct.product.productName}}
+                                <br>
                         <button type="button" class="btn btn-danger config-button2" aria-hidden="true" id="removerP" @click.stop.prevent="deleteRecipeProduct(recipeProduct);">
                             <i class= "fa fa-trash-o"></i> Remover
                         </button>
@@ -246,25 +239,46 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>Quantidade : </label>
+                                <label>Quantidade: </label>
                                 <input class="form-control mr-sm-2" required v-model="recipeProduct.value" placeholder="Valor" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Unidade de medida : </label><br>
+                                <label>Unidade de medida: </label><br>
                                 <input class="form-control mr-sm-2" required v-model="recipeProduct.measurementUnit" placeholder="Ex.: kg" />
                             </div>
                         </div>
-                        <div class="form-row">
-                                <label>Tolerância : </label><br>
-                                <template slot-scope="tooltip">
-                                <div class="diy-tooltip">
-                                    <img :src="tooltip.index === 1 ? black_cat : orange_cat" :width="tooltip.value"></img>
-                                    {{ tooltip.value }}
+                                <div class="form-row">
+                                <label>Tolerância: </label><br>
                                 </div>
+                                <div class="form-row">
+                                <label>Min: </label>
+                               <template>
+                                <range-slider
+                                    class="slider"
+                                    min="0" 
+                                    max="100"
+                                    step="1"
+                                    range
+                                    v-model="recipeProduct.minValue">
+                                </range-slider>
+                                <label>{{recipeProduct.minValue}}</label>
                                 </template>
-                            </div>
-                        <label class="mr-sm-2">Nome do produto : </label>
-                            
+                                </div>
+                                <div class="form-row">
+                                <label>Máx: </label>
+                                <template>
+                                <range-slider
+                                    class="slider"
+                                    min="0"
+                                    max="100"
+                                    step="1"
+                                    range
+                                    v-model="recipeProduct.maxValue">
+                                </range-slider>
+                                <label>{{recipeProduct.maxValue}}</label>
+                                </template>
+                                </div>
+                        <label class="mr-sm-2">Nome do produto: </label>
                             <input @keyup="recipeProducts=getResults(urlProducts,recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                             <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts" v-bind:key="index">{{p.productName}}</b-dropdown-item>
                               {{ recipeProductName }}
@@ -372,7 +386,39 @@
                                     <option value="semi_finished">Semi-Acabado</option>
                                 </select>
                             </div>
+                            
                         </div>
+                        <div class="form-row">
+                                <label>Tolerância: </label><br>
+                                </div>
+                                <div class="form-row">
+                                <label>Min: </label>
+                               <template>
+                                <range-slider
+                                    class="slider"
+                                    min="0" 
+                                    max="100"
+                                    step="1"
+                                    range
+                                    v-model="phaseProduct.minValue">
+                                </range-slider>
+                                <label>{{phaseProduct.minValue}}</label>
+                                </template>
+                                </div>
+                                <div class="form-row">
+                                <label>Máx: </label>
+                                <template>
+                                <range-slider
+                                    class="slider"
+                                    min="0"
+                                    max="100"
+                                    step="1"
+                                    range
+                                    v-model="phaseProduct.maxValue">
+                                </range-slider>
+                                <label>{{phaseProduct.maxValue}}</label>
+                                </template>
+                                </div>
                         <label class="fm mr-sm-2">Nome do produto : </label>
                             <input @keyup="phase.pros=getResults(urlProducts,productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton"/>
                                 <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; phase.pros=[];" v-for="(p,index) in phase.pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>

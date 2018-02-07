@@ -4,7 +4,9 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-import vueSlider from 'vue-slider-component'
+import RangeSlider from 'vue-range-slider'
+import 'vue-range-slider/dist/vue-range-slider.css'
+import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
 var ipServer = 'http://34.239.125.82:';
@@ -23,15 +25,8 @@ export default {
             urlRecipeSearch: 'http://brsbap01:8002/api/tags?fieldFilter=tagName&fieldValue=',
             urlRecipes: ipServer + '8002/api/recipes/',
             urlGatewayRecipes: ipServer + '8003/gateway/recipes/',
-            options: {
-                width: "100%",
-                show: true,
-                min: 0,
-                max: 100,
-                disabled: false,
-                tooltip: "always"
-            },
-            value: [],
+            valMin: 50,
+            valMax: 60,
             carregando: false,
             recipeProduct: {},
             recipeProductDisplay: {},
@@ -75,7 +70,8 @@ export default {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
         'b-modal': bModal,
-         vueSlider
+        RangeSlider,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective
@@ -150,22 +146,25 @@ export default {
             var id = this.$route.params.id;
             if (id != 0) {
                 this.carregando = true;
-                axios.get(this.urlGatewayRecipes + id).then(response => {
-                    this.recipe = response.data;
-                    this.phases = response.data.phases;
-                    console.log(this.phases);
-                    console.log(id);
-                    for (var i = 0; i < this.phases.length; i++) {
-                        this.expand[i] = false;
-                        console.log(this.expand[i]);
-                    }
-                    this.recipeCadastrada = true;
-                    this.carregando = false;
-                    this.editarActivate = true;
-                }).catch(error => {
-                    console.log(error);
-                    this.carregando = false;
-                })
+                console.log(this.urlGatewayRecipes+id);
+                setTimeout(() => {
+                    axios.get(this.urlGatewayRecipes + id).then(response => {
+                        this.recipe = response.data;
+                        this.phases = response.data.phases;
+                        console.log(response.data);
+                        console.log(id);
+                        for (var i = 0; i < this.phases.length; i++) {
+                            this.expand[i] = false;
+                            console.log(this.expand[i]);
+                        }
+                        this.recipeCadastrada = true;
+                        this.carregando = false;
+                        this.editarActivate = true;
+                    }).catch(error => {
+                        console.log(error);
+                        this.carregando = false;
+                    })
+                }, 300);
             }
         },
         createRecipe(recipe) {
@@ -219,17 +218,15 @@ export default {
                 this.carregando = false;
             });
         },
-        deleteRecipeProduct(recipeProduct) {
+        deleteRecipeProduct() {
             this.mensagemSuc = '';
             this.carregando = true;
-            this.pID = recipeProduct.productId;
-            setTimeout(() => {
-                console.log(this.url + "recipes/product/" + this.recipe.recipeId);
-                console.log(recipeProduct);
-            axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,recipeProduct).then((response) => {
+            console.log(this.url + "recipes/product/" + this.recipe.recipeId);
+                console.log(this.recipe.recipeProduct.product);
+            setTimeout(() => {                
+            axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,this.recipe.recipeProduct.product).then((response) => {
                 console.log(response.data);
                 this.carregando = false;
-                this.recipeProductDisplay = response.data;
                 alert("Deletado!!");
             }, (error) => {
                 console.log(error);
@@ -250,9 +247,9 @@ export default {
             this.mensagemSuc = '';
             this.carregando = true;
             axios.post(this.url + "phases/", phase).then((response) => {
-                console.log(response.data);
                 phase = response.data;
                 this.relacionaFase(phase);
+                console.log(phase);
                 this.carregando = false;
             }, (error) => {
                 console.log(error);
@@ -318,11 +315,9 @@ export default {
             console.log(productPhase);
             console.log("fase");
             console.log(phase);
-            console.log("Fases");
-            console.log(this.phases);
-            axios.post(this.url + "phases/products/" + phase.phaseId, productPhase).then((response) => {
+            axios.post(this.url + "phases/products/" + this.phase.phaseId, productPhase).then((response) => {
                 productPhase.phaseProductId = response.data.phaseProductId;
-                phase.products.push(productPhase);
+                this.phase.phaseProducts.push(productPhase);
                 this.phaseProduct = {};
                 this.productPhaseName = '';
                 this.mensagemSuc = 'Fase relacionada com sucesso';

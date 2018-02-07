@@ -4,10 +4,14 @@
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
-    height: 18;
+    height: 18%;
     border-top: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.nav-item{
+    margin-top: 2%;
+} 
 
 .dropdown-item{
     background-color: white;
@@ -26,7 +30,7 @@
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
     position: fixed;
     margin-left: 0.9%;
-    margin-top: 0.5%;
+    margin-top: 2%;
     z-index: 2;
 }
 

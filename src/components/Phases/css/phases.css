@@ -296,6 +296,10 @@ h6{
     font-size: 9px;
 }
 
+.slider {
+    width: 100%;
+}
+
 /*Configuração do Box do título fases da receita*/
 h3 {
     position: fixed;
