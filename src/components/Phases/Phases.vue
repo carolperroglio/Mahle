@@ -62,15 +62,18 @@
                             </i>
                         </div>
                     </li>
-                    <li class="nav-phases col-md-2" id="produtoR" v-if="recipe.recipeProduct !== '{}' || json.stringify(recipeProduct) !== '{}'">
+                    <li class="nav-phases col-md-2" id="produtoR" v-if="pName !== '' || json.stringify(recipeProduct) !== '{}'">
                             <b><font color="#9BA6A5">
                                 Produto:
                             </font></b>
-                                {{recipe.recipeProduct.product.productName}}
+                               {{pName}}
                                 <br>
                         <button type="button" class="btn btn-danger config-button2" aria-hidden="true" id="removerP" @click.stop.prevent="deleteRecipeProduct(recipeProduct);">
                             <i class= "fa fa-trash-o"></i> Remover
                         </button>
+                    </li>
+                    <li v-else class="nav-phases col-md-2" id="produtoR">
+                            <br>
                     </li>
                 </ul>
         </nav>
@@ -134,10 +137,10 @@
                     <ul class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
                         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
                             <label class="ls ls14">
-                                <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
+                               <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp; 
                             </label>
                             <label class="ls ls14">
-                                <b>Quantidade: </b>{{pro.value}} {{pro.measurementUnit}}
+                               <b>Quantidade: </b>{{pro.value}} {{pro.measurementUnit}}
                             </label>
                             <label class="ls ls14">
                                 <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
@@ -153,10 +156,10 @@
                 <!-- Fim v-else -->
                                 
                 <div v-else>
-                    <a class="list-group" v-for="(pro, indexPro) in pha.products" :key="indexPro">
+                    <a class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
                             <div class="list-group-item list-group-item-3">
                             <label class="ls ls14">
-                                <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
+                              <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
                             </label>
                             <label class="ls ls14">
                                 <b>Quantidade : </b>{{pro.value}} {{pro.measurementUnit}}
@@ -237,6 +240,8 @@
         <!--      Modal       -->
          <b-modal ref="modalProFinal" hide-footer title="Cadastro de Produto Final">
                     <div class="modal-body">
+                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Quantidade: </label>
@@ -280,7 +285,7 @@
                                 </div>
                         <label class="mr-sm-2">Nome do produto: </label>
                             <input @keyup="recipeProducts=getResults(urlProducts,recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                            <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts" v-bind:key="index">{{p.productName}}</b-dropdown-item>
+                            <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; pName=recipeProductName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts" v-bind:key="index">{{p.productName}}</b-dropdown-item>
                               {{ recipeProductName }}
                             <br>
                             <small>Digite no minimo 3 letras para busca do produto</small>
