@@ -38,6 +38,7 @@ export default {
             recipes: [],
             RP: [],
             phase: {},
+            pName: '',
             phases: [],
             phaseProduct: {},
             productPhaseName: '',
@@ -152,6 +153,11 @@ export default {
                         this.recipe = response.data;
                         this.phases = response.data.phases;
                         console.log(response.data);
+                        if(this.recipe.recipeProduct !== undefined){
+                            this.pName = this.recipe.recipeProduct.product.productName;
+                        }else{
+                            this.pName = 'Não Definido';
+                        }
                         console.log(id);
                         for (var i = 0; i < this.phases.length; i++) {
                             this.expand[i] = false;
@@ -213,17 +219,18 @@ export default {
                 console.log(response.data);
                 this.carregando = false;
                 this.recipeProductDisplay = response.data;
+                this.mensagemSuc = 'Produto cadastrado com sucesso.';
             }, (error) => {
                 console.log(error);
                 this.carregando = false;
+                this.mensagem = error;
             });
         },
         deleteRecipeProduct() {
             this.mensagemSuc = '';
             this.carregando = true;
             console.log(this.url + "recipes/product/" + this.recipe.recipeId);
-                console.log(this.recipe.recipeProduct.product);
-            setTimeout(() => {                
+            console.log(this.recipe.recipeProduct.product);            
             axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,this.recipe.recipeProduct.product).then((response) => {
                 console.log(response.data);
                 this.carregando = false;
@@ -232,7 +239,6 @@ export default {
                 console.log(error);
                 this.carregando = false;
             });
-            }, 300);
         },
 
 
