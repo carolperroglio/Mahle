@@ -39,8 +39,8 @@ export default {
     name: "Historian",
     data() {
         return {
-            url: process.env.THING_API,
-            urlHist: process.env.PROD_HIST_API,
+            url: process.env.THINGS_API,
+            urlHist: 'http://brsbap01:8010',
             carregando: false,
             date:'',
             datef: '',
@@ -126,7 +126,7 @@ export default {
                 axios.get(this.urlHist+'/api/Historian?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then(response => {
                     
                     response.data.forEach((R) => {
-                            var dataObj = {};
+                            var dataObj = new Object();
                             var tag = R.tag;
                             this.obj["category"] = this.ticksToDate(R.date);
                             this.obj[tag] = R.value;

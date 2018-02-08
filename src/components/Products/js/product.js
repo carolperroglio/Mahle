@@ -4,6 +4,8 @@ import es6promisse from 'es6-promise'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
 
 es6promisse.polyfill();
 
@@ -39,31 +41,46 @@ export default {
             orderField: '',
             fieldValue: '',
             fieldFilter: '',
-            order: ''
+            order: '',
+            errors: []
         }
     },
     computed: {
     },
     components: {
         'b-modal': bModal,
-        Stretch
+        Stretch,
     },
     directives: {
-        'b-modal': bModalDirective
+        'b-modal': bModalDirective,
+        VeeValidate
     },
     methods: {
+        checkForm:function() {
+            if(this.produto.productName && this.produto.productDescription && this.produto.productCode && this.produto.productGTIN) return true;
+            this.errors = [];
+            if(!this.produto.productName) this.errors.push("O nome do produto deve ser preenchido.");
+            if(!this.produto.productDescription) this.errors.push("A descrição do produto deve ser preenchida.");
+            if(!this.produto.productCode) this.errors.push("O código do produto deve ser preenchido.");
+            if(!this.produto.productGTIN) this.errors.push("O código de barras.");
+          },
           showModal () {
             this.mensagemSuc = '';
+            this.produto = {};
+            this.errors = [];
             this.$refs.myModalRef.show()
           },
           hideModal () {
             this.$refs.myModalRef.hide()
           },
-          showModal2(produto) {
+          showModal2(produto) {              
+            this.errors = [];
             this.produto = produto;
             this.$refs.myModalRef.show()
           },
         cadastrar(produto) {
+            this.mensagem = '';
+            this.mensagemSuc = '';
             this.carregando = true;
             produto.enabled = true;
             axios.post(this.url, produto).then((r) => {
@@ -81,6 +98,8 @@ export default {
         },
 
         put(produto) {
+            this.mensagem = '';
+            this.mensagemSuc = '';
             this.carregando = true;
             axios.put(this.url + produto.productId, produto).then((r) => {
                 this.mensagem = '';
@@ -95,6 +114,8 @@ export default {
         },
 
         excluir(produto) {
+            this.mensagem = '';
+            this.mensagemSuc = '';
             this.carregando = true;
             axios.delete(this.url + produto.productId).then((r) => {
                 this.mensagem = '';
