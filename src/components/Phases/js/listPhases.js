@@ -16,14 +16,14 @@ function paginacao(response, este) {
     }
 }
 
-var ipServer = 'http://34.239.125.82:';
+var ipServer = process.env.RECIPE_API;
 
 export default {
     name: "Phases",
     data() {
         return {
-            urlRecipes: ipServer + '8002/api/recipes',
-            urlPhases: ipServer + '8002/api/phases',
+            urlRecipes: ipServer + '/api/recipes',
+            urlPhases: ipServer + '/api/phases',
             recipes: [],
             phases: [],
             carregando: false,

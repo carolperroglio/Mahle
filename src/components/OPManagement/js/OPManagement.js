@@ -23,8 +23,8 @@ export default {
             state: '',
             nextstates: [],
             carregando: false,
-            url: 'http://34.239.125.82:8003/api/productionorders/',
-            url2: 'http://34.239.125.82:8003/api/productionordertypes/'
+            url: process.env.OP_API + '/api/productionorders/',
+            url2: process.env.OP_API + '/api/productionordertypes/'
         }
     },
     components: {

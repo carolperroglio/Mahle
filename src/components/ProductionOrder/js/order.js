@@ -24,19 +24,20 @@ function paginacao(response, este) {
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://34.239.125.82:';
+var ipServerRecipe = process.env.RECIPE_API;
+var ipServer = process.env.OP_API;
 
 export default {
     name: 'ProductionOrder',
     data() {
         return {
             opId: '',
-            urlRecipeSearch: ipServer + '8002/api/recipes?fieldFilter=recipeName&fieldValue=',
-            urlRecipe: ipServer + '8002/api/recipes/',
-            urlOpType: ipServer + '8003/api/productionordertypes/',
-            urlPhases: ipServer + '8002/api/phases/',
-            urlOp: ipServer + '8003/api/productionorders',
-            urlGatewayRecipe: ipServer + '8003/gateway/recipes/',
+            urlRecipeSearch: ipServerRecipe + '/api/recipes?fieldFilter=recipeName&fieldValue=',
+            urlRecipe: ipServerRecipe + '/api/recipes/',
+            urlOpType: ipServer + '/api/productionordertypes/',
+            urlPhases: ipServerRecipe + '/api/phases/',
+            urlOp: ipServer + '/api/productionorders',
+            urlGatewayRecipe: ipServer + '/gateway/recipes/',
             recipeArray: [],
             opArray: [],
             opTypeArray: [],

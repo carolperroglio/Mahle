@@ -1,7 +1,7 @@
 
 .nav-InUseTools{
     position: fixed;
-    margin-top: 5%;
+    margin-top: 6%;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     font-size: 22pt;    
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -24,7 +24,7 @@
     font-size: 22px;
     color: rgb(68, 68, 70);
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-    margin-left: 1.5%;
+    margin-left: 2%;
     margin-top: 0%;
 }
 

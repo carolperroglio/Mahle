@@ -32,7 +32,7 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             id: '',
-            url: 'http://34.239.125.82:8005/api/tool/inuse'
+            url: process.env.TOOLS_API
         }
     },
     methods: {
@@ -42,7 +42,7 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.tools = [];
-            axios.get(this.url).then((response) => {
+            axios.get(this.url+'/api/tool/inuse').then((response) => {
                 paginacao(response, this);
                 this.tools = response.data;
                 for (var index in response.data){

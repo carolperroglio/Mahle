@@ -17,6 +17,8 @@ function paginacao(response, este){
     }                  
 }
 
+var IpServer = process.env.TOOLS_API;
+
 export default {    
     name: "ToolCreate", 
     data(){
@@ -28,7 +30,7 @@ export default {
             carregando: false,    
             ferramentas:[],
             ferramenta: {},
-            url:'http://34.239.125.82:8005/api/tool',
+            url: IpServer + '/api/tool',
             mensagem:'',
             mensagemSuc:'',  
             f:[],
