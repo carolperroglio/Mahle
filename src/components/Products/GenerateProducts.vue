@@ -15,10 +15,15 @@
                             <div class="form-group">
                                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                                    <p v-if="errors.length">
+                                        <ul v-for="(error, index) in errors" v-bind:key="index">
+                                        <li class="alert alert-danger form-control" >{{ error }}</li>
+                                        </ul>
+                                    </p>
                                 <label for="nome">
                                     <b>Nome : </b>
                                 </label>
-                                <input type="text" placeholder="Nome" required v-model="produto.productName" id="nome" class="form-control danger is-invalid form-control-sm">
+                                <input type="text" placeholder="Nome" v-model="produto.productName" id="nome" class="form-control form-control-sm">
                                 <label for="desc">
                                     <b>Descrição : </b>
                                 </label>
@@ -35,7 +40,7 @@
                                 </div>
                                 <div class="btn-group" role="group">
                                         <button class="btn btn-success">
-                                            <i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i>
+                                            <i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="checkForm(); (produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i>
                                         </button>
                                         <button class="btn btn-danger">
                                             <i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i>

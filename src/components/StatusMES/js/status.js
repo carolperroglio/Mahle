@@ -26,11 +26,13 @@ function paginacao(response, este) {
     }
 }
 
+var IpServer = process.env.STATUS_API;
+
 export default {
     name: "StatusMES",
     data() {
         return {
-            url: process.env.STATUS_API + '/api/thingstatus/',
+            url: IpServer + '/api/thingstatus/',
             carregando: false,
             quantityPage: 20,
             startat: 0,

@@ -242,6 +242,13 @@
                     <div class="modal-body">
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                    <li class="form-group nav-phases col-md-2">
+                        <p v-if="errors.length">
+                                        <ul v-for="(error, index) in errors" v-bind:key="index">
+                                        <li class="alert alert-danger form-control" >{{ error }}</li>
+                                        </ul>
+                        </p>
+                    </li>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Quantidade: </label>
@@ -294,7 +301,7 @@
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="button" @click.stop.prevent="createRecipeProduct(recipeProduct)" 
+                            <button type="button" @click.stop.prevent="checkCadProdReceita(); createRecipeProduct(recipeProduct)" 
                             :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>

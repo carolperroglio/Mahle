@@ -54,7 +54,8 @@ export default {
             name: '',
             tagName: '',
             editarActivate: false,
-            expand: []
+            expand: [],
+            errors: []
         }
     },
     filters: {
@@ -80,6 +81,23 @@ export default {
         'b-modal': bModalDirective
     },     
     methods: {
+        /***************************/
+        /*                         */
+        /*                         */
+        /*  Validações dos Campos  */
+        /*                         */
+        /*                         */
+        /***************************/
+
+        checkCadProdReceita: function() {
+            if(this.recipeProduct.value && this.recipeProduct.measurementUnit && this.recipeProduct.minValue && this.recipeProduct.maxValue && recipeProductName) return true;
+            this.errors = [];
+            if(!this.recipeProduct.value) this.errors.push("A quantidade deve ser preenchida.");
+            if(!this.recipeProduct.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
+            if(!this.recipeProduct.minValue) this.errors.push("O valor mínimo deve ser preenchido.");
+            if(!this.recipeProduct.maxValue) this.errors.push("O valor máximo deve ser preenchido.");
+            if(!recipeProductName) this.errors.push("O nome do produto deve ser preenchido.");
+          },
 
         /************************/
         /*                      */
