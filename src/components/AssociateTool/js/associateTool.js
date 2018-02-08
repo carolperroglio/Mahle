@@ -35,7 +35,7 @@ export default {
             lista: false,
             lista2: false,
             carregando: false,
-            url:'http://34.239.125.82:8005',
+            url: process.env.TOOLS_API
          }
     },
     computed: {},

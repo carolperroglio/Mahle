@@ -39,8 +39,8 @@ export default {
     name: "Historian",
     data() {
         return {
-            url: 'http://34.239.125.82:8006/api/Historian?',
-            urlThing: 'http://34.239.125.82:8006/api/things',
+            url: process.env.THING_API,
+            urlHist: process.env.PROD_HIST_API,
             carregando: false,
             date:'',
             datef: '',
@@ -107,7 +107,7 @@ export default {
             this.dataentry = ''
           },
         getThings(){                                  
-            axios.get(this.urlThing).then((response)=>{                                           
+            axios.get(this.url+'/api/things').then((response)=>{                                           
                 this.things = response.data;
             },(error)=>{
                 console.log(error);
@@ -122,8 +122,8 @@ export default {
                 var ticksF = this.dateToTicks(Fim);
                 console.log('I: '+ticksI);
                 console.log('F: '+ticksF);
-                console.log(this.url+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
-                axios.get(this.url+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then(response => {
+                console.log(this.urlHist+'/api/Historian?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
+                axios.get(this.urlHist+'/api/Historian?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then(response => {
                     
                     response.data.forEach((R) => {
                             var dataObj = {};

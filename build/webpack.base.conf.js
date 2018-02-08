@@ -55,6 +55,16 @@ module.exports = {
       Vue: ['vue/dist/vue.esm.js', 'default'],
       moment: 'moment'
     }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        TOOLS_API: JSON.stringify("http://34.239.125.82:8005"),
+        OP_API: JSON.stringify("http://34.239.125.82:8003"),
+        THINGS_API: JSON.stringify("http://34.239.125.82:8001"),
+        PROD_HIST_API: JSON.stringify("http://34.239.125.82:8006"),
+        RECIPE_API: JSON.stringify("http://34.239.125.82:8002"),
+        STATUS_API: JSON.stringify("http://34.239.125.82:8004")
+      }
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',

@@ -17,14 +17,14 @@ function paginacao(response, este) {
 }
 
 // Endereço IP do Servidor com as APIs
-var ipServer = 'http://34.239.125.82:';
+var ipServer = process.env.OP_API;
 
 export default {
     name: 'StateManagement',
     data() {
         return {
-            urlState: ipServer + '8003/api/stateconfiguration/',
-            urlOp: ipServer + '8003/api/productionorders/',
+            urlState: ipServer + '/api/stateconfiguration/',
+            urlOp: ipServer + '/api/productionorders/',
             opSelected: '',
             opArray: [],
             carregando: false

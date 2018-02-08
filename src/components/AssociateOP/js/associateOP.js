@@ -39,7 +39,7 @@ export default {
             carregando: false,
             assoc: false,
             disassoc: false,
-            url:'http://34.239.125.82:8003/',
+            url: process.env.OP_API,
             }
     },
     computed: {},
@@ -57,7 +57,7 @@ export default {
            getOPs(numOP){            
             var array=[];                          
             if(numOP.length<3){return;}                
-            axios.get(this.url+'api/productionorders?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
+            axios.get(this.url+'/api/productionorders?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
                 response.data.values.forEach((pro) => {
                     array.push(pro);                    
                 });
@@ -69,7 +69,7 @@ export default {
             getOPList(){  
                 this.carregando = true;        
                 setTimeout(() => {
-                    axios.get(this.url+'api/productionorders').then((response)=>{                                           
+                    axios.get(this.url+'/api/productionorders').then((response)=>{                                           
                         response.data.values.forEach((op)=>{
                             if (op.currentStatus == "active"){
                                 this.ProductionOrders.push(op);
@@ -96,7 +96,7 @@ export default {
                 this.OPId = op.productionOrderId;
                 this.numOP = op.productionOrderNumber;
                 this.typeId = op.productionOrderTypeId;           
-                axios.get(this.url+'api/productionordertypes/'+this.typeId).then((response)=>{ 
+                axios.get(this.url+'/api/productionordertypes/'+this.typeId).then((response)=>{ 
                     console.log(response.data); 
                     this.Groups = response.data.thingGroups;
                     console.log(this.Groups);
@@ -105,7 +105,7 @@ export default {
                         })
                         this.listaOPs = false;
                         this.lista = true;
-                axios.get(this.url+'api/productionorders/'+this.OPId).then((response)=>{
+                axios.get(this.url+'/api/productionorders/'+this.OPId).then((response)=>{
                     this.OP = response.data;
                     console.log(response.data);
                     this.carregando = false;                                        
@@ -117,7 +117,7 @@ export default {
             },
             openSelectThings(){
                 this.thing=true;             
-                axios.get(this.url+'gateway/thinggroups/attachedthings/'+this.groupId).then((response)=>{   
+                axios.get(this.url+'/gateway/thinggroups/attachedthings/'+this.groupId).then((response)=>{   
                 this.Things = response.data;
                 console.log(this.Things);
             },(error)=>{
@@ -128,8 +128,8 @@ export default {
                 this.mensagemSuc = '';
                 this.mensagem = '';     
                 confirm("Confirma associação?");
-                axios.put(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
-                    console.log(this.url+'api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
+                axios.put(this.url+'/api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
+                    console.log(this.url+'/api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
                     console.log(response.data);
                     this.Thing = response.data.currentThing;
                     this.lista2 = true;
@@ -142,7 +142,7 @@ export default {
             getDisAssoc(){
                 this.mensagemSuc = '';
                 this.mensagem = ''; 
-                axios.put(this.url+'api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId, this.OP).then((response)=>{
+                axios.put(this.url+'/api/productionorders/AssociateProductionOrder/disassociate?thingId='+this.thingId+'&productionOrderId='+this.OPId, this.OP).then((response)=>{
                     console.log(response.data);
                     this.mensagemSuc = 'Ordem desassociada com sucesso.';
                 },(r)=>{                

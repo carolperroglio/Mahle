@@ -30,7 +30,7 @@ export default {
             fieldValue: '' ,
             select: false,
             carregando: true,
-            url:'http://34.239.125.82:8003/',
+            url: process.env.OP_API
          }
     },
     computed: {},
@@ -55,7 +55,7 @@ export default {
             if(numOP.length<3){return;} 
             this.mensagemSuc = '';
             this.mensagemSuc = '';               
-                axios.get(this.url+'api/productionorders?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
+                axios.get(this.url+'/api/productionorders?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
                     response.data.values.forEach((pro) => {
                         array.push(pro);                    
                     });
@@ -84,7 +84,7 @@ export default {
                 }
                 
                 console.log(JSON.stringify(this.Type, undefined, 4));
-                axios.put(this.url+'api/productionordertypes/'+this.Type.productionOrderTypeId, this.Type).then((response)=>{                                           
+                axios.put(this.url+'/api/productionordertypes/'+this.Type.productionOrderTypeId, this.Type).then((response)=>{                                           
                     console.log(response.data);
                     this.mensagemSuc = 'Tipo alterado com sucesso!';
                 },(error)=>{
@@ -96,7 +96,7 @@ export default {
                 this.select = false;
             },
             getThingsGroup: function() {
-            axios.get(this.url+'gateway/thinggroups/').then(response => {
+            axios.get(this.url+'/gateway/thinggroups/').then(response => {
                 this.thingsGroup = response.data;
                 console.log(this.thingsGroup);
             }).catch(error => {
@@ -104,7 +104,7 @@ export default {
             })
             },
             getTypes(){               
-                axios.get(this.url+'api/productionordertypes/').then((response)=>{                                           
+                axios.get(this.url+'/api/productionordertypes/').then((response)=>{                                           
                     this.Types = response.data;
                     console.log(response.data);
                     console.log(this.Types);

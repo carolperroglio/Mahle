@@ -1,5 +1,4 @@
 'use strict'
-
 import axios from 'axios'
 import es6promisse from 'es6-promise'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
@@ -34,7 +33,7 @@ export default {
             pageAtual: 0,
             produtos: [],
             produto: {},
-            url: 'http://34.239.125.82:8002/api/products/',
+            url: process.env.RECIPE_API + '/api/products/',
             mensagem: '',
             mensagemSuc: '',
             orderField: '',

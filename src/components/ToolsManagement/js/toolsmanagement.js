@@ -21,16 +21,15 @@ function paginacao(response, este) {
     }
 }
 
-var ipServer = 'http://34.239.125.82:';
+var ipServer = process.env.TOOLS_API;
 
 export default {
     name: "ToolsManagement",
     data() {
         return {
-            urlTool: ipServer + '8005/api/tool/',
-            urlToolManagement: ipServer + '',
-            urlStateConfig: ipServer + '8005/api/tool/stateconfiguration/',
-            urlStateManagement: ipServer + '8005/api/tool/statemanagement/id?toolid=',
+            urlTool: ipServer + '/api/tool/',
+            urlStateConfig: ipServer + '/api/tool/stateconfiguration/',
+            urlStateManagement: ipServer + '/api/tool/statemanagement/id?toolid=',
             tools: [],
             tool: {},
             tooltype: {},

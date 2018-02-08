@@ -20,14 +20,14 @@ function paginacao(response, este) {
     }
 }
 
-var ipServer = 'http://34.239.125.82:';
+var ipServer = process.env.TOOLS_API;
 
 export default {
     name: "ToolType",
     data() {
         return {
-            urlToolType: ipServer + '8005/api/tooltype/',
-            urlThingsGroup: ipServer + '8005/gateway/thinggroups',
+            urlToolType: ipServer + '/api/tooltype/',
+            urlThingsGroup: ipServer + '/gateway/thinggroups',
             toolsType: [],
             tooltype: {},
             tooltypeUp: {},

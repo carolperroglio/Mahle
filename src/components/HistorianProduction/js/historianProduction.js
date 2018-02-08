@@ -8,7 +8,6 @@ import bBadge from 'bootstrap-vue/es/components/badge/badge'
 import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
-const IP = 'http://34.239.125.82:';
 
 export default {    
     name: "HistorianProduction", 
@@ -43,8 +42,7 @@ export default {
             order: false,
             pFase: false,
             lista: false,
-            url: IP + '8006/',
-            urlOP: IP + '8006/gateway/productionorders'
+            url: process.env.PROD_HIST_API,
         }
     },  
     computed:{  
@@ -100,9 +98,9 @@ export default {
             this.mensagemSuc= '';
             ordem.batch = this.rolo;
             console.log(ordem);    
-            console.log(this.url+'api/producthistorian');      
+            console.log(this.url+'/api/producthistorian');      
             confirm("Confirma apontamento?");     
-            axios.post(this.url+'api/producthistorian',ordem).then((response)=>{
+            axios.post(this.url+'/api/producthistorian',ordem).then((response)=>{
                 this.mensagemSuc = 'Produto apontado com sucesso.'; 
                 this.productionOrderId = this.ordem.productionOrderId;
                 this.carregando = false;     
@@ -122,7 +120,7 @@ export default {
 
         listar(){            
             this.lista = true;  
-            axios.get(this.url+'api/OrderHistorian/'+this.productionOrder.productionOrderId).then((response)=>{   
+            axios.get(this.url+'/api/OrderHistorian/'+this.productionOrder.productionOrderId).then((response)=>{   
                      
                 console.log(response.data);
                 this.orderHistorian = response.data;
@@ -152,8 +150,8 @@ export default {
         },
 
         getResults(){    
-            console.log(this.urlOP);         
-                axios.get(this.urlOP).then((response)=>{          
+            console.log(this.url+'/gateway/productionorders');         
+                axios.get(this.url+'/gateway/productionorders').then((response)=>{          
                     console.log(response.data);                                 
                     response.data.forEach((pro) => {
                         if (pro.currentStatus == "active"){

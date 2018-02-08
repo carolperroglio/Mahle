@@ -9,7 +9,9 @@ import 'vue-range-slider/dist/vue-range-slider.css'
 import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
-var ipServer = 'http://34.239.125.82:';
+var ipServerRecipe = process.env.RECIPE_API;
+var ipServerOP = process.env.OP_API;
+var ipServerThing = process.env.THINGS_API;
 
 export default {
     name: "Phases",
@@ -19,12 +21,12 @@ export default {
             config: {
                 headers: { 'Cache-Control': 'no-cache' }
             },
-            url: ipServer + '8002/api/',
-            url2: ipServer + '8001/api/',
-            urlProducts: ipServer + '8002/api/products?&fieldFilter=productName&fieldValue=',
-            urlRecipeSearch: 'http://brsbap01:8002/api/tags?fieldFilter=tagName&fieldValue=',
-            urlRecipes: ipServer + '8002/api/recipes/',
-            urlGatewayRecipes: ipServer + '8003/gateway/recipes/',
+            url: ipServerRecipe + '/api/',
+            url2: ipServerThing + '/api/',
+            urlProducts: ipServerRecipe + '/api/products?&fieldFilter=productName&fieldValue=',
+            urlRecipeSearch: ipServerRecipe + '/api/tags?fieldFilter=tagName&fieldValue=',
+            urlRecipes: ipServerRecipe + '/api/recipes/',
+            urlGatewayRecipes: ipServerOP + '/gateway/recipes/',
             valMin: 50,
             valMax: 60,
             carregando: false,
