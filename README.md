@@ -1,6 +1,8 @@
-# mahle
+# Mahle
 
-> A Vue.js project
+Repositório do sistema Onyx 
+
+![alt text](https://github.com/flaviajanine/FollowupMaua/blob/master/src/assets/imagens/onyx.png)
 
 ## Build Setup
 
@@ -23,5 +25,3 @@ npm run unit
 # run all tests
 npm test
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
