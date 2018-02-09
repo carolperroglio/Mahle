@@ -2,7 +2,7 @@
 
 Repositório do sistema Onyx 
 
-![alt text](https://github.com/flaviajanine/FollowupMaua/blob/master/onyx.jpeg)
+![alt text](https://github.com/flaviajanine/FollowupMaua/blob/master/onyx.jpg)
 
 ## Build Setup
 
