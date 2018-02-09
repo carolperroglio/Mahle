@@ -76,12 +76,18 @@
                 <b-modal ref="myModalRef" hide-footer title="Cadastro de Ferramentas">
                         <form>
                             <div class="form-group">
+
+                                <p v-if="errors.length">
+                                        <ul v-for="(error, index) in errors" :key="index">
+                                        <li class="alert alert-danger form-control" >{{ error }}</li>
+                                        </ul>
+                                </p>
                                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                                 <label>
                                     <b>Nome: </b>
                                 </label>
-                                <input type="text" placeholder="nome" required v-model="ferramenta.name" id="nome" class="form-control danger is-invalid form-control-sm">
+                                <input type="text" placeholder="nome" v-model="ferramenta.name" id="nome" class="form-control form-control-sm">
                                 <label>
                                     <b>Descrição: </b>
                                 </label>
@@ -128,7 +134,7 @@
                                         </button>
                                         
                                 </div>
-                                    <div class="btn btn-primary pull-right" @click.stop.prevent="ferramenta={}">
+                                    <div class="btn btn-primary pull-right" @click.stop.prevent="ferramenta={};errors=[];">
                                         Limpar
                                     </div>
                         </form>
@@ -143,10 +149,10 @@
 
         <div class="" style="">
             <div class="ferramentas col">
-                <div class="progress" v-show="carregando">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                </div>
-                <div v-for="(f, index) in ferramentas" v-bind:key="index">
+                <div id="load" v-show="carregando">
+                <stretch background="#4d4d4d"></stretch>
+                </div>    
+                <div v-for="(f, index) in ferramentas" :key="index">
                     <div class= "card-header">
                     </div>
                     <div class="card-body">
@@ -198,16 +204,8 @@
             <!--                            -->
             <!--                            -->
 
-                <div class="modal fade" id="editarFerr" tabindex="-1" role="dialog" aria-labelledby="editarFerrLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editarFerrLabel">Editar Ferramentas</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
+                <b-modal ref="myModalRef" hide-footer title="Editar Ferramentas">
+                 
                                 <form>
                                     <div class="form-group">
                                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
@@ -215,7 +213,7 @@
                                         <label>
                                             <b>Nome:</b>
                                         </label>
-                                        <input type="text" placeholder="nome" required v-model="ferramenta.name" id="nome" class="form-control danger is-invalid form-control-sm">
+                                        <input type="text" placeholder="nome" v-model="ferramenta.name" id="nome" class="form-control form-control-sm">
 
                                         <label>
                                             <b>Descrição: </b>
@@ -265,14 +263,11 @@
                                                     <i @click.stop.prevent="editar(ferramenta)" class="fa fa-check-square" aria-hidden="true"></i>
                                                 </button>
                                         </div>
-                                            <div class="btn btn-primary pull-right" @click.stop.prevent="ferramenta={}">
+                                            <div class="btn btn-primary pull-right" @click.stop.prevent="errors=[];ferramenta={}">
                                                 Limpar
                                         </div>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </b-modal>
             </div>
             <br>
         </div>

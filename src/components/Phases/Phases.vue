@@ -357,7 +357,7 @@
 
                     <div class="modal-footer">
                         <div>
-                            <button @click.stop.prevent="createPhase(phase);" class="btn btn-success" :disabled="phase.phaseName==undefined || phase.phaseName=='' || phase.phaseCode==undefined || phase.phaseCode==''">
+                            <button @click.stop.prevent="checkEditarFase(); createPhase(phase);" class="btn btn-success" :disabled="phase.phaseName==undefined || phase.phaseName=='' || phase.phaseCode==undefined || phase.phaseCode==''">
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button @click.stop.prevent="deletePhase(phase, recipe)" :disabled="phase.phaseId == undefined || phase.phaseId == ''" class="btn btn-danger">
@@ -381,6 +381,11 @@
                   
                     <div class="modal-body">
                         <div class="form-row">
+                            <p v-if="errors.length">
+                                        <ul v-for="(error, index) in errors" v-bind:key="index">
+                                        <li class="alert alert-danger form-control" >{{ error }}</li>
+                                        </ul>
+                                    </p>
                             <div class="form-group col-md-3">
                                 <label>Quantidade : </label><br>
                                 <input class="fm form-control mr-sm-2" v-model="phaseProduct.value" placeholder="Valor" />
@@ -439,7 +444,7 @@
                     <div class="modal-footer">
                         <div>
                             <div class="btn-group" role="group">
-                                <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" class="btn btn-success" :disabled="!phaseProduct.phaseProductType || !phaseProduct.measurementUnit || !phaseProduct.value || !productPhaseName">
+                                <button @click.stop.prevent="checkCadProdFase(); createPhaseProduct(phaseProduct, phase);" class="btn btn-success">
                                     <i class="fa fa-check-square" aria-hidden="true"></i>
                                 </button>
                                 <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
@@ -462,6 +467,11 @@
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                         <div class="form-row">
+                            <p v-if="errors.length">
+                                        <ul v-for="(error, index) in errors" v-bind:key="index">
+                                        <li class="alert alert-danger form-control" >{{ error }}</li>
+                                        </ul>
+                                    </p>
                             <div class="form-group col-md-4">
                                 <label for="">Set Point</label>
                                 <input type="text" class="form-control form-control-sm" v-model="phaseParameter.setupValue" placeholder="Set Point">
@@ -482,7 +492,7 @@
                             </div>
                         </div>
                         <div class="btn-group" role="group">
-                            <button @click.stop.prevent="createPhaseParameter(phaseParameter, phase)" class="btn btn-success">
+                            <button @click.stop.prevent="checkCadParam(); createPhaseParameter(phaseParameter, phase)" class="btn btn-success">
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button @click.stop.prevent="deletePhaseParameter(index, tag)" class="btn btn-danger">

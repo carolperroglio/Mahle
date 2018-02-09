@@ -6,6 +6,7 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import Vue from 'vue';
 import VeeValidate from 'vee-validate';
+import { setTimeout } from 'timers';
 
 es6promisse.polyfill();
 
@@ -56,14 +57,6 @@ export default {
         VeeValidate
     },
     methods: {
-        checkForm:function() {
-            if(this.produto.productName && this.produto.productDescription && this.produto.productCode && this.produto.productGTIN) return true;
-            this.errors = [];
-            if(!this.produto.productName) this.errors.push("O nome do produto deve ser preenchido.");
-            if(!this.produto.productDescription) this.errors.push("A descrição do produto deve ser preenchida.");
-            if(!this.produto.productCode) this.errors.push("O código do produto deve ser preenchido.");
-            if(!this.produto.productGTIN) this.errors.push("O código de barras.");
-          },
           showModal () {
             this.mensagemSuc = '';
             this.produto = {};
@@ -82,18 +75,31 @@ export default {
             this.mensagem = '';
             this.mensagemSuc = '';
             this.carregando = true;
-            produto.enabled = true;
-            axios.post(this.url, produto).then((r) => {
-                this.mensagem = '';
-                this.mensagemSuc = "Produto " + produto.productName + " cadastrado com sucesso";
-                this.produto = {};
-                if (this.produtos.length > 0)
-                    this.produtos.push(produto);
-                this.carregando = false;
-            }, (r) => {
-                this.mensagem = 'Erro no server ' + r;
-                this.carregando = false;
-            })
+
+             setTimeout(() =>{ if(this.produto.productName && this.produto.productDescription && this.produto.productCode && this.produto.productGTIN) return true;
+            this.errors = [];
+            if(!this.produto.productName) this.errors.push("O nome do produto deve ser preenchido.");
+            if(!this.produto.productDescription) this.errors.push("A descrição do produto deve ser preenchida.");
+            if(!this.produto.productCode) this.errors.push("O código do produto deve ser preenchido.");
+            if(!this.produto.productGTIN) this.errors.push("O código de barras deve ser preenchido.");}, 100);
+
+            
+             setTimeout(() => {
+                 if(this.errors.length == 0){
+                produto.enabled = true;
+                axios.post(this.url, produto).then((r) => {
+                    this.mensagem = '';
+                    this.mensagemSuc = "Produto " + produto.productName + " cadastrado com sucesso";
+                    this.produto = {};
+                    if (this.produtos.length > 0)
+                        this.produtos.push(produto);
+                    this.carregando = false;
+                }, (r) => {
+                    this.mensagem = 'Erro no server ' + r;
+                    this.carregando = false;
+                })
+            }}, 200);
+           
 
         },
 
@@ -117,16 +123,20 @@ export default {
             this.mensagem = '';
             this.mensagemSuc = '';
             this.carregando = true;
-            axios.delete(this.url + produto.productId).then((r) => {
-                this.mensagem = '';
-                this.mensagemSuc = "Produto " + produto.productName + " deletado com sucesso";
-                this.produto = {};
-                this.produtos = this.produtos.filter(item => item !== produto);
-                this.carregando = false;
-            }, (r) => {
-                this.mensagem = 'Erro no server ' + r;
-                this.carregando = false;
-            });
+
+            if(confirm("Tem certeza que deseja excluir o material?")){
+                axios.delete(this.url + produto.productId).then((r) => {
+                    this.mensagem = '';
+                    this.mensagemSuc = "Produto " + produto.productName + " deletado com sucesso";
+                    this.produto = {};
+                    this.produtos = this.produtos.filter(item => item !== produto);
+                    this.carregando = false;
+                }, (r) => {
+                    this.mensagem = 'Erro no server ' + r;
+                    this.carregando = false;
+                });
+            }
+            this.carregando = false;
         },
         
         buscar() {

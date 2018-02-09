@@ -40,13 +40,13 @@
                                 </div>
                                 <div class="btn-group" role="group">
                                         <button class="btn btn-success">
-                                            <i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="checkForm(); (produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i>
+                                            <i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i>
                                         </button>
                                         <button class="btn btn-danger">
                                             <i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i>
                                         </button>
                                 </div>
-                                    <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}">
+                                    <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}; errors=[]">
                                         Limpar
                                     </div>
                         </form>
@@ -119,7 +119,7 @@
                             <label class="ls ls2">
 
                                 <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2" aria-hidden="true"></i>
+                            <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2(p)" aria-hidden="true"></i>
                         </div>
                 </div>
                 <div class="paginacao" v-show="total>0">

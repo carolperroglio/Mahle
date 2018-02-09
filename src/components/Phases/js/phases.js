@@ -7,6 +7,7 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import RangeSlider from 'vue-range-slider'
 import 'vue-range-slider/dist/vue-range-slider.css'
 import { Stretch } from 'vue-loading-spinner'
+import { setTimeout } from 'timers';
 
 es6promisse.polyfill();
 var ipServerRecipe = process.env.RECIPE_API;
@@ -80,24 +81,7 @@ export default {
     directives: {
         'b-modal': bModalDirective
     },     
-    methods: {
-        /***************************/
-        /*                         */
-        /*                         */
-        /*  Validações dos Campos  */
-        /*                         */
-        /*                         */
-        /***************************/
-
-        checkCadProdReceita: function() {
-            if(this.recipeProduct.value && this.recipeProduct.measurementUnit && this.recipeProduct.minValue && this.recipeProduct.maxValue && recipeProductName) return true;
-            this.errors = [];
-            if(!this.recipeProduct.value) this.errors.push("A quantidade deve ser preenchida.");
-            if(!this.recipeProduct.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
-            if(!this.recipeProduct.minValue) this.errors.push("O valor mínimo deve ser preenchido.");
-            if(!this.recipeProduct.maxValue) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!recipeProductName) this.errors.push("O nome do produto deve ser preenchido.");
-          },
+    methods: {          
 
         /************************/
         /*                      */
@@ -126,6 +110,7 @@ export default {
             this.$refs.modalEditRecipe.hide()
           },
           showModalAddProd() {
+              this.errors = {};
             this.phaseProduct={};
             this.$refs.modalcadProPhase.show()
           },
@@ -232,26 +217,45 @@ export default {
         createRecipeProduct(recipeProduct, recipeProductEnd) {
             this.mensagemSuc = '';
             this.carregando = true;
-            recipeProduct.phaseProductType = 'finished';
-            console.log(recipeProduct);
-            console.log(this.url + "recipes/product/" + this.recipe.recipeId);
-            axios.post(this.url + "recipes/product/" + this.recipe.recipeId, recipeProduct).then((response) => {
-                console.log(response.data);
-                this.carregando = false;
-                this.recipeProductDisplay = response.data;
-                this.mensagemSuc = 'Produto cadastrado com sucesso.';
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-                this.mensagem = error;
-            });
+
+            setTimeout(() => {
+            if(this.recipeProduct.value && this.recipeProduct.measurementUnit && this.recipeProduct.minValue && this.recipeProduct.maxValue && recipeProductName) return true;
+            this.errors = [];
+            if(!this.recipeProduct.value) this.errors.push("A quantidade deve ser preenchida.");
+            if(!this.recipeProduct.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
+            if(!this.recipeProduct.minValue) this.errors.push("O valor mínimo deve ser preenchido.");
+            if(!this.recipeProduct.maxValue) this.errors.push("O valor máximo deve ser preenchido.");
+            if(!recipeProductName) this.errors.push("O nome do produto deve ser preenchido.");
+            }, 100);
+            
+            setTimeout(() => {
+                if(this.errors.length == 0){
+                    recipeProduct.phaseProductType = 'finished';
+                    console.log(recipeProduct);
+                    console.log(this.url + "recipes/product/" + this.recipe.recipeId);
+                    axios.post(this.url + "recipes/product/" + this.recipe.recipeId, recipeProduct).then((response) => {
+                        console.log(response.data);
+                        this.carregando = false;
+                        this.recipeProductDisplay = response.data;
+                        this.mensagemSuc = 'Produto cadastrado com sucesso.';
+                    }, (error) => {
+                        console.log(error);
+                        this.carregando = false;
+                        this.mensagem = error;
+                    });
+                }
+                
+            }, 200);
+
         },
         deleteRecipeProduct() {
-            this.mensagemSuc = '';
             this.carregando = true;
-            console.log(this.url + "recipes/product/" + this.recipe.recipeId);
-            console.log(this.recipe.recipeProduct.product);            
-            axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,this.recipe.recipeProduct.product).then((response) => {
+            this.mensagemSuc = '';
+
+            if(confirm("Tem certeza que deseja excluir produto?")){
+                console.log(this.url + "recipes/product/" + this.recipe.recipeId);
+                console.log(this.recipe.recipeProduct.product);            
+                axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,this.recipe.recipeProduct.product).then((response) => {
                 console.log(response.data);
                 this.carregando = false;
                 alert("Deletado!!");
@@ -259,6 +263,7 @@ export default {
                 console.log(error);
                 this.carregando = false;
             });
+            }
         },
 
 
@@ -285,7 +290,7 @@ export default {
         putPhase(phase) {
             this.mensagemSuc = '';
             this.carregando = true;
-            axios.delete(this.url + "phases/" + phase.phaseId, phase).then((response) => {
+            axios.put(this.url + "phases/" + phase.phaseId, phase).then((response) => {
                 this.mensagem = '';
                 this.mensagemSuc = "Fase " + phase.phaseName + " atualizada com sucesso";
                 console.log(response.data);
@@ -298,18 +303,20 @@ export default {
             })
         },
         deletePhase(phase, recipe) {
-            this.mensagemSuc = '';
             this.carregando = true;
-            axios.delete(this.url + "recipes/phases/" + recipe.recipeId, { data: phase }).then((response) => {
-                console.log(response.data);
-                this.phases = this.phases.filter(item => item !== phase);
-                this.phase = {};
-                this.carregando = false;
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-                this.mensagemSuc = 'Erro ao deletar : ' + error;
-            })
+                this.mensagemSuc = '';
+            if(confirm("Tem certeza que deseja excluir a fase?")){
+                axios.delete(this.url + "recipes/phases/" + recipe.recipeId, { data: phase }).then((response) => {
+                    console.log(response.data);
+                    this.phases = this.phases.filter(item => item !== phase);
+                    this.phase = {};
+                    this.carregando = false;
+                }, (error) => {
+                    console.log(error);
+                    this.carregando = false;
+                    this.mensagemSuc = 'Erro ao deletar : ' + error;
+                })
+            }
         },
         relacionaFase(phase) {
             axios.post(this.url + "recipes/phases/" + this.recipe.recipeId, phase).then((response) => {
@@ -337,11 +344,26 @@ export default {
         createPhaseProduct(productPhase, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
-            console.log("produto da fase");
-            console.log(productPhase);
-            console.log("fase");
-            console.log(phase);
-            axios.post(this.url + "phases/products/" + this.phase.phaseId, productPhase).then((response) => {
+
+            setTimeout(() => {
+            if(this.phaseProduct.value && this.phaseProduct.measurementUnit && !this.phaseProduct.phaseProductType && this.phaseProduct.minValue && this.phaseProduct.maxValue && this.productPhaseName) return true;
+            this.errors = [];
+            if(!this.phaseProduct.value) this.errors.push("A quantidade deve ser preenchida.");
+            if(!this.phaseProduct.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
+            if(!this.phaseProduct.phaseProductType) this.errors.push("O tipo do produto da fase deve ser preenchido.");
+            if(!this.phaseProduct.minValue) this.errors.push("O valor mínimo deve ser preenchido.");
+            if(!this.phaseProduct.maxValue) this.errors.push("O valor máximo deve ser preenchido.");
+            if(!this.productPhaseName) this.errors.push("O nome do produto deve ser preenchido.");
+
+            }, 100);
+            
+            setTimeout(() => {
+                if (this.errors.length == 0){
+                console.log("produto da fase");
+                console.log(productPhase);
+                console.log("fase");
+                console.log(phase);
+                axios.post(this.url + "phases/products/" + this.phase.phaseId, productPhase).then((response) => {
                 productPhase.phaseProductId = response.data.phaseProductId;
                 this.phase.phaseProducts.push(productPhase);
                 this.phaseProduct = {};
@@ -356,24 +378,29 @@ export default {
                 this.productPhaseName = '';
                 this.carregando = false;
             });
+                }
+            })
         },
         deletePhaseProduct(productPhase, phase) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            console.log("produto da fase");
-            console.log(productPhase);
-            console.log("fase");
-            console.log(phase.phaseId);
-            axios.delete(this.url + "phases/products/" + phase.phaseId, { data: productPhase }).then((response) => {
-                phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);
-                this.mensagemSuc = 'Fase relacionada com sucesso';
-                this.ok = true;
-                this.carregando = false;
-                console.log(response);
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-            });
+             this.carregando = true;
+             this.mensagemSuc = '';
+             
+            if(confirm("Tem certeza que deseja excluir a fase?")){
+                console.log("produto da fase");
+                console.log(productPhase);
+                console.log("fase");
+                console.log(phase.phaseId);
+                axios.delete(this.url + "phases/products/" + phase.phaseId, { data: productPhase }).then((response) => {
+                    phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);
+                    this.mensagemSuc = 'Fase relacionada com sucesso';
+                    this.ok = true;
+                    this.carregando = false;
+                    console.log(response);
+                }, (error) => {
+                    console.log(error);
+                    this.carregando = false;
+                });
+            }         
         },
 
         /*****************/
@@ -384,24 +411,37 @@ export default {
         /*               */
         /*****************/
         createPhaseParameter(phaseParameter, phase) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            console.log(phaseParameter);
-            console.log(phase);
-            axios.post(this.url + "phases/parameters/" + phase.phaseId, phaseParameter).then((response) => {
-                phaseParameter.phaseParameterId = response.data.phaseParameterId;
-                phase.parameters.push(phaseParameter);
-                this.phaseParameter = {};
-                this.tagName = '';
-                this.mensagemSuc = 'Parâmetro cadastrado com sucesso!';
-                this.ok = true;
-                this.carregando = false;
-            }, (error) => {
-                console.log(error);
-                this.phaseParameter = {};
-                this.tagName = '';
-                this.carregando = false;
-            });
+
+            setTimeout(() => {
+                if(this.phaseParameter.setupValue && this.phaseParameter.measurementUnit && tagName) return true;
+                this.errors = [];
+                if(!this.phaseParameter.setupValue) this.errors.push("O valor deve ser preenchida.");
+                if(!this.phaseParameter.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
+                if(!tagName) this.errors.push("O nome do parâmetro deve ser preenchido.");
+            }, 100)
+
+            setTimeout(() => {
+                if(this.errors.length == 0){
+                    this.mensagemSuc = '';
+                    this.carregando = true;
+                    console.log(phaseParameter);
+                    console.log(phase);
+                    axios.post(this.url + "phases/parameters/" + phase.phaseId, phaseParameter).then((response) => {
+                        phaseParameter.phaseParameterId = response.data.phaseParameterId;
+                        phase.parameters.push(phaseParameter);
+                        this.phaseParameter = {};
+                        this.tagName = '';
+                        this.mensagemSuc = 'Parâmetro cadastrado com sucesso!';
+                        this.ok = true;
+                        this.carregando = false;
+                    }, (error) => {
+                        console.log(error);
+                        this.phaseParameter = {};
+                        this.tagName = '';
+                        this.carregando = false;
+                    });
+                }
+            }, 200)
         },
 
         /*****************/
