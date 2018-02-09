@@ -5,6 +5,8 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import { Stretch } from 'vue-loading-spinner'
+
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -54,7 +56,8 @@ export default {
     components: {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
-        'b-modal': bModal
+        'b-modal': bModal,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective

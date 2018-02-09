@@ -1,5 +1,7 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
+import { Stretch } from 'vue-loading-spinner'
+
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -34,6 +36,9 @@ export default {
             id: '',
             url: process.env.TOOLS_API
         }
+    },       
+    components: {
+        Stretch
     },
     methods: {
         buscar(id = "") {

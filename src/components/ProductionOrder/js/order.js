@@ -80,6 +80,14 @@ export default {
         'b-modal': bModalDirective
     }, 
     methods: {
+        checkForm:function() {
+            if(this.productionOrderObj.productionOrderNumber && this.productionOrderObj.quantity && this.opSelected && this.filterDesc) return true;
+            this.errors = [];
+            if(!this.productionOrderObj.productionOrderNumber) this.errors.push("O número da ordem de produção deve ser preenchido.");
+            if(!this.productionOrderObj.quantity) this.errors.push("A quantidade deve ser preenchida.");
+            if(!this.opSelected) this.errors.push("O tipo deve ser preenchido.");
+            if(!this.filterDesc) this.errors.push("A receita deve ser preenchida.");
+          },
         showModal() {
         this.$refs.modalCadOP.show()
         },

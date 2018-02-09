@@ -127,17 +127,19 @@ export default {
             getAssoc(){
                 this.mensagemSuc = '';
                 this.mensagem = '';     
-                confirm("Confirma associação?");
-                axios.put(this.url+'/api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
-                    console.log(this.url+'/api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
-                    console.log(response.data);
-                    this.Thing = response.data.currentThing;
-                    this.lista2 = true;
-                    this.mensagemSuc = 'Ordem associada com sucesso.';
-                },(r)=>{                
-                    this.mensagem = r.response.data;      
-                    this.carregando = false;
-                }) 
+                if(confirm("Confirma associação da ordem de produção?")){
+                    axios.put(this.url+'/api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId).then((response)=>{
+                        console.log(this.url+'/api/productionorders/AssociateProductionOrder/associate?thingId='+this.thingId+'&productionOrderId='+this.OPId);
+                        console.log(response.data);
+                        this.Thing = response.data.currentThing;
+                        this.lista2 = true;
+                        this.mensagemSuc = 'Ordem associada com sucesso.';
+                    },(r)=>{                
+                        this.mensagem = r.response.data;      
+                        this.carregando = false;
+                    }) 
+
+                }
             },
             getDisAssoc(){
                 this.mensagemSuc = '';

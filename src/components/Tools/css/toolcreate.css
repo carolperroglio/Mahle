@@ -8,6 +8,11 @@
     height: 16%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+#load {
+    margin-left: 50%;
+}
+
 .nav-item-tool{
     margin-left: 0.5%;
     padding-top: 4%;

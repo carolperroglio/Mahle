@@ -2,6 +2,9 @@ import axios from 'axios'
 import es6promisse from 'es6-promise'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import { Stretch } from 'vue-loading-spinner'
+import { setTimeout } from 'timers';
+
 es6promisse.polyfill();
 
 function paginacao(response, este){
@@ -44,28 +47,53 @@ export default {
             total: 0,
             pages: [],
             pageAtual: 0,
+            errors: []
                    
         }
     },  
     computed:{       
     },   
     components: {
-        'b-modal': bModal
+        'b-modal': bModal,
+        Stretch
     },
     directives: {
         'b-modal': bModalDirective
     },     
     methods:{
           showModal () {
+            this.errors = [];
             this.$refs.myModalRef.show()
           },
           hideModal () {
             this.$refs.myModalRef.hide()
           },
+
+        /***************************/
+        /*                         */
+        /*                         */
+        /*  Validações dos Campos  */
+        /*                         */
+        /*                         */
+        /***************************/
+
+
         cadastrar(ferramenta){      
            // this.carregando = true; 
             this.mensagem='';   
             this.mensagemSuc= '';
+            if(this.ferramenta.name && this.ferramenta.description && this.ferramenta.serialNumber && this.ferramenta.lifeCycle && this.ferramenta.currentLife && this.ferramenta.unitOfMeasurement && this.ferramenta.typeName && this.ferramenta.status) return true;
+            this.errors = [];
+            if(!this.ferramenta.name) this.errors.push("A quantidade deve ser preenchida.");
+            if(!this.ferramenta.description) this.errors.push("A unidade de medida deve ser preenchida.");
+            if(!this.ferramenta.serialNumber) this.errors.push("O valor mínimo deve ser preenchido.");
+            if(!this.ferramenta.lifeCycle) this.errors.push("O valor máximo deve ser preenchido.");
+            if(!this.ferramenta.currentLife) this.errors.push("O valor máximo deve ser preenchido.");
+            if(!this.ferramenta.unitOfMeasurement) this.errors.push("O valor máximo deve ser preenchido.");
+            if(!this.ferramenta.typeName) this.errors.push("O valor máximo deve ser preenchido.");
+            if(!this.ferramenta.status) this.errors.push("O valor máximo deve ser preenchido.");
+            
+            if(this.errors===[]){
             ferramenta.typeId = this.encontraObj(this.tipos, "name", ferramenta.typeName).id;    
             console.log(ferramenta);               
             axios.post(this.url,ferramenta).then((response)=>{
@@ -77,6 +105,7 @@ export default {
                 this.mensagem = 'Erro no server ' + r;                
                 this.carregando = false;
             }) 
+        }
                       
         },
         listar(){              
@@ -85,36 +114,41 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
-            axios.get(this.url+"?orderField="+this.orderField+"&order="+this.order+"&fieldFilter="+this.fieldFilter+"&fieldValue="+this.fieldValue+"&startat="+this.startat+"&quantity="+this.quantityPage).then((response)=>{     
-            this.ferramentas =response.data.values;
-            console.log(this.ferramentas);
-            for (var index in response.data.values){
-                switch(response.data.values[index].status){
-                    case "available":
-                    this.ferramentas[index].status = "Disponível";
-                    break;
-                    case "in_use":                    
-                    this.ferramentas[index].status = "Em uso";
-                    break;
-                    case "in_maintenance":
-                    this.ferramentas[index].status = "Em manutenção";
-                    break;
-                    case "not_available":
-                    this.ferramentas[index].status = "Indisponível";
-                    break;
-                    case "inactive":
-                    this.ferramentas[index].status = "Inativo";
-                    break;
-                    case "active":
-                    this.ferramentas[index].status = "Disponível";
-                    break;
-                }
-            } 
-                paginacao(response,this);
-            },(error)=>{                  
-                this.mensagem = 'Erro no server ' + error;                
-                this.carregando = false;  
-            })                         
+
+            setTimeout(()=>{
+                axios.get(this.url+"?orderField="+this.orderField+"&order="+this.order+"&fieldFilter="+this.fieldFilter+"&fieldValue="+this.fieldValue+"&startat="+this.startat+"&quantity="+this.quantityPage).then((response)=>{     
+                    this.ferramentas =response.data.values;
+                    console.log(this.ferramentas);
+                    for (var index in response.data.values){
+                        switch(response.data.values[index].status){
+                            case "available":
+                            this.ferramentas[index].status = "Disponível";
+                            break;
+                            case "in_use":                    
+                            this.ferramentas[index].status = "Em uso";
+                            break;
+                            case "in_maintenance":
+                            this.ferramentas[index].status = "Em manutenção";
+                            break;
+                            case "not_available":
+                            this.ferramentas[index].status = "Indisponível";
+                            break;
+                            case "inactive":
+                            this.ferramentas[index].status = "Inativo";
+                            break;
+                            case "active":
+                            this.ferramentas[index].status = "Disponível";
+                            break;
+                        }
+                    } 
+                        this.carregando = false;
+                        paginacao(response,this);
+                    },(error)=>{                  
+                        this.mensagem = 'Erro no server ' + error;                
+                        this.carregando = false;  
+                    })  
+            },200);
+                                   
         },
         editar(ferramenta){              
             this.carregando = true;   
@@ -144,12 +178,14 @@ export default {
                 return null;
             },
         itemClicado(f){
-                this.ferramenta=f;            
-                $("#editarFerr").modal('show');
+                this.ferramenta=f;
+                this.errors = [];
+                this.$refs.myModalRef.show();
                 }
         },       
 
     beforeMount: function(){
-        this.buscaTipo()
+        this.buscaTipo();
+        this.listar();
     }
 };

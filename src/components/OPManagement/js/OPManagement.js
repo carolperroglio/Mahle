@@ -5,6 +5,7 @@ import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
+import { setTimeout } from 'timers';
 
 es6promisse.polyfill();
 
@@ -150,7 +151,10 @@ export default {
             }, 1000);
         },
         editar(OP){
-            var stat = '';
+            
+            if(confirm("Tem certeza que deseja mudar o status?")){
+
+                var stat = '';
             switch(this.newStatus){
                 case "Criada":
                 stat = "created";
@@ -182,7 +186,9 @@ export default {
                 this.mensagemSuc = 'Status alterado com sucesso.';
             },(error)=>{   
                 this.mensagem = error.response.data;               
-            })   
+            })
+            }
+            
         }
     },
     beforeMount: function(){
