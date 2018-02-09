@@ -40,7 +40,7 @@ export default {
     data() {
         return {
             url: process.env.THINGS_API,
-            urlHist: 'http://brsbap01:8010',
+            urlHist: 'http://192.168.11.96:8011',
             carregando: false,
             date:'',
             datef: '',
@@ -79,7 +79,8 @@ export default {
             idstat: '',
             idstatcollpse: '',
             selectedTheme: [],
-            provider: []
+            dataProvider: [],
+            graphProvider: []
              }
     },
     components: {
@@ -122,19 +123,29 @@ export default {
                 var ticksF = this.dateToTicks(Fim);
                 console.log('I: '+ticksI);
                 console.log('F: '+ticksF);
-                console.log(this.urlHist+'/api/Historian?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
-                axios.get(this.urlHist+'/api/Historian?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then(response => {
-                    
+                console.log(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
+                axios.get(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then(response => {
+                    console.log(response.data);
+
+                    /*
+
                     response.data.forEach((R) => {
-                            var dataObj = new Object();
-                            var tag = R.tag;
-                            this.obj["category"] = this.ticksToDate(R.date);
-                            this.obj[tag] = R.value;
-                            dataObj = Object.assign(this.obj);
-                            console.log(dataObj);
-                            this.provider.push(dataObj);
+                        var dataObj = new Object();
+                        var tag = R.tag;
+                        this.obj["category"] = this.ticksToDate(R.date);
+                        this.obj[tag] = R.value;
+                        dataObj = Object.assign(this.obj);
+                        console.log(dataObj);
+                        this.provider.push(dataObj);
+                });
+
+                    response.data.tags.forEach(T => {
+                        var name = T.name;
+                        T.timestamp.forEach(TS => {
+
+                        })
                     });
-                    console.log(this.provider);
+                */
 
                 }).catch(error => {
                     console.log(error);
@@ -185,73 +196,7 @@ export default {
                     "gridPosition": "start"
                 },
                 "trendLines": [],
-                "graphs": [
-                    {
-                        "balloonColor": "#8EE8EB",
-                        "balloonText": "[[title]] of [[category]]:[[value]]",
-                        "bullet": "round",
-                        "bulletSize": 10,
-                        "color": "#000000",
-                        "columnWidth": 0.58,
-                        "fixedColumnWidth": -7,
-                        "fontSize": -4,
-                        "id": "AmGraph-1",
-                        "lineAlpha": 1,
-                        "lineThickness": 3,
-                        "tabIndex": -3,
-                        "title": "setpLL_ET-1002_read",
-                        "type": "smoothedLine",
-                        "valueField": "setpLL_ET-1002_read"
-                    },
-                    {
-                        "balloonColor": "#8EE8EB",
-                        "balloonText": "[[title]] of [[category]]:[[value]]",
-                        "bullet": "round",
-                        "bulletSize": 10,
-                        "color": "#000000",
-                        "id": "AmGraph-2",
-                        "lineThickness": 3,
-                        "type": "smoothedLine",
-                        "title": "setpL_ET-1002_read",
-                        "valueField": "setpL_ET-1002_read"
-                    },
-                    {
-                        "balloonColor": "#8EE8EB",
-                        "balloonText": "[[title]] of [[category]]:[[value]]",
-                        "bullet": "round",
-                        "bulletSize": 10,
-                        "color": "#000000",
-                        "id": "AmGraph-3",
-                        "title": "setpHH_ET-1002_read",
-                        "lineThickness": 3,
-                        "type": "smoothedLine",
-                        "valueField": "setpHH_ET-1002_read"
-                    },
-                    {
-                        "balloonColor": "#8EE8EB",
-                        "balloonText": "[[title]] of [[category]]:[[value]]",
-                        "bullet": "round",
-                        "bulletSize": 10,
-                        "color": "#000000",
-                        "id": "AmGraph-4",
-                        "title": "setpH_ET-1002_read",
-                        "lineThickness": 3,
-                        "type": "smoothedLine",
-                        "valueField": "setpH_ET-1002_read"
-                    },
-                    {
-                        "balloonColor": "#8EE8EB",
-                        "balloonText": "[[title]] of [[category]]:[[value]]",
-                        "bullet": "round",
-                        "bulletSize": 10,
-                        "color": "#000000",
-                        "id": "AmGraph-5",
-                        "title": "medicao_ET-1002_read",
-                        "lineThickness": 3,
-                        "type": "smoothedLine",
-                        "valueField": "medicao_ET-1002_read"
-                    }
-                ],
+                "graphs": this.graphProvider,
                 "guides": [],
                 "legend": {
                     "enabled": true
