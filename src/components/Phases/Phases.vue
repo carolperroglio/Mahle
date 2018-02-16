@@ -137,10 +137,10 @@
                     <ul class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
                         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
                             <label class="ls ls14">
-                               <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp; 
+                             <!-- <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp; -->
                             </label>
                             <label class="ls ls14">
-                               <b>Quantidade: </b>{{pro.value}} {{pro.measurementUnit}}
+                               <b>Quantidade: </b>{{pro.minValue}} min. {{pro.maxValue}} máx
                             </label>
                             <label class="ls ls14">
                                 <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
@@ -242,13 +242,7 @@
                     <div class="modal-body">
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                    <li class="form-group nav-phases col-md-2">
-                        <p v-if="errors.length">
-                                        <ul v-for="(error, index) in errors" v-bind:key="index">
-                                        <li class="alert alert-danger form-control" >{{ error }}</li>
-                                        </ul>
-                        </p>
-                    </li>
+                
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Quantidade: </label>
@@ -259,37 +253,20 @@
                                 <input class="form-control mr-sm-2" required v-model="recipeProduct.measurementUnit" placeholder="Ex.: kg" />
                             </div>
                         </div>
-                                <div class="form-row">
-                                <label>Tolerância: </label><br>
-                                </div>
-                                <div class="form-row">
-                                <label>Min: </label>
-                               <template>
-                                <range-slider
-                                    class="slider"
-                                    min="0" 
-                                    max="100"
-                                    step="1"
-                                    range
-                                    v-model="recipeProduct.minValue">
-                                </range-slider>
-                                <label>{{recipeProduct.minValue}}</label>
-                                </template>
-                                </div>
-                                <div class="form-row">
-                                <label>Máx: </label>
-                                <template>
-                                <range-slider
-                                    class="slider"
-                                    min="0"
-                                    max="100"
-                                    step="1"
-                                    range
-                                    v-model="recipeProduct.maxValue">
-                                </range-slider>
-                                <label>{{recipeProduct.maxValue}}</label>
-                                </template>
-                                </div>
+
+                        <div class="form-row">
+                            <label>Tolerância: </label><br>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Mín: </label><br>
+                                <input class="form-control mr-sm-2" required v-model="recipeProduct.minValue" placeholder="Ex.: kg" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Máx: </label><br>
+                                <input class="form-control mr-sm-2" required v-model="recipeProduct.maxValue" placeholder="Ex.: kg" />
+                            </div>
+                        </div>
                         <label class="mr-sm-2">Nome do produto: </label>
                             <input @keyup="recipeProducts=getResults(urlProducts,recipeProductName)" v-model="recipeProductName" placeholder="Nome do produto" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                             <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.productName=p.productName; pName=recipeProductName; recipeProductName=p.productName; recipeProducts=[]" v-for="(p,index) in recipeProducts" v-bind:key="index">{{p.productName}}</b-dropdown-item>
@@ -301,8 +278,10 @@
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
                             <button type="button" @click.stop.prevent="checkCadProdReceita(); createRecipeProduct(recipeProduct)" 
                             :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName || !recipeProduct.minValue || !recipeProduct.maxValue" class="btn btn-success">
+
                             <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -380,12 +359,12 @@
          <b-modal ref="modalcadProPhase" hide-footer title="Cadastrar produto">
                   
                     <div class="modal-body">
+
+                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                        
                         <div class="form-row">
-                            <p v-if="errors.length">
-                                        <ul v-for="(error, index) in errors" v-bind:key="index">
-                                        <li class="alert alert-danger form-control" >{{ error }}</li>
-                                        </ul>
-                                    </p>
+                            
                             <div class="form-group col-md-3">
                                 <label>Quantidade : </label><br>
                                 <input class="fm form-control mr-sm-2" v-model="phaseProduct.value" placeholder="Valor" />
@@ -406,36 +385,18 @@
                             
                         </div>
                         <div class="form-row">
-                                <label>Tolerância: </label><br>
-                                </div>
-                                <div class="form-row">
-                                <label>Min: </label>
-                               <template>
-                                <range-slider
-                                    class="slider"
-                                    min="0" 
-                                    max="100"
-                                    step="1"
-                                    range
-                                    v-model="phaseProduct.minValue">
-                                </range-slider>
-                                <label>{{phaseProduct.minValue}}</label>
-                                </template>
-                                </div>
-                                <div class="form-row">
-                                <label>Máx: </label>
-                                <template>
-                                <range-slider
-                                    class="slider"
-                                    min="0"
-                                    max="100"
-                                    step="1"
-                                    range
-                                    v-model="phaseProduct.maxValue">
-                                </range-slider>
-                                <label>{{phaseProduct.maxValue}}</label>
-                                </template>
-                                </div>
+                            <label>Tolerância: </label><br>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>Mín: </label><br>
+                                <input class="fm form-control mr-sm-2" v-model="phaseProduct.minValue" placeholder="Valor mínimo" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Máx : </label><br>
+                                <input class="fm form-control mr-sm-2" v-model="phaseProduct.maxValue" placeholder="Valor máximo" />
+                            </div>
+                        </div>
                         <label class="fm mr-sm-2">Nome do produto : </label>
                             <input @keyup="phase.pros=getResults(urlProducts,productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton"/>
                                 <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; phase.pros=[];" v-for="(p,index) in phase.pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>
@@ -444,10 +405,11 @@
                     <div class="modal-footer">
                         <div>
                             <div class="btn-group" role="group">
-                                <button @click.stop.prevent="checkCadProdFase(); createPhaseProduct(phaseProduct, phase);"  :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName || !recipeProduct.minValue || !recipeProduct.maxValue" class="btn btn-success">
+                                <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" :disabled="!phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue || !productPhaseName" class="btn btn-success">
+
                                     <i class="fa fa-check-square" aria-hidden="true"></i>
                                 </button>
-                                <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">
+                                <div class="btn btn-primary pull-right" @clicqk.stop.prevent="phase={}">
                                     Limpar
                                 </div>
                             </div>
@@ -467,11 +429,6 @@
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                         <div class="form-row">
-                            <p v-if="errors.length">
-                                        <ul v-for="(error, index) in errors" v-bind:key="index">
-                                        <li class="alert alert-danger form-control" >{{ error }}</li>
-                                        </ul>
-                                    </p>
                             <div class="form-group col-md-4">
                                 <label for="">Set Point</label>
                                 <input type="text" class="form-control form-control-sm" v-model="phaseParameter.setupValue" placeholder="Set Point">
@@ -492,7 +449,7 @@
                             </div>
                         </div>
                         <div class="btn-group" role="group">
-                            <button @click.stop.prevent="checkCadParam(); createPhaseParameter(phaseParameter, phase)" class="btn btn-success">
+                            <button @click.stop.prevent="createPhaseParameter(phaseParameter, phase)" class="btn btn-success">
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button @click.stop.prevent="deletePhaseParameter(index, tag)" class="btn btn-danger">

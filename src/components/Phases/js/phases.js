@@ -4,8 +4,6 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-import RangeSlider from 'vue-range-slider'
-import 'vue-range-slider/dist/vue-range-slider.css'
 import { Stretch } from 'vue-loading-spinner'
 import { setTimeout } from 'timers';
 
@@ -75,7 +73,6 @@ export default {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
         'b-modal': bModal,
-        RangeSlider,
         Stretch
     },
     directives: {
@@ -110,9 +107,11 @@ export default {
             this.$refs.modalEditRecipe.hide()
           },
           showModalAddProd() {
-              this.errors = {};
+            this.errors = {};
             this.phaseProduct={};
-            this.$refs.modalcadProPhase.show()
+            this.$refs.modalcadProPhase.show();
+            this.mensagemSuc = '';
+            this.mensagem = '';
           },
           hideModalAddProd() {
             this.$refs.modalcadProPhase.hide()
@@ -216,6 +215,7 @@ export default {
         /*****************/
         createRecipeProduct(recipeProduct, recipeProductEnd) {
             this.mensagemSuc = '';
+
             this.carregando = true;            
             setTimeout(() => {
                     recipeProduct.phaseProductType = 'finished';
@@ -330,7 +330,7 @@ export default {
         createPhaseProduct(productPhase, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
-            
+
             setTimeout(() => {
                 console.log("produto da fase");
                 console.log(productPhase);
