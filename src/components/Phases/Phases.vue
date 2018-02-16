@@ -37,7 +37,7 @@
                     </li>
                     <li class="form-group nav-phases col-md-2">
                         <form row>
-                            <br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">
+                            <br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="!recipe.recipeName || !recipe.recipeCode || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">
                                 Enviar
                             </button>
                         </form>
@@ -302,7 +302,7 @@
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             <button type="button" @click.stop.prevent="checkCadProdReceita(); createRecipeProduct(recipeProduct)" 
-                            :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName" class="btn btn-success">
+                            :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName || !recipeProduct.minValue || !recipeProduct.maxValue" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -357,7 +357,7 @@
 
                     <div class="modal-footer">
                         <div>
-                            <button @click.stop.prevent="checkEditarFase(); createPhase(phase);" class="btn btn-success" :disabled="phase.phaseName==undefined || phase.phaseName=='' || phase.phaseCode==undefined || phase.phaseCode==''">
+                            <button @click.stop.prevent="createPhase(phase);" class="btn btn-success" :disabled="phase.phaseName==undefined || phase.phaseName=='' || phase.phaseCode==undefined || phase.phaseCode==''">
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button @click.stop.prevent="deletePhase(phase, recipe)" :disabled="phase.phaseId == undefined || phase.phaseId == ''" class="btn btn-danger">
@@ -444,7 +444,7 @@
                     <div class="modal-footer">
                         <div>
                             <div class="btn-group" role="group">
-                                <button @click.stop.prevent="checkCadProdFase(); createPhaseProduct(phaseProduct, phase);" class="btn btn-success">
+                                <button @click.stop.prevent="checkCadProdFase(); createPhaseProduct(phaseProduct, phase);"  :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName || !recipeProduct.minValue || !recipeProduct.maxValue" class="btn btn-success">
                                     <i class="fa fa-check-square" aria-hidden="true"></i>
                                 </button>
                                 <div class="btn btn-primary pull-right" @click.stop.prevent="phase={}">

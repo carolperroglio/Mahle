@@ -575,7 +575,7 @@ export default {
                         var obj2 = new Object();
 
                         obj2["balloonColor"] = "#808080";
-                        obj2["balloonText"] = "[[title]] of [[category]]:[[value]]";
+                        obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
                         obj2["bullet"] = "round";
                         obj2["bulletSize"] = 10;
                         obj2["color"] = "#000000";

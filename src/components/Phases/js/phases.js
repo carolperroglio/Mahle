@@ -216,20 +216,8 @@ export default {
         /*****************/
         createRecipeProduct(recipeProduct, recipeProductEnd) {
             this.mensagemSuc = '';
-            this.carregando = true;
-
+            this.carregando = true;            
             setTimeout(() => {
-            if(this.recipeProduct.value && this.recipeProduct.measurementUnit && this.recipeProduct.minValue && this.recipeProduct.maxValue && recipeProductName) return true;
-            this.errors = [];
-            if(!this.recipeProduct.value) this.errors.push("A quantidade deve ser preenchida.");
-            if(!this.recipeProduct.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
-            if(!this.recipeProduct.minValue) this.errors.push("O valor mínimo deve ser preenchido.");
-            if(!this.recipeProduct.maxValue) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!recipeProductName) this.errors.push("O nome do produto deve ser preenchido.");
-            }, 100);
-            
-            setTimeout(() => {
-                if(this.errors.length == 0){
                     recipeProduct.phaseProductType = 'finished';
                     console.log(recipeProduct);
                     console.log(this.url + "recipes/product/" + this.recipe.recipeId);
@@ -243,8 +231,6 @@ export default {
                         this.carregando = false;
                         this.mensagem = error;
                     });
-                }
-                
             }, 200);
 
         },
@@ -344,21 +330,8 @@ export default {
         createPhaseProduct(productPhase, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
-
-            setTimeout(() => {
-            if(this.phaseProduct.value && this.phaseProduct.measurementUnit && !this.phaseProduct.phaseProductType && this.phaseProduct.minValue && this.phaseProduct.maxValue && this.productPhaseName) return true;
-            this.errors = [];
-            if(!this.phaseProduct.value) this.errors.push("A quantidade deve ser preenchida.");
-            if(!this.phaseProduct.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
-            if(!this.phaseProduct.phaseProductType) this.errors.push("O tipo do produto da fase deve ser preenchido.");
-            if(!this.phaseProduct.minValue) this.errors.push("O valor mínimo deve ser preenchido.");
-            if(!this.phaseProduct.maxValue) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!this.productPhaseName) this.errors.push("O nome do produto deve ser preenchido.");
-
-            }, 100);
             
             setTimeout(() => {
-                if (this.errors.length == 0){
                 console.log("produto da fase");
                 console.log(productPhase);
                 console.log("fase");
@@ -378,7 +351,6 @@ export default {
                 this.productPhaseName = '';
                 this.carregando = false;
             });
-                }
             })
         },
         deletePhaseProduct(productPhase, phase) {
