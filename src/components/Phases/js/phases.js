@@ -215,10 +215,9 @@ export default {
         /*****************/
         createRecipeProduct(recipeProduct, recipeProductEnd) {
             this.mensagemSuc = '';
-            this.carregando = true;
 
+            this.carregando = true;            
             setTimeout(() => {
-                if(this.errors.length == 0){
                     recipeProduct.phaseProductType = 'finished';
                     console.log(recipeProduct);
                     console.log(this.url + "recipes/product/" + this.recipe.recipeId);
@@ -232,8 +231,6 @@ export default {
                         this.carregando = false;
                         this.mensagem = error;
                     });
-                }
-                
             }, 200);
 
         },
@@ -333,7 +330,7 @@ export default {
         createPhaseProduct(productPhase, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
-            console.log(this.phases);
+
             setTimeout(() => {
                 console.log("produto da fase");
                 console.log(productPhase);

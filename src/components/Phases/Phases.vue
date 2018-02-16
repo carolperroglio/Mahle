@@ -37,7 +37,7 @@
                     </li>
                     <li class="form-group nav-phases col-md-2">
                         <form row>
-                            <br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="carregando || recipe.recipeName==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">
+                            <br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="!recipe.recipeName || !recipe.recipeCode || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">
                                 Enviar
                             </button>
                         </form>
@@ -278,8 +278,10 @@
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="button" @click.stop.prevent="createRecipeProduct(recipeProduct)" 
-                            :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName" class="btn btn-success">
+
+                            <button type="button" @click.stop.prevent="checkCadProdReceita(); createRecipeProduct(recipeProduct)" 
+                            :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName || !recipeProduct.minValue || !recipeProduct.maxValue" class="btn btn-success">
+
                             <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -404,6 +406,7 @@
                         <div>
                             <div class="btn-group" role="group">
                                 <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" :disabled="!phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue || !productPhaseName" class="btn btn-success">
+
                                     <i class="fa fa-check-square" aria-hidden="true"></i>
                                 </button>
                                 <div class="btn btn-primary pull-right" @clicqk.stop.prevent="phase={}">
