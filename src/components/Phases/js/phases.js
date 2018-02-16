@@ -4,8 +4,6 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-import RangeSlider from 'vue-range-slider'
-import 'vue-range-slider/dist/vue-range-slider.css'
 import { Stretch } from 'vue-loading-spinner'
 import { setTimeout } from 'timers';
 
@@ -75,7 +73,6 @@ export default {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
         'b-modal': bModal,
-        RangeSlider,
         Stretch
     },
     directives: {
@@ -110,9 +107,11 @@ export default {
             this.$refs.modalEditRecipe.hide()
           },
           showModalAddProd() {
-              this.errors = {};
+            this.errors = {};
             this.phaseProduct={};
-            this.$refs.modalcadProPhase.show()
+            this.$refs.modalcadProPhase.show();
+            this.mensagemSuc = '';
+            this.mensagem = '';
           },
           hideModalAddProd() {
             this.$refs.modalcadProPhase.hide()
@@ -218,16 +217,6 @@ export default {
             this.mensagemSuc = '';
             this.carregando = true;
 
-            setTimeout(() => {
-            if(this.recipeProduct.value && this.recipeProduct.measurementUnit && this.recipeProduct.minValue && this.recipeProduct.maxValue && recipeProductName) return true;
-            this.errors = [];
-            if(!this.recipeProduct.value) this.errors.push("A quantidade deve ser preenchida.");
-            if(!this.recipeProduct.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
-            if(!this.recipeProduct.minValue) this.errors.push("O valor mínimo deve ser preenchido.");
-            if(!this.recipeProduct.maxValue) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!recipeProductName) this.errors.push("O nome do produto deve ser preenchido.");
-            }, 100);
-            
             setTimeout(() => {
                 if(this.errors.length == 0){
                     recipeProduct.phaseProductType = 'finished';
@@ -344,21 +333,8 @@ export default {
         createPhaseProduct(productPhase, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
-
+            console.log(this.phases);
             setTimeout(() => {
-            if(this.phaseProduct.value && this.phaseProduct.measurementUnit && !this.phaseProduct.phaseProductType && this.phaseProduct.minValue && this.phaseProduct.maxValue && this.productPhaseName) return true;
-            this.errors = [];
-            if(!this.phaseProduct.value) this.errors.push("A quantidade deve ser preenchida.");
-            if(!this.phaseProduct.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
-            if(!this.phaseProduct.phaseProductType) this.errors.push("O tipo do produto da fase deve ser preenchido.");
-            if(!this.phaseProduct.minValue) this.errors.push("O valor mínimo deve ser preenchido.");
-            if(!this.phaseProduct.maxValue) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!this.productPhaseName) this.errors.push("O nome do produto deve ser preenchido.");
-
-            }, 100);
-            
-            setTimeout(() => {
-                if (this.errors.length == 0){
                 console.log("produto da fase");
                 console.log(productPhase);
                 console.log("fase");
@@ -378,7 +354,6 @@ export default {
                 this.productPhaseName = '';
                 this.carregando = false;
             });
-                }
             })
         },
         deletePhaseProduct(productPhase, phase) {
