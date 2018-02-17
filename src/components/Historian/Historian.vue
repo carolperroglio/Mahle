@@ -17,7 +17,7 @@
                   <div class="history">
                     <div class="row">
                         <div class="col-sm-8">
-                          <h3>Thing nº: {{thingId}}</h3>
+                          <h3>Thing nº: {{thingId}} - Grupo: {{thingName}}</h3>
                         </div>
                         <div class="col-sm-4">
                        <button type="button" class="btn btn-secondary btn-sm btn-sm" @click.prevent="showModal()">
