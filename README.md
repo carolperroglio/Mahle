@@ -2,7 +2,7 @@
 
 Repositório do sistema Onyx 
 
-![alt text](https://github.com/carolperroglio/Mahle/onyx.jpg)
+![alt text](https://github.com/carolperroglio/Mahle/master/onyx.jpg)
 
 ## Build Setup
 
