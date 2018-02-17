@@ -104,6 +104,7 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             thingId: '',
+            thingName: '',
             things: [],
             bottom: 'bottom',
             idstat: '',
@@ -570,7 +571,8 @@ export default {
 
                 this.data.tags.forEach((R) => { 
                     if(R.group == "Temperatura"){
-
+                        this.thingName = R.group;
+                        this.thingId = this.data.thingId;
                         var dataObj2 = new Array();
                         var obj2 = new Object();
 
