@@ -23,7 +23,7 @@ export default {
             url: ipServerRecipe + '/api/',
             url2: ipServerThing + '/api/',
             urlProducts: ipServerRecipe + '/api/products?&fieldFilter=productName&fieldValue=',
-            urlRecipeSearch: ipServerRecipe + '/api/tags?fieldFilter=tagName&fieldValue=',
+            urlRecipeSearch: ipServerThing + '/api/tags?fieldFilter=tagName&fieldValue=',
             urlRecipes: ipServerRecipe + '/api/recipes/',
             urlGatewayRecipes: ipServerOP + '/gateway/recipes/',
             valMin: 50,

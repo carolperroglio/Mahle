@@ -28,7 +28,8 @@ export default {
             orderHistorian: [],
             productionOrderId: '',
             consumo: false,
-            rolo: 0,
+            rolo: 1,
+            lote: 0,
             OPs: [],
             op: '',
             mensagem:'',
@@ -98,7 +99,11 @@ export default {
             this.mensagemSuc= '';
             console.log(ordem);    
             console.log(this.url+'/api/producthistorian');    
-            ordem.batch = this.rolo;  
+            if(this.ordem.type=="output"){
+                ordem.batch = this.rolo; 
+            }else{
+                ordem.batch = this.lote;
+            }
             confirm("Confirma apontamento?");     
             axios.post(this.url+'/api/producthistorian',ordem).then((response)=>{
                 this.mensagemSuc = 'Produto apontado com sucesso.'; 
@@ -106,7 +111,7 @@ export default {
                 this.carregando = false;     
                 this.pReceita = false;
                 this.pFase = false;
-                this.rolo = ordem.batch + 1;
+                this.rolo++;
                 this.ordem={};   
                 console.log(response);
                 
@@ -120,6 +125,7 @@ export default {
 
         listar(){            
             this.lista = true;  
+            this.carregando = true;
             axios.get(this.url+'/api/OrderHistorian/'+this.productionOrder.productionOrderId).then((response)=>{   
                      
                 console.log(response.data);
@@ -178,5 +184,7 @@ export default {
         },
         beforeMount: function(){
             this.getResults();
+            this.productionOrdersRecipe.recipeName = '';
+            this.productionOrdersRecipe.recipeProduct.product.productName = '';
         }
 };
