@@ -96,9 +96,9 @@ export default {
 
             this.mensagem='';   
             this.mensagemSuc= '';
-            ordem.batch = this.rolo;
             console.log(ordem);    
-            console.log(this.url+'/api/producthistorian');      
+            console.log(this.url+'/api/producthistorian');    
+            ordem.batch = this.rolo;  
             confirm("Confirma apontamento?");     
             axios.post(this.url+'/api/producthistorian',ordem).then((response)=>{
                 this.mensagemSuc = 'Produto apontado com sucesso.'; 
@@ -125,6 +125,7 @@ export default {
                 console.log(response.data);
                 this.orderHistorian = response.data;
                 for (var i = 0; i < this.orderHistorian.productsInput.length; i++){
+                    this.rolo = parseInt(this.orderHistorian.productsInput[i].batch)+1;
                     this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
                 }
                 for (var i = 0; i < this.orderHistorian.productsOutput.length; i++){

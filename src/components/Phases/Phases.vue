@@ -136,8 +136,11 @@
                 <div v-if="editarActivate">
                     <ul class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
                         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
-                            <label class="ls ls14">
-                             <!-- <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp; -->
+                            <label v-if="pro.product.productName != undefined" class="ls ls14">
+                              <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
+                            </label> 
+                            <label v-else class="ls ls14">
+                                Material
                             </label>
                             <label class="ls ls14">
                                <b>Quantidade: </b>{{pro.minValue}} min. {{pro.maxValue}} máx
@@ -449,7 +452,7 @@
                             </div>
                         </div>
                         <div class="btn-group" role="group">
-                            <button @click.stop.prevent="createPhaseParameter(phaseParameter, phase)" class="btn btn-success">
+                            <button @click.stop.prevent="createPhaseParameter(phaseParameter, phase)" :disabled="!phaseParameter.setupValue || !phaseParameter.measurementUnit || !tagName" class="btn btn-success">
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                             <button @click.stop.prevent="deletePhaseParameter(index, tag)" class="btn btn-danger">

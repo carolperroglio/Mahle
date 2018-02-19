@@ -357,7 +357,7 @@ export default {
              this.carregando = true;
              this.mensagemSuc = '';
              
-            if(confirm("Tem certeza que deseja excluir a fase?")){
+            if(confirm("Tem certeza que deseja excluir o produto da fase?")){
                 console.log("produto da fase");
                 console.log(productPhase);
                 console.log("fase");
@@ -385,15 +385,6 @@ export default {
         createPhaseParameter(phaseParameter, phase) {
 
             setTimeout(() => {
-                if(this.phaseParameter.setupValue && this.phaseParameter.measurementUnit && tagName) return true;
-                this.errors = [];
-                if(!this.phaseParameter.setupValue) this.errors.push("O valor deve ser preenchida.");
-                if(!this.phaseParameter.measurementUnit) this.errors.push("A unidade de medida deve ser preenchida.");
-                if(!tagName) this.errors.push("O nome do parâmetro deve ser preenchido.");
-            }, 100)
-
-            setTimeout(() => {
-                if(this.errors.length == 0){
                     this.mensagemSuc = '';
                     this.carregando = true;
                     console.log(phaseParameter);
@@ -412,7 +403,6 @@ export default {
                         this.tagName = '';
                         this.carregando = false;
                     });
-                }
             }, 200)
         },
 
