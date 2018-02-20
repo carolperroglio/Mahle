@@ -56,6 +56,10 @@
     margin-top: 1%;
 }
 
+.lsbtn {
+    width: 4.7%;
+}
+
 /*Botão Cadastrar Receita*/
 #cadReceita{
     padding-left: 15%;

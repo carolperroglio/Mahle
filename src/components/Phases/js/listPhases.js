@@ -48,6 +48,7 @@ export default {
         getRecipe: function() {
             this.carregando = true;
 
+            console.log(this.urlRecipes);
             axios.get(this.urlRecipes).then(response => {
                 this.recipes = response.data.values;
                 this.carregando = false;
@@ -69,6 +70,17 @@ export default {
                 console.log(error);
                 this.carregando = false;
             });
+        },
+        recipeDelete(id){
+            this.carregando = true;
+            console.log(this.urlRecipes);
+            axios.delete(this.urlRecipes+'/'+id).then(response => {
+                console.log(response);
+                this.carregando = false;
+            }).catch(error => {
+                console.log(error);
+                this.carregando = false;
+            })
         },
         /*****************/
         /*               */
