@@ -71,7 +71,7 @@ export default {
     data() {
         return {
             url: process.env.THINGS_API,
-            urlHist: 'http://192.168.11.96:8011',
+            urlHist: 'http://192.168.11.37:8011',
             carregando: false,
             date:'',
             datef: '',
@@ -106,418 +106,17 @@ export default {
             thingId: '',
             thingName: '',
             things: [],
+            tags: [],
             bottom: 'bottom',
             idstat: '',
             idstatcollpse: '',
             selectedTheme: [],
+            group: '',
             graphProvider: [],
-            providerAux : [],
-            provider : [],
-            data: { 
-
-                "thingId": 3, 
-            
-                "tags": [ 
-            
-                    { 
-            
-                        "name": "Valor Medicao", 
-            
-                        "group": "Temperatura", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "41", 
-            
-                            "35", 
-            
-                            "86", 
-            
-                            "42", 
-            
-                            "43" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor HH", 
-            
-                        "group": "Temperatura", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "103", 
-            
-                            "103", 
-            
-                            "103", 
-            
-                            "103", 
-            
-                            "103" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor H", 
-            
-                        "group": "Temperatura", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "88", 
-            
-                            "88", 
-            
-                            "88", 
-            
-                            "88", 
-            
-                            "88" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor L", 
-            
-                        "group": "Temperatura", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "13", 
-            
-                            "13", 
-            
-                            "13", 
-            
-                            "13", 
-            
-                            "13" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor LL", 
-            
-                        "group": "Temperatura", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "3", 
-            
-                            "3", 
-            
-                            "3", 
-            
-                            "3", 
-            
-                            "3" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Linha", 
-            
-                        "group": "Alarme", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "5", 
-            
-                            "4", 
-            
-                            "6", 
-            
-                            "1", 
-            
-                            "4" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor HH", 
-            
-                        "group": "Pressao", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "2603", 
-            
-                            "2603", 
-            
-                            "2603", 
-            
-                            "2603", 
-            
-                            "2603" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor H", 
-            
-                        "group": "Pressao", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "2503", 
-            
-                            "2503", 
-            
-                            "2503", 
-            
-                            "2503", 
-            
-                            "2503" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor L", 
-            
-                        "group": "Pressao", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "1203", 
-            
-                            "1203", 
-            
-                            "1203", 
-            
-                            "1203", 
-            
-                            "1203" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor LL", 
-            
-                        "group": "Pressao", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "1003", 
-            
-                            "1003", 
-            
-                            "1003", 
-            
-                            "1003", 
-            
-                            "1003" 
-            
-                        ] 
-            
-                    }, 
-            
-                    { 
-            
-                        "name": "Valor Medicao", 
-            
-                        "group": "Pressao", 
-            
-                        "timestamp": [ 
-            
-                            636537720043840494, 
-            
-                            636537724505030823, 
-            
-                            636537727259744353, 
-            
-                            636537728994528710, 
-            
-                            636537732751583502 
-            
-                        ], 
-            
-                        "value": [ 
-            
-                            "1697", 
-            
-                            "2124", 
-            
-                            "2078", 
-            
-                            "1963", 
-            
-                            "1064" 
-            
-                        ] 
-            
-                    } 
-            
-                ] 
-            
-            }
+            providerAux: [],
+            provider: [],
+            data: [],
+            headers: []
         }
     },
     components: {
@@ -555,7 +154,7 @@ export default {
         getHistory(){
             this.carregando = true;
             setTimeout(() => {
-                /*
+
                 var Ini = this.date.toString()+' '+this.timeIni.HH+':'+this.timeIni.mm;  
                 var ticksI = this.dateToTicks(Ini);
                 var Fim = this.datef.toString()+' '+this.timeFim.HH+':'+this.timeFim.mm;
@@ -564,97 +163,21 @@ export default {
                 console.log('I: '+ticksI);
                 console.log('F: '+ticksF);
                 console.log(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
-                */
-
-                console.log("this.data");
-                console.log(this.data);
-
-                this.data.tags.forEach((R) => { 
-                    if(R.group == "Temperatura"){
-                        this.thingName = R.group;
-                        this.thingId = this.data.thingId;
-                        var dataObj2 = new Array();
-                        var obj2 = new Object();
-
-                        obj2["balloonColor"] = "#808080";
-                        obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
-                        obj2["bullet"] = "round";
-                        obj2["bulletSize"] = 10;
-                        obj2["color"] = "#000000";
-                        obj2["lineThickness"] = 3;
-                        obj2["type"] = "smoothedLine";
-                        obj2["title"] = R.name;
-                        obj2["valueField"] = R.name; 
-                        
-                        var i = 0;
-
-                        console.log("R");
-                        console.log(R);
-                        
-                        R.timestamp.map( e => {
-                            
-                            var dataObj = new Array();
-
-                            var category = "category";
-                            var tagname = R.name;
-
-                            var obj = new Object();
-                            
-                            obj[category] = this.ticksToDate(e);
-                            obj[tagname] = R.value[i];
-
-                            dataObj = Object.assign(obj);
-                            console.log(dataObj);
-                            this.providerAux.push(dataObj);
-
-                            i++;
-                        })
-
-                        dataObj2 = Object.assign(obj2);
-                        console.log(dataObj2);
-                        this.graphProvider.push(dataObj2);
-
-                        console.log("this.graphProvider");
-                        console.log(this.graphProvider);   
-
-                        console.log("this.providerAux");
-                        console.log(this.providerAux);    
-                        }
-                    }); 
-                    console.log("this.providerAux.groupBy('category')");
-                    console.log(this.providerAux.groupByProperties("category"));
-
-                    var groupArray = this.providerAux.groupByProperties("category");
-
-                    
-                    var newproviderAux = new Array();
-                    var dataObj3 = new Object();
-
-                    groupArray.forEach((Group) => {
-                        var category = "category";
-                        var obj3 = new Object();
-                        obj3[category] = Group[0].category;
-                        Group.forEach((Tag) => {
-                            var keys = Object.keys(Tag);
-                            var val = Object.values(Tag);
-                            obj3[keys[1]] = val[1];
-                            dataObj3 = Object.assign(obj3);
-                        });
-                        
-                        newproviderAux.push(dataObj3);
-                        console.log(newproviderAux);
-                        this.provider = newproviderAux;
-                    });
-
-
+                
+                axios.get(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then((response)=>{
+                    this.data = response.data;
+                    this.tags = response.data.tags;
+                    this.group = "Pressao";   
+                    console.log(this.data);
+                    this.formatGraphData(this.data, this.group);
+                    this.headers = Object.keys(this.provider[0]);
+                },(error)=>{
+                    console.log(error);
+                })      
             }, 200);
-            setTimeout(() => {
-
                 this.carregando = false;
-                this.created();
-
-            }, 300);            
         },
+
         ticksToDate(dateTicks){
             var epochTicks = 621355968000000000,
             ticksPerMillisecond = 10000,  
@@ -664,11 +187,93 @@ export default {
             jsDate = new Date(jsTicks);
             var hours = jsDate.toString().slice(4,21);
             return hours;
-            },
+        },
+
         dateToTicks(dateTime){
             var date = new Date(dateTime); 
             var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
             return ticks;
+        },
+
+        formatGraphData(obj, group){
+            obj.tags.forEach((R) => { 
+                if(R.group == group){
+                    this.thingName = R.group;
+                    this.thingId = obj.thingId;
+                    var dataObj2 = new Array();
+                    var obj2 = new Object();
+
+                    obj2["balloonColor"] = "#808080";
+                    obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
+                    obj2["bullet"] = "round";
+                    obj2["bulletSize"] = 10;
+                    obj2["color"] = "#000000";
+                    obj2["lineThickness"] = 3;
+                    obj2["type"] = "smoothedLine";
+                    obj2["title"] = R.name;
+                    obj2["valueField"] = R.name; 
+                    
+                    var i = 0;
+
+                    console.log("R");
+                    console.log(R);
+                    
+                    R.timestamp.map( e => {
+                        
+                        var dataObj = new Array();
+
+                        var category = "category";
+                        var tagname = R.name;
+
+                        var obj = new Object();
+                        
+                        obj[category] = this.ticksToDate(e);
+                        obj[tagname] = R.value[i];
+
+                        dataObj = Object.assign(obj);
+                        console.log(dataObj);
+                        this.providerAux.push(dataObj);
+
+                        i++;
+                    })
+
+                    dataObj2 = Object.assign(obj2);
+                    console.log(dataObj2);
+                    this.graphProvider.push(dataObj2);
+
+                    console.log("this.graphProvider");
+                    console.log(this.graphProvider);   
+
+                    console.log("this.providerAux");
+                    console.log(this.providerAux);    
+                    }
+                }); 
+                console.log("this.providerAux.groupBy('category')");
+                console.log(this.providerAux.groupByProperties("category"));
+
+                var groupArray = this.providerAux.groupByProperties("category");
+
+                
+                var newproviderAux = new Array();
+                var dataObj3 = new Object();
+
+                groupArray.forEach((Group) => {
+                    var category = "category";
+                    var obj3 = new Object();
+                    obj3[category] = Group[0].category;
+                    Group.forEach((Tag) => {
+                        var keys = Object.keys(Tag);
+                        var val = Object.values(Tag);
+                        obj3[keys[1]] = val[1];
+                        dataObj3 = Object.assign(obj3);
+                    });
+                    
+                    newproviderAux.push(dataObj3);
+                    console.log(newproviderAux);
+                    this.provider = newproviderAux;
+                });
+
+                this.created();
         },
 
         showModal() {
@@ -676,9 +281,11 @@ export default {
                 this.$refs.myModalEdit.show()
             }, 200);
         },
+
         hideModal() {
             this.$refs.myModalEdit.hide();
         },
+
         created() {
             window.AmCharts.makeChart("chartdiv",
             {

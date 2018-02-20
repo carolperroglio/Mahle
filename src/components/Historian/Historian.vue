@@ -23,6 +23,7 @@
                        <button type="button" class="btn btn-secondary btn-sm btn-sm" @click.prevent="showModal()">
                             Editar Período
                        </button>
+                        
                         </div>
                         <br>
                         <br>
@@ -32,6 +33,37 @@
               </div>
             </div>
         </div>
+        </div>
+
+        <div class="row conteudotabela">
+            <div class="col-sm-2">
+            <select class="form-control-outline-secondary" v-model="thingId">    
+                <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
+                </option>
+            </select>
+            </div>
+            <div class="col-sm-2">
+            <button type="button" class="btn btn-secondary btn-sm btn-sm" @click.prevent="showModal()">
+                Editar Grupo
+            </button>
+            </div>
+            <div class="col-sm-2">
+            <button type="button" class="btn btn-success btn-sm btn-sm pull-left" @click.prevent="showModal()">
+                Atualizar
+            </button>
+            </div>
+            <br>
+            <br>
+            <div class="col-md-12">
+                <table class="table1">
+                    <tr class="tr1">
+                        <th class="th1" v-for="(h, index) in headers" :key="index">{{ h }}</th>
+                    </tr>
+                    <tr class="tr1" v-for="(obj,index) in provider" v-bind:key="index">
+                        <td class="td1" v-for="(value, key, index) in obj">{{ value }}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <b-modal ref="myModalEdit" hide-footer title="Selecionar Período">

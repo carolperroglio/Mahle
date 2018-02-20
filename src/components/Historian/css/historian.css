@@ -35,50 +35,26 @@ body {
     margin-left: 5%;
 }
 
-.theme1 {
-    padding: 2%;
-    background-color: rgb(107, 10, 10);
-    color: white;
-    -webkit-transition: background-color 1000ms linear;
-    transition: background-color 1000ms linear;
-    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
-   
-  .theme2 {
-    padding: 2%;
-    background-color: rgb(15, 107, 1);
-    color: white;
-    -webkit-transition: background-color 1000ms linear;
-    transition: background-color 1000ms linear;
-    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
-   
-  .theme3 {
-    padding: 2%;
-    background-color: #00377e;
-    color: white;
-    -webkit-transition: background-color 1000ms linear;
-    transition: background-color 1000ms linear;
-    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
-   
-  .theme4 {
-    padding: 2%;
-    background-color: rgb(213, 181, 0);
-    color: white;
-    -webkit-transition: background-color 1000ms linear;
-    transition: background-color 1000ms linear;
-    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
-   
-  .theme5 {
-    padding: 2%;     
-    background-color: rgb(82, 23, 94);
-    color: white;
-    -webkit-transition: background-color 1000ms linear;
-    transition: background-color 1000ms linear;
-    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
+.conteudotabela{
+    margin-left: 10%;
+    margin-top: -5%;
+}
+
+.table1 {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+.td1, th1 {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.tr1:nth-child(even) {
+    background-color: #dddddd;
+}
 
   #constat {
     padding: 0.5%;
