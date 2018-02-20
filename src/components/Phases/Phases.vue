@@ -134,6 +134,16 @@
                         </label> 
                     </form>
                 <div v-if="editarActivate">
+                    <h2> Produtos </h2>
+                    <div v-if="pha.phaseProducts.length == 0">
+                        <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
+                            <label class="ls ls14">
+                            Sem produtos cadastrados ainda...
+                            </label>
+                        </li>
+                    </ul>
+                    </div>
                     <ul class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
                         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
                             <label v-if="pro.product.productName != undefined" class="ls ls14">
@@ -147,6 +157,31 @@
                             </label>
                             <label class="ls ls14">
                                 <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
+                            </label>
+                            <label class="ls ls14">
+                            <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
+                            </button>
+                            </label>
+                        </li>
+                    </ul>
+
+                     <h2> Parâmetros </h2>
+                      <div v-if="pha.phaseParameters.length == 0">
+                        <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
+                            <label class="ls ls14">
+                            Sem parâmetros cadastrados ainda...
+                            </label>
+                        </li>
+                    </ul>
+                    </div>
+                    <ul class="list-group" v-for="(pro, indexPro) in pha.phaseParameters" :key="indexPro">
+                        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
+                            <label class="ls ls14">
+                               <b>Valor: </b>{{pro.setupValue}} min. {{pro.measurementUnit}} máx
+                            </label>
+                            <label class="ls ls14">
+                                <b>Nome: </b>{{pro.tag.tagName}}
                             </label>
                             <label class="ls ls14">
                             <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
@@ -282,7 +317,7 @@
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
 
-                            <button type="button" @click.stop.prevent="checkCadProdReceita(); createRecipeProduct(recipeProduct)" 
+                            <button type="button" @click.stop.prevent="createRecipeProduct(recipeProduct)" 
                             :disabled="!recipeProduct.value || !recipeProduct.measurementUnit || !recipeProductName || !recipeProduct.minValue || !recipeProduct.maxValue" class="btn btn-success">
 
                             <i class="fa fa-check-square" aria-hidden="true"></i>
@@ -367,16 +402,11 @@
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                         
                         <div class="form-row">
-                            
-                            <div class="form-group col-md-3">
-                                <label>Quantidade : </label><br>
-                                <input class="fm form-control mr-sm-2" v-model="phaseProduct.value" placeholder="Valor" />
-                            </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label>Unidade de medida : </label><br>
                                 <input class="fm form-control mr-sm-2" v-model="phaseProduct.measurementUnit" placeholder="Ex.: kg" />
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label>Tipo de Produto:</label>
                                 <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
                                     <option value="" selected disabled>Campo para busca</option>
