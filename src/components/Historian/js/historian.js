@@ -12,12 +12,15 @@ import VueTimepicker from 'vue2-timepicker'
 import VueTiles from 'vue-tiles'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
+import JsonExcel from 'vue-json-excel'
+import PrintJs from 'print-js'
 import 'vue-tiles/dist/vue-tiles.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
-import { array } from 'bootstrap-vue/es/utils';
+import { array } from 'bootstrap-vue/es/utils'
 import { Stretch } from 'vue-loading-spinner'
+
 
 es6promisse.polyfill();
 
@@ -97,6 +100,7 @@ export default {
             history: [],
             pages: [],
             pageAtual: 0,
+            newGroup: '',
             orderField: '',
             order: '',
             ticksIni: '',
@@ -112,11 +116,337 @@ export default {
             idstatcollpse: '',
             selectedTheme: [],
             group: '',
+            groups: [],
             graphProvider: [],
             providerAux: [],
             provider: [],
             data: [],
-            headers: []
+            headers: [],
+            jsonfields: {
+                "Valor H":"Valor H",
+                "Valor HH":"Valor HH",
+                "Valor Medicao":"Valor Medicao",
+                "Valor LL":"Valor LL",
+                "Valor L":"Valor L",
+                "Data": "category"
+            },
+            dataJSON: { 
+
+                "thingId": 3, 
+            
+                "tags": [ 
+            
+                    { 
+            
+                        "name": "Valor Medicao", 
+            
+                        "group": "Temperatura", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "41", 
+            
+                            "35", 
+            
+                            "86" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor HH", 
+            
+                        "group": "Temperatura", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "103", 
+            
+                            "103", 
+            
+                            "103" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor H", 
+            
+                        "group": "Temperatura", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "88", 
+            
+                            "88", 
+            
+                            "88" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor L", 
+            
+                        "group": "Temperatura", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "13", 
+            
+                            "13", 
+            
+                            "13" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor LL", 
+            
+                        "group": "Temperatura", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "3", 
+            
+                            "3", 
+            
+                            "3" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Linha", 
+            
+                        "group": "Alarme", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "5", 
+            
+                            "4", 
+            
+                            "6" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor HH", 
+            
+                        "group": "Pressao", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "2603", 
+            
+                            "2603", 
+            
+                            "2603" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor H", 
+            
+                        "group": "Pressao", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "2503", 
+            
+                            "2503", 
+            
+                            "2503" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor L", 
+            
+                        "group": "Pressao", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "1203", 
+            
+                            "1203", 
+            
+                            "1203" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor LL", 
+            
+                        "group": "Pressao", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "1003", 
+            
+                            "1003", 
+            
+                            "1003" 
+            
+                        ] 
+            
+                    }, 
+            
+                    { 
+            
+                        "name": "Valor Medicao", 
+            
+                        "group": "Pressao", 
+            
+                        "timestamp": [ 
+            
+                            636537720043840494, 
+            
+                            636537724505030823, 
+            
+                            636537727259744353 
+            
+                        ], 
+            
+                        "value": [ 
+            
+                            "1697", 
+            
+                            "2124", 
+            
+                            "2078" 
+            
+                        ] 
+            
+                    } 
+            
+                ] 
+            
+            } 
         }
     },
     components: {
@@ -129,6 +459,7 @@ export default {
         'b-modal': bModal,
         'date-picker': datePicker,
         'vue-timepicker': VueTimepicker,
+        'downloadExcel': JsonExcel,
         Stretch
     },
     directives: {
@@ -163,7 +494,7 @@ export default {
                 console.log('I: '+ticksI);
                 console.log('F: '+ticksF);
                 console.log(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
-                
+                /*
                 axios.get(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then((response)=>{
                     this.data = response.data;
                     this.tags = response.data.tags;
@@ -173,9 +504,22 @@ export default {
                     this.headers = Object.keys(this.provider[0]);
                 },(error)=>{
                     console.log(error);
-                })      
+                }) 
+                */
+               this.data = this.dataJSON;
+               this.tags = this.dataJSON.tags;
+
+               this.tags.forEach((T) => {
+                   if (!this.groups.includes(T.group)){
+                   this.groups.push(T.group);
+                   }
+               })
+
+               console.log(this.groups);
             }, 200);
                 this.carregando = false;
+                this.created();
+                this.hideModal();
         },
 
         ticksToDate(dateTicks){
@@ -195,6 +539,16 @@ export default {
             return ticks;
         },
 
+        refreshGraph(){
+            this.created();
+        },
+
+        editGroup(grupo){
+            this.group = grupo;   
+            console.log(this.data);
+            this.formatGraphData(this.data, this.group);
+            this.headers = Object.keys(this.provider[0]);
+        },
         formatGraphData(obj, group){
             obj.tags.forEach((R) => { 
                 if(R.group == group){
@@ -272,8 +626,6 @@ export default {
                     console.log(newproviderAux);
                     this.provider = newproviderAux;
                 });
-
-                this.created();
         },
 
         showModal() {

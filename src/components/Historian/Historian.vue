@@ -20,7 +20,7 @@
                           <h3>Thing nº: {{thingId}} - Grupo: {{thingName}}</h3>
                         </div>
                         <div class="col-sm-4">
-                       <button type="button" class="btn btn-secondary btn-sm btn-sm" @click.prevent="showModal()">
+                       <button type="button" class="btn btn-info btn-sm btn-sm" @click.prevent="showModal()">
                             Editar Período
                        </button>
                         
@@ -36,21 +36,35 @@
         </div>
 
         <div class="row conteudotabela">
+            
             <div class="col-sm-2">
-            <select class="form-control-outline-secondary" v-model="thingId">    
-                <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
-                </option>
+            <select class="form-control-outline-secondary" v-model="newGroup">    
+                <option v-for="(g,index) in groups" :value="g" v-bind:key="index">{{g}}</option>
             </select>
             </div>
             <div class="col-sm-2">
-            <button type="button" class="btn btn-secondary btn-sm btn-sm" @click.prevent="showModal()">
+            <button type="button" class="btn btn-info btn-sm btn-sm" @click.prevent="editGroup(newGroup)">
                 Editar Grupo
             </button>
             </div>
             <div class="col-sm-2">
-            <button type="button" class="btn btn-success btn-sm btn-sm pull-left" @click.prevent="showModal()">
-                Atualizar
+            <button type="button" class="btn btn-warning btn-sm btn-sm pull-left" style="color:white" @click.prevent="refreshGraph()">
+                Atualizar Gráfico
             </button>
+            </div>
+            <div class="col-sm-2">
+            <button type="button" class="btn btn-danger btn-sm btn-sm pull-left">
+               <i class="fa fa-file-pdf-o"></i> Exportar para PDF
+            </button>
+            </div>
+            <div class="col-sm-2">
+             <download-excel
+                class   = "btn btn-success btn-sm btn-sm pull-left"
+                :data   = provider
+                :fields = jsonfields
+                name    = "filename.xls">
+                 <i class="fa fa-file-excel-o"></i> Exportar para Excel
+            </download-excel>
             </div>
             <br>
             <br>
