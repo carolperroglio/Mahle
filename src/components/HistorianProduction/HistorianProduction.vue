@@ -56,8 +56,7 @@
                                             </button>
                                         </div>
                                         <div class="card-body card-body-hp">
-                                            
-'                                       <div id="load" v-show="carregando">
+                                        <div id="load" v-show="carregando">
                                           <stretch background="#4d4d4d"></stretch>
                                         </div> 
                                         

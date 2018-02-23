@@ -62,7 +62,7 @@
                 class   = "btn btn-success btn-sm btn-sm pull-left"
                 :data   = provider
                 :fields = jsonfields
-                name    = "filename.xls">
+                :name    = filename >
                  <i class="fa fa-file-excel-o"></i> Exportar para Excel
             </download-excel>
             </div>

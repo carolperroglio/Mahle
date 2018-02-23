@@ -22,7 +22,7 @@
 
 .nav-tool-management {
     font-size: pt;
-    margin-top: 9.7%;
+    margin-top: 8%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     z-index: 1;
@@ -44,7 +44,7 @@
 }
 
 .conteudo-tm {
-    margin-top: 18%;
+    margin-top: 13%;
     padding-bottom: 6%;
     position: relative;
     left: 5%;
@@ -60,7 +60,7 @@
 
 .nav-tm {
     position: fixed;
-    margin-top: 9.7%;
+    margin-top: 6%;
     z-index: 1;
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
