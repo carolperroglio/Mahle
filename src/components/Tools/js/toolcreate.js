@@ -60,13 +60,17 @@ export default {
     directives: {
         'b-modal': bModalDirective
     },     
-    methods:{
+    methods:{ 
           showModal () {
             this.errors = [];
             this.$refs.myModalRef.show()
           },
           hideModal () {
             this.$refs.myModalRef.hide()
+          },
+          showModalCad () {
+            this.errors = [];
+            this.$refs.modalCadTool.show()
           },
 
         /***************************/
@@ -82,18 +86,6 @@ export default {
            // this.carregando = true; 
             this.mensagem='';   
             this.mensagemSuc= '';
-            if(this.ferramenta.name && this.ferramenta.description && this.ferramenta.serialNumber && this.ferramenta.lifeCycle && this.ferramenta.currentLife && this.ferramenta.unitOfMeasurement && this.ferramenta.typeName && this.ferramenta.status) return true;
-            this.errors = [];
-            if(!this.ferramenta.name) this.errors.push("A quantidade deve ser preenchida.");
-            if(!this.ferramenta.description) this.errors.push("A unidade de medida deve ser preenchida.");
-            if(!this.ferramenta.serialNumber) this.errors.push("O valor mínimo deve ser preenchido.");
-            if(!this.ferramenta.lifeCycle) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!this.ferramenta.currentLife) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!this.ferramenta.unitOfMeasurement) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!this.ferramenta.typeName) this.errors.push("O valor máximo deve ser preenchido.");
-            if(!this.ferramenta.status) this.errors.push("O valor máximo deve ser preenchido.");
-            
-            if(this.errors===[]){
             ferramenta.typeId = this.encontraObj(this.tipos, "name", ferramenta.typeName).id;    
             console.log(ferramenta);               
             axios.post(this.url,ferramenta).then((response)=>{
@@ -105,7 +97,6 @@ export default {
                 this.mensagem = 'Erro no server ' + r;                
                 this.carregando = false;
             }) 
-        }
                       
         },
         listar(){              

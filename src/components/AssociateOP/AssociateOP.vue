@@ -13,19 +13,9 @@
             <h1 class="title-page-assop"> 
                 <b>Associação de OP</b>
             </h1>
-            <ul class="nav d-flex align-items-center">
-                <li class="nav-item nav-item-assop col-sm-1.5">
-                    <b>&nbsp&nbsp&nbsp Número da Ordem:</b>
-                        <input @keyup="OPs=getOPs(numOP)" v-model="numOP" placeholder="Número" class="btn btn-outline-secondary dropdown-toggle btn-sm" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                            <b-dropdown-item class="dropdown-item" v-if="notSelected" @click.stop.prevent="OPId = o.productionOrderId;
-                                numOP = o.productionOrderNumber;
-                                typeId = o.productionOrderTypeId;
-                                notSelected = false;
-                                openSelectGroup(o)" v-for="(o,index) in OPs" v-bind:key="index">{{o.productionOrderNumber}}
-                            </b-dropdown-item>
-                </li>                                                          
+            <ul class="nav d-flex align-items-center">                                                       
                 <li class="nav-item nav-item-assop col-sm-1.5" v-if="group">                                                                                                              
-                    <b>&nbsp&nbsp Grupo:</b>
+                    <b> Grupo:</b>
                         <select class="form-control-outline-secondary form-control-sm" v-model="groupId"  v-on:change="openSelectThings()">
                             <option v-for="(g,index) in Groups" :value="g.thingGroupId" v-bind:key="index">{{ g.groupName }}
                             </option>
@@ -106,7 +96,9 @@
                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{OP.quantity}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{OP.typeDescription}}</label>&nbsp;&nbsp;&nbsp;
-
+                            <label class="ls ls3">
+                                    <button class="btn-lg btn-primary" @click.stop.prevent="main()">Voltar</button>
+                            </label>
                         </div>
                 </div>      
             </div>
@@ -123,9 +115,6 @@
                         <label class="ls ls3">
                             <b><font color="#9BA6A5">Nome: </font></b></label>
                         <label class="ls ls3">{{Thing.thingName}}</label>
-                        <label class="ls ls3">
-                            <button class="btn-lg btn-primary" @click.stop.prevent="main()">Voltar</button>
-                        </label>
                     </div>
                     </div>
         </div>

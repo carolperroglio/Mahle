@@ -24,9 +24,9 @@
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{o.typeDescription}}</label>
                             <label class="ls ls3">
-                                <button class="btn btn-sm btn-success" @click.stop.prevent="showModal(o)">Editar Status</button>
+                                <button class="btn btn-sm btn-success" @click.stop.prevent="configOPEstate(o)">Selecionar OP</button>
                             </label>
-                            
+                                                      
                         </div>
                 </div>
             </div>
@@ -37,16 +37,11 @@
                              
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                            
-                            <div id="load" v-show="carregando">
-                        <stretch background="#4d4d4d"></stretch>
-                        </div> 
-
                             <label>
                                 <b>Status:</b>
                             </label>
                             <select class="form-control form-control-sm" v-model="newStatus" >
-                            <option v-for="(n,index) in newNextSt" :value="n" v-bind:key="index">{{ n }}
+                            <option v-for="(n,index) in nextstates" :value="n" v-bind:key="index">{{ n }}
                             </option>
                             </select>
                                         <label>

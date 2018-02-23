@@ -56,7 +56,7 @@
                                 Buscar
                         </button>
                 <li class="nav-item-tool">
-                        <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="showModal">
+                        <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="showModalCad">
                              Cadastrar Ferramenta
                         </button>
                 </li>
@@ -73,7 +73,7 @@
         <!--                                 -->
         <!--               Modal             -->
         
-                <b-modal ref="myModalRef" hide-footer title="Cadastro de Ferramentas">
+                <b-modal ref="modalCadTool" hide-footer title="Cadastro de Ferramentas">
                         <form>
                             <div class="form-group">
 

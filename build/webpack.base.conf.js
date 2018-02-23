@@ -62,7 +62,8 @@ module.exports = {
         THINGS_API: JSON.stringify("http://34.239.125.82:8001"),
         PROD_HIST_API: JSON.stringify("http://34.239.125.82:8006"),
         RECIPE_API: JSON.stringify("http://34.239.125.82:8002"),
-        STATUS_API: JSON.stringify("http://34.239.125.82:8004")
+        STATUS_API: JSON.stringify("http://34.239.125.82:8004"),
+        HIST_BIGTABLE_API: JSON.stringify("http://34.239.125.82:8011")
       }
     }),
     new HtmlWebpackPlugin({

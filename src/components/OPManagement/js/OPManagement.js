@@ -38,79 +38,14 @@ export default {
         'b-modal': bModalDirective
     }, 
     methods: {
-        showModal (o) {
-            this.OP=o; 
+        showModal () {
         this.$refs.modalGerOP.show();
-        this.newNextSt = [];
-        this.carregando = true;
-            
-            axios.get(this.url+this.OP.productionOrderId).then((response)=>{
-                this.state = response.data.currentStatus;
-                console.log(this.state);
-            },(error)=>{                   
-            });
-            axios.get(this.url2+this.OP.productionOrderTypeId).then((response)=>{
-                this.states = response.data.stateConfiguration.states;
-                console.log(this.states);
-                    switch(this.state){
-                        case "created":
-                        this.nextstates = this.states[0].possibleNextStates;
-                        break;
-                        case "active":                    
-                        this.nextstates = this.states[1].possibleNextStates;
-                        break;
-                        case "paused":
-                        this.nextstates = this.states[2].possibleNextStates;
-                        break;
-                        case "ended":
-                        this.nextstates = this.states[3].possibleNextStates;
-                        break;
-                        case "inactive":
-                        this.nextstates = this.states[4].possibleNextStates;
-                        break;                    
-                    }
-                    this.nextstates.map( state => {
-                        console.log("oi");
-                        switch(state){
-                            case "created":
-                            this.newNextSt.push("Criada");
-                            break;
-                            case "active":                    
-                            this.newNextSt.push("Ativa");
-                            break;
-                            case "inactive":
-                            this.newNextSt.push("Inativa");
-                            break;
-                            case "paused":
-                            this.newNextSt.push("Pausada");
-                            break;
-                            case "ended":
-                            this.newNextSt.push("Encerrada");
-                            break;
-                            case "waiting_approval":
-                            this.newNextSt.push("Aguardando Aprovação");
-                            break;
-                            case "approved":
-                            this.newNextSt.push("Aprovada");
-                            break;
-                            case "reproved":
-                            this.newNextSt.push("Reprovada");
-                            break;    
-                        }    
-                    });
-                    console.log(this.newNextSt);
-                    console.log(this.nextstates);
-                    this.carregando = false;
-            },(error)=>{
-                this.carregando = false;                   
-            })
       },
         hideModal () {
         this.$refs.modalGerOP.hide()
       },
-        buscaOP(){
+    buscaOP(){
             this.carregando = true;
-            setTimeout(() => {
                 axios.get(this.url).then((response)=>{
                     
                     this.OPs=response.data.values;
@@ -148,7 +83,6 @@ export default {
                 },(error)=>{            
                     this.carregando = false;       
                 }) 
-            }, 1000);
         },
         editar(OP){
             
@@ -189,7 +123,52 @@ export default {
             })
             }
             
+        },
+
+        configOPEstate(o){
+            this.carregando = true;
+            this.OP=o; 
+            this.newNextSt = [];
+            this.buscaEstadoAtual();
+            this.buscaProxEstados();
+            if(this.nextstates != {}){
+                this.showModal();
+            }
+        },
+        buscaEstadoAtual(){
+            axios.get(this.url+this.OP.productionOrderId).then((response)=>{
+                this.state = response.data.currentStatus;
+                console.log(this.state);
+            },(error)=>{                   
+            });
+        },
+        buscaProxEstados(){
+            axios.get(this.url2+this.OP.productionOrderTypeId).then((response)=>{
+                this.states = response.data.stateConfiguration.states;
+                console.log(this.states);
+                    switch(this.state){
+                        case "created":
+                        this.nextstates = this.states[0].possibleNextStates;
+                        break;
+                        case "active":                    
+                        this.nextstates = this.states[1].possibleNextStates;
+                        break;
+                        case "paused":
+                        this.nextstates = this.states[2].possibleNextStates;
+                        break;
+                        case "ended":
+                        this.nextstates = this.states[3].possibleNextStates;
+                        break;
+                        case "inactive":
+                        this.nextstates = this.states[4].possibleNextStates;
+                        break;                    
+                    }
+                    this.carregando = false;
+            },(error)=>{
+                this.carregando = false;                   
+            })
         }
+
     },
     beforeMount: function(){
         this.buscaOP();
