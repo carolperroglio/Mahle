@@ -148,18 +148,16 @@ export default {
         },
     },
     filters: {
-        StatusName: function(value) {
-            if (value == 'available') {
-                return 'Disponivel'
-            } else if (value == 'in_use') {
-                return 'Em uso'
-            } else if (value == 'in_maintenance') {
-                return 'Em Manutenção'
-            } else if (value == 'not_available') {
-                return 'Indisponível'
-            } else if (value == 'inactive') {
-                return 'Inativo'
-            }
+        StatusName: function(status) {
+            var state = {
+                'available': "Disponível",
+                'in_use': "Em uso",
+                'in_maintenance': "Em manutenção",
+                'not_available': "Indisponível",
+                'inactive': "Inativo",
+                'active': "Disponível"
+                };
+            return state[status];
         }
 
     },

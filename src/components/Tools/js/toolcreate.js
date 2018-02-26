@@ -106,40 +106,18 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
 
-            setTimeout(()=>{
                 axios.get(this.url+"?orderField="+this.orderField+"&order="+this.order+"&fieldFilter="+this.fieldFilter+"&fieldValue="+this.fieldValue+"&startat="+this.startat+"&quantity="+this.quantityPage).then((response)=>{     
                     this.ferramentas =response.data.values;
                     console.log(this.ferramentas);
                     for (var index in response.data.values){
-                        switch(response.data.values[index].status){
-                            case "available":
-                            this.ferramentas[index].status = "Disponível";
-                            break;
-                            case "in_use":                    
-                            this.ferramentas[index].status = "Em uso";
-                            break;
-                            case "in_maintenance":
-                            this.ferramentas[index].status = "Em manutenção";
-                            break;
-                            case "not_available":
-                            this.ferramentas[index].status = "Indisponível";
-                            break;
-                            case "inactive":
-                            this.ferramentas[index].status = "Inativo";
-                            break;
-                            case "active":
-                            this.ferramentas[index].status = "Disponível";
-                            break;
-                        }
+                        this.ferramentas[index].status = this.getStatus(response.data.values[index].status);
                     } 
                         this.carregando = false;
                         paginacao(response,this);
                     },(error)=>{                  
                         this.mensagem = 'Erro no server ' + error;                
                         this.carregando = false;  
-                    })  
-            },200);
-                                   
+                    })                                     
         },
         editar(ferramenta){              
             this.carregando = true;   
@@ -172,9 +150,20 @@ export default {
                 this.ferramenta=f;
                 this.errors = [];
                 this.$refs.myModalRef.show();
-                }
-        },       
-
+                },
+        getStatus (status){
+            var state = {
+                'available': "Disponível",
+                'in_use': "Em uso",
+                'in_maintenance': "Em manutenção",
+                'not_available': "Indisponível",
+                'inactive': "Inativo",
+                'active': "Disponível"
+                };
+                    return state[status];
+                },
+        },  
+             
     beforeMount: function(){
         this.buscaTipo();
         this.listar();

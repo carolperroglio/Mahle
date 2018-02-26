@@ -84,26 +84,7 @@ export default {
                 axios.get(this.url+'api/tool/'+this.toolId).then((response)=>{
                     this.Tool = response.data;
                     console.log(response.data);
-                    switch(response.data.status){
-                        case "available":
-                        this.Tool.status = "Disponível";
-                        break;
-                        case "in_use":                    
-                        this.Tool.status = "Em uso";
-                        break;
-                        case "in_maintenance":
-                        this.Tool.status = "Em manutenção";
-                        break;
-                        case "not_available":
-                        this.Tool.status = "Indisponível";
-                        break;
-                        case "inactive":
-                        this.Tool.status = "Inativo";
-                        break;
-                        case "active":
-                        this.Tool.status = "Disponível";
-                        break;
-                    }  
+                    this.Tool.status = this.getStatus(response.data.status);
                 this.carregando = false;                                      
                 },(r)=>{                
                     this.mensagem = r;                
@@ -127,26 +108,7 @@ export default {
                 axios.put(this.url+'api/tool/AssociateTool/associate?thingId='+this.thingId+'&toolid='+this.toolId).then((response)=>{
                     this.Tool = response.data;
                     console.log(response.data);
-                    switch(response.data.status){
-                        case "available":
-                        this.Tool.status = "Disponível";
-                        break;
-                        case "in_use":                    
-                        this.Tool.status = "Em uso";
-                        break;
-                        case "in_maintenance":
-                        this.Tool.status = "Em manutenção";
-                        break;
-                        case "not_available":
-                        this.Tool.status = "Indisponível";
-                        break;
-                        case "inactive":
-                        this.Tool.status = "Inativo";
-                        break;
-                        case "active":
-                        this.Tool.status = "Disponível";
-                        break;
-                    }
+                    this.Tool.status = this.getStatus(response.data.status);
                     this.Thing = response.data.currentThing;
                     this.lista2 = true;
                     this.mensagemSuc = 'Ferramenta associada com sucesso.';
@@ -155,7 +117,18 @@ export default {
                     this.carregando = false;
                 })
 
-            }
+            },
+            getStatus (status){
+                var state = {
+                    'available': "Disponível",
+                    'in_use': "Em uso",
+                    'in_maintenance': "Em manutenção",
+                    'not_available': "Indisponível",
+                    'inactive': "Inativo",
+                    'active': "Disponível"
+                    };
+                return state[status];
+            },
     },
     beforeMount: function(){
         this.getAllTools();

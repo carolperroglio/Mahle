@@ -75,17 +75,6 @@ export default {
             this.mensagem = '';
             this.mensagemSuc = '';
             this.carregando = true;
-
-             setTimeout(() =>{ if(this.produto.productName && this.produto.productDescription && this.produto.productCode && this.produto.productGTIN) return true;
-            this.errors = [];
-            if(!this.produto.productName) this.errors.push("O nome do produto deve ser preenchido.");
-            if(!this.produto.productDescription) this.errors.push("A descrição do produto deve ser preenchida.");
-            if(!this.produto.productCode) this.errors.push("O código do produto deve ser preenchido.");
-            if(!this.produto.productGTIN) this.errors.push("O código de barras deve ser preenchido.");}, 100);
-
-            
-             setTimeout(() => {
-                 if(this.errors.length == 0){
                 produto.enabled = true;
                 axios.post(this.url, produto).then((r) => {
                     this.mensagem = '';
@@ -97,9 +86,7 @@ export default {
                 }, (r) => {
                     this.mensagem = 'Erro no server ' + r;
                     this.carregando = false;
-                })
-            }}, 200);
-           
+                })          
 
         },
 
@@ -146,7 +133,6 @@ export default {
             };
             this.produtos = [];
             console.log(this.order, this.orderField);
-            setTimeout(() => {
                 axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                     if (!response.data.values && response.data.productId)
                         this.produtos[0] = response.data;
@@ -158,9 +144,7 @@ export default {
                 }, (error) => {
                     this.mensagem = 'Erro no server ao buscar ' + error;
                     this.carregando = false;
-                })
-            }, 2000);
-            
+                })            
         }
     },
     beforeMount: function(){

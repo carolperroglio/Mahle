@@ -60,13 +60,12 @@ export default {
     filters: {
         prodTypeName: function(productTypeName) {
             // productTypeName = '';
-            if (productTypeName == 'scrap') {
-                return productTypeName = "Rejeito";
-            } else if (productTypeName == 'finished') {
-                return productTypeName = "Acabado";
-            } else if (productTypeName == 'semi_finished') {
-                return productTypeName = "Semi Acabado";
-            } else if (productTypeName == null) {}
+            var type = {
+                'scrap': "Rejeito",
+                'finished': "Acabado",
+                'semi_finished': "Semi Acabado"
+                };
+                return type[productTypeName];
         }
     },
     components: {

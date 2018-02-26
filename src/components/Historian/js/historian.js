@@ -174,9 +174,7 @@ export default {
                 
                 axios.get(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then((response)=>{
                     this.data = response.data;
-                    this.tags = response.data.tags;
-                    this.group = "Pressao";   
-                    
+                    this.tags = response.data.tags;                    
                         this.tags.forEach((T) => {
                             if (!this.groups.includes(T.group)){
                             this.groups.push(T.group);

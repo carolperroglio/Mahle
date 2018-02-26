@@ -24,6 +24,7 @@ export default {
             state: '',
             nextstates: [],
             carregando: false,
+            carregandost: false,
             url: process.env.OP_API + '/api/productionorders/',
             url2: process.env.OP_API + '/api/productionordertypes/'
         }
@@ -52,32 +53,7 @@ export default {
                     console.log(this.OPs);
 
                     this.OPs.forEach((op) => {
-                            switch(op.currentStatus){
-                                case "created":
-                                op.currentStatus = "Criada";
-                                break;
-                                case "active":                    
-                                op.currentStatus = "Ativa";
-                                break;
-                                case "inactive":
-                                op.currentStatus = "Inativa";
-                                break;
-                                case "paused":
-                                op.currentStatus = "Pausada";
-                                break;
-                                case "ended":
-                                op.currentStatus = "Encerrada";
-                                break;
-                                case "waiting_approval":
-                                op.currentStatus = "Aguardando Aprovação";
-                                break;
-                                case "approved":
-                                op.currentStatus = "Aprovada";
-                                break;
-                                case "reproved":
-                                op.currentStatus = "Reprovada";
-                                break;                    
-                            }
+                        op.currentStatus = this.getStatus(op.currentStatus);     
                     });
                     this.carregando = false;
                 },(error)=>{            
@@ -87,34 +63,7 @@ export default {
         editar(OP){
             
             if(confirm("Tem certeza que deseja mudar o status?")){
-
-                var stat = '';
-            switch(this.newStatus){
-                case "Criada":
-                stat = "created";
-                break;
-                case "Ativa":                    
-                stat = "active";
-                break;
-                case "Inativa":
-                stat = "inactive";
-                break;
-                case "Pausada":
-                stat = "paused";
-                break;
-                case "Encerrada":
-                stat = "ended";
-                break;
-                case "Aguardando Aprovação":
-                stat = "waiting_approval";
-                break;
-                case "Aprovada":
-                stat = "approved";
-                break;
-                case "Reprovada":
-                stat = "reproved";
-                break;                    
-            }
+                var stat = this.getEstados(this.newStatus);
             axios.put(this.url+'statemanagement/id?productionOrderId='+this.OP.productionOrderId+'&state='+stat).then((response)=>{
                 this.OP.currentStatus = stat;
                 this.mensagemSuc = 'Status alterado com sucesso.';
@@ -126,12 +75,9 @@ export default {
         },
 
         configOPEstate(o){
-            this.carregando = true;
             this.OP=o; 
-            this.newNextSt = [];
             this.buscaEstadoAtual();
-            this.buscaProxEstados();
-            if(this.nextstates != {}){
+            if(this.nextstates != []){
                 this.showModal();
             }
         },
@@ -139,35 +85,42 @@ export default {
             axios.get(this.url+this.OP.productionOrderId).then((response)=>{
                 this.state = response.data.currentStatus;
                 console.log(this.state);
+                this.nextstates = this.getNextStatus(this.state);
+                console.log(this.nextstates);
             },(error)=>{                   
             });
         },
-        buscaProxEstados(){
-            axios.get(this.url2+this.OP.productionOrderTypeId).then((response)=>{
-                this.states = response.data.stateConfiguration.states;
-                console.log(this.states);
-                    switch(this.state){
-                        case "created":
-                        this.nextstates = this.states[0].possibleNextStates;
-                        break;
-                        case "active":                    
-                        this.nextstates = this.states[1].possibleNextStates;
-                        break;
-                        case "paused":
-                        this.nextstates = this.states[2].possibleNextStates;
-                        break;
-                        case "ended":
-                        this.nextstates = this.states[3].possibleNextStates;
-                        break;
-                        case "inactive":
-                        this.nextstates = this.states[4].possibleNextStates;
-                        break;                    
-                    }
-                    this.carregando = false;
-            },(error)=>{
-                this.carregando = false;                   
-            })
+        getStatus (status){
+            var state = {
+                'created': "Criada",
+                'active': "Ativa",
+                'paused': "Pausada",
+                'ended': "Encerrada",
+                'inactive': "Inativa"
+                };
+            return state[status];          
+        },
+        getNextStatus (status){
+            var state = {
+                'created':  ["Inativa","Ativa"],
+                'active': ["Pausada","Encerrada"],
+                'paused': ["Ativa","Encerrada"],
+                'ended': [],
+                'inactive': []
+                };
+            return state[status];          
+        },
+        getEstados (estado){
+            var state = {
+                'Criada': "created",
+                'Ativa': "active",
+                'Pausada': "paused",
+                'Encerrada': "ended",
+                'Inativa': "inactive"
+                };
+            return state[status];          
         }
+
 
     },
     beforeMount: function(){
