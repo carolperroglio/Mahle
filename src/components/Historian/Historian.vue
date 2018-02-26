@@ -53,7 +53,7 @@
             </button>
             </div>
             <div class="col-sm-2">
-            <button type="button" class="btn btn-danger btn-sm btn-sm pull-left">
+            <button type="button" class="btn btn-danger btn-sm btn-sm pull-left" @click.prevent="toPdf()">
                <i class="fa fa-file-pdf-o"></i> Exportar para PDF
             </button>
             </div>
@@ -129,7 +129,6 @@
 
 <script src="./js/historian.js">
 </script>
-
 <style>
 @import url("./css/historian.css");
 </style>

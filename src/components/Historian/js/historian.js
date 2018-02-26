@@ -14,13 +14,14 @@ import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
 import JsonExcel from 'vue-json-excel'
 import PrintJs from 'print-js'
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import 'vue-tiles/dist/vue-tiles.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
 import { array } from 'bootstrap-vue/es/utils'
 import { Stretch } from 'vue-loading-spinner'
-
 
 es6promisse.polyfill();
 
@@ -121,6 +122,7 @@ export default {
             graphProvider: [],
             providerAux: [],
             provider: [],
+            PDFprovider: [],
             data: [],
             headers: [],
             jsonfields: {}
@@ -161,7 +163,6 @@ export default {
 
         getHistory(){
             this.carregando = true;
-            setTimeout(() => {
 
                 var Ini = this.date.toString()+' '+this.timeIni.HH+':'+this.timeIni.mm;  
                 var ticksI = this.dateToTicks(Ini);
@@ -187,10 +188,34 @@ export default {
                 }) 
 
                console.log(this.groups);
-            }, 200);
                 this.carregando = false;
                 this.created();
                 this.hideModal();
+        },
+
+        toPdf(){
+            //To PDF
+            var columns = [];
+            var title = "title";
+            var dataKey = "dataKey";
+            this.headers.forEach( e => {
+                var obj = new Object;
+                obj[title] = e;
+                obj[dataKey] = e;
+                columns.push(obj);
+            })
+            console.log(columns);
+            this.PDFprovider = this.provider;
+            this.PDFprovider.forEach( p => {
+                p.Data = p.category;
+                delete p.category;
+            });
+
+            console.log(this.PDFprovider);
+            var doc = new jsPDF('p', 'pt');
+            doc.text(35, 17, "Rastreamento Thing "+this.thingId+" Grupo "+this.group)
+            doc.autoTable(columns, this.PDFprovider, 15, 65);
+            doc.save( "RastreamentoThing_"+this.thingId+"_"+this.group+".pdf");
         },
 
         ticksToDate(dateTicks){
@@ -220,7 +245,9 @@ export default {
             this.formatGraphData(this.data, this.group);
             var t = 0;
             var aux = [];
+            // To Excel
             this.filename = "RastreamentoThing_"+this.thingId+"_"+this.group+".xls";
+           
         Object.keys(this.provider[0]).forEach((n) => {
             if(n=="category"){
                 aux.push("Data");
