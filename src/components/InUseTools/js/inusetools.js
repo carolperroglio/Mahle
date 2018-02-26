@@ -51,26 +51,7 @@ export default {
                 paginacao(response, this);
                 this.tools = response.data;
                 for (var index in response.data){
-                    switch(response.data[index].status){
-                        case "available":
-                        this.tools[index].status = "Disponível";
-                        break;
-                        case "in_use":                    
-                        this.tools[index].status = "Em uso";
-                        break;
-                        case "in_maintenance":
-                        this.tools[index].status = "Em manutenção";
-                        break;
-                        case "not_available":
-                        this.tools[index].status = "Indisponível";
-                        break;
-                        case "inactive":
-                        this.tools[index].status = "Inativo";
-                        break;
-                        case "active":
-                        this.tools[index].status = "Disponível";
-                        break;
-                    }
+                    this.tools[index].status = this.getStatus(response.data[index].status);
                 }
                 console.log(this.tools);
                 this.carregando = false;
@@ -79,6 +60,17 @@ export default {
                 this.carregando = false;
             })
         },
+        getStatus (status){
+            var state = {
+                'available': "Disponível",
+                'in_use': "Em uso",
+                'in_maintenance': "Em manutenção",
+                'not_available': "Indisponível",
+                'inactive': "Inativo",
+                'active': "Disponível"
+                };
+            return state[status];
+        }
     },
     beforeMount() {
         this.buscar();

@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="btn-group" role="group">
                                         <button class="btn btn-success">
-                                            <i :disabled="produto.productName==undefined || produto.productName==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i>
+                                            <i :disabled="produto.productName==undefined || produto.productName=='' || produto.productCode=='' || produto.productGTIN==''" @click.stop.prevent="(produto.productId!=undefined) ? put(produto) : cadastrar(produto);" class="fa fa-check-square" aria-hidden="true"></i>
                                         </button>
                                         <button class="btn btn-danger">
                                             <i @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="fa fa-window-close" aria-hidden="true"></i>

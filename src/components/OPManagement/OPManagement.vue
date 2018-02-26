@@ -34,7 +34,9 @@
             
                     <form>
                         <div class="form-group">
-                             
+                        <div id="load" v-show="carregandost">
+                        <stretch background="#4d4d4d"></stretch>
+                        </div> 
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                         <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                             <label>

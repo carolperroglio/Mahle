@@ -53,30 +53,14 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
-
-           getOPs(numOP){            
-            var array=[];                          
-            if(numOP.length<3){return;}                
-            axios.get(this.url+'/api/productionorders?fieldFilter=productionOrderNumber&fieldValue='+numOP).then((response)=>{                                           
-                response.data.values.forEach((pro) => {
-                    array.push(pro);                    
-                });
-            },(error)=>{
-                console.log(error);
-            })            
-                return array;
-            },
             getOPList(){  
-                this.carregando = true;        
-                setTimeout(() => {
+                this.carregando = true;   
                     axios.get(this.url+'/api/productionorders').then((response)=>{                                           
                         response.data.values.forEach((op)=>{
                             if (op.currentStatus == "active"){
                                 this.ProductionOrders.push(op);
-                            }
-                            })
-                            this.ProductionOrders.map(op =>{
                                 op.currentStatus ="Ativa";
+                            }
                         })
                         console.log('ProductionOrders');
                         console.log(this.ProductionOrders);                        
@@ -86,8 +70,6 @@ export default {
                         console.log(error);
                         this.carregando = false;
                     })
-                }, 2000);                
-                          
             },
             openSelectGroup(op){
                 this.group = true;  
