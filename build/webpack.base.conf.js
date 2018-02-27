@@ -57,6 +57,14 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
+        TOOLS_API: JSON.stringify("http://10.35.255.22:8004"),
+        OP_API: JSON.stringify("http://10.35.255.22:8005"),
+        THINGS_API: JSON.stringify("http://10.35.255.22:8001"),
+        PROD_HIST_API: JSON.stringify("http://10.35.255.22:8007"),
+        RECIPE_API: JSON.stringify("http://10.35.255.22:8003"),
+        STATUS_API: JSON.stringify("http://10.35.255.22:8006"),
+        HIST_BIGTABLE_API: JSON.stringify("http://10.35.255.22:8011")
+        /**
         TOOLS_API: JSON.stringify("http://34.239.125.82:8005"),
         OP_API: JSON.stringify("http://34.239.125.82:8003"),
         THINGS_API: JSON.stringify("http://34.239.125.82:8001"),
@@ -64,6 +72,8 @@ module.exports = {
         RECIPE_API: JSON.stringify("http://34.239.125.82:8002"),
         STATUS_API: JSON.stringify("http://34.239.125.82:8004"),
         HIST_BIGTABLE_API: JSON.stringify("http://34.239.125.82:8011")
+     
+         */
       }
     }),
     new HtmlWebpackPlugin({
