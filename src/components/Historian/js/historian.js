@@ -109,6 +109,7 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             thingId: '',
+            thingGroup: '',
             thingName: '',
             filename: '',
             things: [],
@@ -147,6 +148,10 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
+        getThingName(t){
+            this.thingName = t.thingName;
+        },
+
         addData () {
             this.dataset.push(this.dataentry)
             this.labels.push(this.datalabel)
@@ -240,14 +245,21 @@ export default {
         },
 
         editGroup(grupo){
-            this.group = grupo;   
+            cache: false;
+            this.group = grupo; 
+            this.provider = [];
+            console.log("console.log(this.provider);");
+            console.log(this.provider);  
+            this.graphProvider = [];
+            this.headers = [];
+            this.providerAux = [];
+            this.jsonfields = {};
             console.log(this.data);
             this.formatGraphData(this.data, this.group);
             var t = 0;
             var aux = [];
             // To Excel
             this.filename = "RastreamentoThing_"+this.thingId+"_"+this.group+".xls";
-           
         Object.keys(this.provider[0]).forEach((n) => {
             if(n=="category"){
                 aux.push("Data");
@@ -266,7 +278,7 @@ export default {
         formatGraphData(obj, group){
             obj.tags.forEach((R) => { 
                 if(R.group == group){
-                    this.thingName = R.group;
+                    this.thingGroup = R.group;
                     this.thingId = obj.thingId;
                     var dataObj2 = new Array();
                     var obj2 = new Object();

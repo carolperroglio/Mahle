@@ -17,7 +17,7 @@
                   <div class="history">
                     <div class="row">
                         <div class="col-sm-8">
-                          <h3>Thing nº: {{thingId}} - Grupo: {{thingName}}</h3>
+                            <h3>Thing nº: {{thingId}} Grupo: {{thingGroup}}</h3>
                         </div>
                         <div class="col-sm-4">
                        <button type="button" class="btn btn-info btn-sm btn-sm" @click.prevent="showModal()">
@@ -73,8 +73,8 @@
                     <tr class="tr1">
                         <th class="th1" v-for="(h, index) in headers" :key="index">{{ h }}</th>
                     </tr>
-                    <tr class="tr1" v-for="(obj,index) in provider" v-bind:key="index">
-                        <td class="td1" v-for="(value, key, index) in obj">{{ value }}</td>
+                    <tr class="tr1" v-for="(obj,index1) in provider" v-bind:key="index1">
+                        <td class="td1" v-for="(value, key, index2) in obj" v-bind:key="index2">{{ value }}</td>
                     </tr>
                 </table>
             </div>
