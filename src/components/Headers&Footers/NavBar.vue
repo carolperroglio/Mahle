@@ -57,9 +57,9 @@
                 <b-collapse class="fixed-top col-md-6 p-l-0 p-r-0" id="sidebar" flush>
                    
                         <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki">
-                            </i> OPERADOR </div>
-
-                        
+                            </i> OPERADOR
+                        <i class="fa fa-chevron-down pull-right"></i>
+                         </div>
                         <b-collapse id="menu2">                      
                             <router-link to="#" data-parent="#menu1" class="list-group-item collapsed" cursor="pointer"> Logout </router-link>
                         </b-collapse>
@@ -83,6 +83,14 @@
                                 RECEITA
                             </span>
                         </router-link>
+
+                        <router-link to="/alarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                            <i class="fa fa-bell"></i> 
+                            <span class="hidden-sm-down">  
+                                ALARMES
+                            </span>
+                        </router-link>
+
                         <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1 cursor="pointer">
                             <i class="fa fa-cogs"></i> 
                                 <span class="hidden-sm-down">   
