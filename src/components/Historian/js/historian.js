@@ -260,6 +260,9 @@ export default {
             var aux = [];
             // To Excel
             this.filename = "RastreamentoThing_"+this.thingId+"_"+this.group+".xls";
+            /*
+             *  JSON de criação das características do gráfico.
+             */
         Object.keys(this.provider[0]).forEach((n) => {
             if(n=="category"){
                 aux.push("Data");
@@ -283,6 +286,10 @@ export default {
                     var dataObj2 = new Array();
                     var obj2 = new Object();
 
+                    /**
+                     * Criação do JSON de criação das características do gráfico.
+                     * Cada linha terá um objeto com as características dentro do array
+                     */
                     obj2["balloonColor"] = "#808080";
                     obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
                     obj2["bullet"] = "round";
@@ -299,7 +306,11 @@ export default {
                     console.log(R);
                     
                     R.timestamp.map( e => {
-                        
+                     /**
+                     * Criando o campo categoria do JSON do gráfico
+                     * E adicionando a data á ele
+                     * Para que cada ponto do eixo X seja uma data diferente
+                     */
                         var dataObj = new Array();
 
                         var category = "category";
@@ -317,6 +328,10 @@ export default {
                         i++;
                     })
 
+                     /**
+                     * Adicionando a tag com a respectiva data ao array
+                     */
+                    
                     dataObj2 = Object.assign(obj2);
                     console.log(dataObj2);
                     this.graphProvider.push(dataObj2);
@@ -328,6 +343,10 @@ export default {
                     console.log(this.providerAux);    
                     }
                 }); 
+
+                    /**
+                     * Separar objetos por data, assim cada obj todas as tags com a mesma data
+                     */
                 console.log("this.providerAux.groupBy('category')");
                 console.log(this.providerAux.groupByProperties("category"));
 
