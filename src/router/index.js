@@ -21,7 +21,9 @@ import HomePage from '@/components/HomePage/home'
 import ToolsManagement from '@/components/ToolsManagement/ToolsManagement'
 import StatusMES from '@/components/StatusMES/StatusMES'
 import Historian from '@/components/Historian/Historian'
+import HistorianAlarm from '@/components/HistorianAlarm/HistorianAlarm'
 import Alarms from '@/components/Alarms/Alarms'
+
 
 Vue.use(Router)
 
@@ -106,17 +108,17 @@ export default new Router({
             component: OPType
         },
         {
-            path:'/inUseTools',
+            path: '/inUseTools',
             name: 'InUseTools',
             component: InUseTools
         },
         {
-            path:'/home',
+            path: '/home',
             name: 'HomePage',
             component: HomePage
         },
         {
-            path:'/statusMES',
+            path: '/statusMES',
             name: 'StatusMES',
             component: StatusMES
         },
@@ -124,6 +126,12 @@ export default new Router({
             path: '/historian',
             name: 'Historian',
             component: Historian
+        },
+        {
+
+            path: '/historianalarms',
+            name: 'Historianalarms',
+            component: HistorianAlarm
         },
         {
             path: '/alarms',
