@@ -39,31 +39,29 @@ function paginacao(response, este) {
     }
 }
 
-Array.prototype.groupByProperties = function(properties){
+Array.prototype.groupByProperties = function(properties) {
     var arr = this;
     var groups = [];
-    for(var i = 0, len = arr.length; i<len; i+=1){
+    for (var i = 0, len = arr.length; i < len; i += 1) {
         var obj = arr[i];
-        if(groups.length == 0){
+        if (groups.length == 0) {
             groups.push([obj]);
-        }
-        else{
+        } else {
             var equalGroup = false;
-            for(var a = 0, glen = groups.length; a<glen;a+=1){
+            for (var a = 0, glen = groups.length; a < glen; a += 1) {
                 var group = groups[a];
                 var equal = true;
                 var firstElement = group[0];
-                    if(firstElement[properties] !== obj[properties]){
-                        equal = false;
-                    }
-                if(equal){
+                if (firstElement[properties] !== obj[properties]) {
+                    equal = false;
+                }
+                if (equal) {
                     equalGroup = group;
                 }
             }
-            if(equalGroup){
+            if (equalGroup) {
                 equalGroup.push(obj);
-            }
-            else {
+            } else {
                 groups.push([obj]);
             }
         }
@@ -77,11 +75,11 @@ export default {
             url: process.env.THINGS_API,
             urlHist: process.env.HIST_BIGTABLE_API,
             carregando: false,
-            date:'',
+            date: '',
             datef: '',
             config: {
-            format: 'MM DD YYYY',
-            useCurrent: false,
+                format: 'MM DD YYYY',
+                useCurrent: false,
             },
             config2: {
                 format: 'MM DD YYYY',
@@ -127,7 +125,7 @@ export default {
             data: [],
             headers: [],
             jsonfields: {}
-    }
+        }
     },
     components: {
         'b-button': bButton,
@@ -148,62 +146,62 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
-        getThingName(t){
+        getThingName(t) {
             this.thingName = t.thingName;
         },
 
-        addData () {
+        addData() {
             this.dataset.push(this.dataentry)
             this.labels.push(this.datalabel)
             this.datalabel = ''
             this.dataentry = ''
-          },
-        getThings(){                                  
-            axios.get(this.url+'/api/things').then((response)=>{                                           
+        },
+        getThings() {
+            axios.get(this.url + '/api/things').then((response) => {
                 this.things = response.data;
-            },(error)=>{
+            }, (error) => {
                 console.log(error);
-            }) 
-            },
-
-        getHistory(){
-            this.carregando = true;
-
-                var Ini = this.date.toString()+' '+this.timeIni.HH+':'+this.timeIni.mm;  
-                var ticksI = this.dateToTicks(Ini);
-                var Fim = this.datef.toString()+' '+this.timeFim.HH+':'+this.timeFim.mm;
-                var ticksF = this.dateToTicks(Fim);
-
-                console.log('I: '+ticksI);
-                console.log('F: '+ticksF);
-                console.log(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF);
-                
-                axios.get(this.urlHist+'/api/HistorianBigTable?'+'thingId='+this.thingId+'&startDate='+ticksI+'&endDate='+ticksF).then((response)=>{
-                    this.data = response.data;
-                    this.tags = response.data.tags;                    
-                        this.tags.forEach((T) => {
-                            if (!this.groups.includes(T.group)){
-                            this.groups.push(T.group);
-                            }
-                        })
-                    console.log(this.data);
-                    
-                },(error)=>{
-                    console.log(error);
-                }) 
-
-               console.log(this.groups);
-                this.carregando = false;
-                this.created();
-                this.hideModal();
+            })
         },
 
-        toPdf(){
+        getHistory() {
+            this.carregando = true;
+
+            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
+            var ticksI = this.dateToTicks(Ini);
+            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
+            var ticksF = this.dateToTicks(Fim);
+
+            console.log('I: ' + ticksI);
+            console.log('F: ' + ticksF);
+            console.log(this.urlHist + '/api/HistorianBigTable?' + 'thingId=' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF);
+
+            axios.get(this.urlHist + '/api/HistorianBigTable?' + 'thingId=' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+                this.data = response.data;
+                this.tags = response.data.tags;
+                this.tags.forEach((T) => {
+                    if (!this.groups.includes(T.group)) {
+                        this.groups.push(T.group);
+                    }
+                })
+                console.log(this.data);
+
+            }, (error) => {
+                console.log(error);
+            })
+
+            console.log(this.groups);
+            this.carregando = false;
+            this.created();
+            this.hideModal();
+        },
+
+        toPdf() {
             //To PDF
             var columns = [];
             var title = "title";
             var dataKey = "dataKey";
-            this.headers.forEach( e => {
+            this.headers.forEach(e => {
                 var obj = new Object;
                 obj[title] = e;
                 obj[dataKey] = e;
@@ -211,45 +209,45 @@ export default {
             })
             console.log(columns);
             this.PDFprovider = this.provider;
-            this.PDFprovider.forEach( p => {
+            this.PDFprovider.forEach(p => {
                 p.Data = p.category;
                 delete p.category;
             });
 
             console.log(this.PDFprovider);
             var doc = new jsPDF('p', 'pt');
-            doc.text(35, 17, "Rastreamento Thing "+this.thingId+" Grupo "+this.group)
+            doc.text(35, 17, "Rastreamento Thing " + this.thingId + " Grupo " + this.group)
             doc.autoTable(columns, this.PDFprovider, 15, 65);
-            doc.save( "RastreamentoThing_"+this.thingId+"_"+this.group+".pdf");
+            doc.save("RastreamentoThing_" + this.thingId + "_" + this.group + ".pdf");
         },
 
-        ticksToDate(dateTicks){
+        ticksToDate(dateTicks) {
             var epochTicks = 621355968000000000,
-            ticksPerMillisecond = 10000,  
-            jsTicks = 0,          
-            jsDate;
+                ticksPerMillisecond = 10000,
+                jsTicks = 0,
+                jsDate;
             jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
             jsDate = new Date(jsTicks);
-            var hours = jsDate.toString().slice(4,21);
+            var hours = jsDate.toString().slice(4, 21);
             return hours;
         },
 
-        dateToTicks(dateTime){
-            var date = new Date(dateTime); 
+        dateToTicks(dateTime) {
+            var date = new Date(dateTime);
             var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
             return ticks;
         },
 
-        refreshGraph(){
+        refreshGraph() {
             this.created();
         },
 
-        editGroup(grupo){
+        editGroup(grupo) {
             cache: false;
-            this.group = grupo; 
+            this.group = grupo;
             this.provider = [];
             console.log("console.log(this.provider);");
-            console.log(this.provider);  
+            console.log(this.provider);
             this.graphProvider = [];
             this.headers = [];
             this.providerAux = [];
@@ -259,25 +257,25 @@ export default {
             var t = 0;
             var aux = [];
             // To Excel
-            this.filename = "RastreamentoThing_"+this.thingId+"_"+this.group+".xls";
-        Object.keys(this.provider[0]).forEach((n) => {
-            if(n=="category"){
-                aux.push("Data");
-                this.jsonfields["Data"]="category";
-            }else{
-                aux.push(n);
-                this.jsonfields[n]=n;
-            }
-            console.log(aux[t]);
-            t++;
-        });
-        this.headers = aux
-        console.log(this.headers);
-        console.log(this.jsonfields);
+            this.filename = "RastreamentoThing_" + this.thingId + "_" + this.group + ".xls";
+            Object.keys(this.provider[0]).forEach((n) => {
+                if (n == "category") {
+                    aux.push("Data");
+                    this.jsonfields["Data"] = "category";
+                } else {
+                    aux.push(n);
+                    this.jsonfields[n] = n;
+                }
+                console.log(aux[t]);
+                t++;
+            });
+            this.headers = aux
+            console.log(this.headers);
+            console.log(this.jsonfields);
         },
-        formatGraphData(obj, group){
-            obj.tags.forEach((R) => { 
-                if(R.group == group){
+        formatGraphData(obj, group) {
+            obj.tags.forEach((R) => {
+                if (R.group == group) {
                     this.thingGroup = R.group;
                     this.thingId = obj.thingId;
                     var dataObj2 = new Array();
@@ -291,22 +289,22 @@ export default {
                     obj2["lineThickness"] = 3;
                     obj2["type"] = "smoothedLine";
                     obj2["title"] = R.name;
-                    obj2["valueField"] = R.name; 
-                    
+                    obj2["valueField"] = R.name;
+
                     var i = 0;
 
                     console.log("R");
                     console.log(R);
-                    
-                    R.timestamp.map( e => {
-                        
+
+                    R.timestamp.map(e => {
+
                         var dataObj = new Array();
 
                         var category = "category";
                         var tagname = R.name;
 
                         var obj = new Object();
-                        
+
                         obj[category] = this.ticksToDate(e);
                         obj[tagname] = R.value[i];
 
@@ -322,37 +320,37 @@ export default {
                     this.graphProvider.push(dataObj2);
 
                     console.log("this.graphProvider");
-                    console.log(this.graphProvider);   
+                    console.log(this.graphProvider);
 
                     console.log("this.providerAux");
-                    console.log(this.providerAux);    
-                    }
-                }); 
-                console.log("this.providerAux.groupBy('category')");
-                console.log(this.providerAux.groupByProperties("category"));
+                    console.log(this.providerAux);
+                }
+            });
+            console.log("this.providerAux.groupBy('category')");
+            console.log(this.providerAux.groupByProperties("category"));
 
-                var groupArray = this.providerAux.groupByProperties("category");
+            var groupArray = this.providerAux.groupByProperties("category");
 
-                
-                var newproviderAux = new Array();
-                var dataObj3 = new Object();
 
-                groupArray.forEach((Group) => {
-                    var category = "category";
-                    var obj3 = new Object();
-                    obj3[category] = Group[0].category;
-                    Group.forEach((Tag) => {
-                        var keys = Object.keys(Tag);
-                        var val = Object.values(Tag);
-                        obj3[keys[1]] = val[1];
-                        dataObj3 = Object.assign(obj3);
-                    });
-                    
-                    newproviderAux.push(dataObj3);
-                    console.log(newproviderAux);
-                    this.provider = newproviderAux;
+            var newproviderAux = new Array();
+            var dataObj3 = new Object();
+
+            groupArray.forEach((Group) => {
+                var category = "category";
+                var obj3 = new Object();
+                obj3[category] = Group[0].category;
+                Group.forEach((Tag) => {
+                    var keys = Object.keys(Tag);
+                    var val = Object.values(Tag);
+                    obj3[keys[1]] = val[1];
+                    dataObj3 = Object.assign(obj3);
                 });
-                   
+
+                newproviderAux.push(dataObj3);
+                console.log(newproviderAux);
+                this.provider = newproviderAux;
+            });
+
         },
 
         showModal() {
@@ -366,8 +364,7 @@ export default {
         },
 
         created() {
-            window.AmCharts.makeChart("chartdiv",
-            {
+            window.AmCharts.makeChart("chartdiv", {
                 "type": "serial",
                 "categoryField": "category",
                 "autoMarginOffset": 40,
@@ -386,21 +383,18 @@ export default {
                 "legend": {
                     "enabled": true
                 },
-                "valueAxes": [
-                    {
-                        "id": "ValueAxis-1",
-                        "title": ""
-                    }
-                ],
+                "valueAxes": [{
+                    "id": "ValueAxis-1",
+                    "title": ""
+                }],
                 "allLabels": [],
                 "balloon": {},
                 "titles": [],
                 "dataProvider": this.provider
-            }
-            );
-          },
-          
+            });
         },
+
+    },
     beforeMount: function() {
         this.showModal();
         this.getThings();

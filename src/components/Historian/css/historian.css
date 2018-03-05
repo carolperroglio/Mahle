@@ -1,4 +1,3 @@
-
 body {
     font-family: "Lucida Sans Unicode";
 }
@@ -17,7 +16,7 @@ body {
     position: fixed;
     margin-top: 5%;
     z-index: 1;
-    background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
     width: 100%;
     height: 12%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -35,7 +34,7 @@ body {
     margin-left: 5%;
 }
 
-.conteudotabela{
+.conteudotabela {
     margin-left: 10%;
     margin-top: -5%;
 }
@@ -46,7 +45,8 @@ body {
     width: 90%;
 }
 
-.td1, th1 {
+.td1,
+th1 {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -56,10 +56,9 @@ body {
     background-color: #dddddd;
 }
 
-  #constat {
+#constat {
     padding: 0.5%;
- }
-
+}
 
 .ls23 {
     width: 100%;
@@ -70,16 +69,16 @@ body {
 }
 
 hr.style13 {
-	height: 10px;
-	border: 0;
-	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
 
 hr.style3 {
-	border-top: 1px dashed #8c8b8b;
+    border-top: 1px dashed #8c8b8b;
 }
 
-.title-page-history{
+.title-page-history {
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
@@ -93,7 +92,7 @@ hr.style3 {
     margin-top: 10%;
 }
 
-.card-header-stat{ 
+.card-header-stat {
     width: 100%;
     margin-top: 0.3%;
     margin-bottom: 0.3%;
@@ -105,32 +104,27 @@ hr.style3 {
     color: rgb(41, 39, 39);
 }
 
-
-
 @media only screen and (max-width: 800px) {
-.nav-history {
+    .nav-history {
         background-color: rgba(249, 247, 247, 1);
         position: fixed;
         z-index: 1;
         margin-top: 10%;
         width: 100%;
         height: 13%;
-        border-bottom: 1px solid rgba(0,0,0,0.2);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
-
-.conteudo-history {
-    margin-top: 22%;
-}
-
-.nav-item-stat {
+    .conteudo-history {
+        margin-top: 22%;
+    }
+    .nav-item-stat {
         font-size: 16px;
         top: 21%;
     }
-.ls {
-    font-size: 12px;
-}
-.ls22 {
-    width: 40%;
-}
-
+    .ls {
+        font-size: 12px;
+    }
+    .ls22 {
+        width: 40%;
+    }
 }

@@ -31,8 +31,7 @@ module.exports = {
         path: config.build.assetsRoot,
         filename: '[name].js',
         publicPath: process.env.NODE_ENV === 'production' ?
-            config.build.assetsPublicPath :
-            config.dev.assetsPublicPath
+            config.build.assetsPublicPath : config.dev.assetsPublicPath
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
@@ -72,7 +71,8 @@ module.exports = {
                 PROD_HIST_API: JSON.stringify("http://52.90.29.209:8006"),
                 RECIPE_API: JSON.stringify("http://52.90.29.209:8002"),
                 STATUS_API: JSON.stringify("http://52.90.29.209:8004"),
-                HIST_BIGTABLE_API: JSON.stringify("http://52.90.29.209:8011")
+                HIST_BIGTABLE_API: JSON.stringify("http://52.90.29.209:8011"),
+                HIST_ALARM_API: JSON.stringify("http://52.90.29.209:8012")
             }
         }),
         new HtmlWebpackPlugin({
