@@ -257,21 +257,24 @@ export default {
             var t = 0;
             var aux = [];
             // To Excel
-            this.filename = "RastreamentoThing_" + this.thingId + "_" + this.group + ".xls";
-            Object.keys(this.provider[0]).forEach((n) => {
-                if (n == "category") {
-                    aux.push("Data");
-                    this.jsonfields["Data"] = "category";
-                } else {
-                    aux.push(n);
-                    this.jsonfields[n] = n;
-                }
-                console.log(aux[t]);
-                t++;
-            });
-            this.headers = aux
-            console.log(this.headers);
-            console.log(this.jsonfields);
+            this.filename = "RastreamentoThing_"+this.thingId+"_"+this.group+".xls";
+            /*
+             *  JSON de criação das características do gráfico.
+             */
+        Object.keys(this.provider[0]).forEach((n) => {
+            if(n=="category"){
+                aux.push("Data");
+                this.jsonfields["Data"]="category";
+            }else{
+                aux.push(n);
+                this.jsonfields[n]=n;
+            }
+            console.log(aux[t]);
+            t++;
+        });
+        this.headers = aux
+        console.log(this.headers);
+        console.log(this.jsonfields);
         },
         formatGraphData(obj, group) {
             obj.tags.forEach((R) => {
@@ -281,6 +284,10 @@ export default {
                     var dataObj2 = new Array();
                     var obj2 = new Object();
 
+                    /**
+                     * Criação do JSON de criação das características do gráfico.
+                     * Cada linha terá um objeto com as características dentro do array
+                     */
                     obj2["balloonColor"] = "#808080";
                     obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
                     obj2["bullet"] = "round";
@@ -295,9 +302,13 @@ export default {
 
                     console.log("R");
                     console.log(R);
-
-                    R.timestamp.map(e => {
-
+                    
+                    R.timestamp.map( e => {
+                     /**
+                     * Criando o campo categoria do JSON do gráfico
+                     * E adicionando a data á ele
+                     * Para que cada ponto do eixo X seja uma data diferente
+                     */
                         var dataObj = new Array();
 
                         var category = "category";
@@ -315,35 +326,46 @@ export default {
                         i++;
                     })
 
+                     /**
+                     * Adicionando a tag com a respectiva data ao array
+                     */
+                    
                     dataObj2 = Object.assign(obj2);
                     console.log(dataObj2);
                     this.graphProvider.push(dataObj2);
 
                     console.log("this.graphProvider");
                     console.log(this.graphProvider);
+                    console.log(this.providerAux);    
+                    }
+                }); 
 
-                    console.log("this.providerAux");
-                    console.log(this.providerAux);
-                }
-            });
-            console.log("this.providerAux.groupBy('category')");
-            console.log(this.providerAux.groupByProperties("category"));
+                    /**
+                     * Separar objetos por data, assim cada obj todas as tags com a mesma data
+                     */
+                console.log("this.providerAux.groupBy('category')");
+                console.log(this.providerAux.groupByProperties("category"));
 
-            var groupArray = this.providerAux.groupByProperties("category");
+                var groupArray = this.providerAux.groupByProperties("category");
 
+                
+                var newproviderAux = new Array();
+                var dataObj3 = new Object();
 
-            var newproviderAux = new Array();
-            var dataObj3 = new Object();
-
-            groupArray.forEach((Group) => {
-                var category = "category";
-                var obj3 = new Object();
-                obj3[category] = Group[0].category;
-                Group.forEach((Tag) => {
-                    var keys = Object.keys(Tag);
-                    var val = Object.values(Tag);
-                    obj3[keys[1]] = val[1];
-                    dataObj3 = Object.assign(obj3);
+                groupArray.forEach((Group) => {
+                    var category = "category";
+                    var obj3 = new Object();
+                    obj3[category] = Group[0].category;
+                    Group.forEach((Tag) => {
+                        var keys = Object.keys(Tag);
+                        var val = Object.values(Tag);
+                        obj3[keys[1]] = val[1];
+                        dataObj3 = Object.assign(obj3);
+                    });
+                    
+                    newproviderAux.push(dataObj3);
+                    console.log(newproviderAux);
+                    this.provider = newproviderAux;
                 });
 
                 newproviderAux.push(dataObj3);

@@ -22,6 +22,8 @@ import ToolsManagement from '@/components/ToolsManagement/ToolsManagement'
 import StatusMES from '@/components/StatusMES/StatusMES'
 import Historian from '@/components/Historian/Historian'
 import HistorianAlarm from '@/components/HistorianAlarm/HistorianAlarm'
+import Alarms from '@/components/Alarms/Alarms'
+
 
 Vue.use(Router)
 
@@ -126,9 +128,15 @@ export default new Router({
             component: Historian
         },
         {
+
             path: '/historianalarms',
             name: 'Historianalarms',
             component: HistorianAlarm
+        },
+        {
+            path: '/alarms',
+            name: 'Alarms',
+            component: Alarms
         }
     ]
 })
