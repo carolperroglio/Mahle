@@ -11,6 +11,7 @@ import HistorianProduction from '@/components/HistorianProduction/HistorianProdu
 import StateManagement from '@/components/OPStateManagement/StateManagement'
 import ListRecipes from '@/components/Phases/ListRecipes'
 import AssociateTool from '@/components/AssociateTool/AssociateTool'
+import AssociateTool2 from '@/components/AssociateTool/AssociateTool2'
 import ToolType from '@/components/ToolType/ToolType'
 import StatusManagement from '@/components/ToolsManagement/ToolsManagement'
 import OPManagement from '@/components/OPManagement/OPManagement'
@@ -22,7 +23,7 @@ import ToolsManagement from '@/components/ToolsManagement/ToolsManagement'
 import StatusMES from '@/components/StatusMES/StatusMES'
 import Historian from '@/components/Historian/Historian'
 import HistorianAlarm from '@/components/HistorianAlarm/HistorianAlarm'
-import Alarms from '@/components/Alarms/Alarms'
+// import Alarms from '@/components/Alarms/Alarms'
 
 
 Vue.use(Router)
@@ -75,7 +76,7 @@ export default new Router({
         {
             path: '/associateTool',
             name: 'AssociateTool',
-            component: AssociateTool
+            component: AssociateTool2
         },
         {
             path: '/toolType',
@@ -133,10 +134,10 @@ export default new Router({
             name: 'Historianalarms',
             component: HistorianAlarm
         },
-        {
-            path: '/alarms',
-            name: 'Alarms',
-            component: Alarms
-        }
+        // {
+        //     path: '/alarms',
+        //     name: 'Alarms',
+        //     component: Alarms
+        // }
     ]
 })

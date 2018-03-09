@@ -1,28 +1,36 @@
-.nav-item-ass-tool{
+.nav-item-ass-tool {
     position: fixed;
     margin-top: 5%;
     z-index: 1;
-    background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
     width: 100%;
     height: 18%;
     border-top: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item{
+.nav-item {
     margin-top: 2%;
-} 
+}
 
-.dropdown-item{
+.dropdown-item {
     background-color: white;
+}
+
+.nav-ass-tool {
+    margin-top: 4%;
+    margin-left: 2%;
+}
+
+.btn-ajusted-center {
+    margin-top: 2%;
 }
 
 #load {
     margin-left: 55%;
 }
 
-
-.title-page-ass-tool{
+.title-page-ass-tool {
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
@@ -34,60 +42,59 @@
     z-index: 2;
 }
 
-.ferAssoc{
+.ferAssoc {
     position: relative;
     margin-top: 22%;
-    margin-bottom: 5%;              
+    margin-bottom: 5%;
     margin-left: 1%;
     width: 100%;
 }
 
-.btn-warning{
+.btn-warning {
     color: white;
 }
 
-
-#dropdownMenuButton{
+#dropdownMenuButton {
     background-color: white;
     color: black;
 }
 
-.card-body-ass-tool{
+.card-body-ass-tool {
     margin-top: 0.1%;
     margin-bottom: 0.1%;
     margin-left: 1.1%;
 }
 
-.card-header-ass-tool{
-        margin-top: 0.6%;
-        margin-bottom: 0.6%;   
+.card-header-ass-tool {
+    margin-top: 0.6%;
+    margin-bottom: 0.6%;
 }
+
 
 /*Listagem de orderHistorian*/
 
-.icon-right{
+.icon-right {
     position: relative;
     float: right;
 }
 
-input{
+input {
     position: relative !important;
 }
 
-.ls11{
-    width: 25%;
+.ls11 {
+    width: 5%;
 }
 
-
-@media screen and (max-width : 801px){
-    .orderHistorian{ 
-        margin-top: 30%; 
-    }   
-    .nav-item-ass-tool{
+@media screen and (max-width: 801px) {
+    .orderHistorian {
+        margin-top: 30%;
+    }
+    .nav-item-ass-tool {
         margin-top: 9%;
     }
-    .title-page-ass-tool{
+    .title-page-ass-tool {
         font-size: 20px;
         margin-top: 5%;
-    }        
-} 
+    }
+}

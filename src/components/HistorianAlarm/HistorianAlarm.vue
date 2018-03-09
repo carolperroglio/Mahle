@@ -1,57 +1,68 @@
 <template>
   <div>
-      <nav class="fixed-top nav-history-alarm">
+      <div class="fixed-top nav-history-alarm">
             <h1 class="title-page-history-alarm"><b>Histórico de Alarmes</b></h1>
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item-hist-alarm">
-                  
+                <li class="nav-item nav-item-hist-alarm">
+                    <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal">Selecionar Periodo</button>
                 </li>
             </ul>
-        </nav>
-
-<div class="row conteudotabela">
-            
-            <div class="col-sm-2">
-            <select class="form-control-outline-secondary" v-model="newGroup">    
-                <option v-for="(g,index) in groups" :value="g" v-bind:key="index">{{g}}</option>
-            </select>
-            </div>
-            <div class="col-sm-2">
-            <button type="button" class="btn btn-info btn-sm btn-sm" @click.prevent="editGroup(newGroup)">
-                Editar Grupo
-            </button>
-            </div>
-            <div class="col-sm-2">
-            <button type="button" class="btn btn-warning btn-sm btn-sm pull-left" style="color:white" @click.prevent="refreshGraph()">
-                Atualizar Gráfico
-            </button>
-            </div>
-            <div class="col-sm-2">
-            <button type="button" class="btn btn-danger btn-sm btn-sm pull-left" @click.prevent="toPdf()">
-               <i class="fa fa-file-pdf-o"></i> Exportar para PDF
-            </button>
-            </div>
-            <div class="col-sm-2">
-             <download-excel
-                class   = "btn btn-success btn-sm btn-sm pull-left"
-                :data   = provider
-                :fields = jsonfields
-                :name    = filename >
-                 <i class="fa fa-file-excel-o"></i> Exportar para Excel
-            </download-excel>
-            </div>
-            <br>
-            <br>
-            <div class="col-md-12">
-                <table class="table1">
-                    <thead>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                    </thead>
-                </table>
-            </div>
         </div>
+
+<div class="col-lg-11">
+    <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+</div>
+<div class="h-alarm col">
+                <div id="load" v-show="carregando">
+                <stretch background="#4d4d4d"></stretch>
+                </div> 
+                <div class="col offset-lg-3 no-ha-msg">
+                    <label class="ls ls2">
+                        <b>
+                        <font color="#9BA6A5"> 
+                        {{msg}}</font></b></label>&nbsp;&nbsp;&nbsp;
+                </div>
+                <div v-for="(h, index) in alarms" v-bind:key="index">
+                      <div class="card-header card-header-alarm">
+                            <b></b>
+                        </div>
+                        <div class="card-body">
+                        
+                            <label class="ls ls2">
+                                <b>
+                                    <font color="#9BA6A5">Thing: </font>
+                                </b>{{h.thingName}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls2">
+                                <b>
+                                    <font color="#9BA6A5">Tipo de Alerta: </font>
+                                </b>{{h.alarmName}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls2">
+                                <b>
+                                    <font color="#9BA6A5">Descrição: </font>
+                                </b>{{h.alarmDescription}}</label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls2">
+                                <b>
+                                    <font color="#9BA6A5">Data inicial: </font>
+                                </b>{{h.iniDate}}</label>&nbsp;&nbsp;&nbsp;
+                        </div>
+                </div>
+                <div class="paginacao" v-show="total>0">
+                    <nav aria-label="">
+                        <ul class="pagination justify-content-center">
+                            <li v-show="startat>0" class="page-item">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Previous</a>
+                            </li>
+                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
+                            </li>
+                            <li class="page-item" v-show="pages.length>1 && startat+20<total">
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <br>
       <b-modal ref="myModalEdit" hide-footer title="Selecionar Período">
                     <div class="modal-body">
                        

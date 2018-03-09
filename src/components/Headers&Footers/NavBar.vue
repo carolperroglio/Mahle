@@ -84,7 +84,7 @@
                             </span>
                         </router-link>
 
-                        <router-link to="/alarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <router-link to="/historianalarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-bell"></i> 
                             <span class="hidden-sm-down">  
                                 ALARMES

@@ -11,8 +11,8 @@ es6promisse.polyfill();
 export default {
     name: "AssociateTool",
     data() {
-        return { 
-            carregando: false,    
+        return {
+            carregando: false,
             Tools: [],
             AllTools: [],
             Groups: [],
@@ -25,10 +25,10 @@ export default {
             thingId: '',
             typeId: '',
             groupId: '',
-            mensagem:'',
-            mensagemSuc:'',
+            mensagem: '',
+            mensagemSuc: '',
             fieldFilter: '',
-            fieldValue: '' ,
+            fieldValue: '',
             notSelected: true,
             group: false,
             thing: false,
@@ -36,7 +36,7 @@ export default {
             lista2: false,
             carregando: false,
             url: process.env.TOOLS_API
-         }
+        }
     },
     computed: {},
     components: {
@@ -50,87 +50,88 @@ export default {
     },
     methods: {
 
-           getTools(name){            
-            var array=[];                          
-            if(name.length<3){return;}                
-            axios.get(this.url+'api/tool?fieldFilter=name&fieldValue='+name).then((response)=>{                                           
+        getTools(name) {
+            var array = [];
+            if (name.length < 3) { return; }
+            axios.get(this.url + '/api/tool?fieldFilter=name&fieldValue=' + name).then((response) => {
                 response.data.values.forEach((pro) => {
-                    array.push(pro);                    
+                    array.push(pro);
+                    console.log(response);
                 });
-            },(error)=>{
+            }, (error) => {
                 console.log(error);
-            })            
-                return array;
-            },
-            getAllTools(){            
-                axios.get(this.url+'/api/tool').then((response)=>{                                           
-                    response.data.values.forEach((pro) => {
-                        this.AllTools.push(pro);                    
-                    });
-                    console.log(this.AllTools);
-                },(error)=>{
-                    console.log(error);
-                })            
-                },
-            openSelectGroup(){
-                this.carregando = true;
-                this.group = true;               
-                axios.get(this.url+'api/tooltype/'+this.typeId).then((response)=>{   
-                    this.Groups = response.data.thingGroups;
-                        },(error)=>{
-                                console.log(error);
-                        })
-                this.lista = true;
-                axios.get(this.url+'api/tool/'+this.toolId).then((response)=>{
-                    this.Tool = response.data;
-                    console.log(response.data);
-                    this.Tool.status = this.getStatus(response.data.status);
-                this.carregando = false;                                      
-                },(r)=>{                
-                    this.mensagem = r;                
-                    this.carregando = false;
-                })            
+            })
+            return array;
+        },
+        getAllTools() {
+            axios.get(this.url + '/api/tool').then((response) => {
+                response.data.values.forEach((pro) => {
+                    this.AllTools.push(pro);
+                });
+                console.log(this.AllTools);
+            }, (error) => {
+                console.log(error);
+            })
+        },
+        openSelectGroup() {
+            this.carregando = true;
+            this.group = true;
+            axios.get(this.url + '/api/tooltype/' + this.typeId).then((response) => {
+                this.Groups = response.data.thingGroups;
+            }, (error) => {
+                console.log(error);
+            })
+            this.lista = true;
+            axios.get(this.url + '/api/tool/' + this.toolId).then((response) => {
+                this.Tool = response.data;
+                console.log(response.data);
+                this.Tool.status = this.getStatus(response.data.status);
+                this.carregando = false;
+            }, (r) => {
+                this.mensagem = r;
+                this.carregando = false;
+            })
 
-            },
-            openSelectThings(){
-                this.thing=true;               
-                axios.get(this.url+'gateway/thinggroups/'+this.groupId).then((response)=>{   
+        },
+        openSelectThings() {
+            this.thing = true;
+            axios.get(this.url + '/gateway/thinggroups/' + this.groupId).then((response) => {
                 this.Things = response.data.things;
                 console.log(this.Things);
-            },(error)=>{
-                    console.log(error);
-                })            
+            }, (error) => {
+                console.log(error);
+            })
 
-            },
-            getAssoc(){
-                this.mensagemSuc = '';
-                this.mensagem = '';
-                axios.put(this.url+'api/tool/AssociateTool/associate?thingId='+this.thingId+'&toolid='+this.toolId).then((response)=>{
-                    this.Tool = response.data;
-                    console.log(response.data);
-                    this.Tool.status = this.getStatus(response.data.status);
-                    this.Thing = response.data.currentThing;
-                    this.lista2 = true;
-                    this.mensagemSuc = 'Ferramenta associada com sucesso.';
-                },(r)=>{                
-                    this.mensagem = r.response.data;      
-                    this.carregando = false;
-                })
+        },
+        getAssoc() {
+            this.mensagemSuc = '';
+            this.mensagem = '';
+            axios.put(this.url + '/api/tool/AssociateTool/associate?thingId=' + this.thingId + '&toolid=' + this.toolId).then((response) => {
+                this.Tool = response.data;
+                console.log(response.data);
+                this.Tool.status = this.getStatus(response.data.status);
+                this.Thing = response.data.currentThing;
+                this.lista2 = true;
+                this.mensagemSuc = 'Ferramenta associada com sucesso.';
+            }, (r) => {
+                this.mensagem = r.response.data;
+                this.carregando = false;
+            })
 
-            },
-            getStatus (status){
-                var state = {
-                    'available': "Disponível",
-                    'in_use': "Em uso",
-                    'in_maintenance': "Em manutenção",
-                    'not_available': "Indisponível",
-                    'inactive': "Inativo",
-                    'active': "Disponível"
-                    };
-                return state[status];
-            },
+        },
+        getStatus(status) {
+            var state = {
+                'available': "Disponível",
+                'in_use': "Em uso",
+                'in_maintenance': "Em manutenção",
+                'not_available': "Indisponível",
+                'inactive': "Inativo",
+                'active': "Disponível"
+            };
+            return state[status];
+        },
     },
-    beforeMount: function(){
+    beforeMount: function() {
         this.getAllTools();
     }
 };

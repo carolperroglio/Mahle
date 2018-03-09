@@ -22,6 +22,8 @@ import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css
 import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
 import { array } from 'bootstrap-vue/es/utils'
 import { Stretch } from 'vue-loading-spinner'
+import logo from './onyx.jpeg'
+import logoSpi from './SPI_Logo_FundoClaro.jpeg'
 
 es6promisse.polyfill();
 
@@ -38,7 +40,6 @@ function paginacao(response, este) {
             este.pages[i] = i;
     }
 }
-
 Array.prototype.groupByProperties = function(properties) {
     var arr = this;
     var groups = [];
@@ -213,11 +214,36 @@ export default {
                 p.Data = p.category;
                 delete p.category;
             });
-
+            var thingNam;
+            this.things.forEach((t) => {
+                if (this.thingId == t.thingId) {
+                    thingNam = t.thingName;
+                }
+            })
             console.log(this.PDFprovider);
+
             var doc = new jsPDF('p', 'pt');
-            doc.text(35, 17, "Rastreamento Thing " + this.thingId + " Grupo " + this.group)
-            doc.autoTable(columns, this.PDFprovider, 15, 65);
+            var img = new Image;
+            var imgLogo = new Image;
+            img.src = logo;
+            imgLogo.src = logoSpi;
+            var pageContent = function(data) {
+                // HEADER
+                doc.setFontSize(20);
+
+                doc.addImage(img, "JPEG", 15, 15, 50, 30);
+                doc.addImage(imgLogo, "JPEG", 510, 15, 60, 30);
+                // doc.text("Report", data.settings.margin.left + 15, 22);
+            };
+            // doc.addImage(imgData, 'JPEG', 15, 10, 10);
+            doc.text(35, 65, "Rastreamento" + thingNam + " Grupo " + this.group)
+                // doc.autoTable(columns, this.PDFprovider, 15, 65);
+            doc.autoTable(columns, this.PDFprovider, {
+                addPageContent: pageContent,
+                showHeader: 'everyPage',
+                margin: { top: 80 }
+            });
+
             doc.save("RastreamentoThing_" + this.thingId + "_" + this.group + ".pdf");
         },
 
@@ -257,24 +283,24 @@ export default {
             var t = 0;
             var aux = [];
             // To Excel
-            this.filename = "RastreamentoThing_"+this.thingId+"_"+this.group+".xls";
+            this.filename = "RastreamentoThing_" + this.thingId + "_" + this.group + ".xls";
             /*
              *  JSON de criação das características do gráfico.
              */
-        Object.keys(this.provider[0]).forEach((n) => {
-            if(n=="category"){
-                aux.push("Data");
-                this.jsonfields["Data"]="category";
-            }else{
-                aux.push(n);
-                this.jsonfields[n]=n;
-            }
-            console.log(aux[t]);
-            t++;
-        });
-        this.headers = aux
-        console.log(this.headers);
-        console.log(this.jsonfields);
+            Object.keys(this.provider[0]).forEach((n) => {
+                if (n == "category") {
+                    aux.push("Data");
+                    this.jsonfields["Data"] = "category";
+                } else {
+                    aux.push(n);
+                    this.jsonfields[n] = n;
+                }
+                console.log(aux[t]);
+                t++;
+            });
+            this.headers = aux
+            console.log(this.headers);
+            console.log(this.jsonfields);
         },
         formatGraphData(obj, group) {
             obj.tags.forEach((R) => {
@@ -302,13 +328,13 @@ export default {
 
                     console.log("R");
                     console.log(R);
-                    
-                    R.timestamp.map( e => {
-                     /**
-                     * Criando o campo categoria do JSON do gráfico
-                     * E adicionando a data á ele
-                     * Para que cada ponto do eixo X seja uma data diferente
-                     */
+
+                    R.timestamp.map(e => {
+                        /**
+                         * Criando o campo categoria do JSON do gráfico
+                         * E adicionando a data á ele
+                         * Para que cada ponto do eixo X seja uma data diferente
+                         */
                         var dataObj = new Array();
 
                         var category = "category";
@@ -326,51 +352,47 @@ export default {
                         i++;
                     })
 
-                     /**
+                    /**
                      * Adicionando a tag com a respectiva data ao array
                      */
-                    
+
                     dataObj2 = Object.assign(obj2);
                     console.log(dataObj2);
                     this.graphProvider.push(dataObj2);
 
                     console.log("this.graphProvider");
                     console.log(this.graphProvider);
-                    console.log(this.providerAux);    
-                    }
-                }); 
+                    console.log(this.providerAux);
+                }
+            });
 
-                    /**
-                     * Separar objetos por data, assim cada obj todas as tags com a mesma data
-                     */
-                console.log("this.providerAux.groupBy('category')");
-                console.log(this.providerAux.groupByProperties("category"));
+            /**
+             * Separar objetos por data, assim cada obj todas as tags com a mesma data
+             */
+            console.log("this.providerAux.groupBy('category')");
+            console.log(this.providerAux.groupByProperties("category"));
 
-                var groupArray = this.providerAux.groupByProperties("category");
+            var groupArray = this.providerAux.groupByProperties("category");
 
-                
-                var newproviderAux = new Array();
-                var dataObj3 = new Object();
 
-                groupArray.forEach((Group) => {
-                    var category = "category";
-                    var obj3 = new Object();
-                    obj3[category] = Group[0].category;
-                    Group.forEach((Tag) => {
-                        var keys = Object.keys(Tag);
-                        var val = Object.values(Tag);
-                        obj3[keys[1]] = val[1];
-                        dataObj3 = Object.assign(obj3);
-                    });
-                    
-                    newproviderAux.push(dataObj3);
-                    console.log(newproviderAux);
-                    this.provider = newproviderAux;
+            var newproviderAux = new Array();
+            var dataObj3 = new Object();
+
+            groupArray.forEach((Group) => {
+                var category = "category";
+                var obj3 = new Object();
+                obj3[category] = Group[0].category;
+                Group.forEach((Tag) => {
+                    var keys = Object.keys(Tag);
+                    var val = Object.values(Tag);
+                    obj3[keys[1]] = val[1];
+                    dataObj3 = Object.assign(obj3);
                 });
 
                 newproviderAux.push(dataObj3);
                 console.log(newproviderAux);
                 this.provider = newproviderAux;
+
             });
 
         },
