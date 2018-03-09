@@ -67,7 +67,7 @@ export default {
             quantityPage: 20,
             startat: 0,
             total: 0,
-            history: [],
+            alarms: [],
             pages: [],
             pageAtual: 0,
             newGroup: '',
@@ -95,7 +95,8 @@ export default {
             PDFprovider: [],
             data: [],
             headers: [],
-            jsonfields: {}
+            jsonfields: {},
+            msg: ''
         }
     },
     components: {
@@ -161,22 +162,30 @@ export default {
             console.log(this.urlHist + '/api/historianAlarm?thingId=' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF);
 
             axios.get(this.urlHist + '/api/historianAlarm?thingId=' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
-                this.data = response.data;
-                this.tags = response.data.tags;
-                this.tags.forEach((T) => {
-                    if (!this.groups.includes(T.group)) {
-                        this.groups.push(T.group);
+                this.msg = "";
+                this.alarms = response.data.values;
+                console.log(this.alarms);
+                var alarmLength = this.alarms.length;
+                this.alarms.forEach((alarm) => {
+                    for (var count = 0; count < this.things.length; count++) {
+                        if (alarm.thingId == this.things[count].thingId) {
+                            alarm.thingName = this.things[count].thingName;
+                        }
                     }
+                    alarm.iniDate = this.ticksToDate(alarm.startDate);
                 })
-                console.log(this.data);
-
+                this.formatGraphData(this.alarms);
             }, (error) => {
+                if (error.response.status == 404) {
+                    this.alarms = [];
+                    this.msg = "Não possui alarme atribuido a thing selecionada neste periodo"
+                    console.log(error);
+                }
                 console.log(error);
             })
-
-            console.log(this.groups);
+            console.log(this.alarms);
             this.carregando = false;
-            this.created();
+            // this.created();
             this.hideModal();
         },
         toPdf() {
@@ -202,6 +211,131 @@ export default {
             doc.text(35, 17, "Rastreamento Thing " + this.thingId + " Grupo " + this.group)
             doc.autoTable(columns, this.PDFprovider, 15, 65);
             doc.save("RastreamentoThing_" + this.thingId + "_" + this.group + ".pdf");
+        },
+
+        /*
+            CRIA O GRÁFICO
+        */
+        formatGraphData(alarms) {
+            alarms.forEach((alarm) => {
+                //if (R.group == group) {
+                var dataObj2 = new Array();
+                var obj2 = new Object();
+
+                /**
+                 * Criação do JSON de criação das características do gráfico.
+                 * Cada linha terá um objeto com as características dentro do array
+                 */
+                obj2["balloonColor"] = "#808080";
+                obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
+                obj2["bullet"] = "round";
+                obj2["bulletSize"] = 10;
+                obj2["color"] = "#000000";
+                obj2["lineThickness"] = 3;
+                obj2["type"] = "smoothedLine";
+                obj2["title"] = alarm.alarmName;
+                obj2["valueField"] = alarm.alarmName;
+
+                var i = 0;
+
+                console.log("R");
+                console.log(alarm);
+
+
+                /**
+                 * Criando o campo categoria do JSON do gráfico
+                 * E adicionando a data á ele
+                 * Para que cada ponto do eixo X seja uma data diferente
+                 */
+                var dataObj = new Array();
+
+                var category = "category";
+                var tagname = alarm.alarmName;
+
+                var obj = new Object();
+
+                obj[category] = this.ticksToDate(alarm.startDate);
+                obj[tagname] = alarm.alarmName;
+
+                dataObj = Object.assign(obj);
+                console.log(dataObj);
+                this.providerAux.push(dataObj);
+
+                i++;
+
+                /**
+                 * Adicionando a tag com a respectiva data ao array
+                 */
+
+                dataObj2 = Object.assign(obj2);
+                console.log(dataObj2);
+                this.graphProvider.push(dataObj2);
+
+                console.log("this.graphProvider");
+                console.log(this.graphProvider);
+                console.log(this.providerAux);
+                //}
+            });
+
+            /**
+             * Separar objetos por data, assim cada obj todas as tags com a mesma data
+             */
+            console.log("this.providerAux.groupBy('category')");
+            console.log(this.providerAux.groupByProperties("category"));
+
+            var groupArray = this.providerAux.groupByProperties("category");
+
+
+            var newproviderAux = new Array();
+            var dataObj3 = new Object();
+
+            groupArray.forEach((Group) => {
+                var category = "category";
+                var obj3 = new Object();
+                obj3[category] = Group[0].category;
+                Group.forEach((Tag) => {
+                    var keys = Object.keys(Tag);
+                    var val = Object.values(Tag);
+                    obj3[keys[1]] = val[1];
+                    dataObj3 = Object.assign(obj3);
+                });
+
+                newproviderAux.push(dataObj3);
+                console.log(newproviderAux);
+                this.provider = newproviderAux;
+
+            });
+
+        },
+        created() {
+            window.AmCharts.makeChart("chartdiv", {
+                "type": "serial",
+                "categoryField": "category",
+                "autoMarginOffset": 40,
+                "marginRight": 60,
+                "marginTop": 60,
+                "startDuration": 1,
+                "borderColor": "#C67373",
+                "fontSize": 13,
+                "theme": "light",
+                "categoryAxis": {
+                    "gridPosition": "start"
+                },
+                "trendLines": [],
+                "graphs": this.graphProvider,
+                "guides": [],
+                "legend": {
+                    "enabled": true
+                },
+                "valueAxes": [{
+                    "id": "ValueAxis-1",
+                    "title": ""
+                }],
+                "allLabels": [],
+                "balloon": {},
+                "titles": [],
+                "dataProvider": this.provider
+            });
         },
         showModal() {
             setTimeout(() => {

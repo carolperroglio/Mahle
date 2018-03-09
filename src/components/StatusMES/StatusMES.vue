@@ -14,29 +14,31 @@
                 </div> 
                   <div class="status">
                     <div class="row">
-                        <div v-for="(s, index) in status" v-bind:key="index" id="constat">
-                            <content-md :class="selectedTheme[index]" >
-                                <h1 class="ls ls22">
-                                    {{s.thing.thingName}}
-                               </h1>
+                        <div v-for="(s, index) in status" v-bind:key="index" id="constat" class="">
+                            <div class="tile-bg">
+                                <h4 class="ls ls22">
+                                    {{s.thingName}}
+                               </h4>
                                 <label>
-                                    <b>Código: </b>{{s.thing.thingCode}}
+                                    <b>Código: </b>{{s.thingId}}
                                 </label>
                                 <br>
-                                <button v-b-toggle="'cont'+s.thingId" class="btn btn-outline-secondary btn-sm pull-right" @click.stop.prevent="onEnable(s)">
-                                    Contexto
+                                <button class="btn btn-outline-info btn-sm pull-right"
+                                @click.stop.prevent="onEnable('cont'+ s.thingId);" 
+                                :aria-controls="'cont'+ s.thingId">
+                                    <b>Listar Alarmes</b>
                                 </button>
                                 <br>
                                 <br>
                                 <b-collapse :id="'cont'+s.thingId" >
-                                    <div v-for="(st, index) in stat.statusContexts" v-bind:key="index">
-                                       <b>Status: </b>{{st.statusName}}
+                                    <div v-for="(st, index) in s.alarms" v-bind:key="index" :style="'background-color:'+st.alarmColor">
+                                       <b>Nome: </b>{{st.alarmName}}
                                     <br>
-                                    <b>Valor: </b>{{st.value}}
-                                    <hr class="style13">
+                                    <b>Status: </b>{{st.alarmDescription}}
+                                    <!-- <hr class="style13"> -->
                                 </div>
                                 </b-collapse>
-                            </content-md>
+                            </div>
                         </div>
                     </div>
               </div>

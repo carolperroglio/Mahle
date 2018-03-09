@@ -12,42 +12,40 @@
          <div class="fixed-top nav-item-ass-tool">
          <h1 class="title-page-ass-tool"> 
          <b>Associação de Ferramenta</b></h1>
-            <ul class="nav d-flex align-items-center">
-                 <li class="nav-item col-sm-1.5">  
-                    <label><br><br><br><b>&nbsp&nbsp&nbsp Nome da ferramenta: </b></label>     
-                       <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                           <b-dropdown-item class="dropdown-item" v-if="notSelected" @click.stop.prevent="toolName = t.name;
+         <div class="form-row nav-ass-tool">
+         <div class="form-group col-md-2">
+            <label for="">Nome da ferramenta:</label>
+                <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                           <ul class="list-group">
+                           <b-dropdown-item class="" v-if="notSelected" @click.stop.prevent="toolName = t.name;
                                                                               toolId = t.id;
                                                                               tool = t.name;
                                                                               typeId = t.typeId;
                                                                               notSelected = false;  
-                                                                              openSelectGroup()" v-for="(t,index) in Tools" v-bind:key="index">{{t.name}}</b-dropdown-item>                              
-                </li>
-                <li class="nav-item-ass-tool  col-sm-1.5"  v-if="group"> 
-                    <label>
-                        <b>Grupo: </b>
-                    </label>  
-                    <select class="form-control-outline-secondary form-control" v-model="groupId"  v-on:change="openSelectThings()">
-                    <option v-for="(g,index) in Groups" :value="g.thingGroupId" v-bind:key="index">{{ g.groupName }}</option>
-                    </select>    
-                </li>
-                <li class="nav-item-ass-tool  col-sm-1.5"  v-if="thing || groupId != ''">
-                       <label>
-                        <b>Thing: </b>
-                    </label> 
-                    <select class="form-control-outline-secondary form-control" v-model="thingId">
-                    <option v-for="(t,index) in Things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}</option>
-                    </select>    
-                </li>
-                <li class="nav-item-ass-tool  col-sm-1.5"  v-if="thing || groupId != ''">
-                    <button type="button" class="btn btn-success" @click.stop.prevent="getAssoc()">
-                        Associar
-                    </button>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DisAssocModal">
-                        Desassociar
-                    </button>
-                </li>
-            </ul>
+                                                                              openSelectGroup()" v-for="(t,index) in Tools" v-bind:key="index"><li class="list-group-item">{{t.name}}</li></b-dropdown-item>                              
+                           </ul>
+        </div>
+        <div class="form-group col-md-2" v-if="group">
+            <label for="inputPassword4">Grupo:</label>
+            <select class="form-control-outline-secondary form-control" v-model="groupId"  v-on:change="openSelectThings()">
+                <option v-for="(g,index) in Groups" :value="g.thingGroupId" v-bind:key="index">{{ g.groupName }}</option>
+            </select>  
+        </div>
+        <div class="form-group col-md-2" v-if="thing || groupId != ''">
+            <label>Thing:</label> 
+            <select class="form-control-outline-secondary form-control" v-model="thingId">
+            <option v-for="(t,index) in Things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}</option>
+            </select>
+         </div>
+         <div class="btn-group-sm btn-ajusted-center col-md-3" v-if="thing || groupId != ''">
+            <button type="button" class="btn btn-success" @click.stop.prevent="getAssoc()">
+                Associar
+            </button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DisAssocModal">
+                Desassociar
+            </button>
+         </div>
+         </div>
         </div>
 
             
@@ -64,7 +62,7 @@
                 <stretch background="#4d4d4d"></stretch>
             </div> 
             <div v-show="lista || Tool.length > 0"> 
-                <div v-for="(t, index) in AllTools" v-bind:key="index">     
+                <!-- <div v-for="(t, index) in AllTools" v-bind:key="index">      -->
                 <div class="card">
                     <div class="card-header card-header-ass-tool">
                         <b>Ferramenta Associada</b>
@@ -75,30 +73,30 @@
                                 
                             <label class="ls ls11">
                                 <b><font color="#9BA6A5">Nome: </font></b></label>
-                            <label class="ls">{{ t.name }}</label>
+                            <label class="ls">{{ Tool.name }}</label>
                             <br>
                             <label class="ls ls11">
                                 <b><font color="#9BA6A5">No Serial: </font></b></label>
-                            <label class="ls">{{ t.serialNumber }}</label>                          
+                            <label class="ls">{{ Tool.serialNumber }}</label>                          
                             <br>
                             <label class="ls ls11">
                                 <b><font color="#9BA6A5">Status: </font></b></label>
-                            <label class="ls">{{ t.status }}</label>
+                            <label class="ls">{{ Tool.status }}</label>
                             <br>
                             <label class="ls ls11">
                                 <b><font color="#9BA6A5">Tipo: </font></b></label>
-                            <label class="ls">{{ t.typeName }}</label>
+                            <label class="ls">{{ Tool.typeName }}</label>
                             <br>
                             <label class="ls ls11">
                                 <b><font color="#9BA6A5">Unidade de Medida: </font></b></label>
-                            <label class="ls">{{ t.unitOfMeasurement }}</label>
+                            <label class="ls">{{ Tool.unitOfMeasurement }}</label>
                             <br>
                             <label class="ls ls11">
                                 <b><font color="#9BA6A5">Vida Atual: </font></b></label>
-                            <label class="ls ls11">{{ t.currentLife }}</label>
+                            <label class="ls ls11">{{ Tool.currentLife }}</label>
                         </div>
                 </div>  
-                </div>    
+                <!-- </div>     -->
             </div>
             <br>
              <div v-show="lista2" class="card">
@@ -201,10 +199,13 @@
 
 <script>
 export default {
-props: ["nothing"]
+  props: ["nothing"]
 };
 </script>
 <script src="./js/associateTool.js">
+export default {
+  props: ["nothing"]
+};
 </script>
 <style>
 @import url("./css/associateTool.css");

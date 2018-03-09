@@ -1,15 +1,16 @@
-
 body {
     font-family: "Lucida Sans Unicode";
 }
+
 .status {
     margin-left: 10%;
 }
+
 .nav-status {
     position: fixed;
     margin-top: 5%;
     z-index: 1;
-    background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
     width: 100%;
     height: 10%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -28,11 +29,21 @@ body {
     margin-top: 10%;
 }
 
+.tile-bg {
+    background-color: #babaaf;
+    padding: 2%;
+    padding-bottom: 20%;
+    /* height: 75% !important;
+    width: 75% !important; */
+    transition: background-color 1000ms linear;
+    box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+}
+
 .conteudo-status {
     margin-top: 12%;
     width: 100%;
     padding-bottom: 5%;
-    margin-left: 5%;
+    /* margin-left: 5%; */
 }
 
 .theme1 {
@@ -42,48 +53,48 @@ body {
     -webkit-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
     box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
-   
-  .theme2 {
+}
+
+.theme2 {
     padding: 2%;
     background-color: rgb(15, 107, 1);
     color: white;
     -webkit-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
     box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
-   
-  .theme3 {
+}
+
+.theme3 {
     padding: 2%;
     background-color: #00377e;
     color: white;
     -webkit-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
     box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
-   
-  .theme4 {
+}
+
+.theme4 {
     padding: 2%;
     background-color: rgb(213, 181, 0);
     color: white;
     -webkit-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
     box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
-   
-  .theme5 {
-    padding: 2%;     
+}
+
+.theme5 {
+    padding: 2%;
     background-color: rgb(82, 23, 94);
     color: white;
     -webkit-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
     box-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-  }
+}
 
-  #constat {
+#constat {
     padding: 0.5%;
- }
-
+    width: 19%;
+}
 
 .ls23 {
     width: 100%;
@@ -94,16 +105,16 @@ body {
 }
 
 hr.style13 {
-	height: 10px;
-	border: 0;
-	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
 
 hr.style3 {
-	border-top: 1px dashed #8c8b8b;
+    border-top: 1px dashed #8c8b8b;
 }
 
-.title-page-status{
+.title-page-status {
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
@@ -117,7 +128,7 @@ hr.style3 {
     margin-top: 10%;
 }
 
-.card-header-stat{ 
+.card-header-stat {
     width: 100%;
     margin-top: 0.3%;
     margin-bottom: 0.3%;
@@ -129,32 +140,27 @@ hr.style3 {
     color: rgb(41, 39, 39);
 }
 
-
-
 @media only screen and (max-width: 800px) {
-.nav-status {
+    .nav-status {
         background-color: rgba(249, 247, 247, 1);
         position: fixed;
         z-index: 1;
         margin-top: 10%;
         width: 100%;
         height: 13%;
-        border-bottom: 1px solid rgba(0,0,0,0.2);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
-
-.conteudo-status {
-    margin-top: 22%;
-}
-
-.nav-item-stat {
+    .conteudo-status {
+        margin-top: 22%;
+    }
+    .nav-item-stat {
         font-size: 16px;
         top: 21%;
     }
-.ls {
-    font-size: 12px;
-}
-.ls22 {
-    width: 40%;
-}
-
+    .ls {
+        font-size: 12px;
+    }
+    .ls22 {
+        width: 40%;
+    }
 }

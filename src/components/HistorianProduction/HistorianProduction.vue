@@ -12,7 +12,7 @@
              <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção</b> </h1>
             <ul class="nav d-flex align-items-center">
                <li class="nav-item-hp col-2.5">
-                   <div class="badge">Clique para escolher uma ordem de produção   <i class="fa fa-arrow-right" id="seta"></i></div>
+                   <div class="badge">Escolha uma ordem de produção   <i class="fa fa-arrow-right" id="seta"></i></div>
                </li>
                 <li class="nav-item-hp col-3">
                     <b-dropdown id="ddown-buttons" text="Número da ordem" class="m-2 pull-left">

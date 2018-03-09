@@ -26,13 +26,14 @@ function paginacao(response, este) {
     }
 }
 
-var IpServer = process.env.STATUS_API;
+var IpServer = process.env.HIST_ALARM_API;
 
 export default {
     name: "StatusMES",
     data() {
         return {
-            url: IpServer + '/api/thingstatus/',
+            url: IpServer + '/api/alarm/',
+            urlThings: process.env.THINGS_API + '/api/things/',
             carregando: false,
             quantityPage: 20,
             startat: 0,
@@ -49,7 +50,10 @@ export default {
             idstat: '',
             idstatcollpse: '',
             themeArr: ['theme1', 'theme2', 'theme3', 'theme4', 'theme5'],
-            selectedTheme: [],           
+            selectedTheme: [],
+            things: [],
+            showCollapse: false,
+            lastId: {}
         }
     },
     components: {
@@ -66,26 +70,39 @@ export default {
         'v-b-toggle': vBToggle
     },
     methods: {
-        onEnable(s) {
-            this.stat = {};
-            this.stat = s;
+        onEnable(id) {
+            $("#" + id).toggle();
         },
-        getStatus(){
+        getThings() {
+            axios.get(this.urlThings).then((response) => {
+                this.things = response.data;
+            }, (error) => {
+                console.log(error);
+            })
+        },
+        getStatus() {
             this.carregando = true;
             setTimeout(() => {
                 axios.get(this.url).then(response => {
                     this.status = response.data;
-                    for(var i = 0; i < this.status.length; i++){
-                        this.selectedTheme[i] = this.themeArr[Math.floor(Math.random() *  this.themeArr.length)];
-                    }
+                    this.status.forEach(s => {
+                        for (var i = 0; i < this.things.length; i++) {
+                            if (s.thingId == this.things[i].thingId) {
+                                s.thingName = this.things[i].thingName;
+                            }
+                        }
+                    });
+
                     this.carregando = false;
                 }).catch(error => {
                     console.log(error);
                 })
             }, 200);
         }
-        },
+    },
     beforeMount: function() {
+        this.getThings();
         this.getStatus();
+
     }
 }
