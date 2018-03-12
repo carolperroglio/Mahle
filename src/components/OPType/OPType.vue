@@ -27,7 +27,7 @@
                             <label class="ls lsoptype">
                             <b><font color="#9BA6A5"> Tipo: </font></b>{{t.typeDescription}}</label>&nbsp;
                             <label class="ls lsoptype">
-                            <b><font color="#9BA6A5">Escopo: </font></b>{{t.typeScope}}</label>&nbsp;
+                            <b><font color="#9BA6A5">Descrição: </font></b>{{t.typeScope}}</label>&nbsp;
                             </div>
                             
                         <div class="card-header card-header-optype" id="group">
@@ -79,12 +79,12 @@
                             </div>
                         
                         <div class="col-md-6 editOP">
-                            <label>Escopo</label>
+                            <label>Descrição</label>
                             <input type="text" class="form-control" placeholder="Descrição" v-model="Type.typeScope" disabled>
                         </div>
 
                         </div>
-                        </br>
+                        <br>
                         <div class="form-row">
                             <div class="col-md-2">
                            <label for="opType" class="col-form-label">Grupo</label>

@@ -13,14 +13,14 @@
             <ul class="nav d-flex align-items-center">
                 </li>    
                 <li class="nav-item-tool">
-                    <h1 class="title-page-tool"> <b>Cadastro de Ferramentas</b> </h1>
+                    <h1 class="title-page-tool"> <b>Cadastro de Ferramentas/Insumos</b> </h1>
                             <select class="form-control form-control-sm" v-model="orderField">
                             <option value="" selected disabled="disabled">Ordenar por:</option>
                             <option value="name">Nome</option>
                             <option value="description">Descrição</option>
                             <option value="serialNumber">Número serial</option>
                             <option value="code">Código</option>
-                            <option value="lifeCycle">Life cycle</option>
+                            <option value="lifeCycle">Vida Útil</option>
                             <option value="currentLife">Ciclo de vida atual</option>
                             <option value="unitOfMeasurement">Unidade de Medida</option>
                             <option value="typeName">Tipo</option>
@@ -41,7 +41,7 @@
                             <option value="description">Descrição</option>
                             <option value="serialNumber">Número serial</option>
                             <option value="code">Código</option>
-                            <option value="lifeCycle">Life cycle</option>
+                            <option value="lifeCycle">Vida Útil</option>
                             <option value="currentLife">Ciclo de vida atual</option>
                             <option value="unitOfMeasurement">Unidade de Medida</option>
                             <option value="typeName">Tipo</option>
@@ -57,7 +57,7 @@
                         </button>
                 <li class="nav-item-tool">
                         <button type="button" class="btn btn-success btn-sm" @click.stop.prevent="showModalCad">
-                             Cadastrar Ferramenta
+                             Cadastrar Ferramentas/Insumos
                         </button>
                 </li>
 
@@ -99,14 +99,14 @@
                                     <b>Código: </b>
                                 </label>
                                 <label>
-                                    <b>Life Cycle: </b>
+                                    <b>Vida Útil: </b>
                                 </label>
                                 <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="life cycle" id="lifec">
-                                <label>
+                                <!-- <label>
                                     <b>Vida útil atual: </b>
                                 </label>
                                 <input type="text" id="currL" v-model="ferramenta.currentLife" class="form-control form-control-sm" placeholder="vida útil atual" disabled>
-                            
+                             -->
                                 <label>
                                     <b>Unidade de Medida: </b>
                                 </label>
@@ -165,18 +165,16 @@
                             <label class="ls ls30">
                                 <b><font color="#9BA6A5">Code: </font></b>{{f.code}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30">
-                                <b><font color="#9BA6A5">Life Cycle: </font></b>{{f.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls30">
-                                <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{f.currentLife}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Vida Útil: </font></b>{{f.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
+                            <!-- <label class="ls ls30">
+                                <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{f.currentLife}}</label>&nbsp;&nbsp;&nbsp; -->
                             <label class="ls ls30">
                                 <b><font color="#9BA6A5">UM: </font></b>{{f.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{f.typeName}}</label>&nbsp;&nbsp;&nbsp;
-                                </label>
                             <label class="ls ls30">
                                 <b><font color="#9BA6A5">Status: </font></b>{{f.status}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
-                            </label>
                     </div>
                 </div>
             
@@ -229,14 +227,14 @@
                                         <input type="text" id="code" class="form-control form-control-sm" v-model="ferramenta.code" placeholder="código">
                                                                                  
                                         <label>
-                                            <b>Life Cycle: </b>
+                                            <b>Vida Útil: </b>
                                         </label>
                                         <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="life cycle" id="lifec" disabled>
-                                        <label>
+                                        <!-- <label>
                                             <b>Vida útil atual: </b>
                                         </label>
                                         <input type="text" id="currL" v-model="ferramenta.currentLife" class="form-control form-control-sm" placeholder="vida útil atual" disabled>
-                                    
+                                     -->
                                         <label>
                                             <b>Unidade de Medida: </b>
                                         </label>
@@ -254,6 +252,7 @@
                                             <option value="available">Disponível</option>
                                             <option value="in_use">Em uso</option>
                                             <option value="in_maintenance">Em manutenção</option>
+                                            <option value="in_test">Em Teste</option>
                                             <option value="not_available">Indisponível</option>
                                             <option value="inactive">Inativo</option>
                                         </select>

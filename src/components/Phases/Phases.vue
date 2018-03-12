@@ -20,12 +20,12 @@
         <!--               -->
         <nav class="fixed-top nav-recipeP">
             <li class="title-recipeP">
-                <b>Gerenciamento de Receita</b>
+                <b>Gerenciamento de Liga</b>
             </li>
                 <ul class="nav d-flex">
                     <li class="form-group nav-phases col-md-2">
                         <label class="">
-                            <b>Nome da receita:</b>
+                            <b>Nome da Liga:</b>
                         </label>
                             <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
                     </li>
@@ -88,6 +88,7 @@
         <!--                       -->
         <div class="container-fluid card-header-phase" v-show="recipeCadastrada">
             <br>
+             <div class="col offset-lg-4 prod-title"><h3>Produto:{{pName}}</h3></div>
             <div class="card card-margin2">
                 <h2>
                     <b style="font-size:20px; font-family: sans-serif;">
@@ -134,12 +135,12 @@
                         </label> 
                     </form>
                 <div v-if="editarActivate">
-                    <h2> Produtos </h2>
+                    <h2> Matéria Prima </h2>
                     <div v-if="pha.phaseProducts.length == 0">
                         <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
                             <label class="ls ls14">
-                            Sem produtos cadastrados ainda...
+                            Sem Matéria Prima cadastradas ainda...
                             </label>
                         </li>
                     </ul>
@@ -147,17 +148,17 @@
                     <ul class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
                         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
                             <label v-if="pro.product.productName != undefined" class="ls ls14">
-                              <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
+                              <b>Componente: </b>{{pro.product.productName}}&nbsp;&nbsp;
                             </label> 
                             <label v-else class="ls ls14">
-                                Material
+                                Componente
                             </label>
                             <label class="ls ls14">
-                               <b>Quantidade: </b>{{pro.minValue}} min. {{pro.maxValue}} máx
+                               <b>Especificação: </b>{{pro.minValue}} mínimo {{pro.maxValue}} máximo
                             </label>
-                            <label class="ls ls14">
+                            <!-- <label class="ls ls14">
                                 <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
-                            </label>
+                            </label> -->
                             <label class="ls ls14">
                             <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
                             </button>

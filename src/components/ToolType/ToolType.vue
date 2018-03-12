@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-row">
                            <div class="col-md-6">
-                            <label for="opType" class="col-form-label">Grupo</label>
+                            <label for="opType" class="col-form-label">Equipamento</label>
                                     <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="groupSelected">
                                         <option value="" selected disabled>Selecione um grupo</option>
                                         <option v-for="(tgroup,index) in thingsGroup" v-bind:value="tgroup" :key="index">
