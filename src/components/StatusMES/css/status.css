@@ -30,9 +30,10 @@ body {
 }
 
 .tile-bg {
-    background-color: #babaaf;
+    background-color: #F5F5F5;
+    border-radius: 4px;
     padding: 2%;
-    padding-bottom: 20%;
+    /* padding-bottom: 20%; */
     /* height: 75% !important;
     width: 75% !important; */
     transition: background-color 1000ms linear;

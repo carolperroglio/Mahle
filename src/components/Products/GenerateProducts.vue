@@ -66,10 +66,10 @@
                 <li class="nav-item nav-item-products col-sm-1.5">
                     <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                             <option value="" selected disabled>Campo para busca</option>
-                            <option value="productName">nome</option>
-                            <option value="productDescription">descrição</option>
-                            <option value="productCode">código</option>
-                            <option value="productGTIN">GTIN</option>
+                            <option value="productName">Nome</option>
+                            <option value="productDescription">Descrição</option>
+                            <option value="productCode">Código</option>
+                            <option value="productGTIN">Código de Barras</option>
                     </select>
                 </li>
                 <li class="nav-item nav-item-products col-sm-2">
@@ -118,7 +118,7 @@
                                 </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls2">
 
-                                <b><font color="#9BA6A5">GTIN: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Código de Barras: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2(p)" aria-hidden="true"></i>
                         </div>
                 </div>

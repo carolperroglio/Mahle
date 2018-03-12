@@ -32,7 +32,7 @@
                                 <div class="col-sm-3">
                                     <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="opSelected">
                                         <option value="" selected disabled>Tipo de Ordem</option>
-                                        <option v-for="(opType,index) in opTypeArray" v-bind:value="opType.productionOrderTypeId" v-bind:key="index">
+                                        <option v-for="(opType,index) in opTypeArray" v-bind:value="opType.productionOrderTypeId" v-bind:key="index" @click.stop="VOpType = opTypeArray[index].typeDescription">
                                             {{ opType.typeDescription }}
                                         </option>
                                     </select>
@@ -45,7 +45,8 @@
                             <div class="form-group row">
                             </div>
                             <div class="form-group row">
-                                <label for="opType" class="col-sm-2 col-form-label">Receita</label>
+                                <label for="opType" class="col-sm-2 col-form-label" v-if="opSelected == '1' || opSelected == ''">Tira</label>
+                                <label for="opType" class="col-sm-2 col-form-label" v-if="opSelected == '2'">Liga</label>
                                 <input @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton" placeholder="Ex: Receita1" />
                                 <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</b-dropdown-item>
                                 <div class="col-sm-2">

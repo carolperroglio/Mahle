@@ -67,7 +67,7 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             id: '',
-            recipeName: ''
+            recipeName: '',
         }
     },
     components: {
@@ -78,13 +78,13 @@ export default {
     },
     directives: {
         'b-modal': bModalDirective
-    }, 
+    },
     methods: {
         showModal() {
-        this.$refs.modalCadOP.show()
+            this.$refs.modalCadOP.show()
         },
         hideModal() {
-        this.$refs.modalCadOP.hide()
+            this.$refs.modalCadOP.hide()
         },
         /*****************/
         /*               */
@@ -116,13 +116,13 @@ export default {
                     paginacao(response, this);
                     this.opArray = response.data;
                     console.log(this.opArray);
-                this.carregando = false;
-            }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
-                this.carregando = false;
-            })
+                    this.carregando = false;
+                }, (error) => {
+                    this.mensagem = 'Erro no server ao buscar ' + error;
+                    this.carregando = false;
+                })
             }, 1000);
-            
+
             console.log(this.opArray);
         },
         getRecipes: function() {
@@ -169,7 +169,7 @@ export default {
         },
         getRecipeGateway: function(id) {
             this.carregando = true;
-             console.log(this.urlGatewayRecipe + id);
+            console.log(this.urlGatewayRecipe + id);
             axios.get(this.urlGatewayRecipe + id).then(response => {
                     this.recipeObj = response.data;
                     console.log('Receita Escolhida!!!!!!')
