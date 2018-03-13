@@ -13,6 +13,20 @@
                     <stretch background="#4d4d4d"></stretch>
                 </div> 
                   <div class="status">
+                      <div class="col-md-12 form-row">
+                          <div class="col-md-1">
+                            <p>Legendas: </p>
+                          </div>
+                          <div class="col-md-1">
+                            <p style="background-color:rgb(237, 4, 4)" class="legend">Em alerta</p>
+                          </div>
+                          <div class="col-md-1">
+                            <p style="background-color:rgb(35, 25, 232)" class="legend">Normal</p>
+                          </div>
+                          <div class="col-md-1">
+                            <p style="background-color:rgb(42, 237, 16)" class="legend">Baixa</p>
+                          </div>
+                      </div>
                     <div class="row">
                         <div v-for="(s, index) in status" v-bind:key="index" id="constat" class="">
                             <div class="tile-bg">

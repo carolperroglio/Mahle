@@ -30,7 +30,7 @@
                         
                             <label class="ls ls2">
                                 <b>
-                                    <font color="#9BA6A5">Thing: </font>
+                                    <font color="#9BA6A5">Estação: </font>
                                 </b>{{h.thingName}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls2">
                                 <b>
@@ -66,7 +66,7 @@
       <b-modal ref="myModalEdit" hide-footer title="Selecionar Período">
                     <div class="modal-body">
                        
-                    <label><b>Thing: </b></label>  
+                    <label><b>Estação: </b></label>  
                     <div class="row">
                       <div class="col-md-9">
                        <select class="form-control-outline-secondary" v-model="thingId">    

@@ -9,7 +9,7 @@
         <!--                                 -->
         <!--                                 -->
          <div class="fixed-top nav-hp">
-             <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção</b> </h1>
+            <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção de Liga</b> </h1>
             <ul class="nav d-flex align-items-center">
                <li class="nav-item-hp col-2.5">
                    <div class="badge">Escolha uma ordem de produção   <i class="fa fa-arrow-right" id="seta"></i></div>
@@ -69,7 +69,8 @@
                                                 <b><font color="#9BA6A5">Lote: </font></b>{{o.batch}}</label>&nbsp;
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
-                                                
+                                            <label class="ls ls10">
+                                                <b><font color="#9BA6A5">Hour: </font></b>{{o.hour}}</label>&nbsp;    
                                         </div>
                                         </div>
                                     </div>
@@ -90,6 +91,8 @@
                                                 <b><font color="#9BA6A5">Rolo: </font></b>{{o.batch}}</label>&nbsp;
                                             <label class="ls ls10">
                                                 <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
+                                            <label class="ls ls10">
+                                                <b><font color="#9BA6A5">Hour: </font></b>{{o.hour}}</label>&nbsp;    
                                         </div>
                                     </div>
                                
@@ -118,30 +121,30 @@
                                 <input type="text" id="prodReceita" placeholder="nome" required v-model="ordem.productName" class="form-control form-control-sm" disabled>
                                 </div>
                                 <div v-show="pFase">
-                                <label>
+                                <!-- <label>
                                     <b>Fase: </b>
                                 </label>
                                     <select class="form-control form-control-sm" v-model="phaseIndex">
                                      <option v-for="(p,index) in orderPhaseProducts" :value="index" v-bind:key="index">{{ p.phaseName }}</option>
-                                    </select>
-                                <div v-if="consumo = true && phaseIndex != '' || phaseIndex == '0' && orderPhaseProducts[phaseIndex].lenght !== '0'">
+                                    </select> -->
+                                <div v-if="consumo = true">
                                 <label>
                                     <b>Materiais: </b>
                                 </label>
                                     <select class="form-control form-control-sm" v-model="ordem.productId">
-                                    <option v-for="(p,index) in orderPhaseProducts[phaseIndex].phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
+                                    <option v-for="(p,index) in orderPhaseProducts.phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
                                     </select>
                                 </div>
                                 </div>
+                                <div v-show="pFase">
                                 <label>
                                     <b>Quantidade: </b>
                                 </label>
                                 <input type="text" required v-model="ordem.quantity" placeholder="quantidade" class="form-control form-control-sm">
-                                <div v-show="pFase">
                                 <label>
                                     <b>Lote: </b>
                                 </label>
-                                <input type="text" required v-model="ordem.batch" class="form-control form-control-sm">
+                                <input type="text" required v-model="lote" class="form-control form-control-sm">
                                 </div>
                                 <div v-show="pReceita">
                                     <label>
@@ -150,15 +153,15 @@
                                 <input type="text" required v-model="rolo" :disabled="true" class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-outline-success btn-sm" @click.stop.prevent="cadastrarApont(ordem)">
+                            <button type="button" class="btn btn-outline-success btn-sm" v-if="pReceita" @click.stop.prevent="cadastrarApont(ordem)">
                             Cadastrar
                             </button>
                         </form>
          </b-modal>
     </div>
 </template>
-<script src="./js/historianProduction.js">
+<script src="./js/historianProductionLiga.js">
 </script>
 <style>
-@import url('./css/historianproduction.css');
+@import url('./css/historianproductionLiga.css');
 </style>

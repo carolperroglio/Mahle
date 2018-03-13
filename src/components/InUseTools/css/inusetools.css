@@ -1,9 +1,8 @@
-
-.nav-InUseTools{
+.nav-InUseTools {
     position: fixed;
     margin-top: 6%;
-    background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
-    font-size: 22pt;    
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
+    font-size: 22pt;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     z-index: 1;
@@ -13,12 +12,12 @@
 }
 
 .InUseTools {
-    margin-top: 11%; 
+    margin-top: 11%;
     width: 95%;
     margin-left: 2%;
 }
 
-.title-InUseTools{
+.title-InUseTools {
     list-style: none;
     font-family: sans-serif;
     font-size: 22px;
@@ -28,37 +27,26 @@
     margin-top: 0%;
 }
 
-.lsinuse{
-    width: 11%;
+.lsinuse {
+    width: 12%;
     font-size: 14px;
 }
 
-
-@media screen and (max-width : 801px){
-    .nav-InUseTools{
+@media screen and (max-width: 801px) {
+    .nav-InUseTools {
         position: fixed;
         margin-top: 15%;
-        font-size: 15px;    
+        font-size: 15px;
     }
     .InUseTools {
-        margin-top: 23%; 
+        margin-top: 23%;
         margin-left: 1%;
     }
-    .lsinuse{
-        width: 10%;
+    .lsinuse {
+        width: 12%;
         font-size: 12px;
     }
-    .title-InUseTools{
+    .title-InUseTools {
         font-size: 18px;
     }
-
 }
-
-
-
-
-
-
-
-
-

@@ -26,7 +26,7 @@
                             <div v-for="(t,index) in tools" v-bind:key="index">
                                 <div class="">
                             <div class="card-header card-header8">
-                                <b><font color="#262626">{{t.name}}</font></b></label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#262626">{{t.name}}</font></b>&nbsp;&nbsp;&nbsp;
                                 </div>
                             <div class="card-body">
                                  <label class="ls lsinuse">
@@ -34,18 +34,17 @@
                             <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{t.description}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls lsinuse">
-                                <b><font color="#9BA6A5">Serial: </font></b>{{t.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Número Serial: </font></b>{{t.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls lsinuse">
-                                <b><font color="#9BA6A5">Code: </font></b>{{t.code}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Código: </font></b>{{t.code}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls lsinuse">
-                                <b><font color="#9BA6A5">Life Cycle: </font></b>{{t.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Vida Útil: </font></b>{{t.lifeCycle}}</label>&nbsp;&nbsp;&nbsp;
+                            <!-- <label class="ls lsinuse">
+                                <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{t.currentLife}}</label>&nbsp;&nbsp;&nbsp; -->
                             <label class="ls lsinuse">
-                                <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{t.currentLife}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls lsinuse">
-                                <b><font color="#9BA6A5">UM: </font></b>{{t.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Unidade de Medida: </font></b>{{t.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls lsinuse">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{t.typeName}}</label>&nbsp;&nbsp;&nbsp;
-                            </label>
                             </div>
                         </div>   
                         </div>

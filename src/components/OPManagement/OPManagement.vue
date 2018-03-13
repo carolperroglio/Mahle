@@ -9,8 +9,10 @@
         </div>
             <div class="contentMOP">
                 <div id="load" v-show="carregando">
-                        <stretch background="#4d4d4d"></stretch>
-                        </div> 
+                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                    <stretch background="#4d4d4d"></stretch>
+                </div> 
                <div v-for="(o, index) in OPs" v-bind:key="index">
                         <div class="card-header">
                         </div>
@@ -18,13 +20,13 @@
                             <label class="ls lsactive">
                                 <b><font color="#9BA6A5">Status: </font></b>{{o.currentStatus}}</label>
                             <label class="ls ls3">
-                                <b><font color="#9BA6A5">Production Order no: </font></b>{{o.productionOrderNumber}}</label>
+                                <b><font color="#9BA6A5">Nº Ordem de produção: </font></b>{{o.productionOrderNumber}}</label>
                             <label class="ls lsquant">
                                 <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>
                             <label class="ls ls3">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{o.typeDescription}}</label>
                             <label class="ls ls3">
-                                <button class="btn btn-sm btn-success" @click.stop.prevent="configOPEstate(o)">Selecionar OP</button>
+                                <button class="btn btn-sm btn-success" @click.stop.prevent="configOPEstate(o)">Alterar Status</button>
                             </label>
                                                       
                         </div>
@@ -47,21 +49,21 @@
                             </option>
                             </select>
                                         <label>
-                                            <b>Production Order no: </b>
+                                            <b>Nº Ordem de produção: </b>
                                         </label>
-                                        <input type="text" id="desc" class="form-control form-control-sm" v-model="OP.productionOrderNumber" placeholder="descrição" disabled>
+                                        <input type="text" id="desc" class="form-control form-control-sm" v-model="OP.productionOrderNumber" placeholder="001" disabled>
                                         <label>
                                             <b>Quantidade: </b>
                                         </label>
-                                        <input type="text" id="sernum" class="form-control form-control-sm" v-model="OP.quantity" placeholder="serial number" disabled>
+                                        <input type="text" id="sernum" class="form-control form-control-sm" v-model="OP.quantity" placeholder="1" disabled>
                                          <label>
                                             <b>Descrição: </b>
                                         </label>
                                         <input type="text" id="code" class="form-control form-control-sm" v-model="OP.typeDescription" placeholder="código" disabled>
                                         <br>
                                         <div class="btn-group" role="group">
-                                                <button class="btn btn-warning" style="color: white">
-                                                    <i @click.stop.prevent="editar(OP)" class="fa fa-check-square" aria-hidden="true"></i>
+                                                <button class="btn btn-warning" style="color: white" @click.stop.prevent="showModalConfirmEditar()">
+                                                    <i  class="fa fa-check-square"></i>
                                                 </button>
                                         </div>
                                             <div class="btn btn-primary pull-right" @click.stop.prevent="OP={}">
@@ -69,6 +71,23 @@
                                         </div>
                                     </div>
                                 </form>
+        </b-modal>
+        <b-modal ref="confirmarEditar" hide-footer title="Tem certeza que deseja mudar o status?">
+                    <form>
+                        <div class="form-group">
+                        <div id="load" v-show="carregandost">
+                        <stretch background="#4d4d4d"></stretch>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" style="color: white" @click.stop.prevent="editar(OP)">
+                                <i class="fa fa-check-square" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-danger" style="color: white" @click.stop.prevent="hideModalConfirmEditar()">
+                                <i  class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        </div> 
+                    </form>
         </b-modal>
     </div>        
 </template>

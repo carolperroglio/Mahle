@@ -9,7 +9,7 @@
         <!--                                 -->
         <!--               Modal             -->
          
-                <b-modal ref="myModalRef" hide-footer title="Cadastro de Materiais">
+                <b-modal ref="myModalRef" hide-footer title="Cadastro de Matérias Primas">
                     
                     <form>
                             <div class="form-group">
@@ -23,19 +23,19 @@
                                 <label for="nome">
                                     <b>Nome : </b>
                                 </label>
-                                <input type="text" placeholder="Nome" v-model="produto.productName" id="nome" class="form-control form-control-sm">
+                                <input type="text" placeholder="Ex: Estanho" v-model="produto.productName" id="nome" class="form-control form-control-sm">
                                 <label for="desc">
                                     <b>Descrição : </b>
                                 </label>
-                                <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Descrição">
+                                <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Ex: Estanho Metálico">
                                 <label for="cod">
                                     <b>Código : </b>
                                 </label>
-                                <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Código" id="cod">
+                                <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Ex: 1010144" id="cod">
                                 <label for="gs1" class="">
                                     <b>Código de barras : </b>
                                 </label>
-                                <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="código de barras">
+                                <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="Ex: 941120000000">
                                 <br>
                                 </div>
                                 <div class="btn-group" role="group">
@@ -60,7 +60,7 @@
         <!--                       -->
         
         <div class="fixed-top nav-produtos">
-             <h1 class="title-page-gp"> <b>Cadastro de Materiais</b> </h1>
+             <h1 class="title-page-gp"> <b>Cadastro de Matérias Primas</b> </h1>
             <ul class="nav d-flex align-items-center">
                
                 <li class="nav-item nav-item-products col-sm-1.5">

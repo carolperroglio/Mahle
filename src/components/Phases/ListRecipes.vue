@@ -43,6 +43,9 @@
                                 <label class="ls ls4">
                                     <b><font color="#9BA6A5">Código da Receita: </font></b>{{recipe.recipeCode}}
                                 </label>
+                                <label class="ls ls4">
+                                    <b><font color="#9BA6A5">Descrição: </font></b>{{recipe.recipeDescription}}
+                                </label>
                                 <label class="ls lsbtn">
                                 <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="recipeDelete(recipe.recipeId);">
                                 </button>

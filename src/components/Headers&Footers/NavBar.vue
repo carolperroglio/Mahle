@@ -10,20 +10,23 @@
             <nav class="header fixed-top">
                 <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
-                    <li class="nav-item-cab col-md-2">
+                    <li class="nav-item-cab col-md-1">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link active bg-dark btn-config" router-link to="/AssociateOP"><i class= "fa fa-clone" style="font-size:25px; cursor:pointer"></i>  <br>Associação de OP </router-link>
                     </li> 
-                    <li class="nav-item-cab col-md-2">
+                    <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:25px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas/Insumos</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProduction"><i class= "fa fa-keyboard-o" style="font-size:25px; cursor:pointer"></i>  <br>Apontamentos</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionLiga"><i class= "fa fa-keyboard-o" style="font-size:25px; cursor:pointer"></i>  <br>Apontamentos Liga</router-link>
+                    </li> 
+                    <li class="nav-item-cab col-md-1.5">
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionTira"><i class= "fa fa-keyboard-o" style="font-size:25px; cursor:pointer"></i>  <br>Apontamentos Tira</router-link>
                     </li> 
                 </ul>    
             </nav>
@@ -94,25 +97,25 @@
                         <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1 cursor="pointer">
                             <i class="fa fa-cogs"></i> 
                                 <span class="hidden-sm-down">   
-                                FERRAMENTAS
+                                FERRAMENTAS/INSUMOS
                                 </span> 
                              <i class="fa fa-chevron-down pull-right"></i> 
                         </div>  
                         <b-collapse id="menu1">
                             <router-link to="/toolCreate" class="list-group-item" data-parent="#menu1"> 
-                                Cadastro de Ferramentas 
+                                Cadastro de Ferramentas/Insumos 
                             </router-link>
                             <router-link to="/toolType" class="list-group-item" data-parent="#menu1"> 
-                                Tipo de Ferramentas 
+                                Tipo de Ferramentas/Insumos 
                             </router-link>
                             <router-link to="/associateTool" class="list-group-item" data-parent="#menu1"> 
-                                Associação de Ferramentas 
+                                Associação de Ferramentas/Insumos 
                             </router-link>
                              <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1"> 
-                                Ferramentas em uso
+                                Ferramentas/Insumos em uso
                             </router-link>
                             <router-link to="/ToolsManagement" class="list-group-item" data-parent="#menu1"> 
-                                Gerenciamento de Ferramentas
+                                Gerenciamento de Ferramentas/Insumos
                             </router-link>
                             <div class="collapse" id="menu1sub1">
                                 <div class="collapse" id="menu1sub1">

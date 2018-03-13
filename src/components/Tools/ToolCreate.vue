@@ -11,7 +11,6 @@
         <!--               Modal             -->
          <div class="fixed-top nav-ferramentas">
             <ul class="nav d-flex align-items-center">
-                </li>    
                 <li class="nav-item-tool">
                     <h1 class="title-page-tool"> <b>Cadastro de Ferramentas/Insumos</b> </h1>
                             <select class="form-control form-control-sm" v-model="orderField">
@@ -87,21 +86,21 @@
                                 <label>
                                     <b>Nome: </b>
                                 </label>
-                                <input type="text" placeholder="nome" v-model="ferramenta.name" id="nome" class="form-control form-control-sm">
+                                <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control form-control-sm">
                                 <label>
                                     <b>Descrição: </b>
                                 </label>
-                                <input type="text" id="desc" class="form-control form-control-sm" v-model="ferramenta.description" placeholder="descrição">
+                                <input type="text" id="desc" class="form-control form-control-sm" v-model="ferramenta.description" placeholder="Ex: Ferramenta usada na Guilhotina">
                                 <label>
                                     <b>Número Serial: </b>
                                 </label>
-                                <input type="text" id="sernum" class="form-control form-control-sm" v-model="ferramenta.serialNumber" placeholder="serial number">                                    <label>
-                                    <b>Código: </b>
+                                <input type="text" id="sernum" class="form-control form-control-sm" v-model="ferramenta.serialNumber" placeholder="124856648">                                    <label>
+                                    <!-- <b>Código: </b> -->
                                 </label>
                                 <label>
                                     <b>Vida Útil: </b>
                                 </label>
-                                <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="life cycle" id="lifec">
+                                <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="Ex: 100" id="lifec">
                                 <!-- <label>
                                     <b>Vida útil atual: </b>
                                 </label>
@@ -110,7 +109,7 @@
                                 <label>
                                     <b>Unidade de Medida: </b>
                                 </label>
-                                <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control form-control-sm" placeholder="Ex.: minutos">                              
+                                <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control form-control-sm" placeholder="Ex.: dias">                              
                                 <label>
                                     <b>Tipo: </b>
                                 </label>
@@ -161,7 +160,7 @@
                             <label class="ls ls30">
                                 <b><font color="#9BA6A5">Descrição: </font></b>{{f.description}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30">
-                                <b><font color="#9BA6A5">Serial: </font></b>{{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Número Serial: </font></b>{{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30">
                                 <b><font color="#9BA6A5">Code: </font></b>{{f.code}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30">
@@ -169,7 +168,7 @@
                             <!-- <label class="ls ls30">
                                 <b><font color="#9BA6A5">Vida Útil Atual: </font></b>{{f.currentLife}}</label>&nbsp;&nbsp;&nbsp; -->
                             <label class="ls ls30">
-                                <b><font color="#9BA6A5">UM: </font></b>{{f.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Unidade de Medida: </font></b>{{f.unitOfMeasurement}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30">
                                 <b><font color="#9BA6A5">Tipo: </font></b>{{f.typeName}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30">
@@ -211,7 +210,7 @@
                                         <label>
                                             <b>Nome:</b>
                                         </label>
-                                        <input type="text" placeholder="nome" v-model="ferramenta.name" id="nome" class="form-control form-control-sm">
+                                        <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control form-control-sm">
 
                                         <label>
                                             <b>Descrição: </b>
@@ -220,7 +219,7 @@
                                         <label>
                                             <b>Número Serial: </b>
                                         </label>
-                                        <input type="text" id="sernum" class="form-control form-control-sm" v-model="ferramenta.serialNumber" placeholder="serial number">
+                                        <input type="text" id="sernum" class="form-control form-control-sm" v-model="ferramenta.serialNumber" placeholder="124856648">
                                          <label>
                                             <b>Código: </b>
                                         </label>
@@ -229,7 +228,7 @@
                                         <label>
                                             <b>Vida Útil: </b>
                                         </label>
-                                        <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="life cycle" id="lifec" disabled>
+                                        <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="Ex: 100" id="lifec" disabled>
                                         <!-- <label>
                                             <b>Vida útil atual: </b>
                                         </label>

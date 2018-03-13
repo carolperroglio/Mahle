@@ -223,10 +223,10 @@
                                 <b>Pointer:</b>{{par.setupValue}} {{par.measurementUnit}}
                             </label>
                             <label class="ls ls16">
-                                <b>Valor min.: </b>{{par.minValue}}
+                                <b>Valor mínimo: </b>{{par.minValue}}
                             </label>
                             <label class="ls ls16">
-                                <b>Valor max.: </b>{{par.maxValue}}
+                                <b>Valor máximo: </b>{{par.maxValue}}
                             </label>
                             <label class="ls ls16">
                                 <b>Tag: </b>{{par.tag.tagName}}
@@ -298,11 +298,11 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>Mín: </label><br>
+                                <label>Mínimo: </label><br>
                                 <input class="form-control mr-sm-2" required v-model="recipeProduct.minValue" placeholder="Ex.: kg" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Máx: </label><br>
+                                <label>Máximo: </label><br>
                                 <input class="form-control mr-sm-2" required v-model="recipeProduct.maxValue" placeholder="Ex.: kg" />
                             </div>
                         </div>
@@ -475,7 +475,7 @@
                                     <input @keypress.capture="phaseTags=getResults(urlRecipeSearch, tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                         <b-dropdown-item @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags" v-bind:key="index">{{p.tagName}}</b-dropdown-item>
                                 </div>
-                            <small>Digite no minimo 3 letras para busca da tag</small>
+                            <small>Digite no mínimo 3 letras para busca da tag</small>
                             </div>
                         </div>
                         <div class="btn-group" role="group">

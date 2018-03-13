@@ -30,7 +30,7 @@
                                     <b>Descrição: </b>{{t.description}}
                                 </label>
                                 <label class="ls ls20">
-                                    <b>Serial Number: </b>{{t.description}}
+                                    <b>Número Serial: </b>{{t.serialNumber}}
                                 </label>
                                 <label class="ls ls20">
                                     <b>Status: </b>{{t.status | StatusName}}
