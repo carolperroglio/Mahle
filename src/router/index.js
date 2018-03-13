@@ -7,7 +7,8 @@ import GenerateProducts from '@/components/Products/GenerateProducts'
 import Phases from '@/components/Phases/Phases'
 import ProductionOrder from '@/components/ProductionOrder/ProductionOrder'
 import ToolCreate from '@/components/Tools/ToolCreate'
-import HistorianProduction from '@/components/HistorianProduction/HistorianProduction'
+import HistorianProductionLiga from '@/components/HistorianProduction/HistorianProductionLiga'
+import HistorianProductionTira from '@/components/HistorianProduction/HistorianProductionTira'
 import StateManagement from '@/components/OPStateManagement/StateManagement'
 import ListRecipes from '@/components/Phases/ListRecipes'
 import AssociateTool from '@/components/AssociateTool/AssociateTool'
@@ -59,9 +60,14 @@ export default new Router({
 
         },
         {
-            path: '/historianProduction',
+            path: '/historianProductionLiga',
             name: 'HistorianProduction',
-            component: HistorianProduction
+            component: HistorianProductionLiga
+        },
+        {
+            path: '/historianProductionTira',
+            name: 'HistorianProductionTira',
+            component: HistorianProductionTira
         },
         {
             path: '/stateManagement',

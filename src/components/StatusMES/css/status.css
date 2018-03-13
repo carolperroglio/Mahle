@@ -141,6 +141,10 @@ hr.style3 {
     color: rgb(41, 39, 39);
 }
 
+.legend {
+    border-radius: 4px;
+}
+
 @media only screen and (max-width: 800px) {
     .nav-status {
         background-color: rgba(249, 247, 247, 1);

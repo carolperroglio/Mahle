@@ -1,8 +1,8 @@
-.nav-hp{
+.nav-hp {
     position: fixed;
     margin-top: 5%;
     z-index: 1;
-    background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
     width: 100%;
     height: 16%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -20,7 +20,7 @@
     left: 50%;
 }
 
-.title-page-hp{
+.title-page-hp {
     text-align: left;
     color: rgb(68, 68, 70);
     font-family: sans-serif;
@@ -31,78 +31,77 @@
     margin-top: 1.5%;
 }
 
-.nav-item-hp{
+.nav-item-hp {
     margin-left: 2%;
     margin-top: 4%;
 }
 
-
-.btn-warning{
+.btn-warning {
     color: white;
 }
 
-#dropdownMenuButton{
+#dropdownMenuButton {
     background-color: white;
     color: black;
 }
 
+
 /*Listagem de orderHistorian*/
-.icon-right{
+
+.icon-right {
     position: relative;
     float: right;
 }
 
-input{
+input {
     position: relative !important;
 }
 
-.orderHistorian{
+.orderHistorian {
     position: relative;
     margin-top: 17%;
-    margin-bottom: 5%;              
+    margin-bottom: 5%;
     margin-left: 1%;
     width: 100%;
 }
 
-.card-body-hp{
+.card-body-hp {
     padding-top: 0.1%;
     padding-bottom: 0.1%;
     padding-left: 1.1%;
 }
 
-#tipo{
+#tipo {
     margin-top: 2%;
-    margin-bottom: 2%; 
+    margin-bottom: 2%;
 }
 
-
-.ls10{
-    width: 20%;
+.ls10 {
+    width: 16%;
 }
 
-@media screen and (max-width : 801px){
-    .orderHistorian{ 
-        margin-top: 20%; 
-    } 
-    .nav-hp{
+@media screen and (max-width: 801px) {
+    .orderHistorian {
+        margin-top: 20%;
+    }
+    .nav-hp {
         margin-top: 18%;
         height: 8%;
-    }  
+    }
     .nav-item-hp {
         margin-top: -2%;
-    }   
-    .title-page-hp{
+    }
+    .title-page-hp {
         font-size: 18px;
         margin-top: -6%;
     }
-    .orderHistorian{
+    .orderHistorian {
         margin-top: 26%;
         font-size: 11px;
         margin-bottom: 8%;
     }
-    .card-header-hp{
+    .card-header-hp {
         margin-top: 0.1%;
         margin-bottom: 0.1%;
     }
-
-} 
+}

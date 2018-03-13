@@ -17,10 +17,10 @@
                   <div class="history">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h3>Thing nº: {{thingId}} Grupo: {{thingGroup}}</h3>
+                            <h3>Estação nº: {{thingNameCabeçalho}} Grupo: {{thingGroup}}</h3>
                         </div>
                         <div class="col-sm-4">
-                       <button type="button" class="btn btn-info btn-sm btn-sm" @click.prevent="showModal()">
+                       <button type="button" class="btn btn-info btn-sm btn-sm"  @click.prevent="showModal()">
                             Editar Período
                        </button>
                         
@@ -38,11 +38,11 @@
         <div class="row conteudotabela">
             
             <div class="col-sm-2">
-            <select class="form-control-outline-secondary" v-model="newGroup">    
-                <option v-for="(g,index) in groups" :value="g" v-bind:key="index">{{g}}</option>
+            <select class="form-control-outline-secondary" v-model="newGroup" @change.prevent="editGroup(newGroup)">    
+                <option v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
             </select>
             </div>
-            <div class="col-sm-2">
+            <!-- <div class="col-sm-2">
             <button type="button" class="btn btn-info btn-sm btn-sm" @click.prevent="editGroup(newGroup)">
                 Editar Grupo
             </button>
@@ -51,8 +51,8 @@
             <button type="button" class="btn btn-warning btn-sm btn-sm pull-left" style="color:white" @click.prevent="refreshGraph()">
                 Atualizar Gráfico
             </button>
-            </div>
-            <div class="col-sm-2">
+            </div> -->
+            <div class="col-sm-2 offset-md-4">
             <button type="button" class="btn btn-danger btn-sm btn-sm pull-left" @click.prevent="toPdf()">
                <i class="fa fa-file-pdf-o"></i> Exportar para PDF
             </button>
@@ -83,7 +83,7 @@
         <b-modal ref="myModalEdit" hide-footer title="Selecionar Período">
                     <div class="modal-body">
                        
-                    <label><b>Thing: </b></label>  
+                    <label><b>Estação: </b></label>  
                     <div class="row">
                       <div class="col-md-9">
                        <select class="form-control-outline-secondary" v-model="thingId">    

@@ -23,7 +23,7 @@ import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
 import { array } from 'bootstrap-vue/es/utils'
 import { Stretch } from 'vue-loading-spinner'
 import logo from './onyx.jpeg'
-import logoSpi from './SPI_Logo_FundoClaro.jpeg'
+import logoMahle from './mahle_logo_azul_claro.jpeg'
 
 es6promisse.polyfill();
 
@@ -79,11 +79,11 @@ export default {
             date: '',
             datef: '',
             config: {
-                format: 'MM DD YYYY',
+                format: 'DD MM YYYY',
                 useCurrent: false,
             },
             config2: {
-                format: 'MM DD YYYY',
+                format: 'DD MM YYYY',
                 useCurrent: false,
             },
             timeIni: {
@@ -111,6 +111,7 @@ export default {
             thingGroup: '',
             thingName: '',
             filename: '',
+            thingNameCabeçalho: '',
             things: [],
             tags: [],
             bottom: 'bottom',
@@ -214,10 +215,9 @@ export default {
                 p.Data = p.category;
                 delete p.category;
             });
-            var thingNam;
             this.things.forEach((t) => {
                 if (this.thingId == t.thingId) {
-                    thingNam = t.thingName;
+                    this.thingNameCabeçalho = t.thingName;
                 }
             })
             console.log(this.PDFprovider);
@@ -226,7 +226,7 @@ export default {
             var img = new Image;
             var imgLogo = new Image;
             img.src = logo;
-            imgLogo.src = logoSpi;
+            imgLogo.src = logoMahle;
             var pageContent = function(data) {
                 // HEADER
                 doc.setFontSize(20);
@@ -236,7 +236,7 @@ export default {
                 // doc.text("Report", data.settings.margin.left + 15, 22);
             };
             // doc.addImage(imgData, 'JPEG', 15, 10, 10);
-            doc.text(35, 65, "Rastreamento" + thingNam + " Grupo " + this.group)
+            doc.text(35, 65, "Rastreamento " + this.thingNameCabeçalho + " Grupo " + this.group)
                 // doc.autoTable(columns, this.PDFprovider, 15, 65);
             doc.autoTable(columns, this.PDFprovider, {
                 addPageContent: pageContent,
@@ -244,7 +244,7 @@ export default {
                 margin: { top: 80 }
             });
 
-            doc.save("RastreamentoThing_" + this.thingId + "_" + this.group + ".pdf");
+            doc.save("RastreamentoThing_" + this.thingNameCabeçalho + "_" + this.group + ".pdf");
         },
 
         ticksToDate(dateTicks) {
@@ -252,14 +252,24 @@ export default {
                 ticksPerMillisecond = 10000,
                 jsTicks = 0,
                 jsDate;
+
             jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
+
             jsDate = new Date(jsTicks);
-            var hours = jsDate.toString().slice(4, 21);
-            return hours;
+
+            var dateFormatted = jsDate.getDate() + "/" +
+                (jsDate.getMonth() + 1) + "/" +
+                jsDate.getFullYear() + " " + jsDate.getHours() + ":" + jsDate.getMinutes();
+            // var hours = jsDate.toString().slice(4, 21);
+            return dateFormatted;
         },
 
         dateToTicks(dateTime) {
-            var date = new Date(dateTime);
+            var dateToTransform = dateTime.slice(3, 6) +
+                dateTime.slice(0, 3) +
+                dateTime.slice(6, 10) +
+                dateTime.slice(10, 16);
+            var date = new Date(dateToTransform);
             var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
             return ticks;
         },
@@ -279,11 +289,12 @@ export default {
             this.providerAux = [];
             this.jsonfields = {};
             console.log(this.data);
+
             this.formatGraphData(this.data, this.group);
             var t = 0;
             var aux = [];
             // To Excel
-            this.filename = "RastreamentoThing_" + this.thingId + "_" + this.group + ".xls";
+            this.filename = "RastreamentoThing_" + this.thingNameCabeçalho + "_" + this.group + ".xls";
             /*
              *  JSON de criação das características do gráfico.
              */
@@ -301,12 +312,18 @@ export default {
             this.headers = aux
             console.log(this.headers);
             console.log(this.jsonfields);
+            this.refreshGraph();
         },
         formatGraphData(obj, group) {
             obj.tags.forEach((R) => {
                 if (R.group == group) {
                     this.thingGroup = R.group;
                     this.thingId = obj.thingId;
+                    this.things.forEach((t) => {
+                        if (this.thingId == t.thingId) {
+                            this.thingNameCabeçalho = t.thingName;
+                        }
+                    })
                     var dataObj2 = new Array();
                     var obj2 = new Object();
 
@@ -321,6 +338,7 @@ export default {
                     obj2["color"] = "#000000";
                     obj2["lineThickness"] = 3;
                     obj2["type"] = "smoothedLine";
+                    obj2["processCount"] = 0;
                     obj2["title"] = R.name;
                     obj2["valueField"] = R.name;
 

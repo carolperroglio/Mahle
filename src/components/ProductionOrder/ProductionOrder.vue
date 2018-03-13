@@ -72,18 +72,20 @@
                                     <!--  Mostra as fases da Receita-->
                                     <div id="recipeAdded" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body card-body-op" v-if="recipeObj.phases.length != 0 || carregando == true">
-                                            <h5>Fases</h5>
-                                            <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases">
-                                                <li class="list-group-item" v-if="recipeAdded.length != 0">
-                                                    <strong>Nome:</strong> {{phases.phaseName}} -
-                                                    <strong>Código:</strong> {{phases.phaseCode}} |
+                                            <!-- <h5>Fases</h5> -->
+                                            <!-- <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases"> -->
+                                            <ul class="list-group" v-if="recipeAdded.length != 0">
+                                                <!-- <li class="list-group-item" > -->
+                                                    <span><strong>Descrição da Receita:</strong> {{recipeObj.recipeDescription}}</span>
+                                                    <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>
+                                                    <!-- <strong>Código:</strong> {{phases.phaseCode}} | -->
                                                     <!--Botão para procurar os produtos de uma determinada fase-->
-                                                    <button type="button" class="btn btn-outline-info btn-sm" :id="index" data-toggle="collapse" data-target="#verProdutos" @click="seeProduct(index)" v-if="phases.phaseProducts != 0">Produtos</button>
+                                                    <!-- <button type="button" class="btn btn-outline-info btn-sm" :id="index" data-toggle="collapse" data-target="#verProdutos" @click="seeProduct(index)" v-if="phases.phaseProducts != 0">Produtos</button> -->
                                                     <!--Botão para procurar os parâmetros de uma determinada fase-->
-                                                    <button type="button" class="btn btn-outline-info btn-sm" :id="index" data-toggle="collapse" data-target="#verPârametros" @click="seeParam(index)" v-if="phases.phaseParameters != 0">Pârametros</button>
-                                                </li>
+                                                    <!-- <button type="button" class="btn btn-outline-info btn-sm" :id="index" data-toggle="collapse" data-target="#verPârametros" @click="seeParam(index)" v-if="phases.phaseParameters != 0">Pârametros</button> -->
+                                                <!-- </li> -->
                                                 <!-- Collapse de ver 'Produtos' -->
-                                                <div class="collapse" id="verProdutos">
+                                                <!-- <div class="collapse" id="verProdutos">
                                                     <div class="card card-body-op">
                                                         <h6>Produtos</h6>
                                                         <ul class="list-group" v-for="product in productArray" v-bind:value="product">
@@ -94,9 +96,9 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <!-- Collapse de ver 'Pârametros' -->
-                                                <div class="collapse" id="verPârametros">
+                                                <!-- <div class="collapse" id="verPârametros">
                                                     <div class="card card-body-op">
                                                         <h6>Pârametros</h6>
                                                         <ul class="list-group" v-for="param in paramArray" v-bind:value="param">
@@ -107,7 +109,7 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </ul>
 
                                         </div>
