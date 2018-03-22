@@ -83,6 +83,34 @@
 
                 </li>
             </ul>
+            <div class="cabecalho-table">
+                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls ls2">
+                    <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>
+                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(produtos, 'productDescription',1):organizar(produtos, 'productDescription',1);" class="ls ls2">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Descrição &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>
+                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(produtos, 'productCode',2):organizar(produtos, 'productCode',2);" class="ls ls2">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Código &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                    </font></b></label>
+                <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls ls2">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Código de Barras &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>
+            </div>
         </div>
 
         <!--                       -->
@@ -97,28 +125,22 @@
             
             <div class="produtos col">
                 <div id="load" v-show="carregando">
-                <stretch background="#4d4d4d"></stretch>
+                    <stretch background="#4d4d4d"></stretch>                
                 </div> 
+                
                 <div v-for="(p, index) in produtos" v-bind:key="index">
                       <div class="card-header card-header5">
                             <b></b>
                         </div>
                         <div class="card-body">
                             <label class="ls ls2">
-                                <b>
-                                    <font color="#9BA6A5">Nome: </font>
-                                </b>{{p.productName}}</label>&nbsp;&nbsp;&nbsp;
+                                {{p.productName}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls2">
-                                <b>
-                                    <font color="#9BA6A5">Descrição: </font>
-                                </b>{{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
+                                {{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls2">
-                                <b>
-                                    <font color="#9BA6A5">Código: </font>
-                                </b>{{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
+                                {{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls2">
-
-                                <b><font color="#9BA6A5">Código de Barras: </font></b>{{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
+                                {{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2(p)" aria-hidden="true"></i>
                         </div>
                 </div>

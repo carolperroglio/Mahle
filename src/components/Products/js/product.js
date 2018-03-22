@@ -33,6 +33,7 @@ export default {
             startat: 0,
             total: 0,
             pages: [],
+            cabecalhoSetas:[false, false, false, false],
             pageAtual: 0,
             produtos: [],
             produto: {},
@@ -43,7 +44,8 @@ export default {
             fieldValue: '',
             fieldFilter: '',
             order: '',
-            errors: []
+            errors: [],
+            
         }
     },
     computed: {
@@ -57,20 +59,35 @@ export default {
         VeeValidate
     },
     methods: {
-          showModal () {
-            this.mensagemSuc = '';
-            this.produto = {};
-            this.errors = [];
-            this.$refs.myModalRef.show()
-          },
-          hideModal () {
-            this.$refs.myModalRef.hide()
-          },
-          showModal2(produto) {              
-            this.errors = [];
-            this.produto = produto;
-            this.$refs.myModalRef.show()
-          },
+        showModal () {
+        this.mensagemSuc = '';
+        this.produto = {};
+        this.errors = [];
+        this.$refs.myModalRef.show()
+        },
+        hideModal () {
+        this.$refs.myModalRef.hide()
+        },
+        showModal2(produto) {              
+        this.errors = [];
+        this.produto = produto;
+        this.$refs.myModalRef.show()
+        },
+        organizar(produtos, campo, pos){                         
+            produtos.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=false;
+
+        },
+        desorganizar(produtos, campo, pos){                         
+            produtos.sort(function(a,b) {return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=true;
+                else   
+                    this.cabecalhoSetas[i]=false;             
+        },
         cadastrar(produto) {
             this.mensagem = '';
             this.mensagemSuc = '';
