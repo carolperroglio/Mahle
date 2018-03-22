@@ -16,6 +16,11 @@
 #load {
     margin-left: 50%;
 }
+.cabecalho-table{
+    margin: 0% 5.3% 0% 2.25%; 
+    padding: 0 0 0 1.2%;   
+    background-color: black;
+}
 
 /* menu de navegação de produtos - título busca de produtos*/ 
 .title-page-gp{
@@ -80,7 +85,9 @@ input {
     font-size: 14px;
 }
 
-
+.cursor-class{
+    cursor:pointer;
+}    
 /* Menu Superior para busca de Produtos 800X600 */ 
 
 @media screen and (max-width: 800px) {
