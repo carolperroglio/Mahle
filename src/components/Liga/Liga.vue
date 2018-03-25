@@ -422,7 +422,11 @@
         </b-modal>-->
     </div>
 </template>
+<<<<<<< HEAD
 <script src="./js/liga.js">
+=======
+<script src="./js/phasesdaliga.js">
+>>>>>>> a45f585df2e28ee2b5181d39b19af817a2443691
 </script>
 <style>
 @import url("./css/liga.css");
