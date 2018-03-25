@@ -19,13 +19,14 @@ function paginacao(response, este) {
 var ipServer = process.env.RECIPE_API;
 
 export default {
-    name: "Phases",
+    name: "ListTira",
     data() {
         return {
             urlRecipes: ipServer + '/api/recipes',
             urlPhases: ipServer + '/api/phases',
             recipes: [],
             phases: [],
+            cabecalhoSetas:[false, false, false],
             carregando: false,
             quantityPage: 20,
             startat: 0,
@@ -81,6 +82,21 @@ export default {
                 console.log(error);
                 this.carregando = false;
             })
+        },
+        organizar(recipe, campo, pos){                         
+            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=false;
+
+        },
+        desorganizar(recipe, campo, pos){                         
+            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=true;
+                else   
+                    this.cabecalhoSetas[i]=false;             
         },
         /*****************/
         /*               */

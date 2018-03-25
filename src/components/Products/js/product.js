@@ -74,7 +74,7 @@ export default {
         this.$refs.myModalRef.show()
         },
         organizar(produtos, campo, pos){                         
-            produtos.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
+            produtos.sort(function(a,b) {console.log(a[campo]);return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
             for(var i=0; i<this.cabecalhoSetas.length; i++)
                 if(i==pos)    
                     this.cabecalhoSetas[i]=false;
@@ -87,6 +87,9 @@ export default {
                     this.cabecalhoSetas[i]=true;
                 else   
                     this.cabecalhoSetas[i]=false;             
+        },
+        alerta(){  
+            return confirm("Deseja realmente prosseguir com o cadastro/edição?");                                
         },
         cadastrar(produto) {
             this.mensagem = '';
