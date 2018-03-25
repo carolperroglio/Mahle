@@ -1,38 +1,46 @@
 /* menu de navegação de produtos */   
 .nav-produtos{
-    margin-top: 5%;
+    margin-top: 5%;    
     background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
     width: 100%;
-    height: 13%;
+    height: 10.5%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* menu de navegação de produtos - busca de produtos*/   
 .nav-item-products { 
     margin-left: 1%;
-    padding-top: 4%;
-    }
+    padding: 1.2% 0 1% 0;
+}
     
 #load {
     margin-left: 50%;
 }
 .cabecalho-table{
-    margin: 0% 5.3% 0% 2.25%; 
-    padding: 0 0 0 1.2%;   
+    position: relative;
+    top: 20%;
+    left: 2.15%;
+    width: 92.9%;
+    padding: 0 0 0 0.1%;       
     background-color: black;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
 }
 
+.fundo-branco{
+    background-color: #ffffff;    
+    margin: 0 0 0 0;
+    width: 100%;     
+    height: 30%;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
 /* menu de navegação de produtos - título busca de produtos*/ 
-.title-page-gp{
-    text-align: left;
+.title-page-gp{    
     color: rgb(68, 68, 70);
     font-family: sans-serif;
     font-size: 22px;
-    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-    position: fixed;
-    z-index: 1;
-    left: 0.9%;
-    margin-top: 1%;
+    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;          
 }
 
 /*Listagem de produtos*/
@@ -49,10 +57,10 @@ input {
 
 .produtos {
     position: relative;
-    margin-top: 13%;
-    padding-bottom: 5%;              
+    margin-top: 14%;                  
     left: 1%;
     width: 95%;
+    margin-bottom: 5%; 
 }
 
 .msg {
@@ -62,31 +70,40 @@ input {
 
 .card-body5{
     font-family: sans-serif;
-    }
-    
-.card-header5{
-    padding-top: 0;
-    padding-bottom: 0; 
 }
-
     
+.card-body{
+    box-sizing: content-box;
+    padding: 0 0 0 0;
+}
+.cinza{
+    background-color: #DCDCDC;
+}
 
 .paginacao {
     position: fixed;
     z-index: 2;
     text-align: center;
     width: 100%;
+    background-color: #ffffff;
     bottom: 5%;
 }
-
-.ls2 {
-    width: 21%;
+.ls2-cabecalhotab{
+    width: 22.2%;
     font-family: sans-serif;
     font-size: 14px;
+    margin-bottom: 0.3%;
+}
+.ls2{
+    width: 21%;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding-bottom: 0;
+    margin-bottom: 0;    
 }
 
 .cursor-class{
-    cursor:pointer;
+    cursor : pointer;
 }    
 /* Menu Superior para busca de Produtos 800X600 */ 
 

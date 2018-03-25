@@ -4,13 +4,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import ThingCreate from '@/components/things/ThingCreate'
 import GenerateProducts from '@/components/Products/GenerateProducts'
-import Phases from '@/components/Phases/Phases'
+import Tira from '@/components/Tira/Tira'
+import ListTira from '@/components/Tira/ListTira'
+import Liga from '@/components/Liga/Liga'
+import ListLiga from '@/components/Liga/ListLiga'
 import ProductionOrder from '@/components/ProductionOrder/ProductionOrder'
 import ToolCreate from '@/components/Tools/ToolCreate'
 import HistorianProductionLiga from '@/components/HistorianProduction/HistorianProductionLiga'
 import HistorianProductionTira from '@/components/HistorianProduction/HistorianProductionTira'
 import StateManagement from '@/components/OPStateManagement/StateManagement'
-import ListRecipes from '@/components/Phases/ListRecipes'
 import AssociateTool from '@/components/AssociateTool/AssociateTool'
 import AssociateTool2 from '@/components/AssociateTool/AssociateTool2'
 import ToolType from '@/components/ToolType/ToolType'
@@ -42,11 +44,27 @@ export default new Router({
             component: GenerateProducts
         },
         {
-            path: '/phases/:id',
-            name: 'Phases',
-            component: Phases,
+            path: '/tira/:id',
+            name: 'Tira',
+            component: Tira,
             props: true
         },
+        {
+            path: '/listtira',
+            name: 'ListTira',
+            component: ListTira
+        },
+        {
+            path: '/liga/:id',
+            name: 'Liga',
+            component: Liga,
+            props: true
+        },
+        {
+            path: '/listliga',
+            name: 'ListLiga',
+            component: ListLiga
+        },        
         {
 
             path: '/prodOrder',
@@ -73,12 +91,7 @@ export default new Router({
             path: '/stateManagement',
             name: 'StateManagement',
             component: StateManagement
-        },
-        {
-            path: '/listRecipes',
-            name: 'ListRecipes',
-            component: ListRecipes
-        },
+        },        
         {
             path: '/associateTool',
             name: 'AssociateTool',

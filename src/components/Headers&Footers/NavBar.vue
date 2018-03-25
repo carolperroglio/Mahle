@@ -6,27 +6,24 @@
         <!-- Cabeçalho da pagina, logo e user -->
         <!--                                  -->
         <!--                                  -->
-        <div class="container fluid">  
-            <nav class="header fixed-top">
-                <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
+        <div class="fluid">  
+            <nav class="fixed-top">
+                <img src="./../../assets/imagens/mahle.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
                     <li class="nav-item-cab col-md-1">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
-                    </li> 
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
+                    </li>                    
                     <li class="nav-item-cab col-md-1.5">
-                        <router-link class="nav-link active bg-dark btn-config" router-link to="/AssociateOP"><i class= "fa fa-clone" style="font-size:25px; cursor:pointer"></i>  <br>Associação de OP </router-link>
-                    </li> 
-                    <li class="nav-item-cab col-md-1.5">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:25px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas/Insumos</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:44px; cursor:pointer"></i>  <br>Ferramentas</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionLiga"><i class= "fa fa-keyboard-o" style="font-size:25px; cursor:pointer"></i>  <br>Apontamentos Liga</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionLiga"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos Liga</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionTira"><i class= "fa fa-keyboard-o" style="font-size:25px; cursor:pointer"></i>  <br>Apontamentos Tira</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionTira"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos Tira</router-link>
                     </li> 
                 </ul>    
             </nav>
@@ -41,7 +38,7 @@
             <div class="footer-text"> Sistema Onyx V1.0</div>
         </footer>
 
-        <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/>
+        <img src="./../../assets/imagens/onyx3.png" class="logo-mahle"/>
         <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
 
         <!--                        -->
@@ -49,9 +46,8 @@
         <!--   Menu lateral Novo    -->
         <!--                        -->
         <!--                        -->  
-         <div v-on-clickaway="away" id="divside">
-        <div class="row fixed-top menu-btn"> 
-            
+        <div v-on-clickaway="away" id="divside">
+        <div class="row fixed-top menu-btn">             
              <b-button v-b-toggle.sidebar id="open" >
                 <i class="icon-navigate fa fa-navicon fa-lg"></i>
             </b-button>       
@@ -59,12 +55,14 @@
             
                 <b-collapse class="fixed-top col-md-6 p-l-0 p-r-0" id="sidebar" flush>
                    
-                        <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki">
-                            </i> OPERADOR
-                        <i class="fa fa-chevron-down pull-right"></i>
-                         </div>
+                        <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki"></i> 
+                            OPERADOR
+                            <i class="fa fa-chevron-down pull-right"></i>
+                        </div>
                         <b-collapse id="menu2">                      
-                            <router-link to="#" data-parent="#menu1" class="list-group-item collapsed" cursor="pointer"> Logout </router-link>
+                            <router-link to="#" data-parent="#menu1" class="list-group-item collapsed" cursor="pointer"> 
+                                Logout 
+                            </router-link>
                         </b-collapse>
 
                         <router-link to="/statusMES" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
@@ -80,13 +78,24 @@
                                 MATERIAIS
                             </span>
                         </router-link>
-                        <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <!--Bye bye receitas <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-book"></i> 
                             <span class="hidden-sm-down">  
                                 RECEITA
                             </span>
+                        </router-link>-->
+                        <router-link to="/listtira" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                            <i class="fa fa-book"></i> 
+                            <span class="hidden-sm-down">  
+                                GERENCIAMENTO DE TIRA
+                            </span>
                         </router-link>
-
+                        <router-link to="/listliga" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                            <i class="fa fa-book"></i> 
+                            <span class="hidden-sm-down">  
+                                GERENCIAMENTO DE LIGA
+                            </span>
+                        </router-link>
                         <router-link to="/historianalarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-bell"></i> 
                             <span class="hidden-sm-down">  
