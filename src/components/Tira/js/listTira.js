@@ -123,13 +123,12 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.recipes = [];
-            console.log(this.order, this.orderField)
             axios.get(this.urlRecipes + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                 paginacao(response, this);
                 this.recipes = response.data.values;
-                console.log('this.recipes');
-                console.log(this.recipes);
-
+                for(var i=0; i<this.recipes.length; i++)
+                    if(this.recipes[i].recipeDescription == undefined)
+                        this.recipes[i].recipeDescription = '';
                 this.carregando = false;
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;

@@ -133,19 +133,16 @@
                     <stretch background="#4d4d4d"></stretch>                
                 </div> 
                 
-                <div v-for="(p, index) in produtos" v-bind:class="{cinza: index%2==0}" v-bind:key="index">
-                    
-                    <div class="card-body">
-                        <label class="ls ls2">
-                            {{p.productName}}</label>&nbsp;&nbsp;&nbsp;
-                        <label class="ls ls2">
-                            {{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
-                        <label class="ls ls2">
-                            {{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
-                        <label class="ls ls2">
-                            {{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2(p)" aria-hidden="true"></i>
-                    </div>
+                <div v-for="(p, index) in produtos" v-bind:class="{cinza: index%2==0}" v-bind:key="index">                                    
+                    <label class="ls ls2">
+                        {{p.productName}}</label>&nbsp;&nbsp;&nbsp;
+                    <label class="ls ls2">
+                        {{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
+                    <label class="ls ls2">
+                        {{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
+                    <label class="ls ls2">
+                        {{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2(p)" aria-hidden="true"></i>
                 </div>
                 <div class="paginacao" v-show="total>0">
                     <nav aria-label="">

@@ -1,6 +1,6 @@
 /*Menu de cadastro da receita*/
 
-.nav-recipe {
+.nav-recipe-tira {
     position: fixed;
     margin-top: 5.5%;
     background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
@@ -13,18 +13,27 @@
     width: 100%;
     height: 10%;
 }
-
-.botao-cadastro{
-    margin: -1% 0 0 0;
+.ls2-cabecalho-tira{
+    width: 30%;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-bottom: 0.3%;
 }
-.title-page-gp{    
+label{
+    margin-bottom: 0;
+}
+
+.botao-cadastro-tira{
+    margin: 0 0 0.5% 1%;
+}
+.title-page-gp-tira{    
     color: rgb(68, 68, 70);
     font-family: sans-serif;
     font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;          
 }
 
-.nav-recipeP {
+.nav-recipeP-tira {
     position: fixed;
     margin-top: 5%;
     background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
@@ -37,18 +46,19 @@
     width: 100%;
     height: 18%;
 }
-.cabecalho-table{
+.cabecalho-table-tira{
     position: relative;
-    top: 20%;
-    left: 2.15%;
-    width: 92.9%;
+    top: 12%;
+    left: 1.8%;
+    width: 95.2%;
     padding: 0 0 0 0.1%;       
     background-color: black;
     margin: 0 0 0 0;
-    padding: 0 0 0 0;
+    padding: 0 0 0 0.2%;
 }
 
-.fundo-branco{
+
+.fundo-branco-tira{
     background-color: #ffffff;    
     margin: 0 0 0 0;
     width: 100%;     
@@ -61,7 +71,7 @@
 }   
 /*Título menu superior da tela de receita*/
 
-.title-recipe {
+.title-recipe-tira {
     list-style: none;
     font-family: sans-serif;
     font-size: 22px;
@@ -71,7 +81,7 @@
     margin-top: 1.2%;
 }
 
-.title-recipeP {
+.title-recipeP-tira {
     list-style: none;
     font-family: sans-serif;
     font-size: 22px;
@@ -84,7 +94,7 @@
 
 /*Botões superiores do menu de Cadastro de Receitas*/
 
-.nav-recipe ul {
+.nav-recipe-tira ul {
     display: inline;
     list-style: none;
     margin-right: 1%;
@@ -144,7 +154,7 @@
     color: black;
 }
 
-.nav-recipe ul li div {
+.nav-recipe-tira ul li div {
     display: inline;
     box-sizing: border-box;
     cursor: pointer;
@@ -181,7 +191,7 @@ h3 {
 
 /*Bloco Fases da Receita*/
 
-.card-header-phase {
+.card-header-tira {
     margin-top: 13%;
     width: 100%;
 }
@@ -200,11 +210,11 @@ h6 {
 
 /*Box das Fases*/
 
-.phases {
+.tiras {
     background-color: rgba(255, 255, 255, 0.137);
 }
 
-#show-phase-products {
+#show-tira-products {
     cursor: pointer;
     margin-left: 2%;
 }
@@ -259,7 +269,7 @@ h6 {
     background-color: rgb(228, 232, 240);
 }
 
-#addPhase {
+#addTira {
     width: 10%;
 }
 
@@ -283,14 +293,14 @@ h6 {
 
 /*Relatório de Receitas*/
 
-.phases {
-    margin-top: 17%;
-    padding-bottom: 5%;
+.tiras {
+    margin-top: 13%;
+    padding-bottom: 6%;
     width: 95%;
     margin-left: 2%;
 }
 
-.card-header-recipe {
+.card-header-recipe-tira {
     background-color: rgba(224, 234, 240, 0.486);
     padding-top: 0.2%;
     padding-bottom: 0.2%;
@@ -319,17 +329,20 @@ h6 {
 
 /*Paginação*/
 
-.paginacao-phase {
+.paginacao-tira {
     position: fixed;
     z-index: 2;
     text-align: center;
-    margin-left: 35%;
-    bottom: 5%;
+    width: 100%;
+    bottom: 4%;
+    background-color: #ffffff;
 }
-
+.cinza{
+    background-color: #DCDCDC;
+}
 @media only screen and (max-width: 800px) {
     /*Titulo da receita*/
-    .title-recipe {
+    .title-recipe-tira {
         font-size: 16px;
         margin-top: 1%;
     }
@@ -339,32 +352,32 @@ h6 {
         margin-top: 10%;
     }
     /*Box das Fases*/
-    .phases {
+    .tiras {
         margin-top: 11%;
         padding-bottom: 6%;
     }
     /**/
-    .phase {
+    .tiras {
         margin-top: 0.5%;
         padding-bottom: 5%;
     }
-    .card-header-phase {
+    .card-header-tira {
         margin-top: 13%;
         width: 100%;
     }
-    .nav-recipeP {
+    .nav-recipeP-tira {
         height: 22%;
     }
     #cadReceita {
         padding-left: 15%;
     }
-    .nav-recipe {
+    .nav-recipe-tira {
         height: 18%;
     }
-    .title-recipeP {
+    .title-recipeP-tira {
         margin-top: 1%;
     }
-    .nav-phases {
+    .nav-tiras {
         width: 19%;
         padding-top: 0.2%;
     }
@@ -383,7 +396,7 @@ h6 {
         font-family: sans-serif;
     }
     /*Fases da Receita*/
-    .card-header-recipe {
+    .card-header-recipe-tira {
         margin-top: 0.2%;
         padding-bottom: 0.2%;
     }
@@ -426,8 +439,9 @@ h6 {
     .ls4 {
         padding-right: 1%;
         font-size: 11px;
+        margin-bottom: 0;
     }
-    #addPhase {
+    #addTira {
         width: 20%;
     }
     /*Configuração do tamanho dos botões: AddFase, EditFase, +Materiais e +Parametros*/
