@@ -40,7 +40,7 @@
             <div class="footer-text"> Sistema Onyx V1.0</div>
         </footer>
 
-        <img src="./../../assets/imagens/onyx3.png" class="logo-mahle"/>
+        <img src="./../../assets/imagens/onyx3.png" class="logo-onyx img-responsive"/>
         <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
 
         <!--                        -->
