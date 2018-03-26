@@ -71,6 +71,7 @@
                         <i class="fa fa-edit icon-right2 icon-style" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">
                         </i>
                     </router-link>
+                    <!--Teste-->
                     <div class="paginacao-tira" v-show="total>0">
                         <nav aria-label="">
                             <ul class="pagination justify-content-center">
