@@ -8,18 +8,17 @@
         <!--                                  -->
         <div class="container fluid">  
             <nav class="header fixed-top">
-                <img src="./../../assets/imagens/onyx3.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
                     <li class="nav-item-cab col-md-1">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:25px; cursor:pointer"></i>  <br>Início</router-link>
                     </li> 
-                    <li class="nav-item-cab col-md-1.5">
+                    <li class="nav-item-cab col-md-1">
                         <router-link class="nav-link active bg-dark btn-config" router-link to="/AssociateOP"><i class= "fa fa-clone" style="font-size:25px; cursor:pointer"></i>  <br>Associação de OP </router-link>
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:25px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
                     </li> 
-                    <li class="nav-item-cab col-md-2">
+                    <li class="nav-item-cab col-md-1">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:25px; cursor:pointer"></i>  <br>Gerenciamento de Ferramentas/Insumos</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
@@ -27,6 +26,14 @@
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionTira"><i class= "fa fa-keyboard-o" style="font-size:25px; cursor:pointer"></i>  <br>Apontamentos Tira</router-link>
+                    </li>
+                    <li class="nav-item-cab col-md-1">
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/"><i class= "fa fa-user" style="font-size:25px; cursor:pointer"></i><br>Login</router-link>
+                    </li>
+                    <li class="nav-item-cab col-md-1">
+                    <router-link class="nav-link bg-dark active btn-config" router-link to="/">
+                     <img src="./../../assets/imagens/mahle.png" class="logo-system img-responsive"/>
+                    </router-link>
                     </li> 
                 </ul>    
             </nav>
@@ -41,7 +48,7 @@
             <div class="footer-text"> Sistema Onyx V1.0</div>
         </footer>
 
-        <img src="./../../assets/imagens/mahle.png" class="logo-mahle"/>
+        <img src="./../../assets/imagens/onyx3.png" class="logo-onyx img-responsive"/>
         <img src="./../../assets/imagens/logonegativo2.png" class="logo-spi"/>
 
         <!--                        -->
@@ -154,10 +161,13 @@
 
 <script>
 export default {
-props: ["nothing"]
+  props: ["nothing"]
 };
 </script>
 <script src="./js/navbar.js">
+export default {
+  props: ["nothing"]
+};
 </script>
 <style>
 @import url("./navBar.css");

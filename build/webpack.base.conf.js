@@ -65,14 +65,14 @@ module.exports = {
                 STATUS_API: JSON.stringify("http://10.35.255.22:8006"),
                 HIST_BIGTABLE_API: JSON.stringify("http://10.35.255.22:8011")
                 */
-                TOOLS_API: JSON.stringify("http://52.90.29.209:8005"),
-                OP_API: JSON.stringify("http://52.90.29.209:8003"),
-                THINGS_API: JSON.stringify("http://52.90.29.209:8001"),
-                PROD_HIST_API: JSON.stringify("http://52.90.29.209:8006"),
-                RECIPE_API: JSON.stringify("http://52.90.29.209:8002"),
-                STATUS_API: JSON.stringify("http://52.90.29.209:8004"),
-                HIST_BIGTABLE_API: JSON.stringify("http://52.90.29.209:8011"),
-                HIST_ALARM_API: JSON.stringify("http://52.90.29.209:8012")
+                TOOLS_API: JSON.stringify("http://54.242.82.119:8005"),
+                OP_API: JSON.stringify("http://54.242.82.119:8003"),
+                THINGS_API: JSON.stringify("http://54.242.82.119:8001"),
+                PROD_HIST_API: JSON.stringify("http://54.242.82.119:8006"),
+                RECIPE_API: JSON.stringify("http://54.242.82.119:8002"),
+                STATUS_API: JSON.stringify("http://54.242.82.119:8004"),
+                HIST_BIGTABLE_API: JSON.stringify("http://54.242.82.119:8011"),
+                HIST_ALARM_API: JSON.stringify("http://54.242.82.119:8012")
             }
         }),
         new HtmlWebpackPlugin({
