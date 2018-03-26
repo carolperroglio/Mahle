@@ -47,7 +47,7 @@
                         <br>
                         <i class="fa fa-edit" style="font-size:22px; cursor:pointer"> 
                             <div class="edit-text">   
-                                <b>Editar receita</b>
+                                <b>Editar liga</b>
                             </div>
                         </i>
                     </div>
@@ -57,7 +57,7 @@
                         <br>
                         <i class="fa fa-plus" aria-hidden="true" style="font-size:22px; cursor:pointer"> 
                             <div class="edit-text">
-                                <b> Cadastrar produto da Receita </b>
+                                <b> Cadastrar produto da Liga </b>
                             </div>
                         </i>
                     </div>
