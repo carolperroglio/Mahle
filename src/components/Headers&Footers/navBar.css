@@ -1,10 +1,11 @@
 ﻿/*Configurações do header*/
+
 body {
     font-family: "Lucida Sans Unicode";
 }
+
 .nav-item-cab {
     position: relative;
-    
     margin: 0 0 0 4% !important;
     font-size: 13px;
     color: black;
@@ -15,14 +16,15 @@ body {
     z-index: 10;
 }
 
-.menu-btn{
+.menu-btn {
     box-sizing: content-box;
     width: 10%;
-    z-index: 5000; 
+    z-index: 5000;
 }
 
 
 /*Logo do sistema*/
+
 .logo-system {
     position: fixed;
     margin-top: 1.5%;
@@ -32,7 +34,9 @@ body {
     z-index: 50;
 }
 
+
 /*Configurações do ícone do menu lateral collapse*/
+
 .icon-navigate {
     position: relative;
     font-size: 30px;
@@ -41,17 +45,18 @@ body {
     color: white;
     cursor: pointer;
     z-index: 100;
-    }
+}
 
 #sidebar {
     margin-top: 5%;
-    position:fixed;
+    position: fixed;
     z-index: 5555;
 }
 
-#list-group{
+#list-group {
     position: relative;
 }
+
 #sidebar .list-group-item {
     border-radius: 0;
     background-color: #333;
@@ -60,7 +65,7 @@ body {
     border-right: 0;
     border-color: #2c2c2c;
     white-space: nowrap;
-    }
+}
 
 #sidebar .list-group-item:not(.collapsed) {
     background-color: #222;
@@ -105,25 +110,26 @@ body {
     margin-left: 30px;
 }
 
-footer{
-    position:fixed;
+footer {
+    position: fixed;
     z-index: 5;
-    bottom:0px;
-    height:40px;
-    width:100%;
+    bottom: 0px;
+    height: 40px;
+    width: 100%;
     background: #222;
 }
 
-.footer-text{
-    font-size: 12px; color: white;
+.footer-text {
+    font-size: 12px;
+    color: white;
     font-family: sans-serif;
-    text-align: center; 
+    text-align: center;
     margin-top: 1%;
     margin-right: 0.9%;
     text-shadow: 1px 1px rgb(124, 114, 114);
 }
 
-.logo-mahle{
+.logo-onyx {
     position: fixed;
     bottom: 0.5%;
     width: 8rem;
@@ -132,27 +138,27 @@ footer{
     left: 0.5%;
 }
 
-.logo-spi{
+.logo-spi {
     position: fixed;
     top: 95%;
     z-index: 7;
     right: 0.4%;
     width: 7%;
     height: 5%;
-    }
-
-.refactor-class-row{
-    height:0;
-    width:0;
 }
 
-#open{
-    background-color: Transparent; 
+.refactor-class-row {
+    height: 0;
+    width: 0;
+}
+
+#open {
+    background-color: Transparent;
     border: none;
 }
 
-#open :visited{
-    background-color: Transparent; 
+#open :visited {
+    background-color: Transparent;
     border: none;
 }
 
@@ -173,6 +179,7 @@ footer{
 
 
 /* change transition animation to width when entire sidebar is toggled */
+
 #sidebar.collapse {
     -webkit-transition-timing-function: ease;
     -o-transition-timing-function: ease;
@@ -202,19 +209,20 @@ footer{
     .icon-navigate {
         font-size: 2em;
         margin-top: 80%;
-       }
-    .logo-system {
-    margin-top: 3%;
-    margin-left: 92%;
-    height: 5%;
-    width: 8%;
     }
-    .nav-item-cab{
+    .logo-system {
+        /* position: fixed; */
+        margin-top: 2.5%;
+        margin-left: 8%;
+        height: 6%;
+        width: 100px;
+        z-index: 50;
+    }
+    .nav-item-cab {
         font-size: 0.5em;
         width: 10%;
     }
     #sidebar .list-group-item {
-       font-size: 13px;
-        }
-} 
-
+        font-size: 13px;
+    }
+}

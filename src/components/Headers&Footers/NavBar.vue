@@ -6,6 +6,7 @@
         <!-- Cabeçalho da pagina, logo e user -->
         <!--                                  -->
         <!--                                  -->
+
         <div class="fluid">  
             <nav class="fixed-top">
                 <img src="./../../assets/imagens/mahle.png" class="logo-system"/>
@@ -16,6 +17,7 @@
                     <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
                     </li> 
+
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:44px; cursor:pointer"></i>  <br>Ferramentas</router-link>
                     </li> 
@@ -163,10 +165,13 @@
 
 <script>
 export default {
-props: ["nothing"]
+  props: ["nothing"]
 };
 </script>
 <script src="./js/navbar.js">
+export default {
+  props: ["nothing"]
+};
 </script>
 <style>
 @import url("./navBar.css");

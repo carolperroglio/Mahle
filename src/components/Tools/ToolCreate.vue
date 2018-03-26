@@ -114,7 +114,7 @@
                                     <b>Tipo: </b>
                                 </label>
                                     <select class="form-control form-control-sm" v-model="ferramenta.typeName">
-                                    <option v-for="(tipo, index) in tipos" :value="tipo.name" v-bind:key="index">{{ tipo.name }}</option>
+                                    <option v-for="(tipo, indexOp) in tipos" :value="tipo.name" v-bind:key="indexOp">{{ tipo.name }}</option>
                                     </select>
                                 <label>
                                     <b>Status: </b>
@@ -151,7 +151,7 @@
                 <div id="load" v-show="carregando">
                 <stretch background="#4d4d4d"></stretch>
                 </div>    
-                <div v-for="(f, index) in ferramentas" :key="index">
+                <div v-for="(f, indexF) in ferramentas" :key="indexF">
                     <div class= "card-header">
                     </div>
                     <div class="card-body">
@@ -183,7 +183,7 @@
                             <li v-show="startat>0" class="page-item">
                                 <a class="page-link" href="#" @click.stop.prevent="listar(startat-=20, quantityPage)">Previous</a>
                             </li>
-                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
+                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index2) in pages" v-bind:key="index2">
                                 <a class="page-link" href="#" @click.stop.prevent="listar(startat=num*20, quantityPage)">{{num+1}}</a>
                             </li>
                             <li class="page-item" v-show="pages.length>1 && startat+20<total">

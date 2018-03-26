@@ -22,8 +22,10 @@ import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css
 import { LinkTile, ContentSm, ContentMd, ContentLg } from 'vue-tiles'
 import { array } from 'bootstrap-vue/es/utils'
 import { Stretch } from 'vue-loading-spinner'
+import logoMahle from './logomahle.jpeg'
 import logo from './onyx.jpeg'
-import logoMahle from './mahle_logo_azul_claro.jpeg'
+
+import { encode } from 'punycode';
 
 es6promisse.polyfill();
 
@@ -223,23 +225,28 @@ export default {
             console.log(this.PDFprovider);
 
             var doc = new jsPDF('p', 'pt');
-            var img = new Image;
-            var imgLogo = new Image;
+            var img = new Image();
+            var imgLogo = new Image();
+            //doc.readAsDataURL
             img.src = logo;
+            // var x = Convert.ToBase64String(imgLogo);            
             imgLogo.src = logoMahle;
-            var pageContent = function(data) {
+            console.log("img.src = " + img.src)
+            console.log("imgLogo.src = " + imgLogo.src)
+                // var pageContent = function(data) {
                 // HEADER
-                doc.setFontSize(20);
+            doc.setFontSize(20);
 
-                doc.addImage(img, "JPEG", 15, 15, 50, 30);
-                doc.addImage(imgLogo, "JPEG", 510, 15, 60, 30);
-                // doc.text("Report", data.settings.margin.left + 15, 22);
-            };
-            // doc.addImage(imgData, 'JPEG', 15, 10, 10);
+            doc.addImage(img, "JPEG", 15, 15, 50, 30);
+            // IMAGEM LOGO DA MAHLE N ESTA SENDO ENCODED
+            // doc.addImage(imgLogo, "JPEG", 510, 15, 60, 30);
+            // doc.text("Report", data.settings.margin.left + 15, 22);
+            // };
+
             doc.text(35, 65, "Rastreamento " + this.thingNameCabeçalho + " Grupo " + this.group)
                 // doc.autoTable(columns, this.PDFprovider, 15, 65);
             doc.autoTable(columns, this.PDFprovider, {
-                addPageContent: pageContent,
+                // addPageContent: pageContent,
                 showHeader: 'everyPage',
                 margin: { top: 80 }
             });
@@ -338,7 +345,6 @@ export default {
                     obj2["color"] = "#000000";
                     obj2["lineThickness"] = 3;
                     obj2["type"] = "smoothedLine";
-                    obj2["processCount"] = 0;
                     obj2["title"] = R.name;
                     obj2["valueField"] = R.name;
 
@@ -432,7 +438,7 @@ export default {
                 "autoMarginOffset": 40,
                 "marginRight": 60,
                 "marginTop": 60,
-                "startDuration": 1,
+                "startDuration": 0,
                 "borderColor": "#C67373",
                 "fontSize": 13,
                 "theme": "light",
