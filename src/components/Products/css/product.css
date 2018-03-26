@@ -7,6 +7,10 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+label{
+    margin-bottom: 0;
+}
+
 /* menu de navegação de produtos - busca de produtos*/   
 .nav-item-products { 
     margin-left: 1%;
@@ -86,7 +90,7 @@ input {
     text-align: center;
     width: 100%;
     background-color: #ffffff;
-    bottom: 5%;
+    bottom: 4%;
 }
 .ls2-cabecalhotab{
     width: 22.2%;
@@ -98,7 +102,6 @@ input {
     width: 21%;
     font-family: Arial, sans-serif;
     font-size: 16px;
-    padding-bottom: 0;
     margin-bottom: 0;    
 }
 

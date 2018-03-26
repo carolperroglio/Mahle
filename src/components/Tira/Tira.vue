@@ -18,31 +18,31 @@
         <!--               -->
         <!--               -->
         <!--               -->
-        <nav class="fixed-top nav-recipeP">
-            <li class="title-recipeP">
+        <nav class="fixed-top nav-recipeP-tira">
+            <li class="title-recipeP-tira">
                 <b>Gerenciamento de Tira</b>
             </li>
             <ul class="nav d-flex">
-                <li class="form-group nav-phases col-md-2">
+                <li class="form-group nav-tiras col-md-2">
                     <label class="">
                         <b>Nome da Tira:</b>
                     </label>
                         <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
                 </li>
-                <li class="form-group nav-phases col-md-2">
+                <li class="form-group nav-tiras col-md-2">
                     <label class="">
                         <b>Código:</b>
                     </label>
                         <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita">
                 </li>
-                <li class="form-group nav-phases col-md-2">
+                <li class="form-group nav-tiras col-md-2">
                     <form row>
                         <br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="!recipe.recipeName || !recipe.recipeCode || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">
                             Enviar
                         </button>
                     </form>
                 </li>
-                <li class="nav-phases col-md-2">
+                <li class="nav-tiras col-md-2">
                     <div @click.stop.prevent="showModalEditRecipe()" v-if="recipeCadastrada">
                         <br>
                         <i class="fa fa-edit" style="font-size:22px; cursor:pointer"> 
@@ -52,7 +52,7 @@
                         </i>
                     </div>
                 </li>
-                <li class="nav-phases col-md-2">
+                <li class="nav-tiras col-md-2">
                     <div v-if="!(carregando || !recipeCadastrada)" @click.stop.prevent="showModalAddProdFin()">
                         <br>
                         <i class="fa fa-plus" aria-hidden="true" style="font-size:22px; cursor:pointer"> 
@@ -62,7 +62,7 @@
                         </i>
                     </div>
                 </li>
-                <li class="nav-phases col-md-2" id="produtoR" v-if="pName !== '' || json.stringify(recipeProduct) !== '{}'">
+                <li class="nav-tiras col-md-2" id="produtoR" v-if="pName !== '' || json.stringify(recipeProduct) !== '{}'">
                         <b><font color="#9BA6A5">
                             Produto:
                         </font></b>
@@ -72,7 +72,7 @@
                         <i class= "fa fa-trash-o"></i> Remover
                     </button>
                 </li>
-                <li v-else class="nav-phases col-md-2" id="produtoR">
+                <li v-else class="nav-tiras col-md-2" id="produtoR">
                     <br>
                 </li>
             </ul>
@@ -86,17 +86,17 @@
     <!--                       -->
     <!--                       -->
     <!--                       -->
-    <div class="container-fluid card-header-phase" v-show="recipeCadastrada">                    
+    <div class="container-fluid card-header-tira" v-show="recipeCadastrada">                    
         <div class="card-body">
-            <div v-for="(pha, index) in phases" class="phase" :key="index">
-                <div class="card-header card-header-recipe">
+            <div v-for="(pha, index) in phases" class="tira" :key="index">
+                <div class="card-header card-header-recipe-tira">
                     <form row="">                                                            
                         <label class="btn btn-warning btn-edit btn-sm config-button" style="color: white" @click.stop.prevent="showModalEditFase();phase=pha" aria-hidden="true">
                             <i class= "fa fa-edit" style="font-size:18px; cursor:pointer"></i> Editar Tira
                         </label>                                                
                     </form>
                     <div v-if="editarActivate">
-                        <h2> Matéria Prima </h2>
+                        <!--<h2> Matéria Prima </h2>
                         <div v-if="pha.phaseProducts.length == 0">
                             <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
@@ -116,17 +116,16 @@
                                 </label>
                                 <label class="ls ls14">
                                 <b>Especificação: </b>{{pro.minValue}} mínimo {{pro.maxValue}} máximo
-                                </label>
+                                </label>-->
                                 <!-- <label class="ls ls14">
                                     <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
                                 </label> -->
-                                <label class="ls ls14">
+                                <!--<label class="ls ls14">
                                 <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
                                 </button>
                                 </label>
                             </li>
-                        </ul>
-
+                        </ul>-->
                         <h2> Parâmetros </h2>
                         <div v-if="pha.phaseParameters.length == 0">
                             <ul class="list-group">

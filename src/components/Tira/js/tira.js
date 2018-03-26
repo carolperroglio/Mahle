@@ -180,15 +180,12 @@ export default {
             this.mensagemSuc = '';
             this.carregando = true;
             this.editarActivate = false;
-            console.log(recipe);
-            console.log(this.url + "recipes/");
+            recipe.recipeTypeId = 2;
             axios.post(this.url + "recipes/", recipe).then((response) => {
-                console.log(response.data);
                 this.recipe = response.data;
                 this.carregando = false;
                 this.recipeCadastrada = true;
             }, (error) => {
-                console.log(error);
                 this.carregando = false;
             });
         },
@@ -331,10 +328,6 @@ export default {
             this.carregando = true;
 
             setTimeout(() => {
-                console.log("produto da fase");
-                console.log(productPhase);
-                console.log("fase");
-                console.log(phase);
                 axios.post(this.url + "phases/products/" + this.phase.phaseId, productPhase).then((response) => {
                 productPhase.phaseProductId = response.data.phaseProductId;
                 this.phase.phaseProducts.push(productPhase);
@@ -357,10 +350,6 @@ export default {
              this.mensagemSuc = '';
              
             if(confirm("Tem certeza que deseja excluir o produto da fase?")){
-                console.log("produto da fase");
-                console.log(productPhase);
-                console.log("fase");
-                console.log(phase.phaseId);
                 axios.delete(this.url + "phases/products/" + phase.phaseId, { data: productPhase }).then((response) => {
                     phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);
                     this.mensagemSuc = 'Fase relacionada com sucesso';
@@ -386,8 +375,6 @@ export default {
             setTimeout(() => {
                     this.mensagemSuc = '';
                     this.carregando = true;
-                    console.log(phaseParameter);
-                    console.log(phase);
                     axios.post(this.url + "phases/parameters/" + phase.phaseId, phaseParameter).then((response) => {
                         phaseParameter.phaseParameterId = response.data.phaseParameterId;
                         phase.parameters.push(phaseParameter);
