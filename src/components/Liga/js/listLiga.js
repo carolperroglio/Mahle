@@ -19,13 +19,14 @@ function paginacao(response, este) {
 var ipServer = process.env.RECIPE_API;
 
 export default {
-    name: "Phases",
+    name: "ListLiga",
     data() {
         return {
             urlRecipes: ipServer + '/api/recipes',
             urlPhases: ipServer + '/api/phases',
             recipes: [],
             phases: [],
+            cabecalhoSetas:[false, false, false],
             carregando: false,
             quantityPage: 20,
             startat: 0,
@@ -82,6 +83,21 @@ export default {
                 this.carregando = false;
             })
         },
+        organizar(recipe, campo, pos){                         
+            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=false;
+
+        },
+        desorganizar(recipe, campo, pos){                         
+            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=true;
+                else   
+                    this.cabecalhoSetas[i]=false;             
+        },
         /*****************/
         /*               */
         /*  GET Phase  */
@@ -111,15 +127,14 @@ export default {
             axios.get(this.urlRecipes + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                 paginacao(response, this);
                 this.recipes = response.data.values;
-                console.log('this.recipes');
-                console.log(this.recipes);
-
+                for(var i=0; i<this.recipes.length; i++)
+                    if(this.recipes[i].recipeDescription == undefined)
+                        this.recipes[i].recipeDescription = '';
                 this.carregando = false;
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
             })
-            console.log(this.recipes);
         },
     },
     beforeMount() {

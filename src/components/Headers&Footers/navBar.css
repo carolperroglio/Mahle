@@ -6,10 +6,10 @@ body {
 
 .nav-item-cab {
     position: relative;
-    margin-left: 2%;
+    margin: 0 0 0 4% !important;
     font-size: 13px;
     color: black;
-    margin-top: 1.1%;
+    margin-top: 0;
     margin-bottom: 1.5%;
     text-align: center;
     cursor: pointer;
@@ -26,10 +26,11 @@ body {
 /*Logo do sistema*/
 
 .logo-system {
-    margin-top: 2.5%;
-    margin-left: 64%;
-    height: 6%;
-    width: 155px;
+    position: fixed;
+    margin-top: 1.5%;
+    margin-left: 91%;
+    height: 4%;
+    width: 8%;
     z-index: 50;
 }
 
@@ -83,7 +84,6 @@ body {
 
 
 /* open state */
-
 #sidebar .list-group .list-group-item[aria-expanded="true"] {
     background-color: #222;
 }
@@ -132,8 +132,8 @@ footer {
 .logo-onyx {
     position: fixed;
     bottom: 0.5%;
-    width: 5%;
-    height: 4.2%;
+    width: 8rem;
+    height: 2rem;
     z-index: 6;
     left: 0.5%;
 }

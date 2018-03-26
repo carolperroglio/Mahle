@@ -13,7 +13,7 @@ var ipServerOP = process.env.OP_API;
 var ipServerThing = process.env.THINGS_API;
 
 export default {
-    name: "Phases",
+    name: "Liga",
     data() {
         return {
             json: JSON,

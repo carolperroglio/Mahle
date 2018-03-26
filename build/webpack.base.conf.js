@@ -6,7 +6,7 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const api='http://54.242.82.119'
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
@@ -65,14 +65,14 @@ module.exports = {
                 STATUS_API: JSON.stringify("http://10.35.255.22:8006"),
                 HIST_BIGTABLE_API: JSON.stringify("http://10.35.255.22:8011")
                 */
-                TOOLS_API: JSON.stringify("http://54.242.82.119:8005"),
-                OP_API: JSON.stringify("http://54.242.82.119:8003"),
-                THINGS_API: JSON.stringify("http://54.242.82.119:8001"),
-                PROD_HIST_API: JSON.stringify("http://54.242.82.119:8006"),
-                RECIPE_API: JSON.stringify("http://54.242.82.119:8002"),
-                STATUS_API: JSON.stringify("http://54.242.82.119:8004"),
-                HIST_BIGTABLE_API: JSON.stringify("http://54.242.82.119:8011"),
-                HIST_ALARM_API: JSON.stringify("http://54.242.82.119:8012")
+                TOOLS_API: JSON.stringify(api+":8005"),
+                OP_API: JSON.stringify(api+":8003"),
+                THINGS_API: JSON.stringify(api+":8001"),
+                PROD_HIST_API: JSON.stringify(api+":8006"),
+                RECIPE_API: JSON.stringify(api+":8002"),
+                STATUS_API: JSON.stringify(api+":8004"),
+                HIST_BIGTABLE_API: JSON.stringify(api+":8011"),
+                HIST_ALARM_API: JSON.stringify(api+":8012")
             }
         }),
         new HtmlWebpackPlugin({
