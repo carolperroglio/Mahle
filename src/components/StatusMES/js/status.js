@@ -85,10 +85,26 @@ export default {
             setTimeout(() => {
                 axios.get(this.url).then(response => {
                     this.status = response.data;
+                    var alarms = [];
+
                     this.status.forEach(s => {
+                        s.hasRedAlert = false;
+                        s.hasLowAlert = false;
+                        s.hasGreenAlert = false;
                         for (var i = 0; i < this.things.length; i++) {
                             if (s.thingId == this.things[i].thingId) {
                                 s.thingName = this.things[i].thingName;
+                            }
+                        }
+                    });
+                    this.status.forEach(s => {
+                        for (var i = 0; i < s.alarms.length; i++) {
+                            if (s.alarms[i].priority == 2) {
+                                s.hasRedAlert = true;
+                            } else if (s.alarms[i].priority == 1 && s.hasRedAlert == false) {
+                                s.hasLowAlert = true;
+                            } else if (s.alarms[i].priority == 0 && s.hasRedAlert == false && s.hasLowAlert == false) {
+                                s.hasGreenAlert = true;
                             }
                         }
                     });
@@ -98,6 +114,23 @@ export default {
                     console.log(error);
                 })
             }, 200);
+        },
+        getClass(objeto) {
+            var string = {
+                'border-radius': '4px',
+                'padding': '2%',
+                'transition': 'background-color 1000ms linear',
+                'box-shadow': '1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070'
+            }
+            if (objeto.hasRedAlert) {
+                string["background-color"] = '#ed0404';
+            } else if (objeto.hasLowAlert && !objeto.hasRedAlert) {
+                string["background-color"] = '#f5fc28';
+            } else if (objeto.hasGreenAlert && !objeto.hasRedAlert && !objeto.hasLowAlert) {
+                string["background-color"] = '#4bff30';
+            }
+
+            return string;
         }
     },
     beforeMount: function() {

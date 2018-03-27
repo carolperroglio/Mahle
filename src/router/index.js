@@ -26,6 +26,7 @@ import ToolsManagement from '@/components/ToolsManagement/ToolsManagement'
 import StatusMES from '@/components/StatusMES/StatusMES'
 import Historian from '@/components/Historian/Historian'
 import HistorianAlarm from '@/components/HistorianAlarm/HistorianAlarm'
+import GenealogyReport from '@/components/GenealogyReport/GenealogyReport'
 // import Alarms from '@/components/Alarms/Alarms'
 
 
@@ -64,7 +65,7 @@ export default new Router({
             path: '/listliga',
             name: 'ListLiga',
             component: ListLiga
-        },        
+        },
         {
 
             path: '/prodOrder',
@@ -91,7 +92,7 @@ export default new Router({
             path: '/stateManagement',
             name: 'StateManagement',
             component: StateManagement
-        },        
+        },
         {
             path: '/associateTool',
             name: 'AssociateTool',
@@ -152,6 +153,12 @@ export default new Router({
             path: '/historianalarms',
             name: 'Historianalarms',
             component: HistorianAlarm
+        },
+        {
+
+            path: '/genealogyReport',
+            name: 'GenealogyReport',
+            component: GenealogyReport
         },
         // {
         //     path: '/alarms',
