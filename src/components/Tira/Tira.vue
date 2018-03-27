@@ -18,7 +18,7 @@
         <!--               -->
         <!--               -->
         <!--               -->
-        <nav class="fixed-top nav-recipeP-tira">
+        <div class="fixed-top nav-recipeP-tira">
             <li class="title-recipeP-tira">
                 <b>Gerenciamento de Tira</b>
             </li>
@@ -43,40 +43,91 @@
                     </form>
                 </li>
                 <li class="nav-tiras col-md-2">
-                    <div @click.stop.prevent="showModalEditRecipe()" v-if="recipeCadastrada">
+                    <!--<div @click.stop.prevent="showModalEditRecipe()" v-if="recipeCadastrada">
                         <br>
                         <i class="fa fa-edit" style="font-size:22px; cursor:pointer"> 
                             <div class="edit-text">   
                                 <b>Editar receita</b>
                             </div>
                         </i>
-                    </div>
+                    </div>-->
                 </li>
                 <li class="nav-tiras col-md-2">
-                    <div v-if="!(carregando || !recipeCadastrada)" @click.stop.prevent="showModalAddProdFin()">
+                    <!--<div v-if="!(carregando || !recipeCadastrada)" @click.stop.prevent="showModalAddProdFin()">
                         <br>
                         <i class="fa fa-plus" aria-hidden="true" style="font-size:22px; cursor:pointer"> 
                             <div class="edit-text">
                                 <b> Cadastrar produto da Receita </b>
                             </div>
                         </i>
-                    </div>
+                    </div>-->
                 </li>
                 <li class="nav-tiras col-md-2" id="produtoR" v-if="pName !== '' || json.stringify(recipeProduct) !== '{}'">
-                        <b><font color="#9BA6A5">
-                            Produto:
-                        </font></b>
-                            {{pName}}
-                            <br>
-                    <button type="button" class="btn btn-danger config-button2" aria-hidden="true" id="removerP" @click.stop.prevent="deleteRecipeProduct(recipeProduct);">
-                        <i class= "fa fa-trash-o"></i> Remover
-                    </button>
+                    <b><font color="#9BA6A5">
+                        Produto:
+                    </font></b>
+                    {{pName}}
+                    <br>                    
                 </li>
                 <li v-else class="nav-tiras col-md-2" id="produtoR">
                     <br>
                 </li>
             </ul>
-        </nav>
+            <div class="fundo-branco-tira">
+                <div class="cabecalho-table-tira">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls7-cabecalho-tira">
+                        <b><font class="cursor-class" color="#ffffff">Parâmetro
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>                    
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametros, 'vn',1):organizar(parametros, 'vn',1);" class="ls7-cabecalho-tira">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Valor Nominal
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametros, 'unidade',2):organizar(parametros, 'unidade',2);" class="ls7-cabecalho-tira">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Unidade
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>  
+                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls7-cabecalho-tira">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Lim. Inferior Específico
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label> 
+                    <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls7-cabecalho-tira">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Lim. Inferior Controle
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label> 
+                    <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls7-cabecalho-tira">
+                        <b>
+                            <font class="cursor-class" color="#ffffff">
+                                Lim. Superior Controle
+                                <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
+                            </font>
+                        </b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls7-cabecalho-tira">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Lim. Superior Específico
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>                              
+                </div>
+            </div>     
+        </div>
         
 
     <!--                       -->
@@ -86,115 +137,44 @@
     <!--                       -->
     <!--                       -->
     <!--                       -->
-    <div class="container-fluid card-header-tira" v-show="recipeCadastrada">                    
-        <div class="card-body">
-            <div v-for="(pha, index) in phases" class="tira" :key="index">
-                <div class="card-header card-header-recipe-tira">
-                    <form row="">                                                            
-                        <label class="btn btn-warning btn-edit btn-sm config-button" style="color: white" @click.stop.prevent="showModalEditFase();phase=pha" aria-hidden="true">
-                            <i class= "fa fa-edit" style="font-size:18px; cursor:pointer"></i> Editar Tira
-                        </label>                                                
-                    </form>
-                    <div v-if="editarActivate">
-                        <!--<h2> Matéria Prima </h2>
-                        <div v-if="pha.phaseProducts.length == 0">
-                            <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
-                                <label class="ls ls14">
-                                Sem Matéria Prima cadastradas ainda...
-                                </label>
-                            </li>
-                        </ul>
-                        </div>
-                        <ul class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
-                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
-                                <label v-if="pro.product.productName != undefined" class="ls ls14">
-                                <b>Componente: </b>{{pro.product.productName}}&nbsp;&nbsp;
-                                </label> 
-                                <label v-else class="ls ls14">
-                                    Componente
-                                </label>
-                                <label class="ls ls14">
-                                <b>Especificação: </b>{{pro.minValue}} mínimo {{pro.maxValue}} máximo
-                                </label>-->
-                                <!-- <label class="ls ls14">
-                                    <b>Tipo de Produto: </b>{{pro.phaseProductType | prodTypeName}}
-                                </label> -->
-                                <!--<label class="ls ls14">
-                                <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
-                                </button>
-                                </label>
-                            </li>
-                        </ul>-->
-                        <h2> Parâmetros </h2>
-                        <div v-if="pha.phaseParameters.length == 0">
-                            <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
-                                <label class="ls ls14">
-                                Sem parâmetros cadastrados ainda...
-                                </label>
-                            </li>
-                        </ul>
-                        </div>
-                        <ul class="list-group" v-for="(pro, indexPro) in pha.phaseParameters" :key="indexPro">
-                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
-                                <label class="ls ls14">
-                                <b>Valor: </b>{{pro.setupValue}} min. {{pro.measurementUnit}} máx
-                                </label>
-                                <label class="ls ls14">
-                                    <b>Nome: </b>{{pro.tag.tagName}}
-                                </label>
-                                <label class="ls ls14">
-                                <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
-                                </button>
-                                </label>
-                            </li>
-                        </ul>
+        <div class="" style="">
+            <div class="tiras" style="margin-top:18%">
+                <div class="progress" v-show="carregando">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                     </div>
-                    <!-- Fim v-else -->
-                                    
-                    <div v-else>
-                        <a class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
-                                <div class="list-group-item list-group-item-3">
-                                <label class="ls ls14">
-                                <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
-                                </label>
-                                <label class="ls ls14">
-                                    <b>Quantidade : </b>{{pro.value}} {{pro.measurementUnit}}
-                                </label>
-                                <label class="ls ls14">
-                                    <b>Tipo de Material: </b>{{pro.phaseProductType | prodTypeName}}
-                                </label>
-                                <label class="ls ls14">
-                                    <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
-                                </button>
-                                </label>
-                                
-                            </div>
-                        </a>
-                    </div>
-
-                    <br>
-                    <a class="list-group" v-for="(par, indexPro) in pha.parameters" v-bind:key="indexPro">
-                        <div class="list-group-item list-group-item-4">
-                            <label class="ls ls14">
-                                <b>Pointer:</b>{{par.setupValue}} {{par.measurementUnit}}
-                            </label>
-                            <label class="ls ls16">
-                                <b>Valor mínimo: </b>{{par.minValue}}
-                            </label>
-                            <label class="ls ls16">
-                                <b>Valor máximo: </b>{{par.maxValue}}
-                            </label>
-                            <label class="ls ls16">
-                                <b>Tag: </b>{{par.tag.tagName}}
-                            </label>
-                        </div>
-                    </a>                                    
                 </div>
+                <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
+                    <label class="ls4">
+                    <b><font color="#9BA6A5"> </font></b>
+                        {{pro.parametro}}
+                    </label>                    
+                    <label class="ls4">
+                    <b><font color="#9BA6A5"> </font></b>
+                        {{pro.vn}}
+                    </label>
+                    <label class="ls4">
+                    <b><font color="#9BA6A5"> </font></b>
+                        {{pro.unidade}}
+                    </label>
+                    <label class="ls4">
+                    <b><font color="#9BA6A5"> </font></b>
+                        {{pro.lie}}
+                    </label>   
+                    <label class="ls4">
+                    <b><font color="#9BA6A5"> </font></b>
+                        {{pro.lic}}
+                    </label>            
+                    <label class="ls4">
+                    <b><font color="#9BA6A5"> </font></b>
+                        {{pro.lsc}}
+                    </label>
+                    <label class="ls4">
+                    <b><font color="#9BA6A5"> </font></b>
+                        {{pro.lse}}
+                    </label>                                                                                        
+                </div>                                                                                                       
             </div>
         </div>
-    </div>
                 
         
             
@@ -323,59 +303,59 @@
         <!--        modal          -->
         
          <b-modal ref="modalcadProPhase" hide-footer title="Cadastrar produto">
-                  
-                    <div class="modal-body">
+            
+            <div class="modal-body">
 
-                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                        
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Unidade de medida : </label><br>
-                                <input class="fm form-control mr-sm-2" v-model="phaseProduct.measurementUnit" placeholder="Ex.: kg" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Tipo de Produto:</label>
-                                <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
-                                    <option value="" selected disabled>Campo para busca</option>
-                                    <option value="scrap">Rejeitado</option>
-                                    <option value="finished">Acabado</option>
-                                    <option value="semi_finished">Semi-Acabado</option>
-                                </select>
-                            </div>
-                            
-                        </div>
-                        <div class="form-row">
-                            <label>Tolerância: </label><br>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label>Mín: </label><br>
-                                <input class="fm form-control mr-sm-2" v-model="phaseProduct.minValue" placeholder="Valor mínimo" />
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label>Máx : </label><br>
-                                <input class="fm form-control mr-sm-2" v-model="phaseProduct.maxValue" placeholder="Valor máximo" />
-                            </div>
-                        </div>
-                        <label class="fm mr-sm-2">Nome do produto : </label>
-                            <input @keyup="phase.pros=getResults(urlProducts,productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton"/>
-                                <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; phase.pros=[];" v-for="(p,index) in phase.pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>
-                            <small>Digite no minimo 3 letras para busca do produto</small>
+                <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Unidade de medida : </label><br>
+                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.measurementUnit" placeholder="Ex.: kg" />
                     </div>
-                    <div class="modal-footer">
-                        <div>
-                            <div class="btn-group" role="group">
-                                <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" :disabled="!phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue || !productPhaseName" class="btn btn-success">
+                    <div class="form-group col-md-6">
+                        <label>Tipo de Produto:</label>
+                        <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
+                            <option value="" selected disabled>Campo para busca</option>
+                            <option value="scrap">Rejeitado</option>
+                            <option value="finished">Acabado</option>
+                            <option value="semi_finished">Semi-Acabado</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="form-row">
+                    <label>Tolerância: </label><br>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Mín: </label><br>
+                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.minValue" placeholder="Valor mínimo" />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Máx : </label><br>
+                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.maxValue" placeholder="Valor máximo" />
+                    </div>
+                </div>
+                <label class="fm mr-sm-2">Nome do produto : </label>
+                    <input @keyup="phase.pros=getResults(urlProducts,productPhaseName)" v-model="productPhaseName" placeholder="Nome do produto"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton"/>
+                        <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; phase.pros=[];" v-for="(p,index) in phase.pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>
+                    <small>Digite no minimo 3 letras para busca do produto</small>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <div class="btn-group" role="group">
+                        <button @click.stop.prevent="createPhaseProduct(phaseProduct, phase);" :disabled="!phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue || !productPhaseName" class="btn btn-success">
 
-                                    <i class="fa fa-check-square" aria-hidden="true"></i>
-                                </button>
-                                <div class="btn btn-primary pull-right" @clicqk.stop.prevent="phase={}">
-                                    Limpar
-                                </div>
-                            </div>
+                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                        </button>
+                        <div class="btn btn-primary pull-right" @clicqk.stop.prevent="phase={}">
+                            Limpar
                         </div>
                     </div>
+                </div>
+            </div>
          </b-modal>
         <!--    Modal da Flavia    -->
         <!--                       -->
@@ -385,35 +365,35 @@
         <!--                       -->
         <!--         Modal         -->
         <b-modal ref="modalCadParam" hide-footer title="Cadastrar Parâmetro">
-                 
-                        <div class="modal-body">
-                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="">Set Point</label>
-                                <input type="text" class="form-control form-control-sm" v-model="phaseParameter.setupValue" placeholder="Set Point">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="mr-sm-2">Nome : </label><br>
-                                <div class="dropdown">
-                                    <input @keypress.capture="phaseTags=getResults(urlRecipeSearch, tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-                                        <b-dropdown-item @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags" v-bind:key="index">{{p.tagName}}</b-dropdown-item>
-                                </div>
-                            <small>Digite no mínimo 3 letras para busca da tag</small>
-                            </div>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button @click.stop.prevent="createPhaseParameter(phaseParameter, phase)" :disabled="!phaseParameter.setupValue || !phaseParameter.measurementUnit || !tagName" class="btn btn-success">
-                                <i class="fa fa-check-square" aria-hidden="true"></i>
-                            </button>
-                            <button @click.stop.prevent="deletePhaseParameter(index, tag)" class="btn btn-danger">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                        </div>
+        
+            <div class="modal-body">
+            <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+            <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">Set Point</label>
+                    <input type="text" class="form-control form-control-sm" v-model="phaseParameter.setupValue" placeholder="Set Point">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="mr-sm-2">Nome : </label><br>
+                    <div class="dropdown">
+                        <input @keypress.capture="phaseTags=getResults(urlRecipeSearch, tagName)" v-model="tagName" placeholder="Nome do parâmetro" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                            <b-dropdown-item @click.stop.prevent="phaseParameter.tagId=p.tagId; phaseParameter.tag=p; tagName=p.tagName; phaseTags=[]" v-for="(p,index) in phaseTags" v-bind:key="index">{{p.tagName}}</b-dropdown-item>
                     </div>
+                <small>Digite no mínimo 3 letras para busca da tag</small>
+                </div>
+            </div>
+            <div class="btn-group" role="group">
+                <button @click.stop.prevent="createPhaseParameter(phaseParameter, phase)" :disabled="!phaseParameter.setupValue || !phaseParameter.measurementUnit || !tagName" class="btn btn-success">
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                </button>
+                <button @click.stop.prevent="deletePhaseParameter(index, tag)" class="btn btn-danger">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
         </b-modal>
     </div>
 </template>

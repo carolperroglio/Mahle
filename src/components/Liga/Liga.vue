@@ -90,11 +90,7 @@
         <div class="card-body">
             <div v-for="(pha, index) in phases" class="liga" :key="index">
                 <div class="card-header card-header-recipe">
-                    <form row="">                                                            
-                        <label class="btn btn-warning btn-edit btn-sm config-button" style="color: white" @click.stop.prevent="showModalEditFase();phase=pha" aria-hidden="true">
-                            <i class= "fa fa-edit" style="font-size:18px; cursor:pointer"></i> Editar Liga
-
-                        </label> 
+                    <form row="">                                                                               
                         <label class="btn btn-primary btn-edit btn-sm config-button" @click.stop.prevent="showModalAddProd();phase=pha;" aria-hidden="true">
                             <i class= "fa fa-plus-circle" style="font-size:22px; cursor:pointer"></i> Materiais
                         </label>                         

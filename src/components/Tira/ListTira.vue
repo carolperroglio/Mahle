@@ -62,13 +62,9 @@
                     </label>
                     <label class="ls4">
                         <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
-                    </label>
-                    <label class="lsbtn">
-                        <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="recipeDelete(recipe.recipeId);">
-                        </button>
-                    </label>
+                    </label>                                        
                     <router-link :to="{ name: 'Tira',params: { id: recipe.recipeId }}">
-                        <i class="fa fa-edit icon-right2 icon-style" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">
+                        <i class="fa fa-eye" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">                        
                         </i>
                     </router-link>
                     <!--Teste-->

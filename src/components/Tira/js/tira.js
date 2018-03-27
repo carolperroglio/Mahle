@@ -6,6 +6,7 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import { setTimeout } from 'timers';
+import { debug } from 'util';
 
 es6promisse.polyfill();
 var ipServerRecipe = process.env.RECIPE_API;
@@ -25,36 +26,28 @@ export default {
             urlProducts: ipServerRecipe + '/api/products?&fieldFilter=productName&fieldValue=',
             urlRecipeSearch: ipServerThing + '/api/tags?fieldFilter=tagName&fieldValue=',
             urlRecipes: ipServerRecipe + '/api/recipes/',
-            urlGatewayRecipes: ipServerOP + '/gateway/recipes/',
-            valMin: 50,
-            valMax: 60,
+            urlGatewayRecipes: ipServerOP + '/gateway/recipes/',            
             carregando: false,
             recipeProduct: {},
-            recipeProductDisplay: {},
-            recipeProductName: '',
             recipeCadastrada: false,
-            recipeProducts: [],
             recipe: {},
-            idRecipe: '',
             recipes: [],
-            RP: [],
+            parameters:{},
+            parametros:[],
             phase: {},
-            pName: '',
             phases: [],
             phaseProduct: {},
-            productPhaseName: '',
-            phaseTag: {},
-            phaseParameter: {},
-            phaseTags: [],
+            phaseParameter: {},        
             carregando: false,
             mensagem: '',
             mensagemSuc: '',
-            productName: '',
             name: '',
             tagName: '',
+            vetNomes: [],
             editarActivate: false,
             expand: [],
-            errors: []
+            errors: [],
+            cabecalhoSetas:[false, false, false, false, false, false, false],
         }
     },
     filters: {
@@ -78,7 +71,6 @@ export default {
         'b-modal': bModalDirective
     },     
     methods: {          
-
         /************************/
         /*                      */
         /*                      */
@@ -87,50 +79,50 @@ export default {
         /*                      */
         /************************/
 
-          showModalCadFase() {
+        showModalCadFase() {
             this.$refs.myModalRefCF.show()
-          },
-          hideModalCadFase() {
+        },
+        hideModalCadFase() {
             this.$refs.myModalRefCF.hide()
-          },
-          showModalEditFase() {
+        },
+        showModalEditFase() {
             this.$refs.modalEditFase.show()
-          },
-          hideModalEditFase() {
+        },
+        hideModalEditFase() {
             this.$refs.modalEditFase.hide()
-          },
-          showModalEditRecipe() {
+        },
+        showModalEditRecipe() {
             this.$refs.modalEditRecipe.show()
-          },
-          hideModalEditRecipe() {
+        },
+        hideModalEditRecipe() {
             this.$refs.modalEditRecipe.hide()
-          },
-          showModalAddProd() {
+        },
+        showModalAddProd() {
             this.errors = {};
             this.phaseProduct={};
             this.$refs.modalcadProPhase.show();
             this.mensagemSuc = '';
             this.mensagem = '';
-          },
-          hideModalAddProd() {
+        },
+        hideModalAddProd() {
             this.$refs.modalcadProPhase.hide()
-          },
-          showModalAddParam() {
+        },
+        showModalAddParam() {
             this.phaseParameter={};
             this.tagName='';
             this.mensagemSuc='';
             this.$refs.modalCadParam.show()
-          },
-          hideModalAddParam() {
+        },
+        hideModalAddParam() {
             this.$refs.modalCadParam.hide()
-          },
-          showModalAddProdFin() {
+        },
+        showModalAddProdFin() {
             this.$refs.modalProFinal.show()
-          },
-          hideModalAddProdFin() {
+        },
+        hideModalAddProdFin() {
             this.$refs.modalProFinal.hide()
-          },
-          
+        },
+        
         /*****************/
         /*               */
         /*               */
@@ -153,19 +145,11 @@ export default {
                 console.log(this.urlGatewayRecipes+id);
                 setTimeout(() => {
                     axios.get(this.urlGatewayRecipes + id).then(response => {
-                        this.recipe = response.data;
-                        this.phases = response.data.phases;
-                        console.log(response.data);
-                        if(this.recipe.recipeProduct !== undefined){
-                            this.pName = this.recipe.recipeProduct.product.productName;
-                        }else{
-                            this.pName = 'Não Definido';
-                        }
-                        console.log(id);
-                        for (var i = 0; i < this.phases.length; i++) {
-                            this.expand[i] = false;
-                            console.log(this.expand[i]);
-                        }
+                        this.recipe = response.data;                 
+                        for(var i = 0; i < this.recipe.phases.length; i++)
+                            if(this.recipe.phases[i].phaseId!=46)
+                                this.phase = this.recipe.phases[i];                                                  
+                        this.getParametros();
                         this.recipeCadastrada = true;
                         this.carregando = false;
                         this.editarActivate = true;
@@ -175,221 +159,59 @@ export default {
                     })
                 }, 300);
             }
-        },
-        createRecipe(recipe) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            this.editarActivate = false;
-            recipe.recipeTypeId = 2;
-            axios.post(this.url + "recipes/", recipe).then((response) => {
-                this.recipe = response.data;
-                this.carregando = false;
-                this.recipeCadastrada = true;
-            }, (error) => {
-                this.carregando = false;
-            });
-        },
-        putRecipe(recipe) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            axios.put(this.url + "recipes/" + recipe.recipeId, recipe).then((response) => {
-                console.log(response.data);
-                recipe = response.data;
-                this.ok = true;
-                this.carregando = false;
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-            });
-        },
+        },        
 
-        /*****************/
-        /*               */
-        /*  CRUD Recipe  */
-        /*   Product     */
-        /*               */
-        /*****************/
-        createRecipeProduct(recipeProduct, recipeProductEnd) {
-            this.mensagemSuc = '';
-
-            this.carregando = true;            
-            setTimeout(() => {
-                    recipeProduct.phaseProductType = 'finished';
-                    console.log(recipeProduct);
-                    console.log(this.url + "recipes/product/" + this.recipe.recipeId);
-                    axios.post(this.url + "recipes/product/" + this.recipe.recipeId, recipeProduct).then((response) => {
-                        console.log(response.data);
-                        this.carregando = false;
-                        this.recipeProductDisplay = response.data;
-                        this.mensagemSuc = 'Produto cadastrado com sucesso.';
-                    }, (error) => {
-                        console.log(error);
-                        this.carregando = false;
-                        this.mensagem = error;
-                    });
-            }, 200);
-
-        },
-        deleteRecipeProduct() {
-            this.carregando = true;
-            this.mensagemSuc = '';
-
-            if(confirm("Tem certeza que deseja excluir produto?")){
-                console.log(this.url + "recipes/product/" + this.recipe.recipeId);
-                console.log(this.recipe.recipeProduct.product);            
-                axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,this.recipe.recipeProduct.product).then((response) => {
-                console.log(response.data);
-                this.carregando = false;
-                alert("Deletado!!");
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-            });
-            }
+        getParametros: function(){
+            var j = 0;                                                                        
+            for(var i = 0; i < this.phase.phaseParameters.length; i++){ 
+                if(this.phase.phaseParameters[i].tag.tagGroup!=undefined){
+                    if(this.parameters[this.phase.phaseParameters[i].tag.tagGroup]!=undefined)
+                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
+                    else{
+                        this.vetNomes[j++] = this.phase.phaseParameters[i].tag.tagGroup;
+                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup] = [];
+                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
+                    }     
+                }                                                          
+            }  
+            j=0;                                                              
+            for(i=0; i<this.vetNomes.length; i++){                            
+                this.parametros[i] = {};                                                                                                                                                                       
+                for(j=0; j<this.parameters[this.vetNomes[i]].length; j++){                                                                                       
+                    if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'vn')                                   
+                        this.parametros[i].vn = this.parameters[this.vetNomes[i]][j].setupValue;  
+                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lie')   
+                        this.parametros[i].lie = this.parameters[this.vetNomes[i]][j].setupValue;  
+                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lic')   
+                        this.parametros[i].lic = this.parameters[this.vetNomes[i]][j].setupValue; 
+                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lsc')   
+                        this.parametros[i].lsc = this.parameters[this.vetNomes[i]][j].setupValue;   
+                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lse')
+                        this.parametros[i].lse = this.parameters[this.vetNomes[i]][j].setupValue;                                    
+                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'unidade')
+                        this.parametros[i].unidade = this.parameters[this.vetNomes[i]][j].setupValue;                                                                                                             
+                }                              
+            }                              
+            for(i=0; i<this.vetNomes.length; i++)
+                this.parametros[i].parametro = this.parameters[this.vetNomes[i]][0].tag.tagGroup;
         },
 
 
-        /*****************/
-        /*               */
-        /*               */
-        /*  CRUD Phase   */
-        /*               */
-        /*               */
-        /*****************/
-        createPhase(phase) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            axios.post(this.url + "phases/", phase).then((response) => {
-                phase = response.data;
-                this.relacionaFase(phase);
-                console.log(phase);
-                this.carregando = false;
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-            });
-        },
-        putPhase(phase) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            axios.put(this.url + "phases/" + phase.phaseId, phase).then((response) => {
-                this.mensagem = '';
-                this.mensagemSuc = "Fase " + phase.phaseName + " atualizada com sucesso";
-                console.log(response.data);
-                this.phase = {};
-                this.carregando = false;
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-                this.mensagemSuc = 'Erro ao deletar : ' + error;
-            })
-        },
-        deletePhase(phase, recipe) {
-            this.carregando = true;
-                this.mensagemSuc = '';
-            if(confirm("Tem certeza que deseja excluir a fase?")){
-                axios.delete(this.url + "recipes/phases/" + recipe.recipeId, { data: phase }).then((response) => {
-                    console.log(response.data);
-                    this.phases = this.phases.filter(item => item !== phase);
-                    this.phase = {};
-                    this.carregando = false;
-                }, (error) => {
-                    console.log(error);
-                    this.carregando = false;
-                    this.mensagemSuc = 'Erro ao deletar : ' + error;
-                })
-            }
-        },
-        relacionaFase(phase) {
-            axios.post(this.url + "recipes/phases/" + this.recipe.recipeId, phase).then((response) => {
-                console.log(response.data);
-                phase.products = [];
-                phase.parameters = [];
-                phase.expand = false;
-                this.phases.push(phase);
-                this.phase = {};
-                this.mensagemSuc = 'Fase relacionada com sucesso';
-                this.ok = true;
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-            });
-        },
 
-        /*****************/
-        /*               */
-        /*               */
-        /*  CRUD Phase   */
-        /*   Products    */
-        /*               */
-        /*****************/
-        createPhaseProduct(productPhase, phase) {
-            this.mensagemSuc = '';
-            this.carregando = true;
+        organizar(recipe, campo, pos){                         
+            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=false;
 
-            setTimeout(() => {
-                axios.post(this.url + "phases/products/" + this.phase.phaseId, productPhase).then((response) => {
-                productPhase.phaseProductId = response.data.phaseProductId;
-                this.phase.phaseProducts.push(productPhase);
-                this.phaseProduct = {};
-                this.productPhaseName = '';
-                this.mensagemSuc = 'Fase relacionada com sucesso';
-                this.ok = true;
-                this.carregando = false;
-                
-            }, (error) => {
-                console.log(error);
-                this.phaseProduct = {};
-                this.productPhaseName = '';
-                this.carregando = false;
-            });
-            })
         },
-        deletePhaseProduct(productPhase, phase) {
-             this.carregando = true;
-             this.mensagemSuc = '';
-             
-            if(confirm("Tem certeza que deseja excluir o produto da fase?")){
-                axios.delete(this.url + "phases/products/" + phase.phaseId, { data: productPhase }).then((response) => {
-                    phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);
-                    this.mensagemSuc = 'Fase relacionada com sucesso';
-                    this.ok = true;
-                    this.carregando = false;
-                    console.log(response);
-                }, (error) => {
-                    console.log(error);
-                    this.carregando = false;
-                });
-            }         
-        },
-
-        /*****************/
-        /*               */
-        /*               */
-        /*  CRUD Phase   */
-        /*   Parameters  */
-        /*               */
-        /*****************/
-        createPhaseParameter(phaseParameter, phase) {
-
-            setTimeout(() => {
-                    this.mensagemSuc = '';
-                    this.carregando = true;
-                    axios.post(this.url + "phases/parameters/" + phase.phaseId, phaseParameter).then((response) => {
-                        phaseParameter.phaseParameterId = response.data.phaseParameterId;
-                        phase.parameters.push(phaseParameter);
-                        this.phaseParameter = {};
-                        this.tagName = '';
-                        this.mensagemSuc = 'Parâmetro cadastrado com sucesso!';
-                        this.ok = true;
-                        this.carregando = false;
-                    }, (error) => {
-                        console.log(error);
-                        this.phaseParameter = {};
-                        this.tagName = '';
-                        this.carregando = false;
-                    });
-            }, 200)
+        desorganizar(recipe, campo, pos){                         
+            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=true;
+                else   
+                    this.cabecalhoSetas[i]=false;             
         },
 
         /*****************/

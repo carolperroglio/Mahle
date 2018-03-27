@@ -11,8 +11,7 @@
         <!--                                 -->
         <!--               Modal             -->
          
-                <b-modal ref="myModalRef" hide-footer title="Cadastro de Matérias Primas">
-                    
+                <b-modal ref="myModalRef" hide-footer title="Cadastro de Matérias Primas">                    
                     <form>
                         <div class="form-group">
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
