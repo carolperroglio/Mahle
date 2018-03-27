@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="teste">
         <nav class="fixed-top nav-history">
             <h1 class="title-page-history"><b>Relatório de Rastreamento</b></h1>
             <ul class="nav d-flex align-items-center">
@@ -27,8 +27,9 @@
                         </div>
                         <br>
                         <br>
-                        <div class="col-lg-11">
-                            <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+                        <div class="col-lg-11" >
+                            <link rel="stylesheet" href='https://www.amcharts.com/lib/3/plugins/export/export.css' type='text/css' media='all'/>
+                            <div id="chartdiv" style="width:100%; height:400px"></div>
                         </div>
               </div>
             </div>

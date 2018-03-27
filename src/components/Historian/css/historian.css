@@ -2,6 +2,12 @@ body {
     font-family: "Lucida Sans Unicode";
 }
 
+
+/* .html2canvas-container {
+    width: 100% !important;
+    height: 100% !important;
+} */
+
 .history {
     margin-left: 2%;
     margin-top: 5%;

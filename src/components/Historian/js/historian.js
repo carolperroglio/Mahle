@@ -16,6 +16,7 @@ import JsonExcel from 'vue-json-excel'
 import PrintJs from 'print-js'
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import html2canvas from 'html2canvas';
 import 'vue-tiles/dist/vue-tiles.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
@@ -201,57 +202,79 @@ export default {
         },
 
         toPdf() {
-            //To PDF
-            var columns = [];
-            var title = "title";
-            var dataKey = "dataKey";
-            this.headers.forEach(e => {
-                var obj = new Object;
-                obj[title] = e;
-                obj[dataKey] = e;
-                columns.push(obj);
-            })
-            console.log(columns);
-            this.PDFprovider = this.provider;
-            this.PDFprovider.forEach(p => {
-                p.Data = p.category;
-                delete p.category;
+            // html2canvas(document.body).then(function(canvas) {
+            //     document.body.appendChild(canvas);
+            // });
+            html2canvas(document.querySelector("#teste"), {
+                x: $("#chartdiv").offset().left,
+                y: $("#chartdiv").offset().top
+            }).then(canvas => {
+                console.log(document);
+                var x = $("#chartdiv").offset().left;
+                console.log(x);
+                var y = $("#chartdiv").offset().top;
+                console.log(y);
+                // var x = $("#chartdiv").offset;
+                var xy = $("#teste");
+                // To PDF
+                var columns = [];
+                var title = "title";
+                var dataKey = "dataKey";
+                this.headers.forEach(e => {
+                    var obj = new Object;
+                    obj[title] = e;
+                    obj[dataKey] = e;
+                    columns.push(obj);
+                })
+                console.log(columns);
+                this.PDFprovider = this.provider;
+                this.PDFprovider.forEach(p => {
+                    p.Data = p.category;
+                    delete p.category;
+                });
+                this.things.forEach((t) => {
+                    if (this.thingId == t.thingId) {
+                        this.thingNameCabeçalho = t.thingName;
+                    }
+                })
+                console.log(this.PDFprovider);
+
+                var doc = new jsPDF('p', 'pt');
+                var img = new Image();
+                var imgLogo = new Image();
+                var grafico = new Image();
+                //doc.readAsDataURL
+                img.src = logo;
+                imgLogo.src = logoMahle;
+                grafico.src = canvas.toDataURL();
+
+                console.log("img.src = " + img.src)
+                console.log("imgLogo.src = " + imgLogo.src)
+                    // var pageContent = function(data) {
+                    // HEADER
+                doc.setFontSize(20);
+
+                // Screenshot do Gráfico e insere no PDF
+                doc.addImage(grafico, "PNG", 100, 510, 300, 1000);
+                doc.addImage(img, "JPEG", 15, 15, 50, 30);
+
+                // doc.addImage(grafico, "PNG", 510, 15, 60, 30);
+                // IMAGEM LOGO DA MAHLE N ESTA SENDO ENCODED
+                // doc.addImage(imgLogo, "JPEG", 510, 15, 60, 30);
+
+                doc.text(35, 65, "Rastreamento " + this.thingNameCabeçalho + " Grupo " + this.group)
+                    // doc.autoTable(columns, this.PDFprovider, 15, 65);
+                doc.autoTable(columns, this.PDFprovider, {
+                    // addPageContent: pageContent,
+                    showHeader: 'everyPage',
+                    margin: { top: 80 }
+                });
+                document.body.appendChild(canvas);
+
+                doc.save("RastreamentoThing_" + this.thingNameCabeçalho + "_" + this.group + ".pdf");
+
             });
-            this.things.forEach((t) => {
-                if (this.thingId == t.thingId) {
-                    this.thingNameCabeçalho = t.thingName;
-                }
-            })
-            console.log(this.PDFprovider);
 
-            var doc = new jsPDF('p', 'pt');
-            var img = new Image();
-            var imgLogo = new Image();
-            //doc.readAsDataURL
-            img.src = logo;
-            // var x = Convert.ToBase64String(imgLogo);            
-            imgLogo.src = logoMahle;
-            console.log("img.src = " + img.src)
-            console.log("imgLogo.src = " + imgLogo.src)
-                // var pageContent = function(data) {
-                // HEADER
-            doc.setFontSize(20);
-
-            doc.addImage(img, "JPEG", 15, 15, 50, 30);
-            // IMAGEM LOGO DA MAHLE N ESTA SENDO ENCODED
-            // doc.addImage(imgLogo, "JPEG", 510, 15, 60, 30);
-            // doc.text("Report", data.settings.margin.left + 15, 22);
-            // };
-
-            doc.text(35, 65, "Rastreamento " + this.thingNameCabeçalho + " Grupo " + this.group)
-                // doc.autoTable(columns, this.PDFprovider, 15, 65);
-            doc.autoTable(columns, this.PDFprovider, {
-                // addPageContent: pageContent,
-                showHeader: 'everyPage',
-                margin: { top: 80 }
-            });
-
-            doc.save("RastreamentoThing_" + this.thingNameCabeçalho + "_" + this.group + ".pdf");
         },
 
         ticksToDate(dateTicks) {
@@ -347,6 +370,10 @@ export default {
                     obj2["type"] = "smoothedLine";
                     obj2["title"] = R.name;
                     obj2["valueField"] = R.name;
+                    obj2["bulletColor"] = "#AC1313";
+                    obj2["fillColors"] = "#AC1313";
+                    obj2["legendColor"] = "#AC1313";
+                    obj2["lineColor"] = "#AC1313";
 
                     var i = 0;
 
@@ -455,6 +482,9 @@ export default {
                     "id": "ValueAxis-1",
                     "title": ""
                 }],
+                "export": {
+                    "enabled": true
+                },
                 "allLabels": [],
                 "balloon": {},
                 "titles": [],

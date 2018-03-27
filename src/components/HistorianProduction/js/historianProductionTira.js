@@ -26,6 +26,8 @@ export default {
             orderPhaseProducts: [],
             phaseProducts: [],
             orderHistorian: [],
+            orderHistorianAllProducts: {},
+            cabecalhoSetas: [false, false, false, false],
             productionOrderId: '',
             consumo: false,
             rolo: 1,
@@ -100,7 +102,22 @@ export default {
             this.pReceita = false;
             this.consumo = false;
         },
-
+        organizar(hp, campo, pos) {
+            console.log(hp);
+            hp.sort(function(a, b) { return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0); });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
+        },
+        desorganizar(hp, campo, pos) {
+            console.log(this.cabecalhoSetas[3]);
+            hp.sort(function(a, b) { return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0); });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
+        },
         cadastrarApont(ordem) {
 
             this.mensagem = '';
@@ -131,7 +148,23 @@ export default {
             this.consumo = false;
         },
 
+        changeJson(obj) {
+            if (this.orderHistorianAllProducts.products == undefined) {
+                this.orderHistorianAllProducts.products = []
+            }
+            if (this.orderHistorianAllProducts.id != undefined) {
+                this.orderHistorianAllProducts.products.push(obj)
+            } else {
+                this.orderHistorianAllProducts.id = this.orderHistorian.id;
+                this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
+                this.orderHistorianAllProducts.order = this.orderHistorian.order
+                this.orderHistorianAllProducts.products.push(obj)
+            }
+
+        },
+
         listar() {
+            this.orderHistorianAllProducts = [];
             this.lista = true;
             this.carregando = true;
             axios.get(this.url + '/api/OrderHistorian/' + this.productionOrder.productionOrderId).then((response) => {
@@ -141,19 +174,22 @@ export default {
                 for (var i = 0; i < this.orderHistorian.productsInput.length; i++) {
                     this.orderHistorian.productsInput[i].hour = this.hourConvert(this.orderHistorian.productsInput[i].date);
                     this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
+                    this.changeJson(this.orderHistorian.productsInput[i]);
                 }
                 for (var i = 0; i < this.orderHistorian.productsOutput.length; i++) {
                     this.rolo = this.orderHistorian.productsOutput.length;
                     this.orderHistorian.productsOutput[i].hour = this.hourConvert(this.orderHistorian.productsOutput[i].date);
                     this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
+                    this.changeJson(this.orderHistorian.productsOutput[i]);
                 }
                 this.rolo += 1;
-
+                console.log(this.orderHistorianAllProducts);
                 this.carregando = false;
             }, (r) => {
                 this.mensagem = 'Erro no server ' + r;
                 this.carregando = false;
                 this.orderHistorian = [];
+                this.orderHistorianAllProducts = [];
             })
 
         },

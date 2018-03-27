@@ -1,0 +1,80 @@
+.nav-genealogy {
+    margin-top: 5%;
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
+    width: 100%;
+    height: 10.5%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+label {
+    margin-bottom: 0;
+}
+
+
+/* menu de navegação de produtos - busca de produtos*/
+
+.nav-item-genealogy {
+    margin-left: 1%;
+    padding: 1.2% 0 1% 0;
+}
+
+.genealogy {
+    position: relative;
+    margin-top: 14%;
+    left: 1%;
+    width: 95%;
+    margin-bottom: 5%;
+}
+
+.cabecalho-table-gen {
+    position: relative;
+    top: 20%;
+    left: 2.15%;
+    width: 92.9%;
+    padding: 0 0 0 0.1%;
+    background-color: black;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    margin-top: 1%;
+}
+
+.cursor-class {
+    cursor: pointer;
+}
+
+.ls2-cabecalhotabgenealogy {
+    width: 12.2%;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-bottom: 0.3%;
+}
+
+@media screen and (max-width: 800px) {
+    .nav-genealogy {
+        background-color: rgba(249, 247, 247, 1);
+        position: fixed;
+        top: 16%;
+        z-index: 1;
+        width: 100%;
+        height: 20%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .nav-item-genealogy {
+        margin-left: 1%;
+        padding-top: 7%;
+    }
+    .title-page {
+        font-size: 19px;
+        top: 11%;
+    }
+    .genealogy {
+        margin-top: 15%;
+        padding-bottom: 10%;
+        width: 100%;
+    }
+    .ls2 {
+        width: 20% !important;
+        font-family: sans-serif;
+        font-size: 11px;
+    }
+}
