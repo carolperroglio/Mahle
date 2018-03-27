@@ -33,6 +33,13 @@ label{
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;          
 }
 
+.ls7-cabecalho-tira{
+    width: 12%;
+    font-family: sans-serif;
+    font-size: 12px;
+    margin-bottom: 0.3%;
+}
+
 .nav-recipeP-tira {
     position: fixed;
     margin-top: 5%;
@@ -311,10 +318,9 @@ h6 {
 /*Relatório de Receitas - Configuração da listagem*/
 
 .ls4 {
-    width: 30%;
-    padding-right: 1%;
+    width: 12%;
     font-family: sans-serif;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 
@@ -436,11 +442,7 @@ h6 {
         font-size: 11px;
     }
     /*Relatório de Receitas - Configuração da listagem*/
-    .ls4 {
-        padding-right: 1%;
-        font-size: 11px;
-        margin-bottom: 0;
-    }
+   
     #addTira {
         width: 20%;
     }

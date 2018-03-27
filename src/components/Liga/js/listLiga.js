@@ -2,9 +2,9 @@ import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 es6promisse.polyfill();
 
-function paginacao(response, este) {
+function paginacao(total, este) {
     este.pageAtual = este.startat / 20;
-    este.total = response.data.total;
+    este.total = total;
     let fim = Math.ceil(este.total / 20);
     var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
     if (este.pageAtual > 11) {
@@ -125,8 +125,10 @@ export default {
             this.recipes = [];
             console.log(this.order, this.orderField)
             axios.get(this.urlRecipes + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
-                paginacao(response, this);
-                this.recipes = response.data.values;
+                for(var i=0; i<response.data.values.length; i++)
+                    if(response.data.values[i].recipeTypeId == 2)
+                        this.recipes.push(response.data.values[i]);
+                paginacao(this.recipes.length, this);
                 for(var i=0; i<this.recipes.length; i++)
                     if(this.recipes[i].recipeDescription == undefined)
                         this.recipes[i].recipeDescription = '';

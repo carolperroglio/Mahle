@@ -130,7 +130,6 @@ export default {
             this.mensagem = '';
             this.mensagemSuc = '';
             this.carregando = true;
-
             if(confirm("Tem certeza que deseja excluir o material?")){
                 axios.delete(this.url + produto.productId).then((r) => {
                     this.mensagem = '';
