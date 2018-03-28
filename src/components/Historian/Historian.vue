@@ -16,18 +16,18 @@
 
                   <div class="history">
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-md-8">
                             <h3>Estação: {{thingNameCabeçalho}} Grupo: {{thingGroup}}</h3>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-md-4">
                        <button type="button" class="btn btn-info btn-sm btn-sm"  @click.prevent="showModal()">
-                            Editar Período
+                            Filtro de Busca
                        </button>
                         
                         </div>
                         <br>
                         <br>
-                        <div class="col-lg-11" >
+                        <div class="col-md-11" >
                             <link rel="stylesheet" href='https://www.amcharts.com/lib/3/plugins/export/export.css' type='text/css' media='all'/>
                             <div id="chartdiv" style="width:100%; height:400px"></div>
                         </div>
@@ -81,35 +81,34 @@
             </div>
         </div>
 
-        <b-modal ref="myModalEdit" hide-footer title="Selecionar Período">
+        <b-modal ref="myModalEdit" hide-footer title="Filtrar Busca">
                     <div class="modal-body">
-                       
-                    <label><b>Estação: </b></label>  
-                    <div class="row">
-                      <div class="col-md-9">
-                       <select class="form-control-outline-secondary" v-model="thingId">    
+                    <div class="form-row">
+                    <div class="form-group col-md-9">
+                    <label><b>Estação </b></label>  
+                       <select class="form-control" v-model="thingId">    
                             <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
                             </option>
                         </select>
                       </div>
                     </div>
                     <br>
-                      <label><b>Início: </b></label>  
-                    <div class="row">
-                        <div class="col-md-6">
+                      <label><b>Início </b></label>  
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
                             <date-picker v-model="date" :config="config"></date-picker>
                         </div>
-                        <div class="col-md-3">
+                        <div class="form-group col-md-3">
                             <vue-timepicker format="HH:mm" v-model="timeIni"></vue-timepicker>
                         </div>
                     </div>
                     <br>
-                    <label><b>Fim: </b></label>  
-                    <div class="row">
-                        <div class="col-md-6">
+                    <label><b>Fim </b></label>  
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
                             <date-picker v-model="datef" :config="config2"></date-picker>
                         </div>
-                        <div class="col-md-3">
+                        <div class="form-group col-md-3">
                             <vue-timepicker format="HH:mm" v-model="timeFim"></vue-timepicker>
                         </div>
                     </div>
@@ -119,9 +118,9 @@
                             <button class="btn btn-success" @click.stop.prevent="getHistory()">
                                 <i class="fa fa-check"></i>
                             </button>
-                            <button class="btn btn-danger">
+                            <!-- <button class="btn btn-danger">
                                 <i class="fa fa-remove" @click.stop.prevent="hideModal()"></i>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
           </b-modal>

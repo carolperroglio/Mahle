@@ -11,9 +11,9 @@
         <!--                                 -->
         <!--               Modal             -->
         
-            <b-modal ref="myModalRef" hide-footer title="Cadastro de Matérias Primas">                    
+            <b-modal ref="myModalRef" hide-footer title="Cadastro de Matéria-Prima">                    
                 <form>
-                    <div class="form-group">
+                    <div>
                     <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                     <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                     <p v-if="errors.length">
@@ -21,34 +21,50 @@
                         <li class="alert alert-danger form-control" >{{ error }}</li>
                         </ul>
                     </p>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
                     <label>
-                        <b>Nome : </b>
+                        <b>Nome </b>
                     </label>
                     <input type="text" placeholder="Ex: Estanho" v-model="produto.productName" id="nome" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-6">
                     <label>
-                        <b>Descrição : </b>
+                        <b>Descrição </b>
                     </label>
                     <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Ex: Estanho Metálico">
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
                     <label>
-                        <b>Código : </b>
+                        <b>Código </b>
                     </label>
                     <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Ex: 1010144" id="cod">
+                    </div>
+                    <div class="form-group col-md-6">
                     <label>
-                        <b>Código de barras : </b>
+                        <b>Código de barras </b>
                     </label>
                     <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="Ex: 941120000000">
                     <br>
                     </div>
-                    <div class="btn-group" role="group">
-                            <button  @click.stop.prevent="alerta()?((produto.productId!=undefined) ? put(produto) : cadastrar(produto)):0" class="btn btn-success" :disabled="produto.productName==undefined || produto.productName=='' || produto.productCode=='' || produto.productGTIN==''">
-                                <i  class="fa fa-check-square" aria-hidden="true"></i>
-                            </button>
-                            <button @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="btn btn-danger">
-                                <i class="fa fa-window-close" aria-hidden="true"></i>
-                            </button>
                     </div>
-                    <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}; errors=[]">
+                    <div class="modal-footer">
+                    <!--<div class="">
+                     <button class="btn btn-primary pull-left" @click.stop.prevent="produto={}; errors=[]">
                         Limpar
+                    </button>
+                    </div> -->
+                    <div class="btn-group" role="group">
+                    <button @click.stop.prevent="alerta()?((produto.productId!=undefined) ? put(produto) : cadastrar(produto)):0" class="btn btn-success pull-right" :disabled="produto.productName==undefined || produto.productName=='' || produto.productCode=='' || produto.productGTIN==''">
+                        <i  class="fa fa-check-square" aria-hidden="true"></i>
+                    </button>
+                    <!-- <button @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="btn btn-danger">
+                        <i class="fa fa-window-close" aria-hidden="true"></i>
+                    </button> -->
+                    </div>
+                    </div>
                     </div>
                 </form>
             </b-modal>
@@ -81,7 +97,7 @@
                         <button type="button" class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
                 <li class="nav-item nav-item-products col-sm-3">
-                    <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Materia Prima</button>
+                    <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal"><i class="fa fa-plus" aria-hidden="true" ></i> Cadastro de Matéria-Prima</button>
 
                 </li>
             </ul>  

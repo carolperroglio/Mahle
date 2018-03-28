@@ -20,7 +20,7 @@
     position: relative;
     top: 12%;
     left: 1.8%;
-    width: 99%;
+    width: 98.2%;
     padding: 0 0 0 0.1%;
     background-color: black;
     margin: 0 0 0 0;
@@ -37,9 +37,9 @@
 }
 
 .ls2-cabecalho-ap-tira {
-    /* width: 98.2%; */
     width: 98.2%;
-    font-family: sans-serif;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     margin-bottom: 0.3%;
 }

@@ -5,7 +5,7 @@
         <!-- Formulário de  -->
         <!-- Criação de OP  -->
         <!--                -->
-        <b-modal ref="modalCadOP" hide-footer title="Cadastrar OP">
+        <b-modal ref="modalCadOP" hide-footer title="Cadastrar Ordem de Produção">
                                        
                     <div class="modal-body">
                         <form>
@@ -163,7 +163,7 @@
                         <!-- Button trigger modal -->
                         <div class="col-sm-1.5">
                             <button @click="showModal(); getRecipes(); getOpType()" type="button" class="btn btn-success btn-sm btn-sm">
-                                Cadastrar Ordem
+                                Cadastrar Ordem de Produção
                             </button>
                         </div>
                     </form>

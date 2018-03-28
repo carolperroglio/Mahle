@@ -52,16 +52,16 @@
                         <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="">Ferramenta</label>
-                            <input type="text" class="form-control form-control-sm" v-model="tooltype.name" placeholder="Nome">
+                            <input type="text" class="form-control form-control-sm" v-model="tooltype.name" placeholder="Ex: Ferramenta Guilhotina">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Descrição</label>
-                            <input type="text" class="form-control form-control-sm" v-model="tooltype.description" placeholder="Código">
+                            <input type="text" class="form-control form-control-sm" v-model="tooltype.description" placeholder="Ex:21721098">
                         </div>
                         </div>
                         <div class="form-row">
                            <div class="col-md-6">
-                            <label for="opType" class="col-form-label">Equipamento</label>
+                            <label for="opType" class="col-form-label">Estação</label>
                                     <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="groupSelected">
                                         <option value="" selected disabled>Selecione um grupo</option>
                                         <option v-for="(tgroup,index) in thingsGroup" v-bind:value="tgroup" :key="index">
@@ -86,9 +86,9 @@
                             <button class="btn btn-success">
                                 <i @click.stop.prevent="createToolType(tooltype)" class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
-                            <button class="btn btn-danger">
+                            <!-- <button class="btn btn-danger">
                                 <i class="fa fa-window-close" aria-hidden="true"></i>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
         </b-modal>
