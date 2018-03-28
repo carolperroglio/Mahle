@@ -10,48 +10,48 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-         
-                <b-modal ref="myModalRef" hide-footer title="Cadastro de Matérias Primas">                    
-                    <form>
-                        <div class="form-group">
-                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                        <p v-if="errors.length">
-                            <ul v-for="(error, index) in errors" v-bind:key="index">
-                            <li class="alert alert-danger form-control" >{{ error }}</li>
-                            </ul>
-                        </p>
-                        <label>
-                            <b>Nome : </b>
-                        </label>
-                        <input type="text" placeholder="Ex: Estanho" v-model="produto.productName" id="nome" class="form-control form-control-sm">
-                        <label>
-                            <b>Descrição : </b>
-                        </label>
-                        <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Ex: Estanho Metálico">
-                        <label>
-                            <b>Código : </b>
-                        </label>
-                        <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Ex: 1010144" id="cod">
-                        <label>
-                            <b>Código de barras : </b>
-                        </label>
-                        <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="Ex: 941120000000">
-                        <br>
-                        </div>
-                        <div class="btn-group" role="group">
-                                <button  @click.stop.prevent="alerta()?((produto.productId!=undefined) ? put(produto) : cadastrar(produto)):0" class="btn btn-success" :disabled="produto.productName==undefined || produto.productName=='' || produto.productCode=='' || produto.productGTIN==''">
-                                    <i  class="fa fa-check-square" aria-hidden="true"></i>
-                                </button>
-                                <button @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="btn btn-danger">
-                                    <i class="fa fa-window-close" aria-hidden="true"></i>
-                                </button>
-                        </div>
-                        <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}; errors=[]">
-                            Limpar
-                        </div>
-                    </form>
-                </b-modal>
+        
+            <b-modal ref="myModalRef" hide-footer title="Cadastro de Matérias Primas">                    
+                <form>
+                    <div class="form-group">
+                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                    <p v-if="errors.length">
+                        <ul v-for="(error, index) in errors" v-bind:key="index">
+                        <li class="alert alert-danger form-control" >{{ error }}</li>
+                        </ul>
+                    </p>
+                    <label>
+                        <b>Nome : </b>
+                    </label>
+                    <input type="text" placeholder="Ex: Estanho" v-model="produto.productName" id="nome" class="form-control form-control-sm">
+                    <label>
+                        <b>Descrição : </b>
+                    </label>
+                    <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Ex: Estanho Metálico">
+                    <label>
+                        <b>Código : </b>
+                    </label>
+                    <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Ex: 1010144" id="cod">
+                    <label>
+                        <b>Código de barras : </b>
+                    </label>
+                    <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                    <br>
+                    </div>
+                    <div class="btn-group" role="group">
+                            <button  @click.stop.prevent="alerta()?((produto.productId!=undefined) ? put(produto) : cadastrar(produto)):0" class="btn btn-success" :disabled="produto.productName==undefined || produto.productName=='' || produto.productCode=='' || produto.productGTIN==''">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i>
+                            </button>
+                            <button @click.stop.prevent="excluir(produto)" :disabled="produto.productId == undefined" class="btn btn-danger">
+                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                            </button>
+                    </div>
+                    <div class="btn btn-primary pull-right" @click.stop.prevent="produto={}; errors=[]">
+                        Limpar
+                    </div>
+                </form>
+            </b-modal>
 
         <!--                       -->
         <!--                       -->
@@ -78,10 +78,10 @@
                         <input class="form-control btn-sm" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                 </li>
                 <li class="nav-item  nav-item-products col-sm-1.5">
-                        <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                        <button type="button" class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
                 <li class="nav-item nav-item-products col-sm-3">
-                    <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal">Nova Materia Prima</button>
+                    <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Materia Prima</button>
 
                 </li>
             </ul>  
@@ -89,28 +89,28 @@
                 <div class="cabecalho-table">
                     <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls2-cabecalhotab">
                         <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
                     <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(produtos, 'productDescription',1):organizar(produtos, 'productDescription',1);" class="ls2-cabecalhotab">
                         <b><font class="cursor-class" color="#ffffff">
                             Descrição &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
                     <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(produtos, 'productCode',2):organizar(produtos, 'productCode',2);" class="ls2-cabecalhotab">
                         <b><font class="cursor-class" color="#ffffff">
                             Código &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                         </font></b></label>
                     <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls2-cabecalhotab">
                         <b><font class="cursor-class" color="#ffffff">
                             Código de Barras &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
                 </div> 
@@ -147,13 +147,13 @@
                     <nav aria-label="">
                         <ul class="pagination justify-content-center">
                             <li v-show="startat>0" class="page-item">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Previous</a>
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=quantityPage, quantityPage)">Previous</a>
                             </li>
                             <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*quantityPage, quantityPage)">{{num+1}}</a>
                             </li>
                             <li class="page-item" v-show="pages.length>1 && startat+20<total">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Next</a>
+                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=quantityPage, quantityPage)">Next</a>
                             </li>
                         </ul>
                     </nav>
