@@ -72,13 +72,13 @@
                         <nav aria-label="">
                             <ul class="pagination justify-content-center">
                                 <li v-show="startat>0" class="page-item">
-                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Previous</a>
+                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=quantityPage, quantityPage)">Previous</a>
                                 </li>
                                 <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
-                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
+                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*quantityPage, quantityPage)">{{num+1}}</a>
                                 </li>
-                                <li class="page-item" v-show="pages.length>1 && startat+20<total">
-                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Next</a>
+                                <li class="page-item" v-show="pages.length>1 && startat+quantityPage<total">
+                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=quantityPage, quantityPage)">Next</a>
                                 </li>
                             </ul>
                         </nav>

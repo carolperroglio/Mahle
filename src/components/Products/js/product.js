@@ -11,9 +11,9 @@ import { setTimeout } from 'timers';
 es6promisse.polyfill();
 
 function paginacao(response, este) {
-    este.pageAtual = este.startat / 20;
+    este.pageAtual = este.startat / este.quantityPage;
     este.total = response.data.total;
-    let fim = Math.ceil(este.total / 20);
+    let fim = Math.ceil(este.total / este.quantityPage);
     if (este.pageAtual > 11) {
         for (var i = this.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
             este.pages[i] = i;
@@ -29,7 +29,7 @@ export default {
         return {
             id: "",
             carregando: false,
-            quantityPage: 20,
+            quantityPage: 100,
             startat: 0,
             total: 0,
             pages: [],
