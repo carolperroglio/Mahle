@@ -26,6 +26,9 @@ export default {
             orderPhaseProducts: [],
             phaseProducts: [],
             orderHistorian: [],
+            orderHistorianAllProducts: [],
+            allProducts: {},
+            cabecalhoSetas: [false, false, false, false, false],
             productionOrderId: '',
             consumo: false,
             rolo: 1,
@@ -124,7 +127,20 @@ export default {
             this.pReceita = false;
             this.consumo = false;
         },
-
+        changeJson(obj) {
+            if (this.orderHistorianAllProducts.products == undefined) {
+                this.orderHistorianAllProducts.products = []
+            }
+            if (this.orderHistorianAllProducts.id != undefined) {
+                this.orderHistorianAllProducts.products.push(obj)
+            } else {
+                this.orderHistorianAllProducts.id = this.orderHistorian.id;
+                this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
+                this.orderHistorianAllProducts.order = this.orderHistorian.order
+                this.orderHistorianAllProducts.products.push(obj)
+            }
+            this.allProducts = this.orderHistorianAllProducts.products
+        },
         listar() {
             this.lista = true;
             this.carregando = true;
@@ -135,11 +151,13 @@ export default {
                 for (var i = 0; i < this.orderHistorian.productsInput.length; i++) {
                     this.orderHistorian.productsInput[i].hour = this.hourConvert(this.orderHistorian.productsInput[i].date);
                     this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
+                    this.changeJson(this.orderHistorian.productsInput[i]);
                 }
                 for (var i = 0; i < this.orderHistorian.productsOutput.length; i++) {
                     this.rolo = parseInt(this.orderHistorian.productsOutput[i].batch) + 1;
                     this.orderHistorian.productsOutput[i].hour = this.hourConvert(this.orderHistorian.productsOutput[i].date);
                     this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
+                    this.changeJson(this.orderHistorian.productsOutput[i]);
                 }
                 this.rolo += 1;
 

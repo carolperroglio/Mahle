@@ -27,7 +27,7 @@ export default {
             phaseProducts: [],
             orderHistorian: [],
             orderHistorianAllProducts: {},
-            cabecalhoSetas: [false, false, false, false],
+            cabecalhoSetas: [false, false, false, false, false],
             productionOrderId: '',
             consumo: false,
             rolo: 1,
@@ -46,6 +46,7 @@ export default {
             pFase: false,
             lista: false,
             url: process.env.PROD_HIST_API,
+            teste: {}
         }
     },
     computed: {
@@ -103,15 +104,17 @@ export default {
             this.consumo = false;
         },
         organizar(hp, campo, pos) {
-            console.log(hp);
-            hp.sort(function(a, b) { return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0); });
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);
+            });
             for (var i = 0; i < this.cabecalhoSetas.length; i++)
                 if (i == pos)
                     this.cabecalhoSetas[i] = false;
         },
         desorganizar(hp, campo, pos) {
-            console.log(this.cabecalhoSetas[3]);
-            hp.sort(function(a, b) { return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0); });
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);
+            });
             for (var i = 0; i < this.cabecalhoSetas.length; i++)
                 if (i == pos)
                     this.cabecalhoSetas[i] = true;
@@ -148,7 +151,9 @@ export default {
             this.consumo = false;
         },
 
-        changeJson(obj) {
+        changeJson(obj, type) {
+
+            var array = this.orderHistorianAllProducts.products;
             if (this.orderHistorianAllProducts.products == undefined) {
                 this.orderHistorianAllProducts.products = []
             }
@@ -160,6 +165,9 @@ export default {
                 this.orderHistorianAllProducts.order = this.orderHistorian.order
                 this.orderHistorianAllProducts.products.push(obj)
             }
+
+            this.teste = this.orderHistorianAllProducts.products
+
 
         },
 
@@ -174,13 +182,13 @@ export default {
                 for (var i = 0; i < this.orderHistorian.productsInput.length; i++) {
                     this.orderHistorian.productsInput[i].hour = this.hourConvert(this.orderHistorian.productsInput[i].date);
                     this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
-                    this.changeJson(this.orderHistorian.productsInput[i]);
+                    this.changeJson(this.orderHistorian.productsInput[i], "in");
                 }
                 for (var i = 0; i < this.orderHistorian.productsOutput.length; i++) {
                     this.rolo = this.orderHistorian.productsOutput.length;
                     this.orderHistorian.productsOutput[i].hour = this.hourConvert(this.orderHistorian.productsOutput[i].date);
                     this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
-                    this.changeJson(this.orderHistorian.productsOutput[i]);
+                    this.changeJson(this.orderHistorian.productsOutput[i], "out");
                 }
                 this.rolo += 1;
                 console.log(this.orderHistorianAllProducts);

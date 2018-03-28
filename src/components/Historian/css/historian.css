@@ -8,6 +8,24 @@ body {
     height: 100% !important;
 } */
 
+.cabecalho-table-rastreamento {
+    position: relative;
+    top: 12%;
+    left: 1.8%;
+    width: 70%;
+    padding: 0 0 0 0.1%;
+    background-color: black;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0.2%;
+}
+
+.ls2-cabecalho-rastreamento {
+    width: 18%;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-bottom: 0.3%;
+}
+
 .history {
     margin-left: 2%;
     margin-top: 5%;

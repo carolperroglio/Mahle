@@ -17,7 +17,7 @@
                   <div class="history">
                     <div class="row">
                         <div class="col-sm-8">
-                            <h3>Estação nº: {{thingNameCabeçalho}} Grupo: {{thingGroup}}</h3>
+                            <h3>Estação: {{thingNameCabeçalho}} Grupo: {{thingGroup}}</h3>
                         </div>
                         <div class="col-sm-4">
                        <button type="button" class="btn btn-info btn-sm btn-sm"  @click.prevent="showModal()">
@@ -59,7 +59,7 @@
             </button>
             </div>
             <div class="col-sm-2">
-             <download-excel
+            <download-excel
                 class   = "btn btn-success btn-sm btn-sm pull-left"
                 :data   = provider
                 :fields = jsonfields
@@ -71,8 +71,8 @@
             <br>
             <div class="col-md-12">
                 <table class="table1">
-                    <tr class="tr1">
-                        <th class="th1" v-for="(h, index) in headers" :key="index">{{ h }}</th>
+                    <tr class="tr1 cabecalho-table-rastreamento ">
+                        <th class="th1 text-white ls2-cabecalho-rastreamento" v-for="(h, index) in headers" :key="index">{{ h }}</th>
                     </tr>
                     <tr class="tr1" v-for="(obj,index1) in provider" v-bind:key="index1">
                         <td class="td1" v-for="(value, key, index2) in obj" v-bind:key="index2">{{ value }}</td>
