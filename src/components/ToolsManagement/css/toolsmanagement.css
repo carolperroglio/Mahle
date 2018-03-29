@@ -5,7 +5,7 @@
 }
 
 .card-body-tools-manag {
-    font-family: sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     margin-top: 0;
     margin-bottom: 0;
@@ -22,6 +22,7 @@
 
 .ls20 {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .nav-tool-management {
@@ -65,7 +66,6 @@
 .cabecalho-table-tm {
     position: relative;
     top: 12%;
-    left: 1.8%;
     width: 100%;
     padding: 0 0 0 0.1%;
     background-color: black;
@@ -88,7 +88,10 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     margin-bottom: 0.3%;
-    margin-left: 0.5%;
+}
+
+.cinza {
+    background-color: #DCDCDC;
 }
 
 .nav-tm {
@@ -118,6 +121,7 @@
         width: 100%;
     }
     .ls20 {
-        text-align: center
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
     }
 }

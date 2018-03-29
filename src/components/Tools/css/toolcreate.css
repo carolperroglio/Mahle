@@ -11,14 +11,15 @@
 }
 
 .cabecalho-table-tm {
-    position: relative;
-    top: 12%;
+    position: fixed;
+    top: 26%;
     /* left: 1.8%; */
     width: 100%;
     padding: 0 0 0 0.1%;
     background-color: black;
     margin: 0 0 0 0;
     padding: 0 0 0 0.2%;
+    z-index: 5;
 }
 
 .fundo-branco-tm {
@@ -92,6 +93,10 @@ input {
     width: 50%;
 }
 
+.cursor-class {
+    cursor: pointer;
+}
+
 
 /* menu de navegação de ferramentas - busca de ferramentas*/
 
@@ -127,6 +132,10 @@ input {
     text-align: center;
 }
 
+.margin-table {
+    margin-top: 15%;
+}
+
 @media only screen and (max-width: 801px) {
     .ferramentas {
         margin-top: 25%;
@@ -154,7 +163,7 @@ input {
         top: 50%;
     }
     .ls30 {
-        font-family: sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         font-size: 11px;
         width: 11%;
         height: 50%;

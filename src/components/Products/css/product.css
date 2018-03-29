@@ -1,59 +1,78 @@
-/* menu de navegação de produtos */   
-.nav-produtos{
-    margin-top: 5%;    
-    background: linear-gradient(rgb(255,255,255), rgb(220,220,220)); 
+/* menu de navegação de produtos */
+
+.nav-produtos {
+    margin-top: 5%;
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
     width: 100%;
     height: 10.5%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-label{
+label {
     margin-bottom: 0;
 }
 
-/* menu de navegação de produtos - busca de produtos*/   
-.nav-item-products { 
+
+/* menu de navegação de produtos - busca de produtos*/
+
+.nav-item-products {
     margin-left: 1%;
     padding: 1.2% 0 1% 0;
 }
-    
-#load {
-    margin-left: 50%;
-}
-.cabecalho-table{
-    position: relative;
-    top: 20%;
-    left: 2.15%;
-    width: 92.9%;
-    padding: 0 0 0 0.1%;       
+
+.cabecalho-table {
+    position: fixed;
+    top: 22%;
+    width: 100%;
+    padding: 0 0 0 0.1%;
     background-color: black;
     margin: 0 0 0 0;
-    padding: 0 0 0 0;
+    padding: 0 0 0 0.2%;
+    z-index: 4;
 }
 
-.fundo-branco{
-    background-color: #ffffff;    
+.fundo-branco {
+    background-color: #ffffff;
     margin: 0 0 0 0;
-    width: 100%;     
+    width: 100%;
     height: 30%;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
+    z-index: 5;
 }
-/* menu de navegação de produtos - título busca de produtos*/ 
-.title-page-gp{    
+
+.ls2-cabecalhotab {
+    width: 100%;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    margin-bottom: 0.3%;
+    /* margin-left: 1%; */
+}
+
+#load {
+    margin-left: 50%;
+}
+
+
+/* menu de navegação de produtos - título busca de produtos*/
+
+.title-page-gp {
     color: rgb(68, 68, 70);
     font-family: sans-serif;
     font-size: 22px;
-    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;          
+    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
 }
 
+
 /*Listagem de produtos*/
-.icon-right{
+
+.icon-right {
     position: relative;
     float: right;
-   /* align-content: right;
+    /* align-content: right;
     padding-bottom: 0.1%;*/
-    }
+}
 
 input {
     position: relative;
@@ -61,10 +80,10 @@ input {
 
 .produtos {
     position: relative;
-    margin-top: 14%;                  
+    margin-top: 11.5%;
     left: 1%;
     width: 95%;
-    margin-bottom: 5%; 
+    margin-bottom: 5%;
 }
 
 .msg {
@@ -72,15 +91,16 @@ input {
     width: 50%;
 }
 
-.card-body5{
+.card-body5 {
     font-family: sans-serif;
 }
-    
-.card-body{
+
+.card-body {
     box-sizing: content-box;
     padding: 0 0 0 0;
 }
-.cinza{
+
+.cinza {
     background-color: #DCDCDC;
 }
 
@@ -92,23 +112,22 @@ input {
     background-color: #ffffff;
     bottom: 4%;
 }
-.ls2-cabecalhotab{
-    width: 22.2%;
-    font-family: sans-serif;
-    font-size: 14px;
-    margin-bottom: 0.3%;
-}
-.ls2{
-    width: 21%;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    margin-bottom: 0;    
+
+.ls2 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
-.cursor-class{
-    cursor : pointer;
-}    
-/* Menu Superior para busca de Produtos 800X600 */ 
+.cursor-class {
+    cursor: pointer;
+}
+
+.margin-table {
+    margin-top: 15%;
+}
+
+
+/* Menu Superior para busca de Produtos 800X600 */
 
 @media screen and (max-width: 800px) {
     .nav-produtos {
@@ -118,30 +137,32 @@ input {
         z-index: 1;
         width: 100%;
         height: 20%;
-        border-bottom: 1px solid rgba(0,0,0,0.2);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
-    .nav-item-products{
+    .nav-item-products {
         margin-left: 1%;
         padding-top: 7%;
     }
-    .title-page{
+    .title-page {
         font-size: 19px;
         top: 11%;
-        
     }
-    .card-body5{ 
+    .card-body5 {
         font-size: 11px;
         padding-top: 0.1%;
         padding-bottom: 0.1%;
-    } 
-    .produtos{ 
-        margin-top: 15%;
+    }
+    .produtos {
+        margin-top: 11.5%;
         padding-bottom: 10%;
-        width: 100%; 
+        width: 100%;
     }
     .ls2 {
         width: 20% !important;
-        font-family: sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         font-size: 11px;
+    }
+    .margin-table {
+        margin-top: 18%;
     }
 }

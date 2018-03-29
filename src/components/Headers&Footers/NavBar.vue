@@ -151,7 +151,7 @@
                             <router-link to="/prodOrder" class="list-group-item" data-parent="#menu3"> 
                                 Cadastro de Ordem de Produção
                             </router-link>
-                            <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
+                            <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 
                             </router-link>
                             <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
@@ -159,7 +159,7 @@
                             </router-link>
                             <router-link to="/OPManagement" class="list-group-item" data-parent="#menu3"> 
                                 Gerenciamento de Ordem de Produção
-                            </router-link>
+                            </router-link> -->
                         </b-collapse>
                     </b-collapse>      
                     </div>   

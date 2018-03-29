@@ -100,38 +100,43 @@
                     <button type="button" class="btn btn-success btn-sm btn-sm" @click.stop.prevent="showModal"><i class="fa fa-plus" aria-hidden="true" ></i> Cadastro de Matéria-Prima</button>
 
                 </li>
-            </ul>  
+            </ul>
+            </div> 
+            
+            <div class="produtos col">
+            <div id="load" v-show="carregando">
+                <stretch background="#4d4d4d"></stretch>                
+            </div> 
             <div class="fundo-branco">                             
                 <div class="cabecalho-table">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls2-cabecalhotab">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls2-cabecalhotab col-md-2">
                         <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(produtos, 'productDescription',1):organizar(produtos, 'productDescription',1);" class="ls2-cabecalhotab">
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(produtos, 'productDescription',1):organizar(produtos, 'productDescription',1);" class="ls2-cabecalhotab col-md-2">
                         <b><font class="cursor-class" color="#ffffff">
                             Descrição &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
-                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(produtos, 'productCode',2):organizar(produtos, 'productCode',2);" class="ls2-cabecalhotab">
+                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(produtos, 'productCode',2):organizar(produtos, 'productCode',2);" class="ls2-cabecalhotab col-md-2">
                         <b><font class="cursor-class" color="#ffffff">
                             Código &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                         </font></b></label>
-                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls2-cabecalhotab">
+                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls2-cabecalhotab col-md-2">
                         <b><font class="cursor-class" color="#ffffff">
                             Código de Barras &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
                 </div> 
             </div>               
-        </div>
 
         <!--                       -->
         <!--                       -->
@@ -141,24 +146,25 @@
         <!--                       -->
         <!--                       -->
 
-        <div class="" style="">
             
-            <div class="produtos col">
-                <div id="load" v-show="carregando">
-                    <stretch background="#4d4d4d"></stretch>                
-                </div> 
                 
+                <div class="margin-table">
                 <div v-for="(p, index) in produtos" v-bind:class="{cinza: index%2==0}" v-bind:key="index">                                    
-                    <label class="ls ls2">
+                    <label class="ls ls2 col-md-2">
                         {{p.productName}}</label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls2">
+                    <label class="ls ls2 col-md-2">
                         {{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls2">
+                    <label class="ls ls2 col-md-2">
                         {{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls2">
+                    <label class="ls ls2 col-md-2">
                         {{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2(p)" aria-hidden="true"></i>
+                    <label class="ls ls2 col-md-2">
+                        <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2(p)" aria-hidden="true"></i>
+                    </label>
+                </div>       
+                </div>       
                 </div>
+
                 <div class="paginacao" v-show="total>0">
                     <nav aria-label="">
                         <ul class="pagination justify-content-center">
@@ -175,8 +181,6 @@
                     </nav>
                 </div>
             </div>
-            <br>
-        </div>
     </div>
 </template>
 <script src="./js/product.js">

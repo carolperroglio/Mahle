@@ -178,46 +178,64 @@
             <div class="op col-md-12">
                 <div id="load" v-show="carregando">
                     <stretch background="#4d4d4d"></stretch>
-                    </div> 
-                <div v-for="(op, index) in opArray.values" v-bind:key="index">
-                    <div class="card card-margin">
-                        <div class="card-header">
-                            <b></b>
-                        </div>
-                        <div class="card-body-op">
-                            <label class="ls ls1">
-                                <b>
-                                    <font color="#9BA6A5">Ordem: </font>
-                                </b>{{op.productionOrderNumber}}
+                </div>
+                <div class="fundo-branco-po">
+                    <div class="cabecalho-table-po">
+                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opArray.values, 'productionOrderNumber',0):organizar(opArray.values, 'productionOrderNumber',0);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">Ordem &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArray.values, 'typeDescription',1):organizar(opArray.values, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Descrição &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArray.values, 'quantity',2):organizar(opArray.values, 'quantity',2);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Quantidade&nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label> 
+                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArray.values, 'recipeName',3):organizar(opArray.values, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Nome de Tira &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArray.values, 'recipeCode',4):organizar(opArray.values, 'recipeCode',4);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Código da Tira &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label> 
+                    </div>
+                </div>   
+                <div v-for="(op, index) in opArray.values" v-bind:key="index" :class="{cinza: index%2==0}">
+                            <label class="ls ls1 col-md-2">
+                                {{op.productionOrderNumber}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1">
-                                <b>
-                                    <font color="#9BA6A5">Descrição: </font>
-                                </b>{{op.typeDescription}}
+                            <label class="ls ls1 col-md-2">
+                                {{op.typeDescription}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1">
-                                <b>
-                                    <font color="#9BA6A5">Quantidade: </font>
-                                </b>{{op.quantity}}
+                            <label class="ls ls1 col-md-2">
+                                {{op.quantity}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1">
-                                <b>
-                                    <font color="#9BA6A5">Nome Tira: </font>
-                                </b>{{op.recipe.recipeName}}
+                            <label class="ls ls1 col-md-2">
+                                {{op.recipe.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1">
-                                <b>
-                                    <font color="#9BA6A5">Cód. da Tira: </font>
-                                </b>{{op.recipe.recipeCode}}
+                            <label class="ls ls1 col-md-2">
+                                {{op.recipe.recipeCode}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1" v-if="op.hasProd == true">
-                                <b>
-                                    <font color="#9BA6A5">Nome Produto: </font>
-                                </b>{{op.recipe.recipeProduct.product.productName}}
+                            <label class="ls ls1 col-md-2" v-if="op.hasProd == true">
+                                {{op.recipe.recipeProduct.product.productName}}
                             </label>
-                            <br>
-
-                        </div>
                     </div>
                 </div>
                 <div class="paginacao-op fixed-bottom" v-show="total>0">

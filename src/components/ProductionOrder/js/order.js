@@ -68,6 +68,7 @@ export default {
             fieldValue: '',
             id: '',
             recipeName: '',
+            cabecalhoSetas: [false, false, false, false, false],
         }
     },
     components: {
@@ -85,6 +86,24 @@ export default {
         },
         hideModal() {
             this.$refs.modalCadOP.hide()
+        },
+        organizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
+        },
+        desorganizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
         },
         /*****************/
         /*               */
