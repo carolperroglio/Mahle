@@ -10,31 +10,46 @@
                 </li>
             </ul>
         </nav>
-        <div class="row conteudo-tt">
-              <div class="container-fluid">
-                    <div class="tool-type col-md-12">
-                        <div class="" v-for="(ttype,index) in toolsType" :key="index">
-                            <div class="card-header card-header7">
-                                <b></b>
-                            </div>
-                            <div class="card-body card-tt">
-                                <label class="ls ls21">
-                                    <b>Nome: </b> {{ttype.name}}
-                                </label>
-                                <label class="ls ls21">
-                                    <b>Descrição: </b>{{ttype.description}}
-                                </label>
-                                <label class="ls ls21">
-                                    <b>Status: </b>{{ttype.description}}
-                                </label>
-                                <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="showModalEdit();catchObjToUpdate(ttype)">
-                                Editar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row conteudo-tt col">
+            <div class="fundo-branco-tt">
+                <div class="cabecalho-table-tt">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(toolsType, 'name',0):organizar(toolsType, 'name',0);" class="ls2-cabecalho-tt col-md-2">
+                        <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(toolsType, 'description',1):organizar(toolsType, 'description',1);" class="ls2-cabecalho-tt col-md-4">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Descrição &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(toolsType, 'serialNumber',2):organizar(toolsType, 'status',2);" class="ls2-cabecalho-tt col-md-2">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Status&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label> 
+            </div>
+            <div v-for="(ttype,index) in toolsType" :key="index" :class="{cinza: index%2==0}">
+                <label class="ls ls21 col-md-2">
+                    {{ttype.name}}
+                </label>
+                <label class="ls ls21 col-md-4">
+                    {{ttype.description}}
+                </label>
+                <label class="ls ls21 col-md-2">
+                    {{ttype.status}}
+                </label>
+                <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="showModalEdit();catchObjToUpdate(ttype)">
+                Editar
+                </button>
             </div>
             </div>
+        </div>
         <!--                       -->
         <!--                       -->
         <!--                       -->

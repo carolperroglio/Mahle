@@ -47,7 +47,8 @@ export default {
             order: '',
             fieldFilter: '',
             fieldValue: '',
-            id: ''
+            id: '',
+            cabecalhoSetas: [false, false, false, false, false],
         }
     },
     components: {
@@ -58,18 +59,36 @@ export default {
     },
     methods: {
 
-        showModal () {
+        showModal() {
             this.$refs.myModalRef.show()
-          },
-        hideModal () {
+        },
+        hideModal() {
             this.$refs.myModalRef.hide()
-          },
-        showModalEdit () {
+        },
+        showModalEdit() {
             this.$refs.myModalEdit.show()
-          },
-        hideModalEdit () {
+        },
+        hideModalEdit() {
             this.$refs.myModalEdit.hide()
-          },
+        },
+        organizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
+        },
+        desorganizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
+        },
         //
         // GET THINGSGROUP
         //
