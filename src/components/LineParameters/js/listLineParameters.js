@@ -3,9 +3,9 @@ import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise
 es6promisse.polyfill();
 
 function paginacao(total, este) {
-    este.pageAtual = este.startat / este.quantityPage;
+    este.pageAtual = este.startat / 20;
     este.total = total;
-    let fim = Math.ceil(este.total / este.quantityPage);
+    let fim = Math.ceil(este.total / 20);
     var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
     if (este.pageAtual > 11) {
         for (var i = este.pageAtual - 5; i < num; i++)
@@ -19,7 +19,7 @@ function paginacao(total, este) {
 var ipServer = process.env.RECIPE_API;
 
 export default {
-    name: "ListTira",
+    name: "ListLineParameters",
     data() {
         return {
             urlRecipes: ipServer + '/api/recipes',
@@ -28,7 +28,7 @@ export default {
             phases: [],
             cabecalhoSetas:[false, false, false],
             carregando: false,
-            quantityPage: 100,
+            quantityPage: 20,
             startat: 0,
             total: 0,
             pages: [],
@@ -123,13 +123,12 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.recipes = [];
-            axios.get(this.urlRecipes + "?&orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {                
-                this.recipes = [];
-                console.log('Oi teste ' + this.fieldValue);
+            console.log(this.order, this.orderField)
+            axios.get(this.urlRecipes + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                 for(var i=0; i<response.data.values.length; i++)
-                    if(response.data.values[i].recipeTypeId == 1)
-                        this.recipes.push(response.data.values[i]); 
-                paginacao(this.recipes.length, this);                                       
+                    if(response.data.values[i].recipeTypeId == 2)
+                        this.recipes.push(response.data.values[i]);
+                paginacao(this.recipes.length, this);
                 for(var i=0; i<this.recipes.length; i++)
                     if(this.recipes[i].recipeDescription == undefined)
                         this.recipes[i].recipeDescription = '';
@@ -138,7 +137,6 @@ export default {
                 this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
             })
-            console.log(this.recipes);
         },
     },
     beforeMount() {

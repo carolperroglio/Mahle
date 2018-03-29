@@ -355,10 +355,10 @@
         </b-modal>-->
     </div>
 </template>
-<script src="./js/liga.js">
+<script src="./js/lineParameters.js">
 </script>
 <style>
-@import url("./css/liga.css");
+@import url("./css/lineparameters.css");
 </style> 
 
 
