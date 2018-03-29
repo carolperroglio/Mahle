@@ -43,20 +43,22 @@
                                 <b><font color="#9BA6A5">Produto da Receita: </font></b>{{productionOrderRecipe.recipeProduct.product.productName}}</label>&nbsp;&nbsp;&nbsp; -->
                            </b>
                             
-                            <button type="button" class="btn btn-secondary pull-right" @click.stop.prevent="listar()">
+                            <!-- <button type="button" class="btn btn-secondary pull-right" @click.stop.prevent="listar()">
                             Listar materiais
-                            </button>
+                            </button> -->
                         </div>
                             <div v-show="lista">
                                     <div class="card">
                                         <div class="card-header card-header-hp">
                                             <b>Materiais Consumidos e Apontados</b>
-                                            <button type="button" class="btn btn-success pull-right" style="margin-right:1%" @click.stop.prevent=" showModal(); ordem.type='input'">
-                                            Registrar matéria prima
+                                            <div style="margin-right:1%" class="pull-right">
+                                                <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='input'">
+                                            <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                             </button>
-                                            <button type="button" class="btn btn-success pull-right"  @click.stop.prevent=" showModal(); ordem.type='output'">
-                                            Registrar rolo de tira
-                                            </button>
+                                            <!-- <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='output'">
+                                            <i aria-hidden="true" class="fa fa-plus"></i> Registrar rolo de tira
+                                            </button> -->
+                                            </div>
                                         </div>
                                         <div class="card-body card-body-hp">
                                         <div id="load" v-show="carregando">
@@ -91,7 +93,7 @@
                                                     <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                                                 </font></b>
                                             </label> 
-                                            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(allProducts, 'hour',4):organizar(allProducts, 'hour',4);" class="ls2-cabecalho-ap-liga col-md-2">
+                                            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(allProducts, 'hour',4):organizar(allProducts, 'hour',4);" class="ls2-cabecalho-ap-liga col-md-2" style="margin-left: 2%;">
                                                 <b><font class="cursor-class" color="#ffffff">
                                                     Hora &nbsp;&nbsp;&nbsp;
                                                     <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
@@ -149,53 +151,54 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-        <b-modal ref="myModalRef" hide-footer title="Registrar Material">
+        <b-modal ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
                         <form>
-                            <div class="form-group">
+                            <div>
                                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                                <div v-show="pReceita">
+                                <div class="form-row">
+                                <div class="form-group col-md-6" v-show="pReceita">
                                 <label>
-                                    <b>Material: </b>
+                                    <b>Material </b>
                                 </label>
                                 <input type="text" id="prodReceita" placeholder="nome" required v-model="ordem.productName" class="form-control form-control-sm" disabled>
                                 </div>
-                                <div v-show="pFase">
-                                <!-- <label>
-                                    <b>Fase: </b>
-                                </label>
-                                    <select class="form-control form-control-sm" v-model="phaseIndex">
-                                     <option v-for="(p,index) in orderPhaseProducts" :value="index" v-bind:key="index">{{ p.phaseName }}</option>
-                                    </select> -->
-                                <div v-if="consumo = true">
+                                <div class="form-group col-md-6" v-show="pFase" v-if="consumo = true">
                                 <label>
-                                    <b>Materiais: </b>
+                                    <b>Materiais </b>
                                 </label>
-                                    <select class="form-control form-control-sm" v-model="ordem.productId">
+                                <select class="form-control form-control-sm" v-model="ordem.productId">
                                     <option v-for="(p,index) in orderPhaseProducts.phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
-                                    </select>
+                                </select>
                                 </div>
-                                </div>
-                                <div v-show="pFase">
+                                <div class="form-group col-md-3" v-show="pFase">
                                 <label>
-                                    <b>Quantidade: </b>
+                                    <b>Quantidade </b>
                                 </label>
-                                <input type="text" required v-model="ordem.quantity" placeholder="quantidade" class="form-control form-control-sm">
+                                <input type="number" required v-model="ordem.quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                                </div>
+                                <div class="form-group col-md-5">
                                 <label>
-                                    <b>Lote: </b>
+                                    <b>Lote </b>
                                 </label>
                                 <input type="text" required v-model="lote" class="form-control form-control-sm">
                                 </div>
-                                <div v-show="pReceita">
-                                    <label>
-                                    <b>Rolo: </b>
+                                <!-- </div> -->
+                                <div class="form-group col-md-4" v-show="pReceita">
+                                <label>
+                                    <b>Rolo </b>
                                 </label>
                                 <input type="text" required v-model="rolo" :disabled="true" class="form-control form-control-sm">
                                 </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="btn-group" role="group">
+                                        <button class="btn btn-success"  @click.stop.prevent="cadastrarApont(ordem)">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <button type="button" class="btn btn-outline-success btn-sm" v-if="pReceita" @click.stop.prevent="cadastrarApont(ordem)">
-                            Cadastrar
-                            </button>
                         </form>
          </b-modal>
     </div>
