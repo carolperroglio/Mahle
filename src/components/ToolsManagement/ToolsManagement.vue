@@ -37,7 +37,7 @@
                                 </label>
                                 <label class="ls ls20">
                                     <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t)">
-                                    Mudar Status
+                                    Alterar Status da Ferramenta
                                 </button>
                                 </label>
                                 
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <!-- Modal -->
-                     <b-modal ref="modalGerT" hide-footer title="Atualizar Status da Ferramenta">
+                     <b-modal ref="modalGerT" hide-footer title="Alterar Status da Ferramenta">
                         <div class="modal-body">
                             <div class="alert alert-success" role="alert" v-if="tsUpdated">
                                 Status da Ferramenta Alterado com Sucesso !
