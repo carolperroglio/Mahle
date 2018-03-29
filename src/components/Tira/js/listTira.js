@@ -124,6 +124,8 @@ export default {
             };
             this.recipes = [];
             axios.get(this.urlRecipes + "?&orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {                
+                this.recipes = [];
+                console.log('Oi teste ' + this.fieldValue);
                 for(var i=0; i<response.data.values.length; i++)
                     if(response.data.values[i].recipeTypeId == 1)
                         this.recipes.push(response.data.values[i]); 

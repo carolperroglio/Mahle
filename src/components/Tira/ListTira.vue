@@ -13,10 +13,8 @@
                 <li class="nav-item nav-item-tira">
                     <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
-                        <option value="productName">Nome</option>
-                        <option value="productDescription">Descrição</option>
-                        <option value="productCode">Código</option>
-                        <option value="productGTIN">Código de Barras</option>
+                        <option value="recipeName">Nome</option>                        
+                        <option value="recipeCode">Código</option>                        
                     </select>
                 </li>
                 <li class="nav-item nav-item-tira">
@@ -24,12 +22,7 @@
                 </li> 
                 <li class="nav-item nav-item-tira">
                     <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
-                </li>   
-                <li class="nav-item nav-item-tira">                                               
-                    <router-link :to="{ name: 'Tira',params: { id: 0 }}" class="btn btn-success btn-lg">
-                        <i class="fa fa-plus" aria-hidden="true" ></i>  Cadastrar Tira
-                    </router-link>                      
-                </li>              
+                </li>                                
             </ul>                
         </div>
         <div class="fundo-branco-list-tira">

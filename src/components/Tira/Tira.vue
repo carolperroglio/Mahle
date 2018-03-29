@@ -27,14 +27,14 @@
                     <label>
                        <b>Nome da Tira</b>
                     </label>                  
-                    <input type="text" class="form-control form-control-md" v-model="recipe.recipeName" size='9' :disabled="recipeCadastrada" required placeholder="Nome da Tira">                    
+                    <input type="text" class="form-control form-control-md" v-model="recipe.recipeName" size='9' :disabled="true" required placeholder="Nome da Tira">                    
                 </li>                  
                 <li class="nav-item nav-item-tira"> 
                     <label>
                         <b>Código</b>
                     </label>                   
-                    <input type="text" class="form-control form-control-md" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='12' placeholder="Código da receita">    
-                </li>                     
+                    <input type="text" class="form-control form-control-md" required v-model="recipe.recipeCode" :disabled="true" size='12' placeholder="Código da receita">    
+                </li>                                     
             </ul>                 
         </div>
         <div class="fundo-branco-tira">
