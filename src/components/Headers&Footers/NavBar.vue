@@ -67,7 +67,7 @@
                             </router-link>
                         </b-collapse>
 
-                        <router-link to="/statusMES" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <router-link to="/statusmes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-check-square"></i> 
                             <span class="hidden-sm-down">  
                                 STATUS DO MES
