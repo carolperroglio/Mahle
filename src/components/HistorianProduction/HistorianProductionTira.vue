@@ -95,7 +95,7 @@
                                                     <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                                                 </font></b>
                                             </label> 
-                                            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(teste, 'hour',4):organizar(teste, 'hour',4);" class="ls2-cabecalho-ap-tira col-md-2" style="margin-left: 2%;">
+                                            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(teste, 'hour',4):organizar(teste, 'hour',4);" class="ls2-cabecalho-ap-tira col-md-2">
                                                 <b><font class="cursor-class" color="#ffffff">
                                                     Hora &nbsp;&nbsp;&nbsp;
                                                     <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
@@ -104,7 +104,7 @@
                                             </label>                
                                         </div>
                                     </div>
-                                        <div v-for="(o, index) in teste" v-bind:key="index">
+                                        <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}">
                                             <label class="ls ls10 col-md-2">
                                                 {{o.product}}</label>&nbsp;
                                             <label class="ls ls10  col-md-2">

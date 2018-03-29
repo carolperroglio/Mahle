@@ -76,7 +76,7 @@
                                             <!-- <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases"> -->
                                             <ul class="list-group" v-if="recipeAdded.length != 0">
                                                 <!-- <li class="list-group-item" > -->
-                                                    <span><strong>Descrição da Receita:</strong> {{recipeObj.recipeDescription}}</span>
+                                                    <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>
                                                     <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>
                                                     <!-- <strong>Código:</strong> {{phases.phaseCode}} | -->
                                                     <!--Botão para procurar os produtos de uma determinada fase-->
@@ -202,7 +202,7 @@
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1">
                                 <b>
-                                    <font color="#9BA6A5">Nome Receita: </font>
+                                    <font color="#9BA6A5">Nome Tira: </font>
                                 </b>{{op.recipe.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1">
