@@ -14,35 +14,57 @@
                 </div> 
                 <div>
                     <div class="container-fluid col-md-12">
-
-                        <div class="card-header card-header-tools-manag">
-                                <b>Lista de Ferramentas</b>
-                            </div>
-                        <div v-for="(t,index) in tools" :key="index">
-                            <div class="card">
-                                <b></b>
-                            </div>
-                            <div class="card-body card-body-tools-manag">
-                                <label class="ls ls20">
-                                    <b>Nome: </b> {{t.name}}
-                                </label>
-                                <label class="ls ls20">
-                                    <b>Descrição: </b>{{t.description}}
-                                </label>
-                                <label class="ls ls20">
-                                    <b>Número Serial: </b>{{t.serialNumber}}
-                                </label>
-                                <label class="ls ls20">
-                                    <b>Status: </b>{{t.status | StatusName}}
-                                </label>
-                                <label class="ls ls20">
-                                    <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t)">
-                                    Alterar Status da Ferramenta
-                                </button>
-                                </label>
-                                
+                    <div class="fundo-branco-tm">
+                    <div class="cabecalho-table-tm">
+                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(ferramentas, 'name',0):organizar(ferramentas, 'name',0);" class="ls2-cabecalho-tm col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(ferramentas, 'description',1):organizar(ferramentas, 'description',1);" class="ls2-cabecalho-tm col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Descrição &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'serialNumber',2):organizar(ferramentas, 'serialNumber',2);" class="ls2-cabecalho-tm col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Número Serial&nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label> 
+                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'status',3):organizar(ferramentas, 'status',3);" class="ls2-cabecalho-tm col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Status&nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label> 
                     </div>
-                        </div>
+                </div>  
+                <div v-for="(t,index) in tools" :key="index" :class="{cinza: index%2==0}">
+                        <label class="ls ls20 col-md-2">
+                            {{t.name}}
+                        </label>
+                        <label class="ls ls20 col-md-2">
+                            {{t.description}}
+                        </label>
+                        <label class="ls ls20 col-md-2">
+                            {{t.serialNumber}}
+                        </label>
+                        <label class="ls ls20 col-md-2">
+                            {{t.status | StatusName}}
+                        </label>
+                        <label class="ls ls20 col-md-2" style="margin-top:0.2%">
+                            <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t)">
+                            Alterar Status da Ferramenta
+                        </button>
+                        </label>
+                    </div>
+                    </div>
                     </div>
                     <!-- Modal -->
                      <b-modal ref="modalGerT" hide-footer title="Alterar Status da Ferramenta">
@@ -97,7 +119,6 @@
                     </b-modal>
                 </div>
             </div>
-        </div>
         </div>
 </template>
 

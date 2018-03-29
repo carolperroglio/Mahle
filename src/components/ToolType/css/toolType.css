@@ -76,6 +76,12 @@
     cursor: pointer;
 }
 
+.icon-style {
+    position: absolute;
+    padding-left: 60%;
+    top: 50%;
+}
+
 .tool-type {
     margin-left: 3%;
     width: 95%;

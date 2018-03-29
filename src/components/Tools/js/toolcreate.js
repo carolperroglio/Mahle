@@ -48,7 +48,7 @@ export default {
             pages: [],
             pageAtual: 0,
             errors: [],
-            cabecalhoSetas: [false, false, false, false, false],
+            cabecalhoSetas: [false, false, false, false, false, false, false, false, false],
 
         }
     },

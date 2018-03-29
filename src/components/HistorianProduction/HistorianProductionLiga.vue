@@ -30,117 +30,95 @@
         <div id="order" v-show="order" style="display: none">
             
             <div class="orderHistorian col-11">
-                    <div class="card">
-                        <div class="card-header card-header-hp">
-                            
-                            <b><label class="ls">
-                                <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
-                                <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>&nbsp;&nbsp;&nbsp;
-                            <!--<label class="ls">
-                                <b><font color="#9BA6A5">Receita da OP: </font></b>{{productionOrderRecipe.recipeName}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls">
-                                <b><font color="#9BA6A5">Produto da Receita: </font></b>{{productionOrderRecipe.recipeProduct.product.productName}}</label>&nbsp;&nbsp;&nbsp; -->
-                           </b>
-                            
-                            <!-- <button type="button" class="btn btn-secondary pull-right" @click.stop.prevent="listar()">
-                            Listar materiais
-                            </button> -->
-                        </div>
-                            <div v-show="lista">
-                                    <div class="card">
-                                        <div class="card-header card-header-hp">
-                                            <b>Materiais Consumidos e Apontados</b>
-                                            <div style="margin-right:1%" class="pull-right">
-                                                <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='input'">
-                                            <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
-                                            </button>
-                                            <!-- <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='output'">
-                                            <i aria-hidden="true" class="fa fa-plus"></i> Registrar rolo de tira
-                                            </button> -->
-                                            </div>
-                                        </div>
-                                        <div class="card-body card-body-hp">
-                                        <div id="load" v-show="carregando">
-                                          <stretch background="#4d4d4d"></stretch>
-                                        </div> 
-                                        <div class="fundo-branco-ap-liga">
-                                        <div class="cabecalho-table-ap-liga">
-                                            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(allProducts, 'product',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">Material &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label>
-                                            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(allProducts, 'quantity',1):organizar(allProducts, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    Quantidade &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label>
-                                            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(allProducts, 'batch',2):organizar(allProducts, 'batch',2);" class="ls2-cabecalho-ap-liga col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    Lote/OPL &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label> 
-                                            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(allProducts, 'date',3):organizar(allProducts, 'date',3);" class="ls2-cabecalho-ap-liga col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    Data &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label> 
-                                            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(allProducts, 'hour',4):organizar(allProducts, 'hour',4);" class="ls2-cabecalho-ap-liga col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    Hora &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label>                
-                                        </div>
-                                        <div v-for="(o, index) in allProducts" v-bind:key="index" :class="{cinza: index%2==0}">
-                                            <label class="ls ls10 col-md-2">
-                                                {{o.product}}</label>&nbsp;
-                                            <label class="ls ls10 col-md-2">
-                                                {{o.quantity}}</label>&nbsp;
-                                            <label class="ls ls10 col-md-2">
-                                                {{o.batch}}</label>&nbsp;
-                                            <label class="ls ls10 col-md-2">
-                                                {{o.date}}</label>&nbsp;
-                                            <label class="ls ls10 col-md-2">
-                                                {{o.hour}}</label>&nbsp;    
-                                        </div>
-                                    </div>
-                                        
-                                        </div>
-                                    </div>
-                                      
-                                        <!-- <div class="card-header card-header-hp">
-                                            <b>Materiais apontados</b>
-                                            <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal(); ordem.type='output'">
-                                            Registrar rolo de tira
-                                            </button>
-                                        </div>
-                                        <div class="card-body card-body-hp">
-                                            <div v-for="(o, index) in orderHistorian.productsOutput" v-bind:key="index">
-                                            <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Material: </font></b>{{o.product}}</label>&nbsp;
-                                            <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Quantidade: </font></b>{{o.quantity}}</label>&nbsp;
-                                            <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Rolo: </font></b>{{o.batch}}</label>&nbsp;
-                                            <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Data: </font></b>{{o.date}}</label>&nbsp;
-                                            <label class="ls ls10">
-                                                <b><font color="#9BA6A5">Hour: </font></b>{{o.hour}}</label>&nbsp;    
-                                        </div>
-                                    </div> -->
-                               
+            <div class="card">
+                <div class="card-header card-header-hp">
+                    
+                    <b><label class="ls">
+                        <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
+                    <label class="ls">
+                        <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>&nbsp;&nbsp;&nbsp;
+                    <!--<label class="ls">
+                        <b><font color="#9BA6A5">Receita da OP: </font></b>{{productionOrderRecipe.recipeName}}</label>&nbsp;&nbsp;&nbsp;
+                    <label class="ls">
+                        <b><font color="#9BA6A5">Produto da Receita: </font></b>{{productionOrderRecipe.recipeProduct.product.productName}}</label>&nbsp;&nbsp;&nbsp; -->
+                    </b>
+                    
+                    <!-- <button type="button" class="btn btn-secondary pull-right" style="font-size:21px;" @click.stop.prevent="listar()">
+                    Listar materiais
+                    </button> -->
+                </div>
+                    <div v-show="lista">
+                        <div class="card">
+                            <div class="card-header card-header-hp">
+                                <b>Materiais Consumidos e Apontados</b>
+                                <div style="margin-right:1%" class="pull-right">
+                                    <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='input'">
+                                <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
+                                </button>
+                                <!-- <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='output'">
+                                <i aria-hidden="true" class="fa fa-plus"></i> Registrar rolo de tira
+                                </button> -->
+                                </div>
+                            </div>
+                            <div class="card-body card-body-hp">
+                            <div id="load" v-show="carregando">
+                                <stretch background="#4d4d4d"></stretch>
+                            </div> 
+                        <div class="fundo-branco-ap-liga">
+                            <div class="cabecalho-table-ap-liga">
+                                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(allProducts, 'product',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-2">
+                                    <b><font class="cursor-class" color="#ffffff">Material &nbsp;&nbsp;&nbsp;
+                                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                                    </font></b>
+                                </label>
+                                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(allProducts, 'quantity',1):organizar(allProducts, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-2">
+                                    <b><font class="cursor-class" color="#ffffff">
+                                        Quantidade &nbsp;&nbsp;&nbsp;
+                                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                                    </font></b>
+                                </label>
+                                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(allProducts, 'batch',2):organizar(allProducts, 'batch',2);" class="ls2-cabecalho-ap-liga col-md-2">
+                                    <b><font class="cursor-class" color="#ffffff">
+                                        Lote/OPL &nbsp;&nbsp;&nbsp;
+                                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                                    </font></b>
+                                </label>
+                                <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(allProducts, 'date',3):organizar(allProducts, 'date',3);" class="ls2-cabecalho-ap-liga col-md-2">
+                                    <b><font class="cursor-class" color="#ffffff">
+                                        Data &nbsp;&nbsp;&nbsp;
+                                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                                    </font></b>
+                                </label> 
+                                <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(allProducts, 'hour',4):organizar(allProducts, 'hour',4);" class="ls2-cabecalho-ap-liga col-md-2">
+                                    <b><font class="cursor-class" color="#ffffff">
+                                        Hora &nbsp;&nbsp;&nbsp;
+                                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                                    </font></b>
+                                </label>                
+                            </div>
+                            <div v-for="(o, index) in allProducts" v-bind:key="index" :class="{cinza: index%2==0}">
+                                <label class="ls ls10 col-md-2">
+                                    {{o.product}}</label>&nbsp;
+                                <label class="ls ls10 col-md-2">
+                                    {{o.quantity}}</label>&nbsp;
+                                <label class="ls ls10 col-md-2">
+                                    {{o.batch}}</label>&nbsp;
+                                <label class="ls ls10 col-md-2">
+                                    {{o.date}}</label>&nbsp;
+                                <label class="ls ls10 col-md-2">
+                                    {{o.hour}}</label>&nbsp;    
                             </div>
                         </div>
+                            
+                            </div>
+                        </div>
+                </div>
+            </div>
                     
             </div>
          </div>
