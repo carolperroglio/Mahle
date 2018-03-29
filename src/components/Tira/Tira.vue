@@ -18,125 +18,87 @@
         <!--               -->
         <!--               -->
         <!--               -->
-        <div class="fixed-top nav-recipeP-tira">
-            <li class="title-recipeP-tira">
-                <b>Gerenciamento de Tira</b>
-            </li>
+        <div class="fixed-top nav-list-tira">            
             <ul class="nav d-flex">
-                <li class="form-group nav-tiras col-md-2">
-                    <label class="">
-                        <b>Nome da Tira:</b>
-                    </label>
-                        <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" size='5' :disabled="recipeCadastrada" required placeholder="Nome da receita">
-                </li>
-                <li class="form-group nav-tiras col-md-2">
-                    <label class="">
-                        <b>Código:</b>
-                    </label>
-                        <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita">
-                </li>
-                <li class="form-group nav-tiras col-md-2">
-                    <form row>
-                        <br><button type="button" class="btn btn-success" v-if="!recipeCadastrada" :disabled="!recipe.recipeName || !recipe.recipeCode || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''" @click.stop.prevent="createRecipe(recipe)">
-                            Enviar
-                        </button>
-                    </form>
-                </li>
-                <li class="nav-tiras col-md-2">
-                    <!--<div @click.stop.prevent="showModalEditRecipe()" v-if="recipeCadastrada">
-                        <br>
-                        <i class="fa fa-edit" style="font-size:22px; cursor:pointer"> 
-                            <div class="edit-text">   
-                                <b>Editar receita</b>
-                            </div>
-                        </i>
-                    </div>-->
-                </li>
-                <li class="nav-tiras col-md-2">
-                    <!--<div v-if="!(carregando || !recipeCadastrada)" @click.stop.prevent="showModalAddProdFin()">
-                        <br>
-                        <i class="fa fa-plus" aria-hidden="true" style="font-size:22px; cursor:pointer"> 
-                            <div class="edit-text">
-                                <b> Cadastrar produto da Receita </b>
-                            </div>
-                        </i>
-                    </div>-->
-                </li>
-                <li class="nav-tiras col-md-2" id="produtoR" v-if="pName !== '' || json.stringify(recipeProduct) !== '{}'">
-                    <b><font color="#9BA6A5">
-                        Produto:
-                    </font></b>
-                    {{pName}}
-                    <br>                    
-                </li>
-                <li v-else class="nav-tiras col-md-2" id="produtoR">
-                    <br>
-                </li>
-            </ul>
-            <div class="fundo-branco-tira">
-                <div class="cabecalho-table-tira">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls7-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">Parâmetro
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>                    
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametros, 'vn',1):organizar(parametros, 'vn',1);" class="ls7-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Valor Nominal
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametros, 'unidade',2):organizar(parametros, 'unidade',2);" class="ls7-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Unidade
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>  
-                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls7-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Lim. Inferior Específico
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label> 
-                    <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls7-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Lim. Inferior Controle
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label> 
-                    <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls7-cabecalho-tira">
-                        <b>
-                            <font class="cursor-class" color="#ffffff">
-                                Lim. Superior Controle
-                                <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
-                            </font>
-                        </b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls7-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Lim. Superior Específico
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>                              
-                </div>
-            </div>     
+                <li class="nav-item title-nav-tira nav-item-tira">
+                    <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
+                </li>               
+                <li class="nav-item nav-item-tira">  
+                    <label>
+                       <b>Nome da Tira</b>
+                    </label>                  
+                    <input type="text" class="form-control form-control-md" v-model="recipe.recipeName" size='9' :disabled="recipeCadastrada" required placeholder="Nome da Tira">                    
+                </li>                  
+                <li class="nav-item nav-item-tira"> 
+                    <label>
+                        <b>Código</b>
+                    </label>                   
+                    <input type="text" class="form-control form-control-md" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='12' placeholder="Código da receita">    
+                </li>                     
+            </ul>                 
         </div>
-        
+        <div class="fundo-branco-tira">
+            <div class="cabecalho-table-tira">
+                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls7-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">Parâmetro
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>                    
+                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametros, 'vn',1):organizar(parametros, 'vn',1);" class="ls7-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Valor Nominal
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>
+                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametros, 'unidade',2):organizar(parametros, 'unidade',2);" class="ls7-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Unidade
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>  
+                <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls7-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Lim. Inferior Específico
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label> 
+                <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls7-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Lim. Inferior Controle
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label> 
+                <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls7-cabecalho-tira">
+                    <b>
+                        <font class="cursor-class" color="#ffffff">
+                            Lim. Superior Controle
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
+                        </font>
+                    </b>
+                </label>
+                <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls7-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Lim. Superior Específico
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>                              
+            </div>
+        </div>
 
-    <!--                       -->
-    <!--                       -->
-    <!--                       -->
-    <!--   Listagem de fase    -->
-    <!--                       -->
-    <!--                       -->
-    <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <!--   Listagem de fase    -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
         <div class="" style="">
             <div class="tiras-parametros" style="margin-top:18%">
                 <div class="progress" v-show="carregando">

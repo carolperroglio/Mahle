@@ -127,71 +127,8 @@
                             </li>
                         </ul>
 
-                        <!--<h2> Parâmetros </h2>
-                        <div v-if="pha.phaseParameters.length == 0">
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
-                                    <label class="ls ls14">
-                                        Sem parâmetros cadastrados ainda...
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                        <ul class="list-group" v-for="(pro, indexPro) in pha.phaseParameters" :key="indexPro">
-                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-3">
-                                <label class="ls ls14">
-                                    <b>Valor: </b>{{pro.setupValue}} min. {{pro.measurementUnit}} máx
-                                </label>
-                                <label class="ls ls14">
-                                    <b>Nome: </b>{{pro.tag.tagName}}
-                                </label>
-                                <label class="ls ls14">
-                                    <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
-                                    </button>
-                                </label>
-                            </li>
-                        </ul>-->
                     </div>
-                    <!-- Fim v-else -->
-                                    
-                    <!--<div v-else>
-                        <a class="list-group" v-for="(pro, indexPro) in pha.phaseProducts" :key="indexPro">
-                                <div class="list-group-item list-group-item-3">
-                                <label class="ls ls14">
-                                <b>Material: </b>{{pro.product.productName}}&nbsp;&nbsp;
-                                </label>
-                                <label class="ls ls14">
-                                    <b>Quantidade : </b>{{pro.value}} {{pro.measurementUnit}}
-                                </label>
-                                <label class="ls ls14">
-                                    <b>Tipo de Material: </b>{{pro.phaseProductType | prodTypeName}}
-                                </label>
-                                <label class="ls ls14">
-                                    <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="deletePhaseProduct(pro, pha);">
-                                </button>
-                                </label>
-                                
-                            </div>
-                        </a>
-                    </div>
-
-                    <br>
-                    <a class="list-group" v-for="(par, indexPro) in pha.parameters" v-bind:key="indexPro">
-                        <div class="list-group-item list-group-item-4">
-                            <label class="ls ls14">
-                                <b>Pointer:</b>{{par.setupValue}} {{par.measurementUnit}}
-                            </label>
-                            <label class="ls ls16">
-                                <b>Valor mínimo: </b>{{par.minValue}}
-                            </label>
-                            <label class="ls ls16">
-                                <b>Valor máximo: </b>{{par.maxValue}}
-                            </label>
-                            <label class="ls ls16">
-                                <b>Tag: </b>{{par.tag.tagName}}
-                            </label>
-                        </div>
-                    </a>-->                                    
+                                                      
                 </div>
             </div>
         </div>

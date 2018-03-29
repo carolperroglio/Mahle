@@ -5,43 +5,57 @@
         <!--Redireciona p/página de cad nova -->
         <!--                                 -->
         <!--                                 -->
-        <div class="fixed-top nav-recipe-tira">            
+        <div class="fixed-top nav-list-tira">            
             <ul class="nav d-flex">
-                <li class="nav-item col-sm-1.5">
-                    <h1 class="title-page-gp-tira"><b>Gerenciamento de Tira</b></h1>
+                <li class="nav-item title-nav-tira nav-item-tira">
+                    <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>
-                <li class="col-sm-2 botao-cadastro-tira">                     
-                    <router-link :to="{ name: 'Tira',params: { id: 0 }}" class="btn btn-primary">
-                        Cadastrar Tira
-                    </router-link>
+                <li class="nav-item nav-item-tira">
+                    <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                        <option value="" selected disabled>Campo para busca</option>
+                        <option value="productName">Nome</option>
+                        <option value="productDescription">Descrição</option>
+                        <option value="productCode">Código</option>
+                        <option value="productGTIN">Código de Barras</option>
+                    </select>
                 </li>
-            </ul>
-            <div class="fundo-branco-tira">
-                <div class="cabecalho-table-tira">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="ls2-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">Nome da Tira &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="ls2-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Código da Tira &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2-cabecalho-tira">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Descrição &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>                
-                </div>
-            </div>    
+                <li class="nav-item nav-item-tira">
+                    <input class="form-control btn-lg" type="search" v-model="fieldValue" placeholder="Tira" aria-label="Busca">
+                </li> 
+                <li class="nav-item nav-item-tira">
+                    <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                </li>   
+                <li class="nav-item nav-item-tira">                                               
+                    <router-link :to="{ name: 'Tira',params: { id: 0 }}" class="btn btn-success btn-lg">
+                        <i class="fa fa-plus" aria-hidden="true" ></i>  Cadastrar Tira
+                    </router-link>                      
+                </li>              
+            </ul>                
         </div>
-
+        <div class="fundo-branco-list-tira">
+            <div class="cabecalho-table-tira">
+                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="ls2-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">Nome da Tira &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>
+                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="ls2-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Código da Tira &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>
+                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2-cabecalho-tira">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Descrição &nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>                
+            </div>
+        </div>
         <!--                         -->
         <!--                         -->
         <!--        Fases            --> 
@@ -94,5 +108,5 @@
 <script src="./js/listTira.js">
 </script>
 <style>
-@import url("./css/tira.css");
+@import url("./css/listtira.css");
 </style> 
