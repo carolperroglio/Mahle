@@ -180,65 +180,66 @@
                     <div class="cabecalho-table-tm">
                         <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(ferramentas, 'name',0):organizar(ferramentas, 'name',0);" class="ls2-cabecalho-tm col-md-1">
                             <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(ferramentas, 'description',1):organizar(ferramentas, 'description',1);" class="ls2-cabecalho-tm col-md-1">
+                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(ferramentas, 'description',1):organizar(ferramentas, 'description',1);" class="ls2-cabecalho-tm col-md-2">
                             <b><font class="cursor-class" color="#ffffff">
                                 Descrição &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>
                         <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'serialNumber',2):organizar(ferramentas, 'serialNumber',2);" class="ls2-cabecalho-tm col-md-2">
                             <b><font class="cursor-class" color="#ffffff">
                                 Número Serial&nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
                         <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(ferramentas, 'code',3):organizar(ferramentas, 'code',3);" class="ls2-cabecalho-tm col-md-1">
                             <b><font class="cursor-class" color="#ffffff">
                                 Código &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(ferramentas, 'lifeCycle',4):organizar(ferramentas, 'lifeCycle',4);" class="ls2-cabecalho-tm col-md-1" style="margin-left: 2%;">
+                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(ferramentas, 'lifeCycle',4):organizar(ferramentas, 'lifeCycle',4);" class="ls2-cabecalho-tm col-md-1">
                             <b><font class="cursor-class" color="#ffffff">
                                 Vida Útil &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>  
-                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(ferramentas, 'unitOfMeasurement',5):organizar(ferramentas, 'unitOfMeasurement',5);" class="ls2-cabecalho-tm col-md-1" style="margin-left: 2%;">
+                        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(ferramentas, 'unitOfMeasurement',5):organizar(ferramentas, 'unitOfMeasurement',5);" class="ls2-cabecalho-tm col-md-1">
                             <b><font class="cursor-class" color="#ffffff">
                                 Unidade de Medida &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(ferramentas, 'typeName',6):organizar(ferramentas, 'typeName',6);" class="ls2-cabecalho-tm col-md-1">
+                        <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(ferramentas, 'typeName',6):organizar(ferramentas, 'typeName',6);" class="ls2-cabecalho-tm col-md-1">
                             <b><font class="cursor-class" color="#ffffff">
                                 Tipo &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(ferramentas, 'status',7):organizar(ferramentas, 'status',7);" class="ls2-cabecalho-tm col-md-1">
+                        <label @click.stop.prevent="cabecalhoSetas[7]==false?desorganizar(ferramentas, 'status',7):organizar(ferramentas, 'status',7);" class="ls2-cabecalho-tm col-md-1">
                             <b><font class="cursor-class" color="#ffffff">
                                 Status &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>               
                     </div>
                 </div>  
+                <div class="margin-table">
                 <div v-for="(f, indexF) in ferramentas" :key="indexF" :class="{cinza: indexF%2==0}">
                             <label class="ls ls30 col-md-1">
                                 {{f.name}}</label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls30 col-md-1">
+                            <label class="ls ls30 col-md-2">
                                 {{f.description}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30 col-md-2">
                                 {{f.serialNumber}}</label>&nbsp;&nbsp;&nbsp;
@@ -254,8 +255,11 @@
                                 {{f.typeName}}</label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls30 col-md-1">
                                 {{f.status}}</label>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-edit icon-right icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
+                            <label class="ls ls30 col-md-1">
+                                <i class="fa fa-edit icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
+                            </label>
                     </div>
+                </div>
                 </div>
             
                 <div class="paginacao2 fixed-bottom" v-show="total>0">
@@ -373,8 +377,7 @@
             </div>
             <br>
         </div>
-
-    </div>
+</div>
 </template>
 <script src="./js/toolcreate.js">
 </script>

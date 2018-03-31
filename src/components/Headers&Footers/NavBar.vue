@@ -66,7 +66,7 @@
                             </router-link>
                         </b-collapse>
 
-                        <router-link to="/statusMES" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <router-link to="/statusmes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-check-square"></i> 
                             <span class="hidden-sm-down">  
                                 STATUS DO MES
@@ -150,7 +150,7 @@
                             <router-link to="/prodOrder" class="list-group-item" data-parent="#menu3"> 
                                 Cadastro de Ordem de Produção
                             </router-link>
-                            <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
+                            <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 
                             </router-link>
                             <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
@@ -158,7 +158,7 @@
                             </router-link>
                             <router-link to="/OPManagement" class="list-group-item" data-parent="#menu3"> 
                                 Gerenciamento de Ordem de Produção
-                            </router-link>
+                            </router-link> -->
                         </b-collapse>
                     </b-collapse>      
                     </div>   

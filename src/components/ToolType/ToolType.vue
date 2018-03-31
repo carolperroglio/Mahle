@@ -15,22 +15,22 @@
                 <div class="cabecalho-table-tt">
                     <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(toolsType, 'name',0):organizar(toolsType, 'name',0);" class="ls2-cabecalho-tt col-md-2">
                         <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
                     <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(toolsType, 'description',1):organizar(toolsType, 'description',1);" class="ls2-cabecalho-tt col-md-4">
                         <b><font class="cursor-class" color="#ffffff">
                             Descrição &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
                     <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(toolsType, 'serialNumber',2):organizar(toolsType, 'status',2);" class="ls2-cabecalho-tt col-md-2">
                         <b><font class="cursor-class" color="#ffffff">
                             Status&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                         </font></b>
                     </label> 
             </div>
@@ -44,9 +44,10 @@
                 <label class="ls ls21 col-md-2">
                     {{ttype.status}}
                 </label>
-                <button type="button" class="btn btn-outline-primary btn-sm btn-sm" @click.prevent="showModalEdit();catchObjToUpdate(ttype)">
-                Editar
-                </button>
+                <label class="ls ls21 col-md-1">
+                    <i class="fa fa-edit icon-style" style="font-size:22px; cursor:pointer"  @click.prevent="showModalEdit();catchObjToUpdate(ttype)"></i>
+                </label>
+                
             </div>
             </div>
         </div>
