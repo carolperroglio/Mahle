@@ -1,64 +1,62 @@
 
 <template >
-    <div>
-        
+    <div>        
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
         <!-- Menu de navegação de produtos   -->
         <!--                                 -->
         <!--                                 -->
-        <!--               Modal             -->
-        
-            <b-modal ref="myModalRef" hide-footer title="Cadastro de Matéria-Prima">                    
-                <form>
-                    <div>
-                        <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                        <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                        <p v-if="errors.length">
-                            <ul v-for="(error, index) in errors" v-bind:key="index">
-                                <li class="alert alert-danger form-control" >{{ error }}</li>
-                            </ul>
-                        </p>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>
-                                    <b>Nome </b>
-                                </label>
-                                <input type="text" placeholder="Ex: Estanho" v-model="produto.productName" id="nome" class="form-control form-control-sm">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>
-                                    <b>Descrição </b>
-                                </label>
-                                <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Ex: Estanho Metálico">
-                            </div>
+        <!--               Modal             -->        
+        <b-modal ref="myModalRef" hide-footer title="Cadastro de Matéria-Prima">                    
+            <form>
+                <div>
+                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                    <p v-if="errors.length">
+                        <ul v-for="(error, index) in errors" v-bind:key="index">
+                            <li class="alert alert-danger form-control" >{{ error }}</li>
+                        </ul>
+                    </p>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Nome </b>
+                            </label>
+                            <input type="text" placeholder="Ex: Estanho" v-model="produto.productName" id="nome" class="form-control form-control-sm">
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>
-                                    <b>Código </b>
-                                </label>
-                                <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Ex: 1010144" id="cod">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>
-                                    <b>Código de barras </b>
-                                </label>
-                                <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="Ex: 941120000000">
-                                <br>
-                            </div>
-                        </div>
-                        <div class="modal-footer">                            
-                            <div class="btn-group" role="group">
-                                <button @click.stop.prevent="alerta()?((produto.productId!=undefined) ? put(produto) : cadastrar(produto)):0" class="btn btn-success pull-right" :disabled="produto.productName==undefined || produto.productName=='' || produto.productCode=='' || produto.productGTIN==''">
-                                    <i  class="fa fa-check-square" aria-hidden="true"></i>
-                                </button>                    
-                            </div>
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Descrição </b>
+                            </label>
+                            <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Ex: Estanho Metálico">
                         </div>
                     </div>
-                </form>
-            </b-modal>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Código </b>
+                            </label>
+                            <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Ex: 1010144" id="cod">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Código de barras </b>
+                            </label>
+                            <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>
+                    </div>
+                    <div class="modal-footer">                            
+                        <div class="btn-group" role="group">
+                            <button @click.stop.prevent="alerta()?((produto.productId!=undefined) ? put(produto) : cadastrar(produto)):0" class="btn btn-success pull-right" :disabled="produto.productName==undefined || produto.productName=='' || produto.productCode=='' || produto.productGTIN==''">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i>
+                            </button>                    
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </b-modal>
 
         <!--                       -->
         <!--                       -->
@@ -90,7 +88,7 @@
                     <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModal"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Materia Prima</button>
                 </li>
             </ul>                             
-        </div>
+        </div>        
         <div class="fundo-branco">                             
             <div class="cabecalho-table">
                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls2-cabecalhotab">
