@@ -17,7 +17,6 @@
                     <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
                     </li> 
-
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:44px; cursor:pointer"></i>  <br>Ferramentas</router-link>
                     </li> 
@@ -98,7 +97,7 @@
                                 GERENCIAMENTO DE LIGA
                             </span>
                         </router-link>
-                        <router-link to="/listliga" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <router-link to="/listlineparameters" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-book"></i> 
                             <span class="hidden-sm-down">  
                                 PARAMETROS DE LINHA
