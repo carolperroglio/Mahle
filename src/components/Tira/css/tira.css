@@ -23,11 +23,11 @@
 }
 
 /*Relatório de Receitas*/
-.tiras-parametros{
-    margin-top: 13%;
+.tiras-parametros{    
     padding-bottom: 6%;
     width: 95%;
     margin-left: 2%;
+    margin-top: 15%;    
 }
 
 /*Relatório de Receitas - Configuração da listagem*/
