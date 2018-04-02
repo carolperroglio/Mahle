@@ -47,6 +47,8 @@ export default {
             pFase: false,
             lista: false,
             url: process.env.PROD_HIST_API,
+            urlOP: process.env.OP_API,
+
         }
     },
     computed: {
@@ -97,7 +99,24 @@ export default {
             this.pReceita = false;
             this.consumo = false;
         },
-
+        organizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
+        },
+        desorganizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
+        },
         cadastrarApont(ordem) {
 
             this.mensagem = '';
@@ -127,17 +146,38 @@ export default {
             this.pReceita = false;
             this.consumo = false;
         },
-        changeJson(obj) {
+        changeJson(obj, type) {
+            var array = this.orderHistorianAllProducts.products;
             if (this.orderHistorianAllProducts.products == undefined) {
                 this.orderHistorianAllProducts.products = []
             }
             if (this.orderHistorianAllProducts.id != undefined) {
-                this.orderHistorianAllProducts.products.push(obj)
+                if (type == "in") {
+                    obj.rolo = "-";
+                    obj.lote = obj.batch;
+                    this.orderHistorianAllProducts.products.push(obj)
+                } else if (type == "out") {
+                    obj.lote = "-";
+                    obj.rolo = obj.batch;
+                    this.orderHistorianAllProducts.products.push(obj)
+                }
             } else {
-                this.orderHistorianAllProducts.id = this.orderHistorian.id;
-                this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
-                this.orderHistorianAllProducts.order = this.orderHistorian.order
-                this.orderHistorianAllProducts.products.push(obj)
+                if (type == "in") {
+                    obj.rolo = "-";
+                    obj.lote = obj.batch;
+                    this.orderHistorianAllProducts.id = this.orderHistorian.id;
+                    this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
+                    this.orderHistorianAllProducts.order = this.orderHistorian.order
+                    this.orderHistorianAllProducts.products.push(obj)
+                } else if (type == "out") {
+                    obj.rolo = obj.batch;
+                    obj.lote = "-";
+                    this.orderHistorianAllProducts.id = this.orderHistorian.id;
+                    this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
+                    this.orderHistorianAllProducts.order = this.orderHistorian.order
+                    this.orderHistorianAllProducts.products.push(obj)
+                }
+
             }
             this.allProducts = this.orderHistorianAllProducts.products
         },
@@ -151,13 +191,13 @@ export default {
                 for (var i = 0; i < this.orderHistorian.productsInput.length; i++) {
                     this.orderHistorian.productsInput[i].hour = this.hourConvert(this.orderHistorian.productsInput[i].date);
                     this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
-                    this.changeJson(this.orderHistorian.productsInput[i]);
+                    this.changeJson(this.orderHistorian.productsInput[i], "in");
                 }
                 for (var i = 0; i < this.orderHistorian.productsOutput.length; i++) {
                     this.rolo = parseInt(this.orderHistorian.productsOutput[i].batch) + 1;
                     this.orderHistorian.productsOutput[i].hour = this.hourConvert(this.orderHistorian.productsOutput[i].date);
                     this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
-                    this.changeJson(this.orderHistorian.productsOutput[i]);
+                    this.changeJson(this.orderHistorian.productsOutput[i], "out");
                 }
                 this.rolo += 1;
 
@@ -171,6 +211,9 @@ export default {
         },
 
         listaOp(p) {
+            this.productionOrder.productionOrderNumber = p.productionOrderNumber;
+            this.productionOrder.productionOrderId = p.productionOrderId;
+            this.op = p.productionOrderNumber;
             console.log(p);
             this.productionOrdersRecipe = p.recipe;
             this.order = true;
@@ -181,15 +224,13 @@ export default {
         },
 
         getResults() {
-            console.log(this.url + '/gateway/productionorders');
-            axios.get(this.url + '/gateway/productionorders').then((response) => {
+            var id = this.$route.params.id;
+            console.log(this.urlOP + '/api/productionorders');
+            axios.get(this.urlOP + '/api/productionorders/' + id).then((response) => {
+                this.productionOrder = response.data;
                 console.log(response.data);
-                response.data.forEach((pro) => {
-                    if (pro.currentStatus == "active" && pro.typeDescription == "Liga") {
-                        this.OPs.push(pro);
-                    }
-                });
-                console.log(this.OPs);
+                this.listaOp(response.data);
+                return response.data;
             }, (error) => {
                 console.log(error);
             })
@@ -217,8 +258,14 @@ export default {
 
             jsTicks = (dataTicks - epochTicks) / ticksPerMillisecond;
             jsDate = new Date(jsTicks);
+            var min = "";
+            if (jsDate.getUTCMinutes() <= 9) {
+                min = "0" + jsDate.getUTCMinutes();
+            } else {
+                min = jsDate.getUTCMinutes();
+            }
             var dateFormatted = jsDate.getHours() + ":" +
-                jsDate.getMinutes();
+                min;
             var teste = jsDate.getUTCMinutes();
 
             console.log(jsDate);

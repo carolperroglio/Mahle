@@ -26,18 +26,18 @@ export default {
             urlProducts: ipServerRecipe + '/api/products?&fieldFilter=productName&fieldValue=',
             urlRecipeSearch: ipServerThing + '/api/tags?fieldFilter=tagName&fieldValue=',
             urlRecipes: ipServerRecipe + '/api/recipes/',
-            urlGatewayRecipes: ipServerOP + '/gateway/recipes/',            
+            urlGatewayRecipes: ipServerOP + '/gateway/recipes/',
             carregando: false,
             recipeProduct: {},
             recipeCadastrada: false,
             recipe: {},
             recipes: [],
-            parameters:{},
-            parametros:[],
+            parameters: {},
+            parametros: [],
             phase: {},
             phases: [],
             phaseProduct: {},
-            phaseParameter: {},        
+            phaseParameter: {},
             carregando: false,
             mensagem: '',
             mensagemSuc: '',
@@ -47,7 +47,7 @@ export default {
             editarActivate: false,
             expand: [],
             errors: [],
-            cabecalhoSetas:[false, false, false, false, false, false, false],
+            cabecalhoSetas: [false, false, false, false, false, false, false],
         }
     },
     filters: {
@@ -57,8 +57,8 @@ export default {
                 'scrap': "Rejeito",
                 'finished': "Acabado",
                 'semi_finished': "Semi Acabado"
-                };
-                return type[productTypeName];
+            };
+            return type[productTypeName];
         }
     },
     components: {
@@ -69,8 +69,8 @@ export default {
     },
     directives: {
         'b-modal': bModalDirective
-    },     
-    methods: {          
+    },
+    methods: {
         /************************/
         /*                      */
         /*                      */
@@ -99,7 +99,7 @@ export default {
         },
         showModalAddProd() {
             this.errors = {};
-            this.phaseProduct={};
+            this.phaseProduct = {};
             this.$refs.modalcadProPhase.show();
             this.mensagemSuc = '';
             this.mensagem = '';
@@ -108,9 +108,9 @@ export default {
             this.$refs.modalcadProPhase.hide()
         },
         showModalAddParam() {
-            this.phaseParameter={};
-            this.tagName='';
-            this.mensagemSuc='';
+            this.phaseParameter = {};
+            this.tagName = '';
+            this.mensagemSuc = '';
             this.$refs.modalCadParam.show()
         },
         hideModalAddParam() {
@@ -122,7 +122,7 @@ export default {
         hideModalAddProdFin() {
             this.$refs.modalProFinal.hide()
         },
-        
+
         /*****************/
         /*               */
         /*               */
@@ -142,13 +142,13 @@ export default {
             var id = this.$route.params.id;
             if (id != 0) {
                 this.carregando = true;
-                console.log(this.urlGatewayRecipes+id);
+                console.log(this.urlGatewayRecipes + id);
                 setTimeout(() => {
                     axios.get(this.urlGatewayRecipes + id).then(response => {
-                        this.recipe = response.data;                 
-                        for(var i = 0; i < this.recipe.phases.length; i++)
-                            if(this.recipe.phases[i].phaseId!=46)
-                                this.phase = this.recipe.phases[i];                                                  
+                        this.recipe = response.data;
+                        for (var i = 0; i < this.recipe.phases.length; i++)
+                            if (this.recipe.phases[i].phaseId != 46)
+                                this.phase = this.recipe.phases[i];
                         this.getParametros();
                         this.recipeCadastrada = true;
                         this.carregando = false;
@@ -159,59 +159,59 @@ export default {
                     })
                 }, 300);
             }
-        },        
+        },
 
-        getParametros: function(){
-            var j = 0;                                                                        
-            for(var i = 0; i < this.phase.phaseParameters.length; i++){ 
-                if(this.phase.phaseParameters[i].tag.tagGroup!=undefined){
-                    if(this.parameters[this.phase.phaseParameters[i].tag.tagGroup]!=undefined)
+        getParametros: function() {
+            var j = 0;
+            for (var i = 0; i < this.phase.phaseParameters.length; i++) {
+                if (this.phase.phaseParameters[i].tag.tagGroup != undefined) {
+                    if (this.parameters[this.phase.phaseParameters[i].tag.tagGroup] != undefined)
                         this.parameters[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
-                    else{
+                    else {
                         this.vetNomes[j++] = this.phase.phaseParameters[i].tag.tagGroup;
                         this.parameters[this.phase.phaseParameters[i].tag.tagGroup] = [];
                         this.parameters[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
-                    }     
-                }                                                          
-            }  
-            j=0;                                                              
-            for(i=0; i<this.vetNomes.length; i++){                            
-                this.parametros[i] = {};                                                                                                                                                                       
-                for(j=0; j<this.parameters[this.vetNomes[i]].length; j++){                                                                                       
-                    if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'vn')                                   
-                        this.parametros[i].vn = this.parameters[this.vetNomes[i]][j].setupValue;  
-                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lie')   
-                        this.parametros[i].lie = this.parameters[this.vetNomes[i]][j].setupValue;  
-                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lic')   
-                        this.parametros[i].lic = this.parameters[this.vetNomes[i]][j].setupValue; 
-                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lsc')   
-                        this.parametros[i].lsc = this.parameters[this.vetNomes[i]][j].setupValue;   
-                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lse')
-                        this.parametros[i].lse = this.parameters[this.vetNomes[i]][j].setupValue;                                    
-                    else if(this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'unidade')
-                        this.parametros[i].unidade = this.parameters[this.vetNomes[i]][j].setupValue;                                                                                                             
-                }                              
-            }                              
-            for(i=0; i<this.vetNomes.length; i++)
+                    }
+                }
+            }
+            j = 0;
+            for (i = 0; i < this.vetNomes.length; i++) {
+                this.parametros[i] = {};
+                for (j = 0; j < this.parameters[this.vetNomes[i]].length; j++) {
+                    if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'vn')
+                        this.parametros[i].vn = this.parameters[this.vetNomes[i]][j].setupValue;
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lie')
+                        this.parametros[i].lie = this.parameters[this.vetNomes[i]][j].setupValue;
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lic')
+                        this.parametros[i].lic = this.parameters[this.vetNomes[i]][j].setupValue;
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lsc')
+                        this.parametros[i].lsc = this.parameters[this.vetNomes[i]][j].setupValue;
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lse')
+                        this.parametros[i].lse = this.parameters[this.vetNomes[i]][j].setupValue;
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'unidade')
+                        this.parametros[i].unidade = this.parameters[this.vetNomes[i]][j].setupValue;
+                }
+            }
+            for (i = 0; i < this.vetNomes.length; i++)
                 this.parametros[i].parametro = this.parameters[this.vetNomes[i]][0].tag.tagGroup;
         },
 
 
 
-        organizar(recipe, campo, pos){                         
-            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
-            for(var i=0; i<this.cabecalhoSetas.length; i++)
-                if(i==pos)    
-                    this.cabecalhoSetas[i]=false;
+        organizar(recipe, campo, pos) {
+            recipe.sort(function(a, b) { return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0); });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
 
         },
-        desorganizar(recipe, campo, pos){                         
-            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);});
-            for(var i=0; i<this.cabecalhoSetas.length; i++)
-                if(i==pos)    
-                    this.cabecalhoSetas[i]=true;
-                else   
-                    this.cabecalhoSetas[i]=false;             
+        desorganizar(recipe, campo, pos) {
+            recipe.sort(function(a, b) { return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0); });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
         },
 
         /*****************/

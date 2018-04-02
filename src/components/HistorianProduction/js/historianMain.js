@@ -9,6 +9,20 @@ import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
 
+function paginacao(response, este) {
+    este.pageAtual = este.startat / 20;
+    este.total = response.data.total;
+    let fim = Math.ceil(este.total / 20);
+    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
+    if (este.pageAtual > 11) {
+        for (var i = este.pageAtual - 5; i < num; i++)
+            este.pages[i] = i;
+    } else {
+        for (var i = 0; i < num; i++)
+            este.pages[i] = i;
+    }
+}
+
 export default {
     name: "HistorianProduction",
     data() {
@@ -26,8 +40,9 @@ export default {
             orderPhaseProducts: [],
             phaseProducts: [],
             orderHistorian: [],
-            orderHistorianAllProducts: {},
-            cabecalhoSetas: [false, false, false, false, false, false],
+            orderHistorianAllProducts: [],
+            allProducts: {},
+            cabecalhoSetas: [false, false, false, false, false],
             productionOrderId: '',
             consumo: false,
             rolo: 1,
@@ -47,7 +62,11 @@ export default {
             lista: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
-            teste: {}
+            quantityPage: 20,
+            startat: 0,
+            total: 0,
+            pages: [],
+            pageAtual: 0,
         }
     },
     computed: {
@@ -67,12 +86,6 @@ export default {
         showModal() {
             this.mensagem = '';
             this.mensagemSuc = '';
-            if (this.orderHistorian.length > 0) {
-                if (this.orderHistorian.productsOutput.length != 0) {
-                    this.ordem.type = "output";
-                }
-            }
-
             setTimeout(() => {
                 if (this.ordem.type === "output") {
                     this.pReceita = true;
@@ -84,13 +97,13 @@ export default {
                     this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                     this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
                     this.rolo = this.orderHistorian.productsOutput.length + 1;
-                } else if (this.ordem.type === "input") {
+                } else {
                     this.consumo = true;
                     this.pReceita = false;
                     this.pFase = true;
                     this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                     this.orderPhaseProducts = this.productionOrdersRecipe.phases[0];
-                    this.lote = "OF";
+                    this.lote = "OPL";
                 }
             }, 100);
 
@@ -151,86 +164,34 @@ export default {
             this.pReceita = false;
             this.consumo = false;
         },
-
-        changeJson(obj, type) {
-
-            var array = this.orderHistorianAllProducts.products;
+        changeJson(obj) {
             if (this.orderHistorianAllProducts.products == undefined) {
                 this.orderHistorianAllProducts.products = []
             }
             if (this.orderHistorianAllProducts.id != undefined) {
-                if (type == "in") {
-                    obj.rolo = "-";
-                    obj.lote = obj.batch;
-                    this.orderHistorianAllProducts.products.push(obj)
-                } else if (type == "out") {
-                    obj.lote = "-";
-                    obj.rolo = obj.batch;
-                    this.orderHistorianAllProducts.products.push(obj)
-                }
+                this.orderHistorianAllProducts.products.push(obj)
             } else {
-                if (type == "in") {
-                    obj.rolo = "-";
-                    obj.lote = obj.batch;
-                    this.orderHistorianAllProducts.id = this.orderHistorian.id;
-                    this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
-                    this.orderHistorianAllProducts.order = this.orderHistorian.order
-                    this.orderHistorianAllProducts.products.push(obj)
-                } else if (type == "out") {
-                    obj.rolo = obj.batch;
-                    obj.lote = "-";
-                    this.orderHistorianAllProducts.id = this.orderHistorian.id;
-                    this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
-                    this.orderHistorianAllProducts.order = this.orderHistorian.order
-                    this.orderHistorianAllProducts.products.push(obj)
-                }
-
+                this.orderHistorianAllProducts.id = this.orderHistorian.id;
+                this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
+                this.orderHistorianAllProducts.order = this.orderHistorian.order
+                this.orderHistorianAllProducts.products.push(obj)
             }
-
-            this.teste = this.orderHistorianAllProducts.products
-
-
+            this.allProducts = this.orderHistorianAllProducts.products
         },
-
         listar() {
-            this.orderHistorianAllProducts = [];
             this.lista = true;
             this.carregando = true;
             axios.get(this.url + '/api/OrderHistorian/' + this.productionOrder.productionOrderId).then((response) => {
-
-                console.log(response.data);
-                this.orderHistorian = response.data;
-                for (var i = 0; i < this.orderHistorian.productsInput.length; i++) {
-                    this.orderHistorian.productsInput[i].hour = this.hourConvert(this.orderHistorian.productsInput[i].date);
-                    this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
-                    this.changeJson(this.orderHistorian.productsInput[i], "in");
-                }
-                for (var i = 0; i < this.orderHistorian.productsOutput.length; i++) {
-                    this.rolo = this.orderHistorian.productsOutput.length;
-                    this.orderHistorian.productsOutput[i].hour = this.hourConvert(this.orderHistorian.productsOutput[i].date);
-                    this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
-                    this.changeJson(this.orderHistorian.productsOutput[i], "out");
-                }
-                this.rolo += 1;
-                console.log(this.orderHistorianAllProducts);
-                this.carregando = false;
+                this.orderHistorian = response.data.values;
             }, (r) => {
                 this.mensagem = 'Erro no server ' + r;
                 this.carregando = false;
                 this.orderHistorian = [];
-                this.orderHistorianAllProducts = [];
             })
 
         },
 
         listaOp(p) {
-            // var id = this.$route.params.id;
-            // var p = this.getResults(id);
-            this.productionOrder.productionOrderNumber = p.productionOrderNumber;
-            this.productionOrder.productionOrderId = p.productionOrderId;
-            this.op = p.productionOrderNumber;
-            // listaOp(p);
-            // productionOrderRecipe = p.recipe
             console.log(p);
             this.productionOrdersRecipe = p.recipe;
             this.order = true;
@@ -239,60 +200,27 @@ export default {
                 this.listar();
             }, 1000);
         },
-
-        getResults(id) {
-            var id = this.$route.params.id;
+        getResults() {
+            this.orderHistorian = [];
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
             console.log(this.urlOP + '/api/productionorders');
-            axios.get(this.urlOP + '/api/productionorders/' + id).then((response) => {
-                this.productionOrder = response.data;
+            axios.get(this.urlOP + '/api/productionorders?orderField=&order=&fieldFilter=&fieldValue=&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
                 console.log(response.data);
-                this.listaOp(response.data);
-                return response.data;
+                response.data.values.forEach((pro) => {
+                    this.orderHistorian.push(pro);
+                });
+
+                paginacao(response, this);
                 console.log(this.OPs);
             }, (error) => {
                 console.log(error);
             })
         },
-        dataConvert(dataTicks) {
-            var epochTicks = 621355968000000000,
-                ticksPerMillisecond = 10000,
-                jsTicks = 0,
-                jsDate;
 
-            jsTicks = (dataTicks - epochTicks) / ticksPerMillisecond;
-            jsDate = new Date(jsTicks);
-            var dateFormatted = jsDate.getDate() + "/" +
-                (jsDate.getMonth() + 1) + "/" +
-                jsDate.getFullYear();
-            console.log(jsDate);
-
-            return dateFormatted;
-        },
-        hourConvert(dataTicks) {
-            var epochTicks = 621355968000000000,
-                ticksPerMillisecond = 10000,
-                jsTicks = 0,
-                jsDate;
-
-            jsTicks = (dataTicks - epochTicks) / ticksPerMillisecond;
-            jsDate = new Date(jsTicks);
-            var min = "";
-            if (jsDate.getUTCMinutes() <= 9) {
-                min = "0" + jsDate.getUTCMinutes();
-            } else {
-                min = jsDate.getUTCMinutes();
-            }
-            var dateFormatted = jsDate.getHours() + ":" +
-                min;
-            var teste = jsDate.getUTCMinutes();
-
-            console.log(jsDate);
-
-            return dateFormatted;
-        }
     },
     beforeMount: function() {
-        // this.getResults();
         this.getResults();
         this.productionOrdersRecipe.recipeName = '';
         this.productionOrdersRecipe.recipeProduct.product.productName = '';
