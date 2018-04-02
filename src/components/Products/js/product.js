@@ -84,9 +84,7 @@ export default {
         },
         hideModalRemoveProduct() {
             this.$refs.modalRemoveProduct.hide()
-        },       
-        
-
+        },               
 
         organizar(produtos, campo, pos){                         
             produtos.sort(function(a,b) {console.log(a[campo]);return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
@@ -168,18 +166,18 @@ export default {
             };
             this.produtos = [];
             console.log(this.order, this.orderField);
-                axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
-                    if (!response.data.values && response.data.productId)
-                        this.produtos[0] = response.data;
-                    else {
-                        paginacao(response, this);
-                        this.produtos = response.data.values;
-                    }
-                    this.carregando = false;
-                }, (error) => {
-                    this.mensagem = 'Erro no server ao buscar ' + error;
-                    this.carregando = false;
-                })            
+            axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                if (!response.data.values && response.data.productId)
+                    this.produtos[0] = response.data;
+                else {
+                    paginacao(response, this);
+                    this.produtos = response.data.values;
+                }
+                this.carregando = false;
+            }, (error) => {
+                this.mensagem = 'Erro no server ao buscar ' + error;
+                this.carregando = false;
+            })            
         }
     },
     beforeMount: function(){

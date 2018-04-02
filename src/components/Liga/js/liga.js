@@ -28,9 +28,11 @@ export default {
             urlGatewayRecipes: ipServerOP + '/gateway/recipes/',
             valMin: 50,
             valMax: 60,
+            cabecalhoSetas: [false, false, false],
             carregando: false,
             recipeCadastrada: false,
             recipe: {},
+            recipeTemp:{},
             phase: {},
             phases: [],
             phaseProduct: {},
@@ -85,15 +87,16 @@ export default {
           hideModalEditFase() {
             this.$refs.modalEditFase.hide()
           },
-          showModalEditRecipe() {
-            this.$refs.modalEditRecipe.show()
+          showModalEditRecipe(recipe) {
+            this.recipeTemp = JSON.parse(JSON.stringify(recipe));
+            delete this.recipeTemp.phases;
+            this.$refs.modalEditRecipe.show();
           },
           hideModalEditRecipe() {
             this.$refs.modalEditRecipe.hide()
           },
           showModalAddProd() {
-            this.errors = {};
-            this.phaseProduct={};
+            this.errors = {};            
             this.$refs.modalcadProPhase.show();
             this.mensagemSuc = '';
             this.mensagem = '';
@@ -107,7 +110,12 @@ export default {
           hideModalRemoveLiga() {
             this.$refs.modalRemoveLiga.hide()
           },
-          
+          showModalConfirmEditLiga() {
+            this.$refs.modalConfirmEditLiga.show()
+          },
+          hideModalConfirmEditLiga() {
+            this.$refs.modalConfirmEditLiga.hide()
+          },
         /*****************/
         /*               */
         /*               */
@@ -124,8 +132,8 @@ export default {
                 setTimeout(() => {
                     axios.get(this.urlGatewayRecipes + id).then(response => {
                         this.recipe = response.data;
-                        this.phases = response.data.phases;
-                        console.log(response.data);                                                
+                        console.log("Teste");
+                        console.log(response.data);                                                                          
                         this.recipeCadastrada = true;
                         this.carregando = false;
                         this.editarActivate = true;
@@ -137,29 +145,30 @@ export default {
             }
         },
         createRecipe(recipe) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            this.editarActivate = false;
-            console.log(recipe);
-            console.log(this.url + "recipes/");
-            axios.post(this.url + "recipes/", recipe).then((response) => {
-                console.log(response.data);
+            this.mensagemSuc = ''; this.carregando = true;            
+            this.editarActivate = false; this.phase = {};  
+            this.phase.phaseName = recipe.recipeName;
+            this.phase.phaseCode = recipe.recipeCode; 
+            recipe.recipeTypeId = 2;                                                                                                             
+            axios.post(this.url + "recipes/", recipe).then((response) => {  
                 this.recipe = response.data;
-                this.carregando = false;
-                this.recipeCadastrada = true;
+                this.createPhase(this.phase);                                                                                                 
             }, (error) => {
                 console.log(error);
                 this.carregando = false;
-            });
+            });                        
         },
         putRecipe(recipe) {
             this.mensagemSuc = '';
-            this.carregando = true;
+            this.carregando = true;             
+            this.hideModalEditRecipe();           
             axios.put(this.url + "recipes/" + recipe.recipeId, recipe).then((response) => {
                 console.log(response.data);
-                recipe = response.data;
+                this.recipe.recipeName = recipe.recipeName;
+                this.recipe.recipeCode = recipe.recipeCode;
                 this.ok = true;
                 this.carregando = false;
+                this.hideModalConfirmEditLiga();
             }, (error) => {
                 console.log(error);
                 this.carregando = false;
@@ -168,10 +177,10 @@ export default {
         deleteRecipe(recipe) {
             this.mensagemSuc = '';
             this.carregando = true;
-            axios.delete(this.url + "recipes/" + recipe.recipeId).then((response) => {
-                console.log(response.data);
-                recipe = {};                
+            axios.delete(this.url + "recipes/" + recipe.recipeId).then((response) => {                
+                this.recipe = {};                
                 this.carregando = false;
+                this.recipeCadastrada = false;
             }, (error) => {                
                 this.carregando = false;
             });
@@ -187,15 +196,13 @@ export default {
         /*****************/
         createPhase(phase) {
             this.mensagemSuc = '';
-            this.carregando = true;
-            axios.post(this.url + "phases/", phase).then((response) => {
-                phase = response.data;
-                this.relacionaFase(phase);
-                console.log(phase);
-                this.carregando = false;
+            this.carregando = true;            
+            axios.post(this.url + "phases/", phase).then((response) => {                                             
+                this.phase = response.data;                              
+                this.relacionaFase(this.phase);                                
             }, (error) => {
                 console.log(error);
-                this.carregando = false;
+                this.carregando = false;                
             });
         },
         putPhase(phase) {
@@ -229,19 +236,18 @@ export default {
                 })
             }
         },
-        relacionaFase(phase) {
-            axios.post(this.url + "recipes/phases/" + this.recipe.recipeId, phase).then((response) => {
-                console.log(response.data);
-                phase.products = [];
-                phase.parameters = [];
-                this.phases.push(phase);
-                this.phase = {};
+        relacionaFase(phase) {     
+            console.log(phase);                                   
+            axios.post(this.url + "recipes/phases/" + this.recipe.recipeId, phase).then((response) => {                                                                                
+                this.$route.params.id = this.recipe.recipeId;
+                this.getGatewayRecipe();
                 this.mensagemSuc = 'Fase relacionada com sucesso';
                 this.ok = true;
+                console.log("testeRelaciona");
             }, (error) => {
                 console.log(error);
                 this.carregando = false;
-            });
+            });            
         },
 
         /*****************/
