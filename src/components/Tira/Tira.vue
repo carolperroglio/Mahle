@@ -99,44 +99,42 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <div class="" style="">
-            <div class="tiras-parametros" style="margin-top:18%">
-                <div class="progress" v-show="carregando">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                    </div>
+        <div class="tiras-parametros">
+            <div class="progress" v-show="carregando">
+                <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                 </div>
-                <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
-                    <label class="ls4-parametros">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.parametro}}
-                    </label>                    
-                    <label class="ls4-parametros">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.vn}}
-                    </label>
-                    <label class="ls4-parametros">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.unidade}}
-                    </label>
-                    <label class="ls4-parametros">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.lie}}
-                    </label>   
-                    <label class="ls4-parametros">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.lic}}
-                    </label>            
-                    <label class="ls4-parametros">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.lsc}}
-                    </label>
-                    <label class="ls4-parametros">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.lse}}
-                    </label>                                                                                        
-                </div>                                                                                                       
             </div>
-        </div>                                                
+            <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
+                <label class="ls4-parametros">
+                <b><font color="#9BA6A5"> </font></b>
+                    {{pro.parametro}}
+                </label>                    
+                <label class="ls4-parametros">
+                <b><font color="#9BA6A5"> </font></b>
+                    {{pro.vn}}
+                </label>
+                <label class="ls4-parametros">
+                <b><font color="#9BA6A5"> </font></b>
+                    {{pro.unidade}}
+                </label>
+                <label class="ls4-parametros">
+                <b><font color="#9BA6A5"> </font></b>
+                    {{pro.lie}}
+                </label>   
+                <label class="ls4-parametros">
+                <b><font color="#9BA6A5"> </font></b>
+                    {{pro.lic}}
+                </label>            
+                <label class="ls4-parametros">
+                <b><font color="#9BA6A5"> </font></b>
+                    {{pro.lsc}}
+                </label>
+                <label class="ls4-parametros">
+                <b><font color="#9BA6A5"> </font></b>
+                    {{pro.lse}}
+                </label>                                                                                        
+            </div>                                                                                                       
+        </div>                                                    
         
         <!--                       -->
         <!--                       -->

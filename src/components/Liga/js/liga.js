@@ -34,15 +34,17 @@ export default {
             recipe: {},
             recipeTemp:{},
             phase: {},
-            phases: [],
+            phases: [],            
             phaseProduct: {},
             productPhaseName: '',
+            produtos: [],
             carregando: false,
             mensagem: '',
             mensagemSuc: '',            
             editarActivate: false,
             expand: [],
-            errors: []
+            errors: [],
+            pros: []
         }
     },
     filters: {
@@ -75,47 +77,66 @@ export default {
         /*                      */
         /************************/
 
-          showModalCadFase() {
-            this.$refs.myModalRefCF.show()
-          },
-          hideModalCadFase() {
-            this.$refs.myModalRefCF.hide()
-          },
-          showModalEditFase() {
-            this.$refs.modalEditFase.show()
-          },
-          hideModalEditFase() {
-            this.$refs.modalEditFase.hide()
-          },
-          showModalEditRecipe(recipe) {
-            this.recipeTemp = JSON.parse(JSON.stringify(recipe));
-            delete this.recipeTemp.phases;
-            this.$refs.modalEditRecipe.show();
-          },
-          hideModalEditRecipe() {
-            this.$refs.modalEditRecipe.hide()
-          },
-          showModalAddProd() {
-            this.errors = {};            
-            this.$refs.modalcadProPhase.show();
-            this.mensagemSuc = '';
-            this.mensagem = '';
-          },
-          hideModalAddProd() {
-            this.$refs.modalcadProPhase.hide()
-          },
-          showModalRemoveLiga() {
-            this.$refs.modalRemoveLiga.show()
-          },
-          hideModalRemoveLiga() {
-            this.$refs.modalRemoveLiga.hide()
-          },
-          showModalConfirmEditLiga() {
-            this.$refs.modalConfirmEditLiga.show()
-          },
-          hideModalConfirmEditLiga() {
-            this.$refs.modalConfirmEditLiga.hide()
-          },
+        showModalCadFase() {
+        this.$refs.myModalRefCF.show()
+        },
+        hideModalCadFase() {
+        this.$refs.myModalRefCF.hide()
+        },
+        showModalEditFase() {
+        this.$refs.modalEditFase.show()
+        },
+        hideModalEditFase() {
+        this.$refs.modalEditFase.hide()
+        },
+        showModalEditRecipe(recipe) {
+        this.recipeTemp = JSON.parse(JSON.stringify(recipe));
+        delete this.recipeTemp.phases;
+        this.$refs.modalEditRecipe.show();
+        },
+        hideModalEditRecipe() {
+        this.$refs.modalEditRecipe.hide()
+        },
+        showModalAddProd() {
+        this.errors = {};            
+        this.$refs.modalcadProPhase.show();
+        this.mensagemSuc = '';
+        this.mensagem = '';
+        },
+        hideModalAddProd() {
+        this.$refs.modalcadProPhase.hide()
+        },
+        showModalRemoveLiga() {
+        this.$refs.modalRemoveLiga.show()
+        },
+        hideModalRemoveLiga() {
+        this.$refs.modalRemoveLiga.hide()
+        },
+        showModalConfirmEditLiga() {
+        this.$refs.modalConfirmEditLiga.show()
+        },
+        hideModalConfirmEditLiga() {
+        this.$refs.modalConfirmEditLiga.hide()
+        },
+
+        organizar(produtos, campo, pos){                         
+            produtos.sort(function(a,b) {console.log(a[campo]);return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=false;
+
+        },
+        desorganizar(produtos, campo, pos){                         
+            produtos.sort(function(a,b) {return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);});
+            for(var i=0; i<this.cabecalhoSetas.length; i++)
+                if(i==pos)    
+                    this.cabecalhoSetas[i]=true;
+                else   
+                    this.cabecalhoSetas[i]=false;             
+        },
+        
+
+
         /*****************/
         /*               */
         /*               */
@@ -131,8 +152,8 @@ export default {
                 console.log(this.urlGatewayRecipes+id);
                 setTimeout(() => {
                     axios.get(this.urlGatewayRecipes + id).then(response => {
-                        this.recipe = response.data;
-                        console.log("Teste");
+                        this.recipe = response.data;                        
+                        this.produtos = this.recipe.phases[0].phaseProducts;
                         console.log(response.data);                                                                          
                         this.recipeCadastrada = true;
                         this.carregando = false;
@@ -144,6 +165,7 @@ export default {
                 }, 300);
             }
         },
+
         createRecipe(recipe) {
             this.mensagemSuc = ''; this.carregando = true;            
             this.editarActivate = false; this.phase = {};  
@@ -153,11 +175,12 @@ export default {
             axios.post(this.url + "recipes/", recipe).then((response) => {  
                 this.recipe = response.data;
                 this.createPhase(this.phase);                                                                                                 
-            }, (error) => {
+            }, (error) => {                
                 console.log(error);
                 this.carregando = false;
             });                        
         },
+
         putRecipe(recipe) {
             this.mensagemSuc = '';
             this.carregando = true;             
@@ -174,9 +197,11 @@ export default {
                 this.carregando = false;
             });
         },
+
         deleteRecipe(recipe) {
             this.mensagemSuc = '';
             this.carregando = true;
+            this.deletePhase(recipe.phases[0],recipe);
             axios.delete(this.url + "recipes/" + recipe.recipeId).then((response) => {                
                 this.recipe = {};                
                 this.carregando = false;
@@ -184,6 +209,7 @@ export default {
             }, (error) => {                
                 this.carregando = false;
             });
+            
         },
 
 
@@ -202,6 +228,7 @@ export default {
                 this.relacionaFase(this.phase);                                
             }, (error) => {
                 console.log(error);
+                this.deleteRecipe(this.recipe);
                 this.carregando = false;                
             });
         },
@@ -222,19 +249,17 @@ export default {
         },
         deletePhase(phase, recipe) {
             this.carregando = true;
-                this.mensagemSuc = '';
-            if(confirm("Tem certeza que deseja excluir a fase?")){
-                axios.delete(this.url + "recipes/phases/" + recipe.recipeId, { data: phase }).then((response) => {
-                    console.log(response.data);
-                    this.phases = this.phases.filter(item => item !== phase);
-                    this.phase = {};
-                    this.carregando = false;
-                }, (error) => {
-                    console.log(error);
-                    this.carregando = false;
-                    this.mensagemSuc = 'Erro ao deletar : ' + error;
-                })
-            }
+            this.mensagemSuc = '';
+            axios.delete(this.url + "phases/" + phase.phaseId, { data: phase }).then((response) => {
+                console.log(response.data);
+                this.phases = [];
+                this.phase = {};
+                this.carregando = false;
+            }, (error) => {
+                console.log(error);
+                this.carregando = false;
+                this.mensagemSuc = 'Erro ao deletar : ' + error;
+            })            
         },
         relacionaFase(phase) {     
             console.log(phase);                                   
@@ -245,6 +270,8 @@ export default {
                 this.ok = true;
                 console.log("testeRelaciona");
             }, (error) => {
+                this.deleteRecipe(this.recipe);
+                this.deletePhase(this.phase);
                 console.log(error);
                 this.carregando = false;
             });            
@@ -257,52 +284,46 @@ export default {
         /*   Products    */
         /*               */
         /*****************/
-        createPhaseProduct(productPhase, phase) {
+        createPhaseProduct(phaseProduct, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
-
-            setTimeout(() => {
-                console.log("produto da fase");
-                console.log(productPhase);
+            phaseProduct.measurementUnit='%';
+            console.log(phaseProduct);
+            setTimeout(() => {                
                 console.log("fase");
                 console.log(phase);
-                axios.post(this.url + "phases/products/" + this.phase.phaseId, productPhase).then((response) => {
-                productPhase.phaseProductId = response.data.phaseProductId;
-                this.phase.phaseProducts.push(productPhase);
-                this.phaseProduct = {};
-                this.productPhaseName = '';
+                axios.post(this.url + "phases/products/" + phase.phaseId, phaseProduct).then((response) => {
+                    phaseProduct.phaseProductId = response.data.phaseProductId;
+                    this.phase.phaseProducts.push(phaseProduct);
+                    this.phaseProduct = {};
+                    this.productPhaseName = '';
+                    this.mensagemSuc = 'Fase relacionada com sucesso';
+                    this.ok = true;
+                    this.carregando = false;                
+                }, (error) => {
+                    console.log(error);
+                    this.phaseProduct = {};
+                    this.productPhaseName = '';
+                    this.carregando = false;
+                },300);
+            })
+        },
+        deletePhaseProduct(phaseProduct, phase) {
+            this.carregando = true;
+            this.mensagemSuc = '';  
+            console.log(JSON.parse(JSON.stringify(phaseProduct)));
+            console.log(phase);           
+            axios.delete(this.url + "phases/products/" + phase.phaseId, { data: JSON.parse(JSON.stringify(phaseProduct))}).then((response) => {
+                phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);
+                this.produtos = phase.products;
                 this.mensagemSuc = 'Fase relacionada com sucesso';
                 this.ok = true;
                 this.carregando = false;
-                
+                console.log(response);
             }, (error) => {
                 console.log(error);
-                this.phaseProduct = {};
-                this.productPhaseName = '';
                 this.carregando = false;
-            });
-            })
-        },
-        deletePhaseProduct(productPhase, phase) {
-             this.carregando = true;
-             this.mensagemSuc = '';
-             
-            if(confirm("Tem certeza que deseja excluir o produto da fase?")){
-                console.log("produto da fase");
-                console.log(productPhase);
-                console.log("fase");
-                console.log(phase.phaseId);
-                axios.delete(this.url + "phases/products/" + phase.phaseId, { data: productPhase }).then((response) => {
-                    phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);
-                    this.mensagemSuc = 'Fase relacionada com sucesso';
-                    this.ok = true;
-                    this.carregando = false;
-                    console.log(response);
-                }, (error) => {
-                    console.log(error);
-                    this.carregando = false;
-                });
-            }         
+            });                
         },
 
         /*****************/
@@ -312,17 +333,18 @@ export default {
         /*               */
         /*               */
         /*****************/
-        getResults(url, name) {
-            var array = [];
-            if (name.length < 3) { return; }
-            axios.get(url + name, this.config).then((response) => {
-                response.data.values.forEach((pro) => {
-                    array.push(pro);
-                });
-            }, (error) => {
-                console.log(error);
-            })
-            return array;
+        getResults(url, name, pros) {                       
+            pros = [];     
+            if (name.length > 3){                  
+                axios.get(url + name, this.config).then((response) => {                                        
+                    response.data.values.forEach((pro) => {                        
+                        pros.push(pro);
+                    });
+                }, (error) => {
+                    console.log(error);
+                })
+            }
+            return pros;            
         }
     },
     mounted() {
