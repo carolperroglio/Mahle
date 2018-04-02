@@ -162,7 +162,7 @@
             </ul>
         </div>             
         <div class="produtos col">
-            <div id="load" v-show="carregando">
+            <div id="load" v-show="carregando" style="z-index:5">
                 <stretch background="#4d4d4d"></stretch>                
             </div> 
             <div class="fundo-branco">                             
