@@ -14,7 +14,7 @@
     position: fixed;
     top: 26%;
     /* left: 1.8%; */
-    width: 100%;
+    width: 96.1%;
     padding: 0 0 0 0.1%;
     background-color: black;
     margin: 0 0 0 0;
@@ -38,7 +38,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     margin-bottom: 0.3%;
-    margin-left: 0.5%;
+    margin-left: 1%;
 }
 
 .cinza {
@@ -167,5 +167,11 @@ input {
         font-size: 11px;
         width: 11%;
         height: 50%;
+    }
+    .cabecalho-table-tm {
+        top: 51%;
+    }
+    .margin-table {
+        margin-top: 53%;
     }
 }

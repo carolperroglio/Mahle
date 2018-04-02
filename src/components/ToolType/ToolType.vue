@@ -45,7 +45,7 @@
                     {{ttype.status}}
                 </label>
                 <label class="ls ls21 col-md-1">
-                    <i class="fa fa-edit icon-style" style="font-size:22px; cursor:pointer"  @click.prevent="showModalEdit();catchObjToUpdate(ttype)"></i>
+                    <i class="fa fa-edit icon-right" style="font-size:22px; cursor:pointer"  @click.prevent="showModalEdit();catchObjToUpdate(ttype)"></i>
                 </label>
                 
             </div>

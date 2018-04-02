@@ -44,7 +44,8 @@
                             </font></b>
                         </label> 
                     </div>
-                </div>  
+                </div> 
+                <div class="table-margin"> 
                 <div v-for="(t,index) in tools" :key="index" :class="{cinza: index%2==0}">
                         <label class="ls ls20 col-md-2">
                             {{t.name}}
@@ -63,7 +64,8 @@
                             Alterar Status da Ferramenta
                         </button>
                         </label>
-                    </div>
+                </div>
+                </div>
                     </div>
                     </div>
                     <!-- Modal -->

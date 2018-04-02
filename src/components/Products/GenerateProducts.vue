@@ -10,7 +10,7 @@
         <!--                                 -->
         <!--               Modal             -->
         
-            <b-modal ref="myModalRef" hide-footer title="Cadastro de Matéria-Prima">                    
+            <b-modal ref="myModalRef" hide-footer title="Cadastrar Matéria-Prima">                    
                 <form>
                     <div>
                         <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
@@ -69,7 +69,7 @@
         <div class="fixed-top nav-produtos">                                   
             <ul class="nav d-flex">
                 <li class="nav-item nav-item-products">
-                    <h1 class="title-page-gp"><b>Cadastro de Matérias Primas</b></h1>
+                    <h1 class="title-page-gp"><b>Cadastro de Matéria-Prima</b></h1>
                 </li>                   
                 <li class="nav-item nav-item-products">
                     <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
@@ -87,7 +87,7 @@
                     <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
                 <li class="nav-item nav-item-products">
-                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModal"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Materia Prima</button>
+                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModal"><i class="fa fa-plus" aria-hidden="true" ></i> Cadastrar Matéria-Prima</button>
                 </li>
             </ul>
             </div> 

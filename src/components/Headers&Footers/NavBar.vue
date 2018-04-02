@@ -22,11 +22,11 @@
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:44px; cursor:pointer"></i>  <br>Ferramentas</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-1.5">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionLiga"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos Liga</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianMain"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos</router-link>
                     </li> 
-                    <li class="nav-item-cab col-md-1.5">
+                    <!-- <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionTira"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos Tira</router-link>
-                    </li> 
+                    </li>  -->
                 </ul>    
             </nav>
         </div> 
@@ -149,15 +149,15 @@
                         </a>  
                         <b-collapse id="menu3">
                             <router-link to="/prodOrder" class="list-group-item" data-parent="#menu3"> 
-                                Cadastro de Ordem de Produção
+                                Cadastro de Ordem de Produção de Tira
                             </router-link>
                             <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 
-                            </router-link>
+                            </router-link> -->
                             <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
                                 Associação de Ordem de Produção
                             </router-link>
-                            <router-link to="/OPManagement" class="list-group-item" data-parent="#menu3"> 
+                            <!-- <router-link to="/OPManagement" class="list-group-item" data-parent="#menu3"> 
                                 Gerenciamento de Ordem de Produção
                             </router-link> -->
                         </b-collapse>

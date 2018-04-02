@@ -1,5 +1,6 @@
 /* menu de navegação de OP */
 
+@import url("./../../genericcss/generico.css");
 .nav-op {
     position: fixed;
     margin-top: 5%;
@@ -12,14 +13,37 @@
 }
 
 .cabecalho-table-po {
-    position: relative;
-    top: 12%;
+    position: fixed;
+    top: 26%;
     /* left: 1.8%; */
+    width: 91.4%;
+    padding: 0 0 0 0.1%;
+    background-color: black;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0.2%;
+}
+
+.cabecalho-table-po-modal {
     width: 100%;
     padding: 0 0 0 0.1%;
     background-color: black;
     margin: 0 0 0 0;
     padding: 0 0 0 0.2%;
+}
+
+.width-table-context {
+    width: 13%;
+    text-align: center;
+    margin-left: 0.5%;
+}
+
+.width-table-context-wider {
+    width: 16%;
+    text-align: center;
+}
+
+.font-size {
+    font-size: 12px;
 }
 
 .fundo-branco-po {
@@ -32,8 +56,8 @@
 }
 
 .ls2-cabecalho-po {
-    /* width: 24.2%; */
-    width: 100%;
+    width: 13%;
+    /* width: 100%; */
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
@@ -141,6 +165,13 @@ input {
     text-align: center;
 }
 
+@media (min-width: 992px) {
+    .modal-lg {
+        max-width: 70%;
+        margin-left: 5%;
+    }
+}
+
 @media screen and (max-width: 801px) {
     .nav-op {
         position: fixed;
@@ -187,5 +218,15 @@ input {
     .ls1 {
         width: 20%;
         font-size: 12px;
+    }
+    .cabecalho-table-po {
+        position: fixed;
+        top: 36%;
+        /* left: 1.8%; */
+        width: 93.2%;
+        padding: 0 0 0 0.1%;
+        background-color: black;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0.2%;
     }
 }
