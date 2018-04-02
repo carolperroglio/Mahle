@@ -10,8 +10,24 @@
                 <li class="nav-item col-sm-1.5">
                     <h1 class="title-page-gp-liga"><b>Gerenciamento de Liga</b></h1>
                 </li>
-                <li class="col-sm-2 botao-cadastro-liga">                     
-                    <router-link :to="{ name: 'Liga',params: { id: 0 }}" class="btn btn-primary">
+                <li class="nav-item nav-item-products">
+                    <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                        <option value="" selected disabled>Campo para busca</option>
+                        <option value="productName">Nome</option>
+                        <option value="productDescription">Descrição</option>
+                        <option value="productCode">Código</option>
+                        <option value="productGTIN">Código de Barras</option>
+                    </select>
+                </li>
+                <li class="nav-item nav-item-products">
+                    <input class="form-control btn-md" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                </li>
+                <li class="nav-item  nav-item-products">
+                    <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                </li>
+                <li class="nav-item  nav-item-products">                     
+                    <router-link :to="{ name: 'Liga',params: { id: 0 }}" class="btn btn-success btn-md">
+                        <i class="fa fa-plus" aria-hidden="true" ></i>
                         Cadastrar Liga
                     </router-link>
                 </li>
@@ -62,13 +78,9 @@
                     </label>
                     <label class="ls4">
                         <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
-                    </label>
-                    <label class="lsbtn">
-                    <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true" @click.stop.prevent="recipeDelete(recipe.recipeId);">
-                    </button>
-                    </label>
+                    </label>                    
                     <router-link :to="{ name: 'Liga',params: { id: recipe.recipeId }}">
-                        <i class="fa fa-edit icon-right2 icon-style" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">
+                        <i class="fa fa-eye" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">                        
                         </i>
                     </router-link>
                     <div class="paginacao-liga" v-show="total>0">

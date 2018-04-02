@@ -3,9 +3,9 @@ import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise
 es6promisse.polyfill();
 
 function paginacao(total, este) {
-    este.pageAtual = este.startat / 20;
+    este.pageAtual = este.startat / este.quantityPage;
     este.total = total;
-    let fim = Math.ceil(este.total / 20);
+    let fim = Math.ceil(este.total / este.quantityPage);
     var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
     if (este.pageAtual > 11) {
         for (var i = este.pageAtual - 5; i < num; i++)

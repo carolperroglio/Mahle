@@ -58,21 +58,36 @@ export default {
         'b-modal': bModalDirective,
         VeeValidate
     },
-    methods: {
-        showModal () {
-        this.mensagemSuc = '';
-        this.produto = {};
-        this.errors = [];
-        this.$refs.myModalRef.show()
-        },
+    methods: {        
         hideModal () {
-        this.$refs.myModalRef.hide()
+            this.$refs.myModalRef.hide()
         },
-        showModal2(produto) {              
-        this.errors = [];
-        this.produto = produto;
-        this.$refs.myModalRef.show()
+        showModal(produto, index) {              
+            this.errors = [];
+            this.mensagemSuc = '';
+            this.produto = JSON.parse(JSON.stringify(produto));
+            this.produto.index = index;
+            this.$refs.myModalRef.show();
+        }, 
+        showModalConfirmCreate() {                          
+            this.$refs.modalCadastrarProduto.show();
+        }, 
+        showModalConfirmPut() {                 
+            this.$refs.modalEditarProduto.show();
+        },    
+        showModalRemoveProduto(produto, index) {
+            this.errors = [];
+            this.mensagemSuc = '';
+            this.produto = JSON.parse(JSON.stringify(produto));
+            this.produto.index = index;
+            this.$refs.modalRemoveProduct.show()
         },
+        hideModalRemoveProduct() {
+            this.$refs.modalRemoveProduct.hide()
+        },       
+        
+
+
         organizar(produtos, campo, pos){                         
             produtos.sort(function(a,b) {console.log(a[campo]);return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
             for(var i=0; i<this.cabecalhoSetas.length; i++)
@@ -88,25 +103,25 @@ export default {
                 else   
                     this.cabecalhoSetas[i]=false;             
         },
-        alerta(){  
-            return confirm("Deseja realmente prosseguir com o cadastro/edição?");                                
+        validaProduto(produto){
+            return produto.productName==undefined || produto.productName=='' || produto.productCode==undefined || produto.productCode=='' || produto.productGTIN==undefined || produto.productGTIN=='';
         },
         cadastrar(produto) {
             this.mensagem = '';
             this.mensagemSuc = '';
             this.carregando = true;
-                produto.enabled = true;
-                axios.post(this.url, produto).then((r) => {
-                    this.mensagem = '';
-                    this.mensagemSuc = "Produto " + produto.productName + " cadastrado com sucesso";
-                    this.produto = {};
-                    if (this.produtos.length > 0)
-                        this.produtos.push(produto);
-                    this.carregando = false;
-                }, (r) => {
-                    this.mensagem = 'Erro no server ' + r;
-                    this.carregando = false;
-                })          
+            produto.enabled = true;
+            axios.post(this.url, produto).then((r) => {
+                this.mensagem = '';
+                this.mensagemSuc = "Produto " + produto.productName + " cadastrado com sucesso";                
+                this.produto = {};                
+                this.produtos.push(produto);
+                this.carregando = false;
+                this.$refs.modalCadastrarProduto.hide();
+            }, (r) => {
+                this.mensagem = 'Erro no server ' + r;
+                this.carregando = false;
+            })          
 
         },
 
@@ -117,8 +132,9 @@ export default {
             axios.put(this.url + produto.productId, produto).then((r) => {
                 this.mensagem = '';
                 this.mensagemSuc = "Produto " + produto.productName + " atualizado com sucesso";
-                this.produto = {}
+                this.produtos[produto.index] = produto;                
                 this.carregando = false;
+                this.$refs.modalEditarProduto.hide();
             }, (r) => {
                 this.carregando = false;
                 this.mensagem = 'Erro no server ' + r;
@@ -130,18 +146,18 @@ export default {
             this.mensagem = '';
             this.mensagemSuc = '';
             this.carregando = true;
-            if(confirm("Tem certeza que deseja excluir o material?")){
-                axios.delete(this.url + produto.productId).then((r) => {
-                    this.mensagem = '';
-                    this.mensagemSuc = "Produto " + produto.productName + " deletado com sucesso";
-                    this.produto = {};
-                    this.produtos = this.produtos.filter(item => item !== produto);
-                    this.carregando = false;
-                }, (r) => {
-                    this.mensagem = 'Erro no server ' + r;
-                    this.carregando = false;
-                });
-            }
+        
+            axios.delete(this.url + produto.productId).then((r) => {
+                this.mensagem = '';
+                this.mensagemSuc = "Produto " + produto.productName + " deletado com sucesso";                
+                this.produtos = this.produtos.filter(item => item.productId !== produto.productId);
+                this.produto = {};
+                this.carregando = false;
+                this.hideModalRemoveProduct();
+            }, (r) => {
+                this.mensagem = 'Erro no server ' + r;
+                this.carregando = false;
+            });            
             this.carregando = false;
         },
         
