@@ -29,6 +29,7 @@ import StatusMES from '@/components/StatusMES/StatusMES'
 import Historian from '@/components/Historian/Historian'
 import HistorianAlarm from '@/components/HistorianAlarm/HistorianAlarm'
 import GenealogyReport from '@/components/GenealogyReport/GenealogyReport'
+import HistorianMain from '@/components/HistorianProduction/HistorianMain'
 // import Alarms from '@/components/Alarms/Alarms'
 
 
@@ -92,14 +93,16 @@ export default new Router({
 
         },
         {
-            path: '/historianProductionLiga',
-            name: 'HistorianProduction',
-            component: HistorianProductionLiga
+            path: '/historianProductionLiga/:id',
+            name: 'HistorianProductionLiga',
+            component: HistorianProductionLiga,
+            props: true
         },
         {
-            path: '/historianProductionTira',
+            path: '/historianProductionTira/:id',
             name: 'HistorianProductionTira',
-            component: HistorianProductionTira
+            component: HistorianProductionTira,
+            props: true
         },
         {
             path: '/stateManagement',
@@ -172,6 +175,12 @@ export default new Router({
             path: '/genealogyReport',
             name: 'GenealogyReport',
             component: GenealogyReport
+        },
+        {
+
+            path: '/historianMain',
+            name: 'HistorianMain',
+            component: HistorianMain
         },
         // {
         //     path: '/alarms',

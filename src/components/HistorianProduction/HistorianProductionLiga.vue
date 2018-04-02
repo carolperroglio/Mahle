@@ -9,9 +9,9 @@
         <!--                                 -->
         <!--                                 -->
          <div class="fixed-top nav-hp">
-            <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção de Liga</b> </h1>
+            <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção de Liga (OPL)</b> </h1>
             <ul class="nav d-flex align-items-center">
-               <li class="nav-item-hp col-2.5">
+               <!-- <li class="nav-item-hp col-2.5">
                    <div class="badge">Escolha uma ordem de produção   <i class="fa fa-arrow-right" id="seta"></i></div>
                </li>
                 <li class="nav-item-hp col-3">
@@ -23,7 +23,7 @@
                                                                               listaOp(p);
                                                                               productionOrderRecipe=p.recipe" >{{p.productionOrderNumber}}</b-dropdown-item>          
                     </b-dropdown>                                                  
-                </li>                
+                </li>                 -->
             </ul>
         </div>
 
@@ -79,7 +79,7 @@
                                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                                     </font></b>
                                 </label>
-                                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(allProducts, 'batch',2):organizar(allProducts, 'batch',2);" class="ls2-cabecalho-ap-liga col-md-2">
+                                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(allProducts, 'lote',2):organizar(allProducts, 'lote',2);" class="ls2-cabecalho-ap-liga col-md-2">
                                     <b><font class="cursor-class" color="#ffffff">
                                         Lote/OPL &nbsp;&nbsp;&nbsp;
                                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
@@ -107,7 +107,7 @@
                                 <label class="ls ls10 col-md-2">
                                     {{o.quantity}}</label>&nbsp;
                                 <label class="ls ls10 col-md-2">
-                                    {{o.batch}}</label>&nbsp;
+                                    {{o.lote}}</label>&nbsp;
                                 <label class="ls ls10 col-md-2">
                                     {{o.date}}</label>&nbsp;
                                 <label class="ls ls10 col-md-2">
