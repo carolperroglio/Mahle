@@ -39,6 +39,7 @@
                     </font></b>
                 </label>
             </div>
+            <div class="table-margin">
             <div v-for="(o, index) in orderHistorian" v-bind:key="index" :class="{cinza: index%2==0}">
                 <label class="ls ls10 col-md-3">
                     {{o.productionOrderNumber}}</label>
@@ -70,6 +71,7 @@
                         </li>
                     </ul>
                 </nav>
+            </div>
             </div>
         </div>
     </div>

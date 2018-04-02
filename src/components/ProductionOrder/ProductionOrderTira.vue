@@ -18,18 +18,18 @@
                                 OP criada com sucesso !
                             </div>
                             <div class="form-group row">
-                                <label for="op" class="col-sm-3 col-form-label">Ordem de Produção de Tira</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control form-control-sm" id="op" aria-describedby="prodorder" placeholder="ex:20405060" v-model="productionOrderObj.productionOrderNumber">
+                                <div class="form-group col-sm-6">
+                                <label for="op">OP</label>
+                                    <input type="text" class="form-control" id="op" aria-describedby="prodorder" placeholder="ex:20405060" v-model="productionOrderObj.productionOrderNumber">
                                 </div>
-                                <label for="qtd" class="col-sm-2 col-form-label">Quantidade</label>
-                                <div class="col-sm-3">
-                                    <input type="number" class="form-control form-control-sm" id="qtd" v-model="productionOrderObj.quantity">
+                                <div class="form-group col-sm-4">
+                                <label for="desc">Descrição</label>
+                                    <input type="text" disabled class="form-control" id="desc" v-model="descriptionTira" value="opDesc">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="opType" class="col-sm-3 col-form-label">Tipo de Ordem</label>
-                                <div class="col-sm-3">
+                            <!-- <div class="form-group row">
+                                <div class="form-group col-sm-6">
+                                <label for="opType" >Tipo de Ordem</label>
                                     <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="opSelected">
                                         <option value="" selected disabled>Tipo de Ordem</option>
                                         <option v-for="(opType,index) in opTypeArray" v-bind:value="opType.productionOrderTypeId" v-bind:key="index" @click.stop="VOpType = opTypeArray[index].typeDescription">
@@ -37,23 +37,17 @@
                                         </option>
                                     </select>
                                 </div>
-                                <label for="desc" class="col-sm-2 col-form-label">Descrição</label>
-                                <div class="col-sm-4">
-                                    <input type="text" disabled class="form-control form-control-sm" id="desc" v-model="filterDesc" value="opDesc">
-                                </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
-                            </div>
-                            <div class="form-group row">
-                                <label for="opType" class="col-sm-2 col-form-label" v-if="opSelected == '1' || opSelected == ''">Tira</label>
-                                <label for="opType" class="col-sm-2 col-form-label" v-if="opSelected == '2'">Liga</label>
+                                <div class="form-group col-sm-6">
+                                <label for="opType">Nome da Tira</label>
                                 <input @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                                <button class="btn btn-outline-success btn-sm" :disabled="!productionOrderObj.productionOrderNumber || !recipeName " @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                </button>
                                 <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</b-dropdown-item>
-                                <div class="col-sm-2">
-                                    <button class="btn btn-outline-success btn-sm" :disabled="!productionOrderObj.productionOrderNumber || !productionOrderObj.quantity || !opSelected || !filterDesc" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                    </button>
                                 </div>
+                                
                             </div>
 
                             <!--  Acordion que mostra qual   -->
@@ -78,38 +72,7 @@
                                                 <!-- <li class="list-group-item" > -->
                                                     <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>
                                                     <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>
-                                                    <!-- <strong>Código:</strong> {{phases.phaseCode}} | -->
-                                                    <!--Botão para procurar os produtos de uma determinada fase-->
-                                                    <!-- <button type="button" class="btn btn-outline-info btn-sm" :id="index" data-toggle="collapse" data-target="#verProdutos" @click="seeProduct(index)" v-if="phases.phaseProducts != 0">Produtos</button> -->
-                                                    <!--Botão para procurar os parâmetros de uma determinada fase-->
-                                                    <!-- <button type="button" class="btn btn-outline-info btn-sm" :id="index" data-toggle="collapse" data-target="#verPârametros" @click="seeParam(index)" v-if="phases.phaseParameters != 0">Pârametros</button> -->
-                                                <!-- </li> -->
-                                                <!-- Collapse de ver 'Produtos' -->
-                                                <!-- <div class="collapse" id="verProdutos">
-                                                    <div class="card card-body-op">
-                                                        <h6>Produtos</h6>
-                                                        <ul class="list-group" v-for="product in productArray" v-bind:value="product">
-                                                            <li class="list-group-item">
-                                                                <strong>Nome:</strong> {{product.product.productName}} -
-                                                                <strong>Descrição:</strong> {{product.product.productDescription}} -
-                                                                <strong>GTIN:</strong> {{product.product.productGTIN}}
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div> -->
-                                                <!-- Collapse de ver 'Pârametros' -->
-                                                <!-- <div class="collapse" id="verPârametros">
-                                                    <div class="card card-body-op">
-                                                        <h6>Pârametros</h6>
-                                                        <ul class="list-group" v-for="param in paramArray" v-bind:value="param">
-                                                            <li class="list-group-item">
-                                                                <strong>Nome:</strong> {{param.tag.tagName}} -
-                                                                <strong>Descrição:</strong> {{param.tag.tagDescription}} -
-                                                                <strong>Grupo:</strong> {{param.tag.thingGroup.groupName}}
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div> -->
+                                                    
                                             </ul>
 
                                         </div>
@@ -125,7 +88,7 @@
                     <!--                    -->
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" @click="createOp(productionOrderObj)">
+                            <button class="btn btn-success" :disabled="!recipeAdded || !productionOrderObj.productionOrderNumber" @click="createOp(productionOrderObj)">
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -144,12 +107,12 @@
         <div class="fixed-top nav-op">
             <ul class="nav d-flex align-items-center">
             <li class="nav-prod col-sm-1.5">
-                    <h1 class="title-page-op"> <b>Cadastro de Ordem de Produção de Tira</b> </h1>
+                    <h1 class="title-page-op"> <b>Ordens de Produção - Tiras</b> </h1>
                     <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
                         <option value="" selected disabled>Buscar por:</option>
-                        <option value="productionOrderNumber">Nº Ordem de Produção</option>
+                        <option value="productionOrderNumber">OP</option>
                         <option value="typeDescription">Descrição</option>
-                        <option value="quantity">Quantidade</option>
+                        <option value="recipeCode">Código</option>
                         <option value="currentStatus">Status</option>
                     </select>
                 </li>
@@ -162,9 +125,9 @@
                             <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
                         </div>
                         <!-- Button trigger modal -->
-                        <div class="col-sm-1.5">
+                        <div class="col-sm-3">
                             <button @click="showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-sm btn-sm">
-                                Cadastrar Ordem de Produção
+                                <i class="fa fa-plus"></i> Cadastrar Ordem de Produção
                             </button>
                         </div>
                     </form>
@@ -182,58 +145,58 @@
                 </div>
                 <div class="fundo-branco-po">
                     <div class="cabecalho-table-po">
-                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opArray.values, 'productionOrderNumber',0):organizar(opArray.values, 'productionOrderNumber',0);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">Ordem &nbsp;&nbsp;&nbsp;
+                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opArrarKeep, 'productionOrderNumber',0):organizar(opArrarKeep, 'productionOrderNumber',0);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">OP &nbsp;&nbsp;&nbsp;
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArray.values, 'typeDescription',1):organizar(opArray.values, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">
-                                Descrição &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                            </font></b>
-                        </label>
-                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArray.values, 'quantity',2):organizar(opArray.values, 'quantity',2);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">
-                                Quantidade&nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                            </font></b>
-                        </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArray.values, 'recipeName',3):organizar(opArray.values, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">
-                                Nome de Tira &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                            </font></b>
-                        </label>
-                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArray.values, 'recipeCode',4):organizar(opArray.values, 'recipeCode',4);" class="ls2-cabecalho-po col-md-2">
+                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeCode',4):organizar(opArrarKeep, 'recipeCode',4);" class="ls2-cabecalho-po col-md-2">
                             <b><font class="cursor-class" color="#ffffff">
                                 Código da Tira &nbsp;&nbsp;&nbsp;
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
+                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeName',3):organizar(opArrarKeep, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Nome da Tira &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Descrição &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArrarKeep, 'quantity',2):organizar(opArrarKeep, 'quantity',2);" class="ls2-cabecalho-po col-md-2">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Status&nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label> 
                     </div>
                 </div>   
                 <div class="table-margin">
-                <div v-for="(op, index) in opArray.values" v-bind:key="index" :class="{cinza: index%2==0}">
+                <div v-for="(op, index) in opArrarKeep" v-bind:key="index" :class="{cinza: index%2==0}">
                             <label class="ls ls1 col-md-2">
                                 {{op.productionOrderNumber}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2">
-                                {{op.typeDescription}}
-                            </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2">
-                                {{op.quantity}}
+                                {{op.recipe.recipeCode}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2">
                                 {{op.recipe.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2">
-                                {{op.recipe.recipeCode}}
+                                {{op.typeDescription}}
+                            </label>&nbsp;&nbsp;&nbsp;
+                            <label class="ls ls1 col-md-2">
+                                {{op.currentStatus | filterStatus}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2" v-if="op.hasProd == true">
                                 {{op.recipe.recipeProduct.product.productName}}
@@ -244,7 +207,7 @@
                     </div>
                 </div>
                 </div>
-                <div class="paginacao-op fixed-bottom" v-show="total>0">
+                <div class="paginacao-op-tira fixed-bottom" v-show="total>0">
                     <nav aria-label="">
                         <ul class="pagination justify-content-center">
                             <li v-show="startat>0" class="page-item">
@@ -378,8 +341,8 @@
 
 
 </template>
-<script src="./js/order.js">
+<script src="./js/orderTira.js">
 </script>
 <style>
-@import url("./css/order.css");
+@import url("./css/orderTira.css");
 </style>

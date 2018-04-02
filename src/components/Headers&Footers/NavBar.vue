@@ -11,16 +11,16 @@
             <nav class="fixed-top">
                 <img src="./../../assets/imagens/mahle.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
-                    <li class="nav-item-cab col-md-1">
+                    <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
                     </li>                    
-                    <li class="nav-item-cab col-md-1.5">
+                    <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
                     </li> 
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:44px; cursor:pointer"></i>  <br>Ferramentas</router-link>
                     </li> 
-                    <li class="nav-item-cab col-md-1.5">
+                    <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historianMain"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos</router-link>
                     </li> 
                     <!-- <li class="nav-item-cab col-md-1.5">
@@ -147,8 +147,11 @@
                              <i class="fa fa-chevron-down pull-right"></i> 
                         </a>  
                         <b-collapse id="menu3">
-                            <router-link to="/prodOrder" class="list-group-item" data-parent="#menu3"> 
+                            <router-link to="/prodOrderTira" class="list-group-item" data-parent="#menu3"> 
                                 Cadastro de Ordem de Produção de Tira
+                            </router-link>
+                            <router-link to="/prodOrderLiga" class="list-group-item" data-parent="#menu3"> 
+                                Cadastro de Ordem de Produção de Liga
                             </router-link>
                             <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 
