@@ -71,7 +71,7 @@ export default {
             fieldValue: '',
             id: '',
             recipeName: '',
-            cabecalhoSetas: [false, false, false, false, false, false],
+            cabecalhoSetas: [false, false, false, false, false, false, false],
             objetooo: "",
             phase: {},
             parameters: {},
@@ -160,6 +160,8 @@ export default {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
                         if (obj.typeDescription == "Liga") {
+                            obj.recipeName = obj.recipe.recipeName
+                            obj.recipeCode = obj.recipe.recipeCode
                             this.opArray.values.push(obj);
                         }
                     })
@@ -403,7 +405,8 @@ export default {
                                         var currentID = this.opArray.values[i].currentThingId
                                         var OPId = this.opArray.values[i].productionOrderId;
                                         var obj = this.opArray.values[i];
-                                        this.getDisAssoc(currentID, OPId, obj);
+                                        if (currentID == this.idAllowed)
+                                            this.getDisAssoc(currentID, OPId, obj);
                                     }
 
                                 }

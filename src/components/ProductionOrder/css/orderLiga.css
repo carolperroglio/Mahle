@@ -47,6 +47,10 @@
     text-align: center;
 }
 
+.col1-5 {
+    width: 10%;
+}
+
 .font-size {
     font-size: 12px;
 }
@@ -61,8 +65,6 @@
 }
 
 .ls2-cabecalho-po-liga {
-    /* width: 13%; */
-    /* width: 100%; */
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
@@ -101,27 +103,6 @@ a:hover {
     color: #929fac;
 }
 
-.cadastro-op {
-    padding-right: 125px !important;
-}
-
-.modal-content {
-    width: 125%;
-}
-
-.icon-right {
-    position: relative;
-    float: right;
-}
-
-.panel-body {
-    text-align: left;
-}
-
-input {
-    position: relative;
-}
-
 .op {
     position: relative;
     margin-top: 14%;
@@ -145,26 +126,9 @@ input {
     background-color: #ffffff;
 }
 
-.cadForm {
-    position: fixed;
-    float: right;
-    z-index: 10%;
-    margin-top: 10%;
-    width: 5%;
-    left: 10%;
-    border: 1px solid rgb(223, 223, 223);
-    border-radius: 10%;
-    padding-top: 0.5%;
-}
-
 .card-header {
     padding-top: 0.5%;
     padding-bottom: 0.5%;
-}
-
-.card-margin {
-    margin-bottom: 0.1%;
-    margin-top: 0.1%;
 }
 
 .ls1 {
@@ -189,11 +153,6 @@ input {
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         padding-top: 3%;
     }
-    .cadForm {
-        margin-top: 30%;
-        width: 15%;
-        height: 70%;
-    }
     .card-body-op {
         font-size: 10px;
         padding-top: 1%;
@@ -211,7 +170,7 @@ input {
     }
     .op {
         position: relative;
-        margin-top: 28%;
+        margin-top: 36%;
         margin-bottom: 5%;
         left: 1%;
         width: 100%;
@@ -225,9 +184,9 @@ input {
         width: 20%;
         font-size: 12px;
     }
-    .cabecalho-table-po {
+    .cabecalho-table-po-liga {
         position: fixed;
-        top: 36%;
+        top: 44%;
         /* left: 1.8%; */
         width: 93.2%;
         padding: 0 0 0 0.1%;

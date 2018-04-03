@@ -159,6 +159,8 @@ export default {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
                         if (obj.typeDescription == "Tira") {
+                            obj.recipeName = obj.recipe.recipeName
+                            obj.recipeCode = obj.recipe.recipeCode
                             this.opArray.values.push(obj);
                         }
                     })
@@ -167,6 +169,7 @@ export default {
                     paginacao(response, this);
                     console.log(this.opArray);
                     this.carregando = false;
+
                 }, (error) => {
                     this.mensagem = 'Erro no server ao buscar ' + error;
                     this.carregando = false;
@@ -176,6 +179,8 @@ export default {
             console.log(this.opArray);
         },
         getGatewayRecipe: function(obj) {
+            this.parametros = [];
+            this.recipe = {};
             var id = obj.recipe.recipeId;
             this.opSelectedParams = obj;
 
@@ -194,16 +199,16 @@ export default {
                         this.editarActivate = true;
                         switch (obj.currentStatus) {
                             case 'created':
-                                return "Criado"
+                                return obj.status = "Criado"
                                 break;
                             case 'available':
-                                return "Disponível"
+                                return obj.status = "Disponível"
                                 break;
                             case 'active':
-                                return "Ativo"
+                                return obj.status = "Ativo"
                                 break;
                             case 'reproved':
-                                return "Reprovado"
+                                return obj.status = "Reprovado"
                                 break;
                             default:
                                 break;
@@ -218,6 +223,7 @@ export default {
         },
         getParametros: function() {
             this.parametros = [];
+            this.parameters = [];
             var j = 0;
             for (var i = 0; i < this.phase.phaseParameters.length; i++) {
                 if (this.phase.phaseParameters[i].tag.tagGroup != undefined) {
