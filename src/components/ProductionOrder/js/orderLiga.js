@@ -159,7 +159,7 @@ export default {
             axios.get(this.urlOp + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
-                        if (obj.typeDescription == "Liga") {
+                        if (obj.typeDescription == "Liga" && obj.currentStatus == "active") {
                             obj.recipeName = obj.recipe.recipeName
                             obj.recipeCode = obj.recipe.recipeCode
                             this.opArray.values.push(obj);
@@ -379,6 +379,15 @@ export default {
                     this.carregando = false;
                 })
         },
+        desativarOP(id) {
+            axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended")
+                .then(response => {
+                    console.log("OP Desativada" + response.statusText)
+                }).catch((e) => {
+                    console.log("OP Desativada Falhou" + response.statusText)
+                })
+
+        },
         createOp: function(data) {
                 // adiciona propriedades necessárias na op que são mandatory
                 data.recipe = this.recipeObj;
@@ -405,14 +414,21 @@ export default {
                                         var currentID = this.opArray.values[i].currentThingId
                                         var OPId = this.opArray.values[i].productionOrderId;
                                         var obj = this.opArray.values[i];
-                                        if (currentID == this.idAllowed)
+                                        if (currentID == this.idAllowed) {
                                             this.getDisAssoc(currentID, OPId, obj);
+                                            if (obj.currentStatus == "active" && obj.typeDescription == "Liga") {
+                                                //Desativar OP anterior
+                                                this.desativarOP(obj.productionOrderId);
+                                            }
+                                        }
                                     }
 
                                 }
                                 //Associar OP criada a linha
                                 this.getOPTypeToAssoc(id);
                                 // this.getAssoc(id);
+
+
 
                             })
                         })

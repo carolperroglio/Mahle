@@ -68,8 +68,9 @@
     background-color: #DCDCDC;
 }
 
-.table-margin {
-    margin-top: 17%;
+.table-margin-hm {
+    margin-top: 15%;
+    width: 100%;
 }
 
 .table-size {

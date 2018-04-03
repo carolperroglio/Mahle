@@ -24,7 +24,7 @@
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                     </font></b>
                 </label>
-                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(orderHistorian, 'quantity',1):organizar(orderHistorian, 'quantity',1);" class="ls2-cabecalho-ap col-md-3">
+                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(orderHistorian, 'thingName',1):organizar(orderHistorian, 'thingName',1);" class="ls2-cabecalho-ap col-md-3">
                     <b><font class="cursor-class" color="#ffffff">
                         Estação 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
@@ -39,14 +39,12 @@
                     </font></b>
                 </label>
             </div>
-            <div class="table-margin">
+            <div class="table-margin-hm">
             <div v-for="(o, index) in orderHistorian" v-bind:key="index" :class="{cinza: index%2==0}">
                 <label class="ls ls10 col-md-3">
                     {{o.productionOrderNumber}}</label>
-                <label class="ls ls10 col-md-3" v-if="o.currentThing">
-                    {{o.currentThing.thingName}} </label>
-                 <label class="ls ls10 col-md-3" v-else>
-                    - </label>
+                <label class="ls ls10 col-md-3">
+                    {{o.thingName}} </label>
                 <label class="ls ls10 col-md-2">
                     {{o.typeDescription}}</label>
                 <label class="ls ls10 col-md-2" v-if="o.typeDescription == 'Liga'" style="margin-top:1%">

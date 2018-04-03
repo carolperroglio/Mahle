@@ -141,7 +141,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-        <b-modal ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
+        <b-modal ref="myModalRef" hide-footer title="Registrar Aço">
                         <form>
                             <div>
                                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>

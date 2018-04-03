@@ -110,7 +110,7 @@
                             </span>
                         </router-link>
 
-                        <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1 cursor="pointer">
+                        <!-- <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1 cursor="pointer">
                             <i class="fa fa-cogs"></i> 
                                 <span class="hidden-sm-down">   
                                 FERRAMENTAS/INSUMOS
@@ -137,7 +137,7 @@
                                 <div class="collapse" id="menu1sub1">
                                 </div>
                             </div> 
-                        </b-collapse>         
+                        </b-collapse>          -->
 
                         <a class="list-group-item collapsed"  v-b-toggle.menu3>
                             <i class="fa fa-industry"></i> 
