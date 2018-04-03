@@ -108,25 +108,25 @@
             <ul class="nav d-flex align-items-center">
             <li class="nav-prod col-sm-1.5">
                     <h1 class="title-page-op"> <b>Ordens de Produção - Tiras</b> </h1>
-                    <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
+                    <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
                         <option value="" selected disabled>Buscar por:</option>
                         <option value="productionOrderNumber">OP</option>
                         <option value="typeDescription">Descrição</option>
-                        <option value="recipeCode">Código</option>
-                        <option value="currentStatus">Status</option>
+                        <!-- <option value="recipeCode">Código</option> -->
+                        <!-- <option value="currentStatus">Status</option> -->
                     </select>
                 </li>
                 <li class="nav-prod col-sm-1.5">
-                    <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                    <input class="form-control relative btn-lg col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                 </li>
                 <li class="nav-prod col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <div class="col-md-auto">
-                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                            <button type="button" button class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search"></i> Buscar</button>
                         </div>
                         <!-- Button trigger modal -->
                         <div class="col-sm-3">
-                            <button @click="showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-sm btn-sm">
+                            <button @click="showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-lg">
                                 <i class="fa fa-plus"></i> Cadastrar Ordem de Produção
                             </button>
                         </div>
@@ -151,11 +151,11 @@
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeCode',4):organizar(opArrarKeep, 'recipeCode',4);" class="ls2-cabecalho-po col-md-2">
+                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(opArrarKeep, 'recipeCode',4):organizar(opArrarKeep, 'recipeCode',4);" class="ls2-cabecalho-po col-md-2">
                             <b><font class="cursor-class" color="#ffffff">
                                 Código da Tira &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
                         <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeName',3):organizar(opArrarKeep, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
@@ -187,10 +187,10 @@
                                 {{op.productionOrderNumber}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2">
-                                {{op.recipe.recipeCode}}
+                                {{op.recipeCode}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2">
-                                {{op.recipe.recipeName}}
+                                {{op.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2">
                                 {{op.typeDescription}}
@@ -202,7 +202,7 @@
                                 {{op.recipe.recipeProduct.product.productName}}
                             </label>
                             <label class="ls ls1 col-md-1">
-                                <i :id="op.recipe.recipeId" class="fa fa-eye" style="font-size: 22px; cursor: pointer;" @click="showModal('visualizarParams');getGatewayRecipe(op)"></i>
+                                <i :id="op.recipe.recipeId" class="fa fa-eye" style="font-size: 22px; cursor: pointer;" @click="parametros=[];recipes={};showModal('visualizarParams');getGatewayRecipe(op)"></i>
                             </label>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="">Status</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.currentStatus" disabled>
+                        <input type="text" class="form-control" v-model="opSelectedParams.status" disabled>
                     </div>
                     <div class="form-row">
                     <div class="form-group col-md-3">

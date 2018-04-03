@@ -43,10 +43,10 @@
             <div v-for="(o, index) in orderHistorian" v-bind:key="index" :class="{cinza: index%2==0}">
                 <label class="ls ls10 col-md-3">
                     {{o.productionOrderNumber}}</label>
-                <label class="ls ls10 col-md-3">
+                <label class="ls ls10 col-md-3" v-if="o.currentThing">
+                    {{o.currentThing.thingName}} </label>
+                 <label class="ls ls10 col-md-3" v-else>
                     - </label>
-                 <!-- <label class="ls ls10 col-md-3" v-else-if="!o.currentThing">
-                    {{o.currentThing.thingName}}</label> -->
                 <label class="ls ls10 col-md-2">
                     {{o.typeDescription}}</label>
                 <label class="ls ls10 col-md-2" v-if="o.typeDescription == 'Liga'" style="margin-top:1%">

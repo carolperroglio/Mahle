@@ -43,12 +43,11 @@
                                 <div class="form-group col-md-6">
                                 <label for="opType">Nome da Liga</label>
                                 <input @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                                <button class="btn btn-outline-success btn-sm" :disabled="!productionOrderObj.productionOrderNumber || !decriptionLiga" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                </button>
                                 <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</b-dropdown-item>
-                                    <button class="btn btn-outline-success btn-sm" :disabled="!productionOrderObj.productionOrderNumber || !decriptionLiga" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                    </button>
                                 </div>
-                                {{idAllowed}}
                                 <div class="form-group col-md-4">
                                 <label for="desc">Equipamento</label>
                                 <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="idAllowed">
@@ -117,25 +116,25 @@
             <ul class="nav d-flex align-items-center">
             <li class="nav-prod col-sm-1.5">
                     <h1 class="title-page-op"> <b>Ordens de Produção - Ligas (OPL)</b> </h1>
-                    <select class="form-control form-control-sm" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
+                    <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
                         <option value="" selected disabled>Buscar por:</option>
                         <option value="productionOrderNumber">OPL</option>
                         <option value="typeDescription">Descrição</option>
-                        <option value="quantity">Quantidade</option>
-                        <option value="currentStatus">Status</option>
+                        <!-- <option value="recipeCode">Código da Liga</option> -->
+                        <!-- <option value="currentStatus">Status</option> -->
                     </select>
                 </li>
                 <li class="nav-prod col-sm-1.5">
-                    <input class="form-control relative btn-sm col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                    <input class="form-control relative btn-lg col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
                 </li>
                 <li class="nav-prod col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <div class="col-md-auto">
-                            <button type="button" button class="btn btn-primary btn-sm" @click.stop.prevent="buscar(id)">Buscar</button>
+                            <button type="button" button class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search"></i> Buscar</button>
                         </div>
                         <!-- Button trigger modal -->
                         <div class="col-md-3">
-                            <button @click="showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-sm btn-sm">
+                            <button @click="showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-lg">
                                 <i class="fa fa-plus"></i> Cadastrar Ordem de Produção
                             </button>
                         </div>
@@ -163,36 +162,36 @@
                         <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(opArrarKeep, 'recipeCode',4):organizar(opArrarKeep, 'recipeCode',4);" class="ls2-cabecalho-po-liga col-md-2">
                             <b><font class="cursor-class" color="#ffffff">
                                 Código da Liga &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>
                         <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeName',3):organizar(opArrarKeep, 'recipeName',3);" class="ls2-cabecalho-po-liga col-md-2">
                             <b><font class="cursor-class" color="#ffffff">
-                                Nome de Liga &nbsp;&nbsp;&nbsp;
+                                Nome da Liga &nbsp;&nbsp;&nbsp;
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po-liga col-md-1">
+                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po-liga col1-5">
                             <b><font class="cursor-class" color="#ffffff">
                                 Descrição &nbsp;&nbsp;&nbsp;
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArrarKeep, 'currentStatus',2):organizar(opArrarKeep, 'currentStatus',2);" class="ls2-cabecalho-po-liga col-md-1">
+                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArrarKeep, 'thingName',2):organizar(opArrarKeep, 'thingName',2);" class="ls2-cabecalho-po-liga col1-5">
                             <b><font class="cursor-class" color="#ffffff">
                                 Equipamento&nbsp;&nbsp;&nbsp;
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArrarKeep, 'currentStatus',2):organizar(opArrarKeep, 'currentStatus',2);" class="ls2-cabecalho-po-liga col-md-1">
+                        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(opArrarKeep, 'currentStatus',5):organizar(opArrarKeep, 'currentStatus',5);" class="ls2-cabecalho-po-liga col-md-1">
                             <b><font class="cursor-class" color="#ffffff">
                                 Status&nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
                        
@@ -205,15 +204,18 @@
                                 {{op.productionOrderNumber}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2">
-                                {{op.recipe.recipeCode}}
+                                {{op.recipeCode}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2">
-                                {{op.recipe.recipeName}}
+                                {{op.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 width-table-context-liga col-md-1">
+                            <label class="ls ls1 col1-5">
                                 {{op.typeDescription}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-1">
+                            <label class="ls ls1 col1-5" v-if="op.currentThing">
+                                {{op.currentThing.thingName}}
+                            </label>
+                            <label class="ls ls1 col1-5" v-else>
                                 -
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-1">
