@@ -1,21 +1,7 @@
 @import url("./../../genericcss/generico.css");
 
-/* menu de navegação de produtos */
 
-.nav-produtos {
-    margin-top: 5%;
-    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
-    width: 100%;
-    height: 15.5%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-label {
-    margin-bottom: 0;
-}
-
-
-/* menu de navegação de produtos - busca de produtos*/
+/*itens menu de navegação de produtos - busca de produtos*/
 
 .nav-item-products {
     margin-left: 1%;
@@ -23,54 +9,16 @@ label {
 }
 
 .cabecalho-table {
-    position: fixed;
-    top: 25%;
-    width: 100%;
-    padding: 0 0 0 0.1%;
+    position: fixed;    
+    width: 100%;    
     background-color: black;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0.2%;
+    margin: -2.2% 0 0 0;    
     z-index: 4;
 }
 
 
-/* .fundo-branco {
-    background-color: #ffffff;
-    margin: 0 0 0 0;
-    width: 100%;
-    height: 30%;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
-    z-index: 5;
-}   */
-
 #load {
-    margin-left: 50%;
-}
-
-.fundo-branco {
-    position: fixed;
-    background-color: #ffffff;
-    width: 100%;
-    height: 14%;
-    top: 16%;
-    z-index: 1;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
-    z-index: 5;
-}
-
-.ls2-cabecalhotab {
-    width: 100%;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    margin-bottom: 0.3%;
-    /* margin-left: 1%; */
-}
-
-#load {
-    margin-left: 50%;
+    margin: 18% 0 0 50%;    
 }
 
 
@@ -87,14 +35,6 @@ input {
     position: relative;
 }
 
-.produtos {
-    position: relative;
-    margin-top: 11.5%;
-    left: 1%;
-    width: 95%;
-    margin-bottom: 5%;
-}
-
 .msg {
     position: relative;
     width: 50%;
@@ -109,35 +49,18 @@ input {
     padding: 0 0 0 0;
 }
 
-.cinza {
-    background-color: #DCDCDC;
-}
 
-.paginacao {
-    position: fixed;
-    z-index: 2;
-    text-align: center;
-    width: 100%;
-    background-color: #ffffff;
-    bottom: 4%;
-}
-
-.ls2 {
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-}
 
 .cursor-class {
     cursor: pointer;
 }
 
 .margin-table {
-    margin-top: 16%;
+    margin-top: 14%;
 }
 
 
 /* Menu Superior para busca de Produtos 800X600 */
-
 @media screen and (max-width: 800px) {
     .nav-produtos {
         background-color: rgba(249, 247, 247, 1);

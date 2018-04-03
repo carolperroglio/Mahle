@@ -7,7 +7,7 @@
         <!--               -->
         <!--               -->
         <!--               -->
-        <div class="fixed-top nav-recipeP-liga">
+        <div class="fixed-top nav-cinza">
             <li class="title-recipeP-liga">
                 <b>Composição Química da Liga</b>
             </li>
@@ -54,8 +54,11 @@
             </ul>
         </div>
 
-        <div class="col">    
-            <div class="fundo-branco-liga">  
+        <div class="col">  
+            <div id="load" v-show="carregando">
+                <stretch background="#4d4d4d"></stretch>                
+            </div>  
+            <div class="fundo-branco-liga" v-show="!carregando">  
                 <h2 class="nome-liga">{{recipe.recipeName}}</h2>                           
                 <div class="cabecalho-table-liga">
                     <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'product',0):organizar(produtos, 'product',0);" class="ls2-cabecalhotab col-md-2">
