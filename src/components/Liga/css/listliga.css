@@ -1,0 +1,24 @@
+@import url("./../../genericcss/generico.css");
+
+
+/* Menu de nav */
+.nav-items-listliga{
+    margin-left: 1%;
+    padding: 1.2% 0 1% 0;
+}
+
+/* Listagem de ligas */
+.ligas{
+    margin-top: 14%;
+}
+#load-listliga{
+    margin: 15% 0 0 50% !important;  
+}
+
+.cabecalho-table-listliga {
+    position: fixed;    
+    width: 100%;    
+    background-color: black;
+    margin: -2.2% 0 0 0;    
+    z-index: 4;
+}

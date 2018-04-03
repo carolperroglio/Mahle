@@ -118,6 +118,12 @@ export default {
         hideModalConfirmEditLiga() {
         this.$refs.modalConfirmEditLiga.hide()
         },
+        showModalRemoveProduto(){
+        this.$refs.modalRemoveProdutos.show();
+        },
+        hideModalRemoveProduto(){
+        this.$refs.modalRemoveProdutos.hide();
+        },
 
         organizar(produtos, campo, pos){                         
             produtos.sort(function(a,b) {console.log(a[campo]);return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
@@ -148,10 +154,9 @@ export default {
         getGatewayRecipe: function() {
             var id = this.$route.params.id;
             if (id != 0) {
-                this.carregando = true;
-                console.log(this.urlGatewayRecipes+id);
+                this.carregando = true;                
                 setTimeout(() => {
-                    axios.get(this.urlGatewayRecipes + id).then(response => {
+                    axios.get(this.urlRecipes + id).then(response => {
                         this.recipe = response.data;                        
                         this.produtos = this.recipe.phases[0].phaseProducts;
                         console.log(response.data);                                                                          

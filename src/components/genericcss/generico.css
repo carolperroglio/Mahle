@@ -1,8 +1,6 @@
 /* menu de navegação de produtos - título busca de produtos*/
 
 
-
-
 /* tabelas */
 .cinza {
     background-color: #DCDCDC;
@@ -12,13 +10,10 @@
     text-align: center;
 }
 
-
 /* Clase de cursor mãozinha */
 .cursor-class{
     cursor:pointer;
 } 
-
-
 
 /* Menu de navegação padrão cinza */
 .nav-cinza {
@@ -38,6 +33,7 @@
     font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
 }
+
 
 label{
     margin-bottom: 0;
