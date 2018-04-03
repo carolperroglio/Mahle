@@ -304,6 +304,7 @@
                             </p></font></b>
                         </label> 
                     </div>
+                    <div class="table-margin-params">
                     <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
                     <label class="width-table-context-wider col-md-2">
                     <b><font color="#9BA6A5"> </font></b>
@@ -333,6 +334,7 @@
                     <b><font color="#9BA6A5"> </font></b>
                         {{pro.lse}}
                     </label>                                                                                        
+                </div>
                 </div>
                 <!-- </div>   -->
                     </form>

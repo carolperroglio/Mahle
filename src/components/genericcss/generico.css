@@ -2,20 +2,25 @@
 
 
 /* tabelas */
+
 .cinza {
     background-color: #DCDCDC;
 }
+
 .ls2 {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
 
 /* Clase de cursor mãozinha */
-.cursor-class{
-    cursor:pointer;
-} 
+
+
+.cursor-class {
+    cursor: pointer;
+}
 
 /* Menu de navegação padrão cinza */
+
 .nav-cinza {
     position: fixed;
     margin-top: 5.5%;
@@ -23,10 +28,11 @@
     font-size: 11pt;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: content-box;
-    z-index: 1;    
+    z-index: 1;
     background-color: white;
-    width: 100%;    
+    width: 100%;
 }
+
 .title-page-gp {
     color: rgb(68, 68, 70);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -36,10 +42,13 @@
 
 
 label{
+
     margin-bottom: 0;
 }
 
+
 /*Paginação*/
+
 .paginacao {
     position: fixed;
     z-index: 2;
@@ -48,6 +57,12 @@ label{
     bottom: 4%;
     background-color: #ffffff;
 }
+
+.table-margin {
+    margin-top: 15%;
+    width: 98.2%;
+}
+
 @media screen and (max-width: 801px) {
     .table-margin {
         margin-top: 35%;

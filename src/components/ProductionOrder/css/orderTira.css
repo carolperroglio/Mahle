@@ -32,14 +32,15 @@
 }
 
 .width-table-context {
-    width: 9%;
+    width: 14%;
     text-align: center;
-    margin-left: 0.5%;
+    margin-left: 1%;
 }
 
 .width-table-context-wider {
-    width: 16%;
+    width: 19%;
     text-align: center;
+    margin-left: 1.5%;
 }
 
 .font-size {
@@ -104,6 +105,11 @@ a:hover {
     width: 95%;
 }
 
+.table-margin-params {
+    margin-top: 1%;
+    width: 100%;
+}
+
 .card-body-op {
     padding-top: 0.1%;
     margin-bottom: 1%;
@@ -136,7 +142,7 @@ a:hover {
 @media (min-width: 992px) {
     .modal-lg {
         max-width: 70%;
-        margin-left: 5%;
+        margin-left: 15%;
     }
 }
 

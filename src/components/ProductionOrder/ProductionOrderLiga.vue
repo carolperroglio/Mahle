@@ -5,7 +5,7 @@
         <!-- Formulário de  -->
         <!-- Criação de OP  -->
         <!--                -->
-        <b-modal ref="modalCadOP" hide-footer title="Cadastrar Ordem de Produção de Liga">
+        <b-modal size="md" ref="modalCadOP" hide-footer title="Cadastrar Ordem de Produção de Liga">
                                        
                     <div class="modal-body">
                         <form>
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                 <label for="desc">Equipamento</label>
-                                <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="idAllowed">
+                                <select class="form-control  mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="idAllowed">
                                         <option value="" selected disabled></option>
                                         <option v-for="(e,index) in equipaments" v-bind:value="e.thingId" v-bind:key="index" >
                                             {{ e.thingName }}

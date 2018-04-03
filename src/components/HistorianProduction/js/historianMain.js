@@ -209,7 +209,10 @@ export default {
             axios.get(this.urlOP + '/api/productionorders?orderField=&order=&fieldFilter=&fieldValue=&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
                 console.log(response.data);
                 response.data.values.forEach((pro) => {
-                    this.orderHistorian.push(pro);
+                    if (pro.currentThing && pro.currentStatus == "active") {
+                        pro.thingName = pro.currentThing.thingName
+                        this.orderHistorian.push(pro);
+                    }
                 });
 
                 paginacao(response, this);

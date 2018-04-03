@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-md-4">
                        <button type="button" class="btn btn-info btn-sm btn-sm"  @click.prevent="showModal()">
-                            Filtro de Busca
+                            Filtrar Busca
                        </button>
                         
                         </div>
