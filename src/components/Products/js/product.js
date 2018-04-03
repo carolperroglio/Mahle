@@ -136,7 +136,6 @@ export default {
                 this.carregando = false;
                 this.mensagem = 'Erro no server ' + r;
             })
-
         },
 
         excluir(produto) {

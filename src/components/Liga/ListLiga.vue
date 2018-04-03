@@ -5,7 +5,7 @@
         <!--Redireciona p/página de cad nova -->
         <!--                                 -->
         <!--                                 -->
-        <nav class="fixed-top nav-recipe-liga">            
+        <nav class="fixed-top nav-cinza">            
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item col-sm-1.5">
                     <h1 class="title-page-gp-liga"><b>Gerenciamento de Liga</b></h1>

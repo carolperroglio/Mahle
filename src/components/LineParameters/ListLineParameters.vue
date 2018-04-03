@@ -5,10 +5,10 @@
         <!--Redireciona p/página de cad nova -->
         <!--                                 -->
         <!--                                 -->
-        <div class="fixed-top nav-recipe-liga">            
+        <nav class="fixed-top nav-cinza">            
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item col-sm-1.5">
-                    <h1 class="title-page-gp-liga"><b>Gerenciamento de Parametros de Linha</b></h1>
+                    <h1 class="title-page-gp-liga"><b>Parâmetros da Linha</b></h1>
                 </li>
                 <li class="nav-item nav-item-products">
                     <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
@@ -20,40 +20,83 @@
                     </select>
                 </li>
                 <li class="nav-item nav-item-products">
-                    <input class="form-control btn-md" type="search" v-model="fieldValue" placeholder="" aria-label="Busca">
+                    <input class="form-control btn-md" type="search" v-model="fieldValue" placeholder="Parametro" aria-label="Busca">
                 </li>
                 <li class="nav-item  nav-item-products">
                     <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
-                </li> 
-                <li class="nav-item nav-item-products">
-                    <button type="button" class="btn btn-success btn-md"><i class="fa fa-plus" aria-hidden="true" ></i> Cadastrar Parâmetro</button>
-                </li>               
+                </li>
+                <li class="nav-item  nav-item-products">                     
+                    <router-link :to="{ name: 'Liga',params: { id: 0 }}" class="btn btn-success btn-md">
+                        <i class="fa fa-plus" aria-hidden="true" ></i>
+                        Cadastrar Parâmetro
+                    </router-link>
+                </li>
             </ul>
             <div class="fundo-branco-liga">
-                <!--<div class="cabecalho-table-liga">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="ls2-cabecalho-liga">
-                        <b><font class="cursor-class" color="#ffffff">Nome da Liga &nbsp;&nbsp;&nbsp;
+                <div class="cabecalho-table-liga">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="cabecalho-parametros-text">
+                        <b><font class="cursor-class" color="#ffffff">Parâmetro &nbsp;&nbsp;&nbsp;
                             <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                             <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="ls2-cabecalho-liga">
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="cabecalho-parametros-text">
                         <b><font class="cursor-class" color="#ffffff">
-                            Código da Liga &nbsp;&nbsp;&nbsp;
+                            Equipamento &nbsp;&nbsp;&nbsp;
                             <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                             <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
-                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2-cabecalho-liga">
+                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="cabecalho-parametros-text">
                         <b><font class="cursor-class" color="#ffffff">
-                            Descrição &nbsp;&nbsp;&nbsp;
+                            Valor Nominal &nbsp;&nbsp;&nbsp;
                             <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                             <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                         </font></b>
-                    </label>                
-                </div>-->
+                    </label>   
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="cabecalho-parametros-text">
+                        <b><font class="cursor-class" color="#ffffff">Unidade &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="cabecalho-parametros-text">
+                        <b><font class="cursor-class" color="#ffffff">
+                            LIE<br>Limite Inferior de Especificação &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="cabecalho-parametros-text">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Limite Inferior de Controle &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="cabecalho-parametros-text">
+                        <b><font class="cursor-class" color="#ffffff">Limite Superior de Controle &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="cabecalho-parametros-text">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Limite Superior de Especificação &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="cabecalho-parametros-text">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Referência &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>             
+                </div>
             </div>    
-        </div>
+        </nav>
 
         <!--                         -->
         <!--                         -->
@@ -66,21 +109,21 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                     </div>
                 </div>
-                <div >    
+                <div v-for="(recipe,index) in recipes" v-bind:class="{cinza: index%2==0}" v-bind:key="index">    
                     <label class="ls4">
-                        <b><font color="#9BA6A5"> </font></b> {{"recipe.recipeName"}}
+                        <b><font color="#9BA6A5"> </font></b> {{recipe.recipeName}}
                     </label>
                     <label class="ls4">
-                        <b><font color="#9BA6A5"> </font></b>{{"recipe.recipeCode"}}
+                        <b><font color="#9BA6A5"> </font></b>{{recipe.recipeCode}}
                     </label>
                     <label class="ls4">
-                        <b><font color="#9BA6A5"> </font></b>{{"recipe.recipeDescription"}}
-                    </label>
-                    <label class="lsbtn">
-                        <button type="button" class="btn btn-danger btn-edit btn-sm fa fa-trash-o" style="font-size:17px; cursor:pointer" aria-hidden="true">
-                    </button>
-                    </label>          
-                    <!--<div class="paginacao-liga" v-show="total>0">
+                        <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
+                    </label>                    
+                    <router-link :to="{ name: 'Liga',params: { id: recipe.recipeId }}">
+                        <i class="fa fa-eye" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">                        
+                        </i>
+                    </router-link>
+                    <div class="paginacao-liga" v-show="total>0">
                         <nav aria-label="">
                             <ul class="pagination justify-content-center">
                                 <li v-show="startat>0" class="page-item">
@@ -94,7 +137,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,8 +146,8 @@
 
 
 
-<script src="./js/lineParameters.js">
+<script src="./js/listlineParameters.js">
 </script>
 <style>
-@import url("./css/lineparameters.css");
+@import url("./css/listLineParameters.css");
 </style> 

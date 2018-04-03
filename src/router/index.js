@@ -8,7 +8,6 @@ import Tira from '@/components/Tira/Tira'
 import ListTira from '@/components/Tira/ListTira'
 import Liga from '@/components/Liga/Liga'
 import ListLiga from '@/components/Liga/ListLiga'
-import LineParameters from '@/components/LineParameters/LineParameters'
 import ListLineParameters from '@/components/LineParameters/ListLineParameters'
 import ProductionOrderTira from '@/components/ProductionOrder/ProductionOrderTira'
 import ProductionOrderLiga from '@/components/ProductionOrder/ProductionOrderLiga'
@@ -58,13 +57,7 @@ export default new Router({
             path: '/listtira',
             name: 'ListTira',
             component: ListTira
-        },
-        {
-            path: '/lineparamters/:id',
-            name: 'LineParamters',
-            component: LineParameters,
-            props: true
-        },
+        },        
         {
             path: '/listlineparameters',
             name: 'ListLineParameters',

@@ -10,11 +10,16 @@
     margin-bottom: 0.3%;
 }
 
-/*Título menu superior da tela de receita*/
-/* ok */
-
-
-/*Título dos botões de edit-recipe e cadastrar produto da receita*/
+/*Cabeçalho da tabela*/
+.header-table-tira{    
+    position: fixed;    
+    width: 95%;
+    padding: 0 0 0 0.1%;
+    background-color: black;
+    margin: -2.3% 0 0 2%;
+    padding: 0 0 0 0.2%;
+    z-index: 4;
+}
 
 /* ok */
 #dropdownMenuButton {
@@ -38,15 +43,6 @@
     font-size: 13px;
 }
 
-.fundo-branco-tira{
-    position: fixed;
-    background-color: #ffffff;        
-    width: 100%;     
-    height: 10%;
-    top: 15%;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
-}
 
 @media only screen and (max-width: 800px) {
     /*Titulo da receita*/

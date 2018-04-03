@@ -5,9 +5,9 @@
         <!--Redireciona p/página de cad nova -->
         <!--                                 -->
         <!--                                 -->
-        <div class="fixed-top nav-list-tira">            
+        <div class="fixed-top nav-cinza">            
             <ul class="nav d-flex">
-                <li class="nav-item title-nav-tira nav-item-tira">
+                <li class="nav-item nav-item-tira">
                     <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>
                 <li class="nav-item nav-item-tira">
@@ -24,75 +24,73 @@
                     <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>                                
             </ul>                
+        </div>  
+        <div id="load-listtira" v-show="carregando">
+            <stretch background="#4d4d4d"></stretch>                
+        </div>       
+        <div class="header-table-listtira" v-show="!carregando">
+            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="ls2 col-md-3">
+                <b><font class="cursor-class" color="#ffffff">Nome da Tira &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="ls2 col-md-3">
+                <b><font class="cursor-class" color="#ffffff">
+                    Código da Tira &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2 col-md-3">
+                <b><font class="cursor-class" color="#ffffff">
+                    Descrição &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                </font></b>
+            </label>                
         </div>
-        <div class="fundo-branco-list-tira">
-            <div class="cabecalho-table-tira">
-                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="ls2-cabecalho-tira">
-                    <b><font class="cursor-class" color="#ffffff">Nome da Tira &nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                    </font></b>
-                </label>
-                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="ls2-cabecalho-tira">
-                    <b><font class="cursor-class" color="#ffffff">
-                        Código da Tira &nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                    </font></b>
-                </label>
-                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2-cabecalho-tira">
-                    <b><font class="cursor-class" color="#ffffff">
-                        Descrição &nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                    </font></b>
-                </label>                
-            </div>
-        </div>
+
         <!--                         -->
         <!--                         -->
         <!--        Fases            --> 
-        <!--                         -->
-      
-        <div class="" style="">
-            <div class="tiras">
-                <div class="progress" v-show="carregando">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                    </div>
-                </div>
-                <div v-for="(recipe,index) in recipes" v-bind:class="{cinza: index%2==0}" v-bind:key="index">
-                    <label class="ls4">
-                        <b><font color="#9BA6A5"> </font></b> {{recipe.recipeName}}
-                    </label>
-                    <label class="ls4">
-                        <b><font color="#9BA6A5"> </font></b>{{recipe.recipeCode}}
-                    </label>
-                    <label class="ls4">
-                        <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
-                    </label>                                        
+        <!--                         -->    
+        <div class="table-listtira" v-show="!carregando">    
+            <div v-for="(recipe,index) in recipes" v-bind:class="{cinza: index%2==0}" v-bind:key="index">
+                <label class="ls2 col-md-3">
+                    <b><font color="#9BA6A5"> </font></b> {{recipe.recipeName}}
+                </label>
+                <label class="ls2 col-md-3">
+                    <b><font color="#9BA6A5"> </font></b>{{recipe.recipeCode}}
+                </label>
+                <label class="ls2 col-md-3">
+                    <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
+                </label>  
+                <label class="ls2 col-md-2">                                   
                     <router-link :to="{ name: 'Tira',params: { id: recipe.recipeId }}">
                         <i class="fa fa-eye" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">                        
                         </i>
                     </router-link>
-                    <!--Teste-->
-                    <div class="paginacao-tira" v-show="total>0">
-                        <nav aria-label="">
-                            <ul class="pagination justify-content-center">
-                                <li v-show="startat>0" class="page-item">
-                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=quantityPage, quantityPage)">Anterior</a>
-                                </li>
-                                <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
-                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*quantityPage, quantityPage)">{{num+1}}</a>
-                                </li>
-                                <li class="page-item" v-show="pages.length>1 && startat+quantityPage<total">
-                                    <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=quantityPage, quantityPage)">Próxima</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+                </label>    
             </div>
-        </div>
+        </div>    
+
+        <!--Paginação-->
+        <div class="paginacao" v-show="total > 0">
+            <nav aria-label="">
+                <ul class="pagination justify-content-center">
+                    <li v-show="startat>0" class="page-item">
+                        <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=quantityPage, quantityPage)">Anterior</a>
+                    </li>
+                    <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
+                        <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*quantityPage, quantityPage)">{{num+1}}</a>
+                    </li>
+                    <li class="page-item" v-show="pages.length>1 && startat+quantityPage<total">
+                        <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=quantityPage, quantityPage)">Próxima</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>        
     </div>
 </template>
 

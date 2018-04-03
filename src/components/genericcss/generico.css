@@ -1,17 +1,57 @@
 /* menu de navegação de produtos - título busca de produtos*/
 
+
+
+
+/* tabelas */
+.cinza {
+    background-color: #DCDCDC;
+}
+.ls2 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+
+/* Clase de cursor mãozinha */
+.cursor-class{
+    cursor:pointer;
+} 
+
+
+
+/* Menu de navegação padrão cinza */
+.nav-cinza {
+    position: fixed;
+    margin-top: 5.5%;
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
+    font-size: 11pt;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: content-box;
+    z-index: 1;    
+    background-color: white;
+    width: 100%;    
+}
 .title-page-gp {
     color: rgb(68, 68, 70);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 22px !important;
+    font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
 }
 
-.table-margin {
-    margin-top: 3%;
-    width: 98%;
+label{
+    margin-bottom: 0;
 }
 
+/*Paginação*/
+.paginacao {
+    position: fixed;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    bottom: 4%;
+    background-color: #ffffff;
+}
 @media screen and (max-width: 801px) {
     .table-margin {
         margin-top: 35%;
