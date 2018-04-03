@@ -1,5 +1,5 @@
 /* menu de navegação de ferramentas */
-
+@import url("./../../genericcss/generico.css");
 .nav-ferramentas {
     position: fixed;
     margin-top: 5%;
