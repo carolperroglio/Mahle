@@ -177,7 +177,7 @@ export default {
                     this.mensagem = 'Erro no server ao buscar ' + error;
                     this.carregando = false;
                 })
-            }, 1000)
+            }, 500)
         }
     },
     beforeMount: function() {

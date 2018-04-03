@@ -116,7 +116,7 @@
                             <b><font color="#9BA6A5">Nome: </font></b></label>
                         <label class="ls ls3">{{Thing.thingName}}</label>
                     </div>
-                    </div>
+                </div>
         </div>
 
     </div>  

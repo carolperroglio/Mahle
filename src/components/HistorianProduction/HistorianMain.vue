@@ -55,7 +55,7 @@
                 </label>  
             </div>
             </div>
-            <div class="paginacao-op fixed-bottom" v-show="total>0">
+            <div class="paginacao" v-show="total>0">
                 <nav aria-label="">
                     <ul class="pagination justify-content-center">
                         <li v-show="startat>0" class="page-item">
