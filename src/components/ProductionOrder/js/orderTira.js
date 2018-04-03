@@ -27,6 +27,7 @@ function paginacao(response, este) {
 // Endereço IP do Servidor com as APIs
 var ipServerRecipe = process.env.RECIPE_API;
 var ipServer = process.env.OP_API;
+var ipthing = process.env.THINGS_API;
 
 export default {
     name: 'ProductionOrder',
@@ -40,6 +41,8 @@ export default {
             urlOp: ipServer + '/api/productionorders',
             urlGatewayRecipe: ipServer + '/gateway/recipes/',
             url: process.env.OP_API,
+            urlThingGroup: ipthing + '/api/thinggroups/',
+            urlGateway: process.env.TOOLS_API + '/gateway/thinggroups/',
             recipeArray: [],
             opArray: [],
             opArrarKeep: [],
@@ -78,7 +81,8 @@ export default {
             parametros: [],
             vetNomes: [],
             idLinha: "1",
-            opSelectedParams: ""
+            opSelectedParams: "",
+            descriptionTira: "Tira"
 
         }
     },
@@ -158,7 +162,7 @@ export default {
                             this.opArray.values.push(obj);
                         }
                     })
-                    this.opArrarKeep = this.opArray;
+                    this.opArrarKeep = this.opArray.values;
                     response.data.values = this.opArray.values;
                     paginacao(response, this);
                     console.log(this.opArray);
@@ -349,12 +353,29 @@ export default {
                     this.errors.push(e)
                 })
         },
-        getAssoc(idOP) {
+        getOPTypeToAssoc(idOP) {
+            //Get on OP of Type: Tira - ID: 1 
+            axios.get(this.url + "/api/productionordertypes/1").then((response) => {
+                //IDS from group allowed to associate to Op Type Tira
+                var thingGroupId = response.data.thingGroupIds[0];
+
+                //IDS of Things allowed to associate to Op of Type Tira
+                axios.get(this.urlGateway + thingGroupId).then((response) => {
+                    var idAllowed = response.data.things[0];
+                    this.getAssoc(idOP, idAllowed.thingId);
+
+                })
+            }).catch((e) => {
+                console.log(e);
+            })
+        },
+        getAssoc(idOP, idallowed) {
             this.mensagemSuc = '';
             this.mensagem = '';
-            axios.put(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + this.idLinha + '&productionOrderId=' + idOP).then((response) => {
+            axios.put(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + idallowed + '&productionOrderId=' + idOP).then((response) => {
                 console.log(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + this.idLinha + '&productionOrderId=' + this.OPId);
                 console.log(response.data);
+
 
             }, (r) => {
                 this.mensagem = r.response.data;
@@ -379,8 +400,8 @@ export default {
                 // adiciona propriedades necessárias na op que são mandatory
                 data.recipe = this.recipeObj;
                 console.log(this.recipeObj);
-                data.productionOrderTypeId = this.opSelected;
-                data.typeDescription = this.filterDesc;
+                data.productionOrderTypeId = "1";
+                data.typeDescription = "Tira";
                 data.currentstatus = "created";
                 this.objetooo = data;
                 console.log('OP sendo criada!!!!!!!!');
@@ -398,12 +419,15 @@ export default {
                                 // Dessassociar OP anterior, a linha
                                 for (var i = 0; i < this.opArray.values.length; i++) {
                                     if (this.opArray.values[i].currentThingId != undefined) {
-                                        this.getDisAssoc(this.opArray.values[i].currentThingId, this.opArray.values[i].productionOrderId, this.opArray.values[i]);
+                                        var currentID = this.opArray.values[i].currentThingId
+                                        var OPId = this.opArray.values[i].productionOrderId;
+                                        var obj = this.opArray.values[i];
+                                        this.getDisAssoc(currentID, OPId, obj);
                                     }
 
                                 }
                                 //Associar OP criada a linha
-                                this.getAssoc(id);
+                                this.getOPTypeToAssoc(id);
 
                             })
                         })
@@ -416,8 +440,48 @@ export default {
             //  END CRUD //
             //           //
     },
+    filters: {
+        filterStatus: function(value) {
+            switch (value) {
+                case 'created':
+                    return "Criado"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativo"
+                    break;
+                case 'reproved':
+                    return "Reprovado"
+                    break;
+                default:
+                    break;
+
+            }
+        },
+    },
 
     computed: {
+        filterStatus: function(value) {
+            switch (value) {
+                case 'created':
+                    return "Criado"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativo"
+                    break;
+                case 'reproved':
+                    return "Reprovado"
+                    break;
+                default:
+                    break;
+
+            }
+        },
         filterDesc: function(value) {
             for (var count = 0; count < this.opTypeArray.length; count++) {
                 if (this.opTypeArray[count].productionOrderTypeId == this.opSelected) {

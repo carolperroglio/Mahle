@@ -266,13 +266,13 @@
                     <nav aria-label="">
                         <ul class="pagination justify-content-center">
                             <li v-show="startat>0" class="page-item">
-                                <a class="page-link" href="#" @click.stop.prevent="listar(startat-=20, quantityPage)">Previous</a>
+                                <a class="page-link" href="#" @click.stop.prevent="listar(startat-=20, quantityPage)">Anterior</a>
                             </li>
                             <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index2) in pages" v-bind:key="index2">
                                 <a class="page-link" href="#" @click.stop.prevent="listar(startat=num*20, quantityPage)">{{num+1}}</a>
                             </li>
                             <li class="page-item" v-show="pages.length>1 && startat+20<total">
-                                <a class="page-link" href="#" @click.stop.prevent="listar(startat+=20, quantityPage)">Next</a>
+                                <a class="page-link" href="#" @click.stop.prevent="listar(startat+=20, quantityPage)">Próximo</a>
                             </li>
                         </ul>
                     </nav>
@@ -377,7 +377,6 @@
             </div>
             <br>
         </div>
-</div>
 </template>
 <script src="./js/toolcreate.js">
 </script>

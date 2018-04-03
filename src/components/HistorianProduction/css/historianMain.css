@@ -17,14 +17,15 @@
 }
 
 .cabecalho-table-ap {
-    position: relative;
-    top: 12%;
+    position: fixed;
+    top: 26%;
     /* left: 1.8%; */
-    width: 100%;
+    width: 93.2%;
     padding: 0 0 0 0.1%;
     background-color: black;
     margin: 0 0 0 0;
     padding: 0 0 0 0.2%;
+    z-index: 1;
 }
 
 .fundo-branco-ap {
@@ -44,6 +45,15 @@
     width: 95%;
 }
 
+.paginacao-op {
+    position: fixed;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2.5%;
+    background-color: #ffffff;
+}
+
 .ls2-cabecalho-ap {
     /* width: 24.2%; */
     width: 100%;
@@ -56,6 +66,10 @@
 
 .cinza {
     background-color: #DCDCDC;
+}
+
+.table-margin {
+    margin-top: 17%;
 }
 
 .table-size {
@@ -133,15 +147,15 @@ input {
         margin-top: 20%;
     }
     .nav-hp {
-        margin-top: 18%;
-        height: 8%;
+        margin-top: 10%;
+        height: 18%;
     }
     .nav-item-hp {
         margin-top: -2%;
     }
     .title-page-hp {
         font-size: 18px;
-        margin-top: -6%;
+        margin-top: 2%;
     }
     .orderHistorian {
         margin-top: 26%;
@@ -151,5 +165,23 @@ input {
     .card-header-hp {
         margin-top: 0.1%;
         margin-bottom: 0.1%;
+    }
+    .op {
+        position: relative;
+        margin-top: 27%;
+        padding-bottom: 8%;
+        left: 1%;
+        width: 95%;
+        /* margin-bottom: -57%; */
+    }
+    .table-margin {
+        margin-top: 34%;
+    }
+    .cabecalho-table-ap {
+        top: 32%;
+        position: fixed;
+        /* left: 1.8%; */
+        width: 91.3%;
+        padding: 0 0 0 0.1%;
     }
 }

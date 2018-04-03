@@ -9,7 +9,8 @@ import ListTira from '@/components/Tira/ListTira'
 import Liga from '@/components/Liga/Liga'
 import ListLiga from '@/components/Liga/ListLiga'
 import ListLineParameters from '@/components/LineParameters/ListLineParameters'
-import ProductionOrder from '@/components/ProductionOrder/ProductionOrder'
+import ProductionOrderTira from '@/components/ProductionOrder/ProductionOrderTira'
+import ProductionOrderLiga from '@/components/ProductionOrder/ProductionOrderLiga'
 import ToolCreate from '@/components/Tools/ToolCreate'
 import HistorianProductionLiga from '@/components/HistorianProduction/HistorianProductionLiga'
 import HistorianProductionTira from '@/components/HistorianProduction/HistorianProductionTira'
@@ -75,9 +76,15 @@ export default new Router({
         },
         {
 
-            path: '/prodOrder',
-            name: 'ProductionOrder',
-            component: ProductionOrder
+            path: '/prodOrderTira',
+            name: 'ProductionOrderLiga',
+            component: ProductionOrderTira
+        },
+        {
+
+            path: '/prodOrderLiga',
+            name: 'ProductionOrderLiga',
+            component: ProductionOrderLiga
         },
         {
             path: '/toolCreate',
