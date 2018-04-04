@@ -1,5 +1,8 @@
 import axios from '../../../.././node_modules/axios/index.js'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import { Stretch } from 'vue-loading-spinner'
 es6promisse.polyfill();
 
 function paginacao(total, este) {
@@ -17,14 +20,23 @@ function paginacao(total, este) {
 }
 
 var ipServer = process.env.RECIPE_API;
-
+var ipThings = process.env.THINGS_API
 export default {
     name: "ListLineParameters",
     data() {
         return {
             urlRecipes: ipServer + '/api/recipes',
             urlPhases: ipServer + '/api/phases',
+            urlThings: ipThings + '/api/thinggroups/',
+            mensagem:'',
+            mensagemSuc:'',
+            errors:[],
             recipes: [],
+            recipe: {},
+            parameters:[],
+            parameter: {},
+            ferramentas: [],
+            ferramenta:{},
             phases: [],
             cabecalhoSetas:[false, false, false],
             carregando: false,
@@ -40,7 +52,20 @@ export default {
             id: ''
         }
     },
+    components: {
+        'b-modal': bModal,
+        Stretch,
+    },
+    directives: {
+        'b-modal': bModalDirective,    
+    },
     methods: {
+
+        showModalCreateParameter(){
+            this.$refs.modalCreateParameter.show();
+        },
+
+
         /*****************/
         /*               */
         /*  CRUD Recipe  */
@@ -58,6 +83,9 @@ export default {
                 console.log(error);
                 this.carregando = false;
             })
+        },
+        createParameter(){
+            console.log("oi");
         },
         putRecipe(recipe) {
             this.mensagemSuc = '';
@@ -117,21 +145,14 @@ export default {
         //
         // PAGINAÇÃO //
         //
-        buscar(id = "") {
-            this.carregando = true;
+        buscarThings() {            
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.recipes = [];
-            console.log(this.order, this.orderField)
-            axios.get(urlPhases+"/46", config).then((response) => {
-                for(var i=0; i<response.data.values.length; i++)
-                    if(response.data.values[i].recipeTypeId == 2)
-                        this.recipes.push(response.data.values[i]);
-                paginacao(this.recipes.length, this);
-                for(var i=0; i<this.recipes.length; i++)
-                    if(this.recipes[i].recipeDescription == undefined)
-                        this.recipes[i].recipeDescription = '';
+            axios.get(this.urlThings, config).then((response) => {
+                console.log(response);
+                this.ferramentas = response.data.values;                                
                 this.carregando = false;
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;
@@ -140,7 +161,9 @@ export default {
         },
     },
     beforeMount() {
-        this.buscar();
-        // this.getPhasesById();
+        //this.buscar();
+        //this.getPhasesById();
+        this.carregando = true;
+        this.buscarThings();
     }
 }

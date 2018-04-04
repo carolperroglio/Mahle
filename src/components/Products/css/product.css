@@ -2,7 +2,6 @@
 
 
 /*itens menu de navegação de produtos - busca de produtos*/
-
 .nav-item-products {
     margin-left: 1%;
     padding: 1.2% 0 1% 0;
@@ -16,47 +15,18 @@
     z-index: 4;
 }
 
-
 #load-products {
     margin: 18% 0 0 50%;    
 }
 
-
-/*Listagem de produtos*/
-
-.icon-right {
-    position: relative;
-    float: right;
-    /* align-content: right;
-    padding-bottom: 0.1%;*/
-}
-
-input {
-    position: relative;
-}
 
 .msg {
     position: relative;
     width: 50%;
 }
 
-.card-body5 {
-    font-family: sans-serif;
-}
-
-.card-body {
-    box-sizing: content-box;
-    padding: 0 0 0 0;
-}
-
-
-
-.cursor-class {
-    cursor: pointer;
-}
-
 .margin-table {
-    margin-top: 14%;
+    margin: 14% 0 6% 0;
 }
 
 

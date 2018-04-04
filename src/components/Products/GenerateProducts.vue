@@ -76,7 +76,7 @@
         <!--                       -->
         <!--                       -->            
             
-        <div class="margin-table">
+        <div class="margin-table" v-show="!carregando">
             <div v-for="(p, index) in produtos" v-bind:class="{cinza: index%2==0}" v-bind:key="index">                                    
                 <label class="ls2 col-md-2">
                     {{p.productName}}</label>
@@ -150,6 +150,8 @@
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="put(produto);" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
+                        </button>
+                        <button @click.stop.prevent="hideModalConfirmPut()" class="btn btn-danger">Cancelar                            
                         </button>                        
                     </div>
                 </div>
@@ -171,6 +173,8 @@
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="cadastrar(produto);" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
+                        </button>
+                        <button @click.stop.prevent="hideModalConfirmCreate()" class="btn btn-danger">Cancelar                            
                         </button>                        
                     </div>
                 </div>

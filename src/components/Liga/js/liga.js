@@ -38,6 +38,8 @@ export default {
             phaseProduct: {},
             productPhaseName: '',
             produtos: [],
+            produto:{},
+            cadEdit:'',
             carregando: false,
             mensagem: '',
             mensagemSuc: '',            
@@ -54,8 +56,8 @@ export default {
                 'scrap': "Rejeito",
                 'finished': "Acabado",
                 'semi_finished': "Semi Acabado"
-                };
-                return type[productTypeName];
+            };
+            return type[productTypeName];
         }
     },
     components: {
@@ -97,6 +99,17 @@ export default {
         hideModalEditRecipe() {
         this.$refs.modalEditRecipe.hide()
         },
+        showModalEditProPhase(pro, index){
+        this.errors = {};  
+        this.phaseProduct = pro;        
+        this.productPhaseName = pro.product.productName;
+        this.$refs.modalEditProPhase.show();
+        this.mensagemSuc = '';
+        this.mensagem = '';
+        },
+        hideModalEditProPhase() {
+        this.$refs.modalEditProPhase.hide()
+        },
         showModalAddProd() {
         this.errors = {};            
         this.$refs.modalcadProPhase.show();
@@ -118,8 +131,12 @@ export default {
         hideModalConfirmEditLiga() {
         this.$refs.modalConfirmEditLiga.hide()
         },
-        showModalRemoveProduto(){
-        this.$refs.modalRemoveProdutos.show();
+        showModalRemoveProduto(p, index){
+            this.errors = [];
+            this.mensagemSuc = '';
+            this.produto = JSON.parse(JSON.stringify(p));
+            this.produto.index = index;            
+            this.$refs.modalRemoveProdutos.show();
         },
         hideModalRemoveProduto(){
         this.$refs.modalRemoveProdutos.hide();
@@ -236,22 +253,7 @@ export default {
                 this.deleteRecipe(this.recipe);
                 this.carregando = false;                
             });
-        },
-        putPhase(phase) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            axios.put(this.url + "phases/" + phase.phaseId, phase).then((response) => {
-                this.mensagem = '';
-                this.mensagemSuc = "Fase " + phase.phaseName + " atualizada com sucesso";
-                console.log(response.data);
-                this.phase = {};
-                this.carregando = false;
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-                this.mensagemSuc = 'Erro ao deletar : ' + error;
-            })
-        },
+        },        
         deletePhase(phase, recipe) {
             this.carregando = true;
             this.mensagemSuc = '';
@@ -288,21 +290,21 @@ export default {
         /*  CRUD Phase   */
         /*   Products    */
         /*               */
-        /*****************/
+        /*****************/        
         createPhaseProduct(phaseProduct, phase) {
             this.mensagemSuc = '';
             this.carregando = true;
+            this.hideModalAddProd();
             phaseProduct.measurementUnit='%';
             console.log(phaseProduct);
             setTimeout(() => {                
                 console.log("fase");
                 console.log(phase);
-                axios.post(this.url + "phases/products/" + phase.phaseId, phaseProduct).then((response) => {
-                    phaseProduct.phaseProductId = response.data.phaseProductId;
-                    this.phase.phaseProducts.push(phaseProduct);
+                axios.post(this.url + "phases/products/" + phase.phaseId, phaseProduct).then((response) => {                    
+                    this.produtos.push(response.data);
                     this.phaseProduct = {};
                     this.productPhaseName = '';
-                    this.mensagemSuc = 'Fase relacionada com sucesso';
+                    this.mensagemSuc = 'Fase relacionada com sucesso';                    
                     this.ok = true;
                     this.carregando = false;                
                 }, (error) => {
@@ -310,17 +312,27 @@ export default {
                     this.phaseProduct = {};
                     this.productPhaseName = '';
                     this.carregando = false;
-                },300);
-            })
+                });
+            },300)
+        },
+        putPhaseProduct(phaseProduct, phase) {
+            this.carregando = true;
+            this.mensagemSuc = ''; 
+            axios.post(this.url + "phases/products/" + phase.phaseId, phaseProduct).then((response) => {
+                
+            },(error) => {
+                console.log(error);
+                this.phaseProduct = {};
+                this.productPhaseName = '';
+                this.carregando = false;
+            });    
         },
         deletePhaseProduct(phaseProduct, phase) {
             this.carregando = true;
             this.mensagemSuc = '';  
-            console.log(JSON.parse(JSON.stringify(phaseProduct)));
-            console.log(phase);           
-            axios.delete(this.url + "phases/products/" + phase.phaseId, { data: JSON.parse(JSON.stringify(phaseProduct))}).then((response) => {
-                phase.products = phase.products.filter(item => item.phaseProductId != productPhase.phaseProductId);
-                this.produtos = phase.products;
+            this.$refs.modalRemoveProdutos.hide();
+            axios.delete(this.url + "phases/products/" + phase.phaseId, { data: phaseProduct}).then((response) => {                
+                this.produtos = response.data.phaseProducts;                                
                 this.mensagemSuc = 'Fase relacionada com sucesso';
                 this.ok = true;
                 this.carregando = false;
