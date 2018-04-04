@@ -154,12 +154,11 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.opArray = [];
-            console.log(this.order, this.orderField)
-                // setTimeout(() => {
-            axios.get(this.urlOp + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+            // setTimeout(() => {
+            axios.get(this.urlOp + "/v2?&filters=currentStatus,active" + "&filters=productionOrderTypeId,2" + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
-                        if (obj.typeDescription == "Liga" && obj.currentStatus == "active") {
+                        if (obj.currentThing) {
                             obj.recipeName = obj.recipe.recipeName
                             obj.recipeCode = obj.recipe.recipeCode
                             this.opArray.values.push(obj);

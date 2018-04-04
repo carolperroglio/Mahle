@@ -41,8 +41,8 @@
                             <div class="form-group row">
                                 <div class="form-group col-sm-6">
                                 <label for="opType">Nome da Tira</label>
-                                <input @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-10" id="dropdownMenuButton" placeholder="Ex: Receita1" />
-                                <button class="btn btn-outline-success btn-sm" :disabled="!productionOrderObj.productionOrderNumber || !recipeName " @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
+                                <input @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-8" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                                <button class="btn btn-outline-success btn-sm col-sm-2" :disabled="!productionOrderObj.productionOrderNumber || !recipeName " @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </button>
                                 <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</b-dropdown-item>
@@ -138,7 +138,7 @@
         <!--             -->
         <!--  LISTAR OPs -->
         <!--             -->
-        <div class="" style="">
+        <div>
             <div class="op col-md-12">
                 <div id="load" v-show="carregando">
                     <stretch background="#4d4d4d"></stretch>
@@ -225,7 +225,7 @@
             </div>
 
             <!-- MODAL VISUALIZAR PARAMS -->
-            <b-modal size="lg" ref="visualizarParams" hide-footer title="Visualizar Ordem de Produção de Tira">
+            <b-modal size="lg" ref="visualizarParams" hide-footer title="Visualizar Ordem de Produção de Tira" class="modal-lg-tira">
                 <div v-if="opSelectedParams != ''">
                 <div class="form-row">
                     <div class="form-group col-md-3">

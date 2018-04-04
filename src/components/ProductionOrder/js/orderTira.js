@@ -155,10 +155,11 @@ export default {
             this.opArray = [];
             console.log(this.order, this.orderField)
                 // setTimeout(() => {
-            axios.get(this.urlOp + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                // api/ProductionOrders/v2?filters=productionOrderTypeId,2&filters=currentStatus,reproved
+            axios.get(this.urlOp + "/v2?&filters=currentStatus,active" + "&filters=productionOrderTypeId,1" + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
-                        if (obj.typeDescription == "Tira" && obj.currentStatus == "active" && obj.currentThing) {
+                        if (obj.typeDescription == "Tira" && obj.currentThing) {
                             obj.recipeName = obj.recipe.recipeName
                             obj.recipeCode = obj.recipe.recipeCode
                             this.opArray.values.push(obj);
