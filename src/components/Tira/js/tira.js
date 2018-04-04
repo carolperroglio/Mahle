@@ -140,16 +140,19 @@ export default {
         },
         getGatewayRecipe: function() {
             var id = this.$route.params.id;
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
             if (id != 0) {
-                this.carregando = true;
-                console.log(this.urlGatewayRecipes + id);
-                setTimeout(() => {
-                    axios.get(this.urlGatewayRecipes + id).then(response => {
-                        this.recipe = response.data;
+                this.carregando = true;                
+                //setTimeout(() => {
+                    console.log(this.urlRecipes + id);
+                    axios.get(this.urlRecipes + id, config).then(response => {                    
+                        this.recipe = response.data;                        
                         for (var i = 0; i < this.recipe.phases.length; i++)
                             if (this.recipe.phases[i].phaseId != 46)
-                                this.phase = this.recipe.phases[i];
-                        this.getParametros();
+                                this.phase = JSON.parse(JSON.stringify(this.recipe.phases[i]));                                                                    
+                        this.getParametros(this.phase);
                         this.recipeCadastrada = true;
                         this.carregando = false;
                         this.editarActivate = true;
@@ -157,23 +160,24 @@ export default {
                         console.log(error);
                         this.carregando = false;
                     })
-                }, 300);
+                //}, 100);
             }
         },
 
-        getParametros: function() {
-            var j = 0;
-            for (var i = 0; i < this.phase.phaseParameters.length; i++) {
-                if (this.phase.phaseParameters[i].tag.tagGroup != undefined) {
-                    if (this.parameters[this.phase.phaseParameters[i].tag.tagGroup] != undefined)
-                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
+        getParametros: function(phase) {            
+            var j = 0;    
+                    
+            for (var i = 0; i < phase.phaseParameters.length; i++) {
+                if (phase.phaseParameters[i].tag.tagGroup != undefined) {
+                    if (this.parameters[phase.phaseParameters[i].tag.tagGroup] != undefined)
+                        this.parameters[phase.phaseParameters[i].tag.tagGroup].push(phase.phaseParameters[i]);
                     else {
-                        this.vetNomes[j++] = this.phase.phaseParameters[i].tag.tagGroup;
-                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup] = [];
-                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
+                        this.vetNomes[j++] = phase.phaseParameters[i].tag.tagGroup;
+                        this.parameters[phase.phaseParameters[i].tag.tagGroup] = [];
+                        this.parameters[phase.phaseParameters[i].tag.tagGroup].push(phase.phaseParameters[i]);
                     }
                 }
-            }
+            }            
             j = 0;
             for (i = 0; i < this.vetNomes.length; i++) {
                 this.parametros[i] = {};
@@ -234,8 +238,11 @@ export default {
             return array;
         }
     },
-    mounted() {
-        // if()
+    created() {
+        this.recipe;
+        this.phase;
+        this.recipes;
+        this.phases;
         this.getGatewayRecipe();
     }
 }

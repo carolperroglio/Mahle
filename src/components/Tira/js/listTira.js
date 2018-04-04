@@ -25,7 +25,7 @@ export default {
     name: "ListTira",
     data() {
         return {
-            urlRecipes: ipServer + '/api/recipes',
+            urlRecipes: ipServer + '/api/recipes/',
             urlPhases: ipServer + '/api/phases',
             recipes: [],
             phases: [],
@@ -113,7 +113,7 @@ export default {
         getPhasesById: function(id) {
             console.log(id);
             this.carregando = true;
-            axios.get(this.urlRecipes + id).then(response => {
+            axios.get(this.urlRecipes + id, config).then(response => {
                 this.phases = response.data;
                 this.carregando = false;
             }).catch(error => {
@@ -124,18 +124,19 @@ export default {
         //
         // PAGINAÇÃO //
         //
-        buscar(id = "") {
+        buscar() {
             this.carregando = true;
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.recipes = [];
             setTimeout(() => {
-                axios.get(this.urlRecipes + "?&orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {                
+                axios.get(this.urlRecipes + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {                
                     this.recipes = [];                    
                     for(var i=0; i<response.data.values.length; i++)
                         if(response.data.values[i].recipeTypeId == 1)
-                            this.recipes.push(response.data.values[i]); 
+                            this.recipes.push(response.data.values[i]);
+                    console.log(this.recipes);         
                     paginacao(this.recipes.length, this);                                       
                     for(var i=0; i<this.recipes.length; i++)
                         if(this.recipes[i].recipeDescription == undefined)
@@ -145,11 +146,11 @@ export default {
                     this.mensagem = 'Erro no server ao buscar ' + error;
                     this.carregando = false;
                 })
-            },300);    
-            console.log(this.recipes);
+            },100);    
+            
         },
     },
-    beforeMount() {
+    created() {
         this.buscar();
         // this.getPhasesById();
     }

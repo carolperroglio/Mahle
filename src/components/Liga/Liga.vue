@@ -53,8 +53,8 @@
         <div id="load-liga" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>                
         </div>            
-        <h2 v-if="recipeCadastrada" class="nome-liga">{{recipe.recipeName}}</h2>                           
-        <div v-if="recipeCadastrada" class="cabecalho-table-liga"  v-show="!carregando">
+        <h2 v-if="recipeCadastrada" v-show="!carregando" class="nome-liga">{{recipe.recipeName}}</h2>                           
+        <div v-if="recipeCadastrada" class="cabecalho-table-liga"  v-show="!carregando && produtos.length>0">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'product',0):organizar(produtos, 'product',0);" class="ls2 col-md-2">
                 <b><font class="cursor-class" color="#ffffff">Componente &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -85,7 +85,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->                            
-        <div v-if="recipeCadastrada" class="liga-produtos">
+        <div v-if="recipeCadastrada" v-show="!carregando" class="liga-produtos">
             <div v-for="(pro, index) in produtos" v-bind:class="{cinza: index%2==0}" :key="index">                                    
                 <label class="ls ls2 col-md-2">
                     {{pro.product.productName}}</label>
@@ -94,17 +94,15 @@
                 <label class="ls ls2 col-md-2">
                     {{pro.maxValue}}</label>                                        
                 <label class="ls ls2 col-md-5">                        
-                    <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto()"></i>&nbsp;&nbsp;&nbsp;                     
-                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal(pro, index)"></i>
+                    <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto(pro, index)"></i>&nbsp;&nbsp;&nbsp;                     
+                    <!--<i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="phaseProduct = {};showModalEditProPhase(pro, index)"></i>-->
                 </label>
             </div>                       
         </div> 
         
 
 
-
-                              
-        
+                                      
         <!--                       -->
         <!--                       -->
         <!--                       -->
@@ -140,18 +138,47 @@
         <!--                       -->
         <b-modal ref="modalConfirmEditLiga" hide-footer title="Editar Liga">            
             <div class="modal-body">
-                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar !</b>
+                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar!?</b>
             </div>    
             <div class="modal-footer">
                 <div>
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="putRecipe(recipeTemp);" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
+                        </button>
+                        <button @click.stop.prevent="hideModalConfirmEditLiga()" class="btn btn-danger">Cancelar                        
                         </button>                        
                     </div>
                 </div>
             </div>
-         </b-modal>             
+        </b-modal>             
+
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--        Editar         -->
+        <!--        Produto        -->
+        <!--                       -->
+        <!--                       -->
+        <b-modal ref="modalConfirmEditarProduto" hide-footer title="Editar Produto"> 
+            <div class="modal-body">
+                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar o Componente!?</b>
+            </div>    
+            <div class="modal-footer">
+                <div>
+                    <div class="btn-group" role="group">
+                        <button @click.stop.prevent="put(produto);" class="btn btn-success">
+                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                        </button>
+                        <button @click.stop.prevent="hideModalConfirmEditarProduto()" class="btn btn-danger">Cancelar                            
+                        </button>                        
+                    </div>
+                </div>
+            </div>
+        </b-modal> 
+
+
 
         <!--                       -->
         <!--                       -->
@@ -161,8 +188,7 @@
         <!--       da liga         -->
         <!--        modal          -->
         
-        <b-modal ref="modalcadProPhase" hide-footer title="Cadastrar produto">
-            
+        <b-modal ref="modalcadProPhase" hide-footer title="Cadastrar Componente">            
             <div class="modal-body">
                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
@@ -196,6 +222,7 @@
             <div class="modal-footer">
                 <div>
                     <div class="btn-group" role="group">
+                        {{phaseProduct.phaseProductId}}
                         <button @click.stop.prevent="createPhaseProduct(phaseProduct, recipe.phases[0]);" :disabled="!phaseProduct.productId || !phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
                         </button>
@@ -206,7 +233,58 @@
                 </div>
             </div>
         </b-modal>
-
+        
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <!--       Editar de       -->
+        <!--       produto         -->
+        <!--       da liga         -->
+        <!--        modal          -->        
+        <b-modal ref="modalEditProPhase" hide-footer title="Editar Componente">            
+            <div class="modal-body">
+                <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                <div class="form-row"> 
+                    <div class="form-group col-md-6">
+                        <label>Nome do produto </label>
+                        <input @keyup="pros=getResults(urlProducts, productPhaseName, pros);delete phaseProduct.productId;" v-model="productPhaseName" placeholder="Nome do produto"  class="fm form-control mr-sm-0" id="dropdownMenuButton"/>
+                        <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; pros=[];" v-for="(p,index) in pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>
+                    </div>                                                   
+                    <div class="form-group col-md-6">
+                        <label>Tipo de Produto</label>
+                        <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
+                            <option value="" selected disabled>Campo para busca</option>
+                            <option value="scrap">Rejeitado</option>
+                            <option value="finished">Acabado</option>
+                            <option value="semi_finished">Semi-Acabado</option>
+                        </select>
+                    </div>                    
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Mín(%) </label><br>
+                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.minValue" placeholder="Valor mínimo" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Máx(%) </label><br>
+                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.maxValue" placeholder="Valor máximo" />
+                    </div>
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <div class="btn-group" role="group">{{phaseProduct.phaseProductId}}
+                        <button @click.stop.prevent="putPhaseProduct(phaseProduct, recipe.phases[0]);" :disabled="!phaseProduct.productId || !phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue" class="btn btn-success">
+                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                        </button>
+                        <div class="btn btn-primary pull-right" @click.stop.prevent="phaseProduct={}; productPhaseName=''">
+                            Limpar
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </b-modal>
 
         <!--                       -->
         <!--                       -->
@@ -217,7 +295,7 @@
         <!--                       -->
         <b-modal ref="modalRemoveLiga" hide-footer title="Remover Liga">            
             <div class="modal-body">
-                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja remover !</b>
+                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja remover a Liga!</b>
             </div>    
             <div class="modal-footer">
                 <div>
@@ -246,7 +324,7 @@
             <div class="modal-footer">
                 <div>
                     <div class="btn-group" role="group">
-                        <button @click.stop.prevent="deletePhaseProduct(pro,recipe.phases[0]);" class="btn btn-success">
+                        <button @click.stop.prevent="deletePhaseProduct(produto, recipe.phases[0]);" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i>
                         </button>  
                         <button @click.stop.prevent="hideModalRemoveProduto()" class="btn btn-danger">Cancelar                            

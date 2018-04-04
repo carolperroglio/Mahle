@@ -74,6 +74,12 @@ export default {
         showModalConfirmPut() {
             this.$refs.modalEditarProduto.show();
         },
+        hideModalConfirmCreate(){
+            this.$refs.modalCadastrarProduto.hide();
+        },
+        hideModalConfirmPut(){
+            this.$refs.modalEditarProduto.hide();
+        },
         showModalRemoveProduto(produto, index) {
             this.errors = [];
             this.mensagemSuc = '';
