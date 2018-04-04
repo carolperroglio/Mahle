@@ -12,12 +12,13 @@
     text-align: center;
 }
 
-/* Clase de cursor mãozinha */
 
+/* Clase de cursor mãozinha */
 
 .cursor-class {
     cursor: pointer;
 }
+
 
 /* Menu de navegação padrão cinza */
 
@@ -40,10 +41,26 @@
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
 }
 
-
-label{
-
+label {
     margin-bottom: 0;
+}
+
+
+/* Icone de Carregamento */
+
+#load {
+    margin-left: 45%;
+    z-index: 100;
+    margin-top: 25%
+}
+
+
+/* Icone de Carregamento para views de ap */
+
+#load2 {
+    margin-left: 45%;
+    z-index: 100;
+    margin-top: 5%
 }
 
 

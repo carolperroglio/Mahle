@@ -14,7 +14,9 @@
             </ul>
         </div>
         <div class="op col-md-12">
-
+        <div id="load" v-show="carregando">
+            <stretch background="#4d4d4d"></stretch>
+        </div> 
         <h3 style="text-align:center"></h3>
         <div class="fundo-branco-ap">
             <div class="cabecalho-table-ap">

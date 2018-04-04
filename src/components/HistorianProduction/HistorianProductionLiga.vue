@@ -60,10 +60,8 @@
                                 </button> -->
                                 </div>
                             </div>
-                            <div class="card-body card-body-hp">
-                            <div id="load" v-show="carregando">
-                                <stretch background="#4d4d4d"></stretch>
-                            </div> 
+                        <div class="card-body card-body-hp">
+                            
                         <div class="fundo-branco-ap-liga">
                             <div class="cabecalho-table-ap-liga">
                                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(allProducts, 'product',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-2">
@@ -101,6 +99,9 @@
                                     </font></b>
                                 </label>                
                             </div>
+                            <div id="load2" v-show="carregando">
+                                <stretch background="#4d4d4d"></stretch>
+                            </div> 
                             <div v-for="(o, index) in allProducts" v-bind:key="index" :class="{cinza: index%2==0}">
                                 <label class="ls ls10 col-md-2">
                                     {{o.product}}</label>&nbsp;

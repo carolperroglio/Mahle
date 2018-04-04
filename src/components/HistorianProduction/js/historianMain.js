@@ -201,6 +201,7 @@ export default {
             }, 1000);
         },
         getResults() {
+            this.carregando = true;
             this.orderHistorian = [];
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
@@ -216,8 +217,11 @@ export default {
                 });
 
                 paginacao(response, this);
+                this.carregando = false;
+
                 console.log(this.OPs);
             }, (error) => {
+                this.carregando = false;
                 console.log(error);
             })
         },

@@ -64,9 +64,6 @@
                                             </div>
                                         </div>
                                         <div class="card-body card-body-hp">
-                                        <div id="load" v-show="carregando">
-                                          <stretch background="#4d4d4d"></stretch>
-                                        </div> 
                                         <div class="fundo-branco-ap-tira">
                                         <div class="cabecalho-table-ap-tira">
                                             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(teste, 'product',0):organizar(teste, 'product',0);" class="ls2-cabecalho-ap-tira col-md-2">
@@ -112,7 +109,10 @@
                                             </label>                
                                         </div>
                                     </div>
-                                        <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}">
+                                    <div id="load2" v-show="carregando">
+                                        <stretch background="#4d4d4d"></stretch>
+                                    </div> 
+                                    <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}">
                                             <label class="ls ls10 col-md-2">
                                                 {{o.product}}</label>&nbsp;
                                             <label class="ls ls10  col-md-2">

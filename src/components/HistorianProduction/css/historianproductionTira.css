@@ -1,5 +1,4 @@
 @import url("./../../genericcss/generico.css");
-
 .nav-hp {
     position: fixed;
     margin-top: 5%;
@@ -49,10 +48,6 @@
 
 .cinza {
     background-color: #DCDCDC;
-}
-
-#load {
-    left: 50%;
 }
 
 .title-page-hp {
