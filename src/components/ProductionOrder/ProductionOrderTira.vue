@@ -9,9 +9,9 @@
                                        
                     <div class="modal-body">
                         <form>
-                            <div class="alert alert-success" role="alert" v-if="opCreated">
+                            <!-- <div class="alert alert-success" role="alert" v-if="opCreated">
                                 OP criada com sucesso !
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                                 <div class="form-group col-sm-6">
                                 <label for="op">OP</label>
@@ -34,13 +34,13 @@
                                 </div>
                             </div> -->
                             <div class="form-group row">
-                                <div class="form-group col-sm-6">
-                                <label for="opType">Nome da Tira</label>
-                                <input autocomplete="off" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-8" id="dropdownMenuButton" placeholder="Ex: Receita1" />
-                                <button class="btn btn-outline-success btn-sm col-sm-2" :disabled="!productionOrderObj.productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
+                                <div class="form-group col-md-12">
+                                <label for="opType">Código da Tira</label>
+                                <input autocomplete="off" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                                <button class="btn btn-outline-success btn-sm col-md-1" :disabled="!productionOrderObj.productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </button>
-                                <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</b-dropdown-item>
+                                <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeCode; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeCode }}</b-dropdown-item>
                                 </div>
                                 
                             </div>
@@ -84,8 +84,12 @@
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
                             <button class="btn btn-success" :disabled="!recipeAdded || !productionOrderObj.productionOrderNumber || productionOrderObj.productionOrderNumber == ' '" @click="createOp(productionOrderObj); hideModal('modalCadOP');">
-                                <i class="fa fa-check-square" aria-hidden="true"></i>
+                                <i  class="fa fa-check-square" aria-hidden="true"></i>
+                                Confirmar
                             </button>
+                            <button @click.stop.prevent="productionOrderObj.productionOrderNumber = ''; recipeAdded = ''; idAllowed  = '';recipeName=''" class="btn btn-primary pull-right">
+                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                            </button> 
                         </div>
                     </div>
                     <!--</Botão que cria a OP -->
@@ -99,28 +103,30 @@
         <!--                      -->
         <!--  Botão que inicia    -->
         <!--  o Modal de Criação da OP  -->
-        <div class="fixed-top nav-op">
+        <div class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
-            <li class="nav-prod col-sm-1.5">
-                    <h1 class="title-page-op"> <b>Ordens de Produção - Tiras</b> </h1>
-                    <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter" @change="fieldValue = ''">
-                        <option value="" selected disabled>Buscar por:</option>
-                        <option value="productionOrderNumber">OP</option>
-                        <option value="typeDescription">Descrição</option>
-                        <!-- <option value="recipeCode">Código</option> -->
-                        <!-- <option value="currentStatus">Status</option> -->
-                    </select>
-                </li>
-                <li class="nav-prod col-sm-1.5">
+            <li class="nav-prod col-md-12">
+                <h1 class="title-page-gp"> <b>Ordens de Produção - Tiras</b> </h1>
+            </li>
+            <li class="nav-prod col-md-2">
+                <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter" @change="fieldValue = ''">
+                    <option value="" selected disabled>Buscar por:</option>
+                    <option value="productionOrderNumber">OP</option>
+                    <option value="typeDescription">Descrição</option>
+                    <!-- <option value="recipeCode">Código</option> -->
+                    <!-- <option value="currentStatus">Status</option> -->
+                </select>
+            </li>
+                <li class="nav-prod col-md-2">
                     <input class="form-control relative btn-lg col-md-auto" type="search" :disabled="!fieldFilter" v-model="fieldValue" placeholder="Ex:OP1" aria-label="Busca">
                 </li>
-                <li class="nav-prod col-sm-1.5">
+                <li class="nav-prod col-md-6">
                     <form class="form-inline my-3 form-control-sm">
                         <div class="col-md-auto">
                             <button type="button" button class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search"></i> Buscar</button>
                         </div>
                         <!-- Button trigger modal -->
-                        <div class="col-sm-3">
+                        <div class="col-md-3">
                             <button @click="productionOrderObj.productionOrderNumber = ''; recipeAdded = ''; idAllowed  = '';recipeName='';showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-lg">
                                 <i class="fa fa-plus"></i> Cadastrar Ordem de Produção
                             </button>
@@ -134,12 +140,10 @@
         <!--  LISTAR OPs -->
         <!--             -->
         <div>
-            <div class="op col-md-12">
                 <div id="load" v-show="carregando">
                     <stretch background="#4d4d4d"></stretch>
                 </div>
-                <div class="fundo-branco-po">
-                    <div class="cabecalho-table-po">
+                    <div class="cabecalho-table-po"  v-show="!carregando">
                         <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opArrarKeep, 'productionOrderNumber',0):organizar(opArrarKeep, 'productionOrderNumber',0);" class="ls2-cabecalho-po col-md-2">
                             <b><font class="cursor-class" color="#ffffff">OP &nbsp;&nbsp;&nbsp;
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -174,9 +178,8 @@
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                             </font></b>
                         </label> 
-                    </div>
                 </div>   
-                <div class="table-margin">
+                <div class="table-margin"  v-show="!carregando">
                 <div v-for="(op, index) in opArrarKeep" v-bind:key="index" :class="{cinza: index%2==0}">
                             <label class="ls ls1 col-md-2">
                                 {{op.productionOrderNumber}}
@@ -200,7 +203,6 @@
                                 <i :id="op.recipe.recipeId" class="fa fa-eye" style="font-size: 22px; cursor: pointer;" @click="parametros=[];recipes={};showModal('visualizarParams');getGatewayRecipe(op)"></i>
                             </label>
                     </div>
-                </div>
                 </div>
                 <div class="paginacao" v-show="total>0">
                     <nav aria-label="">

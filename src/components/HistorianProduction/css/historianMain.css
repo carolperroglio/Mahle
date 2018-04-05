@@ -19,14 +19,10 @@
 
 .cabecalho-table-ap {
     position: fixed;
-    top: 26%;
-    /* left: 1.8%; */
-    width: 93.1%;
-    padding: 0 0 0 0.1%;
+    width: 100%;
     background-color: black;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0.2%;
-    z-index: 1;
+    margin: -2.2% 0 0 0;
+    z-index: 4;
 }
 
 .fundo-branco-ap {
@@ -62,11 +58,15 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     margin-bottom: 0.3%;
-    margin-left: 0.5%;
+    margin-left: 0.2%;
 }
 
 .cinza {
     background-color: #DCDCDC;
+}
+
+.router {
+    margin: 0.1% 0 0.1% 5%;
 }
 
 .table-margin-hm {
@@ -176,10 +176,10 @@ input {
         margin-top: 34%;
     }
     .cabecalho-table-ap {
-        top: 32%;
         position: fixed;
-        /* left: 1.8%; */
-        width: 91.3%;
-        padding: 0 0 0 0.1%;
+        width: 100%;
+        background-color: black;
+        margin: -2.2% 0 0 0;
+        z-index: 4;
     }
 }

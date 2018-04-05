@@ -8,8 +8,8 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-         <div class="fixed-top nav-hp">
-            <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção de Liga (OPL)</b> </h1>
+         <div class="fixed-top nav-cinza">
+            <h1 class="title-page-gp-s-campo" id="exButton1"><b> Apontamentos de Ordem de Produção de Liga (OPL)</b> </h1>
             <ul class="nav d-flex align-items-center">
                <!-- <li class="nav-item-hp col-2.5">
                    <div class="badge">Escolha uma ordem de produção   <i class="fa fa-arrow-right" id="seta"></i></div>
@@ -134,8 +134,6 @@
         <b-modal ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
                         <form>
                             <div>
-                                <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                                <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                                 <div class="form-row">
                                 <div class="form-group col-md-6" v-show="pReceita">
                                 <label>
@@ -175,13 +173,19 @@
                                     <div class="btn-group" role="group" v-show="pReceita">
                                         <button class="btn btn-success" :disabled="!ordem.quantity || ordem.quantity == '' ||
                                          !rolo || rolo == '' || !ordem.productName || ordem.productName == ''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
-                                            <i class="fa fa-check"></i>
+                                            <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                                         </button>
+                                        <button @click.stop.prevent="ordem.quantity =''; ordem.productName = ''" class="btn btn-primary pull-right">
+                                            <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                                        </button> 
                                     </div>
                                     <div class="btn-group" role="group" v-show="!pReceita">
                                         <button class="btn btn-success" :disabled="!ordem.quantity || ordem.quantity == '' || !lote || lote == ' '" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
-                                            <i class="fa fa-check"></i>
+                                            <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                                         </button>
+                                        <button @click.stop.prevent="ordem.quantity = '';ordem.productId = ''" class="btn btn-primary pull-right">
+                                            <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                                        </button> 
                                     </div>
                                 </div>
                             </div>

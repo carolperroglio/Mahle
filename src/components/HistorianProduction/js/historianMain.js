@@ -10,9 +10,9 @@ import { Stretch } from 'vue-loading-spinner'
 es6promisse.polyfill();
 
 function paginacao(response, este) {
-    este.pageAtual = este.startat / 20;
+    este.pageAtual = este.startat / este.quantityPage;
     este.total = response.data.total;
-    let fim = Math.ceil(este.total / 20);
+    let fim = Math.ceil(este.total / este.quantityPage);
     var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
     if (este.pageAtual > 11) {
         for (var i = este.pageAtual - 5; i < num; i++)
@@ -62,11 +62,12 @@ export default {
             lista: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
-            quantityPage: 20,
+            quantityPage: 100,
             startat: 0,
             total: 0,
             pages: [],
             pageAtual: 0,
+            msgErro: ""
         }
     },
     computed: {
@@ -154,7 +155,7 @@ export default {
             } else {
                 ordem.batch = this.lote;
             }
-            confirm("Confirma apontamento?");
+            // confirm("Confirma apontamento?");
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
                 this.mensagemSuc = 'Produto apontado com sucesso.';
                 this.productionOrderId = this.ordem.productionOrderId;
@@ -196,7 +197,6 @@ export default {
             }).catch((error) => {
                 this.msgErro = error.message;
                 this.showModal("modalErro");
-                this.mensagem = 'Erro no server ' + r;
                 this.carregando = false;
                 this.orderHistorian = [];
             })
