@@ -251,8 +251,13 @@ export default {
                 console.log(this.orderHistorianAllProducts);
                 this.carregando = false;
             }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
+                if (error.response.status == 404) {
+                    this.msgErro = "Sem registros na tabela";
+                    this.showModal("modalErro");
+                } else {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+                }
                 this.carregando = false;
             })
 

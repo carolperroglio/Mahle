@@ -98,7 +98,7 @@
                             </span>
                         </router-link>
                         <router-link to="/listlineparameters" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
-                            <i class="fa fa-book"></i> 
+                            <i class="fa fa-random"></i> 
                             <span class="hidden-sm-down">  
                                 PARAMETROS DE LINHA
                             </span>

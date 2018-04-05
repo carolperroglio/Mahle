@@ -132,64 +132,43 @@
         <!--                                 -->
         <!--               Modal             -->
         <b-modal ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
-                        <form>
-                            <div>
-                                <div class="form-row">
-                                <div class="form-group col-md-6" v-show="pReceita">
-                                <label>
-                                    <b>Material </b>
-                                </label>
-                                <input type="text" id="prodReceita" placeholder="nome" required v-model="ordem.productName" class="form-control form-control-sm" disabled>
-                                </div>
-                                <div class="form-group col-md-6" v-show="pFase" v-if="consumo = true">
-                                <label>
-                                    <b>Materiais </b>
-                                </label>
-                                <select class="form-control form-control-sm" v-model="ordem.productId">
-                                    <option v-for="(p,index) in orderPhaseProducts.phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
-                                </select>
-                                </div>
-                                <div class="form-group col-md-3" v-show="pFase">
-                                <label>
-                                    <b>Quantidade </b>
-                                </label>
-                                <input type="number" required v-model="ordem.quantity" placeholder="Ex:5" class="form-control form-control-sm">
-                                </div>
-                                <div class="form-group col-md-5">
-                                <label>
-                                    <b>Lote </b>
-                                </label>
-                                <input type="text" required v-model="lote" class="form-control form-control-sm">
-                                </div>
-                                <!-- </div> -->
-                                <div class="form-group col-md-4" v-show="pReceita">
-                                <label>
-                                    <b>Rolo </b>
-                                </label>
-                                <input type="text" required v-model="rolo" :disabled="true" class="form-control form-control-sm">
-                                </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="btn-group" role="group" v-show="pReceita">
-                                        <button class="btn btn-success" :disabled="!ordem.quantity || ordem.quantity == '' ||
-                                         !rolo || rolo == '' || !ordem.productName || ordem.productName == ''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
-                                            <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
-                                        </button>
-                                        <button @click.stop.prevent="ordem.quantity =''; ordem.productName = ''" class="btn btn-primary pull-right">
-                                            <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
-                                        </button> 
-                                    </div>
-                                    <div class="btn-group" role="group" v-show="!pReceita">
-                                        <button class="btn btn-success" :disabled="!ordem.quantity || ordem.quantity == '' || !lote || lote == ' '" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
-                                            <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
-                                        </button>
-                                        <button @click.stop.prevent="ordem.quantity = '';ordem.productId = ''" class="btn btn-primary pull-right">
-                                            <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
-                                        </button> 
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+            <form>
+                <div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6" v-show="pFase" v-if="consumo = true">
+                    <label>
+                        <b>Materiais </b>
+                    </label>
+                    <select class="form-control form-control-sm" v-model="ordem.productId">
+                        <option v-for="(p,index) in orderPhaseProducts.phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
+                    </select>
+                    </div>
+                    <div class="form-group col-md-3" v-show="pFase">
+                    <label>
+                        <b>Quantidade </b>
+                    </label>
+                    <input type="number" required v-model="ordem.quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-5">
+                    <label>
+                        <b>Lote </b>
+                    </label>
+                    <input type="text" required v-model="lote" class="form-control form-control-sm">
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group" role="group" v-show="pReceita">
+                            <button class="btn btn-success" :disabled="!ordem.quantity || ordem.quantity == '' ||
+                                !rolo || rolo == '' || !ordem.productId || ordem.productId == ''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
+                            </button>
+                            <button @click.stop.prevent="ordem.quantity =''; ordem.productName = ''" class="btn btn-primary pull-right">
+                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                            </button> 
+                        </div>
+                    </div>
+                </div>
+            </form>
          </b-modal>
 
          <b-modal ref="modalErro" title="Erro" hide-footer="">

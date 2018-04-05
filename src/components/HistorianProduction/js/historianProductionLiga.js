@@ -48,8 +48,11 @@ export default {
             lista: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
-            msgErro: ""
-
+            msgErro: "",
+            quantity: "",
+            productionOrderId: "",
+            prodRolo: "",
+            unity: "",
 
         }
     },
@@ -129,10 +132,11 @@ export default {
         },
         cadastrarApont(ordem) {
 
-            this.mensagem = '';
-            this.mensagemSuc = '';
-            console.log(ordem);
-            console.log(this.url + '/api/producthistorian');
+            ordem.productionOrderId = this.productionOrderId.productionOrderId;
+            ordem.quantity = this.quantity;
+            ordem.type = this.ordem.type;
+            ordem.unity = this.unity;
+
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;
             } else {
@@ -214,8 +218,8 @@ export default {
                 this.carregando = false;
             }).catch((error) => {
                 this.carregando = false;
-                if (error.code == 404) {
-                    this.msgErro = "Não possui elementos para a liga escolhida ";
+                if (error.response.status == 404) {
+                    this.msgErro = "Sem registros na tabela";
                     this.showModal("modalErro");
                 } else {
                     this.msgErro = error.message;
