@@ -36,7 +36,7 @@
         <div id="load-parameters" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>                
         </div>                                    
-        <div class="cabecalho-table-prameters">
+        <div class="cabecalho-table-prameters" v-show="false">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'productName',0):organizar(recipes, 'productName',0);" class="ls2 col-md-2">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -64,7 +64,7 @@
                 </font></b>
             </label>
         </div>                           
-
+        Parametros em breve
         <!--                       -->
         <!--                       -->
         <!--                       -->
@@ -72,7 +72,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->                        
-        <div class="margin-table" v-show="!carregando">
+        <div class="margin-table" v-show="!carregando && false">
             <div v-for="(p, index) in recipes" v-bind:class="{cinza: index%2==0}" v-bind:key="index">                                    
                 <label class="ls2 col-md-2">
                     </label>
