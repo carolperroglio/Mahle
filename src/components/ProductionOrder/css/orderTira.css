@@ -14,13 +14,10 @@
 
 .cabecalho-table-po {
     position: fixed;
-    top: 26%;
-    /* left: 1.8%; */
-    width: 91.4%;
-    padding: 0 0 0 0.1%;
+    width: 100%;
     background-color: black;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0.2%;
+    margin: -2.5% 0 0 0;
+    z-index: 4;
 }
 
 .cabecalho-table-po-modal {
@@ -102,8 +99,7 @@ a:hover {
 }
 
 .table-margin-params {
-    margin-top: 1%;
-    width: 100%;
+    margin: 1% 0 6% 0;
 }
 
 .card-body-op {
@@ -138,13 +134,10 @@ a:hover {
 @media screen and (min-width: 768px) {
     .cabecalho-table-po {
         position: fixed;
-        top: 28%;
-        /* left: 1.8%; */
-        width: 91%;
-        padding: 0 0 0 0.1%;
+        width: 100%;
         background-color: black;
-        margin: 0 0 0 0;
-        padding: 0 0 0 0.2%;
+        margin: -2.5% 0 0 0;
+        z-index: 4;
     }
     .op {
         position: relative;
@@ -206,12 +199,9 @@ a:hover {
     }
     .cabecalho-table-po {
         position: fixed;
-        top: 36%;
-        /* left: 1.8%; */
-        width: 93.2%;
-        padding: 0 0 0 0.1%;
+        width: 100%;
         background-color: black;
-        margin: 0 0 0 0;
-        padding: 0 0 0 0.2%;
+        margin: -2.5% 0 0 0;
+        z-index: 4;
     }
 }

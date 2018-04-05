@@ -34,11 +34,31 @@
     width: 100%;
 }
 
+.nav-cinza-s-campo {
+    position: fixed;
+    margin-top: 12%;
+    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
+    font-size: 11pt;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: content-box;
+    z-index: 1;
+    background-color: white;
+    width: 100%;
+}
+
 .title-page-gp {
     color: rgb(68, 68, 70);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 22px;
     text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+}
+
+.title-page-gp-s-campo {
+    color: rgb(68, 68, 70);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 22px;
+    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+    padding-bottom: 5%;
 }
 
 label {
@@ -76,13 +96,11 @@ label {
 }
 
 .table-margin {
-    margin-top: 15%;
-    width: 98.2%;
+    margin: 14% 0 6% 0;
 }
 
 @media screen and (max-width: 801px) {
     .table-margin {
-        margin-top: 35%;
-        width: 98%;
+        margin: 14% 0 6% 0;
     }
 }

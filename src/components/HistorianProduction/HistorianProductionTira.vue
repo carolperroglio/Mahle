@@ -49,87 +49,90 @@
                             </button> -->
                         </div>
                 
-                            <div >
-                                    <div class="card">
-                                        <div class="card-header card-header-hp">
-                                            <b>Materiais Consumidos e Apontados</b>
-                                            <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
-                                            <div style="margin-right:1%" class="pull-right">
-                                            <button type="button" class="btn btn-success" @click.stop.prevent="ordem.quantity = ''; showModal('myModalRef'); ordem.type = 'input'">
-                                            <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
-                                            </button>
-                                            <button type="button" class="btn btn-success" @click.stop.prevent="ordem.quantity = '';showModal('myModalRef');pReceita = true; ordem.type = 'output'">
-                                            <i aria-hidden="true" class="fa fa-plus"></i> Registrar Liga
-                                            </button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body card-body-hp">
-                                        <div class="fundo-branco-ap-tira">
-                                        <div class="cabecalho-table-ap-tira">
-                                            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(teste, 'product',0):organizar(teste, 'product',0);" class="ls2-cabecalho-ap-tira col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">Material &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label>
-                                            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(teste, 'lote',2):organizar(teste, 'lote',2);" class="ls2-cabecalho-ap-tira col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    OF/OPL &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label>
-                                            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(teste, 'rolo',5):organizar(teste, 'rolo',5);" class="ls2-cabecalho-ap-tira col-md-1">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    Rolo &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label> 
-                                            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(teste, 'quantity',1):organizar(teste, 'quantity',1);" class="ls2-cabecalho-ap-tira col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    Quantidade &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label>
-                                            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(teste, 'date',3):organizar(teste, 'date',3);" class="ls2-cabecalho-ap-tira col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    Data &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label> 
-                                            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(teste, 'hour',4):organizar(teste, 'hour',4);" class="ls2-cabecalho-ap-tira col-md-2">
-                                                <b><font class="cursor-class" color="#ffffff">
-                                                    Hora &nbsp;&nbsp;&nbsp;
-                                                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                                                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-                                                </font></b>
-                                            </label>                
-                                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header card-header-hp">
+                                    <b>Materiais Consumidos e Apontados</b>
+                                    <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
+                                    <div style="margin-right:1%" class="pull-right">
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity=''; showModal('cadAco'); ordem.type = 'input'">
+                                    <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
+                                    </button>
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';productionOrderId=''; unity=''; showModal('cadLiga'); ordem.type = 'input'">
+                                    <i aria-hidden="true" class="fa fa-plus"></i> Registrar Liga
+                                    </button>
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = ''; ordem.productName = ''; unity=''; showModal('cadRoloSaida');pReceita = true; ordem.type = 'output'">
+                                    <i aria-hidden="true" class="fa fa-plus"></i> Registrar Rolo de Saída
+                                    </button>
                                     </div>
-                                    <div id="load2" v-show="carregando">
-                                        <stretch background="#4d4d4d"></stretch>
-                                    </div> 
-                                    <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}">
-                                            <label class="ls ls10 col-md-2">
-                                                {{o.product}}</label>&nbsp;
-                                            <label class="ls ls10  col-md-2">
-                                                {{o.lote}}</label>&nbsp;
-                                            <label class="ls ls10  col-md-1">
-                                                {{o.rolo}}</label>&nbsp;
-                                            <label class="ls ls10  col-md-2">
-                                                {{o.quantity}}</label>&nbsp;
-                                            <label class="ls ls10  col-md-2">
-                                                {{o.date}}</label>&nbsp;
-                                            <label class="ls ls10  col-md-1">
-                                                {{o.hour}}</label>&nbsp;    
-                                        </div>
-                                        </div>
-                                    </div>
+                                </div>
+                                <div class="card-body card-body-hp">
+                                <div class="fundo-branco-ap-tira">
+                                <div class="cabecalho-table-ap-tira">
+                                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(teste, 'product',0):organizar(teste, 'product',0);" class="ls2-cabecalho-ap-tira col-md-2">
+                                        <b><font class="cursor-class" color="#ffffff">Material &nbsp;&nbsp;&nbsp;
+                                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                                        </font></b>
+                                    </label>
+                                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(teste, 'lote',2):organizar(teste, 'lote',2);" class="ls2-cabecalho-ap-tira col-md-2">
+                                        <b><font class="cursor-class" color="#ffffff">
+                                            OF/OPL &nbsp;&nbsp;&nbsp;
+                                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                                        </font></b>
+                                    </label>
+                                    <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(teste, 'rolo',5):organizar(teste, 'rolo',5);" class="ls2-cabecalho-ap-tira col-md-1">
+                                        <b><font class="cursor-class" color="#ffffff">
+                                            Rolo &nbsp;&nbsp;&nbsp;
+                                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                                        </font></b>
+                                    </label> 
+                                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(teste, 'quantity',1):organizar(teste, 'quantity',1);" class="ls2-cabecalho-ap-tira col-md-2">
+                                        <b><font class="cursor-class" color="#ffffff">
+                                            Quantidade &nbsp;&nbsp;&nbsp;
+                                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                                        </font></b>
+                                    </label>
+                                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(teste, 'date',3):organizar(teste, 'date',3);" class="ls2-cabecalho-ap-tira col-md-2">
+                                        <b><font class="cursor-class" color="#ffffff">
+                                            Data &nbsp;&nbsp;&nbsp;
+                                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                                        </font></b>
+                                    </label> 
+                                    <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(teste, 'hour',4):organizar(teste, 'hour',4);" class="ls2-cabecalho-ap-tira col-md-2">
+                                        <b><font class="cursor-class" color="#ffffff">
+                                            Hora &nbsp;&nbsp;&nbsp;
+                                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                                        </font></b>
+                                    </label>                
+                                </div>
+                            </div>
+                            <div id="load2" v-show="carregando">
+                                <stretch background="#4d4d4d"></stretch>
+                            </div> 
+                            <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}">
+                                    <label class="ls ls10 col-md-2">
+                                        {{o.product}}</label>&nbsp;
+                                    <label class="ls ls10  col-md-2">
+                                        {{o.lote}}</label>&nbsp;
+                                    <label class="ls ls10  col-md-1">
+                                        {{o.rolo}}</label>&nbsp;
+                                    <label class="ls ls10  col-md-2">
+                                        {{o.quantity}}</label>&nbsp;
+                                    <label class="ls ls10  col-md-2">
+                                        {{o.date}}</label>&nbsp;
+                                    <label class="ls ls10  col-md-1">
+                                        {{o.hour}}</label>&nbsp;    
+                                </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
                     
             </div>
          </div>
@@ -137,68 +140,147 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-        <!--   Cadastro de orderHistorian    -->
+        <!--   Cadastro de Rolo de Aço       -->
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-        <b-modal ref="myModalRef" hide-footer :title="titleheader" modal-header-close>
-                        <form>
-                            <div>
-                                <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                                <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                                <div class="form-row">
-                                <div class="form-group col-md-6" v-show="pReceita">    
-                                <label>
-                                    <b>Material: </b>
-                                </label>
-                                <input type="text" id="prodReceita" placeholder="nome" required v-model="ordem.productName" class="form-control form-control-sm" disabled>
-                                </div>
-                                <div class="form-group col-md-6" v-if="consumo = true" v-show="pFase">
-                                <label>
-                                    <b>Materiais: </b>
-                                </label>
-                                    <select class="form-control form-control-sm" v-model="ordem.productId">
-                                    <option v-for="(p,index) in orderPhaseProducts.phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3" v-show="pFase || pReceita">
-                                <label>
-                                    <b>Quantidade: </b>
-                                </label>
-                                <input type="number" required v-model="ordem.quantity" placeholder="Ex:5" class="form-control form-control-sm">
-                                </div>
-                                </div>
-                                <div class="form-row" >
-                                <div class="form-group col-md-5" v-show="pFase">
-                                <label>
-                                    <b>Lote: </b>
-                                </label>
-                                <input type="text" required v-model="lote" class="form-control form-control-sm">
-                                </div>
-                                <div class="form-group col-md-5" v-show="pReceita">
-                                    <label>
-                                    <b>Rolo: </b>
-                                </label>
-                                <input type="text" required v-model="rolo" :disabled="true" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                    <div class="btn-group" role="group" v-show="pReceita">
-                                        <button class="btn btn-success" :disabled=" !rolo || rolo ==' ' 
-                                        || !ordem.quantity || ordem.quantity == ''" v-show="pFase || pReceita" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                    </div>
-                                    <div class="btn-group" role="group" v-show="!pReceita">
-                                        <button class="btn btn-success" :disabled="!ordem.productId || !ordem.quantity
-                                        || ordem.quantity == ''" v-show="pFase || pReceita" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+        <b-modal ref="cadAco" hide-footer title="Registrar Aço" modal-header-close>
+            <form>
+                <div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">    
+                    <label>
+                        <b>Rolo de Aço: </b>
+                    </label>
+                    <input type="text" id="prodReceita" placeholder="nome" required  :value="prodRolo = productionOrder.recipe.phases[0].phaseProducts[0].product.productName" class="form-control form-control-sm" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                    <label>
+                        <b>Quantidade: </b>
+                    </label>
+                    <input type="number" required v-model="quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-2">
+                    <label>
+                        <b>Unidade: </b>
+                    </label>
+                    <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-5">
+                    <label>
+                        <b>Lote: </b>
+                    </label>
+                    <input type="text" required v-model="lote" class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId==''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                            <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
+                        </button>
+                        <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
+                            <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                        </button>
+                    </div>
+                    
+                </div>
+                </div>
+            </form>
          </b-modal>
+
+        <!-- MODAL CADASTRAR LIGA -->
+        <!--                      -->
+        <b-modal ref="cadLiga" hide-footer title="Registrar Liga" modal-header-close>
+            <form>
+                <div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">    
+                    <label>
+                        <b>Liga: </b>
+                    </label>
+                    <select class="form-control form-control-sm" required v-model="productionOrderId">
+                        <option v-for="(p,index) in listOP" :value="p" v-bind:key="index">{{ p.productionOrderNumber }}</option>
+                    </select>
+                    <!-- <input type="text" id="prodReceita" placeholder="nome" required v-model="ordem.productName" class="form-control form-control-sm" disabled> -->
+                    </div>
+                    <div class="form-group col-md-3">
+                    <label>
+                        <b>Quantidade: </b>
+                    </label>
+                    <input type="number" required v-model="quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-2">
+                    <label>
+                        <b>Unidade: </b>
+                    </label>
+                    <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label>
+                        <b>Lote: </b>
+                        </label>
+                        <input type="text" required :value="lote = productionOrderId.productionOrderNumber" class="form-control form-control-sm" disabled>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId=='' || unity == ''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
+                            </button>
+                            <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
+                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+         </b-modal>
+
+        <!-- MODAL CADASTRAR ROLO DE SAÍDA -->
+        <b-modal ref="cadRoloSaida" hide-footer title="Registrar Rolo de Saída" modal-header-close>
+            <form>
+                <div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">    
+                    <label>
+                        <b>Rolo de Saída: </b>
+                    </label>
+                    <input type="text" id="prodReceita" placeholder="nome" required v-model="roloSaida" class="form-control form-control-sm" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                    <label>
+                        <b>Quantidade: </b>
+                    </label>
+                    <input type="number" required v-model="quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-2">
+                    <label>
+                        <b>Unidade: </b>
+                    </label>
+                    <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId=='' || unity == ''" v-show=" pReceita" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
+                            </button>
+                            <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
+                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+         </b-modal>
+        <!-- MODAL ERRO -->
+          <b-modal ref="modalErro" title="Erro" hide-footer="">
+            <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
+        </b-modal>
     </div>
 </template>
 <script src="./js/historianProductionTira.js">
