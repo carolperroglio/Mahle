@@ -9,9 +9,9 @@ import { directive as onClickaway } from 'vue-clickaway';
 export default {
     name: "NavBar",
     data() {
-        return { 
-          
-         }
+        return {
+            active: true
+        }
     },
     computed: {},
     components: {
@@ -27,8 +27,7 @@ export default {
     methods: {
         away: function() {
             var divToHide = document.getElementById('sidebar');
-               divToHide.style.display = 'none';
-          }
+            divToHide.style.display = 'none';
+        }
     }
- };
-
+};

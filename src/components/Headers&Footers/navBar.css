@@ -22,8 +22,13 @@ body {
     z-index: 5000;
 }
 
+.show-menu {
+    display: none;
+}
+
 
 /*Logo do sistema*/
+
 .logo-system {
     position: fixed;
     margin-top: 1.5%;

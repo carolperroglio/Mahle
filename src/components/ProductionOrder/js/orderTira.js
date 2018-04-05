@@ -6,6 +6,7 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import { read } from 'fs';
+import { setTimeout } from 'timers';
 
 es6promisse.polyfill();
 
@@ -82,7 +83,9 @@ export default {
             vetNomes: [],
             idLinha: "1",
             opSelectedParams: "",
-            descriptionTira: "Tira"
+            descriptionTira: "Tira",
+            canAdd: false,
+            msgErro: ""
 
         }
     },
@@ -101,6 +104,10 @@ export default {
                 this.$refs.visualizarParams.show();
             } else if (id == "modalCadOP") {
                 this.$refs.modalCadOP.show();
+            } else if (id == "modalErro") {
+                this.$refs.modalErro.show();
+                this.$refs.visualizarParams.hide();
+                this.$refs.modalCadOP.hide();
             }
         },
         hideModal(id) {
@@ -108,6 +115,8 @@ export default {
                 this.$refs.visualizarParams.hide();
             } else if (id == "modalCadOP") {
                 this.$refs.modalCadOP.hide();
+            } else if (id == "modalErro") {
+                this.$refs.modalErro.hide();
             }
         },
         organizar(hp, campo, pos) {
@@ -134,14 +143,18 @@ export default {
         /*               */
         /*****************/
         getResults(url, name) {
+            this.canAdd = false;
             var array = [];
             if (name.length < 3) { return; }
             axios.get(url + name, this.config).then((response) => {
                 response.data.values.forEach((pro) => {
                     array.push(pro);
+                    this.canAdd = true;
                 });
-            }, (error) => {
-                console.log(error);
+            }).catch((error) => {
+                this.carregando = false;
+                this.msgErro = error.message;
+                this.showModal("modalErro");
             })
             return array;
         },
@@ -156,7 +169,7 @@ export default {
             console.log(this.order, this.orderField)
                 // setTimeout(() => {
                 // api/ProductionOrders/v2?filters=productionOrderTypeId,2&filters=currentStatus,reproved
-            axios.get(this.urlOp + "/v2?&filters=currentStatus,active" + "&filters=productionOrderTypeId,1" + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+            axios.get(this.urlOp + "/v2?&filters=currentStatus,active" + "&filters=productionOrderTypeId,1" + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
                         if (obj.typeDescription == "Tira" && obj.currentThing) {
@@ -171,9 +184,10 @@ export default {
                     console.log(this.opArray);
                     this.carregando = false;
 
-                }, (error) => {
-                    this.mensagem = 'Erro no server ao buscar ' + error;
+                }).catch((error) => {
                     this.carregando = false;
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                 })
                 // }, 1000);
 
@@ -215,9 +229,10 @@ export default {
                                 break;
 
                         }
-                    }).catch(error => {
-                        console.log(error);
+                    }).catch((error) => {
                         this.carregando = false;
+                        this.msgErro = error.message;
+                        this.showModal("modalErro");
                     })
                 }, 300);
             }
@@ -272,8 +287,10 @@ export default {
                     console.log(this.recipeArray);
                     this.carregando = false;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch((error) => {
+                    this.carregando = false;
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                 })
 
         },
@@ -299,8 +316,10 @@ export default {
                     console.log(this.opTypeArray);
                     this.carregando = false;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch((error) => {
+                    this.carregando = false;
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                 })
         },
         getRecipeGateway: function(id) {
@@ -312,8 +331,10 @@ export default {
                     console.log(this.recipeObj);
                     this.carregando = false;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch((error) => {
+                    this.carregando = false;
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                 })
         },
         addRecipe: function(recipe, id) {
@@ -356,8 +377,10 @@ export default {
                     console.log(response);
                     this.carregando = false;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch((error) => {
+                    this.carregando = false;
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                 })
         },
         getOPTypeToAssoc(idOP) {
@@ -372,8 +395,10 @@ export default {
                     this.getAssoc(idOP, idAllowed.thingId);
 
                 })
-            }).catch((e) => {
-                console.log(e);
+            }).catch((error) => {
+                this.carregando = false;
+                this.msgErro = error.message;
+                this.showModal("modalErro");
             })
         },
         getAssoc(idOP, idallowed) {
@@ -384,8 +409,9 @@ export default {
                 console.log(response.data);
 
 
-            }, (r) => {
-                this.mensagem = r.response.data;
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
                 this.carregando = false;
             })
 
@@ -404,6 +430,7 @@ export default {
                 })
         },
         createOp: function(data) {
+                this.opArrarKeep = [];
                 // adiciona propriedades necessárias na op que são mandatory
                 data.recipe = this.recipeObj;
                 console.log(this.recipeObj);
@@ -436,10 +463,15 @@ export default {
                                 //Associar OP criada a linha
                                 this.getOPTypeToAssoc(id);
 
+                                setTimeout(() => {
+                                    this.buscar();
+                                }, 1250)
                             })
                         })
-                        .catch(e => {
-                            this.errors.push(e)
+                        .catch((error) => {
+                            this.carregando = false;
+                            this.msgErro = error.message;
+                            this.showModal("modalErro");
                         })
                 }, 400)
             }

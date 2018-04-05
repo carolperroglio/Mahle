@@ -52,7 +52,7 @@
                             <div class="card-header card-header-hp">
                                 <b>Materiais Consumidos e Apontados</b>
                                 <div style="margin-right:1%" class="pull-right">
-                                    <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='input'">
+                                    <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                 </button>
                                 <!-- <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='output'">
@@ -172,8 +172,14 @@
                                 </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <div class="btn-group" role="group">
-                                        <button class="btn btn-success"  @click.stop.prevent="cadastrarApont(ordem)">
+                                    <div class="btn-group" role="group" v-show="pReceita">
+                                        <button class="btn btn-success" :disabled="!ordem.quantity || ordem.quantity == '' ||
+                                         !rolo || rolo == '' || !ordem.productName || ordem.productName == ''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group" v-show="!pReceita">
+                                        <button class="btn btn-success" :disabled="!ordem.quantity || ordem.quantity == '' || !lote || lote == ' '" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
                                             <i class="fa fa-check"></i>
                                         </button>
                                     </div>
@@ -181,6 +187,10 @@
                             </div>
                         </form>
          </b-modal>
+
+         <b-modal ref="modalErro" title="Erro" hide-footer="">
+            <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
+        </b-modal>
     </div>
 </template>
 <script src="./js/historianProductionLiga.js">

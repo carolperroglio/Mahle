@@ -53,12 +53,12 @@
                                     <div class="card">
                                         <div class="card-header card-header-hp">
                                             <b>Materiais Consumidos e Apontados</b>
-                                            <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal(); ordem.type='input'"> -->
+                                            <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
                                             <div style="margin-right:1%" class="pull-right">
-                                            <button type="button" class="btn btn-success" @click.stop.prevent=" showModal(); ordem.type = 'input'">
+                                            <button type="button" class="btn btn-success" @click.stop.prevent="ordem.quantity = ''; showModal('myModalRef'); ordem.type = 'input'">
                                             <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
                                             </button>
-                                            <button type="button" class="btn btn-success" @click.stop.prevent="showModal();pReceita = true; ordem.type = 'output'">
+                                            <button type="button" class="btn btn-success" @click.stop.prevent="ordem.quantity = '';showModal('myModalRef');pReceita = true; ordem.type = 'output'">
                                             <i aria-hidden="true" class="fa fa-plus"></i> Registrar Liga
                                             </button>
                                             </div>
@@ -141,7 +141,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-        <b-modal ref="myModalRef" hide-footer title="Registrar Aço">
+        <b-modal ref="myModalRef" hide-footer :title="titleheader" modal-header-close>
                         <form>
                             <div>
                                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
@@ -183,8 +183,15 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                    <div class="btn-group" role="group">
-                                        <button class="btn btn-success" v-show="pFase || pReceita" @click.stop.prevent="cadastrarApont(ordem)">
+                                    <div class="btn-group" role="group" v-show="pReceita">
+                                        <button class="btn btn-success" :disabled=" !rolo || rolo ==' ' 
+                                        || !ordem.quantity || ordem.quantity == ''" v-show="pFase || pReceita" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group" v-show="!pReceita">
+                                        <button class="btn btn-success" :disabled="!ordem.productId || !ordem.quantity
+                                        || ordem.quantity == ''" v-show="pFase || pReceita" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
                                             <i class="fa fa-check"></i>
                                         </button>
                                     </div>

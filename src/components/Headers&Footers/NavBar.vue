@@ -11,16 +11,16 @@
             <nav class="fixed-top">
                 <img src="./../../assets/imagens/mahle.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
-                    <li class="nav-item-cab col-md-3">
+                    <li class="nav-item-cab col-md-4">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
                     </li>                    
-                    <li class="nav-item-cab col-md-3">
+                    <!-- <li class="nav-item-cab col-md-3">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
-                    </li> 
+                    </li>  -->
                     <!-- <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:44px; cursor:pointer"></i>  <br>Ferramentas</router-link>
                     </li>  -->
-                    <li class="nav-item-cab col-md-3">
+                    <li class="nav-item-cab col-md-4">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historianMain"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos</router-link>
                     </li> 
                     <!-- <li class="nav-item-cab col-md-1.5">
@@ -49,14 +49,14 @@
         <!--                        -->  
         <div v-on-clickaway="away" id="divside">
         <div class="row fixed-top menu-btn">             
-             <b-button v-b-toggle.sidebar id="open" >
+             <b-button v-b-toggle.sidebar id="open">
                 <i class="icon-navigate fa fa-navicon fa-lg"></i>
             </b-button>       
         </div>   
             
-                <b-collapse class="fixed-top col-md-6 p-l-0 p-r-0" id="sidebar" flush>
+                <b-collapse class="fixed-top col-md-6 p-l-0 p-r-0" id="sidebar" >
                    
-                        <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki"></i> 
+                        <!-- <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki"></i> 
                             OPERADOR
                             <i class="fa fa-chevron-down pull-right"></i>
                         </div>
@@ -64,19 +64,19 @@
                             <router-link to="#" data-parent="#menu1" class="list-group-item collapsed" cursor="pointer"> 
                                 Logout 
                             </router-link>
-                        </b-collapse>
+                        </b-collapse> -->
 
-                        <router-link to="/statusmes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <!-- <router-link to="/statusmes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-check-square"></i> 
                             <span class="hidden-sm-down">  
                                 STATUS DO MES
                             </span>
-                        </router-link>
+                        </router-link> -->
 
-                        <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar" >
+                        <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
                             <i class="fa fa-barcode"></i> 
                             <span class="hidden-sm-down">  
-                                MATERIAIS
+                                MATÉRIAS-PRIMAS
                             </span>
                         </router-link>
                         <!--Bye bye receitas <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
@@ -85,25 +85,25 @@
                                 RECEITA
                             </span>
                         </router-link>-->
-                        <router-link to="/listtira" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
-                            <i class="fa fa-book"></i> 
+                        <router-link to="/listtira" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
+                            <i class="fa fa-bars"></i> 
                             <span class="hidden-sm-down">  
                                 GERENCIAMENTO DE TIRA
                             </span>
                         </router-link>
-                        <router-link to="/listliga" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <router-link to="/listliga" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
                             <i class="fa fa-book"></i> 
                             <span class="hidden-sm-down">  
                                 GERENCIAMENTO DE LIGA
                             </span>
                         </router-link>
-                        <router-link to="/listlineparameters" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <router-link to="/listlineparameters" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
                             <i class="fa fa-book"></i> 
                             <span class="hidden-sm-down">  
                                 PARAMETROS DE LINHA
                             </span>
                         </router-link>
-                        <router-link to="/historianalarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <router-link to="/historianalarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
                             <i class="fa fa-bell"></i> 
                             <span class="hidden-sm-down">  
                                 ALARMES
@@ -139,30 +139,30 @@
                             </div> 
                         </b-collapse>          -->
 
-                        <a class="list-group-item collapsed"  v-b-toggle.menu3>
+                        <!-- <a class="list-group-item collapsed"  v-b-toggle.menu3  >
                             <i class="fa fa-industry"></i> 
                                 <span class="hidden-sm-down">   
                                  ORDEM DE PRODUÇÃO
                                 </span> 
                              <i class="fa fa-chevron-down pull-right"></i> 
-                        </a>  
-                        <b-collapse id="menu3">
-                            <router-link to="/prodOrderTira" class="list-group-item" data-parent="#menu3"> 
-                                Ordens de Produção - Tiras
+                        </a>   -->
+                        <!-- <b-collapse id="menu3" @click.stop="active = !active"> -->
+                            <router-link to="/prodOrderTira" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
+                                <i class="fa fa-industry"></i> Ordens de Produção - Tiras
                             </router-link>
-                            <router-link to="/prodOrderLiga" class="list-group-item" data-parent="#menu3"> 
-                                Ordens de Produção - Ligas (OPL)
+                            <router-link to="/prodOrderLiga" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
+                                <i class="fa fa-gear"></i> Ordens de Produção - Ligas (OPL)
                             </router-link>
                             <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 
                             </router-link> -->
-                            <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3"> 
+                            <!-- <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
                                 Associação de Ordem de Produção
-                            </router-link>
+                            </router-link> -->
                             <!-- <router-link to="/OPManagement" class="list-group-item" data-parent="#menu3"> 
                                 Gerenciamento de Ordem de Produção
                             </router-link> -->
-                        </b-collapse>
+                        <!-- </b-collapse> -->
                     </b-collapse>      
                     </div>   
         <router-view/>

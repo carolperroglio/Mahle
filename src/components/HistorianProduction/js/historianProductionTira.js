@@ -47,7 +47,10 @@ export default {
             lista: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
-            teste: {}
+            teste: {},
+            msgErro: "",
+            titleheader: ""
+
         }
     },
     computed: {
@@ -64,7 +67,8 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
-        showModal() {
+        showModal(id) {
+            this.titleheader = "Registrar Liga"
             this.mensagem = '';
             this.mensagemSuc = '';
             if (this.orderHistorian.length > 0) {
@@ -84,6 +88,7 @@ export default {
                     this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                     this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
                     this.rolo = this.orderHistorian.productsOutput.length + 1;
+                    this.titleheader = "Registrar Matéria-Prima"
                 } else if (this.ordem.type === "input") {
                     this.consumo = true;
                     this.pReceita = false;
@@ -91,16 +96,25 @@ export default {
                     this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                     this.orderPhaseProducts = this.productionOrdersRecipe.phases[0];
                     this.lote = "OF";
+                    this.titleheader = "Registrar Aço"
                 }
             }, 100);
 
             setTimeout(() => {
-                this.$refs.myModalRef.show();
+                if (id == "myModalRef") {
+                    this.$refs.myModalRef.show();
+                } else if (id == "modalErro") {
+                    this.$refs.modalErro.show();
+                }
             }, 150);
 
         },
-        hideModal() {
-            this.$refs.myModalRef.hide();
+        hideModal(id) {
+            if (id == "myModalRef") {
+                this.$refs.myModalRef.hide();
+            } else if (id == "modalErro") {
+                this.$refs.modalErro.hide();
+            }
             this.pReceita = false;
             this.consumo = false;
         },
@@ -133,7 +147,6 @@ export default {
             } else {
                 ordem.batch = this.lote;
             }
-            confirm("Confirma apontamento?");
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
                 this.mensagemSuc = 'Produto apontado com sucesso.';
                 this.productionOrderId = this.ordem.productionOrderId;
@@ -144,8 +157,9 @@ export default {
                 this.ordem = {};
                 console.log(response);
 
-            }, (r) => {
-                this.mensagem = r.response.data;
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
                 this.carregando = false;
             })
             this.pReceita = false;
@@ -214,11 +228,10 @@ export default {
                 this.rolo += 1;
                 console.log(this.orderHistorianAllProducts);
                 this.carregando = false;
-            }, (r) => {
-                this.mensagem = 'Erro no server ' + r;
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
                 this.carregando = false;
-                this.orderHistorian = [];
-                this.orderHistorianAllProducts = [];
             })
 
         },
@@ -249,8 +262,10 @@ export default {
                 this.listaOp(response.data);
                 return response.data;
                 console.log(this.OPs);
-            }, (error) => {
-                console.log(error);
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
+                this.carregando = false;
             })
         },
         dataConvert(dataTicks) {
