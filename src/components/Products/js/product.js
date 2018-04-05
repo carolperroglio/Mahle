@@ -44,8 +44,8 @@ export default {
             fieldValue: '',
             fieldFilter: '',
             order: '',
-            errors: [],
-
+            errors: [],   
+            cadEdit:''         
         }
     },
     computed: {},
@@ -109,6 +109,18 @@ export default {
         validaProduto(produto) {
             return produto.productName == undefined || produto.productName == '' || produto.productCode == undefined || produto.productCode == '' || produto.productGTIN == undefined || produto.productGTIN == '';
         },
+        mudaPlace(fieldFilter){
+            var place = 'Matéria-Prima';
+            if(fieldFilter=='productName')
+                place = 'Digite o Nome';
+            else if(fieldFilter=='productDescription')
+                place = 'Digite a Descrição';
+            else if(fieldFilter=='productCode')
+                place = 'Digite o Código';
+            else if(fieldFilter=='productGTIN')
+                place = 'Digite Código de Barras';  
+            return place;       
+        },
         cadastrar(produto) {
             this.mensagem = '';
             this.mensagemSuc = '';
@@ -148,7 +160,6 @@ export default {
             this.mensagem = '';
             this.mensagemSuc = '';
             this.carregando = true;
-
             axios.delete(this.url + produto.productId).then((r) => {
                 this.mensagem = '';
                 this.mensagemSuc = "Produto " + produto.productName + " deletado com sucesso";
@@ -168,10 +179,15 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
+            var u='';
             this.produtos = [];
-            console.log(this.order, this.orderField);
+            if(this.fieldValue==undefined || this.fieldValue.length<=0)
+                u = this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&startat=" + this.startat + "&quantity=" + this.quantityPage;
+            else
+                u = this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage;
+            console.log(u);    
             setTimeout(() => {
-                axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                axios.get(u, config).then((response) => {
                     if (!response.data.values && response.data.productId)
                         this.produtos[0] = response.data;
                     else {

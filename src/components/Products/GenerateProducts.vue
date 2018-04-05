@@ -11,7 +11,7 @@
         <!--                       -->        
         <div class="fixed-top nav-cinza"> 
             <ul class="nav d-flex">
-                <li class="nav-item nav-item-products">
+                <li class="nav-item nav-item-products col-md-12">
                     <h1 class="title-page-gp"><b>Cadastro de Matéria-Prima</b></h1>
                 </li>                   
                 <li class="nav-item nav-item-products">
@@ -24,15 +24,13 @@
                     </select>
                 </li>
                 <li class="nav-item nav-item-products">
-                    <input class="form-control btn-lg" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                    <input class="form-control btn-lg" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" aria-label="Busca">
                 </li>
                 <li class="nav-item  nav-item-products">
-                    <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                    <button type="button" class="btn btn-primary btn-lg"  @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
                 <li class="nav-item nav-item-products">
-
-                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="produto.productId==undefined?showModal(produto,0):showModal(produto={},0)"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Matéria-Prima</button>
-
+                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="cadEdit='Cadastrar Matéria-Prima';showModal(produto,-1)"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Matéria-Prima</button>
                 </li>
             </ul>
         </div>                     
@@ -90,11 +88,18 @@
                 </label>    
                 <label class="ls2 col-md-2">                        
                     <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto(p,index)"></i>&nbsp;&nbsp;&nbsp;                     
-                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal(p, index)"></i>
+                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="cadEdit='Editar produto';showModal(p, index)"></i>
                 </label>
             </div>       
         </div>       
             
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <!--       Paginação       -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
         <div class="paginacao" v-show="total>0">
             <nav aria-label="">
                 <ul class="pagination justify-content-center">
@@ -127,8 +132,11 @@
                 <div>
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="excluir(produto);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
-                        </button>                        
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
+                        </button>   
+                        <button @click.stop.prevent="hideModalRemoveProduct()" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar                          
+                        </button>                       
                     </div>
                 </div>
             </div>
@@ -149,9 +157,10 @@
                 <div>
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="put(produto);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
-                        <button @click.stop.prevent="hideModalConfirmPut()" class="btn btn-danger">Cancelar                            
+                        <button @click.stop.prevent="hideModalConfirmPut()" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar                            
                         </button>                        
                     </div>
                 </div>
@@ -172,9 +181,10 @@
                 <div>
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="cadastrar(produto);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
-                        <button @click.stop.prevent="hideModalConfirmCreate()" class="btn btn-danger">Cancelar                            
+                        <button @click.stop.prevent="hideModalConfirmCreate()" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar                          
                         </button>                        
                     </div>
                 </div>
@@ -187,7 +197,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->        
-        <b-modal ref="myModalRef" hide-footer title="Cadastro de Matéria-Prima">                    
+        <b-modal ref="myModalRef" hide-footer :title="cadEdit">                    
             <form>
                 <div>
                     <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
@@ -230,9 +240,10 @@
                         <div class="btn-group" role="group">
                             <button @click.stop.prevent="produto.productId!=undefined ?  showModalConfirmPut() : showModalConfirmCreate();" class="btn btn-success pull-right" :disabled="validaProduto(produto)">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i>
+                                Confirmar
                             </button>  
                             <button @click.stop.prevent="produto.productName='';produto.productCode='';produto.productDescription='';produto.productGTIN='';" class="btn btn-primary pull-right">
-                                Limpar                           
+                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                             </button>                      
                         </div>                        
                     </div>

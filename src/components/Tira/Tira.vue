@@ -97,7 +97,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <div class="margin-table" v-show="!carregando">            
+        <div class="margin-table-tira" v-show="!carregando">            
             <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
                 <label class="ls2 col-md-2">
                 <b><font color="#9BA6A5"> </font></b>

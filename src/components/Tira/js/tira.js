@@ -145,9 +145,10 @@ export default {
             };
             if (id != 0) {
                 this.carregando = true;                
-                //setTimeout(() => {
+                setTimeout(() => {}, 500);
                     console.log(this.urlRecipes + id);
-                    axios.get(this.urlRecipes + id, config).then(response => {                    
+                    axios.get(this.urlRecipes + id, config).then(response => {
+                        console.log(response.data);                    
                         this.recipe = response.data;                        
                         for (var i = 0; i < this.recipe.phases.length; i++)
                             if (this.recipe.phases[i].phaseId != 46)
@@ -160,7 +161,7 @@ export default {
                         console.log(error);
                         this.carregando = false;
                     })
-                //}, 100);
+                //
             }
         },
 
@@ -239,10 +240,10 @@ export default {
         }
     },
     created() {
-        this.recipe;
-        this.phase;
-        this.recipes;
-        this.phases;
+        this.recipe = {};
+        this.phase = {};
+        this.recipes = [];
+        this.phases = [];
         this.getGatewayRecipe();
     }
 }
