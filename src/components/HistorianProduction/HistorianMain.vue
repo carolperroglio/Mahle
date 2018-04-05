@@ -74,6 +74,9 @@
             </div>
             </div>
         </div>
+        <b-modal ref="modalErro" title="Erro" hide-footer="">
+            <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
+        </b-modal>
     </div>
 </template>
 <script src="./js/historianMain.js">

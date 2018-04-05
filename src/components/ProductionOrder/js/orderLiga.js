@@ -82,7 +82,9 @@ export default {
             decriptionLiga: "Liga",
             urlGateway: process.env.TOOLS_API + '/gateway/thinggroups/',
             equipaments: [],
-            idAllowed: ""
+            idAllowed: "",
+            canAdd: false,
+            msgErro: ""
 
         }
     },
@@ -101,6 +103,10 @@ export default {
                 this.$refs.visualizarParams.show();
             } else if (id == "modalCadOP") {
                 this.$refs.modalCadOP.show();
+            } else if (id == "modalErro") {
+                this.$refs.modalErro.show();
+                this.$refs.visualizarParams.hide();
+                this.$refs.modalCadOP.hide();
             }
         },
         hideModal(id) {
@@ -108,6 +114,8 @@ export default {
                 this.$refs.visualizarParams.hide();
             } else if (id == "modalCadOP") {
                 this.$refs.modalCadOP.hide();
+            } else if (id == "modalErro") {
+                this.$refs.modalErro.hide();
             }
         },
         organizar(hp, campo, pos) {
@@ -134,14 +142,20 @@ export default {
         /*               */
         /*****************/
         getResults(url, name) {
+            this.carregando = true;
+            this.canAdd = false;
             var array = [];
             if (name.length < 3) { return; }
             axios.get(url + name, this.config).then((response) => {
                 response.data.values.forEach((pro) => {
                     array.push(pro);
+                    this.canAdd = true;
                 });
             }, (error) => {
                 console.log(error);
+                this.carregando = false;
+                this.msgErro = error.message;
+                this.showModal("modalErro");
             })
             return array;
         },
@@ -155,10 +169,12 @@ export default {
             };
             this.opArray = [];
             // setTimeout(() => {
-            axios.get(this.urlOp + "/v2?&filters=currentStatus,active" + "&filters=productionOrderTypeId,2" + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+            axios.get(this.urlOp + "/v2?&filters=currentStatus,active" + "&filters=productionOrderTypeId,2" + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config)
+                .then((response) => {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
                         if (obj.currentThing) {
+                            obj.thingName = obj.currentThing.thingName
                             obj.recipeName = obj.recipe.recipeName
                             obj.recipeCode = obj.recipe.recipeCode
                             this.opArray.values.push(obj);
@@ -170,20 +186,22 @@ export default {
                     paginacao(response, this);
                     console.log(this.opArray);
                     this.carregando = false;
-                }, (error) => {
+                }).catch((error) => {
                     this.mensagem = 'Erro no server ao buscar ' + error;
                     this.carregando = false;
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+                    // }, 1000);
                 })
-                // }, 1000);
-
             console.log(this.opArray);
         },
         getThings() {
             //ID Grupo do forno de fusao: 11
             axios.get(this.urlGateway + "11").then((response) => {
                 this.equipaments = response.data.things;
-            }).catch((e) => {
-
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
             })
         },
         getGatewayRecipe: function(obj) {
@@ -223,6 +241,8 @@ export default {
                     }).catch(error => {
                         console.log(error);
                         this.carregando = false;
+                        this.msgErro = e.status;
+                        this.showModal("modalErro");
                     })
                 }, 300);
             }
@@ -247,8 +267,9 @@ export default {
                     console.log(this.recipeArray);
                     this.carregando = false;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch(error => {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                 })
 
         },
@@ -274,8 +295,10 @@ export default {
                     console.log(this.opTypeArray);
                     this.carregando = false;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch(error => {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+
                 })
         },
         getRecipeGateway: function(id) {
@@ -287,8 +310,9 @@ export default {
                     console.log(this.recipeObj);
                     this.carregando = false;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch(error => {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                 })
         },
         addRecipe: function(recipe, id) {
@@ -331,8 +355,11 @@ export default {
                     console.log(response);
                     this.carregando = false;
                 })
-                .catch(e => {
-                    this.errors.push(e)
+                .catch(error => {
+                    this.carregando = false;
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+
                 })
         },
         getOPTypeToAssoc(idOP) {
@@ -348,8 +375,10 @@ export default {
                     this.getAssoc(idOP, this.idAllowed);
 
                 })
-            }).catch((e) => {
-                console.log(e);
+            }).catch((error) => {
+                console.log(error);
+                this.msgErro = error.message;
+                this.showModal("modalErro");
             })
         },
         getAssoc(idOP, idallowed) {
@@ -382,7 +411,9 @@ export default {
             axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended")
                 .then(response => {
                     console.log("OP Desativada" + response.statusText)
-                }).catch((e) => {
+                }).catch((error) => {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                     console.log("OP Desativada Falhou" + response.statusText)
                 })
 
@@ -427,12 +458,15 @@ export default {
                                 this.getOPTypeToAssoc(id);
                                 // this.getAssoc(id);
 
-
+                                setTimeout(() => {
+                                    this.buscar();
+                                }, 1250)
 
                             })
                         })
-                        .catch(e => {
-                            this.errors.push(e)
+                        .catch(error => {
+                            this.msgErro = error.message;
+                            this.showModal("modalErro");
                         })
                 }, 400)
             }

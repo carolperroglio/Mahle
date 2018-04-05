@@ -48,6 +48,8 @@ export default {
             lista: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
+            msgErro: ""
+
 
         }
     },
@@ -65,7 +67,7 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
-        showModal() {
+        showModal(id) {
             this.mensagem = '';
             this.mensagemSuc = '';
             setTimeout(() => {
@@ -90,12 +92,20 @@ export default {
             }, 100);
 
             setTimeout(() => {
-                this.$refs.myModalRef.show();
+                if (id == "myModalRef") {
+                    this.$refs.myModalRef.show();
+                } else if (id == "modalErro") {
+                    this.$refs.modalErro.show();
+                }
             }, 150);
 
         },
-        hideModal() {
-            this.$refs.myModalRef.hide();
+        hideModal(id) {
+            if (id == "myModalRef") {
+                this.$refs.myModalRef.hide();
+            } else if (id == "modalErro") {
+                this.$refs.modalErro.hide();
+            }
             this.pReceita = false;
             this.consumo = false;
         },
@@ -128,7 +138,6 @@ export default {
             } else {
                 ordem.batch = this.lote;
             }
-            confirm("Confirma apontamento?");
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
                 this.mensagemSuc = 'Produto apontado com sucesso.';
                 this.productionOrderId = this.ordem.productionOrderId;
@@ -139,8 +148,9 @@ export default {
                 this.ordem = {};
                 console.log(response);
 
-            }, (r) => {
-                this.mensagem = r.response.data;
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
                 this.carregando = false;
             })
             this.pReceita = false;
@@ -202,9 +212,15 @@ export default {
                 this.rolo += 1;
 
                 this.carregando = false;
-            }, (r) => {
-                this.mensagem = 'Erro no server ' + r;
+            }).catch((error) => {
                 this.carregando = false;
+                if (error.code == 404) {
+                    this.msgErro = "Não possui elementos para a liga escolhida ";
+                    this.showModal("modalErro");
+                } else {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+                }
                 this.orderHistorian = [];
             })
 
@@ -231,7 +247,10 @@ export default {
                 console.log(response.data);
                 this.listaOp(response.data);
                 return response.data;
-            }, (error) => {
+            }).catch((error) => {
+                this.carregando = false;
+                this.msgErro = error.message;
+                this.showModal("modalErro");
                 console.log(error);
             })
         },

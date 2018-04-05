@@ -5,7 +5,7 @@
         <!-- Formulário de  -->
         <!-- Criação de OP  -->
         <!--                -->
-        <b-modal size="md" ref="modalCadOP" hide-footer title="Cadastrar Ordem de Produção de Liga">
+        <b-modal size="md" ref="modalCadOP" hide-footer title="Cadastrar Ordem de Produção de Liga" modal-header-close>
                                        
                     <div class="modal-body">
                         <form>
@@ -42,8 +42,8 @@
                             <div class="form-group row">
                                 <div class="form-group col-md-6">
                                 <label for="opType">Nome da Liga</label>
-                                <input @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-8" id="dropdownMenuButton" placeholder="Ex: Receita1" />
-                                <button class="btn btn-outline-success btn-sm  col-sm-2" :disabled="!productionOrderObj.productionOrderNumber || !decriptionLiga" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
+                                <input autocomplete="off" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-sm-8" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                                <button class="btn btn-outline-success btn-sm  col-sm-2" :disabled="!productionOrderObj.productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </button>
                                 <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeName; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeName }}</b-dropdown-item>
@@ -96,7 +96,7 @@
                     <!--                    -->
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled="!recipeAdded || !productionOrderObj.productionOrderNumber ||!idAllowed" @click="createOp(productionOrderObj)">
+                            <button class="btn btn-success" :disabled="!recipeAdded || !productionOrderObj.productionOrderNumber || productionOrderObj.productionOrderNumber == ' ' ||!idAllowed" @click="createOp(productionOrderObj);hideModal('modalCadOP');">
                                 <i class="fa fa-check-square" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -116,7 +116,7 @@
             <ul class="nav d-flex align-items-center">
             <li class="nav-prod col-sm-1.5">
                     <h1 class="title-page-op"> <b>Ordens de Produção - Ligas (OPL)</b> </h1>
-                    <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">
+                    <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter" @change="fieldValue = ''">
                         <option value="" selected disabled>Buscar por:</option>
                         <option value="productionOrderNumber">OPL</option>
                         <option value="typeDescription">Descrição</option>
@@ -125,16 +125,16 @@
                     </select>
                 </li>
                 <li class="nav-prod col-sm-1.5">
-                    <input class="form-control relative btn-lg col-md-auto" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                    <input class="form-control relative btn-lg col-md-auto" type="search" :disabled="!fieldFilter" v-model="fieldValue" placeholder="Ex: OP1" aria-label="Busca">
                 </li>
                 <li class="nav-prod col-sm-1.5">
                     <form class="form-inline my-3 form-control-sm">
                         <div class="col-md-auto">
-                            <button type="button" button class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search"></i> Buscar</button>
+                            <button type="button" button class="btn btn-primary btn-lg"  @click.stop.prevent="buscar(id)"><i class="fa fa-search"></i> Buscar</button>
                         </div>
                         <!-- Button trigger modal -->
                         <div class="col-md-3">
-                            <button @click="showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-lg">
+                            <button @click="productionOrderObj.productionOrderNumber = ''; recipeAdded = ''; idAllowed  = '';recipeName='';showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-lg">
                                 <i class="fa fa-plus"></i> Cadastrar Ordem de Produção
                             </button>
                         </div>
@@ -213,7 +213,7 @@
                                 {{op.typeDescription}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col1-5" v-if="op.currentThing">
-                                {{op.currentThing.thingName}}
+                                {{op.thingName}}
                             </label>
                             <label class="ls ls1 col1-5" v-else>
                                 -
@@ -336,6 +336,11 @@
                 </div>
                 <!-- </div>   -->
                     </form>
+            </b-modal>
+
+            <!-- MODAL PARA EXIBIR ERRO  -->
+            <b-modal ref="modalErro" title="Erro" hide-footer="">
+                <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
             </b-modal>
     </div>
 

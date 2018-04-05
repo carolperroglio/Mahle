@@ -83,7 +83,7 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
-        showModal() {
+        showModal(id) {
             this.mensagem = '';
             this.mensagemSuc = '';
             setTimeout(() => {
@@ -108,12 +108,20 @@ export default {
             }, 100);
 
             setTimeout(() => {
-                this.$refs.myModalRef.show();
+                if (id == "myModalRef") {
+                    this.$refs.myModalRef.show();
+                } else if (id == "modalErro") {
+                    this.$refs.modalErro.show();
+                }
             }, 150);
 
         },
-        hideModal() {
-            this.$refs.myModalRef.hide();
+        hideModal(id) {
+            if (id == "myModalRef") {
+                this.$refs.myModalRef.hide();
+            } else if (id == "modalErro") {
+                this.$refs.modalErro.hide();
+            }
             this.pReceita = false;
             this.consumo = false;
         },
@@ -157,7 +165,9 @@ export default {
                 this.ordem = {};
                 console.log(response);
 
-            }, (r) => {
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
                 this.mensagem = r.response.data;
                 this.carregando = false;
             })
@@ -183,7 +193,9 @@ export default {
             this.carregando = true;
             axios.get(this.url + '/api/OrderHistorian/' + this.productionOrder.productionOrderId).then((response) => {
                 this.orderHistorian = response.data.values;
-            }, (r) => {
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
                 this.mensagem = 'Erro no server ' + r;
                 this.carregando = false;
                 this.orderHistorian = [];
@@ -207,7 +219,7 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             console.log(this.urlOP + '/api/productionorders');
-            axios.get(this.urlOP + '/api/productionorders?orderField=&order=&fieldFilter=&fieldValue=&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
+            axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,active' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
                 console.log(response.data);
                 response.data.values.forEach((pro) => {
                     if (pro.currentThing && pro.currentStatus == "active") {
@@ -220,7 +232,9 @@ export default {
                 this.carregando = false;
 
                 console.log(this.OPs);
-            }, (error) => {
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
                 this.carregando = false;
                 console.log(error);
             })
