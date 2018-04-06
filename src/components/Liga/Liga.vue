@@ -15,14 +15,14 @@
                 <li class="nav-item nav-items-liga form-group col-sm-0">                    
                     <b>Nome <br>da Liga</b>
                 </li>
-                <li class="nav-item nav-items-liga form-group col-sm-2">
-                    <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" :disabled="recipeCadastrada" required placeholder="Nome da receita">
+                <li class="nav-item nav-items-liga form-group col-sm-1">
+                    <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" :disabled="recipeCadastrada" required placeholder="Nome da liga">
                 </li>
                 <li class="nav-item nav-items-liga form-group col-sm-0">
                     <b>Código <br>da Liga</b>
                 </li>       
                 <li class="nav-item nav-items-liga col-sm-2">
-                    <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" placeholder="Código da receita">         
+                    <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" placeholder="Código da liga">         
                 </li>                                    
                 <li class="nav-item nav-items-liga col-sm-0" id="produtoR">                        
                     <b>Produto <br>Final</b>
@@ -95,7 +95,7 @@
         <!--                       -->                            
         <div v-if="recipeCadastrada" v-show="!carregando" class="liga-produtos">
             <div v-for="(pro, index) in produtos" v-bind:class="{cinza: index%2==0}" :key="index">                                    
-                <label class="ls ls2 col-md-2">
+                <label class="ls ls2 ls2-marg col-md-2">
                     {{pro.product.productName}}</label>
                 <label class="ls ls2 col-md-2">
                     {{pro.minValue}}</label>

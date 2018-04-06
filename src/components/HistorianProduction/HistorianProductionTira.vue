@@ -8,9 +8,11 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-         <div class="fixed-top nav-hp">
-             <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordem de Produção de Tira</b> </h1>
+         <div class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
+            <li class="nav-prod nav-item-gp col-md-12">
+                <h1 class="title-page-gp-s-campo" id="exButton1"><b> Apontamentos de Ordem de Produção de Tira</b> </h1>
+            </li>
                <!-- <li class="nav-item-hp col-2.5">
                    <div class="badge">Escolha uma ordem de produção   <i class="fa fa-arrow-right" id="seta"></i></div>
                </li>
@@ -55,10 +57,10 @@
                                     <b>Materiais Consumidos e Apontados</b>
                                     <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
                                     <div style="margin-right:1%" class="pull-right">
-                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity=''; showModal('cadAco'); ordem.type = 'input'">
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity='';loteAco=''; showModal('cadAco'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
                                     </button>
-                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';productionOrderId=''; unity=''; showModal('cadLiga'); ordem.type = 'input'">
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';productionOrderId=''; unity='';loteLiga=''; showModal('cadLiga'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Liga
                                     </button>
                                     <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = ''; ordem.productName = ''; unity=''; showModal('cadRoloSaida');pReceita = true; ordem.type = 'output'">
@@ -126,7 +128,7 @@
                                         {{o.quantity}}</label>&nbsp;
                                     <label class="ls ls10  col-md-2">
                                         {{o.date}}</label>&nbsp;
-                                    <label class="ls ls10  col-md-1">
+                                    <label class="ls ls10  col-md-1" style="margin-left:4%">
                                         {{o.hour}}</label>&nbsp;    
                                 </div>
                                 </div>
@@ -172,12 +174,12 @@
                     <label>
                         <b>Lote: </b>
                     </label>
-                    <input type="text" required v-model="lote" class="form-control form-control-sm">
+                    <input type="text"  v-model="loteAco" class="form-control form-control-sm">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId==''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                        <button class="btn btn-success" :disabled=" quantity==='' || loteLiga=='' || unity==''" @click.stop.prevent="cadastrarApont(ordem);">
                             <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
                         <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
@@ -223,12 +225,12 @@
                         <label>
                         <b>Lote: </b>
                         </label>
-                        <input type="text" required :value="lote = productionOrderId.productionOrderNumber" class="form-control form-control-sm" disabled>
+                        <input type="text" required :value="loteLiga = productionOrderId.productionOrderNumber" class="form-control form-control-sm" disabled>
                     </div>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId=='' || unity == ''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                            <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId=='' || unity == ''" @click.stop.prevent="cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
@@ -266,7 +268,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId=='' || unity == ''" v-show=" pReceita" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                            <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId=='' || unity == ''" v-show=" pReceita" @click.stop.prevent="cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">

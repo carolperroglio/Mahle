@@ -10,7 +10,7 @@
         <!--                                 -->
          <div class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
-            <li class="nav-prod col-md-12">
+            <li class="nav-prod nav-item-gp col-md-12">
                 <h1 class="title-page-gp-s-campo"> <b>Apontamentos de Ordens de Produção</b> </h1>
             </li>
             <li class="col-md-12">

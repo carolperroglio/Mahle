@@ -38,7 +38,7 @@
             <stretch background="#4d4d4d"></stretch>                
         </div>                                    
         <div class="cabecalho-table" v-show="!carregando">
-            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls2 col-md-2">
+            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls2  ls2-margin col-md-2">
                 <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>

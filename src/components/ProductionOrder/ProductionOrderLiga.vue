@@ -120,7 +120,7 @@
         <!--  o Modal de Criação da OP  -->
         <div class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
-            <li class="nav-prod col-md-12">
+            <li class="nav-prod nav-item-gp col-md-12">
                 <h1 class="title-page-gp"> <b>Ordens de Produção - Ligas (OPL)</b> </h1>
             </li>
             <li class="col-md-2">
@@ -211,10 +211,10 @@
                     <label class="ls ls1 col-md-2">
                         {{op.recipeName}}
                     </label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls1 col1-5">
+                    <label class="ls ls1 col1-5" style="margin-left:-1%">
                         {{op.typeDescription}}
                     </label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls1 col1-5" v-if="op.currentThing">
+                    <label class="ls ls1 col1-5"  v-if="op.currentThing">
                         {{op.thingName}}
                     </label>
                     <label class="ls ls1 col1-5" v-else>
@@ -248,7 +248,10 @@
                         </ul>
                     </nav>
                 </div>
+
+
             <!-- MODAL VISUALIZAR PARAMS -->
+            <!--                         -->
             <b-modal size="lg" ref="visualizarParams" hide-footer title="Visualizar OPL">
                 <div v-if="opSelectedParams != ''">
                 <div class="form-row">

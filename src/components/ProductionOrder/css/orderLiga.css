@@ -2,7 +2,7 @@
 
 @import url("./../../genericcss/generico.css");
 .table-margin-liga {
-    margin: 14% 0 6% 0;
+    margin: 17% 0 6% 0;
 }
 
 .nav-op {
@@ -35,7 +35,7 @@
 .width-table-context-liga {
     /* width: 13%; */
     text-align: center;
-    margin-left: 1.3%;
+    margin-left: 1%;
 }
 
 .width-table-context-wider-liga {
@@ -123,7 +123,7 @@ a:hover {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: 11.8% 0 0 0;
+        margin: 14.8% 0 0 0;
         z-index: 4;
     }
 }

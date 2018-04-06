@@ -1,34 +1,40 @@
-
 @import url("./../../genericcss/generico.css");
+
 /*Menu de cadastro da receita*/
 
-
-.nav-items-liga{
+.nav-items-liga {
     margin-left: 0.3%;
     padding: 1.2% 0 0.3% 0;
 }
 
+.ls2-marg {
+    margin-left: -1.5%;
+}
+
 
 /* Tabela */
-.cabecalho-table-liga{
-    position: fixed;    
-    width: 100%;    
+
+.cabecalho-table-liga {
+    position: fixed;
+    width: 100%;
     background-color: black;
-    margin: -2% 0 0 0;    
+    margin: -2% 0 0 0;
     z-index: 4;
 }
-.liga-produtos{
+
+.liga-produtos {
     margin-top: 22.5%;
 }
 
-.nome-liga{
+.nome-liga {
     width: 100%;
     position: fixed;
     background-color: white;
     text-align: center;
     margin-top: -5%;
 }
-  
+
+
 /*Título menu superior da tela de receita*/
 
 .title-recipe-liga {
@@ -41,8 +47,8 @@
     margin-top: 1.2%;
 }
 
-#load-liga{
-    margin: 15% 0 0 50% !important;  
+#load-liga {
+    margin: 15% 0 0 50% !important;
 }
 
 @media only screen and (max-width: 800px) {

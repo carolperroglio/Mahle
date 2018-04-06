@@ -13,13 +13,13 @@
                 <li class="nav-item nav-item-tira col-md-12">
                     <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>               
-                <li class="nav-item nav-items-tira form-group col-md-0">                    
+                <li class="nav-item nav-items-tira form-group col-md-0 margin-nav">                    
                     <b>Nome da Tira</b>                    
                 </li>
                 <li class="nav-item nav-items-tira form-group col-md-2">
                     <input type="text" class="form-control form-control-md" v-model="recipe.recipeName" size='9' :disabled="true" required placeholder="Nome da Tira">                        
                 </li>                  
-                <li class="nav-item nav-items-tira form-group col-md-0">                 
+                <li class="nav-item nav-items-tira form-group col-md-0  margin-nav">                 
                     <b>Código</b>                                                           
                 </li>                                     
                 <li class="nav-item nav-items-tira form-group col-md-2">
@@ -60,33 +60,31 @@
             </label>  
             <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls3">
                 <b><font class="cursor-class" color="#ffffff">
-                    Lim. Inferior Específico
+                    LIE <p class="font-size">Limite inferior da Especificação
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                </font></b>
+                </p></font></b>
             </label> 
             <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls3">
-                <b><font class="cursor-class" color="#ffffff">
-                    Lim. Inferior Controle
+               <b><font class="cursor-class" color="#ffffff">
+                    LIC <p class="font-size">Limite inferior de controle 
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-                </font></b>
+                </p></font></b>
             </label> 
             <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls3">
-                <b>
-                    <font class="cursor-class" color="#ffffff">
-                        Lim. Superior Controle
-                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
-                    </font>
-                </b>
+               <b><font class="cursor-class" color="#ffffff">
+                    LSC <p class="font-size">Limite superior de controle
+                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
+            </p></font></b>
             </label>
             <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls3">
                 <b><font class="cursor-class" color="#ffffff">
-                    Lim. Superior Específico
+                    LSE <p class="font-size">Limite superior de especificação 
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
-                </font></b>
+                </p></font></b>
             </label>                              
         </div>
 

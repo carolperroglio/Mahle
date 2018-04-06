@@ -21,7 +21,7 @@
     position: fixed;
     width: 100%;
     background-color: black;
-    margin: -2.2% 0 0 0;
+    margin: -2% 0 0 0;
     z-index: 4;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .table-margin-hm {
-    margin-top: 15%;
+    margin-top: 17%;
     width: 100%;
 }
 

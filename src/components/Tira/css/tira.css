@@ -3,17 +3,27 @@
 @import url("./generictira.css");
 @import url("./../../genericcss/generico.css");
 
+/* inputs navbar alinhamento e margin */
+
+.margin-nav {
+    margin-left: 1%;
+    margin-top: 0.5%;
+}
+
 
 /*Cabeçalho da tabela*/
-.header-table-tira{    
-    position: fixed;    
-    width: 100%;    
+
+.header-table-tira {
+    position: fixed;
+    width: 100%;
     background-color: black;
-    margin: -2.2% 0 0 0;    
+    margin: -2.2% 0 0 0;
     z-index: 4;
 }
 
+
 /* ok */
+
 #dropdownMenuButton {
     background-color: white;
     color: black;
@@ -21,25 +31,30 @@
 
 .margin-table-tira {
     margin: 16.45% 0 6% 0;
+    padding-top: 4%;
 }
 
+
 /*Relatório de Receitas*/
-.tiras-parametros{    
+
+.tiras-parametros {
     padding-bottom: 6%;
     width: 95%;
     margin-left: 2%;
-    margin-top: 15%;    
+    margin-top: 15%;
 }
+
 
 /*Relatório de Receitas - Configuração da listagem*/
 
-.ls3{
+.ls3 {
     width: 13%;
     font-family: sans-serif;
     font-size: 12px;
     text-align: center;
 }
-.ls5{
+
+.ls5 {
     width: 17%;
     font-family: sans-serif;
     font-size: 12px;
@@ -142,7 +157,6 @@
         font-size: 11px;
     }
     /*Relatório de Receitas - Configuração da listagem*/
-   
     #addTira {
         width: 20%;
     }

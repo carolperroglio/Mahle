@@ -34,6 +34,25 @@
     width: 100%;
 }
 
+@media screen and (min-width:770px) {
+    .nav-cinza {
+        position: fixed;
+        margin-top: 5%;
+        background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
+        font-size: 11pt;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        box-sizing: content-box;
+        z-index: 1;
+        background-color: white;
+        width: 100%;
+    }
+}
+
+.nav-item-gp {
+    padding: 1.5% 0 1% 0;
+    margin-left: 1%;
+}
+
 .nav-cinza-s-campo {
     position: fixed;
     margin-top: 12%;
@@ -96,7 +115,7 @@ label {
 }
 
 .table-margin {
-    margin: 14% 0 6% 0;
+    margin: 16% 0 6% 0;
 }
 
 @media screen and (max-width: 801px) {

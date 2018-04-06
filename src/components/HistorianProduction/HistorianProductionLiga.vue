@@ -9,8 +9,10 @@
         <!--                                 -->
         <!--                                 -->
          <div class="fixed-top nav-cinza">
-            <h1 class="title-page-gp-s-campo" id="exButton1"><b> Apontamentos de Ordem de Produção de Liga (OPL)</b> </h1>
             <ul class="nav d-flex align-items-center">
+            <li class="nav-prod nav-item-gp col-md-12">
+            <h1 class="title-page-gp-s-campo" id="exButton1"><b> Apontamentos de Ordem de Produção de Liga (OPL)</b> </h1>
+            </li> 
                <!-- <li class="nav-item-hp col-2.5">
                    <div class="badge">Escolha uma ordem de produção   <i class="fa fa-arrow-right" id="seta"></i></div>
                </li>
