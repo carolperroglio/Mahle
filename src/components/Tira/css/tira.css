@@ -20,7 +20,7 @@
 }
 
 .margin-table-tira {
-    margin: 16.55% 0 6% 0;
+    margin: 16.45% 0 6% 0;
 }
 
 /*Relatório de Receitas*/
@@ -39,7 +39,12 @@
     font-size: 12px;
     text-align: center;
 }
-
+.ls5{
+    width: 17%;
+    font-family: sans-serif;
+    font-size: 12px;
+    text-align: center;
+}
 
 @media only screen and (max-width: 800px) {
     /*Titulo da receita*/

@@ -99,11 +99,12 @@ export default {
     },
     methods: {
         showModal(id) {
-            if (id == "visualizarParams") {
-                this.$refs.visualizarParams.show();
-            } else if (id == "modalCadOP") {
-                this.$refs.modalCadOP.show();
-            } else if (id == "modalErro") {
+            this.$refs[id].show();            
+            // if (id == "visualizarParams") {
+            //     this.$refs['visualizarParams'].show();
+            // } else if (id == "modalCadOP") {
+            //     this.$refs.modalCadOP.show();
+            if (id == "modalErro") {
                 this.$refs.modalErro.show();
                 this.$refs.visualizarParams.hide();
                 this.$refs.modalCadOP.hide();

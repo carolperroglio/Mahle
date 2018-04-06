@@ -12,41 +12,49 @@
                 <li class="nav-item nav-items-liga col-md-12">
                     <h1 class="title-page-gp"><b>Composição Química da Liga</b></h1>
                 </li>
-                <li class="nav-item nav-items-liga form-group col-md-0">                    
-                    <b>Nome da Liga</b>
+                <li class="nav-item nav-items-liga form-group col-sm-0">                    
+                    <b>Nome <br>da Liga</b>
                 </li>
-                <li class="nav-item nav-items-liga form-group col-md-2">
-                    <input type="text" class="form-control form-control-md" v-model="recipe.recipeName" :disabled="recipeCadastrada" required placeholder="Nome da receita">
+                <li class="nav-item nav-items-liga form-group col-sm-2">
+                    <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" :disabled="recipeCadastrada" required placeholder="Nome da receita">
                 </li>
-                <li class="nav-item nav-items-liga form-group col-md-0">
-                    <b>Código da Liga</b>
+                <li class="nav-item nav-items-liga form-group col-sm-0">
+                    <b>Código <br>da Liga</b>
                 </li>       
-                <li class="nav-item nav-items-liga col-md-2">
-                    <input type="text" class="form-control form-control-md" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" size='5' placeholder="Código da receita">         
-                </li>                    
-                <li class="nav-item nav-items-liga col-md-2" v-if="!recipeCadastrada" :disabled="!recipe.recipeName || !recipe.recipeCode || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''">                    
-                    <button type="button" class="btn btn-success"  @click.stop.prevent="createRecipe(recipe)">
+                <li class="nav-item nav-items-liga col-sm-2">
+                    <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" placeholder="Código da receita">         
+                </li>                                    
+                <li class="nav-item nav-items-liga col-sm-0" id="produtoR">                        
+                    <b>Produto <br>Final</b>
+                </li>                 
+                <li class="nav-item nav-items-liga form-group col-sm-2"><!--recipe.recipeProduct.product.productName-->
+                    <input @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim);delete recipeProduct.productId;" v-model="productRecipeName" placeholder="Nome do produto" :disabled="recipeCadastrada" class="form-control form-control-sm" id="dropdownMenuButton"/>
+                    <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.product=p; productRecipeName=p.productName; prosFim=[];" v-for="(p,index) in prosFim" v-bind:key="index">{{p.productName}}</b-dropdown-item>
+                </li>
+                <li class="nav-item nav-items-liga col-sm-2" v-if="!recipeCadastrada" >                    
+                    <button type="button" class="btn btn-success btn-sm" :disabled="!recipe.recipeName || !recipe.recipeCode || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''"  @click.stop.prevent="createRecipe(recipe)">
                         Enviar
                     </button>                    
-                </li>
-                <li class="nav-item nav-items-liga" v-if="recipeCadastrada">
-                    <button class="btn btn-warning btn-md" @click.stop.prevent="showModalEditRecipe(recipe)" >                        
+                </li> 
+                <li class="nav-item nav-items-liga col-sm-0" v-if="recipeCadastrada">
+                    <button class="btn btn-warning btn-sm" @click.stop.prevent="showModalEditRecipe(recipe)" >                        
                         <i class="fa fa-pencil" style="font-size:22px; cursor:pointer"></i>                          
                         Editar liga
                     </button>
                 </li>
-                <li class="nav-item nav-items-liga" v-if="recipeCadastrada">
-                    <button class="btn btn-success btn-md" v-if="recipeCadastrada" @click.stop.prevent="showModalAddProd()">                                                
-                        <i class="fa fa-plus" aria-hidden="true" style="font-size:22px; cursor:pointer"></i>                                                    
-                        Cadastrar Componente
-                    </button>
-                </li>
-                <li class="nav-item nav-items-liga" id="produtoR" v-if="recipeCadastrada">                        
-                    <button class="btn btn-danger btn-md" aria-hidden="true" id="removerP" @click.stop.prevent="showModalRemoveLiga()">
+                
+                <li class="nav-item nav-items-liga col-sm-0" id="produtoR" v-if="recipeCadastrada">                        
+                    <button class="btn btn-danger btn-sm" aria-hidden="true" id="removerP" @click.stop.prevent="showModalRemoveLiga()">
                         <i class= "fa fa-trash-o" style="font-size:23px; cursor:pointer">
                         </i> Remover Liga
                     </button>
-                </li>                
+                </li>                  
+                <li class="nav-item nav-items-liga" v-if="recipeCadastrada">
+                    <button class="btn btn-success btn-sm" v-if="recipeCadastrada" @click.stop.prevent="showModalAddProd()">                                                
+                        <i class="fa fa-plus" aria-hidden="true" style="font-size:22px; cursor:pointer"></i>                                                    
+                        Cadastrar Componente
+                    </button>
+                </li>            
             </ul>
         </div>
 
@@ -120,10 +128,11 @@
             <div class="modal-footer">
                 <div class="btn-group" role="group">
                    <button @click.stop.prevent="showModalConfirmEditLiga()" class="btn btn-success">
-                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                        <i  class="fa fa-check-square" aria-hidden="true"></i> 
+                        Confirmar
                    </button>
                    <button @click.stop.prevent="recipeTemp = {}" class="btn btn-primary pull-right">
-                        Limpar                           
+                        <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                            
                     </button>  
                 </div>
             </div>
@@ -144,9 +153,10 @@
                 <div>
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="putRecipe(recipeTemp);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
-                        <button @click.stop.prevent="hideModalConfirmEditLiga()" class="btn btn-danger">Cancelar                        
+                        <button @click.stop.prevent="hideModalConfirmEditLiga()" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar                        
                         </button>                        
                     </div>
                 </div>
@@ -169,9 +179,10 @@
                 <div>
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="put(produto);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
-                        <button @click.stop.prevent="hideModalConfirmEditarProduto()" class="btn btn-danger">Cancelar                            
+                        <button @click.stop.prevent="hideModalConfirmEditarProduto()" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar                            
                         </button>                        
                     </div>
                 </div>
@@ -224,11 +235,12 @@
                     <div class="btn-group" role="group">
                         {{phaseProduct.phaseProductId}}
                         <button @click.stop.prevent="createPhaseProduct(phaseProduct, recipe.phases[0]);" :disabled="!phaseProduct.productId || !phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <i  class="fa fa-check-square" aria-hidden="true"></i>
+                            Confirmar
                         </button>
-                        <div class="btn btn-primary pull-right" @click.stop.prevent="phaseProduct={}; productPhaseName=''">
-                            Limpar
-                        </div>
+                        <button class="btn btn-primary pull-right" @click.stop.prevent="phaseProduct={}; productPhaseName=''">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -276,10 +288,10 @@
                 <div>
                     <div class="btn-group" role="group">{{phaseProduct.phaseProductId}}
                         <button @click.stop.prevent="putPhaseProduct(phaseProduct, recipe.phases[0]);" :disabled="!phaseProduct.productId || !phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
                         <div class="btn btn-primary pull-right" @click.stop.prevent="phaseProduct={}; productPhaseName=''">
-                            Limpar
+                            <i class="fa fa-eraser" aria-hidden="true"></i> Limpar 
                         </div>
                     </div>
                 </div>
@@ -301,9 +313,10 @@
                 <div>
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="deleteRecipe(recipe);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>  
-                        <button @click.stop.prevent="hideModalRemoveLiga()" class="btn btn-danger">Cancelar                            
+                        <button @click.stop.prevent="hideModalRemoveLiga()" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar                            
                         </button>                       
                     </div>
                 </div>
@@ -325,9 +338,10 @@
                 <div>
                     <div class="btn-group" role="group">
                         <button @click.stop.prevent="deletePhaseProduct(produto, recipe.phases[0]);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>  
-                        <button @click.stop.prevent="hideModalRemoveProduto()" class="btn btn-danger">Cancelar                            
+                        <button @click.stop.prevent="hideModalRemoveProduto()" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar                            
                         </button>                       
                     </div>
                 </div>

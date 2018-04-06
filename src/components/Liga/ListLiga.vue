@@ -7,7 +7,7 @@
         <!--                                 -->
         <div class="fixed-top nav-cinza">            
             <ul class="nav d-flex">
-                <li class="nav-item nav-items-listliga">
+                <li class="nav-item nav-items-listliga col-md-12">
                     <h1 class="title-page-gp"><b>Gerenciamento de Liga</b></h1>
                 </li>
                 <li class="nav-item nav-items-listliga">
@@ -18,7 +18,7 @@
                     </select>
                 </li>
                 <li class="nav-item nav-items-listliga">
-                    <input class="form-control btn-md" type="search" v-model="fieldValue" placeholder="Produto" aria-label="Busca">
+                    <input class="form-control btn-md" type="search" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" v-model="fieldValue" aria-label="Busca">
                 </li>
                 <li class="nav-item nav-items-listliga">
                     <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>

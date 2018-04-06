@@ -46,7 +46,10 @@ export default {
             editarActivate: false,
             expand: [],
             errors: [],
-            pros: []
+            pros: [],
+            prosFim: [],
+            productRecipeName:'',
+            recipeProduct: {}
         }
     },
     filters: {

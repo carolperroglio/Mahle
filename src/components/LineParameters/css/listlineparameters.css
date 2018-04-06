@@ -6,7 +6,11 @@
     padding: 1.2% 0 1% 0;
 }
 
-.cabecalho-table-prameters {
+.item-cabecalho-table-parameters{
+    width: 12%;
+}
+
+.cabecalho-table-parameters {
     position: fixed;    
     width: 100%;    
     background-color: black;
@@ -18,6 +22,6 @@
     margin: 18% 0 0 50%;    
 }
 
-.margin-table {
-    margin: 16% 0 6% 0;
+.margin-table-parameters {
+    margin: 19.9% 0 6% 0;
 }

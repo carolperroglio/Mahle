@@ -40,7 +40,7 @@ export default {
             order: '',
             fieldFilter: '',
             fieldValue: '',
-            id: ''
+            id: '',
         }
     },
     components: {
@@ -89,6 +89,15 @@ export default {
                 console.log(error);
                 this.carregando = false;
             })
+        },
+
+        mudaPlace(fieldFilter){
+            var place = 'Tira';
+            if(fieldFilter=='recipeName')
+                place = 'Digite o Nome da Tira';       
+            else if(fieldFilter=='recipeCode')
+                place = 'Digite o Código da Tira';
+            return place;       
         },
         organizar(recipe, campo, pos){                         
             recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
@@ -145,9 +154,7 @@ export default {
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
-            })
-                
-            
+            })                            
         },
     },
     created() {
