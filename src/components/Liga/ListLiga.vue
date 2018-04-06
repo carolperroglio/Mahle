@@ -35,7 +35,7 @@
             <stretch background="#4d4d4d"></stretch>                
         </div>        
         <div class="cabecalho-table-listliga" v-show="!carregando">
-            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="ls2 col-md-3">
+            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="ls2 col-md-3"  style="margin-left:1%;">
                 <b><font class="cursor-class" color="#ffffff">Nome da Liga &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>

@@ -99,7 +99,7 @@ export default {
     },
     methods: {
         showModal(id) {
-            this.$refs[id].show();            
+            this.$refs[id].show();
             // if (id == "visualizarParams") {
             //     this.$refs['visualizarParams'].show();
             // } else if (id == "modalCadOP") {
@@ -143,7 +143,7 @@ export default {
         /*               */
         /*****************/
         getResults(url, name) {
-            this.carregando = true;
+            // this.carregando = true;
             this.canAdd = false;
             var array = [];
             if (name.length < 3) { return; }
@@ -152,10 +152,10 @@ export default {
                     array.push(pro);
                     this.canAdd = true;
                 });
-                this.carregando = false;
+                // this.carregando = false;
             }).catch((error) => {
                 console.log(error);
-                this.carregando = false;
+                // this.carregando = false;
                 this.msgErro = error.message;
                 this.showModal("modalErro");
             })

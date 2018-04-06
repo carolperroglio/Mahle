@@ -179,7 +179,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-success" :disabled=" quantity==='' || loteLiga=='' || unity==''" @click.stop.prevent="cadastrarApont(ordem);">
+                        <button class="btn btn-success" :disabled=" quantity==='' || loteAco=='' || unity==''" @click.stop.prevent="cadastrarApont(ordem);">
                             <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
                         <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">

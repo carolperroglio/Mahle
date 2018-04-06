@@ -81,7 +81,7 @@
                                             <!-- <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases"> -->
                                             <ul class="list-group" v-if="recipeAdded.length != 0">
                                                 <!-- <li class="list-group-item" > -->
-                                                    <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>
+                                                    <span><strong>Descrição da Liga:</strong> {{recipeObj.recipeDescription}}</span>
                                                     <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>
                                             </ul>
 
@@ -263,28 +263,28 @@
                         <label for="">Status</label>
                         <input type="text" class="form-control" v-model="opSelectedParams.status" disabled>
                     </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="">Código da Liga</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeCode" disabled>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="">Nome da Liga</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeName" disabled>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="">Descrição</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeDescription" disabled>
-                    </div>
-                    </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="">Equipamento</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeDescription" disabled>
-                    </div>
-                    </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="">Código da Liga</label>
+                    <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeCode" disabled>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="">Nome da Liga</label>
+                    <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeName" disabled>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="">Descrição</label>
+                    <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeDescription" disabled>
                 </div>
                 </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">Equipamento</label>
+                    <input type="text" class="form-control" v-model="opSelectedParams.currentThing.thingName" disabled>
+                </div>
+                </div>
+            </div>
                     <form>
                     <!-- <div class="fundo-branco-po"> -->
                     <div class="cabecalho-table-po-modal-liga col-md-12">
