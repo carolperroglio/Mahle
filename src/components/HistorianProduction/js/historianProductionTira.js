@@ -99,7 +99,11 @@ export default {
                 this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;
                 this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                 this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
-                this.rolo = this.orderHistorian.productsOutput.length + 1;
+                if (this.orderHistorian.productsOutput != undefined) {
+                    this.rolo = this.orderHistorian.productsOutput.length + 1;
+                } else {
+                    this.rolo = 1;
+                }
                 this.titleheader = "Registrar Matéria-Prima"
             } else if (this.ordem.type === "input") {
                 this.consumo = true;
@@ -112,10 +116,7 @@ export default {
             }
             // }, 100);
 
-            // setTimeout(() => {
             this.$refs[id].show();
-            this.$refs[id].show();
-            // }, 150);
 
         },
         hideModal(id) {
@@ -288,11 +289,19 @@ export default {
             console.log(this.urlOP + '/api/productionorders');
             axios.get(this.urlOP + '/api/productionorders/' + id).then((response) => {
                 this.productionOrder = response.data;
-                console.log(this.productionOrder.recipe.phases[0]);
-                for (var i; i < this.productionOrder.recipe.phases[0].phaseProducts.length; i++) {
-                    if (this.productionOrder.recipe.phases[0].phaseProducts[i].productId == "47") {
-                        this.prodRolo = productionOrder.recipe.phases[0].phaseProducts[i].product.productName;
+                // console.log(this.productionOrder.recipe.phases[0]);
+
+                for (var x = 0; x < this.productionOrder.recipe.phases.length; x++) {
+                    if (this.productionOrder.recipe.phases[x].phaseId != 46) {
+                        if (this.productionOrder.recipe.phases[x].phaseProducts != undefined) {
+                            for (var i = 0; i < this.productionOrder.recipe.phases[x].phaseProducts.length; i++) {
+                                if (this.productionOrder.recipe.phases[x].phaseProducts[i].product.productId == "47") {
+                                    this.prodRolo = this.productionOrder.recipe.phases[x].phaseProducts[i].product.productName;
+                                }
+                            }
+                        }
                     }
+
                 }
                 if (this.productionOrder.recipe.recipeProduct != undefined) {
                     this.roloSaida = this.productionOrder.recipe.recipeProduct.product.productName;
@@ -369,7 +378,7 @@ export default {
                 min = jsDate.getUTCMinutes();
             }
             var dateFormatted = jsDate.getHours() + ":" +
-                min;
+                min + ":" + jsDate.getSeconds();
             var teste = jsDate.getUTCMinutes();
 
             console.log(jsDate);

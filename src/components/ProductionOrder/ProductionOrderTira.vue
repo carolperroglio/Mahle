@@ -281,21 +281,21 @@
                         </label>
                         <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls2-cabecalho-po col-md-2 width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
-                                LIC <p class="font-size">Limite inferior de controle 
+                                LIC <p class="font-size">Limite inferior de Controle 
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label> 
                         <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls2-cabecalho-po col-md-2 width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
-                                LSC <p class="font-size">Limite superior de controle
+                                LSC <p class="font-size">Limite superior de Controle
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label> 
                         <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls2-cabecalho-po col-md-2 width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
-                                LSE <p class="font-size">Limite superior de especificação 
+                                LSE <p class="font-size">Limite superior de Especificação 
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>

@@ -84,16 +84,43 @@
         <b-modal ref="myModalEdit" hide-footer title="Filtrar Busca">
                     <div class="modal-body">
                     <div class="form-row">
+                    <div class="form-group  col-md-6">
+                    <label><b>Filtrar por</b></label>
+                    <select class="form-control" v-model="filterSelected">   
+                        <option value="" selected disabled>Buscar por:</option>
+                        <option value="op" key="op">OP</option> 
+                        <option value="code" key="code">Código da Receita</option> 
+                        <option value="date" key="date">Data</option> 
+                    </select>
+                    </div>
+                    </div>
+                    <div class="form-row">
                     <div class="form-group col-md-9">
                     <label><b>Estação </b></label>  
                        <select class="form-control" v-model="thingId">    
                             <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
                             </option>
                         </select>
-                      </div>
                     </div>
-                    <br>
-                      <label><b>Início </b></label>  
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6" v-if="filterSelected == 'op'">
+                    <label><b>OP </b></label>  
+                       <select class="form-control" v-model="OP">    
+                            <option v-for="(op,index) in opList" :value="op.productionOrderId" v-bind:key="index">{{ op.productionOrderNumber }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6"  v-if="filterSelected == 'code'">
+                    <label><b>Código da Receita </b></label>  
+                       <select class="form-control" v-model="recipeCode">    
+                            <option v-for="(r,index) in recipeList" :value="r.recipeId" v-bind:key="index">{{ r.recipeName }}
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+                    
+                    <label><b>Início </b></label>  
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <date-picker v-model="date" :config="config"></date-picker>
@@ -115,12 +142,18 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" @click.stop.prevent="getHistory()">
-                                <i class="fa fa-check"></i>
+                            <button class="btn btn-success" @click.stop.prevent="getReportDate()" 
+                            :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
+                                <i class="fa fa-check"></i> Confirmar
                             </button>
-                            <!-- <button class="btn btn-danger">
-                                <i class="fa fa-remove" @click.stop.prevent="hideModal()"></i>
-                            </button> -->
+                            <button class="btn btn-success" @click.stop.prevent="getReportOP()" 
+                            :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !OP" v-if="filterSelected == 'op'">
+                                <i class="fa fa-check"></i> Confirmar
+                            </button>
+                            <button class="btn btn-success" @click.stop.prevent="getReportCode()" 
+                            :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !recipeCode" v-if="filterSelected == 'code'">
+                                <i class="fa fa-check"></i> Confirmar
+                            </button>
                         </div>
                     </div>
           </b-modal>

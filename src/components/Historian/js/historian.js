@@ -27,6 +27,7 @@ import logoMahle from './logomahle.jpeg'
 import logo from './onyx.jpeg'
 
 import { encode } from 'punycode';
+import { error } from 'util';
 
 es6promisse.polyfill();
 
@@ -78,6 +79,9 @@ export default {
         return {
             url: process.env.THINGS_API,
             urlHist: process.env.HIST_BIGTABLE_API,
+            urlReport: process.env.REPORT_API,
+            urlGatOP: process.env.PROD_HIST_API,
+            urlGatRec: process.env.OP_API,
             carregando: false,
             date: '',
             datef: '',
@@ -129,7 +133,12 @@ export default {
             PDFprovider: [],
             data: [],
             headers: [],
-            jsonfields: {}
+            jsonfields: {},
+            recipeCode: "",
+            OP: "",
+            filterSelected: "",
+            opList: [],
+            recipeList: []
         }
     },
     components: {
@@ -168,7 +177,90 @@ export default {
                 console.log(error);
             })
         },
+        getOP() {
+            axios.get(this.urlGatOP + "/gateway/productionorders").then((response) => {
+                this.opList = response.data;
+            }).catch((error) => {
 
+            })
+        },
+        getRecipe() {
+            axios.get(this.urlGatRec + "/gateway/recipes").then((response) => {
+                this.recipeList = response.data;
+            }).catch((error) => {
+
+            })
+        },
+        getReportDate() {
+            this.carregando = true;
+
+            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
+            var ticksI = this.dateToTicks(Ini);
+            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
+            var ticksF = this.dateToTicks(Fim);
+
+            axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
+                '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+                this.data = response.data;
+                this.tags = response.data.tags;
+                this.tags.forEach((T) => {
+                    if (!this.groups.includes(T.group)) {
+                        this.groups.push(T.group);
+                    }
+                })
+                this.carregando = false;
+                this.created();
+                this.hideModal();
+            }).catch((error) => {
+
+            });
+        },
+        getReportCode() {
+            this.carregando = true;
+
+            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
+            var ticksI = this.dateToTicks(Ini);
+            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
+            var ticksF = this.dateToTicks(Fim);
+
+            axios.get(this.urlReport + "/api/ReportParameter/RecipeCode/" + this.recipeCode + '?thingId' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+                this.data = response.data;
+                this.tags = response.data.tags;
+                this.tags.forEach((T) => {
+                    if (!this.groups.includes(T.group)) {
+                        this.groups.push(T.group);
+                    }
+                })
+                this.carregando = false;
+                this.created();
+                this.hideModal();
+            }).catch((error) => {
+
+            });
+        },
+        getReportOP() {
+            this.carregando = true;
+
+            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
+            var ticksI = this.dateToTicks(Ini);
+            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
+            var ticksF = this.dateToTicks(Fim);
+
+            axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+                this.data = response.data;
+                this.tags = response.data.tags;
+                this.tags.forEach((T) => {
+                    if (!this.groups.includes(T.group)) {
+                        this.groups.push(T.group);
+                    }
+                })
+                this.carregando = false;
+                this.created();
+                this.hideModal();
+            }).catch((error) => {
+
+            });
+        },
         getHistory() {
             this.carregando = true;
 
@@ -269,7 +361,7 @@ export default {
                     showHeader: 'everyPage',
                     margin: { top: 80 }
                 });
-                document.body.appendChild(canvas);
+                // document.body.appendChild(canvas);
 
                 doc.save("RastreamentoThing_" + this.thingNameCabeçalho + "_" + this.group + ".pdf");
 
@@ -370,10 +462,10 @@ export default {
                     obj2["type"] = "smoothedLine";
                     obj2["title"] = R.name;
                     obj2["valueField"] = R.name;
-                    obj2["bulletColor"] = "#AC1313";
-                    obj2["fillColors"] = "#AC1313";
-                    obj2["legendColor"] = "#AC1313";
-                    obj2["lineColor"] = "#AC1313";
+                    obj2["bulletColor"] = R.color;
+                    obj2["fillColors"] = R.color;
+                    obj2["legendColor"] = R.color;
+                    obj2["lineColor"] = R.color;
 
                     var i = 0;
 
@@ -496,6 +588,8 @@ export default {
     beforeMount: function() {
         this.showModal();
         this.getThings();
+        this.getOP();
+        this.getRecipe();
     },
 
 }

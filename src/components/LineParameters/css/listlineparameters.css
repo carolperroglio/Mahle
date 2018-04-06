@@ -1,27 +1,32 @@
 @import url("./../../genericcss/generico.css");
 
 /*itens menu de navegação de produtos - busca de produtos*/
+
 .nav-item-prameters {
     margin-left: 1%;
     padding: 1.2% 0 1% 0;
 }
 
-.item-cabecalho-table-parameters{
+.item-cabecalho-table-parameters {
     width: 12%;
 }
 
 .cabecalho-table-parameters {
-    position: fixed;    
-    width: 100%;    
+    position: fixed;
+    width: 100%;
     background-color: black;
-    margin: -6.5% 0 0 0;    
+    margin: -8% 0 0 0;
     z-index: 4;
 }
 
 #load-parameters {
-    margin: 30% 0 0 50%;    
+    margin: 30% 0 0 50%;
 }
 
 .margin-table-parameters {
     margin: 22.5% 0 6% 0;
+}
+
+.font-size {
+    font-size: 12px;
 }

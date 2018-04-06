@@ -154,7 +154,7 @@
                     <label>
                         <b>Rolo de Aço: </b>
                     </label>
-                    <input type="text" id="prodReceita" placeholder="nome" required  :value="prodRolo = productionOrder.recipe.phases[0].phaseProducts[0].product.productName" class="form-control form-control-sm" disabled>
+                    <input type="text" id="prodReceita" placeholder="nome" required  :value="prodRolo" class="form-control form-control-sm" disabled>
                     </div>
                     <div class="form-group col-md-3">
                     <label>
@@ -172,7 +172,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-5">
                     <label>
-                        <b>Lote: </b>
+                        <b>OPL: </b>
                     </label>
                     <input type="text"  v-model="loteAco" class="form-control form-control-sm">
                     </div>
@@ -223,7 +223,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-5">
                         <label>
-                        <b>Lote: </b>
+                        <b>OPL: </b>
                         </label>
                         <input type="text" required :value="loteLiga = productionOrderId.productionOrderNumber" class="form-control form-control-sm" disabled>
                     </div>
@@ -264,6 +264,14 @@
                         <b>Unidade: </b>
                     </label>
                     <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-3">
+                    <label>
+                        <b>Nº do Rolo: </b>
+                    </label>
+                    <input type="text" required v-model="rolo" disabled class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="modal-footer">

@@ -38,52 +38,38 @@
             <stretch background="#4d4d4d"></stretch>
         </div>   
         <div class="header-table-tira"  v-show="!carregando">
-            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls5">
+            <label class="ls5">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                 </font></b>
             </label>                    
-            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametros, 'vn',1):organizar(parametros, 'vn',1);" class="ls3">
+            <label class="ls3">
                 <b><font class="cursor-class" color="#ffffff">
                     Valor Nominal
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                 </font></b>
             </label>
-            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametros, 'unidade',2):organizar(parametros, 'unidade',2);" class="ls3">
+            <label class="ls3">
                 <b><font class="cursor-class" color="#ffffff">
                     Unidade
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                 </font></b>
             </label>  
-            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls3">
+            <label class="ls3">
                 <b><font class="cursor-class" color="#ffffff">
                     LIE <p class="font-size">Limite inferior da Especificação
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                 </p></font></b>
             </label> 
-            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls3">
+            <label class="ls3">
                <b><font class="cursor-class" color="#ffffff">
-                    LIC <p class="font-size">Limite inferior de controle 
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                    LIC <p class="font-size">Limite inferior de Controle 
                 </p></font></b>
             </label> 
-            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls3">
+            <label class="ls3">
                <b><font class="cursor-class" color="#ffffff">
-                    LSC <p class="font-size">Limite superior de controle
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
+                    LSC <p class="font-size">Limite superior de Controle
             </p></font></b>
             </label>
-            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls3">
+            <label class="ls3">
                 <b><font class="cursor-class" color="#ffffff">
-                    LSE <p class="font-size">Limite superior de especificação 
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
+                    LSE <p class="font-size">Limite superior de Especificação 
                 </p></font></b>
             </label>                              
         </div>

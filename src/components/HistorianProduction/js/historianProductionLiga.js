@@ -298,7 +298,7 @@ export default {
                 min = jsDate.getUTCMinutes();
             }
             var dateFormatted = jsDate.getHours() + ":" +
-                min;
+                min + ":" + jsDate.getSeconds();
             var teste = jsDate.getUTCMinutes();
 
             console.log(jsDate);
