@@ -57,7 +57,7 @@ export default new Router({
             path: '/listtira',
             name: 'ListTira',
             component: ListTira
-        },        
+        },
         {
             path: '/listlineparameters',
             name: 'ListLineParameters',
@@ -77,7 +77,7 @@ export default new Router({
         {
 
             path: '/prodOrderTira',
-            name: 'ProductionOrderLiga',
+            name: 'ProductionOrderTira',
             component: ProductionOrderTira
         },
         {

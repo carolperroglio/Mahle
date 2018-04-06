@@ -294,13 +294,6 @@
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametros, 'vn',1):organizar(parametros, 'vn',1);" class="ls2-cabecalho-po-liga col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">
-                                <p>Valor
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                            </p></font></b>
-                        </label>
                         <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametros, 'minValue',2):organizar(parametros, 'minValue',2);" class="ls2-cabecalho-po-liga col-md-2">
                             <b><font class="cursor-class" color="#ffffff">
                                 <p>Mínimo (%)
@@ -322,10 +315,6 @@
                     <b><font color="#9BA6A5"> </font></b>
                         {{p.product.productName}}
                     </label>                    
-                    <label class="width-table-context-liga col-md-2">
-                    <b><font color="#9BA6A5"> </font></b>
-                        <!-- {{p.product.productName}} -->
-                    </label>
                     <label class="width-table-context-liga col-md-2">
                     <b><font color="#9BA6A5"> </font></b>
                         {{p.minValue}}

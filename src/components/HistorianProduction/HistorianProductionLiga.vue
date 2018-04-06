@@ -52,7 +52,7 @@
                     <div v-show="lista">
                         <div class="card">
                             <div class="card-header card-header-hp">
-                                <b>Materiais Consumidos e Apontados</b>
+                                <b>Materiais Apontados</b>
                                 <div style="margin-right:1%" class="pull-right">
                                     <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
