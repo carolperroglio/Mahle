@@ -98,7 +98,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <div class="margin-table-parameters" v-show="!carregando">            
+        <div class="margin-table-parameters" v-show="!carregando">         
             <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
@@ -106,32 +106,32 @@
                 </label>                    
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                        {{pro.vn}}
+                        {{pro.vn.setupValue}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.unidade}}
+                    {{pro.unidade.setupValue}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lie}}
+                    {{pro.lie.setupValue}}
                 </label>   
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lic}}
+                    {{pro.lic.setupValue}}
                 </label>            
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lsc}}
+                    {{pro.lsc.setupValue}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lse}}
+                    {{pro.lse.setupValue}}
                 </label> 
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
                     <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="deletar=pro;showModal('modalRemoveParameter');"></i>&nbsp;&nbsp;&nbsp;                     
-                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="cadEdit='Editar produto';showModal(p, index)"></i>
+                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="cadEdit='Editar Parâmetro';p, index;showModal()"></i>
                 </label> 
                                                                                                        
             </div>                                                                                                       
@@ -225,6 +225,100 @@
                 </div>
             </div>
         </b-modal> -->
+
+        <!--                                 -->
+        <!--                                 -->
+        <!--                                 -->
+        <!-- Menu de navegação de produtos   -->
+        <!--                                 -->
+        <!--                                 -->
+        <!--               Modal             -->     
+        <b-modal ref="modalEditarParameter" hide-footer title="Editar Parâmetro">                    
+            <form>
+                <div>
+                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                    <p v-if="errors.length">
+                        <ul v-for="(error, index) in errors" v-bind:key="index">
+                            <li class="alert alert-danger form-control" >{{ error }}</li>
+                        </ul>
+                    </p>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Equipamento </b>
+                            </label>
+                            
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Parâmetro </b>
+                            </label>
+                            <select class="fm form-control mr-sm-2" v-model="tagGroup">
+                                <option v-for="(groups,index) in thing.possibleTagGroups" :key="index">{{groups}}</option>                                
+                            </select>
+                        </div>                        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>Valor Nominal</b>
+                            </label>
+                            <input class="fm form-control mr-sm-2" type="text" v-model="valores.vn" placeholder="Ex: 1010144">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>Unidade </b>
+                            </label>
+                            <br><br>
+                            <input type="text" v-model="valores.unidade"  class="fm form-control mr-sm-2" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>LIE </b>
+                            </label>
+                            <input type="text" v-model="valores.lie" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>  
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>LIC </b>
+                            </label>
+                            <input type="text" v-model="valores.lic" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>LSC </b>
+                            </label>
+                            <input type="text" v-model="valores.lsc" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div> 
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>LSE </b>
+                            </label>
+                            <input type="text" v-model="valores.lse" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>       
+                    </div>   
+                    <div class="modal-footer">                            
+                        <div class="btn-group" role="group">
+                            <button @click.stop.prevent="createParameter(valores, thing, tagGroup)" class="btn btn-success pull-right" :disabled="false">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i>
+                            </button>  
+                            <button @click.stop.prevent="recipe" class="btn btn-primary pull-right">
+                                Limpar                           
+                            </button>                      
+                        </div>                        
+                    </div>
+                </div>
+            </form>
+        </b-modal> 
+
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
