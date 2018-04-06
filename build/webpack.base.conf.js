@@ -6,7 +6,7 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const api='http://54.242.82.119'
+const api='http://54.175.82.79'
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
@@ -72,8 +72,8 @@ module.exports = {
                 RECIPE_API: JSON.stringify(api+":8002"),
                 STATUS_API: JSON.stringify(api+":8004"),
                 HIST_BIGTABLE_API: JSON.stringify(api+":8011"),
-                HIST_ALARM_API: JSON.stringify(api+":8012")
-            }
+                HIST_ALARM_API: JSON.stringify(api+":8012"),                
+            }            
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
