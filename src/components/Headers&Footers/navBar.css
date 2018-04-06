@@ -31,7 +31,7 @@ body {
 
 .logo-system {
     position: fixed;
-    margin-top: 1.5%;
+    margin-top: 2%;
     margin-left: 91%;
     height: 4%;
     width: 8%;
@@ -217,7 +217,7 @@ footer {
     }
     .logo-system {
         /* position: fixed; */
-        margin-top: 2.5%;
+        margin-top: 3%;
         margin-left: 82%;
         height: 6%;
         width: 108px;
