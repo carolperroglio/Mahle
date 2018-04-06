@@ -327,7 +327,7 @@
                     <b><font color="#9BA6A5"> </font></b>
                         {{pro.lsc}}
                     </label>
-                    <label class="width-table-context">
+                    <label class="width-table-context" style="margin-left:-0.5%">
                     <b><font color="#9BA6A5"> </font></b>
                         {{pro.lse}}
                     </label>                                                                                        
