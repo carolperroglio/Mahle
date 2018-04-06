@@ -165,7 +165,7 @@ export default {
             }
         },
 
-        getParametros: function(phase) {            
+        getParametros(phase) {            
             var j = 0;    
                     
             for (var i = 0; i < phase.phaseParameters.length; i++) {

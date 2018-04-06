@@ -38,7 +38,7 @@
             <stretch background="#4d4d4d"></stretch>
         </div>   
         <div class="header-table-tira"  v-show="!carregando">
-            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls3">
+            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls5">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
