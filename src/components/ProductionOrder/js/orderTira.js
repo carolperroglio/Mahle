@@ -12,9 +12,9 @@ es6promisse.polyfill();
 
 
 function paginacao(response, este) {
-    este.pageAtual = este.startat / 20;
+    este.pageAtual = este.startat / este.quantityPage;
     este.total = response.data.total;
-    let fim = Math.ceil(este.total / 20);
+    let fim = Math.ceil(este.total / este.quantityPage);
     var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
     if (este.pageAtual > 11) {
         for (var i = este.pageAtual - 5; i < num; i++)
@@ -35,7 +35,7 @@ export default {
     data() {
         return {
             opId: '',
-            urlRecipeSearch: ipServerRecipe + '/api/recipes?fieldFilter=recipeName&fieldValue=',
+            urlRecipeSearch: ipServerRecipe,
             urlRecipe: ipServerRecipe + '/api/recipes/',
             urlOpType: ipServer + '/api/productionordertypes/',
             urlPhases: ipServerRecipe + '/api/phases/',
@@ -59,7 +59,7 @@ export default {
             productionOrderObj: {},
             recipeAdded: '',
             carregando: false,
-            quantityPage: 20,
+            quantityPage: 100,
             startat: 0,
             total: 0,
             pages: [],
@@ -146,7 +146,7 @@ export default {
             this.canAdd = false;
             var array = [];
             if (name.length < 3) { return; }
-            axios.get(url + name, this.config).then((response) => {
+            axios.get(url + "/api/recipes/v2?filters=recipeCode," + name + ",&filters=recipeTypeId,1", this.config).then((response) => {
                 response.data.values.forEach((pro) => {
                     array.push(pro);
                     this.canAdd = true;
@@ -173,6 +173,10 @@ export default {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
                         if (obj.typeDescription == "Tira" && obj.currentThing) {
+                            obj.recipeName = obj.recipe.recipeName
+                            obj.recipeCode = obj.recipe.recipeCode
+                            this.opArray.values.push(obj);
+                        } else {
                             obj.recipeName = obj.recipe.recipeName
                             obj.recipeCode = obj.recipe.recipeCode
                             this.opArray.values.push(obj);
@@ -424,9 +428,10 @@ export default {
                 .then((response) => {
                     console.log(response.data);
                     this.mensagemSuc = 'Ordem desassociada com sucesso.';
-                }, (r) => {
-                    this.mensagem = r.response.data;
+                }).catch((error) => {
                     this.carregando = false;
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
                 })
         },
         createOp: function(data) {

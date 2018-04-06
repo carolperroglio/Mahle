@@ -89,6 +89,15 @@ export default {
                 this.carregando = false;
             })
         },
+
+        mudaPlace(fieldFilter){
+            var place = 'Liga';
+            if(fieldFilter=='recipeName')
+                place = 'Digite o Nome da Liga';
+            else if(fieldFilter=='recipeCode')
+                place = 'Digite o Código da Liga';            
+            return place;       
+        },
         organizar(recipe, campo, pos){                         
             recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
             for(var i=0; i<this.cabecalhoSetas.length; i++)

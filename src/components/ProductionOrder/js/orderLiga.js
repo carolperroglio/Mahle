@@ -11,9 +11,9 @@ es6promisse.polyfill();
 
 
 function paginacao(response, este) {
-    este.pageAtual = este.startat / 20;
+    este.pageAtual = este.startat / este.quantityPage;
     este.total = response.data.total;
-    let fim = Math.ceil(este.total / 20);
+    let fim = Math.ceil(este.total / este.quantityPage);
     var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
     if (este.pageAtual > 11) {
         for (var i = este.pageAtual - 5; i < num; i++)
@@ -33,7 +33,7 @@ export default {
     data() {
         return {
             opId: '',
-            urlRecipeSearch: ipServerRecipe + '/api/recipes?fieldFilter=recipeName&fieldValue=',
+            urlRecipeSearch: ipServerRecipe,
             urlRecipe: ipServerRecipe + '/api/recipes/',
             urlOpType: ipServer + '/api/productionordertypes/',
             urlPhases: ipServerRecipe + '/api/phases/',
@@ -55,7 +55,7 @@ export default {
             productionOrderObj: {},
             recipeAdded: '',
             carregando: false,
-            quantityPage: 20,
+            quantityPage: 100,
             startat: 0,
             total: 0,
             pages: [],
@@ -99,11 +99,12 @@ export default {
     },
     methods: {
         showModal(id) {
-            if (id == "visualizarParams") {
-                this.$refs.visualizarParams.show();
-            } else if (id == "modalCadOP") {
-                this.$refs.modalCadOP.show();
-            } else if (id == "modalErro") {
+            this.$refs[id].show();            
+            // if (id == "visualizarParams") {
+            //     this.$refs['visualizarParams'].show();
+            // } else if (id == "modalCadOP") {
+            //     this.$refs.modalCadOP.show();
+            if (id == "modalErro") {
                 this.$refs.modalErro.show();
                 this.$refs.visualizarParams.hide();
                 this.$refs.modalCadOP.hide();
@@ -146,12 +147,13 @@ export default {
             this.canAdd = false;
             var array = [];
             if (name.length < 3) { return; }
-            axios.get(url + name, this.config).then((response) => {
+            axios.get(url + "/api/recipes/v2?filters=recipeCode," + name + ",&filters=recipeTypeId,2", this.config).then((response) => {
                 response.data.values.forEach((pro) => {
                     array.push(pro);
                     this.canAdd = true;
                 });
-            }, (error) => {
+                this.carregando = false;
+            }).catch((error) => {
                 console.log(error);
                 this.carregando = false;
                 this.msgErro = error.message;
@@ -175,6 +177,10 @@ export default {
                     response.data.values.forEach((obj) => {
                         if (obj.currentThing) {
                             obj.thingName = obj.currentThing.thingName
+                            obj.recipeName = obj.recipe.recipeName
+                            obj.recipeCode = obj.recipe.recipeCode
+                            this.opArray.values.push(obj);
+                        } else {
                             obj.recipeName = obj.recipe.recipeName
                             obj.recipeCode = obj.recipe.recipeCode
                             this.opArray.values.push(obj);

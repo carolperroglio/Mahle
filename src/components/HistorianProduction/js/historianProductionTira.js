@@ -49,7 +49,14 @@ export default {
             urlOP: process.env.OP_API,
             teste: {},
             msgErro: "",
-            titleheader: ""
+            titleheader: "",
+            listOP: [],
+            quantity: "",
+            productionOrderId: "",
+            prodRolo: "",
+            unity: "",
+            roloSaida: "",
+            roloSaidaID: "",
 
         }
     },
@@ -68,9 +75,11 @@ export default {
     },
     methods: {
         showModal(id) {
+            this.ordem.quantity = "";
+            this.ordem.productId = "";
+            this.ordem.productionOrderId = "";
             this.titleheader = "Registrar Liga"
-            this.mensagem = '';
-            this.mensagemSuc = '';
+
             if (this.orderHistorian.length > 0) {
                 if (this.orderHistorian.productsOutput.length != 0) {
                     this.ordem.type = "output";
@@ -101,11 +110,8 @@ export default {
             }, 100);
 
             setTimeout(() => {
-                if (id == "myModalRef") {
-                    this.$refs.myModalRef.show();
-                } else if (id == "modalErro") {
-                    this.$refs.modalErro.show();
-                }
+                this.$refs[id].show();
+                this.$refs[id].show();
             }, 150);
 
         },
@@ -137,16 +143,33 @@ export default {
                     this.cabecalhoSetas[i] = false;
         },
         cadastrarApont(ordem) {
+            // MODELO JSON
+            // {
+            //     "type": "output",
+            //     "productionOrderId": 1,
+            //     "productId": 6,
+            //     "quantity": 2.5,
+            //     "batch": "lote"
+            // }
 
-            this.mensagem = '';
-            this.mensagemSuc = '';
-            console.log(ordem);
-            console.log(this.url + '/api/producthistorian');
+            if (this.roloSaidaID == "") {
+                ordem.productId = 47;
+            } else {
+                ordem.productId = this.roloSaidaID;
+            }
+
+            ordem.productionOrderId = this.productionOrderId.productionOrderId;
+            ordem.quantity = this.quantity;
+            ordem.type = this.ordem.type;
+            ordem.unity = this.unity;
+
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;
             } else {
                 ordem.batch = this.lote;
             }
+
+            console.log(ordem);
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
                 this.mensagemSuc = 'Produto apontado com sucesso.';
                 this.productionOrderId = this.ordem.productionOrderId;
@@ -155,7 +178,6 @@ export default {
                 this.pFase = false;
                 this.rolo++;
                 this.ordem = {};
-                console.log(response);
 
             }).catch((error) => {
                 this.msgErro = error.message;
@@ -229,13 +251,42 @@ export default {
                 console.log(this.orderHistorianAllProducts);
                 this.carregando = false;
             }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
+                if (error.response.status == 404) {
+                    this.msgErro = "Sem registros na tabela";
+                    this.showModal("modalErro");
+                } else {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+                }
                 this.carregando = false;
             })
 
         },
-
+        getResults(id) {
+            var id = this.$route.params.id;
+            console.log(this.urlOP + '/api/productionorders');
+            axios.get(this.urlOP + '/api/productionorders/' + id).then((response) => {
+                this.productionOrder = response.data;
+                console.log(this.productionOrder.recipe.phases[0]);
+                for (var i; i < this.productionOrder.recipe.phases[0].phaseProducts.length; i++) {
+                    if (this.productionOrder.recipe.phases[0].phaseProducts[i].productId == "47") {
+                        this.prodRolo = productionOrder.recipe.phases[0].phaseProducts[i].product.productName;
+                    }
+                }
+                if (this.productionOrder.recipe.recipeProduct != undefined) {
+                    this.roloSaida = this.productionOrder.recipe.recipeProduct.product.productName;
+                    this.roloSaidaID = this.productionOrder.recipe.recipeProduct.product.productId;
+                }
+                console.log(response.data);
+                this.listaOp(response.data);
+                return response.data;
+                console.log(this.OPs);
+            }).catch((error) => {
+                this.msgErro = error.message;
+                this.showModal("modalErro");
+                this.carregando = false;
+            })
+        },
         listaOp(p) {
             // var id = this.$route.params.id;
             // var p = this.getResults(id);
@@ -253,20 +304,15 @@ export default {
             }, 1000);
         },
 
-        getResults(id) {
-            var id = this.$route.params.id;
-            console.log(this.urlOP + '/api/productionorders');
-            axios.get(this.urlOP + '/api/productionorders/' + id).then((response) => {
-                this.productionOrder = response.data;
-                console.log(response.data);
-                this.listaOp(response.data);
-                return response.data;
-                console.log(this.OPs);
-            }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
-                this.carregando = false;
-            })
+        getOP() {
+            axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,active&filters=productionOrderTypeId,2", this.config)
+                .then((response) => {
+                    this.listOP = response.data.values;
+                }).catch((error) => {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+                    this.carregando = false;
+                })
         },
         dataConvert(dataTicks) {
             var epochTicks = 621355968000000000,
@@ -309,6 +355,7 @@ export default {
     beforeMount: function() {
         // this.getResults();
         this.getResults();
+        this.getOP();
         this.productionOrdersRecipe.recipeName = '';
         this.productionOrdersRecipe.recipeProduct.product.productName = '';
     }

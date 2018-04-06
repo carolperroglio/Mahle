@@ -33,12 +33,17 @@ export default {
             errors:[],
             recipes: [],
             recipe: {},
+            thing: {},
+            things: [],
+            tagGroup:'',
+            parametroCurrent: {},
+            parametros:[],
             parameters:[],
             parameter: {},
             ferramentas: [],
-            ferramenta:{},
+            ferramenta:{},            
             phases: [],
-            cabecalhoSetas:[false, false, false],
+            cabecalhoSetas:[false, false, false, false, false, false, false],
             carregando: false,
             quantityPage: 20,
             startat: 0,
@@ -49,7 +54,10 @@ export default {
             order: '',
             fieldFilter: '',
             fieldValue: '',
-            id: ''
+            id: '',
+            valores: {},
+            vetNomes: [],
+            deletar: {}
         }
     },
     components: {
@@ -61,56 +69,64 @@ export default {
     },
     methods: {
 
-        showModalCreateParameter(){
-            this.$refs.modalCreateParameter.show();
+        showModal(ref){
+            this.$refs[ref].show();
         },
+        hideModal(ref){
+            this.$refs[ref].hide();
+        },        
 
 
-        /*****************/
-        /*               */
-        /*  CRUD Recipe  */
-        /*               */
-        /*****************/
-        getRecipe: function() {
-            this.carregando = true;
 
-            console.log(this.urlRecipes);
-            axios.get(this.urlRecipes).then(response => {
-                this.recipes = response.data.values;
-                this.carregando = false;
+        createParameter(valores, thing, tagGroup){
+            this.carregando=true;
+            this.hideModal('modalCreateParameter');
+            var item=[];
+            var j=0;
+            var urls = [];
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            for(var i=0; i<thing.tags.length; i++){
+                console.log(thing.tags[i]);
+                if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'vn')
+                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.vn};
+                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'unidade')                     
+                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.unidade};
+                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lic')
+                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lic};    
+                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lie') 
+                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lie};
+                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lsc')
+                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lsc};
+                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lse')               
+                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lse};                               
+            }
 
-            }).catch(error => {
-                console.log(error);
-                this.carregando = false;
-            })
+            for(var i = 0; i<item.length; i++)
+                axios.post(this.urlPhases + '/parameters/46',JSON.parse(JSON.stringify(item[i])),config);
+            setTimeout(() => {
+                this.buscarPhase();
+            },12000);      
         },
-        createParameter(){
-            console.log("oi");
+        deleteParameter(parametro){
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            var urls =  [];
+            console.log(parametro);
+            for(var i = 0; i<this.phase.phaseParameters.length; i++){
+                if(this.phase.phaseParameters[i].tag.tagGroup == parametro.parametro){
+                    urls[i] = axios.delete(this.urlPhases + '/parameters/46',{ data: JSON.parse(JSON.stringify(this.phase.phaseParameters[i]))},config);
+                    console.log(this.phase.phaseParameters[i].phaseParameterId);
+                }                        
+            } 
+            this.deletar = {};  
+            setTimeout(() => {
+                this.buscarPhase();
+            },12000);        
         },
-        putRecipe(recipe) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            axios.put(this.url + "recipes/" + recipe.recipeId, recipe).then((response) => {
-                console.log(response.data);
-                recipe = response.data;
-                this.ok = true;
-                this.carregando = false;
-            }, (error) => {
-                console.log(error);
-                this.carregando = false;
-            });
-        },
-        recipeDelete(id){
-            this.carregando = true;
-            console.log(this.urlRecipes);
-            axios.delete(this.urlRecipes+'/'+id).then(response => {
-                console.log(response);
-                this.carregando = false;
-            }).catch(error => {
-                console.log(error);
-                this.carregando = false;
-            })
-        },
+
         organizar(recipe, campo, pos){                         
             recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
             for(var i=0; i<this.cabecalhoSetas.length; i++)
@@ -126,44 +142,101 @@ export default {
                 else   
                     this.cabecalhoSetas[i]=false;             
         },
-        /*****************/
-        /*               */
-        /*  GET Phase  */
-        /*               */
-        /*****************/
-        getPhasesById: function(id) {
-            console.log(id);
-            this.carregando = true;
-            axios.get(this.urlRecipes + id).then(response => {
-                this.phases = response.data;
-                this.carregando = false;
-            }).catch(error => {
-                console.log(error);
-                this.carregando = false;
-            })
+
+
+        getParametros(phase) {            
+            var j = 0;    
+         
+            for (var i = 0; i < phase.phaseParameters.length; i++) {
+                if (phase.phaseParameters[i].tag != undefined) {                      
+                    if (this.parameters[phase.phaseParameters[i].tag.tagGroup] != undefined)
+                        this.parameters[phase.phaseParameters[i].tag.tagGroup].push(phase.phaseParameters[i]);                        
+                    else {                        
+                        this.vetNomes[j++] = phase.phaseParameters[i].tag.tagGroup;                        
+                        this.parameters[phase.phaseParameters[i].tag.tagGroup] = [];
+                        this.parameters[phase.phaseParameters[i].tag.tagGroup].push(phase.phaseParameters[i]);
+                    }
+                }
+            } 
+                      
+            j = 0;
+            for (i = 0; i < this.vetNomes.length; i++) {
+                this.parametros[i] = {};
+                for (j = 0; j < this.parameters[this.vetNomes[i]].length; j++) {
+                    if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'vn'){
+                        this.parametros[i].vn = this.parameters[this.vetNomes[i]][j].setupValue;
+                        this.parametros[i].tagId = this.parameters[this.vetNomes[i]][j].tag.tagId;
+                        this.parametros[i].phaseParameterId = this.parameters[this.vetNomes[i]][j].phaseParameterId;
+                    }
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lie'){
+                        this.parametros[i].lie = this.parameters[this.vetNomes[i]][j].setupValue;
+                        this.parametros[i].tagId = this.parameters[this.vetNomes[i]][j].tag.tagId;
+                        this.parametros[i].phaseParameterId = this.parameters[this.vetNomes[i]][j].phaseParameterId;
+                    }
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lic'){
+                        this.parametros[i].lic = this.parameters[this.vetNomes[i]][j].setupValue;
+                        this.parametros[i].tagId = this.parameters[this.vetNomes[i]][j].tag.tagId;
+                        this.parametros[i].phaseParameterId = this.parameters[this.vetNomes[i]][j].phaseParameterId;
+                    }
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lsc'){
+                        this.parametros[i].lsc = this.parameters[this.vetNomes[i]][j].setupValue;
+                        this.parametros[i].tagId = this.parameters[this.vetNomes[i]][j].tag.tagId;
+                        this.parametros[i].phaseParameterId = this.parameters[this.vetNomes[i]][j].phaseParameterId;
+                    }
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lse'){
+                        this.parametros[i].lse = this.parameters[this.vetNomes[i]][j].setupValue;
+                        this.parametros[i].tagId = this.parameters[this.vetNomes[i]][j].tag.tagId;
+                        this.parametros[i].phaseParameterId = this.parameters[this.vetNomes[i]][j].phaseParameterId;
+                    }
+                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'unidade'){
+                        this.parametros[i].unidade = this.parameters[this.vetNomes[i]][j].setupValue;
+                        this.parametros[i].tagId = this.parameters[this.vetNomes[i]][j].tag.tagId;
+                        this.parametros[i].phaseParameterId = this.parameters[this.vetNomes[i]][j].phaseParameterId;
+                    }
+                }
+            }
+            for (i = 0; i < this.vetNomes.length; i++)
+                this.parametros[i].parametro = this.parameters[this.vetNomes[i]][0].tag.tagGroup;
         },
         //
         // PAGINAÇÃO //
         //
+
+        
         buscarThings() {            
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.recipes = [];
-            axios.get(this.urlThings, config).then((response) => {
-                console.log(response);
-                this.ferramentas = response.data.values;                                
-                this.carregando = false;
+            console.log(this.urlThings)
+            axios.get(this.urlThings, config).then((response) => {                
+                this.things = response.data.values;                                                
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
             })
+        }, 
+        buscarPhase() {            
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            this.recipes = [];
+            console.log(this.urlThings)
+        
+            axios.get(this.urlPhases+'/46', config).then((response) => {                
+                this.phase = response.data;
+                this.getParametros(this.phase);  
+                this.carregando = false;                                              
+            }, (error) => {
+                this.mensagem = 'Erro no server ao buscar ' + error;
+                this.carregando = false;
+            })
+                
         },
     },
-    beforeMount() {
-        //this.buscar();
-        //this.getPhasesById();
+    beforeMount() {        
         this.carregando = true;
         this.buscarThings();
+        this.buscarPhase();
     }
 }

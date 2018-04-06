@@ -8,18 +8,21 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-         <div class="fixed-top nav-hp">
-            <h1 class="title-page-hp" id="exButton1"><b> Apontamentos de Ordens de Produção</b> </h1>
+         <div class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
+            <li class="nav-prod col-md-12">
+                <h1 class="title-page-gp-s-campo"> <b>Apontamentos de Ordens de Produção</b> </h1>
+            </li>
+            <li class="col-md-12">
+                <p></p>
+            </li>
             </ul>
         </div>
-        <div class="op col-md-12">
         <div id="load" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>
         </div> 
         <h3 style="text-align:center"></h3>
-        <div class="fundo-branco-ap">
-            <div class="cabecalho-table-ap">
+            <div class="cabecalho-table-ap" v-show="!carregando">
                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(orderHistorian, 'productionOrderNumber',0):organizar(orderHistorian, 'productionOrderNumber',0);" class="ls2-cabecalho-ap col-md-3">
                     <b><font class="cursor-class" color="#ffffff">OP 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -41,7 +44,7 @@
                     </font></b>
                 </label>
             </div>
-            <div class="table-margin-hm">
+            <div class="table-margin-hm" v-show="!carregando">
             <div v-for="(o, index) in orderHistorian" v-bind:key="index" :class="{cinza: index%2==0}">
                 <label class="ls ls10 col-md-3">
                     {{o.productionOrderNumber}}</label>
@@ -49,10 +52,10 @@
                     {{o.thingName}} </label>
                 <label class="ls ls10 col-md-2">
                     {{o.typeDescription}}</label>
-                <label class="ls ls10 col-md-2" v-if="o.typeDescription == 'Liga'" style="margin-top:1%">
+                <label class="ls ls10 col-md-2 router" v-if="o.typeDescription == 'Liga'">
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
                 </label>  
-                <label class="ls ls10 col-md-2" v-else-if="o.typeDescription == 'Tira'" style="margin-top:1%">
+                <label class="ls ls10 col-md-2 router" v-else-if="o.typeDescription == 'Tira'">
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">Realizar Apontamento</router-link>
                 </label>  
             </div>
@@ -72,8 +75,6 @@
                     </ul>
                 </nav>
             </div>
-            </div>
-        </div>
         <b-modal ref="modalErro" title="Erro" hide-footer="">
             <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
         </b-modal>

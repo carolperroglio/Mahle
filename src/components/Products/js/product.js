@@ -37,14 +37,15 @@ export default {
             pageAtual: 0,
             produtos: [],
             produto: {},
-            url: process.env.RECIPE_API + '/api/products/',
+            url: process.env.RECIPE_API + '/api/products/',            
             mensagem: '',
             mensagemSuc: '',
             orderField: '',
             fieldValue: '',
             fieldFilter: '',
             order: '',
-            errors: [],   
+            errors: [], 
+            erro: '',  
             cadEdit:''         
         }
     },
@@ -68,6 +69,9 @@ export default {
             this.produto.index = index;
             this.$refs.myModalRef.show();
         },
+        showModalErro(erro){
+
+        },
         showModalConfirmCreate() {
             this.$refs.modalCadastrarProduto.show();
         },
@@ -90,7 +94,13 @@ export default {
         hideModalRemoveProduct() {
             this.$refs.modalRemoveProduct.hide()
         },
-
+        showModalErro(erro){
+            this.erro = erro;
+            this.$refs.modalErro.show();            
+        },
+        hideModalErro(){
+            this.$refs.modalErro.hide();
+        },
         organizar(produtos, campo, pos) {
             produtos.sort(function(a, b) { console.log(a[campo]); return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0); });
             for (var i = 0; i < this.cabecalhoSetas.length; i++)
@@ -133,8 +143,9 @@ export default {
                 this.produtos.push(produto);
                 this.carregando = false;
                 this.$refs.modalCadastrarProduto.hide();
-            }, (r) => {
-                this.mensagem = 'Erro no server ' + r;
+            }, (error) => {
+                this.teste(error.response.status);
+                this.erro = 'Erro no server ' + r;
                 this.carregando = false;
             })
 
@@ -142,7 +153,7 @@ export default {
 
         put(produto) {
             this.mensagem = '';
-            this.mensagemSuc = '';
+            this.mensagemSuc = '';            
             this.carregando = true;
             axios.put(this.url + produto.productId, produto).then((r) => {
                 this.mensagem = '';
@@ -151,6 +162,7 @@ export default {
                 this.carregando = false;
                 this.$refs.modalEditarProduto.hide();
             }, (r) => {
+                
                 this.carregando = false;
                 this.mensagem = 'Erro no server ' + r;
             })
@@ -172,8 +184,7 @@ export default {
                 this.carregando = false;
             });
             this.carregando = false;
-        },
-
+        },        
         buscar() {
             this.carregando = true;
             var config = {
@@ -185,7 +196,7 @@ export default {
                 u = this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&startat=" + this.startat + "&quantity=" + this.quantityPage;
             else
                 u = this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage;
-            console.log(u);    
+               
             setTimeout(() => {
                 axios.get(u, config).then((response) => {
                     if (!response.data.values && response.data.productId)
@@ -196,11 +207,21 @@ export default {
                     }
                     this.carregando = false;
                 }, (error) => {
-                    this.mensagem = 'Erro no server ao buscar ' + error;
+                    this.codigosErro(error.response.status);                                    
                     this.carregando = false;
                 })
             }, 500)
-        }
+        },
+        codigosErro(status){
+            if(status == 400)
+                this.showModalErro("Erro de requisição código 400");
+            else if(status == 404)
+                this.showModalErro("Serviço não encontrado código 404");
+            else if(status == 500)
+                this.showModalErro("Erro no servidor código 500"); 
+            else    
+                this.showModalErro("Erro desconhecido código" + status);
+        },
     },
     beforeMount: function() {
         this.buscar();

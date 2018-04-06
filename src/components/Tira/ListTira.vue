@@ -7,7 +7,7 @@
         <!--                                 -->
         <div class="fixed-top nav-cinza">            
             <ul class="nav d-flex">
-                <li class="nav-item nav-item-tira">
+                <li class="nav-item nav-item-tira col-sm-12">
                     <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>
                 <li class="nav-item nav-item-tira">
@@ -18,7 +18,7 @@
                     </select>
                 </li>
                 <li class="nav-item nav-item-tira">
-                    <input class="form-control btn-lg" type="search" v-model="fieldValue" placeholder="Tira" aria-label="Busca">
+                    <input class="form-control btn-lg" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" aria-label="Busca">
                 </li> 
                 <li class="nav-item nav-item-tira">
                     <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>

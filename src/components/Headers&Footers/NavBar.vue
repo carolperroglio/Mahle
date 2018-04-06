@@ -98,17 +98,17 @@
                             </span>
                         </router-link>
                         <router-link to="/listlineparameters" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
-                            <i class="fa fa-book"></i> 
+                            <i class="fa fa-random"></i> 
                             <span class="hidden-sm-down">  
                                 PARAMETROS DE LINHA
                             </span>
                         </router-link>
-                        <router-link to="/historianalarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
+                        <!-- <router-link to="/historianalarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
                             <i class="fa fa-bell"></i> 
                             <span class="hidden-sm-down">  
                                 ALARMES
                             </span>
-                        </router-link>
+                        </router-link> -->
 
                         <!-- <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1 cursor="pointer">
                             <i class="fa fa-cogs"></i> 
