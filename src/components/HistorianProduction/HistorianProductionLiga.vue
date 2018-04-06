@@ -137,20 +137,28 @@
             <form>
                 <div>
                     <div class="form-row">
-                    <div class="form-group col-md-6" v-show="pFase" v-if="consumo = true">
+                    <div class="form-group col-md-6">
                     <label>
                         <b>Materiais </b>
                     </label>
-                    <select class="form-control form-control-sm" v-model="ordem.productId">
-                        <option v-for="(p,index) in orderPhaseProducts.phaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
+                    <select class="form-control form-control-sm" v-model="prodRolo">
+                        <option v-for="(p,index) in orderPhaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
                     </select>
                     </div>
-                    <div class="form-group col-md-3" v-show="pFase">
+                    <div class="form-group col-md-3">
                     <label>
                         <b>Quantidade </b>
                     </label>
-                    <input type="number" required v-model="ordem.quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                    <input type="number" required v-model="quantity" placeholder="Ex:5" class="form-control form-control-sm">
                     </div>
+                    <div class="form-group col-md-3">
+                    <label>
+                        <b>Unidade </b>
+                    </label>
+                    <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    </div>
+                    </div>
+                    <div class="form-row">
                     <div class="form-group col-md-5">
                     <label>
                         <b>Lote </b>
@@ -159,9 +167,8 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-                        <div class="btn-group" role="group" v-show="pReceita">
-                            <button class="btn btn-success" :disabled="!ordem.quantity || ordem.quantity == '' ||
-                                !rolo || rolo == '' || !ordem.productId || ordem.productId == ''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" :disabled="!quantity ||prodRolo == ''||lote ==''|| unity ==''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="ordem.quantity =''; ordem.productName = ''" class="btn btn-primary pull-right">

@@ -141,6 +141,16 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        cleanVariables() {
+            this.quantity = "";
+            this.productionOrderId = "";
+            this.prodRolo = "";
+            this.unity = "";
+            this.roloSaida = "";
+            this.roloSaidaID = "";
+            this.loteAco = "";
+            this.loteLiga = "";
+        },
         cadastrarApont(ordem) {
             // MODELO JSON
             // {
@@ -188,6 +198,7 @@ export default {
                     this.hideModal('cadAco');
                     this.hideModal('cadLiga');
                     this.hideModal('cadRoloSaida');
+                    this.cleanVariables();
                 }).catch((error) => {
                     this.msgErro = error.message;
                     this.showModal("modalErro");

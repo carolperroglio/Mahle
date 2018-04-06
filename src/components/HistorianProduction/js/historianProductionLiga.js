@@ -89,7 +89,7 @@ export default {
                     this.pReceita = false;
                     this.pFase = true;
                     this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                    this.orderPhaseProducts = this.productionOrdersRecipe.phases[0];
+                    this.orderPhaseProducts = this.productionOrdersRecipe.phases[0].phaseProducts;
                     this.lote = "OPL";
                 }
             }, 100);
@@ -131,11 +131,21 @@ export default {
                     this.cabecalhoSetas[i] = false;
         },
         cadastrarApont(ordem) {
+            // MODELO JSON
+            // {
+            //     "type": "output",
+            //     "productionOrderId": 1,
+            //     "productId": 6,
+            //     "quantity": 2.5,
+            //     "batch": "lote",
+            //     "unity": 5
+            // }
 
-            ordem.productionOrderId = this.productionOrderId.productionOrderId;
+            ordem.productionOrderId = this.productionOrder.productionOrderId;
             ordem.quantity = this.quantity;
             ordem.type = this.ordem.type;
             ordem.unity = this.unity;
+            ordem.productId = this.prodRolo;
 
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;
