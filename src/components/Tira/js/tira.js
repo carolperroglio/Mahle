@@ -239,7 +239,7 @@ export default {
             return array;
         }
     },
-    created() {
+    created() {        
         this.recipe = {};
         this.phase = {};
         this.recipes = [];

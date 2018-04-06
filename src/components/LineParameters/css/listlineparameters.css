@@ -14,14 +14,14 @@
     position: fixed;    
     width: 100%;    
     background-color: black;
-    margin: -4% 0 0 0;    
+    margin: -6.5% 0 0 0;    
     z-index: 4;
 }
 
 #load-parameters {
-    margin: 18% 0 0 50%;    
+    margin: 30% 0 0 50%;    
 }
 
 .margin-table-parameters {
-    margin: 19.9% 0 6% 0;
+    margin: 22.5% 0 6% 0;
 }
