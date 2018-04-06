@@ -87,6 +87,9 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
+
+
+
             for(var i=0; i<thing.tags.length; i++){
                 console.log(thing.tags[i]);
                 if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'vn')
@@ -197,6 +200,20 @@ export default {
             }
             for (i = 0; i < this.vetNomes.length; i++)
                 this.parametros[i].parametro = this.parameters[this.vetNomes[i]][0].tag.tagGroup;
+
+            for(var t=0; t<this.things.length; t++){
+                console.log("entrou loop things");
+                for(var i=0; i<this.things[t].possibleTagGroups.length; i++){
+                    console.log("entrou loop possible");
+                    for(var j=0; j<this.vetNomes.length; j++){            
+                        console.log("entrou loop vet");                
+                        if(this.things[t].possibleTagGroups[i]==this.vetNomes[j]){
+                            console.log("entrou");                                                               
+                            this.things[t].possibleTagGroups[i] = 'oi';    
+                        }      
+                    }
+                }
+            }                            
         },
         //
         // PAGINAÇÃO //
@@ -210,11 +227,12 @@ export default {
             this.recipes = [];
             console.log(this.urlThings)
             axios.get(this.urlThings, config).then((response) => {                
-                this.things = response.data.values;                                                
+                this.things = response.data.values;                                  
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
             })
+
         }, 
         buscarPhase() {            
             var config = {
@@ -225,7 +243,7 @@ export default {
         
             axios.get(this.urlPhases+'/46', config).then((response) => {                
                 this.phase = response.data;
-                this.getParametros(this.phase);  
+                this.getParametros(this.phase);                                                  
                 this.carregando = false;                                              
             }, (error) => {
                 this.mensagem = 'Erro no server ao buscar ' + error;

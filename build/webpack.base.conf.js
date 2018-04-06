@@ -68,7 +68,6 @@ module.exports = {
                 STATUS_API: JSON.stringify("http://10.35.255.22:8006"),
                 HIST_BIGTABLE_API: JSON.stringify("http://10.35.255.22:8011")
                 */
-<<<<<<< HEAD
                 TOOLS_API: JSON.stringify(api+":8005"),
                 OP_API: JSON.stringify(api+":8003"),
                 THINGS_API: JSON.stringify(api+":8001"),
@@ -78,17 +77,6 @@ module.exports = {
                 HIST_BIGTABLE_API: JSON.stringify(api+":8011"),
                 HIST_ALARM_API: JSON.stringify(api+":8012"),                
             }            
-=======
-                TOOLS_API: JSON.stringify(api + ":8005"),
-                OP_API: JSON.stringify(api + ":8003"),
-                THINGS_API: JSON.stringify(api + ":8001"),
-                PROD_HIST_API: JSON.stringify(api + ":8006"),
-                RECIPE_API: JSON.stringify(api + ":8002"),
-                STATUS_API: JSON.stringify(api + ":8004"),
-                HIST_BIGTABLE_API: JSON.stringify(api + ":8011"),
-                HIST_ALARM_API: JSON.stringify(api + ":8012")
-            }
->>>>>>> 48c8d1896c7365fe0af7f8bda8ea1e11c9aa7ee8
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
