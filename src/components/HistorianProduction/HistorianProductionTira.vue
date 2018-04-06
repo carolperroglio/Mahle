@@ -172,7 +172,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-5">
                     <label>
-                        <b>Lote: </b>
+                        <b>OPL: </b>
                     </label>
                     <input type="text"  v-model="loteAco" class="form-control form-control-sm">
                     </div>
@@ -223,7 +223,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-5">
                         <label>
-                        <b>Lote: </b>
+                        <b>OPL: </b>
                         </label>
                         <input type="text" required :value="loteLiga = productionOrderId.productionOrderNumber" class="form-control form-control-sm" disabled>
                     </div>
