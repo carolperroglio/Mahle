@@ -60,7 +60,7 @@
                 <label class="ls2 col-md-3">
                     <b><font color="#9BA6A5"> </font></b> {{recipe.recipeName}}
                 </label>
-                <label class="ls2 col-md-3">
+                <label class="ls2 col-md-3" style="margin-left:-1%">
                     <b><font color="#9BA6A5"> </font></b>{{recipe.recipeCode}}
                 </label>
                 <label class="ls2 col-md-3">

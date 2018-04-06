@@ -6,6 +6,7 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import bBadge from 'bootstrap-vue/es/components/badge/badge'
 import { Stretch } from 'vue-loading-spinner'
+import { setTimeout } from 'timers';
 
 es6promisse.polyfill();
 
@@ -57,6 +58,8 @@ export default {
             unity: "",
             roloSaida: "",
             roloSaidaID: "",
+            loteAco: "",
+            loteLiga: "",
 
         }
     },
@@ -86,41 +89,37 @@ export default {
                 }
             }
 
-            setTimeout(() => {
-                if (this.ordem.type === "output") {
-                    this.pReceita = true;
-                    this.consumo = false;
-                    this.pFase = false;
-                    console.log(this.productionOrdersRecipe);
-                    console.log(this.productionOrder);
-                    this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;
-                    this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                    this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
-                    this.rolo = this.orderHistorian.productsOutput.length + 1;
-                    this.titleheader = "Registrar Matéria-Prima"
-                } else if (this.ordem.type === "input") {
-                    this.consumo = true;
-                    this.pReceita = false;
-                    this.pFase = true;
-                    this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                    this.orderPhaseProducts = this.productionOrdersRecipe.phases[0];
-                    this.lote = "OF";
-                    this.titleheader = "Registrar Aço"
-                }
-            }, 100);
+            // setTimeout(() => {
+            if (this.ordem.type === "output") {
+                this.pReceita = true;
+                this.consumo = false;
+                this.pFase = false;
+                console.log(this.productionOrdersRecipe);
+                console.log(this.productionOrder);
+                this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;
+                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
+                this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
+                this.rolo = this.orderHistorian.productsOutput.length + 1;
+                this.titleheader = "Registrar Matéria-Prima"
+            } else if (this.ordem.type === "input") {
+                this.consumo = true;
+                this.pReceita = false;
+                this.pFase = true;
+                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
+                this.orderPhaseProducts = this.productionOrdersRecipe.phases[0];
+                this.lote = "OF";
+                this.titleheader = "Registrar Aço"
+            }
+            // }, 100);
 
-            setTimeout(() => {
-                this.$refs[id].show();
-                this.$refs[id].show();
-            }, 150);
+            // setTimeout(() => {
+            this.$refs[id].show();
+            this.$refs[id].show();
+            // }, 150);
 
         },
         hideModal(id) {
-            if (id == "myModalRef") {
-                this.$refs.myModalRef.hide();
-            } else if (id == "modalErro") {
-                this.$refs.modalErro.hide();
-            }
+            this.$refs[id].hide();
             this.pReceita = false;
             this.consumo = false;
         },
@@ -152,40 +151,51 @@ export default {
             //     "batch": "lote"
             // }
 
-            if (this.roloSaidaID == "") {
+            if (this.loteAco != "") {
                 ordem.productId = 47;
             } else {
                 ordem.productId = this.roloSaidaID;
             }
 
-            ordem.productionOrderId = this.productionOrderId.productionOrderId;
+            if (this.productionOrderId.productionOrderId != undefined) {
+                ordem.productionOrderId = this.productionOrderId.productionOrderId;
+            } else {
+                ordem.productionOrderId = this.productionOrder.productionOrderId;
+            }
+
             ordem.quantity = this.quantity;
             ordem.type = this.ordem.type;
             ordem.unity = this.unity;
 
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;
-            } else {
-                ordem.batch = this.lote;
+            } else if (this.loteLiga != undefined) {
+                ordem.batch = this.loteLiga;
+            } else if (this.loteAco != undefined) {
+                ordem.batch = this.loteAco;
             }
 
             console.log(ordem);
-            axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
-                this.mensagemSuc = 'Produto apontado com sucesso.';
-                this.productionOrderId = this.ordem.productionOrderId;
-                this.carregando = false;
+            setTimeout(() => {
+                axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
+                    this.mensagemSuc = 'Produto apontado com sucesso.';
+                    this.productionOrderId = this.ordem.productionOrderId;
+                    this.carregando = false;
+                    this.pReceita = false;
+                    this.pFase = false;
+                    this.rolo++;
+                    this.ordem = {};
+                    this.hideModal('cadAco');
+                    this.hideModal('cadLiga');
+                    this.hideModal('cadRoloSaida');
+                }).catch((error) => {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+                    this.carregando = false;
+                })
                 this.pReceita = false;
-                this.pFase = false;
-                this.rolo++;
-                this.ordem = {};
-
-            }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
-                this.carregando = false;
-            })
-            this.pReceita = false;
-            this.consumo = false;
+                this.consumo = false;
+            }, 1000);
         },
 
         changeJson(obj, type) {
@@ -307,7 +317,11 @@ export default {
         getOP() {
             axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,active&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
-                    this.listOP = response.data.values;
+                    response.data.values.forEach(obj => {
+                        if (obj.currentThing != undefined) {
+                            this.listOP.push(obj);
+                        }
+                    });
                 }).catch((error) => {
                     this.msgErro = error.message;
                     this.showModal("modalErro");

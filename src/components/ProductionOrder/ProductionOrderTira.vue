@@ -104,8 +104,8 @@
         <!--  Botão que inicia    -->
         <!--  o Modal de Criação da OP  -->
         <div class="fixed-top nav-cinza">
-            <ul class="nav d-flex align-items-center">
-            <li class="nav-prod col-md-12">
+            <ul class="nav d-flex align-items-center nav-item-gp">
+            <li class="nav-prod   col-md-12">
                 <h1 class="title-page-gp"> <b>Ordens de Produção - Tiras</b> </h1>
             </li>
             <li class="nav-prod col-md-2">
@@ -164,7 +164,7 @@
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2">
+                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2" style="margin-left:1%">
                             <b><font class="cursor-class" color="#ffffff">
                                 Descrição &nbsp;&nbsp;&nbsp;
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
@@ -190,10 +190,10 @@
                             <label class="ls ls1 col-md-2">
                                 {{op.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2">
+                            <label class="ls ls1 col-md-2" style="margin-left:-1%">
                                 {{op.typeDescription}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2">
+                            <label class="ls ls1 col-md-2" style="margin-left:0.1%">
                                 {{op.currentStatus | filterStatus}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2" v-if="op.hasProd == true">
