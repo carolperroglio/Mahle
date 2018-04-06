@@ -47,47 +47,46 @@
             </label>                    
             <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametros, 'vn',1):organizar(parametros, 'vn',1);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    Valor Nominal
+                    <p class="font-size">Valor Nominal
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                </font></b>
+                </p></font></b>
             </label>
             <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametros, 'unidade',2):organizar(parametros, 'unidade',2);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    Unidade
+                    <p class="font-size">Unidade
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                </font></b>
+                </p></font></b>
             </label>  
             <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    Lim. Inferior Específico
+                    LSE <p class="font-size">Limite superior de especificação
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                </font></b>
+                </p></font></b>
             </label> 
             <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    Lim. Inferior Controle
+                    LIC <p class="font-size">Limite inferior controle
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-                </font></b>
+                </p></font></b>
             </label> 
             <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls2 item-cabecalho-table-parameters">
-                <b>
-                    <font class="cursor-class" color="#ffffff">
-                        Lim. Superior Controle
+                <b><font class="cursor-class" color="#ffffff">
+                    LSC <p class="font-size">Limite superior controle
                         <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
-                    </font>
+                    </p></font>
                 </b>
             </label>
             <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    Lim. Superior Específico
+                    LSE <p class="font-size">Limite superior especifico
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
-                </font></b>
+                </p></font></b>
             </label>                              
         </div>
 
@@ -98,7 +97,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <div class="margin-table-parameters" v-show="!carregando">            
+        <div class="margin-table-parameters" v-show="!carregando">         
             <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
@@ -106,32 +105,32 @@
                 </label>                    
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                        {{pro.vn}}
+                        {{pro.vn.setupValue}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.unidade}}
+                    {{pro.unidade.setupValue}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lie}}
+                    {{pro.lie.setupValue}}
                 </label>   
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lic}}
+                    {{pro.lic.setupValue}}
                 </label>            
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lsc}}
+                    {{pro.lsc.setupValue}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lse}}
+                    {{pro.lse.setupValue}}
                 </label> 
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
                     <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="deletar=pro;showModal('modalRemoveParameter');"></i>&nbsp;&nbsp;&nbsp;                     
-                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="cadEdit='Editar produto';showModal(p, index)"></i>
+                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="cadEdit='Editar Parâmetro';p, index;showModal('modalEditarParameter')"></i>
                 </label> 
                                                                                                        
             </div>                                                                                                       
@@ -225,6 +224,98 @@
                 </div>
             </div>
         </b-modal> -->
+
+        <!--                                 -->
+        <!--                                 -->
+        <!--                                 -->
+        <!-- Menu de navegação de produtos   -->
+        <!--                                 -->
+        <!--                                 -->
+        <!--               Modal             -->     
+        <b-modal ref="modalEditarParameter" hide-footer title="Editar Parâmetro">                    
+            <form>
+                <div>
+                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
+                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
+                    <p v-if="errors.length">
+                        <ul v-for="(error, index) in errors" v-bind:key="index">
+                            <li class="alert alert-danger form-control" >{{ error }}</li>
+                        </ul>
+                    </p>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Equipamento </b>
+                            </label>
+                            <input class="fm form-control mr-sm-2" type="text" disabled placeholder="Ex: 1010144">                                                        
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Parâmetro </b>
+                            </label>
+                            <input class="fm form-control mr-sm-2" type="text" disabled placeholder="Ex: 1010144">                                                        
+                        </div>                        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>Valor Nominal</b>
+                            </label>
+                            <input class="fm form-control mr-sm-2" type="text" placeholder="Ex: 1010144">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>Unidade </b>
+                            </label>
+                            <br><br>
+                            <input type="text" class="fm form-control mr-sm-2" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>LIE </b>
+                            </label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>  
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>LIC </b>
+                            </label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>LSC </b>
+                            </label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div> 
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>LSE </b>
+                            </label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <br>
+                        </div>       
+                    </div>   
+                    <div class="modal-footer">                            
+                        <div class="btn-group" role="group">
+                            <button @click.stop.prevent="createParameter(valores, thing, tagGroup)" class="btn btn-success pull-right" :disabled="false">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i>
+                            </button>  
+                            <button @click.stop.prevent="recipe" class="btn btn-primary pull-right">
+                                Limpar                           
+                            </button>                      
+                        </div>                        
+                    </div>
+                </div>
+            </form>
+        </b-modal> 
+
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
