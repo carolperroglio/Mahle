@@ -120,7 +120,8 @@ export default {
                 'border-radius': '4px',
                 'padding': '2%',
                 'transition': 'background-color 1000ms linear',
-                'box-shadow': '1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070'
+                'box-shadow': '1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070',
+                'height': '100%'
             }
             if (objeto.hasRedAlert) {
                 string["background-color"] = '#ed0404';

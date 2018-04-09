@@ -1,28 +1,39 @@
 <template>
   <div>
-        <nav class="fixed-top nav-status">
-            <h1 class="title-page-status"><b>Visualização de Status de MES</b></h1>
+        <!-- <nav class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
-                <li class="nav-item-stat">
-                </li>
+            <li class="nav-prod nav-item-gp col-md-12">
+            <h1 class="title-page-gp-s-campo"><b>Visualização de Status de MES</b></h1>
+            </li>
             </ul>
-        </nav>
+        </nav> -->
         <div class="row conteudo-status">
               <div class="container-fluid">
                 <div id="load" v-show="carregando">
                     <stretch background="#4d4d4d"></stretch>
                 </div> 
                   <div class="status">
-                    <div class=" col-md-4 offset-md-3" style="margin-bottom:5%">
+                    <div class=" col-md-10 offset-1" style="margin-bottom:5%;">
                     <div class="card">
                         <div class="card-header">
                             Legendas
                         </div>
                         <div class="card-body">
-                            Alta: <i class="fa fa-square" style="color:#ed0404" aria-hidden="true"></i> - 
-                            Baixa: <i class="fa fa-square" style="color:#f5fc28" aria-hidden="true"></i> - 
-                            Normal: <i class="fa fa-square" style="color:#4bff30" aria-hidden="true"></i> - 
+                            <div class="row">
+
+                            <div class="col-md-3">
+                            Alta: <i class="fa fa-square" style="color:#ed0404" aria-hidden="true"></i>
+                            </div> 
+                            <div class="col-md-3">
+                            Baixa: <i class="fa fa-square" style="color:#f5fc28" aria-hidden="true"></i>  
+                            </div> 
+                            <div class="col-md-3">
+                            Normal: <i class="fa fa-square" style="color:#4bff30" aria-hidden="true"></i>  
+                            </div> 
+                            <div class="col-md-2">
                             Offline: <i class="fa fa-square" style="color:#b2b7b2" aria-hidden="true"></i>
+                            </div> 
+                            </div>
                         </div>
                     </div>
                     </div>

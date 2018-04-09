@@ -1,11 +1,10 @@
 @import url("./../../genericcss/generico.css");
-
 body {
     font-family: "Lucida Sans Unicode";
 }
 
 .status {
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
 .nav-status {
@@ -43,7 +42,7 @@ body {
 }
 
 .conteudo-status {
-    margin-top: 12%;
+    margin-top: 8%;
     width: 100%;
     padding-bottom: 5%;
     /* margin-left: 5%; */
