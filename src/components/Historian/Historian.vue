@@ -1,10 +1,9 @@
 <template>
   <div id="teste">
-        <nav class="fixed-top nav-history">
-            <h1 class="title-page-history"><b>Relatório de Rastreamento</b></h1>
+        <nav class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
-                 <li class="nav-item-hist">
-                  
+                <li class="nav-item-hist nav-item-gp col-md-12">
+                <h1 class="title-page-gp-s-campo"><b>Relatório de Rastreamento</b></h1>
                 </li>
             </ul>
         </nav>
@@ -71,7 +70,7 @@
             <br>
             <div class="col-md-12">
                 <table class="table1">
-                    <tr class="tr1 cabecalho-table-rastreamento ">
+                    <tr class="tr1 cabecalho-table-rastreamento">
                         <th class="th1 text-white ls2-cabecalho-rastreamento" v-for="(h, index) in headers" :key="index">{{ h }}</th>
                     </tr>
                     <tr class="tr1" v-for="(obj,index1) in provider" v-bind:key="index1">
@@ -144,15 +143,15 @@
                         <div class="btn-group" role="group">
                             <button class="btn btn-success" @click.stop.prevent="getReportDate()" 
                             :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
-                                <i class="fa fa-check"></i> Confirmar
+                                <i class="fa fa-check-square"></i> Confirmar
                             </button>
                             <button class="btn btn-success" @click.stop.prevent="getReportOP()" 
                             :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !OP" v-if="filterSelected == 'op'">
-                                <i class="fa fa-check"></i> Confirmar
+                                <i class="fa fa-check-square"></i> Confirmar
                             </button>
                             <button class="btn btn-success" @click.stop.prevent="getReportCode()" 
                             :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !recipeCode" v-if="filterSelected == 'code'">
-                                <i class="fa fa-check"></i> Confirmar
+                                <i class="fa fa-check-square"></i> Confirmar
                             </button>
                         </div>
                     </div>

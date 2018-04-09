@@ -1,3 +1,4 @@
+@import url("./../../genericcss/generico.css");
 body {
     font-family: "Lucida Sans Unicode";
 }
@@ -9,6 +10,7 @@ body {
 } */
 
 .cabecalho-table-rastreamento {
+    text-align: center;
     position: relative;
     top: 12%;
     left: 1.8%;
@@ -74,6 +76,7 @@ th1 {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+    text-align: center;
 }
 
 .tr1:nth-child(even) {
