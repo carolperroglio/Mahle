@@ -74,7 +74,7 @@ Array.prototype.groupByProperties = function(properties) {
     return groups;
 };
 export default {
-    name: "Historian",
+    name: "AlarmReport",
     data() {
         return {
             url: process.env.THINGS_API,
@@ -201,52 +201,6 @@ export default {
 
             axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
                 '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
-                this.data = response.data;
-                this.tags = response.data.tags;
-                this.tags.forEach((T) => {
-                    if (!this.groups.includes(T.group)) {
-                        this.groups.push(T.group);
-                    }
-                })
-                this.carregando = false;
-                this.created();
-                this.hideModal();
-            }).catch((error) => {
-
-            });
-        },
-        getReportCode() {
-            this.carregando = true;
-
-            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
-            var ticksI = this.dateToTicks(Ini);
-            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
-            var ticksF = this.dateToTicks(Fim);
-
-            axios.get(this.urlReport + "/api/ReportParameter/RecipeCode/" + this.recipeCode + '?thingId' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
-                this.data = response.data;
-                this.tags = response.data.tags;
-                this.tags.forEach((T) => {
-                    if (!this.groups.includes(T.group)) {
-                        this.groups.push(T.group);
-                    }
-                })
-                this.carregando = false;
-                this.created();
-                this.hideModal();
-            }).catch((error) => {
-
-            });
-        },
-        getReportOP() {
-            this.carregando = true;
-
-            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
-            var ticksI = this.dateToTicks(Ini);
-            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
-            var ticksF = this.dateToTicks(Fim);
-
-            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
                 this.data = response.data;
                 this.tags = response.data.tags;
                 this.tags.forEach((T) => {
@@ -524,7 +478,7 @@ export default {
                 "categoryField": "category",
                 "autoMarginOffset": 40,
                 "marginRight": 60,
-                "marginTop": 60,
+                "marginTop": 30,
                 "startDuration": 0,
                 "borderColor": "#C67373",
                 "fontSize": 13,
