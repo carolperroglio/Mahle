@@ -3,17 +3,17 @@
         <nav class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item-hist nav-item-gp col-md-12">
-                <h1 class="title-page-gp-s-campo"><b>Relatório de Rastreamento</b></h1>
+                <h1 class="title-page-gp-s-campo"><b>Relatório de Alarme</b></h1>
                 </li>
             </ul>
         </nav>
-        <div class="row conteudo-history">
+        <div class="row conteudo-rel-alarm">
               <div class="container-fluid">
                 <div id="load" v-show="carregando">
                 <stretch></stretch>
                 </div>    
 
-                  <div class="history">
+                  <div class="rel-alarm">
                     <div class="row">
                         <div class="col-md-8">
                             <h3>Equipamento: {{thingNameCabeçalho}} Grupo: {{thingGroup}}</h3>
@@ -70,8 +70,8 @@
             <br>
             <div class="col-md-12">
                 <table class="table1">
-                    <tr class="tr1 cabecalho-table-rastreamento">
-                        <th class="th1 text-white ls2-cabecalho-rastreamento" v-for="(h, index) in headers" :key="index">{{ h }}</th>
+                    <tr class="tr1 cabecalho-table-rel-alarm">
+                        <th class="th1 text-white ls2-cabecalho-rel-alarm" v-for="(h, index) in headers" :key="index">{{ h }}</th>
                     </tr>
                     <tr class="tr1" v-for="(obj,index1) in provider" v-bind:key="index1">
                         <td class="td1" v-for="(value, key, index2) in obj" v-bind:key="index2">{{ value }}</td>
@@ -83,17 +83,6 @@
         <b-modal ref="myModalEdit" hide-footer title="Filtrar Busca">
                     <div class="modal-body">
                     <div class="form-row">
-                    <div class="form-group  col-md-6">
-                    <label><b>Filtrar por</b></label>
-                    <select class="form-control" v-model="filterSelected">   
-                        <option value="" selected disabled>Buscar por:</option>
-                        <option value="op" key="op">OP</option> 
-                        <option value="code" key="code">Código da Receita</option> 
-                        <option value="date" key="date">Data</option> 
-                    </select>
-                    </div>
-                    </div>
-                    <div class="form-row">
                     <div class="form-group col-md-9">
                     <label><b>Equipamento </b></label>  
                        <select class="form-control" v-model="thingId">    
@@ -102,23 +91,6 @@
                         </select>
                     </div>
                     </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-6" v-if="filterSelected == 'op'">
-                    <label><b>OP </b></label>  
-                       <select class="form-control" v-model="OP">    
-                            <option v-for="(op,index) in opList" :value="op.productionOrderId" v-bind:key="index">{{ op.productionOrderNumber }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6"  v-if="filterSelected == 'code'">
-                    <label><b>Código da Receita </b></label>  
-                       <select class="form-control" v-model="recipeCode">    
-                            <option v-for="(r,index) in recipeList" :value="r.recipeId" v-bind:key="index">{{ r.recipeName }}
-                            </option>
-                        </select>
-                    </div>
-                    </div>
-                    
                     <label><b>Início </b></label>  
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -145,22 +117,14 @@
                             :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
                                 <i class="fa fa-check-square"></i> Confirmar
                             </button>
-                            <button class="btn btn-success" @click.stop.prevent="getReportOP()" 
-                            :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !OP" v-if="filterSelected == 'op'">
-                                <i class="fa fa-check-square"></i> Confirmar
-                            </button>
-                            <button class="btn btn-success" @click.stop.prevent="getReportCode()" 
-                            :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !recipeCode" v-if="filterSelected == 'code'">
-                                <i class="fa fa-check-square"></i> Confirmar
-                            </button>
                         </div>
                     </div>
           </b-modal>
   </div>
 </template>
 
-<script src="./js/historian.js">
+<script src="./js/reportAlarm.js">
 </script>
 <style>
-@import url("./css/historian.css");
+@import url("./css/reportAlarm.css");
 </style>

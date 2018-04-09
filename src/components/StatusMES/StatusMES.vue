@@ -13,7 +13,7 @@
                     <stretch background="#4d4d4d"></stretch>
                 </div> 
                   <div class="status">
-                    <div class=" col-md-10 offset-1" style="margin-bottom:5%;">
+                    <div class=" col-md-10" style="margin-bottom:5%;">
                     <div class="card">
                         <div class="card-header">
                             Legendas
