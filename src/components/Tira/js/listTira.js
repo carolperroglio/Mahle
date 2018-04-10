@@ -41,6 +41,7 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             id: '',
+            erro:'',
         }
     },
     components: {
@@ -48,6 +49,11 @@ export default {
         Stretch,
     },
     methods: {
+
+        showModalErro(erro){
+            this.erro = erro;
+            this.$refs.modalErro.show();            
+        },
         /*****************/
         /*               */
         /*  CRUD Recipe  */
@@ -62,8 +68,8 @@ export default {
                 this.carregando = false;
 
             }).catch(error => {
-                console.log(error);
                 this.carregando = false;
+                this.codigosErro(error.response.status); 
             })
         },
         putRecipe(recipe) {
@@ -75,8 +81,8 @@ export default {
                 this.ok = true;
                 this.carregando = false;
             }, (error) => {
-                console.log(error);
                 this.carregando = false;
+                this.codigosErro(error.response.status); 
             });
         },
         recipeDelete(id){
@@ -86,8 +92,8 @@ export default {
                 console.log(response);
                 this.carregando = false;
             }).catch(error => {
-                console.log(error);
                 this.carregando = false;
+                this.codigosErro(error.response.status); 
             })
         },
 
@@ -126,8 +132,8 @@ export default {
                 this.phases = response.data;
                 this.carregando = false;
             }).catch(error => {
-                console.log(error);
                 this.carregando = false;
+                this.codigosErro(error.response.status); 
             })
         },
         //
@@ -152,9 +158,19 @@ export default {
                         this.recipes[i].recipeDescription = '';
                 this.carregando = false;
             }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
+                this.codigosErro(error.response.status); 
             })                            
+        },
+        codigosErro(status){
+            if(status == 400)
+                this.showModalErro("Erro de requisição código 400");
+            else if(status == 404)
+                this.showModalErro("Serviço não encontrado código 404");
+            else if(status == 500)
+                this.showModalErro("Erro no servidor código 500"); 
+            else    
+                this.showModalErro("Erro desconhecido código" + status);
         },
     },
     created() {

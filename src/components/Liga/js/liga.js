@@ -49,7 +49,8 @@ export default {
             pros: [],
             prosFim: [],
             productRecipeName:'',
-            recipeProduct: {}
+            recipeProduct: {},
+            erro:''
         }
     },
     filters: {
@@ -73,7 +74,7 @@ export default {
         'b-modal': bModalDirective
     },     
     methods: {          
-
+        
         /************************/
         /*                      */
         /*                      */
@@ -81,7 +82,10 @@ export default {
         /*                      */
         /*                      */
         /************************/
-
+        showModalErro(erro){
+            this.erro = erro;
+            this.$refs.modalErro.show();            
+        },
         showModalCadFase() {
         this.$refs.myModalRefCF.show()
         },
@@ -177,15 +181,21 @@ export default {
                 this.carregando = true;                
                 setTimeout(() => {
                     axios.get(this.urlRecipes + id).then(response => {
-                        this.recipe = response.data;                        
-                        this.produtos = this.recipe.phases[0].phaseProducts;
-                        console.log(response.data);                                                                          
-                        this.recipeCadastrada = true;
+                        this.recipe = response.data;                  
+                        if(this.recipe.recipeTypeId == 2){      
+                            this.produtos = this.recipe.phases[0].phaseProducts;
+                            console.log(response.data);                                                                          
+                            this.recipeCadastrada = true;
+                        }else{                            
+                            this.carregando = false;                        
+                            this.codigosErro(error.response.status,"código "+this.recipe.recipeId +" não corresponde a uma receita de liga");
+                            this.recipe = {};
+                        }    
                         this.carregando = false;
                         this.editarActivate = true;
                     }).catch(error => {
-                        console.log(error);
-                        this.carregando = false;
+                        this.carregando = false;                        
+                        this.codigosErro(error.response.status);
                     })
                 }, 300);
             }
@@ -201,8 +211,8 @@ export default {
                 this.recipe = response.data;
                 this.createPhase(this.phase);                                                                                                 
             }, (error) => {                
-                console.log(error);
-                this.carregando = false;
+                this.carregando = false;                        
+                this.codigosErro(error.response.status);
             });                        
         },
 
@@ -218,8 +228,8 @@ export default {
                 this.carregando = false;
                 this.hideModalConfirmEditLiga();
             }, (error) => {
-                console.log(error);
-                this.carregando = false;
+                this.carregando = false;                        
+                this.codigosErro(error.response.status);
             });
         },
 
@@ -232,7 +242,8 @@ export default {
                 this.carregando = false;
                 this.recipeCadastrada = false;
             }, (error) => {                
-                this.carregando = false;
+                this.carregando = false;                        
+                this.codigosErro(error.response.status);
             });
             
         },
@@ -254,7 +265,8 @@ export default {
             }, (error) => {
                 console.log(error);
                 this.deleteRecipe(this.recipe);
-                this.carregando = false;                
+                this.carregando = false;                        
+                this.codigosErro(error.response.status);                            
             });
         },        
         deletePhase(phase, recipe) {
@@ -282,7 +294,8 @@ export default {
             }, (error) => {
                 this.deleteRecipe(this.recipe);
                 this.deletePhase(this.phase);
-                console.log(error);
+                this.carregando = false;                        
+                this.codigosErro(error.response.status);            
                 this.carregando = false;
             });            
         },
@@ -346,6 +359,16 @@ export default {
             });                
         },
 
+        codigosErro(status, text=''){
+            if(status == 400)
+                this.showModalErro("Erro de requisição "+text+" código 400");
+            else if(status == 404)
+                this.showModalErro("Serviço não encontrado "+text+" código 404");
+            else if(status == 500)
+                this.showModalErro("Erro no servidor código "+text+" 500"); 
+            else    
+                this.showModalErro("Erro desconhecido "+text+" código" + status);
+        },
         /*****************/
         /*               */
         /*               */

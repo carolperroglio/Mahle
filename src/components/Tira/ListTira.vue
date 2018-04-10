@@ -11,17 +11,17 @@
                     <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>
                 <li class="nav-item nav-item-tira">
-                    <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                    <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="recipeName">Nome</option>                        
                         <option value="recipeCode">Código</option>                        
                     </select>
                 </li>
                 <li class="nav-item nav-item-tira">
-                    <input class="form-control btn-lg" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" aria-label="Busca">
+                    <input class="form-control btn-md" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" aria-label="Busca">
                 </li> 
                 <li class="nav-item nav-item-tira">
-                    <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                    <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>                                
             </ul>                
         </div>  
@@ -67,7 +67,7 @@
                     <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
                 </label>  
                 <label class="ls2 col-md-2">                                   
-                    <router-link :to="{ name: 'Tira',params: { id: recipe.recipeId }}">
+                    <router-link class="link-decoration" :to="{ name: 'Tira',params: { id: recipe.recipeId }}">
                         <i class="fa fa-eye" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">                        
                         </i>
                     </router-link>
@@ -90,7 +90,18 @@
                     </li>
                 </ul>
             </nav>
-        </div>        
+        </div>  
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--         Erro          -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+            <p class="alert alert-danger">Ocorreu um erro: {{erro}}</p>
+        </b-modal>      
     </div>
 </template>
 

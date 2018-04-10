@@ -27,6 +27,8 @@
                 </li>
             </ul>                 
         </div>     
+        
+
         <!--                       -->
         <!--                       -->
         <!--                       -->
@@ -37,7 +39,7 @@
         <div id="load-tira" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>
         </div>   
-        <div class="header-table-tira"  v-show="!carregando">
+        <div class="header-table-tira"  v-show="!carregando" v-if="recipeCadastrada">
             <label class="ls5">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro
                 </font></b>
@@ -112,7 +114,18 @@
                     {{pro.lse}}
                 </label>                                                                                        
             </div>                                                                                                       
-        </div>                                                                
+        </div>
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--         Erro          -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+            <p class="alert alert-danger">Ocorreu um erro: {{erro}}</p>
+        </b-modal>                                                                
     </div>
 </template>
 <script src="./js/tira.js">

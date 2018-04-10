@@ -48,6 +48,7 @@ export default {
             expand: [],
             errors: [],
             cabecalhoSetas: [false, false, false, false, false, false, false],
+            erro: '',
         }
     },
     filters: {
@@ -78,7 +79,10 @@ export default {
         /*                      */
         /*                      */
         /************************/
-
+        showModalErro(erro){
+            this.erro = erro;
+            this.$refs.modalErro.show();            
+        },
         showModalCadFase() {
             this.$refs.myModalRefCF.show()
         },
@@ -149,17 +153,20 @@ export default {
                     console.log(this.urlRecipes + id);
                     axios.get(this.urlRecipes + id, config).then(response => {
                         console.log(response.data);                    
-                        this.recipe = response.data;                        
-                        for (var i = 0; i < this.recipe.phases.length; i++)
-                            if (this.recipe.phases[i].phaseId != 46)
-                                this.phase = JSON.parse(JSON.stringify(this.recipe.phases[i]));                                                                    
-                        this.getParametros(this.phase);
-                        this.recipeCadastrada = true;
+                        this.recipe = response.data;
+                        if(this.recipe.recipeTypeId == 1){                            
+                            for (var i = 0; i < this.recipe.phases.length; i++)
+                                if (this.recipe.phases[i].phaseId != 46)
+                                    this.phase = JSON.parse(JSON.stringify(this.recipe.phases[i]));                                                                    
+                            this.getParametros(this.phase);
+                            this.recipeCadastrada = true;
+                        }else
+                            this.recipe = {};                            
                         this.carregando = false;
                         this.editarActivate = true;
                     }).catch(error => {
-                        console.log(error);
-                        this.carregando = false;
+                        this.carregando = false;                        
+                        this.codigosErro(error.response.status); 
                     })
                 //
             }
@@ -234,11 +241,25 @@ export default {
                     array.push(pro);
                 });
             }, (error) => {
-                console.log(error);
+                this.carregando = false;
+                this.codigosErro(error.response.status); 
             })
             return array;
-        }
+        },
+
+        codigosErro(status){
+            if(status == 400)
+                this.showModalErro("Erro de requisição código 400");
+            else if(status == 404)
+                this.showModalErro("Serviço não encontrado código 404");
+            else if(status == 500)
+                this.showModalErro("Erro no servidor código 500"); 
+            else    
+                this.showModalErro("Erro desconhecido código" + status);
+        },
     },
+    
+
     created() {        
         this.recipe = {};
         this.phase = {};

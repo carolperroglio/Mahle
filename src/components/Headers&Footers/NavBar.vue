@@ -73,7 +73,7 @@
                             </span>
                         </router-link> -->
 
-                        <router-link to="/generateProducts" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
+                        <router-link to="/generateproducts" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
                             <i class="fa fa-barcode"></i> 
                             <span class="hidden-sm-down">  
                                 MATÉRIAS-PRIMAS

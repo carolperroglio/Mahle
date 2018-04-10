@@ -68,10 +68,7 @@ export default {
             this.produto = JSON.parse(JSON.stringify(produto));
             this.produto.index = index;
             this.$refs.myModalRef.show();
-        },
-        showModalErro(erro){
-
-        },
+        },        
         showModalConfirmCreate() {
             this.$refs.modalCadastrarProduto.show();
         },
@@ -144,9 +141,8 @@ export default {
                 this.carregando = false;
                 this.$refs.modalCadastrarProduto.hide();
             }, (error) => {
-                this.teste(error.response.status);
-                this.erro = 'Erro no server ' + r;
                 this.carregando = false;
+                this.codigosErro(error.response.status); 
             })
 
         },
@@ -161,10 +157,9 @@ export default {
                 this.produtos[produto.index] = produto;
                 this.carregando = false;
                 this.$refs.modalEditarProduto.hide();
-            }, (r) => {
-                
+            }, (error) => {
                 this.carregando = false;
-                this.mensagem = 'Erro no server ' + r;
+                this.codigosErro(error.response.status); 
             })
         },
 
@@ -179,9 +174,9 @@ export default {
                 this.produto = {};
                 this.carregando = false;
                 this.hideModalRemoveProduct();
-            }, (r) => {
-                this.mensagem = 'Erro no server ' + r;
+            }, (error) => {
                 this.carregando = false;
+                this.codigosErro(error.response.status);                                
             });
             this.carregando = false;
         },        
@@ -207,8 +202,8 @@ export default {
                     }
                     this.carregando = false;
                 }, (error) => {
-                    this.codigosErro(error.response.status);                                    
                     this.carregando = false;
+                    this.codigosErro(error.response.status);                                                        
                 })
             }, 500)
         },
