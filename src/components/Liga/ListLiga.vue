@@ -73,7 +73,7 @@
                     <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
                 </label>  
                 <label class="ls2 col-md-2">                  
-                    <router-link :to="{ name: 'Liga',params: { id: recipe.recipeId }}">
+                    <router-link class="link-decoration" :to="{ name: 'Liga',params: { id: recipe.recipeId }}">
                         <i class="fa fa-eye" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">                        
                         </i>
                     </router-link> 
@@ -95,6 +95,17 @@
                 </ul>
             </nav>
         </div>
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--         Erro          -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+            <p class="alert alert-danger">Ocorreu um erro: {{erro}}</p>
+        </b-modal> 
     </div>
 </template>
 

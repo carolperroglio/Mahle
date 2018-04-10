@@ -102,7 +102,7 @@
                 <label class="ls ls2 col-md-2">
                     {{pro.maxValue}}</label>                                        
                 <label class="ls ls2 col-md-5">                        
-                    <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto(pro, index)"></i>&nbsp;&nbsp;&nbsp;                     
+                    <i class = "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto(pro, index)"></i>&nbsp;&nbsp;&nbsp;                     
                     <!--<i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="phaseProduct = {};showModalEditProPhase(pro, index)"></i>-->
                 </label>
             </div>                       
@@ -347,6 +347,18 @@
                 </div>
             </div>
          </b-modal>
+
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--         Erro          -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+            <p class="alert alert-danger">Ocorreu um erro: {{erro}}</p>
+        </b-modal> 
     </div>
 </template>
 <script src="./js/liga.js">

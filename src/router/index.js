@@ -43,7 +43,7 @@ export default new Router({
             component: ThingCreate
         },
         {
-            path: '/generateProducts',
+            path: '/generateproducts',
             name: 'GenerateProducts',
             component: GenerateProducts
         },
