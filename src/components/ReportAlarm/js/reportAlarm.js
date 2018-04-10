@@ -377,14 +377,12 @@ export default {
                      */
                     obj2["balloonColor"] = "#808080";
                     obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
-                    obj2["bullet"] = "round";
-                    obj2["bulletSize"] = 10;
                     obj2["color"] = "#000000";
                     obj2["lineThickness"] = 3;
-                    obj2["type"] = "smoothedLine";
-                    obj2["title"] = R.name;
+                    obj2["type"] = "column";
+                    obj2["fillAlphas"] = 1,
+                        obj2["title"] = R.name;
                     obj2["valueField"] = R.name;
-                    obj2["bulletColor"] = R.color;
                     obj2["fillColors"] = R.color;
                     obj2["legendColor"] = R.color;
                     obj2["lineColor"] = R.color;
