@@ -7,23 +7,23 @@
         <!--                                 -->
         <div class="fixed-top nav-cinza">            
             <ul class="nav d-flex">
-                <li class="nav-item nav-items-listliga col-md-12">
+                <li class="nav-items-listliga col-md-12">
                     <h1 class="title-page-gp"><b>Gerenciamento de Liga</b></h1>
                 </li>
-                <li class="nav-item nav-items-listliga">
+                <li class="nav-items-listliga">
                     <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="recipeName">Nome</option>
                         <option value="recipeCode">Código</option>
                     </select>
                 </li>
-                <li class="nav-item nav-items-listliga">
+                <li class="nav-items-listliga">
                     <input class="form-control btn-md" type="search" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" v-model="fieldValue" aria-label="Busca">
                 </li>
-                <li class="nav-item nav-items-listliga">
+                <li class="nav-items-listliga">
                     <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
-                <li class="nav-item nav-items-listliga">                     
+                <li class="nav-items-listliga">                     
                     <router-link :to="{ name: 'Liga',params: { id: 0 }}" class="btn btn-success btn-md">
                         <i class="fa fa-plus" aria-hidden="true" ></i>
                         Cadastrar Liga

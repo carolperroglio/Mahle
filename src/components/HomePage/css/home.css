@@ -1,14 +1,8 @@
 
-body, html {
-    height: 100%;
-}
-
 
 .fundo-home{
     background: linear-gradient(rgba(244, 244, 245, 0.384), rgba(98, 163, 201, 0.438)); 
-
     height: 100%; 
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -18,11 +12,10 @@ body, html {
     position: absolute;
     left: 20%;
     top: 30%;
-  }
+}
 
-.circle:hover
-{
-        border-radius: 50%;
+.circle:hover{
+    border-radius: 50%;
 }
 
 .circle{
@@ -38,6 +31,6 @@ body, html {
       }
       .circle:hover
       {
-              border-radius: 50%;
+        border-radius: 50%;
       }
 }
