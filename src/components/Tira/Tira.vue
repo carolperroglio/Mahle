@@ -40,7 +40,7 @@
             <stretch background="#4d4d4d"></stretch>
         </div>   
         <div class="header-table-tira"  v-show="!carregando" v-if="recipeCadastrada">
-            <label class="ls5">
+            <label class="ls3">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro
                 </font></b>
             </label>                    
@@ -85,7 +85,7 @@
         <!--                       -->
         <div class="margin-table-tira" v-show="!carregando">            
             <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
-                <label class="ls2 col-md-2">
+                <label class="ls3">
                 <b><font color="#9BA6A5"> </font></b>
                     {{pro.parametro}}
                 </label>                    

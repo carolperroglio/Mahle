@@ -28,8 +28,19 @@
                     <b>Produto <br>Final</b>
                 </li>                 
                 <li class="nav-items-liga form-group col-sm-2"><!--recipe.recipeProduct.product.productName-->
-                    <input @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim);delete recipeProduct.productId;" v-model="productRecipeName" placeholder="Nome do produto" :disabled="recipeCadastrada" class="form-control form-control-sm" id="dropdownMenuButton"/>
-                    <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.product=p; productRecipeName=p.productName; prosFim=[];" v-for="(p,index) in prosFim" v-bind:key="index">{{p.productName}}</b-dropdown-item>
+                    
+                    <input placeholder="Nome do produto" class="form-control form-control-sm" list="dropdownMenuButton" v-model="productRecipeName"
+                        @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim);delete recipeProduct.productId;">                                                           
+                    <datalist id="dropdownMenuButton" v-show="prosFim.length>0">    
+                        <option v-for="(p,i) in prosFim" :key="i"                        
+                        :value="p.productName" :label="p.productName">{{p.productName}}</option>
+                    </datalist>                        
+
+                    <!--<b-dropdown-item id="dropdownMenuButton" 
+                        @click.stop.prevent="recipeProduct.productId=p.productId; recipeProduct.product=p; productRecipeName=p.productName; prosFim=[];" 
+                        v-for="(p,index) in prosFim" v-bind:key="index">
+                        {{p.productName}}                    
+                    </b-dropdown-item>-->
                 </li>
                 <li class="nav-items-liga col-sm-2" v-if="!recipeCadastrada" >                    
                     <button type="button" class="btn btn-success btn-sm" :disabled="!recipe.recipeName || !recipe.recipeCode || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''"  @click.stop.prevent="createRecipe(recipe)">
@@ -204,20 +215,11 @@
                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                 <div class="form-row"> 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label>Nome do produto </label>
                         <input @keyup="pros=getResults(urlProducts, productPhaseName, pros);delete phaseProduct.productId;" v-model="productPhaseName" placeholder="Nome do produto"  class="fm form-control mr-sm-0" id="dropdownMenuButton"/>
                         <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; pros=[];" v-for="(p,index) in pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>
-                    </div>                                                   
-                    <div class="form-group col-md-6">
-                        <label>Tipo de Produto</label>
-                        <select class="fm form-control mr-sm-2" v-model="phaseProduct.phaseProductType">
-                            <option value="" selected disabled>Campo para busca</option>
-                            <option value="scrap">Rejeitado</option>
-                            <option value="finished">Acabado</option>
-                            <option value="semi_finished">Semi-Acabado</option>
-                        </select>
-                    </div>                    
+                    </div>                                                                                          
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">

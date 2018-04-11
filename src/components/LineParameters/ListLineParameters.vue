@@ -26,6 +26,7 @@
                     <input class="form-control btn-lg" type="search" placeholder="Parâmetros" aria-label="Busca">
                 </li>
                 <li class="nav-item-prameters">
+
                     <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
                 <li class="nav-item-prameters">

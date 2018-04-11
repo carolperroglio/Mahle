@@ -74,7 +74,7 @@
         <!--                       -->
         <!--                       -->            
             
-        <div class="margin-table" v-show="!carregando">
+        <div class="margin-table-products" v-show="!carregando">
             <div v-for="(p, index) in produtos" v-bind:class="{cinza: index%2==0}" v-bind:key="index">                                    
                 <label class="ls2 col-md-2">
                     {{p.productName}}</label>

@@ -197,17 +197,17 @@ export default {
                     if (!response.data.values && response.data.productId)
                         this.produtos[0] = response.data;
                     else {
-                        paginacao(response, this);
-                        this.produtos = response.data.values;
+                        paginacao(response, this);                        
+                        this.produtos = response.data.values;                        
                     }
                     this.carregando = false;
                 }, (error) => {
-                    this.carregando = false;
+                    this.carregando = false;                    
                     this.codigosErro(error.response.status);                                                        
                 })
             }, 500)
         },
-        codigosErro(status){
+        codigosErro(status=0){
             if(status == 400)
                 this.showModalErro("Erro de requisição código 400");
             else if(status == 404)
