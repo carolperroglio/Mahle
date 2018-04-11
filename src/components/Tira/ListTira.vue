@@ -7,20 +7,20 @@
         <!--                                 -->
         <div class="fixed-top nav-cinza">            
             <ul class="nav d-flex">
-                <li class="nav-item nav-item-tira col-sm-12">
+                <li class="nav-item-tira col-sm-12">
                     <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>
-                <li class="nav-item nav-item-tira">
+                <li class="nav-item-tira">
                     <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="recipeName">Nome</option>                        
                         <option value="recipeCode">Código</option>                        
                     </select>
                 </li>
-                <li class="nav-item nav-item-tira">
+                <li class="nav-item-tira">
                     <input class="form-control btn-md" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" aria-label="Busca">
                 </li> 
-                <li class="nav-item nav-item-tira">
+                <li class="nav-item-tira">
                     <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>                                
             </ul>                

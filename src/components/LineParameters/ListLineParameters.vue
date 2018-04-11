@@ -10,7 +10,7 @@
         <!--                       -->        
         <div class="fixed-top nav-cinza"> 
             <ul class="nav d-flex">
-                <li class="nav-item nav-item-prameters col-md-12">
+                <li class="nav-item-prameters col-md-12">
                     <h1 class="title-page-gp"><b>Parâmetros de Linha</b></h1>
                 </li>                   
                 <li class="nav-item-prameters">
@@ -25,7 +25,8 @@
                 <li class="nav-item-prameters">
                     <input class="form-control btn-lg" type="search" placeholder="Parâmetros" aria-label="Busca">
                 </li>
-                <li class=" nav-item-prameters">
+                <li class="nav-item-prameters">
+
                     <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
                 <li class="nav-item-prameters">

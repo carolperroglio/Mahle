@@ -7,8 +7,9 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-// const api='http://54.242.82.119'
-const api = 'http://spi067'
+// const api = 'http://35.170.191.75'
+//const api = 'http://spi067'
+const apimahle = 'http://10.35.255.22'
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -59,24 +60,28 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                /**
-                TOOLS_API: JSON.stringify("http://10.35.255.22:8004"),
-                OP_API: JSON.stringify("http://10.35.255.22:8005"),
-                THINGS_API: JSON.stringify("http://10.35.255.22:8001"),
-                PROD_HIST_API: JSON.stringify("http://10.35.255.22:8007"),
-                RECIPE_API: JSON.stringify("http://10.35.255.22:8003"),
-                STATUS_API: JSON.stringify("http://10.35.255.22:8006"),
-                HIST_BIGTABLE_API: JSON.stringify("http://10.35.255.22:8011")
-                */
-                TOOLS_API: JSON.stringify(api + ":8005"),
-                OP_API: JSON.stringify(api + ":8003"),
-                THINGS_API: JSON.stringify(api + ":8001"),
-                PROD_HIST_API: JSON.stringify(api + ":8006"),
-                RECIPE_API: JSON.stringify(api + ":8002"),
-                STATUS_API: JSON.stringify(api + ":8004"),
-                HIST_BIGTABLE_API: JSON.stringify(api + ":8011"),
-                HIST_ALARM_API: JSON.stringify(api + ":8012"),
-                REPORT_API: JSON.stringify(api + ":8007"),
+
+                // IP MAHLE
+                TOOLS_API: JSON.stringify(apimahle + ":8005"),
+                OP_API: JSON.stringify(apimahle + ":8003"),
+                THINGS_API: JSON.stringify(apimahle + ":8001"),
+                PROD_HIST_API: JSON.stringify(apimahle + ":8006"),
+                RECIPE_API: JSON.stringify(apimahle + ":8002"),
+                STATUS_API: JSON.stringify(apimahle + ":8004"),
+                HIST_BIGTABLE_API: JSON.stringify(apimahle + ":8011"),
+                HIST_ALARM_API: JSON.stringify(apimahle + ":8012"),
+                REPORT_API: JSON.stringify(apimahle + ":8007"),
+
+                // IP SPI
+                // TOOLS_API: JSON.stringify(api + ":8005"),
+                // OP_API: JSON.stringify(api + ":8003"),
+                // THINGS_API: JSON.stringify(api + ":8001"),
+                // PROD_HIST_API: JSON.stringify(api + ":8006"),
+                // RECIPE_API: JSON.stringify(api + ":8002"),
+                // STATUS_API: JSON.stringify(api + ":8004"),
+                // HIST_BIGTABLE_API: JSON.stringify(api + ":8011"),
+                // HIST_ALARM_API: JSON.stringify(api + ":8012"),
+                // REPORT_API: JSON.stringify(api + ":8007"),
             }
         }),
         new HtmlWebpackPlugin({

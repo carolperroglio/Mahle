@@ -185,7 +185,7 @@ export default {
             } else if (this.loteAco != undefined) {
                 ordem.batch = this.loteAco;
             }
-
+            var teste = ordem;
             console.log(ordem);
             setTimeout(() => {
                 axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
@@ -196,6 +196,7 @@ export default {
                     this.pFase = false;
                     this.rolo++;
                     this.ordem = {};
+                    console.log(ordem);
                     this.hideModal('cadAco');
                     this.hideModal('cadLiga');
                     this.hideModal('cadRoloSaida');
@@ -204,6 +205,8 @@ export default {
                     this.msgErro = error.message;
                     this.showModal("modalErro");
                     this.carregando = false;
+                    console.log(teste);
+
                 })
                 this.pReceita = false;
                 this.consumo = false;
@@ -372,12 +375,18 @@ export default {
             jsTicks = (dataTicks - epochTicks) / ticksPerMillisecond;
             jsDate = new Date(jsTicks);
             var min = "";
+            // Tira a diferença de timezone que é de 3 horas
+            var timezone = jsDate.getTimezoneOffset() / 60;
+            var hour = jsDate.setHours(jsDate.getHours() + timezone);
+            hour = jsDate.getHours();
+
             if (jsDate.getUTCMinutes() <= 9) {
                 min = "0" + jsDate.getUTCMinutes();
             } else {
                 min = jsDate.getUTCMinutes();
             }
-            var dateFormatted = jsDate.getHours() + ":" +
+
+            var dateFormatted = hour + ":" +
                 min + ":" + jsDate.getSeconds();
             var teste = jsDate.getUTCMinutes();
 

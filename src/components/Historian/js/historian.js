@@ -346,10 +346,12 @@ export default {
             jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
 
             jsDate = new Date(jsTicks);
+            var timezone = jsDate.getTimezoneOffset() / 60;
+            var hour = jsDate.setHours(jsDate.getHours() + timezone);
 
             var dateFormatted = jsDate.getDate() + "/" +
                 (jsDate.getMonth() + 1) + "/" +
-                jsDate.getFullYear() + " " + jsDate.getHours() + ":" + jsDate.getMinutes();
+                jsDate.getFullYear() + " " + hour + ":" + jsDate.getMinutes();
             // var hours = jsDate.toString().slice(4, 21);
             return dateFormatted;
         },

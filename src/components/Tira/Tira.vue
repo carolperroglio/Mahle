@@ -19,7 +19,7 @@
                 <li class="nav-items-tira form-group col-md-2">
                     <input type="text" class="form-control form-control-md" v-model="recipe.recipeName" size='9' :disabled="true" required placeholder="Nome da Tira">                        
                 </li>                  
-                <li class="nav-item nav-items-tira form-group col-md-0  margin-nav">                 
+                <li class="nav-items-tira form-group col-md-0  margin-nav">                 
                     <b>Código</b>                                                           
                 </li>                                     
                 <li class="nav-items-tira form-group col-md-2">

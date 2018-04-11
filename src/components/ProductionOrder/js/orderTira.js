@@ -43,7 +43,7 @@ export default {
             urlGatewayRecipe: ipServer + '/gateway/recipes/',
             url: process.env.OP_API,
             urlThingGroup: ipthing + '/api/thinggroups/',
-            urlGateway: process.env.TOOLS_API + '/gateway/thinggroups/',
+            urlGateway: process.env.ipServer + '/gateway/thinggroups/',
             recipeArray: [],
             opArray: [],
             opArrarKeep: [],
@@ -212,6 +212,8 @@ export default {
                         for (var i = 0; i < this.recipe.phases.length; i++)
                             if (this.recipe.phases[i].phaseId != 46)
                                 this.phase = this.recipe.phases[i];
+                        console.log("phase");
+                        console.log(this.phase);
                         this.getParametros();
                         this.recipeCadastrada = true;
                         this.carregando = false;
@@ -276,6 +278,8 @@ export default {
             }
             for (i = 0; i < this.vetNomes.length; i++)
                 this.parametros[i].parametro = this.parameters[this.vetNomes[i]][0].tag.tagGroup;
+            console.log("parametros");
+            console.log(this.parametros);
         },
 
         getRecipes: function() {

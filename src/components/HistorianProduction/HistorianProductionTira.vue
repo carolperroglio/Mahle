@@ -128,7 +128,7 @@
                                         {{o.quantity}}</label>&nbsp;
                                     <label class="ls ls10  col-md-2">
                                         {{o.date}}</label>&nbsp;
-                                    <label class="ls ls10  col-md-1" style="margin-left:4%">
+                                    <label class="ls ls10  col-md-2">
                                         {{o.hour}}</label>&nbsp;    
                                 </div>
                                 </div>

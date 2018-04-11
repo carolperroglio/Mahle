@@ -292,12 +292,17 @@ export default {
             jsTicks = (dataTicks - epochTicks) / ticksPerMillisecond;
             jsDate = new Date(jsTicks);
             var min = "";
+            // Tira a diferença de timezone que é de 3 horas
+            var timezone = jsDate.getTimezoneOffset() / 60;
+            var hour = jsDate.setHours(jsDate.getHours() + timezone);
+            hour = jsDate.getHours();
+
             if (jsDate.getUTCMinutes() <= 9) {
                 min = "0" + jsDate.getUTCMinutes();
             } else {
                 min = jsDate.getUTCMinutes();
             }
-            var dateFormatted = jsDate.getHours() + ":" +
+            var dateFormatted = hour + ":" +
                 min + ":" + jsDate.getSeconds();
             var teste = jsDate.getUTCMinutes();
 
