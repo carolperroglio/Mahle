@@ -11,7 +11,7 @@
         <!--                       -->        
         <div class="fixed-top nav-cinza"> 
             <ul class="nav d-flex">
-                <li class="nav-item nav-item-products col-md-12">
+                <li class="nav-item-products col-md-12">
                     <h1 class="title-page-gp"><b>Cadastro de Matéria-Prima</b></h1>
                 </li>                   
                 <li class="nav-item nav-item-products">
@@ -23,13 +23,13 @@
                         <option value="productGTIN">Código de Barras</option>
                     </select>
                 </li>
-                <li class="nav-item nav-item-products">
+                <li class="nav-item-products">
                     <input class="form-control btn-md" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" aria-label="Busca">
                 </li>
-                <li class="nav-item  nav-item-products">
+                <li class=" nav-item-products">
                     <button type="button" class="btn btn-primary btn-md"  @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
-                <li class="nav-item nav-item-products">
+                <li class="nav-item-products">
                     <button type="button" class="btn btn-success btn-md" @click.stop.prevent="cadEdit='Cadastrar Matéria-Prima';showModal(produto,-1)"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Matéria-Prima</button>
                 </li>
             </ul>
@@ -74,7 +74,7 @@
         <!--                       -->
         <!--                       -->            
             
-        <div class="margin-table" v-show="!carregando">
+        <div class="margin-table-products" v-show="!carregando">
             <div v-for="(p, index) in produtos" v-bind:class="{cinza: index%2==0}" v-bind:key="index">                                    
                 <label class="ls2 col-md-2">
                     {{p.productName}}</label>

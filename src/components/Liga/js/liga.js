@@ -50,7 +50,8 @@ export default {
             prosFim: [],
             productRecipeName:'',
             recipeProduct: {},
-            erro:''
+            erro:'',
+            input:'',
         }
     },
     filters: {
@@ -369,6 +370,9 @@ export default {
             else    
                 this.showModalErro("Erro desconhecido "+text+" código" + status);
         },
+
+
+        
         /*****************/
         /*               */
         /*               */
@@ -382,6 +386,7 @@ export default {
                 axios.get(url + name, this.config).then((response) => {                                        
                     response.data.values.forEach((pro) => {                        
                         pros.push(pro);
+                        console.log("oi")
                     });
                 }, (error) => {
                     console.log(error);

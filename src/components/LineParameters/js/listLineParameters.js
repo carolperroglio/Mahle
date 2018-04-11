@@ -115,6 +115,8 @@ export default {
                 axios.post(this.urlPhases + '/parameters/46',JSON.parse(JSON.stringify(item[i])),config);
             this.$router.go();    
         },
+
+      
         deleteParameter(parametro){
             this.carregando = true;
             this.hideModal('modalRemoveParameter');     

@@ -145,7 +145,7 @@ export default {
             };
             this.recipes = [];
             setTimeout(() => {
-                axios.get(this.urlRecipes + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                axios.get(this.urlRecipes + "/v2?filters=recipeTypeId,2&orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                     for(var i=0; i<response.data.values.length; i++)
                         if(response.data.values[i].recipeTypeId == 2)
                             this.recipes.push(response.data.values[i]);
