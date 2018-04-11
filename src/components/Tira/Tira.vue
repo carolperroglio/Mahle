@@ -10,19 +10,19 @@
         <!--               -->
         <div class="fixed-top nav-cinza">            
             <ul class="nav d-flex">
-                <li class="nav-item nav-item-tira col-md-12">
+                <li class="nav-item-tira col-md-12">
                     <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>               
-                <li class="nav-item nav-items-tira form-group col-md-0 margin-nav">                    
+                <li class="nav-items-tira form-group col-md-0 margin-nav">                    
                     <b>Nome da Tira</b>                    
                 </li>
-                <li class="nav-item nav-items-tira form-group col-md-2">
+                <li class="nav-items-tira form-group col-md-2">
                     <input type="text" class="form-control form-control-md" v-model="recipe.recipeName" size='9' :disabled="true" required placeholder="Nome da Tira">                        
                 </li>                  
-                <li class="nav-item nav-items-tira form-group col-md-0  margin-nav">                 
+                <li class="nav-items-tira form-group col-md-0  margin-nav">                 
                     <b>Código</b>                                                           
                 </li>                                     
-                <li class="nav-item nav-items-tira form-group col-md-2">
+                <li class="nav-items-tira form-group col-md-2">
                     <input type="text" class="form-control form-control-md" required v-model="recipe.recipeCode" :disabled="true" size='12' placeholder="Código da receita">    
                 </li>
             </ul>                 
