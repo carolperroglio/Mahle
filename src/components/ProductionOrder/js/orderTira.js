@@ -43,7 +43,7 @@ export default {
             urlGatewayRecipe: ipServer + '/gateway/recipes/',
             url: process.env.OP_API,
             urlThingGroup: ipthing + '/api/thinggroups/',
-            urlGateway: process.env.ipServer + '/gateway/thinggroups/',
+            urlGateway: ipServer + '/gateway/thinggroups/',
             recipeArray: [],
             opArray: [],
             opArrarKeep: [],
@@ -78,9 +78,9 @@ export default {
             cabecalhoSetas: [false, false, false, false, false],
             objetooo: "",
             phase: {},
-            parameters: {},
-            parametros: [],
-            vetNomes: [],
+            parametersteste: {},
+            parametrosteste: [],
+            vetNomesteste: [],
             idLinha: "1",
             opSelectedParams: "",
             descriptionTira: "Tira",
@@ -198,20 +198,14 @@ export default {
             console.log(this.opArray);
         },
         getGatewayRecipe: function(obj) {
-            this.parametros = [];
-            this.recipe = {};
+
             var id = obj.recipe.recipeId;
             this.opSelectedParams = obj;
 
-            if (id != 0) {
-                this.carregando = true;
-                console.log(this.urlGatewayRecipe + id);
-                setTimeout(() => {
-                    axios.get(this.urlGatewayRecipe + id).then(response => {
-                        this.recipe = response.data;
-                        for (var i = 0; i < this.recipe.phases.length; i++)
-                            if (this.recipe.phases[i].phaseId != 46)
-                                this.phase = this.recipe.phases[i];
+            for (var count = 0; count < this.opSelectedParams.recipe.phases.length; count++)
+                if (this.opSelectedParams.recipe.phases[count].phaseId != 46)
+                    if (this.opSelectedParams.recipe.phases[count].phaseParameters.length > 0) {
+                        this.phase = this.opSelectedParams.recipe.phases[count];
                         console.log("phase");
                         console.log(this.phase);
                         this.getParametros();
@@ -235,51 +229,68 @@ export default {
                                 break;
 
                         }
-                    }).catch((error) => {
-                        this.carregando = false;
-                        this.msgErro = error.message;
-                        this.showModal("modalErro");
-                    })
-                }, 300);
-            }
+                    } else {
+                        console.log("Receita sem Parameters");
+                    }
         },
         getParametros: function() {
-            this.parametros = [];
-            this.parameters = [];
+            console.log("GETPARAMETROS() - BEEN CALLEEEEEEED !!! -------------------------")
+            this.parametrosteste = [];
+            this.parametersteste = [];
+
             var j = 0;
+            console.log("this.phase.phaseParameters.length");
+            console.log(this.phase.phaseParameters.length);
             for (var i = 0; i < this.phase.phaseParameters.length; i++) {
                 if (this.phase.phaseParameters[i].tag.tagGroup != undefined) {
-                    if (this.parameters[this.phase.phaseParameters[i].tag.tagGroup] != undefined)
-                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
-                    else {
-                        this.vetNomes[j++] = this.phase.phaseParameters[i].tag.tagGroup;
-                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup] = [];
-                        this.parameters[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
+                    if (this.parametersteste[this.phase.phaseParameters[i].tag.tagGroup] != undefined) {
+                        this.parametersteste[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
+                    } else {
+                        this.vetNomesteste[j++] = this.phase.phaseParameters[i].tag.tagGroup;
+                        this.parametersteste[this.phase.phaseParameters[i].tag.tagGroup] = [];
+                        this.parametersteste[this.phase.phaseParameters[i].tag.tagGroup].push(this.phase.phaseParameters[i]);
                     }
                 }
             }
             j = 0;
-            for (i = 0; i < this.vetNomes.length; i++) {
-                this.parametros[i] = {};
-                for (j = 0; j < this.parameters[this.vetNomes[i]].length; j++) {
-                    if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'vn')
-                        this.parametros[i].vn = this.parameters[this.vetNomes[i]][j].setupValue;
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lie')
-                        this.parametros[i].lie = this.parameters[this.vetNomes[i]][j].setupValue;
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lic')
-                        this.parametros[i].lic = this.parameters[this.vetNomes[i]][j].setupValue;
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lsc')
-                        this.parametros[i].lsc = this.parameters[this.vetNomes[i]][j].setupValue;
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lse')
-                        this.parametros[i].lse = this.parameters[this.vetNomes[i]][j].setupValue;
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'unidade')
-                        this.parametros[i].unidade = this.parameters[this.vetNomes[i]][j].setupValue;
+            console.log("this.vetNomesteste.length");
+            console.log(this.vetNomesteste.length);
+            for (var xi = 0; xi < this.vetNomesteste.length; xi++) {
+                this.parametrosteste[xi] = {};
+                console.log("this.parametersteste[this.vetNomesteste[xi]].length");
+                console.log(this.parametersteste[this.vetNomesteste[xi]].length);
+                for (var j2 = 0; j2 < this.parametersteste[this.vetNomesteste[xi]].length; j2++) {
+                    if (this.parametersteste[this.vetNomesteste[xi]][j2].tag.tagDescription == 'vn') {
+                        this.parametrosteste[xi].vn = this.parametersteste[this.vetNomesteste[xi]][j2].setupValue;
+                    } else if (this.parametersteste[this.vetNomesteste[xi]][j2].tag.tagDescription == 'lie') {
+                        this.parametrosteste[xi].lie = this.parametersteste[this.vetNomesteste[xi]][j2].setupValue;
+                    } else if (this.parametersteste[this.vetNomesteste[xi]][j2].tag.tagDescription == 'lic') {
+                        this.parametrosteste[xi].lic = this.parametersteste[this.vetNomesteste[xi]][j2].setupValue;
+                    } else if (this.parametersteste[this.vetNomesteste[xi]][j2].tag.tagDescription == 'lsc') {
+                        this.parametrosteste[xi].lsc = this.parametersteste[this.vetNomesteste[xi]][j2].setupValue;
+                    } else if (this.parametersteste[this.vetNomesteste[xi]][j2].tag.tagDescription == 'lse') {
+                        this.parametrosteste[xi].lse = this.parametersteste[this.vetNomesteste[xi]][j2].setupValue;
+                    } else if (this.parametersteste[this.vetNomesteste[xi]][j2].tag.tagDescription == 'unidade') {
+                        this.parametrosteste[xi].unidade = this.parametersteste[this.vetNomesteste[xi]][j2].setupValue;
+                    }
+                    console.log("this.parametersteste[this.vetNomesteste[xi]]");
+                    console.log(this.parametersteste[this.vetNomesteste[xi]]);
                 }
             }
-            for (i = 0; i < this.vetNomes.length; i++)
-                this.parametros[i].parametro = this.parameters[this.vetNomes[i]][0].tag.tagGroup;
-            console.log("parametros");
-            console.log(this.parametros);
+            console.log("this.vetNomesteste.length");
+            console.log(this.vetNomesteste.length);
+            for (var xy = 0; xy < this.vetNomesteste.length; xy++) {
+                this.parametrosteste[xy].parametro = this.parametersteste[this.vetNomesteste[xy]][0].tag.tagGroup;
+                console.log("this.parametrosteste[xy].parametro = this.parametersteste[this.vetNomesteste[xy]][0].tag.tagGroup");
+                console.log(this.parametrosteste[xy].parametro = this.parametersteste[this.vetNomesteste[xy]][0].tag.tagGroup);
+            }
+            setTimeout(() => {
+                this.showModal('visualizarParams');
+                console.log("parametrosteste");
+                console.log(this.parametrosteste);
+                console.log("GETPARAMETROS() - BEEN ENDEEEEEEEEEEEEEED !!! -------------------------")
+
+            }, 4000);
         },
 
         getRecipes: function() {

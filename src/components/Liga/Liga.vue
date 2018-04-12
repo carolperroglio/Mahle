@@ -238,7 +238,7 @@
                 <div>
                     <div class="btn-group" role="group">
                         {{phaseProduct.phaseProductId}}
-                        <button @click.stop.prevent="createPhaseProduct(phaseProduct, recipe.phases[0]);" :disabled="!phaseProduct.productId || !phaseProduct.phaseProductType || !phaseProduct.minValue || !phaseProduct.maxValue" class="btn btn-success">
+                        <button @click.stop.prevent="createPhaseProduct(phaseProduct, recipe.phases[0]);" :disabled="!phaseProduct.productId || !phaseProduct.minValue || !phaseProduct.maxValue" class="btn btn-success">
                             <i  class="fa fa-check-square" aria-hidden="true"></i>
                             Confirmar
                         </button>

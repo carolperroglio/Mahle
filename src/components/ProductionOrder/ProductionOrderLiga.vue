@@ -211,13 +211,13 @@
                     <label class="ls ls1 col-md-2">
                         {{op.recipeName}}
                     </label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls1 col1-5" style="margin-left:-1%">
+                    <label class="ls ls1 col1-5 aling-lb-l">
                         {{op.typeDescription}}
                     </label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls1 col1-5"  v-if="op.currentThing">
+                    <label class="ls ls1 col1-5 aling-lb-l"  v-if="op.currentThing">
                         {{op.thingName}}
                     </label>
-                    <label class="ls ls1 col1-5" v-else>
+                    <label class="ls ls1 col1-5 aling-lb-l" v-else>
                        {{op.thingName = "-"}}
                     </label>&nbsp;&nbsp;&nbsp;
                     <label class="ls ls1 col-md-1">
@@ -279,7 +279,7 @@
                 </div>
                 </div>
                 <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" v-if="opSelectedParams.currentThing">
                     <label for="">Equipamento</label>
                     <input type="text" class="form-control" v-model="opSelectedParams.currentThing.thingName" disabled>
                 </div>

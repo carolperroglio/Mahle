@@ -1,24 +1,66 @@
 @import url("./../../genericcss/generico.css");
-
-
-/* Menu de nav */
-.nav-items-listliga{
-    margin-left: 1%;
-    padding: 1.2% 0 1% 0;
+@media (min-width: 768px) {
+    /* Menu de nav */
+    .nav-items-listliga {
+        margin-left: 1%;
+        padding: 1.2% 0 1% 0;
+    }
+    /* Listagem de ligas */
+    .ligas {
+        margin-top: 25%;
+    }
+    #load-listliga {
+        margin: 18% 0 0 50% !important;
+    }
+    .cabecalho-table-listliga {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -3.2% 0 7% 0;
+        z-index: 4;
+    }
 }
 
-/* Listagem de ligas */
-.ligas{
-    margin-top: 16.4%;
-}
-#load-listliga{
-    margin: 18% 0 0 50% !important;  
+@media (min-width: 960px) {
+    /* Menu de nav */
+    .nav-items-listliga {
+        margin-left: 1%;
+        padding: 1.2% 0 1% 0;
+    }
+    /* Listagem de ligas */
+    .ligas {
+        margin-top: 17%;
+    }
+    #load-listliga {
+        margin: 18% 0 0 50% !important;
+    }
+    .cabecalho-table-listliga {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -2.2% 0 7% 0;
+        z-index: 4;
+    }
 }
 
-.cabecalho-table-listliga {
-    position: fixed;    
-    width: 100%;    
-    background-color: black;
-    margin: -2.2% 0 7% 0;    
-    z-index: 4;
+@media (min-width: 1400px) {
+    /* Menu de nav */
+    .nav-items-listliga {
+        margin-left: 1%;
+        padding: 1.2% 0 1% 0;
+    }
+    /* Listagem de ligas */
+    .ligas {
+        margin-top: 15.4%;
+    }
+    #load-listliga {
+        margin: 18% 0 0 50% !important;
+    }
+    .cabecalho-table-listliga {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -2.2% 0 7% 0;
+        z-index: 4;
+    }
 }
