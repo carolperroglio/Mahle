@@ -30,7 +30,7 @@
                     <button type="button" class="btn btn-primary btn-md"  @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
                 </li>
                 <li class="nav-item-products">
-                    <button type="button" class="btn btn-success btn-md" @click.stop.prevent="cadEdit='Cadastrar Matéria-Prima';showModal(produto,-1)"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Matéria-Prima</button>
+                    <button type="button" class="btn btn-success btn-md" @click.stop.prevent="cadEdit='Cadastrar Matéria-Prima';produto={};showModal(produto,-1)"><i class="fa fa-plus" aria-hidden="true" ></i> Nova Matéria-Prima</button>
                 </li>
             </ul>
         </div>                     

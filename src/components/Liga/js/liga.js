@@ -49,9 +49,10 @@ export default {
             pros: [],
             prosFim: [],
             productRecipeName:'',
-            recipeProduct: {},
             erro:'',
             input:'',
+            recipeProduct: {},
+            p:{}
         }
     },
     filters: {
@@ -202,15 +203,20 @@ export default {
             }
         },
 
-        createRecipe(recipe) {
+        createRecipe(recipe, produto) {
             this.mensagemSuc = ''; this.carregando = true;            
             this.editarActivate = false; this.phase = {};  
             this.phase.phaseName = recipe.recipeName;
             this.phase.phaseCode = recipe.recipeCode; 
-            recipe.recipeTypeId = 2;                                                                                                             
+            recipe.recipeProduct = {},
+            recipe.recipeProduct = produto;  
+            this.p = recipe;                                         
+            recipe.recipeTypeId = 2;       
+            console.log(recipe);                                                                                                      
             axios.post(this.url + "recipes/", recipe).then((response) => {  
                 this.recipe = response.data;
-                this.createPhase(this.phase);                                                                                                 
+                this.createPhase(this.phase);  
+                this.p =   this.recipe;                                                                                             
             }, (error) => {                
                 this.carregando = false;                        
                 this.codigosErro(error.response.status);
@@ -283,6 +289,10 @@ export default {
                 this.carregando = false;
                 this.mensagemSuc = 'Erro ao deletar : ' + error;
             })            
+        },
+
+        testea(p){
+            console.log(p);
         },
         relacionaFase(phase) {     
             console.log(phase);                                   
