@@ -105,7 +105,7 @@
         <!--  o Modal de Criação da OP  -->
         <div class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center nav-item-gp">
-            <li class="nav-prod   col-md-12">
+            <li class="nav-prod col-md-12">
                 <h1 class="title-page-gp"> <b>Ordens de Produção - Tiras</b> </h1>
             </li>
             <li class="nav-prod col-md-2">
@@ -190,17 +190,17 @@
                             <label class="ls ls1 col-md-2">
                                 {{op.recipeName}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2" style="margin-left:-1%">
+                            <label class="ls ls1 col-md-2 aling-lb">
                                 {{op.typeDescription}}
                             </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2" style="margin-left:0.1%">
+                            <label class="ls ls1 col-md-2">
                                 {{op.currentStatus | filterStatus}}
                             </label>&nbsp;&nbsp;&nbsp;
                             <label class="ls ls1 col-md-2" v-if="op.hasProd == true">
                                 {{op.recipe.recipeProduct.product.productName}}
                             </label>
                             <label class="ls ls1 col-md-1">
-                                <i :id="op.recipe.recipeId" class="fa fa-eye" style="font-size: 22px; cursor: pointer;" @click="parametros=[];recipes={};showModal('visualizarParams');getGatewayRecipe(op)"></i>
+                                <i :id="op.recipe.recipeId" class="fa fa-eye" style="font-size: 22px; cursor: pointer;" @click="parametrosteste=[];recipes={};getGatewayRecipe(op)"></i>
                             </label>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
             </div>
 
             <!-- MODAL VISUALIZAR PARAMS -->
-            <b-modal size="lg" ref="visualizarParams" hide-footer title="Visualizar Ordem de Produção de Tira" class="modal-lg-tira">
+            <b-modal size="lg" ref="visualizarParams" hide-footer title="Visualizar Ordem de Produção de Tira" class="">
                 <div v-if="opSelectedParams != ''">
                 <div class="form-row">
                     <div class="form-group col-md-3">
@@ -252,48 +252,48 @@
                     <form>
                     <!-- <div class="fundo-branco-po"> -->
                     <div class="cabecalho-table-po-modal col-md-12">
-                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls2-cabecalho-po col-md-2">
+                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametrosteste, 'parametro',0):organizar(parametrosteste, 'parametro',0);" class="ls2-cabecalho-po col-md-2">
                             <b><font class="cursor-class" color="#ffffff"><p>Parâmetro
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametros, 'vn',1):organizar(parametros, 'vn',1);" class="ls2-cabecalho-po col-md-1">
+                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametrosteste, 'vn',1):organizar(parametrosteste, 'vn',1);" class="ls2-cabecalho-po col-md-1">
                             <b><font class="cursor-class" color="#ffffff">
                                 <p>Valor
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametros, 'unidade',2):organizar(parametros, 'unidade',2);" class="ls2-cabecalho-po col-md-1">
+                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametrosteste, 'unidade',2):organizar(parametrosteste, 'unidade',2);" class="ls2-cabecalho-po col-md-1">
                             <b><font class="cursor-class" color="#ffffff">
                                 <p>Unidade
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls2-cabecalho-po col-md-2 width-table-context">
+                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametrosteste, 'lie',3):organizar(parametrosteste, 'lie',3);" class="ls2-cabecalho-po  width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
                                 LIE <p class="font-size">Limite inferior da Especificação 
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label>
-                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls2-cabecalho-po col-md-2 width-table-context">
+                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametrosteste, 'lic',4):organizar(parametrosteste, 'lic',4);" class="ls2-cabecalho-po  width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
                                 LIC <p class="font-size">Limite inferior de Controle 
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls2-cabecalho-po col-md-2 width-table-context">
+                        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametrosteste, 'lsc',5):organizar(parametrosteste, 'lsc',5);" class="ls2-cabecalho-po  width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
                                 LSC <p class="font-size">Limite superior de Controle
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls2-cabecalho-po col-md-2 width-table-context">
+                        <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametrosteste, 'lse',6):organizar(parametrosteste, 'lse',6);" class="ls2-cabecalho-po  width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
                                 LSE <p class="font-size">Limite superior de Especificação 
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
@@ -302,7 +302,7 @@
                         </label> 
                     </div>
                     <div class="table-margin-params">
-                    <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
+                    <div v-for="(pro, index) in parametrosteste" v-bind:class="{cinza: index%2==0}" :key="index">                     
                     <label class="width-table-context-wider col-md-2">
                     <b><font color="#9BA6A5"> </font></b>
                         {{pro.parametro}}

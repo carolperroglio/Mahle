@@ -211,19 +211,16 @@ export default {
             })
         },
         getGatewayRecipe: function(obj) {
+            this.opSelectedParams = {};
             var id = obj.recipe.recipeId;
             this.opSelectedParams = obj;
 
-            if (id != 0) {
-                this.carregando = true;
-                console.log(this.urlGatewayRecipe + id);
-                setTimeout(() => {
-                    axios.get(this.urlGatewayRecipe + id).then(response => {
-                        this.recipe = response.data;
-                        for (var i = 0; i < this.recipe.phases.length; i++)
-                            if (this.recipe.phases[i].phaseId != 46)
-                                this.phase = this.recipe.phases[i];
-                        this.getParametros();
+
+            for (var i = 0; i < this.opSelectedParams.recipe.phases.length; i++)
+                if (this.opSelectedParams.recipe.phases[i].phaseId != 46)
+                    if (this.opSelectedParams.recipe.phases[i].phaseParameters.length > 0) {
+                        this.phase = this.opSelectedParams.recipe.phases[i];
+                        this.getParametros(this.phase);
                         this.recipeCadastrada = true;
                         this.carregando = false;
                         this.editarActivate = true;
@@ -242,22 +239,16 @@ export default {
                                 break;
                             default:
                                 break;
-
                         }
-                    }).catch(error => {
-                        console.log(error);
-                        this.carregando = false;
-                        this.msgErro = e.status;
-                        this.showModal("modalErro");
-                    })
-                }, 300);
-            }
+                    } else {
+                        console.log("Receita sem Parameters");
+
+                    }
+
         },
-        getParametros: function() {
+        getParametros: function(obj) {
             this.parametros = [];
-            // for(var x = 0; this.recipe.phases[0].phaseProducts.length; x++){
-            this.parametros = this.recipe.phases[0].phaseProducts;
-            // }
+            this.parametros = obj.phaseProducts;
         },
 
         getRecipes: function() {

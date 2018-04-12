@@ -31,25 +31,121 @@ body {
 
 .logo-system {
     position: fixed;
-    margin-top: 2%;
+    margin-top: 1%;
     margin-left: 91%;
     height: 4%;
     width: 8%;
     z-index: 50;
 }
 
+@media (min-width:768px) {
+    /*Logo do sistema*/
+    .logo-system {
+        position: fixed;
+        margin-top: 3%;
+        margin-left: 89%;
+        height: 4%;
+        width: 10%;
+        z-index: 50;
+    }
+    #sidebar {
+        margin-top: 7%;
+        margin-left: 0;
+        position: fixed;
+    }
+    .icon-navigate {
+        font-size: 2em;
+        margin-top: 80%;
+    }
+    .nav-item-cab {
+        font-size: 0.5em;
+        width: 10%;
+    }
+    #sidebar .list-group-item {
+        font-size: 13px;
+    }
+    /*Configurações do ícone do menu lateral collapse*/
+    .icon-navigate {
+        position: relative;
+        font-size: 30px;
+        margin-top: 85%;
+        margin-left: 45%;
+        color: white;
+        cursor: pointer;
+        z-index: 100;
+    }
+}
+
+@media (min-width: 960px) {
+    /*Logo do sistema*/
+    .logo-system {
+        position: fixed;
+        margin-top: 2%;
+        margin-left: 89%;
+        height: 4%;
+        width: 10%;
+        z-index: 50;
+    }
+    #sidebar {
+        margin-top: 7%;
+        margin-left: 0;
+        position: fixed;
+    }
+    .nav-item-cab {
+        font-size: 0.5em;
+        width: 10%;
+    }
+    #sidebar .list-group-item {
+        font-size: 13px;
+    }
+    /*Configurações do ícone do menu lateral collapse*/
+    .icon-navigate {
+        position: fixed;
+        font-size: 2em;
+        margin-top: 2%;
+        margin-left: -2%;
+        height: 6%;
+        width: 8%;
+        z-index: 50;
+    }
+}
+
+@media (min-width: 1400px) {
+    /*Logo do sistema*/
+    .logo-system {
+        position: fixed;
+        margin-top: 3%;
+        margin-left: 89%;
+        height: 4%;
+        width: 10%;
+        z-index: 50;
+    }
+    #sidebar {
+        margin-top: 7%;
+        margin-left: 0;
+        position: fixed;
+    }
+    .nav-item-cab {
+        font-size: 0.5em;
+        width: 10%;
+    }
+    #sidebar .list-group-item {
+        font-size: 13px;
+    }
+    /*Configurações do ícone do menu lateral collapse*/
+    .icon-navigate {
+        position: fixed;
+        font-size: 2em;
+        margin-top: 2%;
+        margin-left: 91%;
+        height: 6%;
+        width: 8%;
+        z-index: 50;
+    }
+}
+
 
 /*Configurações do ícone do menu lateral collapse*/
-
-.icon-navigate {
-    position: relative;
-    font-size: 30px;
-    margin-top: 94%;
-    margin-left: 45%;
-    color: white;
-    cursor: pointer;
-    z-index: 100;
-}
 
 #sidebar {
     margin-top: 5%;
@@ -203,31 +299,4 @@ footer {
     -webkit-transition-duration: .1s;
     -o-transition-duration: .1s;
     transition-duration: .1s;
-}
-
-@media screen and (max-width: 800px) {
-    #sidebar {
-        margin-top: 7%;
-        margin-left: 0;
-        position: fixed;
-    }
-    .icon-navigate {
-        font-size: 2em;
-        margin-top: 80%;
-    }
-    .logo-system {
-        /* position: fixed; */
-        margin-top: 3%;
-        margin-left: 82%;
-        height: 6%;
-        width: 108px;
-        z-index: 50;
-    }
-    .nav-item-cab {
-        font-size: 0.5em;
-        width: 10%;
-    }
-    #sidebar .list-group-item {
-        font-size: 13px;
-    }
 }

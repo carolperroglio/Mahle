@@ -1,203 +1,303 @@
 /* menu de navegação de OP */
 
 @import url("./../../genericcss/generico.css");
-.nav-op {
-    position: fixed;
-    margin-top: 5%;
-    z-index: 1;
-    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
-    width: 100%;
-    height: 17%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding-top: 3%;
-}
-
-.cabecalho-table-po {
-    position: fixed;
-    width: 100%;
-    background-color: black;
-    margin: -2.5% 0 0 0;
-    z-index: 4;
-}
-
-.cabecalho-table-po-modal {
-    width: 100%;
-    padding: 0 0 0 0.1%;
-    background-color: black;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0.2%;
-}
-
-.width-table-context {
-    width: 14%;
-    text-align: center;
-    margin-left: 1%;
-}
-
-.width-table-context-wider {
-    width: 19%;
-    text-align: center;
-    margin-left: 1.5%;
-}
-
-.font-size {
-    font-size: 12px;
-}
-
-.fundo-branco-po {
-    background-color: #ffffff;
-    margin: 0 0 0 0;
-    width: 100%;
-    height: 30%;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
-}
-
-.ls2-cabecalho-po {
-    /* width: 13%; */
-    /* width: 100%; */
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    margin-bottom: 0.3%;
-    margin-left: 1%;
-}
-
-.nav-prod {
-    padding-left: 0.5%;
-}
-
-.title-page-op {
-    text-align: left;
-    color: rgb(68, 68, 70);
-    font-family: sans-serif;
-    font-size: 22px;
-    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-    position: fixed;
-    top: 12%;
-    left: 0.9%;
-}
-
-.collapse-color {
-    color: #6a7989;
-}
-
-a:hover {
-    color: #929fac;
-}
-
-.op {
-    position: relative;
-    margin-top: 14%;
-    padding-bottom: 8%;
-    left: 1%;
-    width: 95%;
-}
-
-.table-margin-params {
-    margin: 1% 0 6% 0;
-}
-
-.card-body-op {
-    padding-top: 0.1%;
-    margin-bottom: 1%;
-    padding-left: 0.8%;
-}
-
-.paginacao-op-tira {
-    position: fixed;
-    z-index: 2;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 2%;
-    background-color: #ffffff;
-}
-
-.card-header {
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
-}
-
-.card-margin {
-    margin-bottom: 0.1%;
-    margin-top: 0.1%;
-}
-
-.ls1 {
-    text-align: center;
-}
-
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
     .cabecalho-table-po {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -2.5% 0 0 0;
+        margin: -5.5% 0 0 0;
         z-index: 4;
     }
-    .op {
-        position: relative;
-        margin-top: 12%;
-        padding-bottom: 8%;
-        left: 1%;
-        width: 94.6%;
-    }
-}
-
-@media (min-width: 768px) {
-    .modal-lg {
-        max-width: 70%;
-        margin-left: 15% !important;
-    }
-}
-
-@media screen and (max-width: 801px) {
-    .nav-op {
-        position: fixed;
-        margin-top: 15%;
-        z-index: 1;
-        background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
+    .cabecalho-table-po-modal {
         width: 100%;
-        height: 20%;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        padding-top: 3%;
+        padding: 0 0 0 0.1%;
+        background-color: black;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0.2%;
     }
-    .card-body-op {
-        font-size: 10px;
-        padding-top: 1%;
-        bottom: 1%;
+    .table-margin {
+        margin: 29% 0 6% 0;
+    }
+    .width-table-context {
+        width: 11%;
+        text-align: center;
+        margin-left: 1%;
+    }
+    .width-table-context-wider {
+        width: 19%;
+        text-align: center;
+        margin-left: 1.5%;
+    }
+    .font-size {
+        font-size: 12px;
+    }
+    .fundo-branco-po {
+        background-color: #ffffff;
+        margin: 0 0 0 0;
+        width: 100%;
+        height: 30%;
+        padding: 0 0 0 0;
+        margin: 0 0 0 0;
+    }
+    .ls2-cabecalho-po {
+        /* width: 13%; */
+        /* width: 100%; */
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        margin-bottom: 0.3%;
+        margin-left: 1%;
+    }
+    .nav-prod {
+        padding-left: 0.5%;
     }
     .title-page-op {
         text-align: left;
-        color: rgb(82, 84, 87);
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-size: 16px;
-        text-shadow: 1px 1px #F9F9F9;
+        color: rgb(68, 68, 70);
+        font-family: sans-serif;
+        font-size: 22px;
+        text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
         position: fixed;
-        top: 20%;
-        margin-left: 0.5%;
+        top: 12%;
+        left: 0.9%;
     }
-    .op {
-        position: relative;
-        margin-top: 28%;
-        margin-bottom: 5%;
-        left: 1%;
+    .collapse-color {
+        color: #6a7989;
+    }
+    a:hover {
+        color: #929fac;
+    }
+    .table-margin-params {
+        margin: 1% 0 6% 0;
+    }
+    .card-body-op {
+        padding-top: 0.1%;
+        margin-bottom: 1%;
+        padding-left: 0.8%;
+    }
+    .paginacao-op-tira {
+        position: fixed;
+        z-index: 2;
+        text-align: center;
         width: 100%;
+        margin-bottom: 2%;
+        background-color: #ffffff;
     }
-    /* .nav-op{
-        top: 16%;
-        height: 30%;
-        padding-top: 10%;     
-    } */
+    .card-header {
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+    }
+    .card-margin {
+        margin-bottom: 0.1%;
+        margin-top: 0.1%;
+    }
     .ls1 {
-        width: 20%;
-        font-size: 12px;
+        text-align: center;
     }
+    .aling-lb {
+        margin-left: -4.9%;
+    }
+}
+
+@media (min-width: 960px) {
     .cabecalho-table-po {
         position: fixed;
         width: 100%;
         background-color: black;
         margin: -2.5% 0 0 0;
         z-index: 4;
+    }
+    .cabecalho-table-po-modal {
+        width: 100%;
+        padding: 0 0 0 0.1%;
+        background-color: black;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0.2%;
+    }
+    .width-table-context {
+        width: 11%;
+        text-align: center;
+        margin-left: 1%;
+    }
+    .width-table-context-wider {
+        width: 19%;
+        text-align: center;
+        margin-left: 1.5%;
+    }
+    .font-size {
+        font-size: 12px;
+    }
+    .fundo-branco-po {
+        background-color: #ffffff;
+        margin: 0 0 0 0;
+        width: 100%;
+        height: 30%;
+        padding: 0 0 0 0;
+        margin: 0 0 0 0;
+    }
+    .ls2-cabecalho-po {
+        /* width: 13%; */
+        /* width: 100%; */
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        margin-bottom: 0.3%;
+        margin-left: 1%;
+    }
+    .nav-prod {
+        padding-left: 0.5%;
+    }
+    .title-page-op {
+        text-align: left;
+        color: rgb(68, 68, 70);
+        font-family: sans-serif;
+        font-size: 22px;
+        text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+        position: fixed;
+        top: 12%;
+        left: 0.9%;
+    }
+    .collapse-color {
+        color: #6a7989;
+    }
+    a:hover {
+        color: #929fac;
+    }
+    .op {
+        position: relative;
+        margin-top: 14%;
+        padding-bottom: 8%;
+        left: 1%;
+        width: 95%;
+    }
+    .table-margin-params {
+        margin: 1% 0 6% 0;
+    }
+    .card-body-op {
+        padding-top: 0.1%;
+        margin-bottom: 1%;
+        padding-left: 0.8%;
+    }
+    .paginacao-op-tira {
+        position: fixed;
+        z-index: 2;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 2%;
+        background-color: #ffffff;
+    }
+    .card-header {
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+    }
+    .card-margin {
+        margin-bottom: 0.1%;
+        margin-top: 0.1%;
+    }
+    .ls1 {
+        text-align: center;
+    }
+    .aling-lb {
+        margin-left: 0.1%;
+    }
+}
+
+@media (min-width:1400px) {
+    .cabecalho-table-po-modal {
+        width: 100%;
+        padding: 0 0 0 0.1%;
+        background-color: black;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0.2%;
+    }
+    .width-table-context {
+        width: 11%;
+        text-align: center;
+        margin-left: 1%;
+    }
+    .width-table-context-wider {
+        width: 19%;
+        text-align: center;
+        margin-left: 1.5%;
+    }
+    .font-size {
+        font-size: 12px;
+    }
+    .fundo-branco-po {
+        background-color: #ffffff;
+        margin: 0 0 0 0;
+        width: 100%;
+        height: 30%;
+        padding: 0 0 0 0;
+        margin: 0 0 0 0;
+    }
+    .ls2-cabecalho-po {
+        /* width: 13%; */
+        /* width: 100%; */
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        margin-bottom: 0.3%;
+        margin-left: 1%;
+    }
+    .nav-prod {
+        padding-left: 0.5%;
+    }
+    .title-page-op {
+        text-align: left;
+        color: rgb(68, 68, 70);
+        font-family: sans-serif;
+        font-size: 22px;
+        text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+        position: fixed;
+        top: 12%;
+        left: 0.9%;
+    }
+    .collapse-color {
+        color: #6a7989;
+    }
+    a:hover {
+        color: #929fac;
+    }
+    .op {
+        position: relative;
+        margin-top: 14%;
+        padding-bottom: 8%;
+        left: 1%;
+        width: 95%;
+    }
+    .table-margin-params {
+        margin: 1% 0 6% 0;
+    }
+    .card-body-op {
+        padding-top: 0.1%;
+        margin-bottom: 1%;
+        padding-left: 0.8%;
+    }
+    .paginacao-op-tira {
+        position: fixed;
+        z-index: 2;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 2%;
+        background-color: #ffffff;
+    }
+    .card-header {
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+    }
+    .card-margin {
+        margin-bottom: 0.1%;
+        margin-top: 0.1%;
+    }
+    .ls1 {
+        text-align: center;
+    }
+    .aling-lb {
+        margin-left: 1%;
+    }
+    .table-margin {
+        margin: 14% 0 6% 0;
     }
 }
