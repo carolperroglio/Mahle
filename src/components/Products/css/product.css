@@ -2,7 +2,7 @@
 
 /*itens menu de navegação de produtos - busca de produtos*/
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
     .cabecalho-table {
         position: fixed;
         width: 100%;
@@ -58,7 +58,7 @@
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -2.2% 0 0 0;
+        margin: -1.5% 0 0 0;
         z-index: 4;
     }
     #load-products {
@@ -69,7 +69,7 @@
         width: 50%;
     }
     .margin-table-products {
-        margin: 15.3% 0 7% 0;
+        margin: 14.3% 0 7% 0;
     }
     .ls2-margin {
         margin-left: 1.3%;
