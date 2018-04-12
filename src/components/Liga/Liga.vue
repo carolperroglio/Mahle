@@ -37,10 +37,10 @@
                             :value="p">{{p.productName}}</option>
                         </select> -->                       
 
-                    <b-dropdown-item id="dropdownMenuButton" style="position:absolute !important; background-color:white;" class="form-control form-control-sm"
+                    <b-dropdown-item id="dropdownMenuButton" style="position:absolute;" class="form-control form-control-sm"
                         @click.stop.prevent="recipeProduct=p; productRecipeName=p.productName; prosFim=[];" 
                         v-for="(p,index) in prosFim" v-bind:key="index">
-                        {{p.productName}}                    
+                        {{p.productName}}                   
                     </b-dropdown-item>
                 </li>
                 <li class="nav-items-liga col-sm-2" v-if="!recipeCadastrada" >                    

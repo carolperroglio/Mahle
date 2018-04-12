@@ -62,7 +62,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
 
-                // IP MAHLE
+                //IP MAHLE
                 // TOOLS_API: JSON.stringify(apimahle + ":8005"),
                 // OP_API: JSON.stringify(apimahle + ":8003"),
                 // THINGS_API: JSON.stringify(apimahle + ":8001"),
@@ -71,9 +71,10 @@ module.exports = {
                 // STATUS_API: JSON.stringify(apimahle + ":8004"),
                 // HIST_BIGTABLE_API: JSON.stringify(apimahle + ":8011"),
                 // HIST_ALARM_API: JSON.stringify(apimahle + ":8012"),
-                // REPORT_API: JSON.stringify(apimahle + ":8007"),
+                // REPORT_API: JSON.stringify(apimahle + ":8007"), 
+                // LINE_PARAMETERS_API: JSON.stringify(apimahle + ":8013"),
 
-                // IP SPI
+                //IP SPI
                 TOOLS_API: JSON.stringify(api + ":8005"),
                 OP_API: JSON.stringify(api + ":8003"),
                 THINGS_API: JSON.stringify(api + ":8001"),

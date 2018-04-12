@@ -145,8 +145,8 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };    
             
-            axios.get(this.urlLineParameters+'/46', config).then((response) => {                
-                this.parametros = response.data.parameters;                
+            axios.get(this.urlLineParameters+'/46', config).then((response) => {                                
+                this.parametros = response.data.parameters;                            
                 this.carregando = false;
             }, (error) => {
                 this.carregando = false;
@@ -161,6 +161,7 @@ export default {
         // PAGINAÇÃO //
         //
         validaTag(possibleTagGroups, index){                        
+            console.log(parametros);
             for(var i = 0; i<this.parametros.length; i++)
                 if(possibleTagGroups[index] == this.parametros[i].tagGroup)
                     return false;
