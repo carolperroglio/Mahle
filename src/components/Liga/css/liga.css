@@ -49,11 +49,6 @@
         font-size: 13px;
         margin-top: 10%;
     }
-    /*Box das Fases*/
-    .ligas {
-        margin-top: 11.5%;
-        padding-bottom: 6%;
-    }
     /**/
     .liga {
         margin-top: 0.5%;
@@ -203,11 +198,6 @@
         font-size: 13px;
         margin-top: 10%;
     }
-    /*Box das Fases*/
-    .ligas {
-        margin-top: 11.5%;
-        padding-bottom: 6%;
-    }
     /**/
     .liga {
         margin-top: 0.5%;
@@ -320,8 +310,4 @@
         margin-top: 22.5%;
     }
     /*Box das Fases*/
-    .ligas {
-        margin-top: 15.4%;
-        padding-bottom: 6%;
-    }
 }
