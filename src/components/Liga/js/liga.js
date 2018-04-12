@@ -183,7 +183,8 @@ export default {
                 this.carregando = true;                
                 setTimeout(() => {
                     axios.get(this.urlRecipes + id).then(response => {
-                        this.recipe = response.data;                  
+                        this.recipe = response.data; 
+                        this.productRecipeName = this.recipe.recipeProduct.product.productName;                 
                         if(this.recipe.recipeTypeId == 2){      
                             this.produtos = this.recipe.phases[0].phaseProducts;
                             console.log(response.data);                                                                          
@@ -203,28 +204,64 @@ export default {
             }
         },
 
-        createRecipe(recipe, produto) {
-            this.mensagemSuc = ''; this.carregando = true;            
+        createRecipe(recipe, produto) {                       
             this.editarActivate = false; this.phase = {};  
             this.phase.phaseName = recipe.recipeName;
-            this.phase.phaseCode = recipe.recipeCode; 
-            recipe.recipeProduct = {},
-            recipe.recipeProduct = produto;  
-            this.p = recipe;                                         
-            recipe.recipeTypeId = 2;       
-            console.log(recipe);                                                                                                      
+            this.phase.phaseCode = recipe.recipeCode;  
+            delete produto.parentProductsIds; delete produto.productName;
+            delete produto.productDescription; delete produto.productCode;
+            delete produto.productGTIN; delete produto.childrenProductsIds;
+            delete produto.enabled; delete produto.additionalInformation;
+            this.p = recipe; recipe.recipeTypeId = 2;                                                                                                        
             axios.post(this.url + "recipes/", recipe).then((response) => {  
                 this.recipe = response.data;
-                this.createPhase(this.phase);  
-                this.p =   this.recipe;                                                                                             
+                this.createRecipeProduct(produto);                  
+                //this.p = this.recipe;                                                                                                                       
             }, (error) => {                
                 this.carregando = false;                        
                 this.codigosErro(error.response.status);
             });                        
         },
+        createRecipeProduct(produto){
+            console.log(produto);
+            produto.minvalue = "1"; produto.maxvalue = "1";
+            produto.mesuaremntUnit = "Kg";           
+            axios.post(this.url + "recipes/product/"+this.recipe.recipeId, produto).then((response) => {
+                this.recipe.recipeProduct = response.data;
+                this.createPhase(this.phase);
+            }, (error) => {             
+                this.deleteRecipe(this.recipe);                   
+                this.carregando = false;                        
+                this.codigosErro(error.response.status, "Erro ao criar produto final da liga!<br>Criação de Liga cancelada");
+            });              
+        },
 
+        createPhase(phase) {
+            this.carregando = true;            
+            axios.post(this.url + "phases/", phase).then((response) => {                                             
+                this.phase = response.data;                              
+                this.relacionaFase(this.phase);                                
+            }, (error) => {
+                this.deleteRecipe(this.recipe);
+                this.carregando = false;                        
+                this.codigosErro(error.response.status, "Erro ao criar liga!<br>Criação de Liga cancelada");                            
+            });
+        }, 
+
+
+        relacionaFase(phase) {                                                 
+            axios.post(this.url + "recipes/phases/" + this.recipe.recipeId, phase).then((response) => {                                                                                
+                this.ok = true;
+                this.$router.push({ name: 'Liga', params: { id: this.recipe.recipeId }})
+                this.$router.go();                
+            }, (error) => {
+                this.deleteRecipe(this.recipe);
+                this.deletePhase(this.phase);
+                this.carregando = false;                        
+                this.codigosErro(error.response.status, "Erro ao criar liga!<br>Criação de Liga cancelada");                            
+            });            
+        },
         putRecipe(recipe) {
-            this.mensagemSuc = '';
             this.carregando = true;             
             this.hideModalEditRecipe();           
             axios.put(this.url + "recipes/" + recipe.recipeId, recipe).then((response) => {
@@ -239,6 +276,7 @@ export default {
                 this.codigosErro(error.response.status);
             });
         },
+  
 
         deleteRecipe(recipe) {
             this.mensagemSuc = '';
@@ -253,8 +291,7 @@ export default {
                 this.codigosErro(error.response.status);
             });
             
-        },
-
+        },  
 
         /*****************/
         /*               */
@@ -263,27 +300,14 @@ export default {
         /*               */
         /*               */
         /*****************/
-        createPhase(phase) {
-            this.mensagemSuc = '';
-            this.carregando = true;            
-            axios.post(this.url + "phases/", phase).then((response) => {                                             
-                this.phase = response.data;                              
-                this.relacionaFase(this.phase);                                
-            }, (error) => {
-                console.log(error);
-                this.deleteRecipe(this.recipe);
-                this.carregando = false;                        
-                this.codigosErro(error.response.status);                            
-            });
-        },        
+             
         deletePhase(phase, recipe) {
             this.carregando = true;
             this.mensagemSuc = '';
             axios.delete(this.url + "phases/" + phase.phaseId, { data: phase }).then((response) => {
                 console.log(response.data);
-                this.phases = [];
-                this.phase = {};
-                this.carregando = false;
+                this.$router.push({ name: 'Liga', params: {id:0} })
+                this.$router.go();
             }, (error) => {
                 console.log(error);
                 this.carregando = false;
@@ -291,25 +315,6 @@ export default {
             })            
         },
 
-        testea(p){
-            console.log(p);
-        },
-        relacionaFase(phase) {     
-            console.log(phase);                                   
-            axios.post(this.url + "recipes/phases/" + this.recipe.recipeId, phase).then((response) => {                                                                                
-                this.$route.params.id = this.recipe.recipeId;
-                this.getGatewayRecipe();
-                this.mensagemSuc = 'Fase relacionada com sucesso';
-                this.ok = true;
-                console.log("testeRelaciona");
-            }, (error) => {
-                this.deleteRecipe(this.recipe);
-                this.deletePhase(this.phase);
-                this.carregando = false;                        
-                this.codigosErro(error.response.status);            
-                this.carregando = false;
-            });            
-        },
 
         /*****************/
         /*               */
@@ -341,28 +346,14 @@ export default {
                     this.carregando = false;
                 });
             },300)
-        },
-        putPhaseProduct(phaseProduct, phase) {
-            this.carregando = true;
-            this.mensagemSuc = ''; 
-            axios.post(this.url + "phases/products/" + phase.phaseId, phaseProduct).then((response) => {
-                
-            },(error) => {
-                console.log(error);
-                this.phaseProduct = {};
-                this.productPhaseName = '';
-                this.carregando = false;
-            });    
-        },
+        }, 
+
         deletePhaseProduct(phaseProduct, phase) {
             this.carregando = true;
-            this.mensagemSuc = '';  
             this.$refs.modalRemoveProdutos.hide();
             axios.delete(this.url + "phases/products/" + phase.phaseId, { data: phaseProduct}).then((response) => {                
-                this.produtos = response.data.phaseProducts;                                
-                this.mensagemSuc = 'Fase relacionada com sucesso';
-                this.ok = true;
-                this.carregando = false;
+                this.$router.push({ name: 'Liga', params: {id:this.$route.params.id} })
+                this.$router.go();                              
                 console.log(response);
             }, (error) => {
                 console.log(error);

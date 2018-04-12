@@ -19,26 +19,22 @@ function paginacao(total, este) {
     }
 }
 
-var ipServer = process.env.RECIPE_API;
-var ipThings = process.env.THINGS_API
+const ipServer = process.env.RECIPE_API;
+const ipThings = process.env.THINGS_API;
+const ipLineParameters = process.env.LINE_PARAMETERS_API;
 export default {
     name: "ListLineParameters",
     data() {
         return {
+            urlLineParameters: ipLineParameters+ '/api/specificPhase',
             urlRecipes: ipServer + '/api/recipes',
             urlPhases: ipServer + '/api/phases',
-            urlThings: ipThings + '/api/thinggroups/',
-            mensagem:'',
-            mensagemSuc:'',
-            errors:[],
-            recipes: [],
-            recipe: {},
+            urlThings: ipThings + '/api/thinggroups/',            
+            error:'',
             thing: {},
             things: [],
-            tagGroup:'',
-            parametroCurrent: {},
-            parametros:[],
-            parameters:[],
+            tagGroup:'',           
+            parametros:[],            
             parameter: {},
             ferramentas: [],
             ferramenta:{},            
@@ -49,15 +45,7 @@ export default {
             startat: 0,
             total: 0,
             pages: [],
-            pageAtual: 0,
-            orderField: '',
-            order: '',
-            fieldFilter: '',
-            fieldValue: '',
-            id: '',
-            valores: {},
-            vetNomes: [],
-            deletar: {}
+            pageAtual: 0,            
         }
     },
     components: {
@@ -75,67 +63,9 @@ export default {
         hideModal(ref){
             this.$refs[ref].hide();
         },        
-
-        putParameter(parametro){
-            this.carregando=true;
-
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-            axios.put(this.urlPhases+'/parameters/'+parametro.phaseParameterId, config);
-
-        },
-        createParameter(valores, thing, tagGroup){
-            this.carregando=true;
-            this.hideModal('modalCreateParameter');
-            var item=[];
-            var j=0;
-            var urls = [];
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-
-            for(var i=0; i<thing.tags.length; i++){
-                console.log(thing.tags[i]);
-                if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'vn')
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.vn};
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'unidade')                     
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.unidade};
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lic')
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lic};    
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lie') 
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lie};
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lsc')
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lsc};
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lse')               
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lse};                               
-            }
-
-            for(var i = 0; i<item.length; i++)
-                axios.post(this.urlPhases + '/parameters/46',JSON.parse(JSON.stringify(item[i])),config);
-            this.$router.go();    
-        },
-
-      
-        deleteParameter(parametro){
-            this.carregando = true;
-            this.hideModal('modalRemoveParameter');     
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-            var urls =  [];
-            
-            for(var i = 0; i<this.phase.phaseParameters.length; i++)
-                if(this.phase.phaseParameters[i].tag.tagGroup == parametro.parametro)
-                    urls[i] = axios.delete(this.urlPhases + '/parameters/46',{ data: JSON.parse(JSON.stringify(this.phase.phaseParameters[i]))},config);
-                
-            this.deletar = {}; 
-            for(var t=0; t<this.things.length; t++)                                                   
-                for(var j=0; j<this.vetNomes.length; j++)                                                                                                                                                                
-                    this.things[t].possibleTagGroups = this.things[t].possibleTagGroups.filter(item => item !== this.vetNomes[j]);
-            this.$router.go();
-            this.parametros = this.parametros.filter(item => item.parametro !== parametro.parametro);        
-            this.buscarPhase();
+        showModalErro(erro){
+            this.error = erro;
+            this.$refs.modalErro.show();            
         },
 
         organizar(recipe, campo, pos){                         
@@ -154,91 +84,121 @@ export default {
                     this.cabecalhoSetas[i]=false;             
         },
 
+        putParameter(parametro){
+            this.carregando=true;
 
-        getParametros(phase) {            
-            var j = 0;    
-            for (var i = 0; i < phase.phaseParameters.length; i++) {
-                if (phase.phaseParameters[i].tag != undefined) {                      
-                    if (this.parameters[phase.phaseParameters[i].tag.tagGroup] != undefined)
-                        this.parameters[phase.phaseParameters[i].tag.tagGroup].push(phase.phaseParameters[i]);                        
-                    else {                        
-                        this.vetNomes[j++] = phase.phaseParameters[i].tag.tagGroup;                        
-                        this.parameters[phase.phaseParameters[i].tag.tagGroup] = [];
-                        this.parameters[phase.phaseParameters[i].tag.tagGroup].push(phase.phaseParameters[i]);
-                    }
-                }
-            } 
-                      
-            j = 0;
-            for (i = 0; i < this.vetNomes.length; i++) {
-                this.parametros[i] = {};
-                for (j = 0; j < this.parameters[this.vetNomes[i]].length; j++) {
-                    if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'vn')                       
-                        this.parametros[i].vn = this.parameters[this.vetNomes[i]][j];                        
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lie')
-                        this.parametros[i].lie = this.parameters[this.vetNomes[i]][j];
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lic')
-                        this.parametros[i].lic = this.parameters[this.vetNomes[i]][j];                        
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lsc')
-                        this.parametros[i].lsc = this.parameters[this.vetNomes[i]][j];                       
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lse')
-                        this.parametros[i].lse = this.parameters[this.vetNomes[i]][j];                       
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'unidade')
-                        this.parametros[i].unidade = this.parameters[this.vetNomes[i]][j];
-                       
-                }
-            }
-            for (i = 0; i < this.vetNomes.length; i++)
-                this.parametros[i].parametro = this.parameters[this.vetNomes[i]][0].tag.tagGroup;
- 
-            for(var t=0; t<this.things.length; t++)                                                   
-                for(var j=0; j<this.vetNomes.length; j++)                                                                                                                                                                
-                    this.things[t].possibleTagGroups = this.things[t].possibleTagGroups.filter(item => item !== this.vetNomes[j]);                               
-                                                   
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            axios.put(this.urlLineParameters+'/46', parametro, config).then((response) => {
+                this.getParametros();
+                this.carregando = false;
+            }, (error) => {
+                this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
+            });
+
+        },
+
+        createParameter(parametro, thing, tagGroup){
+            this.carregando=true;
+            this.hideModal('modalCreateParameter');       
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };            
+            parametro.thingGroupId = thing.thingGroupId;
+            parametro.tagGroup = tagGroup;
+            axios.post(this.urlLineParameters, parametro,config).then((response) => {
+                this.parametros.push(response.data);      
+                this.carregando = false;                         
+            }, (error) => {
+                this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
+            });                   
+        },
+
+        deleteParameter(parametro){
+            this.carregando = true;
+            this.hideModal('modalRemoveParameter');     
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            axios.delete(this.urlLineParameters+'/46', {data: parametro}, config).then((response) => {                
+                setTimeout(this.getParametros(), 500);                           
+            }, (error) => {
+                this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
+            }) 
+        },        
+
+        getParametros() {                                       
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };    
+            
+            axios.get(this.urlLineParameters+'/46', config).then((response) => {                
+                this.parametros = response.data.parameters;                
+                this.carregando = false;
+            }, (error) => {
+                this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
+            }) 
+                                                                                   
         },
         //
         // PAGINAÇÃO //
         //
-
+        validaTag(possibleTagGroups, index){                        
+            for(var i = 0; i<this.parametros.length; i++)
+                if(possibleTagGroups[index] == this.parametros[i].tagGroup)
+                    return false;
+            return true;        
+        },
         
+        codigosErro(status=-1){
+            if(status == 400)
+                this.showModalErro("Erro de requisição código 400");
+            else if(status == 404)
+                this.showModalErro("Serviço não encontrado código 404");
+            else if(status == 500)
+                this.showModalErro("Erro no servidor código 500");             
+            else    
+                this.showModalErro("Erro desconhecido código " + status);
+        },
+
         buscarThings() {            
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.recipes = [];
-
-            axios.get(this.urlThings, config).then((response) => {                
-                this.things = response.data.values;                                               
+            axios.get(this.urlThings, config).then((response) => {  
+                this.things = response.data.values;
+                this.getParametros();                                                     
             }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
             })
-
         }, 
-        buscarPhase() {            
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-            this.recipes = [];
-            console.log(this.urlThings)
-        
-            axios.get(this.urlPhases+'/46', config).then((response) => {                
-                this.phase = response.data;
-                this.getParametros(this.phase);                                                  
-                this.carregando = false;                                              
-            }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
-                this.carregando = false;
-            })
-                
-        },
     },
+
     beforeMount() {        
         this.carregando = true;
         
-        this.buscarThings();
-        setTimeout(() => {
-            this.buscarPhase();
-        },5000);    
+        this.buscarThings();                                
     }
 }

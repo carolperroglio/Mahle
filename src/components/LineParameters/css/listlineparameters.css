@@ -66,14 +66,14 @@
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -3.5% 0 0 0;
+        margin: -5.2% 0 0 0;
         z-index: 4;
     }
     #load-parameters {
         margin: 30% 0 0 50%;
     }
     .margin-table-parameters {
-        margin: 17% 0 6% 0;
+        margin: 20% 0 6% 0;
     }
     .font-size {
         font-size: 12px;
