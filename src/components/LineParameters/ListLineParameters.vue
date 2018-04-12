@@ -102,11 +102,11 @@
             <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                        {{pro.parametro}}
+                    {{pro.parametro}}
                 </label>                    
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>
-                        {{pro.vn.setupValue}}
+                    {{pro.vn.setupValue}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"> </font></b>

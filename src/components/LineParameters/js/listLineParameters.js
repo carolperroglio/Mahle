@@ -19,12 +19,14 @@ function paginacao(total, este) {
     }
 }
 
-var ipServer = process.env.RECIPE_API;
-var ipThings = process.env.THINGS_API
+const ipServer = process.env.RECIPE_API;
+const ipThings = process.env.THINGS_API;
+const ipLineParameters = process.env.LINE_PARAMETERS;
 export default {
     name: "ListLineParameters",
     data() {
         return {
+            urlLineParameters: ipLineParameters+ 'api/specificPhase',
             urlRecipes: ipServer + '/api/recipes',
             urlPhases: ipServer + '/api/phases',
             urlThings: ipThings + '/api/thinggroups/',
@@ -37,8 +39,7 @@ export default {
             things: [],
             tagGroup:'',
             parametroCurrent: {},
-            parametros:[],
-            parameters:[],
+            parametros:[],            
             parameter: {},
             ferramentas: [],
             ferramenta:{},            
@@ -95,24 +96,11 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
 
-            for(var i=0; i<thing.tags.length; i++){
-                console.log(thing.tags[i]);
-                if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'vn')
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.vn};
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'unidade')                     
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.unidade};
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lic')
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lic};    
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lie') 
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lie};
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lsc')
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lsc};
-                else if(thing.tags[i].tagGroup == tagGroup && thing.tags[i].tagDescription == 'lse')               
-                    item[j++]={"tagId":thing.tags[i].tagId, "setupValue":valores.lse};                               
-            }
-
-            for(var i = 0; i<item.length; i++)
-                axios.post(this.urlPhases + '/parameters/46',JSON.parse(JSON.stringify(item[i])),config);
+            axios.post(urlLineParameters, parametro,config).then((response) => { 
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            });   
             this.$router.go();    
         },
 
@@ -155,46 +143,26 @@ export default {
         },
 
 
-        getParametros(phase) {            
-            var j = 0;    
-            for (var i = 0; i < phase.phaseParameters.length; i++) {
-                if (phase.phaseParameters[i].tag != undefined) {                      
-                    if (this.parameters[phase.phaseParameters[i].tag.tagGroup] != undefined)
-                        this.parameters[phase.phaseParameters[i].tag.tagGroup].push(phase.phaseParameters[i]);                        
-                    else {                        
-                        this.vetNomes[j++] = phase.phaseParameters[i].tag.tagGroup;                        
-                        this.parameters[phase.phaseParameters[i].tag.tagGroup] = [];
-                        this.parameters[phase.phaseParameters[i].tag.tagGroup].push(phase.phaseParameters[i]);
-                    }
-                }
-            } 
-                      
-            j = 0;
-            for (i = 0; i < this.vetNomes.length; i++) {
-                this.parametros[i] = {};
-                for (j = 0; j < this.parameters[this.vetNomes[i]].length; j++) {
-                    if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'vn')                       
-                        this.parametros[i].vn = this.parameters[this.vetNomes[i]][j];                        
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lie')
-                        this.parametros[i].lie = this.parameters[this.vetNomes[i]][j];
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lic')
-                        this.parametros[i].lic = this.parameters[this.vetNomes[i]][j];                        
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lsc')
-                        this.parametros[i].lsc = this.parameters[this.vetNomes[i]][j];                       
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'lse')
-                        this.parametros[i].lse = this.parameters[this.vetNomes[i]][j];                       
-                    else if (this.parameters[this.vetNomes[i]][j].tag.tagDescription == 'unidade')
-                        this.parametros[i].unidade = this.parameters[this.vetNomes[i]][j];
-                       
-                }
-            }
-            for (i = 0; i < this.vetNomes.length; i++)
-                this.parametros[i].parametro = this.parameters[this.vetNomes[i]][0].tag.tagGroup;
- 
-            for(var t=0; t<this.things.length; t++)                                                   
-                for(var j=0; j<this.vetNomes.length; j++)                                                                                                                                                                
-                    this.things[t].possibleTagGroups = this.things[t].possibleTagGroups.filter(item => item !== this.vetNomes[j]);                               
-                                                   
+        getParametros(phase) {                           
+            // {
+            //     "thingGroupId":1,
+            //     "tagGroup":"Larg Canal",
+            //     "LSE":"4.5",
+            //     "LSC":"1",
+            //     "LIC":"2",
+            //     "LIE":"3",
+            //     "value":"foi",
+            //     "Unit":"unidade"
+            //     }
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };    
+            axios.get(this.urlLineParameters+'/46', config).then((response) => {                
+                console.log(response.data.values);                                               
+            }, (error) => {
+                this.mensagem = 'Erro no server ao buscar ' + error;
+                this.carregando = false;
+            })                                                                    
         },
         //
         // PAGINAÇÃO //
@@ -237,8 +205,7 @@ export default {
         this.carregando = true;
         
         this.buscarThings();
-        setTimeout(() => {
-            this.buscarPhase();
-        },5000);    
+        
+        this.getParametros();        
     }
 }

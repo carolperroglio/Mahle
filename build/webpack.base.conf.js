@@ -82,6 +82,7 @@ module.exports = {
                 HIST_BIGTABLE_API: JSON.stringify(api + ":8011"),
                 HIST_ALARM_API: JSON.stringify(api + ":8012"),
                 REPORT_API: JSON.stringify(api + ":8007"),
+                LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
             }
         }),
         new HtmlWebpackPlugin({
