@@ -73,7 +73,7 @@
                     <tr class="tr1 cabecalho-table-rastreamento">
                         <th class="th1 text-white ls2-cabecalho-rastreamento" v-for="(h, index) in headers" :key="index">{{ h }}</th>
                     </tr>
-                    <tr class="tr1" v-for="(obj,index1) in provider" v-bind:key="index1">
+                    <tr class="tr1" v-for="(obj,index1) in providertable" v-bind:key="index1">
                         <td class="td1" v-for="(value, key, index2) in obj" v-bind:key="index2">{{ value }}</td>
                     </tr>
                 </table>
