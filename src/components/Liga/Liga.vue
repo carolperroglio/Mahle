@@ -28,8 +28,8 @@
                     <b>Produto <br>Final</b>
                 </li>                 
                 <li class="nav-items-liga form-group col-sm-2"><!--recipe.recipeProduct.product.productName-->
-                    <input placeholder="Nome do produto" class="form-control form-control-sm" list="dropdownMenuButton" 
-                        v-model="productRecipeName" @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim); recipeProduct={}">                                                           
+                    <input :disabled="recipeCadastrada" placeholder="Nome do produto" class="form-control form-control-sm" list="dropdownMenuButton" 
+                        v-model="productRecipeName" @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim); recipeProduct={}" >                                                           
 
                         <!--<select id="dropdownMenuButton" v-model="recipeProduct" class="form-control form-control-sm"
                             style="position:absolute;" v-show="prosFim.length>0">                                
@@ -38,17 +38,17 @@
                         </select> -->                       
 
                     <b-dropdown-item id="dropdownMenuButton" style="position:absolute !important; background-color:white;" class="form-control form-control-sm"
-                        @click.stop.prevent="recipeProduct.product=p; productRecipeName=p.productName; prosFim=[];" 
+                        @click.stop.prevent="recipeProduct=p; productRecipeName=p.productName; prosFim=[];" 
                         v-for="(p,index) in prosFim" v-bind:key="index">
                         {{p.productName}}                    
                     </b-dropdown-item>
                 </li>
                 <li class="nav-items-liga col-sm-2" v-if="!recipeCadastrada" >                    
-                    <button type="button" class="btn btn-success btn-sm" :disabled="!recipe.recipeName || !recipe.recipeCode || !recipeProduct || recipeProduct.product==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''"  @click.stop.prevent="createRecipe(recipe,recipeProduct)">
+                    <button type="button" class="btn btn-success btn-sm" :disabled="!recipe.recipeName || !recipe.recipeCode || recipeProduct==undefined || recipeProduct.productId==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''"  @click.stop.prevent="createRecipe(recipe,recipeProduct)">
                         Enviar
                     </button>   
                 </li> 
-                {{p}}
+
                 <li class="nav-items-liga col-sm-0" v-if="recipeCadastrada">
                     <button class="btn btn-warning btn-sm" @click.stop.prevent="showModalEditRecipe(recipe)" >                        
                         <i class="fa fa-pencil" style="font-size:22px; cursor:pointer"></i>                          
@@ -191,7 +191,7 @@
             <div class="modal-footer">
                 <div>
                     <div class="btn-group" role="group">
-                        <button @click.stop.prevent="put(produto);" class="btn btn-success">
+                        <button @click.stop.prevent="put(produtos);" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
                         <button @click.stop.prevent="hideModalConfirmEditarProduto()" class="btn btn-danger">

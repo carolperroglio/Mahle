@@ -13,22 +13,8 @@
                 <li class="nav-item-prameters col-md-12">
                     <h1 class="title-page-gp"><b>Parâmetros de Linha</b></h1>
                 </li>                   
-                <li class="nav-item-prameters">
-                    <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="productName">Nome</option>
-                        <option value="productDescription">Descrição</option>
-                        <option value="productCode">Código</option>
-                        <option value="productGTIN">Código de Barras</option>
-                    </select>
-                </li>
-                <li class="nav-item-prameters">
-                    <input class="form-control btn-lg" type="search" placeholder="Parâmetros" aria-label="Busca">
-                </li>
-                <li class="nav-item-prameters">
-
-                    <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
-                </li>
+                
+              
                 <li class="nav-item-prameters">
                     <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModal('modalCreateParameter')"><i class="fa fa-plus" aria-hidden="true" ></i> Cadastrar Parâmetro</button>
                 </li>
@@ -99,41 +85,40 @@
         <!--                       -->
         <!--                       -->
         <div class="margin-table-parameters" v-show="!carregando">         
-            <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
+            <div v-for="(pro, index) in parametros" :class="{cinza: index%2==0}" :key="index">                     
                 <label class="ls2 item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"> </font></b>
-                    {{pro.parametro}}
+                    <b><font color="#9BA6A5"></font></b>
+                    {{pro.tagGroup}}
                 </label>                    
                 <label class="ls2 item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"> </font></b>
-                    {{pro.vn.setupValue}}
+                    <b><font color="#9BA6A5"></font></b>
+                    {{pro.value}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"> </font></b>
-                    {{pro.unidade.setupValue}}
+                    <b><font color="#9BA6A5"></font></b>
+                    {{pro.unit}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lie.setupValue}}
+                    <b><font color="#9BA6A5"></font></b>
+                    {{pro.lie}}
                 </label>   
                 <label class="ls2 item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lic.setupValue}}
+                    <b><font color="#9BA6A5"></font></b>
+                    {{pro.lic}}
                 </label>            
                 <label class="ls2 item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lsc.setupValue}}
+                    <b><font color="#9BA6A5"></font></b>
+                    {{pro.lsc}}
                 </label>
                 <label class="ls2 item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"> </font></b>
-                    {{pro.lse.setupValue}}
+                    <b><font color="#9BA6A5"></font></b>
+                    {{pro.lse}}
                 </label> 
                 <label class="ls2 item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"> </font></b>
+                    <b><font color="#9BA6A5"></font></b>
                     <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="deletar=pro;showModal('modalRemoveParameter');"></i>&nbsp;&nbsp;&nbsp;                     
                     <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="cadEdit='Editar Parâmetro';p, index;showModal('modalEditarParameter')"></i>
-                </label> 
-                                                                                                       
+                </label>                                                                                                       
             </div>                                                                                                       
         </div>      
             
@@ -178,53 +163,7 @@
                 </div>
             </div>
         </b-modal>
-
-        <!--                       -->
-        <!--                       -->
-        <!--        Modal          -->
-        <!--        Editar         -->
-        <!--        Produto        -->
-        <!--                       -->
-        <!--                       
-        <b-modal ref="modalEditarProduto" hide-footer title="Editar Produto"> 
-            <div class="modal-body">
-                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar o Produto!?</b>
-            </div>    
-            <div class="modal-footer">
-                <div>
-                    <div class="btn-group" role="group">
-                        <button @click.stop.prevent="put(produto);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
-                        </button>
-                        <button @click.stop.prevent="hideModalConfirmPut()" class="btn btn-danger">Cancelar                            
-                        </button>                        
-                    </div>
-                </div>
-            </div>
-        </b-modal> -->
-        <!--                       -->
-        <!--                       -->
-        <!--        Modal          -->
-        <!--      Cadastrar        -->
-        <!--       Produto         -->
-        <!--                       -->
-        <!--                       
-        <b-modal ref="modalCadastrarProduto" hide-footer title="Cadastrar Produto"> 
-            <div class="modal-body">
-                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja cadastrar o Produto!?</b>
-            </div>    
-            <div class="modal-footer">
-                <div>
-                    <div class="btn-group" role="group">
-                        <button @click.stop.prevent="cadastrar(produto);" class="btn btn-success">
-                            <i class="fa fa-check-square" aria-hidden="true"></i>
-                        </button>
-                        <button @click.stop.prevent="hideModalConfirmCreate()" class="btn btn-danger">Cancelar                            
-                        </button>                        
-                    </div>
-                </div>
-            </div>
-        </b-modal> -->
+        
 
         <!--                                 -->
         <!--                                 -->
@@ -235,14 +174,7 @@
         <!--               Modal             -->     
         <b-modal ref="modalEditarParameter" hide-footer title="Editar Parâmetro">                    
             <form>
-                <div>
-                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                    <p v-if="errors.length">
-                        <ul v-for="(error, index) in errors" v-bind:key="index">
-                            <li class="alert alert-danger form-control" >{{ error }}</li>
-                        </ul>
-                    </p>
+                <div>                    
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>
@@ -320,20 +252,13 @@
         <!--                                 -->
         <!--                                 -->
         <!--                                 -->
-        <!-- Menu de navegação de produtos   -->
+        <!-- Menu de navegação de parametros -->
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->     
         <b-modal ref="modalCreateParameter" hide-footer title="Cadastrar Parâmetro">                    
             <form>
-                <div>
-                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                    <p v-if="errors.length">
-                        <ul v-for="(error, index) in errors" v-bind:key="index">
-                            <li class="alert alert-danger form-control" >{{ error }}</li>
-                        </ul>
-                    </p>
+                <div>                    
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>
@@ -348,7 +273,7 @@
                                 <b>Parâmetro </b>
                             </label>
                             <select class="fm form-control mr-sm-2" v-model="tagGroup">
-                                <option v-for="(groups,index) in thing.possibleTagGroups" :key="index">{{groups}}</option>                                
+                                <option v-for="(groups,index) in thing.possibleTagGroups" v-if="validaTag(thing.possibleTagGroups,index)" :key="index">{{groups}}</option>                                
                             </select>
                         </div>                        
                     </div>
@@ -357,14 +282,14 @@
                             <label>
                                 <b>Valor Nominal</b>
                             </label>
-                            <input class="fm form-control mr-sm-2" type="text" v-model="valores.vn" placeholder="Ex: 1010144">
+                            <input class="fm form-control mr-sm-2" type="text" v-model="parameter.value" placeholder="Ex: 1010144">
                         </div>
                         <div class="form-group col-md-3">
                             <label>
                                 <b>Unidade </b>
                             </label>
                             <br><br>
-                            <input type="text" v-model="valores.unidade"  class="fm form-control mr-sm-2" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.unit"  class="fm form-control mr-sm-2" placeholder="Ex: 941120000000">
                             <br>
                         </div>
                     </div>
@@ -373,34 +298,34 @@
                             <label>
                                 <b>LIE </b>
                             </label>
-                            <input type="text" v-model="valores.lie" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.lie" class="form-control form-control-sm" placeholder="Ex: 941120000000">
                             <br>
                         </div>  
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LIC </b>
                             </label>
-                            <input type="text" v-model="valores.lic" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.lic" class="form-control form-control-sm" placeholder="Ex: 941120000000">
                             <br>
                         </div>
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LSC </b>
                             </label>
-                            <input type="text" v-model="valores.lsc" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.lsc" class="form-control form-control-sm" placeholder="Ex: 941120000000">
                             <br>
                         </div> 
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LSE </b>
                             </label>
-                            <input type="text" v-model="valores.lse" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.lse" class="form-control form-control-sm" placeholder="Ex: 941120000000">
                             <br>
                         </div>       
                     </div>   
                     <div class="modal-footer">                            
                         <div class="btn-group" role="group">
-                            <button @click.stop.prevent="createParameter(valores, thing, tagGroup)" class="btn btn-success pull-right" :disabled="false">
+                            <button @click.stop.prevent="createParameter(parameter, thing, tagGroup)" class="btn btn-success pull-right" :disabled="false">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i>
                             </button>  
                             <button @click.stop.prevent="recipe" class="btn btn-primary pull-right">
@@ -411,6 +336,19 @@
                 </div>
             </form>
         </b-modal> 
+        
+        
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--         Erro          -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+            <p class="alert alert-danger">Ocorreu um erro: {{error}}</p>
+        </b-modal>
+
     </div>
 </template>
 

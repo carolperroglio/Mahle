@@ -128,60 +128,49 @@ export default {
                 place = 'Digite Código de Barras';  
             return place;       
         },
+
         cadastrar(produto) {
-            this.mensagem = '';
-            this.mensagemSuc = '';
             this.carregando = true;
             produto.enabled = true;
-            axios.post(this.url, produto).then((r) => {
-                this.mensagem = '';
-                this.mensagemSuc = "Produto " + produto.productName + " cadastrado com sucesso";
+            this.$refs.modalCadastrarProduto.hide();  
+            axios.post(this.url, produto).then((r) => {                
                 this.produto = {};
-                this.produtos.push(produto);
-                this.carregando = false;
-                this.$refs.modalCadastrarProduto.hide();
+                this.buscar();
+                this.carregando = false;                              
             }, (error) => {
                 this.carregando = false;
                 this.codigosErro(error.response.status); 
-            })
-
+            })            
         },
 
-        put(produto) {
-            this.mensagem = '';
-            this.mensagemSuc = '';            
+        put(produto) {                   
             this.carregando = true;
-            axios.put(this.url + produto.productId, produto).then((r) => {
-                this.mensagem = '';
-                this.mensagemSuc = "Produto " + produto.productName + " atualizado com sucesso";
-                this.produtos[produto.index] = produto;
-                this.carregando = false;
-                this.$refs.modalEditarProduto.hide();
+            this.$refs.modalEditarProduto.hide();
+            axios.put(this.url + produto.productId, produto).then((r) => {   
+                this.produto = {};                           
+                this.buscar();
+                this.carregando = false;                
             }, (error) => {
                 this.carregando = false;
                 this.codigosErro(error.response.status); 
             })
         },
 
-        excluir(produto) {
-            this.mensagem = '';
-            this.mensagemSuc = '';
+        excluir(produto) {        
             this.carregando = true;
+            this.hideModalRemoveProduct();
             axios.delete(this.url + produto.productId).then((r) => {
-                this.mensagem = '';
-                this.mensagemSuc = "Produto " + produto.productName + " deletado com sucesso";
                 this.produtos = this.produtos.filter(item => item.productId !== produto.productId);
                 this.produto = {};
-                this.carregando = false;
-                this.hideModalRemoveProduct();
+                this.buscar();
+                this.carregando = false;                
             }, (error) => {
                 this.carregando = false;
                 this.codigosErro(error.response.status);                                
             });
-            this.carregando = false;
         },        
         buscar() {
-            this.carregando = true;
+            
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
@@ -190,23 +179,21 @@ export default {
             if(this.fieldValue==undefined || this.fieldValue.length<=0)
                 u = this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&startat=" + this.startat + "&quantity=" + this.quantityPage;
             else
-                u = this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage;
-               
-            setTimeout(() => {
-                axios.get(u, config).then((response) => {
-                    if (!response.data.values && response.data.productId)
-                        this.produtos[0] = response.data;
-                    else {
-                        paginacao(response, this);                        
-                        this.produtos = response.data.values;                        
-                    }
-                    this.carregando = false;
-                }, (error) => {
-                    this.carregando = false;                    
-                    this.codigosErro(error.response.status);                                                        
-                })
-            }, 500)
+                u = this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage;               
+            axios.get(u, config).then((response) => {
+                if (!response.data.values && response.data.productId)
+                    this.produtos[0] = response.data;
+                else {
+                    paginacao(response, this);                        
+                    this.produtos = response.data.values;                        
+                }
+            }, (error) => {
+                this.carregando = false;                    
+                this.codigosErro(error.response.status);                                                        
+            })
+   
         },
+
         codigosErro(status=0){
             if(status == 400)
                 this.showModalErro("Erro de requisição código 400");
@@ -219,6 +206,10 @@ export default {
         },
     },
     beforeMount: function() {
-        this.buscar();
+        this.carregando = true;
+        setTimeout(() => {
+            this.buscar();
+        }, 500)
+        this.carregando = false;
     }
 };

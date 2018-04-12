@@ -21,24 +21,19 @@ function paginacao(total, este) {
 
 const ipServer = process.env.RECIPE_API;
 const ipThings = process.env.THINGS_API;
-const ipLineParameters = process.env.LINE_PARAMETERS;
+const ipLineParameters = process.env.LINE_PARAMETERS_API;
 export default {
     name: "ListLineParameters",
     data() {
         return {
-            urlLineParameters: ipLineParameters+ 'api/specificPhase',
+            urlLineParameters: ipLineParameters+ '/api/specificPhase',
             urlRecipes: ipServer + '/api/recipes',
             urlPhases: ipServer + '/api/phases',
-            urlThings: ipThings + '/api/thinggroups/',
-            mensagem:'',
-            mensagemSuc:'',
-            errors:[],
-            recipes: [],
-            recipe: {},
+            urlThings: ipThings + '/api/thinggroups/',            
+            error:'',
             thing: {},
             things: [],
-            tagGroup:'',
-            parametroCurrent: {},
+            tagGroup:'',           
             parametros:[],            
             parameter: {},
             ferramentas: [],
@@ -50,15 +45,7 @@ export default {
             startat: 0,
             total: 0,
             pages: [],
-            pageAtual: 0,
-            orderField: '',
-            order: '',
-            fieldFilter: '',
-            fieldValue: '',
-            id: '',
-            valores: {},
-            vetNomes: [],
-            deletar: {}
+            pageAtual: 0,            
         }
     },
     components: {
@@ -76,54 +63,9 @@ export default {
         hideModal(ref){
             this.$refs[ref].hide();
         },        
-
-        putParameter(parametro){
-            this.carregando=true;
-
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-            axios.put(this.urlPhases+'/parameters/'+parametro.phaseParameterId, config);
-
-        },
-        createParameter(valores, thing, tagGroup){
-            this.carregando=true;
-            this.hideModal('modalCreateParameter');
-            var item=[];
-            var j=0;
-            var urls = [];
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-
-            axios.post(urlLineParameters, parametro,config).then((response) => { 
-                console.log(response);
-            }, (error) => {
-                console.log(error);
-            });   
-            this.$router.go();    
-        },
-
-      
-        deleteParameter(parametro){
-            this.carregando = true;
-            this.hideModal('modalRemoveParameter');     
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-            var urls =  [];
-            
-            for(var i = 0; i<this.phase.phaseParameters.length; i++)
-                if(this.phase.phaseParameters[i].tag.tagGroup == parametro.parametro)
-                    urls[i] = axios.delete(this.urlPhases + '/parameters/46',{ data: JSON.parse(JSON.stringify(this.phase.phaseParameters[i]))},config);
-                
-            this.deletar = {}; 
-            for(var t=0; t<this.things.length; t++)                                                   
-                for(var j=0; j<this.vetNomes.length; j++)                                                                                                                                                                
-                    this.things[t].possibleTagGroups = this.things[t].possibleTagGroups.filter(item => item !== this.vetNomes[j]);
-            this.$router.go();
-            this.parametros = this.parametros.filter(item => item.parametro !== parametro.parametro);        
-            this.buscarPhase();
+        showModalErro(erro){
+            this.error = erro;
+            this.$refs.modalErro.show();            
         },
 
         organizar(recipe, campo, pos){                         
@@ -142,70 +84,121 @@ export default {
                     this.cabecalhoSetas[i]=false;             
         },
 
+        putParameter(parametro){
+            this.carregando=true;
 
-        getParametros(phase) {                           
-            // {
-            //     "thingGroupId":1,
-            //     "tagGroup":"Larg Canal",
-            //     "LSE":"4.5",
-            //     "LSC":"1",
-            //     "LIC":"2",
-            //     "LIE":"3",
-            //     "value":"foi",
-            //     "Unit":"unidade"
-            //     }
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            axios.put(this.urlLineParameters+'/46', parametro, config).then((response) => {
+                this.getParametros();
+                this.carregando = false;
+            }, (error) => {
+                this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
+            });
+
+        },
+
+        createParameter(parametro, thing, tagGroup){
+            this.carregando=true;
+            this.hideModal('modalCreateParameter');       
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };            
+            parametro.thingGroupId = thing.thingGroupId;
+            parametro.tagGroup = tagGroup;
+            axios.post(this.urlLineParameters, parametro,config).then((response) => {
+                this.parametros.push(response.data);      
+                this.carregando = false;                         
+            }, (error) => {
+                this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
+            });                   
+        },
+
+        deleteParameter(parametro){
+            this.carregando = true;
+            this.hideModal('modalRemoveParameter');     
+            var config = {
+                headers: { 'Cache-Control': 'no-cache' }
+            };
+            axios.delete(this.urlLineParameters+'/46', {data: parametro}, config).then((response) => {                
+                setTimeout(this.getParametros(), 500);                           
+            }, (error) => {
+                this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
+            }) 
+        },        
+
+        getParametros() {                                       
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };    
+            
             axios.get(this.urlLineParameters+'/46', config).then((response) => {                
-                console.log(response.data.values);                                               
-            }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
+                this.parametros = response.data.parameters;                
                 this.carregando = false;
-            })                                                                    
+            }, (error) => {
+                this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
+            }) 
+                                                                                   
         },
         //
         // PAGINAÇÃO //
         //
-
+        validaTag(possibleTagGroups, index){                        
+            for(var i = 0; i<this.parametros.length; i++)
+                if(possibleTagGroups[index] == this.parametros[i].tagGroup)
+                    return false;
+            return true;        
+        },
         
+        codigosErro(status=-1){
+            if(status == 400)
+                this.showModalErro("Erro de requisição código 400");
+            else if(status == 404)
+                this.showModalErro("Serviço não encontrado código 404");
+            else if(status == 500)
+                this.showModalErro("Erro no servidor código 500");             
+            else    
+                this.showModalErro("Erro desconhecido código " + status);
+        },
+
         buscarThings() {            
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.recipes = [];
-
-            axios.get(this.urlThings, config).then((response) => {                
-                this.things = response.data.values;                                               
+            axios.get(this.urlThings, config).then((response) => {  
+                this.things = response.data.values;
+                this.getParametros();                                                     
             }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
                 this.carregando = false;
+                if(error.response)
+                    this.codigosErro(error.response.status);
+                else
+                    this.codigosErro(0);
             })
-
         }, 
-        buscarPhase() {            
-            var config = {
-                headers: { 'Cache-Control': 'no-cache' }
-            };
-            this.recipes = [];
-            console.log(this.urlThings)
-        
-            axios.get(this.urlPhases+'/46', config).then((response) => {                
-                this.phase = response.data;
-                this.getParametros(this.phase);                                                  
-                this.carregando = false;                                              
-            }, (error) => {
-                this.mensagem = 'Erro no server ao buscar ' + error;
-                this.carregando = false;
-            })
-                
-        },
     },
+
     beforeMount() {        
         this.carregando = true;
         
-        this.buscarThings();
-        
-        this.getParametros();        
+        this.buscarThings();                                
     }
 }
