@@ -16,9 +16,6 @@
         margin: 0 0 0 0;
         padding: 0 0 0 0.2%;
     }
-    .table-margin {
-        margin: 29% 0 6% 0;
-    }
     .width-table-context {
         width: 11%;
         text-align: center;
@@ -204,6 +201,13 @@
 }
 
 @media (min-width:1400px) {
+    .cabecalho-table-po {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -2% 0 0 0;
+        z-index: 4;
+    }
     .cabecalho-table-po-modal {
         width: 100%;
         padding: 0 0 0 0.1%;
@@ -296,8 +300,5 @@
     }
     .aling-lb {
         margin-left: 1%;
-    }
-    .table-margin {
-        margin: 14% 0 6% 0;
     }
 }

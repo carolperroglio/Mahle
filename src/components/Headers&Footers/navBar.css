@@ -49,13 +49,10 @@ body {
         z-index: 50;
     }
     #sidebar {
-        margin-top: 7%;
-        margin-left: 0;
+        margin-top: 9%;
+        margin-left: -15px;
         position: fixed;
-    }
-    .icon-navigate {
-        font-size: 2em;
-        margin-top: 80%;
+        width: 50%;
     }
     .nav-item-cab {
         font-size: 0.5em;
@@ -67,12 +64,16 @@ body {
     /*Configurações do ícone do menu lateral collapse*/
     .icon-navigate {
         position: relative;
-        font-size: 30px;
+        font-size: 2em;
         margin-top: 85%;
-        margin-left: 45%;
         color: white;
         cursor: pointer;
         z-index: 100;
+    }
+    #open {
+        background-color: Transparent;
+        border: none;
+        margin-left: 21%;
     }
 }
 
@@ -87,9 +88,10 @@ body {
         z-index: 50;
     }
     #sidebar {
-        margin-top: 7%;
-        margin-left: 0;
+        margin-top: 5.2%;
+        margin-left: -15px;
         position: fixed;
+        width: 32%;
     }
     .nav-item-cab {
         font-size: 0.5em;
@@ -100,13 +102,15 @@ body {
     }
     /*Configurações do ícone do menu lateral collapse*/
     .icon-navigate {
-        position: fixed;
+        position: relative;
         font-size: 2em;
-        margin-top: 2%;
-        margin-left: -2%;
-        height: 6%;
-        width: 8%;
         z-index: 50;
+    }
+    #open {
+        background-color: Transparent;
+        border: none;
+        margin-left: 21%;
+        margin-top: 3%;
     }
 }
 
@@ -121,9 +125,10 @@ body {
         z-index: 50;
     }
     #sidebar {
-        margin-top: 7%;
-        margin-left: 0;
+        margin-top: 3.7%;
+        margin-left: -15px;
         position: fixed;
+        width: 32%;
     }
     .nav-item-cab {
         font-size: 0.5em;
@@ -134,24 +139,22 @@ body {
     }
     /*Configurações do ícone do menu lateral collapse*/
     .icon-navigate {
-        position: fixed;
+        position: relative;
+        margin-top: 85%;
         font-size: 2em;
-        margin-top: 1%;
-        margin-left: -2%;
-        height: 6%;
-        width: 8%;
         z-index: 50;
+    }
+    #open {
+        background-color: Transparent;
+        border: none;
+        margin-left: 6%;
     }
 }
 
+.no-btn {}
+
 
 /*Configurações do ícone do menu lateral collapse*/
-
-#sidebar {
-    margin-top: 5%;
-    position: fixed;
-    z-index: 5555;
-}
 
 #list-group {
     position: relative;
@@ -251,11 +254,6 @@ footer {
 .refactor-class-row {
     height: 0;
     width: 0;
-}
-
-#open {
-    background-color: Transparent;
-    border: none;
 }
 
 #open :visited {

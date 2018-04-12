@@ -39,7 +39,7 @@
     #load-liga {
         margin: 15% 0 0 50% !important;
     }
- 
+
 }
 
 
@@ -83,7 +83,6 @@
     #load-liga {
         margin: 15% 0 0 50% !important;
     }    
-
 }
 
 @media (min-width:1400px) {
@@ -99,8 +98,4 @@
         margin-top: 22.5%;
     }
     /*Box das Fases*/
-    .ligas {
-        margin-top: 15.4%;
-        padding-bottom: 6%;
-    }
 }

@@ -154,7 +154,7 @@
                     <label>
                         <b>Rolo de Aço: </b>
                     </label>
-                    <input type="text" id="prodReceita" placeholder="nome" required  :value="prodRolo" class="form-control form-control-sm" disabled>
+                    <input type="text" id="prodReceita" placeholder="Sem produto registrado!" required  :value="prodRolo" class="form-control form-control-sm" disabled>
                     </div>
                     <div class="form-group col-md-3">
                     <label>
