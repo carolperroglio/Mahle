@@ -146,8 +146,7 @@ export default {
             };    
             
             axios.get(this.urlLineParameters+'/46', config).then((response) => {                                
-                this.parametros = response.data.parameters;                
-                console.log(parametros);
+                this.parametros = response.data.parameters;                            
                 this.carregando = false;
             }, (error) => {
                 this.carregando = false;
