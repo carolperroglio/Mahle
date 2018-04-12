@@ -1,57 +1,44 @@
 @import url("./../../genericcss/generico.css");
-
-/*Menu de cadastro da receita*/
-
-.nav-items-liga {
-    margin-left: 0.3%;
-    padding: 1.2% 0 0.3% 0;
-}
-
-.ls2-marg {
-    margin-left: -1.5%;
-}
-
-
-/* Tabela */
-
-.cabecalho-table-liga {
-    position: fixed;
-    width: 100%;
-    background-color: black;
-    margin: -2% 0 0 0;
-    z-index: 4;
-}
-
-.liga-produtos {
-    margin-top: 22.5%;
-}
-
-.nome-liga {
-    width: 100%;
-    position: fixed;
-    background-color: white;
-    text-align: center;
-    margin-top: -5%;
-}
-
-
-/*Título menu superior da tela de receita*/
-
-.title-recipe-liga {
-    list-style: none;
-    font-family: sans-serif;
-    font-size: 22px;
-    color: rgb(68, 68, 70);
-    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-    margin-left: 1%;
-    margin-top: 1.2%;
-}
-
-#load-liga {
-    margin: 15% 0 0 50% !important;
-}
-
-@media only screen and (max-width: 800px) {
+@media (min-width: 768px) {
+    /*Menu de cadastro da receita*/
+    .nav-items-liga {
+        margin-left: 0.3%;
+        padding: 1.2% 0 0.3% 0;
+    }
+    .ls2-marg {
+        margin-left: 0.5%;
+    }
+    /* Tabela */
+    .cabecalho-table-liga {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -9% 0 0 0;
+        z-index: 4;
+    }
+    .liga-produtos {
+        margin-top: 48.5%;
+    }
+    .nome-liga {
+        width: 100%;
+        position: fixed;
+        background-color: white;
+        text-align: center;
+        margin-top: -16%;
+    }
+    /*Título menu superior da tela de receita*/
+    .title-recipe-liga {
+        list-style: none;
+        font-family: sans-serif;
+        font-size: 22px;
+        color: rgb(68, 68, 70);
+        text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+        margin-left: 1%;
+        margin-top: 1.2%;
+    }
+    #load-liga {
+        margin: 15% 0 0 50% !important;
+    }
     /*Titulo da receita*/
     .title-recipe-liga {
         font-size: 16px;
@@ -64,7 +51,7 @@
     }
     /*Box das Fases*/
     .ligas {
-        margin-top: 11%;
+        margin-top: 11.5%;
         padding-bottom: 6%;
     }
     /**/
@@ -163,5 +150,178 @@
     .config-button2 {
         width: 100%;
         font-size: 11px;
+    }
+}
+
+@media (min-width: 960px) {
+    /*Menu de cadastro da receita*/
+    .nav-items-liga {
+        margin-left: 0.3%;
+        padding: 1.2% 0 0.3% 0;
+    }
+    .ls2-marg {
+        margin-left: -1.5%;
+    }
+    /* Tabela */
+    .cabecalho-table-liga {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -2% 0 0 0;
+        z-index: 4;
+    }
+    .liga-produtos {
+        margin-top: 22.5%;
+    }
+    .nome-liga {
+        width: 100%;
+        position: fixed;
+        background-color: white;
+        text-align: center;
+        margin-top: -5%;
+    }
+    /*Título menu superior da tela de receita*/
+    .title-recipe-liga {
+        list-style: none;
+        font-family: sans-serif;
+        font-size: 22px;
+        color: rgb(68, 68, 70);
+        text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+        margin-left: 1%;
+        margin-top: 1.2%;
+    }
+    #load-liga {
+        margin: 15% 0 0 50% !important;
+    }
+    /*Titulo da receita*/
+    .title-recipe-liga {
+        font-size: 16px;
+        margin-top: 1%;
+    }
+    /*Título dos botões de input do menu superior da tela de receita*/
+    .title-cad {
+        font-size: 13px;
+        margin-top: 10%;
+    }
+    /*Box das Fases*/
+    .ligas {
+        margin-top: 11.5%;
+        padding-bottom: 6%;
+    }
+    /**/
+    .liga {
+        margin-top: 0.5%;
+        padding-bottom: 5%;
+    }
+    .card-header-liga {
+        margin-top: 13%;
+        width: 100%;
+    }
+    .nav-recipeP-liga {
+        height: 22%;
+    }
+    #cadReceita {
+        padding-left: 15%;
+    }
+    .nav-recipe-liga {
+        height: 18%;
+    }
+    .title-recipeP-liga {
+        margin-top: 1%;
+    }
+    .nav-liga {
+        width: 19%;
+        padding-top: 0.2%;
+    }
+    /*Título dos botões de edit-recipe e cadastrar produto da receita*/
+    .edit-text {
+        font-size: 9px;
+    }
+    .slider {
+        width: 100%;
+    }
+    /*Configuração do Box do título fases da receita*/
+    h3 {
+        position: fixed;
+        display: inline;
+        font-size: 18px;
+        font-family: sans-serif;
+    }
+    /*Fases da Receita*/
+    .card-header-recipe-liga {
+        margin-top: 0.2%;
+        padding-bottom: 0.2%;
+    }
+    .card-margin2 {
+        margin-top: 14%;
+        padding-bottom: 0.1%;
+        padding-left: 1%;
+    }
+    /*Box das Fases - Código da fase e Nome da Fase*/
+    .ls5 {
+        margin-left: 5%;
+        width: 100%;
+        font-size: 16px;
+    }
+    /*Título do número das fases Ex.: 1º Fase*/
+    h6 {
+        font-size: 14px;
+        padding-top: 0.8%;
+    }
+    /*Parte de produto da receita*/
+    #produtoR {
+        font-size: 11px;
+    }
+    #removerP {
+        font-size: 12px;
+    }
+    /*Box do cadastro do material da fase*/
+    .ls14 {
+        width: 23%;
+        margin-left: 1%;
+        font-size: 11px;
+    }
+    /*Box do cadastro do parametro da fase*/
+    .ls16 {
+        width: 23.5%;
+        margin-left: 1%;
+        font-size: 11px;
+    }
+    /*Relatório de Receitas - Configuração da listagem*/
+    .ls4 {
+        padding-right: 1%;
+        font-size: 11px;
+    }
+    #addPhase {
+        width: 20%;
+    }
+    /*Configuração do tamanho dos botões: AddFase, EditFase, +Materiais e +Parametros*/
+    .config-button {
+        width: 15%;
+        padding: 0.1%;
+    }
+    /*Configuração do botão Remover produto do cabeçalho da receita */
+    .config-button2 {
+        width: 100%;
+        font-size: 11px;
+    }
+}
+
+@media (min-width:1400px) {
+    /* Tabela */
+    .cabecalho-table-liga {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -2% 0 0 0;
+        z-index: 4;
+    }
+    .liga-produtos {
+        margin-top: 22.5%;
+    }
+    /*Box das Fases*/
+    .ligas {
+        margin-top: 15.4%;
+        padding-bottom: 6%;
     }
 }
