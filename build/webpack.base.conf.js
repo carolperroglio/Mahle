@@ -6,6 +6,7 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const api = 'http://35.170.191.75'
     //const api = 'http://spi067'
@@ -89,6 +90,10 @@ module.exports = {
             template: 'index.html',
             inject: true
         }),
+        new CopyWebpackPlugin([{
+            from: 'node_modules/amcharts3/amcharts/images',
+            to: 'amcharts/images'
+        }, ])
     ],
 
     module: {
