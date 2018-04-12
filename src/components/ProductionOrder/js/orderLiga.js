@@ -171,7 +171,7 @@ export default {
             };
             this.opArray = [];
             // setTimeout(() => {
-            axios.get(this.urlOp + "/v2?&filters=currentStatus,active" + "&filters=productionOrderTypeId,2" + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config)
+            axios.get(this.urlOp + "/v2?&filters=productionOrderTypeId,2" + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config)
                 .then((response) => {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
@@ -422,6 +422,7 @@ export default {
                 data.productionOrderTypeId = 2;
                 data.typeDescription = "Liga";
                 data.currentstatus = "created";
+                data.recipe.recipeProduct.measurementUnit = "kg";
                 this.objetooo = data;
                 console.log('OP sendo criada!!!!!!!!');
                 // Criando OP
@@ -449,7 +450,6 @@ export default {
                                             }
                                         }
                                     }
-
                                 }
                                 //Associar OP criada a linha
                                 this.getOPTypeToAssoc(id);
@@ -485,6 +485,9 @@ export default {
                     break;
                 case 'reproved':
                     return "Reprovado"
+                    break;
+                case 'ended':
+                    return "Finalizado"
                     break;
                 default:
                     break;

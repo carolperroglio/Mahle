@@ -169,7 +169,7 @@ export default {
             console.log(this.order, this.orderField)
                 // setTimeout(() => {
                 // api/ProductionOrders/v2?filters=productionOrderTypeId,2&filters=currentStatus,reproved
-            axios.get(this.urlOp + "/v2?&filters=currentStatus,active" + "&filters=productionOrderTypeId,1" + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+            axios.get(this.urlOp + "/v2?&filters=productionOrderTypeId,1" + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {
                         if (obj.typeDescription == "Tira" && obj.currentThing) {
@@ -290,7 +290,7 @@ export default {
                 console.log(this.parametrosteste);
                 console.log("GETPARAMETROS() - BEEN ENDEEEEEEEEEEEEEED !!! -------------------------")
 
-            }, 4000);
+            }, 1000);
         },
 
         getRecipes: function() {
@@ -427,6 +427,7 @@ export default {
                 console.log(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + this.idLinha + '&productionOrderId=' + this.OPId);
                 console.log(response.data);
 
+                this.buscar();
 
             }).catch((error) => {
                 this.msgErro = error.message;
@@ -448,6 +449,17 @@ export default {
                     this.msgErro = error.message;
                     this.showModal("modalErro");
                 })
+        },
+        desativarOP(id) {
+            axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended")
+                .then(response => {
+                    console.log("OP Desativada" + response.statusText)
+                }).catch((error) => {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+                    console.log("OP Desativada Falhou" + response.statusText)
+                })
+
         },
         createOp: function(data) {
                 this.opArrarKeep = [];
@@ -472,20 +484,20 @@ export default {
 
                                 // Dessassociar OP anterior, a linha
                                 for (var i = 0; i < this.opArray.values.length; i++) {
+                                    var OPId = this.opArray.values[i].productionOrderId;
+                                    var obj = this.opArray.values[i];
+                                    if (obj.currentStatus == "active" && obj.typeDescription == "Tira") {
+                                        //Desativar OP anterior
+                                        this.desativarOP(obj.productionOrderId);
+                                    }
                                     if (this.opArray.values[i].currentThingId != undefined) {
                                         var currentID = this.opArray.values[i].currentThingId
-                                        var OPId = this.opArray.values[i].productionOrderId;
-                                        var obj = this.opArray.values[i];
                                         this.getDisAssoc(currentID, OPId, obj);
                                     }
-
                                 }
                                 //Associar OP criada a linha
                                 this.getOPTypeToAssoc(id);
 
-                                setTimeout(() => {
-                                    this.buscar();
-                                }, 1250)
                             })
                         })
                         .catch((error) => {
@@ -513,6 +525,9 @@ export default {
                     break;
                 case 'reproved':
                     return "Reprovado"
+                    break;
+                case 'ended':
+                    return "Finalizado"
                     break;
                 default:
                     break;
