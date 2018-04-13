@@ -140,7 +140,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" @click.stop.prevent="getTeste(); editGroup(groups[0])" 
+                            <button class="btn btn-success" @click.stop.prevent="getReportDate(); editGroup(groups[0])" 
                             :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
                                 <i class="fa fa-check-square"></i> Confirmar
                             </button>

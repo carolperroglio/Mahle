@@ -161,7 +161,7 @@ export default {
                 this.rolo++;
                 this.ordem = {};
                 console.log(response);
-
+                this.getResults();
             }).catch((error) => {
                 this.msgErro = error.message;
                 this.showModal("modalErro");

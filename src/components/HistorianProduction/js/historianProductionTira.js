@@ -31,7 +31,7 @@ export default {
             cabecalhoSetas: [false, false, false, false, false, false],
             productionOrderId: '',
             consumo: false,
-            rolo: 1,
+            rolo: "",
             lote: 0,
             OPs: [],
             op: '',
@@ -78,7 +78,6 @@ export default {
     },
     methods: {
         showModal(id) {
-            this.cleanVariables();
             this.ordem.quantity = "";
             this.ordem.productId = "";
             this.ordem.productionOrderId = "";
@@ -100,11 +99,11 @@ export default {
                 this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;
                 this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                 this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
-                if (this.orderHistorian.productsOutput != undefined) {
-                    this.rolo = this.orderHistorian.productsOutput.length + 1;
-                } else {
-                    this.rolo = 1;
-                }
+                // if (this.orderHistorian.productsOutput != undefined) {
+                //     this.rolo = this.orderHistorian.productsOutput.length + 1;
+                // } else {
+                //     this.rolo = 1;
+                // }
                 this.titleheader = "Registrar Matéria-Prima"
             } else if (this.ordem.type === "input") {
                 this.consumo = true;
@@ -146,10 +145,10 @@ export default {
         cleanVariables() {
             this.quantity = "";
             this.productionOrderId = "";
-            this.prodRolo = "";
+            // this.prodRolo = "";
             this.unity = "";
-            this.roloSaida = "";
-            this.roloSaidaID = "";
+            // this.roloSaida = "";
+            // this.roloSaidaID = "";
             this.loteAco = "";
             this.loteLiga = "";
         },
@@ -193,12 +192,13 @@ export default {
                     this.carregando = false;
                     this.pReceita = false;
                     this.pFase = false;
-                    this.rolo++;
+                    // this.rolo++;
                     this.ordem = {};
                     console.log(ordem);
                     this.hideModal('cadAco');
                     this.hideModal('cadLiga');
                     this.hideModal('cadRoloSaida');
+                    this.getResults();
                     this.cleanVariables();
                 }).catch((error) => {
                     this.msgErro = error.message;
@@ -258,24 +258,30 @@ export default {
             this.carregando = true;
             axios.get(this.url + '/api/OrderHistorian/' + this.productionOrder.productionOrderId).then((response) => {
 
-                console.log(response.data);
-                this.orderHistorian = response.data;
+            console.log(response.data);
+            this.orderHistorian = response.data;
+
+            if(this.orderHistorian.productsOutput.length > 0){
+                this.rolo = this.orderHistorian.productsOutput.length + 1;
+            }else if(this.orderHistorian.productsOutput.length == 0){
+                this.rolo = 1;
+            }
                 for (var i = 0; i < this.orderHistorian.productsInput.length; i++) {
                     this.orderHistorian.productsInput[i].hour = this.hourConvert(this.orderHistorian.productsInput[i].date);
                     this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
                     this.changeJson(this.orderHistorian.productsInput[i], "in");
                 }
                 for (var i = 0; i < this.orderHistorian.productsOutput.length; i++) {
-                    this.rolo = this.orderHistorian.productsOutput.length;
                     this.orderHistorian.productsOutput[i].hour = this.hourConvert(this.orderHistorian.productsOutput[i].date);
                     this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
                     this.changeJson(this.orderHistorian.productsOutput[i], "out");
                 }
-                this.rolo += 1;
+                // this.rolo += 1;
                 console.log(this.orderHistorianAllProducts);
                 this.carregando = false;
             }).catch((error) => {
                 if (error.response.status == 404) {
+                
                     this.msgErro = "Sem registros na tabela";
                     this.showModal("modalErro");
                 } else {

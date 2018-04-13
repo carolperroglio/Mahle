@@ -57,7 +57,7 @@
                                     <b>Materiais Consumidos e Apontados</b>{{quantity}}
                                     <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
                                     <div style="margin-right:1%" class="pull-right">
-                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = '323'; ordem.productId = '';lote = ''; unity='';loteAco=''; showModal('cadAco'); ordem.type = 'input'">
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity='';loteAco=''; showModal('cadAco'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
                                     </button>
                                     <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';productionOrderId=''; unity='';loteLiga=''; showModal('cadLiga'); ordem.type = 'input'">
@@ -166,7 +166,7 @@
                     <label>
                         <b>Unidade: </b>
                     </label>
-                    <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    <input type="text" required :value="unity = 'kg'" placeholder="Ex:kg" class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="form-row">
@@ -179,10 +179,10 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-success" :disabled=" quantity==='' || loteAco=='' || unity==''" @click.stop.prevent="cadastrarApont(ordem);">
+                        <button class="btn btn-success" :disabled=" quantity=='' || loteAco=='' || unity==''" @click.stop.prevent="cadastrarApont(ordem);">
                             <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
-                        <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
+                        <button @click.stop.prevent="quantity = ''; loteAco = ''; unity = ''" class="btn btn-primary pull-right">
                             <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                         </button>
                     </div>
@@ -217,7 +217,7 @@
                     <label>
                         <b>Unidade: </b>
                     </label>
-                    <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    <input type="text" required :value="unity = 'kg'" placeholder="Ex:kg" class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="form-row">
@@ -230,10 +230,10 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId=='' || unity == ''" @click.stop.prevent="cadastrarApont(ordem);">
+                            <button class="btn btn-success" :disabled=" quantity=='' || productionOrderId=='' || unity == ''" @click.stop.prevent="cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
-                            <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
+                            <button @click.stop.prevent="quantity = ''; quantity = ''; unity = '';productionOrderId=''" class="btn btn-primary pull-right">
                                 <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                             </button>
                         </div>
@@ -263,7 +263,7 @@
                     <label>
                         <b>Unidade: </b>
                     </label>
-                    <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    <input type="text" required :value="unity = 'kg'" placeholder="Ex:kg" class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="form-row">
@@ -279,7 +279,7 @@
                             <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show=" pReceita" @click.stop.prevent="cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
-                            <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
+                            <button @click.stop.prevent="quantity = ''; unity = '';" class="btn btn-primary pull-right">
                                 <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                             </button>
                         </div>

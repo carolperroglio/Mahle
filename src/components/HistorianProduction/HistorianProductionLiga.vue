@@ -155,7 +155,7 @@
                     <label>
                         <b>Unidade </b>
                     </label>
-                    <input type="text" required v-model="unity" placeholder="Ex:kg" class="form-control form-control-sm">
+                    <input type="text" required :value="unity ='kg'" placeholder="Ex:kg" class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="form-row">
@@ -171,7 +171,7 @@
                             <button class="btn btn-success" :disabled="!quantity ||prodRolo == ''||lote ==''|| unity ==''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
-                            <button @click.stop.prevent="ordem.quantity =''; ordem.productName = ''" class="btn btn-primary pull-right">
+                            <button @click.stop.prevent="quantity =''; lote = ''; unity = ''" class="btn btn-primary pull-right">
                                 <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                             </button> 
                         </div>
