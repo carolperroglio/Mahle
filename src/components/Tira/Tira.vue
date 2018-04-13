@@ -40,36 +40,36 @@
             <stretch background="#4d4d4d"></stretch>
         </div>   
         <div class="header-table-tira"  v-show="!carregando" v-if="recipeCadastrada">
-            <label class="ls3">
+            <label class="ls-tira">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro
                 </font></b>
             </label>                    
-            <label class="ls3">
+            <label class="ls-tira">
                 <b><font class="cursor-class" color="#ffffff">
                     Valor Nominal
                 </font></b>
             </label>
-            <label class="ls3">
+            <label class="ls-tira">
                 <b><font class="cursor-class" color="#ffffff">
                     Unidade
                 </font></b>
             </label>  
-            <label class="ls3">
+            <label class="ls-tira">
                 <b><font class="cursor-class" color="#ffffff">
                     LIE <p class="font-size">Limite inferior da Especificação
                 </p></font></b>
             </label> 
-            <label class="ls3">
+            <label class="ls-tira">
                <b><font class="cursor-class" color="#ffffff">
                     LIC <p class="font-size">Limite inferior de Controle 
                 </p></font></b>
             </label> 
-            <label class="ls3">
+            <label class="ls-tira">
                <b><font class="cursor-class" color="#ffffff">
                     LSC <p class="font-size">Limite superior de Controle
             </p></font></b>
             </label>
-            <label class="ls3">
+            <label class="ls-tira">
                 <b><font class="cursor-class" color="#ffffff">
                     LSE <p class="font-size">Limite superior de Especificação 
                 </p></font></b>
@@ -85,31 +85,31 @@
         <!--                       -->
         <div class="margin-table-tira" v-show="!carregando">            
             <div v-for="(pro, index) in parametros" v-bind:class="{cinza: index%2==0}" :key="index">                     
-                <label class="ls3">
+                <label class="ls-tira">
                 <b><font color="#9BA6A5"> </font></b>
                     {{pro.parametro}}
                 </label>                    
-                <label class="ls3">
+                <label class="ls-tira">
                 <b><font color="#9BA6A5"> </font></b>
                     {{pro.vn}}
                 </label>
-                <label class="ls3">
+                <label class="ls-tira">
                 <b><font color="#9BA6A5"> </font></b>
                     {{pro.unidade}}
                 </label>
-                <label class="ls3">
+                <label class="ls-tira">
                 <b><font color="#9BA6A5"> </font></b>
                     {{pro.lie}}
                 </label>   
-                <label class="ls3">
+                <label class="ls-tira">
                 <b><font color="#9BA6A5"> </font></b>
                     {{pro.lic}}
                 </label>            
-                <label class="ls3">
+                <label class="ls-tira">
                 <b><font color="#9BA6A5"> </font></b>
                     {{pro.lsc}}
                 </label>
-                <label class="ls3">
+                <label class="ls-tira">
                 <b><font color="#9BA6A5"> </font></b>
                     {{pro.lse}}
                 </label>                                                                                        

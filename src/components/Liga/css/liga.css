@@ -5,9 +5,6 @@
         margin-left: 0.3%;
         padding: 1.2% 0 0.3% 0;
     }
-    .ls2-marg {
-        margin-left: 0.5%;
-    }
     /* Tabela */
     .cabecalho-table-liga {
         position: fixed;
@@ -48,10 +45,7 @@
     .nav-items-liga {
         margin-left: 0.3%;
         padding: 1.2% 0 0.3% 0;
-    }
-    .ls2-marg {
-        margin-left: -1.5%;
-    }
+    }  
     /* Tabela */
     .cabecalho-table-liga {
         position: fixed;
@@ -85,17 +79,23 @@
     }    
 }
 
+
 @media (min-width:1400px) {
     /* Tabela */
     .cabecalho-table-liga {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -2% 0 0 0;
+        margin: -1.7% 0 0 0;
         z-index: 4;
     }
+ 
     .liga-produtos {
-        margin-top: 22.5%;
+        margin-top: 19.5%;
+    }
+
+    .fim{
+        padding-left: 15%;
     }
     /*Box das Fases*/
 }

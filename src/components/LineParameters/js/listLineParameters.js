@@ -93,7 +93,7 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
-
+            this.hideModal('modalEditarConfirm');
             delete parametro.equip;
           
             axios.put(this.urlLineParameters+'/46', parametro, config).then((response) => {
@@ -111,7 +111,7 @@ export default {
 
         createParameter(parametro, thing, tagGroup){
             this.carregando=true;
-            this.hideModal('modalCreateParameter');       
+            this.hideModal('modalCreateConfirm');       
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };            
