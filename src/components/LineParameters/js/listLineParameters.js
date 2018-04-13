@@ -33,7 +33,8 @@ export default {
             error:'',
             thing: {},
             things: [],
-            tagGroup:'',           
+            tagGroup:'', 
+            parametro:{},          
             parametros:[],            
             parameter: {},
             ferramentas: [],
@@ -45,8 +46,13 @@ export default {
             startat: 0,
             total: 0,
             pages: [],
-            pageAtual: 0,            
+            pageAtual: 0,   
+            deleteParameter:{},  
+            teste:'',       
         }
+    },
+    computed:{
+
     },
     components: {
         'b-modal': bModal,
@@ -66,8 +72,7 @@ export default {
         showModalErro(erro){
             this.error = erro;
             this.$refs.modalErro.show();            
-        },
-
+        },        
         organizar(recipe, campo, pos){                         
             recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
             for(var i=0; i<this.cabecalhoSetas.length; i++)
@@ -90,6 +95,9 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
+
+            delete parametro.equip;
+          
             axios.put(this.urlLineParameters+'/46', parametro, config).then((response) => {
                 this.getParametros();
                 this.carregando = false;
@@ -130,7 +138,7 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             axios.delete(this.urlLineParameters+'/46', {data: parametro}, config).then((response) => {                
-                setTimeout(this.getParametros(), 500);                           
+                this.getParametros();                          
             }, (error) => {
                 this.carregando = false;
                 if(error.response)
@@ -140,13 +148,19 @@ export default {
             }) 
         },        
 
+        validaParametro(parameter){
+            if(parameter.lsc=='' || parameter.lse=='' || parameter.lic=='' || parameter.lie=='' || parameter.unit=='' || parameter.value=='' ||
+                parameter.lsc==undefined || parameter.lse==undefined || parameter.lic==undefined || parameter.lie==undefined|| parameter.unit==undefined || parameter.value==undefined)
+                return false;
+            return true;    
+        },
         getParametros() {                                       
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };    
             
             axios.get(this.urlLineParameters+'/46', config).then((response) => {                                
-                this.parametros = response.data.parameters;                            
+                this.parametros = response.data.parameters;                                
                 this.carregando = false;
             }, (error) => {
                 this.carregando = false;
@@ -160,11 +174,10 @@ export default {
         //
         // PAGINAÇÃO //
         //
-        validaTag(possibleTagGroups, index){                        
-            console.log(parametros);
-            for(var i = 0; i<this.parametros.length; i++)
-                if(possibleTagGroups[index] == this.parametros[i].tagGroup)
-                    return false;
+        validaTag(possibleTagGroups, index, parametros){                     
+            for(var i = 0; i<parametros.length; i++)
+                if(possibleTagGroups == parametros[i].tagGroup)
+                    return false;                
             return true;        
         },
         
@@ -177,6 +190,13 @@ export default {
                 this.showModalErro("Erro no servidor código 500");             
             else    
                 this.showModalErro("Erro desconhecido código " + status);
+        },
+
+        buscaEquip(thingId){
+            for(var i=0; i<this.things.length; i++)                
+                if(this.things[i].thingGroupId==thingId)
+                    return this.things[i].groupName;
+            return "Erro";        
         },
 
         buscarThings() {            
@@ -197,9 +217,8 @@ export default {
         }, 
     },
 
-    beforeMount() {        
-        this.carregando = true;
-        
+    created() {        
+        this.carregando = true;        
         this.buscarThings();                                
     }
 }

@@ -17,7 +17,9 @@
     text-align: center;
 }
 
-
+button{
+    cursor: pointer;
+}
 /* Clase de cursor mãozinha */
 
 .cursor-class {

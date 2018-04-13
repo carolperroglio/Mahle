@@ -52,7 +52,15 @@ export default {
             erro:'',
             input:'',
             recipeProduct: {},
-            p:{}
+            p:{},
+            teste:'',
+        }
+    },
+    computed: {
+        // uma função "getter" computada (computed getter)
+        reversedMessage: function () {
+            // `this` aponta para a instância Vue da variável `vm`
+            return this.recipeProduct;
         }
     },
     filters: {
@@ -166,9 +174,7 @@ export default {
                 else   
                     this.cabecalhoSetas[i]=false;             
         },
-        
-
-
+ 
         /*****************/
         /*               */
         /*               */
@@ -387,7 +393,6 @@ export default {
                 axios.get(url + name, this.config).then((response) => {                                        
                     response.data.values.forEach((pro) => {                        
                         pros.push(pro);
-                        console.log("oi")
                     });
                 }, (error) => {
                     console.log(error);

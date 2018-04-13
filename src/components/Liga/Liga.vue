@@ -28,20 +28,16 @@
                     <b>Produto <br>Final</b>
                 </li>                 
                 <li class="nav-items-liga form-group col-sm-2"><!--recipe.recipeProduct.product.productName-->
-                    <input :disabled="recipeCadastrada" placeholder="Nome do produto" class="form-control form-control-sm" list="dropdownMenuButton" 
-                        v-model="productRecipeName" @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim); recipeProduct={}" >                                                           
-
-                        <!--<select id="dropdownMenuButton" v-model="recipeProduct" class="form-control form-control-sm"
-                            style="position:absolute;" v-show="prosFim.length>0">                                
-                            <option v-for="(p,i) in prosFim" :key="i"                        
-                            :value="p">{{p.productName}}</option>
-                        </select> -->                       
-
-                    <b-dropdown-item id="dropdownMenuButton" style="position:absolute;" class="form-control form-control-sm"
-                        @click.stop.prevent="recipeProduct=p; productRecipeName=p.productName; prosFim=[];" 
+                    <input :disabled="recipeCadastrada" placeholder="Nome do produto" class="form-control form-control-sm" 
+                        v-model="productRecipeName" @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim); recipeProduct={}" >                                                                                 
+                    
+                    <select id="dropdownMenuButton" @change="productRecipeName=recipeProduct.productName" 
+                        v-show="prosFim.length>0" v-model="recipeProduct" class="form-control form-control-sm">
+                        <option :value="p" 
                         v-for="(p,index) in prosFim" v-bind:key="index">
-                        {{p.productName}}                   
-                    </b-dropdown-item>
+                        {{p.productName}}</option>                   
+                    </select>
+                      
                 </li>
                 <li class="nav-items-liga col-sm-2" v-if="!recipeCadastrada" >                    
                     <button type="button" class="btn btn-success btn-sm" :disabled="!recipe.recipeName || !recipe.recipeCode || recipeProduct==undefined || recipeProduct.productId==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''"  @click.stop.prevent="createRecipe(recipe,recipeProduct)">
