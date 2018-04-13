@@ -104,13 +104,13 @@
         <!--                       -->                            
         <div v-if="recipeCadastrada" v-show="!carregando" class="liga-produtos">
             <div v-for="(pro, index) in produtos" v-bind:class="{cinza: index%2==0}" :key="index">                                    
-                <label class="ls ls2 ls2-marg col-md-2">
+                <label class="ls2 col-md-2">
                     {{pro.product.productName}}</label>
-                <label class="ls ls2 col-md-2">
+                <label class="ls2 col-md-2">
                     {{pro.minValue}}</label>
-                <label class="ls ls2 col-md-2">
+                <label class="ls2 col-md-2">
                     {{pro.maxValue}}</label>                                        
-                <label class="ls ls2 col-md-5">                        
+                <label class="ls2 fim col-md-5">                        
                     <i class = "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto(pro, index)"></i>&nbsp;&nbsp;&nbsp;                     
                     <!--<i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="phaseProduct = {};showModalEditProPhase(pro, index)"></i>-->
                 </label>

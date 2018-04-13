@@ -33,7 +33,10 @@
         padding: 1.2% 0 1% 0;
     }
     .item-cabecalho-table-parameters {
-        width: 12%;
+        width: 15%;
+        font-family: sans-serif;
+        font-size: 12px;
+        text-align: center;
     }
     .cabecalho-table-parameters {
         position: fixed;
@@ -51,6 +54,12 @@
     .font-size {
         font-size: 12px;
     }
+    .item-cabecalho-table-parameters-sm{
+        width: 8%;
+        font-family: sans-serif;
+        font-size: 12px;
+        text-align: center;
+    }
 }
 
 @media (min-width: 1400px) {
@@ -66,16 +75,28 @@
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -5.2% 0 0 0;
+        margin: -3% 0 0 0;
         z-index: 4;
     }
     #load-parameters {
         margin: 30% 0 0 50%;
     }
     .margin-table-parameters {
-        margin: 20% 0 6% 0;
+        margin: 16.3% 0 6% 0;
     }
     .font-size {
         font-size: 12px;
+    }
+    .item-cabecalho-table-parameters {
+        width: 14%;
+        font-family: sans-serif;
+        font-size: 12px;
+        text-align: center;
+    }
+    .item-cabecalho-table-parameters-sm{
+        width: 8%;
+        font-family: sans-serif;
+        font-size: 12px;
+        text-align: center;
     }
 }

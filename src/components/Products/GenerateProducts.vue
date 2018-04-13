@@ -95,6 +95,7 @@
         </div>       
 
 
+
         <!--                       -->
         <!--                       -->
         <!--                       -->
@@ -104,7 +105,10 @@
         <!--                       -->
         <div class="margin-table-products" v-show="!carregando && produtos.length==0">
             <h2>Não foram encontradas Matérias-Primas</h2>
-        </div>        
+        </div>    
+
+
+
         <!--                       -->
         <!--                       -->
         <!--                       -->
