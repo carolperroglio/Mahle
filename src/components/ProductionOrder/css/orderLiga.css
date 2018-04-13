@@ -252,32 +252,3 @@
             margin-left: 0.7%;
         }
     }
-    /* @media screen and (max-width: 801px) {
-    .card-body-op {
-        font-size: 10px;
-        padding-top: 1%;
-        bottom: 1%;
-    }
-    .ls1 {
-        width: 20%;
-        font-size: 12px;
-    }
-    .cabecalho-table-po-liga {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -2.5% 0 0 0;
-        z-index: 4;
-    }
-    .margin-table {
-        margin-top: 18%;
-    }
-} */
-    /* 1920 x 1080 */
-    
-    @media (min-width: 992px) {
-        .modal-lg {
-            max-width: 85%;
-            margin-left: 8% !important;
-        }
-    }

@@ -78,6 +78,7 @@ export default {
     },
     methods: {
         showModal(id) {
+            this.cleanVariables();
             this.ordem.quantity = "";
             this.ordem.productId = "";
             this.ordem.productionOrderId = "";
@@ -164,16 +165,14 @@ export default {
 
             if (this.loteAco != "") {
                 ordem.productId = 47;
+            } else if (this.loteLiga != "") {
+                ordem.productId = this.productionOrderId.recipe.recipeProduct.product.productId;
             } else {
                 ordem.productId = this.roloSaidaID;
             }
 
-            if (this.productionOrderId.productionOrderId != undefined) {
-                ordem.productionOrderId = this.productionOrderId.productionOrderId;
-            } else {
-                ordem.productionOrderId = this.productionOrder.productionOrderId;
-            }
 
+            ordem.productionOrderId = this.productionOrder.productionOrderId;
             ordem.quantity = this.quantity;
             ordem.type = this.ordem.type;
             ordem.unity = this.unity;
