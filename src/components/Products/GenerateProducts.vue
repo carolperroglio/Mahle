@@ -36,8 +36,9 @@
         </div>                     
         <div id="load-products" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>                
-        </div>                                    
-        <div class="cabecalho-table" v-show="!carregando">
+        </div>       
+                                     
+        <div class="cabecalho-table" v-show="!carregando && produtos.length>0">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls2  ls2-margin col-md-2">
                 <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -74,7 +75,7 @@
         <!--                       -->
         <!--                       -->            
             
-        <div class="margin-table-products" v-show="!carregando">
+        <div class="margin-table-products" v-show="!carregando && produtos.length>0">
             <div v-for="(p, index) in produtos" v-bind:class="{cinza: index%2==0}" v-bind:key="index">                                    
                 <label class="ls2 col-md-2">
                     {{p.productName}}</label>
@@ -92,7 +93,18 @@
                 </label>
             </div>       
         </div>       
-            
+
+
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <!--       Paginação       -->
+        <!--                       -->
+        <!--                       -->
+        <!--                       -->
+        <div class="margin-table-products" v-show="!carregando && produtos.length==0">
+            <h2>Não foram encontradas Matérias-Primas</h2>
+        </div>        
         <!--                       -->
         <!--                       -->
         <!--                       -->
