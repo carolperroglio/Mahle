@@ -16,7 +16,7 @@
                 
               
                 <li class="nav-item-prameters">
-                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModal('modalCreateParameter')"><i class="fa fa-plus" aria-hidden="true" ></i> Cadastrar Parâmetro</button>
+                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="parameter={};thing={};tagGroup='';showModal('modalCreateParameter')"><i class="fa fa-plus" aria-hidden="true" ></i> Cadastrar Parâmetro</button>
                 </li>
             </ul>
         </div>                     
@@ -25,7 +25,7 @@
         </div>                                                                          
         
 
-        <div class="cabecalho-table-parameters"  v-show="!carregando">
+        <div class="cabecalho-table-parameters"  v-show="!carregando && parametros.length>0">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -84,7 +84,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <div class="margin-table-parameters" v-show="!carregando">         
+        <div class="margin-table-parameters" v-show="!carregando && parametros.length>0">         
             <div v-for="(pro, index) in parametros" :class="{cinza: index%2==0}" :key="index">                     
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"></font></b>
@@ -116,8 +116,8 @@
                 </label> 
                 <label class="ls2 item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"></font></b>
-                    <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="deletar=pro;showModal('modalRemoveParameter');"></i>&nbsp;&nbsp;&nbsp;                     
-                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="cadEdit='Editar Parâmetro';p, index;showModal('modalEditarParameter')"></i>
+                    <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="deletarParameter=pro;showModal('modalRemoveParameter');"></i>&nbsp;&nbsp;&nbsp;                     
+                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="parametro=JSON.parse(JSON.stringify(pro));parametro.equip=buscaEquip(parametro.thingGroupId); showModal('modalEditarParameter')"></i>
                 </label>                                                                                                       
             </div>                                                                                                       
         </div>      
@@ -153,7 +153,7 @@
             <div class="modal-footer">
                 <div>
                     <div class="btn-group" role="group">
-                        <button @click.stop.prevent="deleteParameter(deletar);" class="btn btn-success">
+                        <button @click.stop.prevent="deleteParameter(deletarParameter);" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
                         <button @click.stop.prevent="hideModal('modalRemoveParameter')" class="btn btn-danger">
@@ -180,13 +180,13 @@
                             <label>
                                 <b>Equipamento </b>
                             </label>
-                            <input class="fm form-control mr-sm-2" type="text" disabled placeholder="Ex: 1010144">                                                        
+                            <input class="fm form-control mr-sm-2" v-model="parametro.equip" type="text" disabled placeholder="Ex: 1010144">                                                        
                         </div>
                         <div class="form-group col-md-6">
                             <label>
                                 <b>Parâmetro </b>
                             </label>
-                            <input class="fm form-control mr-sm-2" type="text" disabled placeholder="Ex: 1010144">                                                        
+                            <input class="fm form-control mr-sm-2" v-model="parametro.tagGroup" type="text" disabled placeholder="Ex: 1010144">                                                        
                         </div>                        
                     </div>
                     <div class="form-row">
@@ -194,14 +194,14 @@
                             <label>
                                 <b>Valor Nominal</b>
                             </label>
-                            <input class="fm form-control mr-sm-2" type="text" placeholder="Ex: 1010144">
+                            <input class="fm form-control mr-sm-2" v-model="parametro.value" type="text" placeholder="Ex: 1010144">
                         </div>
                         <div class="form-group col-md-3">
                             <label>
                                 <b>Unidade </b>
                             </label>
                             <br><br>
-                            <input type="text" class="fm form-control mr-sm-2" placeholder="Ex: 941120000000">
+                            <input type="text" class="fm form-control mr-sm-2" v-model="parametro.unit" placeholder="Ex: 941120000000">
                             <br>
                         </div>
                     </div>
@@ -210,37 +210,37 @@
                             <label>
                                 <b>LIE </b>
                             </label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" class="form-control form-control-sm" v-model="parametro.lie" placeholder="Ex: 941120000000">
                             <br>
                         </div>  
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LIC </b>
                             </label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" class="form-control form-control-sm" v-model="parametro.lic" placeholder="Ex: 941120000000">
                             <br>
                         </div>
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LSC </b>
                             </label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" class="form-control form-control-sm" v-model="parametro.lsc" placeholder="Ex: 941120000000">
                             <br>
                         </div> 
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LSE </b>
                             </label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" class="form-control form-control-sm" v-model="parametro.lse" placeholder="Ex: 941120000000">
                             <br>
                         </div>       
                     </div>   
                     <div class="modal-footer">                            
                         <div class="btn-group" role="group">
-                            <button @click.stop.prevent="createParameter(valores, thing, tagGroup)" class="btn btn-success pull-right" :disabled="false">
+                            <button @click.stop.prevent="showModal('modalEditarConfirm');" class="btn btn-success pull-right" :disabled="!validaParametro(parametro)">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i>
                             </button>  
-                            <button @click.stop.prevent="recipe" class="btn btn-primary pull-right">
+                            <button @click.stop.prevent="parametro.lse='';parametro.lsc='';parametro.lse='';parametro.lic='';parametro.lie='';parametro.unit='';parametro.value='';" class="btn btn-primary pull-right">
                                 Limpar                           
                             </button>                      
                         </div>                        
@@ -248,6 +248,33 @@
                 </div>
             </form>
         </b-modal> 
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--        Editar         -->
+        <!--       Parametro       -->
+        <!--                       -->
+        <!--                       -->                 
+        <b-modal ref="modalEditarConfirm" hide-footer title="Editar Parâmetro">            
+            <div class="modal-body">
+                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar o Parametro !?</b>
+            </div>    
+            <div class="modal-footer">
+                <div>
+                    <div class="btn-group" role="group">
+                        <button @click.stop.prevent="putParameter(parametro)" class="btn btn-success">
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
+                        </button>
+                        <button @click.stop.prevent="hideModal('modalRemoveParameter')" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar   
+                        </button>                      
+                    </div>
+                </div>
+            </div>
+        </b-modal>
+        
+
 
         <!--                                 -->
         <!--                                 -->
@@ -273,7 +300,7 @@
                                 <b>Parâmetro </b>
                             </label>
                             <select class="fm form-control mr-sm-2" v-model="tagGroup">
-                                <option v-for="(groups,index) in thing.possibleTagGroups" v-if="validaTag(thing.possibleTagGroups,index)" :key="index">{{groups}}</option>                                
+                                <option v-for="(groups,index) in thing.possibleTagGroups" v-if="validaTag(groups,index,parametros)" :key="index">{{groups}}</option>                                
                             </select>
                         </div>                        
                     </div>
@@ -325,10 +352,10 @@
                     </div>   
                     <div class="modal-footer">                            
                         <div class="btn-group" role="group">
-                            <button @click.stop.prevent="createParameter(parameter, thing, tagGroup)" class="btn btn-success pull-right" :disabled="false">
+                            <button @click.stop.prevent="showModal('modalCreateConfirm')" class="btn btn-success pull-right" :disabled="!validaParametro(parameter) || tagGroup=='' || tagGroup==undefined">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i>
                             </button>  
-                            <button @click.stop.prevent="recipe" class="btn btn-primary pull-right">
+                            <button @click.stop.prevent="parameter.lse='';parameter.lsc='';parameter.lse='';parameter.lic='';parameter.lie='';parameter.unit='';parameter.value='';tagGroup='';thing={}" class="btn btn-primary pull-right">
                                 Limpar                           
                             </button>                      
                         </div>                        
@@ -336,6 +363,31 @@
                 </div>
             </form>
         </b-modal> 
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--        Create         -->
+        <!--       Parametro       -->
+        <!--                       -->
+        <!--                       -->                 
+        <b-modal ref="modalCreateConfirm" hide-footer title="Cadastrar Parâmetro">            
+            <div class="modal-body">
+                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja cadastrar o Parametro !?</b>
+            </div>    
+            <div class="modal-footer">
+                <div>
+                    <div class="btn-group" role="group">
+                        <button @click.stop.prevent="createParameter(parameter, thing, tagGroup);" class="btn btn-success">
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
+                        </button>
+                        <button @click.stop.prevent="hideModal('modalRemoveParameter')" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar   
+                        </button>                      
+                    </div>
+                </div>
+            </div>
+        </b-modal>
         
         
         <!--                       -->
