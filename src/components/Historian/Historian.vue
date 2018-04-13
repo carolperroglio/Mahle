@@ -36,7 +36,6 @@
         </div>
 
         <div class="row conteudotabela">
-            
             <div class="col-sm-2">
             <select class="form-control-outline-secondary" v-model="newGroup" @change.prevent="editGroup(newGroup)">    
                 <option v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
@@ -141,15 +140,15 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" @click.stop.prevent="getReportDate()" 
+                            <button class="btn btn-success" @click.stop.prevent="getTeste(); editGroup(groups[0])" 
                             :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
                                 <i class="fa fa-check-square"></i> Confirmar
                             </button>
-                            <button class="btn btn-success" @click.stop.prevent="getReportOP()" 
+                            <button class="btn btn-success" @click.stop.prevent="getReportOP(); editGroup(groups[0])" 
                             :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !OP" v-if="filterSelected == 'op'">
                                 <i class="fa fa-check-square"></i> Confirmar
                             </button>
-                            <button class="btn btn-success" @click.stop.prevent="getReportCode()" 
+                            <button class="btn btn-success" @click.stop.prevent="getReportCode(); editGroup(groups[0])" 
                             :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !recipeCode" v-if="filterSelected == 'code'">
                                 <i class="fa fa-check-square"></i> Confirmar
                             </button>

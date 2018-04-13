@@ -218,7 +218,7 @@ export default {
 
             for (var i = 0; i < this.opSelectedParams.recipe.phases.length; i++)
                 if (this.opSelectedParams.recipe.phases[i].phaseId != 46)
-                    if (this.opSelectedParams.recipe.phases[i].phaseParameters.length > 0) {
+                    if (this.opSelectedParams.recipe.phases[i].phaseProducts.length > 0) {
                         this.phase = this.opSelectedParams.recipe.phases[i];
                         this.getParametros(this.phase);
                         this.recipeCadastrada = true;

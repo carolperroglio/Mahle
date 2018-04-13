@@ -54,10 +54,10 @@
                         <div>
                             <div class="card">
                                 <div class="card-header card-header-hp">
-                                    <b>Materiais Consumidos e Apontados</b>
+                                    <b>Materiais Consumidos e Apontados</b>{{quantity}}
                                     <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
                                     <div style="margin-right:1%" class="pull-right">
-                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity='';loteAco=''; showModal('cadAco'); ordem.type = 'input'">
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = '323'; ordem.productId = '';lote = ''; unity='';loteAco=''; showModal('cadAco'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
                                     </button>
                                     <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';productionOrderId=''; unity='';loteLiga=''; showModal('cadLiga'); ordem.type = 'input'">
@@ -251,7 +251,7 @@
                     <label>
                         <b>Rolo de Saída: </b>
                     </label>
-                    <input type="text" id="prodReceita" placeholder="nome" required v-model="roloSaida" class="form-control form-control-sm" disabled>
+                    <input type="text" id="prodReceita" required v-model="roloSaida" class="form-control form-control-sm" disabled>
                     </div>
                     <div class="form-group col-md-3">
                     <label>
@@ -276,7 +276,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity==='' || productionOrderId=='' || unity == ''" v-show=" pReceita" @click.stop.prevent="cadastrarApont(ordem);">
+                            <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show=" pReceita" @click.stop.prevent="cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="ordem.quantity = ''; ordem.productName = ''" class="btn btn-primary pull-right">
