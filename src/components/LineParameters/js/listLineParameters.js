@@ -48,12 +48,10 @@ export default {
             pages: [],
             pageAtual: 0,   
             deleteParameter:{},  
-            teste:'',       
+                   
         }
     },
-    computed:{
 
-    },
     components: {
         'b-modal': bModal,
         Stretch,
@@ -131,7 +129,7 @@ export default {
             });                   
         },
 
-        deleteParameter(parametro){
+        deleteParametro(parametro){
             this.carregando = true;
             this.hideModal('modalRemoveParameter');     
             var config = {
