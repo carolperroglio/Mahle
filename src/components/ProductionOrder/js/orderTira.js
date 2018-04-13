@@ -486,13 +486,13 @@ export default {
                                 for (var i = 0; i < this.opArray.values.length; i++) {
                                     var OPId = this.opArray.values[i].productionOrderId;
                                     var obj = this.opArray.values[i];
-                                    if (obj.currentStatus == "active" && obj.typeDescription == "Tira") {
-                                        //Desativar OP anterior
-                                        this.desativarOP(obj.productionOrderId);
-                                    }
                                     if (this.opArray.values[i].currentThingId != undefined) {
                                         var currentID = this.opArray.values[i].currentThingId
                                         this.getDisAssoc(currentID, OPId, obj);
+                                    }
+                                    if (obj.currentStatus == "active" && obj.typeDescription == "Tira") {
+                                        //Desativar OP anterior
+                                        this.desativarOP(obj.productionOrderId);
                                     }
                                 }
                                 //Associar OP criada a linha
