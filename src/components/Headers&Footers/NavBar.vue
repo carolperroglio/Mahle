@@ -148,10 +148,10 @@
                         </a>   -->
                         <!-- <b-collapse id="menu3" @click.stop="active = !active"> -->
                             <router-link to="/prodOrderTira" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
-                                <i class="fa fa-industry"></i> Ordens de Produção - Tiras
+                                <i class="fa fa-industry"></i> ORDENS DE PRODUÇÃO - TIRAS
                             </router-link>
                             <router-link to="/prodOrderLiga" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
-                                <i class="fa fa-gear"></i> Ordens de Produção - Ligas (OPL)
+                                <i class="fa fa-gear"></i> ORDENS DE PRODUÇÃO - LIGAS (OPL)
                             </router-link>
                             <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 

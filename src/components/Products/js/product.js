@@ -169,8 +169,8 @@ export default {
                 this.codigosErro(error.response.status);                                
             });
         },        
-        buscar() {
-            
+        buscar() {   
+            this.carregando = true;                     
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
@@ -187,6 +187,7 @@ export default {
                     paginacao(response, this);                        
                     this.produtos = response.data.values;                        
                 }
+                this.carregando = false;
             }, (error) => {
                 this.carregando = false;                    
                 this.codigosErro(error.response.status);                                                        
@@ -205,11 +206,9 @@ export default {
                 this.showModalErro("Erro desconhecido código" + status);
         },
     },
-    beforeMount: function() {
-        this.carregando = true;
-        setTimeout(() => {
-            this.buscar();
-        }, 500)
-        this.carregando = false;
+    beforeMount: function() {        
+        
+        this.buscar();
+        
     }
 };

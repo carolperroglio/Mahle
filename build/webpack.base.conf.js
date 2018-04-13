@@ -8,9 +8,9 @@ const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const api = 'http://35.170.191.75'
-    //const api = 'http://spi067'
-const apimahle = 'http://10.35.255.22'
+//const api = 'http://35.170.191.75'
+const api = process.env.API_ADDRESS
+//const api = 'http://spi067'
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -58,34 +58,6 @@ module.exports = {
             Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
             Vue: ['vue/dist/vue.esm.js', 'default'],
             moment: 'moment'
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-
-                //IP MAHLE
-                // TOOLS_API: JSON.stringify(apimahle + ":8005"),
-                // OP_API: JSON.stringify(apimahle + ":8003"),
-                // THINGS_API: JSON.stringify(apimahle + ":8001"),
-                // PROD_HIST_API: JSON.stringify(apimahle + ":8006"),
-                // RECIPE_API: JSON.stringify(apimahle + ":8002"),
-                // STATUS_API: JSON.stringify(apimahle + ":8004"),
-                // HIST_BIGTABLE_API: JSON.stringify(apimahle + ":8011"),
-                // HIST_ALARM_API: JSON.stringify(apimahle + ":8012"),
-                // REPORT_API: JSON.stringify(apimahle + ":8007"), 
-                // LINE_PARAMETERS_API: JSON.stringify(apimahle + ":8013"),
-
-                //IP SPI
-                TOOLS_API: JSON.stringify(api + ":8005"),
-                OP_API: JSON.stringify(api + ":8003"),
-                THINGS_API: JSON.stringify(api + ":8001"),
-                PROD_HIST_API: JSON.stringify(api + ":8006"),
-                RECIPE_API: JSON.stringify(api + ":8002"),
-                STATUS_API: JSON.stringify(api + ":8004"),
-                HIST_BIGTABLE_API: JSON.stringify(api + ":8011"),
-                HIST_ALARM_API: JSON.stringify(api + ":8012"),
-                REPORT_API: JSON.stringify(api + ":8007"),
-                LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
-            }
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',

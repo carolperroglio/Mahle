@@ -153,7 +153,7 @@
             <div class="modal-footer">
                 <div>
                     <div class="btn-group" role="group">
-                        <button @click.stop.prevent="deleteParameter(deletarParameter);" class="btn btn-success">
+                        <button @click.stop.prevent="deleteParametro(deletarParameter);" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
                         <button @click.stop.prevent="hideModal('modalRemoveParameter')" class="btn btn-danger">

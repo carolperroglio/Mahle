@@ -10,6 +10,8 @@ const portfinder = require('portfinder')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
+const api = process.env.DEV_API_ADDRESS
+console.log("Build Env Dev:" +api)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -56,6 +58,34 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
+    new webpack.DefinePlugin({
+        'process.env': {
+
+            //IP MAHLE
+            // TOOLS_API: JSON.stringify(apimahle + ":8005"),
+            // OP_API: JSON.stringify(apimahle + ":8003"),
+            // THINGS_API: JSON.stringify(apimahle + ":8001"),
+            // PROD_HIST_API: JSON.stringify(apimahle + ":8006"),
+            // RECIPE_API: JSON.stringify(apimahle + ":8002"),
+            // STATUS_API: JSON.stringify(apimahle + ":8004"),
+            // HIST_BIGTABLE_API: JSON.stringify(apimahle + ":8011"),
+            // HIST_ALARM_API: JSON.stringify(apimahle + ":8012"),
+            // REPORT_API: JSON.stringify(apimahle + ":8007"), 
+            // LINE_PARAMETERS_API: JSON.stringify(apimahle + ":8013"),
+
+            //IP SPI
+            TOOLS_API: JSON.stringify(api + ":8005"),
+            OP_API: JSON.stringify(api + ":8003"),
+            THINGS_API: JSON.stringify(api + ":8001"),
+            PROD_HIST_API: JSON.stringify(api + ":8006"),
+            RECIPE_API: JSON.stringify(api + ":8002"),
+            STATUS_API: JSON.stringify(api + ":8004"),
+            HIST_BIGTABLE_API: JSON.stringify(api + ":8011"),
+            HIST_ALARM_API: JSON.stringify(api + ":8012"),
+            REPORT_API: JSON.stringify(api + ":8007"),
+            LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
+        }
+    }),    
     new webpack.ProvidePlugin({
       Popper: ['popper.js', 'default'],
       // In case you imported plugins individually, you must also require them here:
