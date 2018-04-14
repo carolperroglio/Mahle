@@ -217,10 +217,10 @@ export default {
 
             axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
                 '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
-    
-                
-                this.data = response;
-                this.tags = response.tags;
+
+
+                this.data = response.data;
+                this.tags = response.data.tags;
                 this.tags.forEach((T) => {
                     if (!this.groups.includes(T.group)) {
                         this.groups.push(T.group);
@@ -397,7 +397,7 @@ export default {
             return ticks;
         },
         separateDateAndHour(providerar) {
-            var finalprovider =  new Array();
+            var finalprovider = new Array();
             var copyprovider = new Array();
             copyprovider = JSON.parse(JSON.stringify(providerar));
             var objaux = new Object();
@@ -412,8 +412,8 @@ export default {
                 obj.Hora = hourformatted;
                 objaux.category = obj.category;
                 objaux.Hora = obj.Hora;
-                for (var key in obj){
-                   objaux[key] = obj[key]
+                for (var key in obj) {
+                    objaux[key] = obj[key]
                 }
                 finalprovider.push(objaux);
             });
@@ -628,7 +628,6 @@ export default {
         this.getThings();
         this.getOP();
         this.getRecipe();
-        this.getReportDate();
     },
 
 }

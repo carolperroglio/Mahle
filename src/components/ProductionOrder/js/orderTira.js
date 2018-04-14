@@ -442,6 +442,10 @@ export default {
             this.mensagem = '';
             axios.put(this.url + '/api/productionorders/AssociateProductionOrder/disassociate?thingId=' + idThing + '&productionOrderId=' + idOP, op)
                 .then((response) => {
+                    if (op.currentStatus == "active" && op.typeDescription == "Tira") {
+                        //Desativar OP anterior
+                        this.desativarOP(op.productionOrderId);
+                    }
                     console.log(response.data);
                     this.mensagemSuc = 'Ordem desassociada com sucesso.';
                 }).catch((error) => {
@@ -482,18 +486,21 @@ export default {
                             var id = response.data.productionOrderId;
                             axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active").then(response => {
 
-                                // Dessassociar OP anterior, a linha
+                                // Desassociar OP anterior, a linha
                                 for (var i = 0; i < this.opArray.values.length; i++) {
                                     var OPId = this.opArray.values[i].productionOrderId;
                                     var obj = this.opArray.values[i];
+                                    var currentID = this.opArray.values[i].currentThingId;
+
                                     if (this.opArray.values[i].currentThingId != undefined) {
-                                        var currentID = this.opArray.values[i].currentThingId
                                         this.getDisAssoc(currentID, OPId, obj);
+                                        // A DESATIVAÇÃO DA OP FOI COLOCADA DENTRO DO getDisAssoc , APENAS APÓS DESASSOCIAR ELA DESATIVA A OP
+                                        // if (obj.currentStatus == "active" && obj.typeDescription == "Tira") {
+                                        //     //Desativar OP anterior
+                                        //     this.desativarOP(obj.productionOrderId);
+                                        // }
                                     }
-                                    if (obj.currentStatus == "active" && obj.typeDescription == "Tira") {
-                                        //Desativar OP anterior
-                                        this.desativarOP(obj.productionOrderId);
-                                    }
+
                                 }
                                 //Associar OP criada a linha
                                 this.getOPTypeToAssoc(id);

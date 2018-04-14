@@ -179,7 +179,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-success" :disabled=" quantity=='' || loteAco=='' || unity==''" @click.stop.prevent="cadastrarApont(ordem);">
+                        <button class="btn btn-success" :disabled=" quantity=='' || loteAco=='' || unity==''" @click.stop.prevent="ordem.type = 'input';cadastrarApont(ordem);">
                             <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
                         <button @click.stop.prevent="quantity = ''; loteAco = ''; unity = ''" class="btn btn-primary pull-right">
@@ -230,7 +230,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity=='' || productionOrderId=='' || unity == ''" @click.stop.prevent="cadastrarApont(ordem);">
+                            <button class="btn btn-success" :disabled=" quantity=='' || productionOrderId=='' || unity == ''" @click.stop.prevent="ordem.type = 'input';cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="quantity = ''; quantity = ''; unity = '';productionOrderId=''" class="btn btn-primary pull-right">
@@ -276,7 +276,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show=" pReceita" @click.stop.prevent="cadastrarApont(ordem);">
+                            <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show=" pReceita" @click.stop.prevent="ordem.type = 'output';cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="quantity = ''; unity = '';" class="btn btn-primary pull-right">
