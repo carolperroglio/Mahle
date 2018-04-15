@@ -346,10 +346,18 @@ export default {
             axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,active&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
                     response.data.values.forEach(obj => {
-                        // if (obj.currentThing != undefined && obj.recipe.recipeId == this.productionOrder.recipe.recipeId) {
-                        if (obj.currentThing != undefined) {
-                            this.listOP.push(obj);
-                        }
+                        obj.recipe.phases.forEach(phase => {
+                            if (phase.phaseId != 46) {
+                                phase.phaseProducts.forEach(phaseobj => {
+                                    if (obj.currentThing != undefined && phaseobj.product.productId == this.productionOrder.recipe.recipeId) {
+                                        this.listOP.push(obj);
+                                    }
+                                })
+                            }
+
+
+                        });
+                        // if (obj.currentThing != undefined) {
                     });
                 }).catch((error) => {
                     this.msgErro = error.message;
