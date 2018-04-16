@@ -2,23 +2,30 @@
 
 /*itens menu de navegação de produtos - busca de produtos*/
 
-@media (min-width: 768px) {
+@media (min-width: 599px) {
+    .nav-item-products {
+        margin-left: 1%;
+        padding: 1.2% 0 1% 0;
+    }
     .cabecalho-table {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -34.4% 0 0 0;
+        margin: -2.2% 0 0 0;
         z-index: 4;
     }
     #load-products {
-        margin: 25% 0 0 50%;
+        margin: 18% 0 0 50%;
     }
     .msg {
         position: relative;
         width: 50%;
     }
     .margin-table-products {
-        margin: 52.5% 0 7% 0;
+        margin: 24.5% 0 10% 0;
+    }
+    .ls2-margin {
+        margin-left: 1.3%;
     }
 }
 
@@ -50,6 +57,33 @@
 }
 
 @media (min-width:1400px) {
+    .nav-item-products {
+        margin-left: 1%;
+        padding: 1.2% 0 1% 0;
+    }
+    .cabecalho-table {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -1.5% 0 0 0;
+        z-index: 4;
+    }
+    #load-products {
+        margin: 18% 0 0 50%;
+    }
+    .msg {
+        position: relative;
+        width: 50%;
+    }
+    .margin-table-products {
+        margin: 15% 0 7% 0;
+    }
+    .ls2-margin {
+        margin-left: 1.3%;
+    }
+}
+
+@media (min-width:1800px) {
     .nav-item-products {
         margin-left: 1%;
         padding: 1.2% 0 1% 0;
