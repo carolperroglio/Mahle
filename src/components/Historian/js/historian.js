@@ -154,8 +154,8 @@ export default {
             opList: [],
             recipeList: [],
             providertable: [],
-            opName:'',
-            prosFim:[]
+            opName: '',
+            prosFim: []
         }
     },
     components: {
@@ -229,8 +229,8 @@ export default {
                         this.groups.push(T.group);
                     }
                 })
-                this.editGroup(this.groups[0]);
                 this.newGroup = this.groups[0];
+                this.editGroup(this.groups[0]);
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -254,8 +254,8 @@ export default {
                         this.groups.push(T.group);
                     }
                 })
-                this.editGroup(this.groups[0]);
                 this.newGroup = this.groups[0];
+                this.editGroup(this.groups[0]);
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -279,8 +279,8 @@ export default {
                         this.groups.push(T.group);
                     }
                 })
-                this.editGroup(this.groups[0]);
                 this.newGroup = this.groups[0];
+                this.editGroup(this.groups[0]);
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -597,7 +597,7 @@ export default {
                 "fontSize": 13,
                 "theme": "light",
                 "categoryAxis": {
-                    "autoRotateAngle": -90,
+                    "autoRotateAngle": -45,
                     "autoRotateCount": 0,
                     "gridPosition": "start",
                     "titleFontSize": 0,
@@ -641,18 +641,18 @@ export default {
     /*               */
     /*               */
     /*****************/
-    getResults(url, name, pros) {                       
-        pros = [];     
-        if (name.length > 3){                  
-            axios.get(url + name, this.config).then((response) => {                                        
-                response.data.values.forEach((pro) => {                        
+    getResults(url, name, pros) {
+        pros = [];
+        if (name.length > 3) {
+            axios.get(url + name, this.config).then((response) => {
+                response.data.values.forEach((pro) => {
                     pros.push(pro);
                 });
             }, (error) => {
                 console.log(error);
             })
         }
-        return pros;            
+        return pros;
     },
     beforeMount: function() {
         this.showModal();

@@ -27,8 +27,7 @@
                         <br>
                         <br>
                         <div class="col-md-11" >
-                            <link rel="stylesheet" href='https://www.amcharts.com/lib/3/plugins/export/export.css' type='text/css' media='all'/>
-                            <div id="chartdiv" style="width:100%; height:400px"></div>
+                            <div id="chartdiv" style="width:100%; height:500px"></div>
                         </div>
               </div>
             </div>
