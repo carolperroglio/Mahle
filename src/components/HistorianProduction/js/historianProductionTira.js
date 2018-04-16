@@ -162,9 +162,9 @@ export default {
             //     "batch": "lote"
             // }
 
-            if (this.loteAco != "") {
+            if (this.loteAco != "" && this.loteAco != undefined) {
                 ordem.productId = 47;
-            } else if (this.loteLiga != "") {
+            } else if (this.loteLiga != "" && this.loteLiga != undefined) {
                 ordem.productId = this.productionOrderId.recipe.recipeProduct.product.productId;
             } else {
                 ordem.productId = this.roloSaidaID;
@@ -178,9 +178,9 @@ export default {
 
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;
-            } else if (this.loteLiga != undefined) {
+            } else if (this.loteLiga != undefined && this.ordem.type == "input") {
                 ordem.batch = this.loteLiga;
-            } else if (this.loteAco != undefined) {
+            } else if (this.loteAco != undefined && this.ordem.type == "input") {
                 ordem.batch = this.loteAco;
             }
             var teste = ordem;
@@ -258,14 +258,14 @@ export default {
             this.carregando = true;
             axios.get(this.url + '/api/OrderHistorian/' + this.productionOrder.productionOrderId).then((response) => {
 
-            console.log(response.data);
-            this.orderHistorian = response.data;
+                console.log(response.data);
+                this.orderHistorian = response.data;
 
-            if(this.orderHistorian.productsOutput.length > 0){
-                this.rolo = this.orderHistorian.productsOutput.length + 1;
-            }else if(this.orderHistorian.productsOutput.length == 0){
-                this.rolo = 1;
-            }
+                if (this.orderHistorian.productsOutput.length > 0) {
+                    this.rolo = this.orderHistorian.productsOutput.length + 1;
+                } else if (this.orderHistorian.productsOutput.length == 0) {
+                    this.rolo = 1;
+                }
                 for (var i = 0; i < this.orderHistorian.productsInput.length; i++) {
                     this.orderHistorian.productsInput[i].hour = this.hourConvert(this.orderHistorian.productsInput[i].date);
                     this.orderHistorian.productsInput[i].date = this.dataConvert(this.orderHistorian.productsInput[i].date);
@@ -281,7 +281,7 @@ export default {
                 this.carregando = false;
             }).catch((error) => {
                 if (error.response.status == 404) {
-                
+
                     this.msgErro = "Sem registros na tabela";
                     this.showModal("modalErro");
                 } else {
@@ -346,9 +346,18 @@ export default {
             axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,active&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
                     response.data.values.forEach(obj => {
-                        if (obj.currentThing != undefined) {
-                            this.listOP.push(obj);
-                        }
+                        obj.recipe.phases.forEach(phase => {
+                            if (phase.phaseId != 46) {
+                                phase.phaseProducts.forEach(phaseobj => {
+                                    if (obj.currentThing != undefined && phaseobj.product.productId == this.productionOrder.recipe.recipeId) {
+                                        this.listOP.push(obj);
+                                    }
+                                })
+                            }
+
+
+                        });
+                        // if (obj.currentThing != undefined) {
                     });
                 }).catch((error) => {
                     this.msgErro = error.message;
