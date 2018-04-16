@@ -227,6 +227,7 @@ export default {
                     }
                 })
                 this.editGroup(this.groups[0]);
+                this.newGroup = this.groups[0];
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -251,6 +252,7 @@ export default {
                     }
                 })
                 this.editGroup(this.groups[0]);
+                this.newGroup = this.groups[0];
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -275,6 +277,7 @@ export default {
                     }
                 })
                 this.editGroup(this.groups[0]);
+                this.newGroup = this.groups[0];
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -627,7 +630,7 @@ export default {
         this.showModal();
         this.getThings();
         this.getOP();
-        this.getRecipe();  
+        this.getRecipe();
     },
 
 }

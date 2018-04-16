@@ -224,7 +224,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-5">
                         <label>
-                        <b>OPL: </b>
+                        <b>OF: </b>
                         </label>
                         <input type="text" required :value="loteLiga = productionOrderId.productionOrderNumber" class="form-control form-control-sm" disabled>
                     </div>

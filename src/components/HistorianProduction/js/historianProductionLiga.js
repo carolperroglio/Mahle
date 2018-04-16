@@ -295,6 +295,7 @@ export default {
             // Tira a diferença de timezone que é de 3 horas
             var timezone = jsDate.getTimezoneOffset() / 60;
             var hour = jsDate.setHours(jsDate.getHours() + timezone);
+            var sec = "";
             hour = jsDate.getHours();
 
             if (jsDate.getUTCMinutes() <= 9) {
@@ -302,9 +303,16 @@ export default {
             } else {
                 min = jsDate.getUTCMinutes();
             }
+
+
+            if (jsDate.getSeconds() <= 9) {
+                sec = "0" + jsDate.getSeconds();
+            } else {
+                sec = jsDate.getSeconds();
+            }
+
             var dateFormatted = hour + ":" +
-                min + ":" + jsDate.getSeconds();
-            var teste = jsDate.getUTCMinutes();
+                min + ":" + sec;
 
             console.log(jsDate);
 
