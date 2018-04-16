@@ -346,9 +346,7 @@ export default {
         getOP() {
             axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,active&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
-                    
 
-                    console.log(this.productionOrder.recipe.recipeId);
                     response.data.values.forEach(obj => {
                         //pego o ID do produto final da LIGA
                         var prodligaid = obj.recipe.recipeProduct.product.productId;
@@ -410,6 +408,7 @@ export default {
             jsTicks = (dataTicks - epochTicks) / ticksPerMillisecond;
             jsDate = new Date(jsTicks);
             var min = "";
+            var sec = "";
             // Tira a diferença de timezone que é de 3 horas
             var timezone = jsDate.getTimezoneOffset() / 60;
             var hour = jsDate.setHours(jsDate.getHours() + timezone);
@@ -421,9 +420,15 @@ export default {
                 min = jsDate.getUTCMinutes();
             }
 
+            if (jsDate.getSeconds() <= 9) {
+                sec = "0" + jsDate.getSeconds();
+            } else {
+                sec = jsDate.getSeconds();
+            }
+
+
             var dateFormatted = hour + ":" +
-                min + ":" + jsDate.getSeconds();
-            var teste = jsDate.getUTCMinutes();
+                min + ":" + sec;
 
             console.log(jsDate);
 

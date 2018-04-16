@@ -227,6 +227,7 @@ export default {
                     }
                 })
                 this.editGroup(this.groups[0]);
+                this.newGroup = this.groups[0];
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -251,6 +252,7 @@ export default {
                     }
                 })
                 this.editGroup(this.groups[0]);
+                this.newGroup = this.groups[0];
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -275,6 +277,7 @@ export default {
                     }
                 })
                 this.editGroup(this.groups[0]);
+                this.newGroup = this.groups[0];
                 this.carregando = false;
                 this.created();
                 this.hideModal();
@@ -336,7 +339,7 @@ export default {
                 doc.setFontSize(20);
 
                 // Screenshot do Gráfico e insere no PDF
-                doc.addImage(grafico, "PNG", 100, 510, 300, 1000);
+                // doc.addImage(grafico, "PNG", 100, 510, 300, 1000);
                 doc.addImage(img, "JPEG", 15, 15, 50, 30);
 
                 // doc.addImage(grafico, "PNG", 510, 15, 60, 30);
@@ -591,7 +594,11 @@ export default {
                 "fontSize": 13,
                 "theme": "light",
                 "categoryAxis": {
-                    "gridPosition": "start"
+                    "autoRotateAngle": -90,
+                    "autoRotateCount": 0,
+                    "gridPosition": "start",
+                    "titleFontSize": 0,
+                    "titleRotation": 3
                 },
                 "valueScrollbar": {
                     "enabled": true,
@@ -627,7 +634,7 @@ export default {
         this.showModal();
         this.getThings();
         this.getOP();
-        this.getRecipe();  
+        this.getRecipe();
     },
 
 }
