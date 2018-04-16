@@ -397,6 +397,10 @@ export default {
             this.mensagem = '';
             axios.put(this.url + '/api/productionorders/AssociateProductionOrder/disassociate?thingId=' + idThing + '&productionOrderId=' + idOP, op)
                 .then((response) => {
+                    if (op.currentStatus == "active" && op.typeDescription == "Liga") {
+                        //Desativar OP anterior
+                        this.desativarOP(idOP);
+                    }
                     console.log(response.data);
                     this.mensagemSuc = 'Ordem desassociada com sucesso.';
                 }, (r) => {
@@ -444,10 +448,7 @@ export default {
                                         var obj = this.opArray.values[i];
                                         if (currentID == this.idAllowed) {
                                             this.getDisAssoc(currentID, OPId, obj);
-                                            if (obj.currentStatus == "active" && obj.typeDescription == "Liga") {
-                                                //Desativar OP anterior
-                                                this.desativarOP(obj.productionOrderId);
-                                            }
+
                                         }
                                     }
                                 }

@@ -87,13 +87,13 @@
     .slider {
         width: 100%;
     }
-    /*Configuração do Box do título fases da receita*/
+    /* Configuração do Box do título fases da receita
     h3 {
         position: fixed;
         display: inline;
         font-size: 18px;
         font-family: sans-serif;
-    }
+    } */
     /*Fases da Receita*/
     .card-header-recipe-tira {
         margin-top: 0.2%;
@@ -241,12 +241,12 @@
         width: 100%;
     }
     /*Configuração do Box do título fases da receita*/
-    h3 {
+    /* h3 {
         position: fixed;
         display: inline;
         font-size: 18px;
         font-family: sans-serif;
-    }
+    } */
     /*Fases da Receita*/
     .card-header-recipe-tira {
         margin-top: 0.2%;
