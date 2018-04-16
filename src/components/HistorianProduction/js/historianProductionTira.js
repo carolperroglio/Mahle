@@ -345,6 +345,9 @@ export default {
         getOP() {
             axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,active&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
+                    
+
+                    console.log(this.productionOrder.recipe.recipeId);
                     response.data.values.forEach(obj => {
                         obj.recipe.phases.forEach(phase => {
                             if (phase.phaseId != 46) {

@@ -240,10 +240,10 @@
                     <div class="modal-footer">                            
                         <div class="btn-group" role="group">
                             <button @click.stop.prevent="showModal('modalEditarConfirm');" class="btn btn-success pull-right" :disabled="!validaParametro(parametro)">
-                                <i  class="fa fa-check-square" aria-hidden="true"></i>
+                                <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>  
                             <button @click.stop.prevent="parametro.lse='';parametro.lsc='';parametro.lse='';parametro.lic='';parametro.lie='';parametro.unit='';parametro.value='';" class="btn btn-primary pull-right">
-                                Limpar                           
+                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                           
                             </button>                      
                         </div>                        
                     </div>
@@ -355,10 +355,10 @@
                     <div class="modal-footer">                            
                         <div class="btn-group" role="group">
                             <button @click.stop.prevent="showModal('modalCreateConfirm')" class="btn btn-success pull-right" :disabled="!validaParametro(parameter) || tagGroup=='' || tagGroup==undefined">
-                                <i  class="fa fa-check-square" aria-hidden="true"></i>
+                                <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>  
                             <button @click.stop.prevent="parameter.lse='';parameter.lsc='';parameter.lse='';parameter.lic='';parameter.lie='';parameter.unit='';parameter.value='';tagGroup='';thing={}" class="btn btn-primary pull-right">
-                                Limpar                           
+                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                           
                             </button>                      
                         </div>                        
                     </div>

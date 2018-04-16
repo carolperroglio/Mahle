@@ -627,12 +627,7 @@ export default {
         this.showModal();
         this.getThings();
         this.getOP();
-<<<<<<< HEAD
         this.getRecipe();  
-        this.getReportDate();      
-=======
-        this.getRecipe();
->>>>>>> ee4b80487542b33453cef0ec7fdfdfe9af96eaa8
     },
 
 }
