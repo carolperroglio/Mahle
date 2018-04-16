@@ -225,6 +225,9 @@ export default {
                             case 'reproved':
                                 return obj.status = "Reprovado"
                                 break;
+                            case 'ended':
+                                return obj.status = "Finalizado"
+                                break;
                             default:
                                 break;
 
