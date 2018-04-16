@@ -127,9 +127,10 @@ hr.style3 {
     margin-bottom: 0.2%;
 }
 
-.onteudo-history h3 {
+
+/* .onteudo-history h3 {
     color: rgb(41, 39, 39);
-}
+} */
 
 @media only screen and (max-width: 800px) {
     .nav-history {

@@ -60,6 +60,7 @@ export default {
             roloSaidaID: "",
             loteAco: "",
             loteLiga: "",
+            noop: true
 
         }
     },
@@ -346,11 +347,24 @@ export default {
             axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,active&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
                     response.data.values.forEach(obj => {
-                        obj.recipe.phases.forEach(phase => {
-                            if (phase.phaseId != 46) {
-                                phase.phaseProducts.forEach(phaseobj => {
-                                    if (obj.currentThing != undefined && phaseobj.product.productId == this.productionOrder.recipe.recipeId) {
+                        //pego o ID do produto final da LIGA
+                        var prodligaid = obj.recipe.recipeProduct.product.productId;
+                        console.log("prodligaid");
+                        console.log(prodligaid);
+                        this.productionOrder.recipe.phases.forEach(phaseobjtira => {
+                            console.log("this.phaseobjtira");
+                            console.log(phaseobjtira);
+                            if (phaseobjtira.phaseId != 46) {
+                                // Verifico se o ID do produto final da LIGA é igual a algum ID do produto das fases da TIRA
+                                phaseobjtira.phaseProducts.forEach(phaseprod => {
+                                    console.log("this.phaseprod");
+                                    console.log(phaseprod);
+                                    if (phaseprod.product.productId == prodligaid) {
+                                        this.noop = false;
+
                                         this.listOP.push(obj);
+                                        console.log("this.listOP");
+                                        console.log(this.listOP);
                                     }
                                 })
                             }
@@ -359,6 +373,10 @@ export default {
                         });
                         // if (obj.currentThing != undefined) {
                     });
+
+                    if (this.listOP.length < 0) {
+                        this.noop = true;
+                    }
                 }).catch((error) => {
                     this.msgErro = error.message;
                     this.showModal("modalErro");
