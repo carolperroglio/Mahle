@@ -54,6 +54,9 @@ export default {
             recipeProduct: {},
             p:{},
             teste:'',
+            productRecipeNameEdit:'',
+            recipeProductEdit:{},
+            prosFimEdit: []
         }
     },
     computed: {
@@ -96,33 +99,15 @@ export default {
             this.erro = erro;
             this.$refs.modalErro.show();            
         },
-        showModalCadFase() {
-        this.$refs.myModalRefCF.show()
-        },
-        hideModalCadFase() {
-        this.$refs.myModalRefCF.hide()
-        },
-        showModalEditFase() {
-        this.$refs.modalEditFase.show()
-        },
-        hideModalEditFase() {
-        this.$refs.modalEditFase.hide()
-        },
         showModalEditRecipe(recipe) {
+        this.recipeProductEdit=recipe.recipeProduct.product;
+        this.productRecipeNameEdit=this.recipeProductEdit.productName;
         this.recipeTemp = JSON.parse(JSON.stringify(recipe));
         delete this.recipeTemp.phases;
         this.$refs.modalEditRecipe.show();
         },
         hideModalEditRecipe() {
         this.$refs.modalEditRecipe.hide()
-        },
-        showModalEditProPhase(pro, index){
-        this.errors = {};  
-        this.phaseProduct = pro;        
-        this.productPhaseName = pro.product.productName;
-        this.$refs.modalEditProPhase.show();
-        this.mensagemSuc = '';
-        this.mensagem = '';
         },
         hideModalEditProPhase() {
         this.$refs.modalEditProPhase.hide()
@@ -142,8 +127,8 @@ export default {
         hideModalRemoveLiga() {
         this.$refs.modalRemoveLiga.hide()
         },
-        showModalConfirmEditLiga() {
-        this.$refs.modalConfirmEditLiga.show()
+        showModalConfirmEditLiga() {        
+            this.$refs.modalConfirmEditLiga.show()
         },
         hideModalConfirmEditLiga() {
         this.$refs.modalConfirmEditLiga.hide()
@@ -200,6 +185,7 @@ export default {
                             this.codigosErro(error.response.status,"código "+this.recipe.recipeId +" não corresponde a uma receita de liga");
                             this.recipe = {};
                         }    
+                        console.log(this.recipe);
                         this.carregando = false;
                         this.editarActivate = true;
                     }).catch(error => {
@@ -269,27 +255,23 @@ export default {
         },
         putRecipe(recipe) {
             this.carregando = true;             
-            this.hideModalEditRecipe();           
+            this.hideModalEditRecipe();                      
             axios.put(this.url + "recipes/" + recipe.recipeId, recipe).then((response) => {
-                console.log(response.data);
-                this.recipe.recipeName = recipe.recipeName;
-                this.recipe.recipeCode = recipe.recipeCode;
-                this.ok = true;
-                this.carregando = false;
-                this.hideModalConfirmEditLiga();
+                this.$router.push({ name: 'Liga', params: { id: this.recipe.recipeId }})
+                this.$router.go(); 
             }, (error) => {
                 this.carregando = false;                        
-                this.codigosErro(error.response.status);
+                this.codigosErro(error.response.status, 'Erro ao editar liga, apenas a matéria-prima foi alterada');
             });
         },
   
 
         deleteRecipe(recipe) {
-            this.mensagemSuc = '';
-            this.carregando = true;
-            this.deletePhase(recipe.phases[0],recipe);
-            axios.delete(this.url + "recipes/" + recipe.recipeId).then((response) => {                
-                this.recipe = {};                
+            this.carregando = true;            
+            axios.delete(this.url + "recipes/" + recipe.recipeId).then((response) => {       
+                this.deletePhase(recipe.phases[0],recipe);         
+                this.$router.push({ name: 'ListLiga' })
+                this.$router.go();                                
                 this.carregando = false;
                 this.recipeCadastrada = false;
             }, (error) => {                
@@ -299,6 +281,30 @@ export default {
             
         },  
 
+        deleteRecipeProduct(recipe, produto) {
+            this.carregando = true;    
+            this.hideModalConfirmEditLiga();        
+            axios.delete(this.url + "recipes/product/" + this.recipe.recipeId,{data : this.recipe.recipeProduct.product}).then((response) => {                                                                          
+                this.editRecipeProduct(produto,recipe);                
+            }, (error) => {                
+                this.carregando = false;   
+                if(error.response.status)                     
+                    this.codigosErro(error.response.status, 'Erro ao deletar produto');
+                else
+                    this.codigosErro(0, 'Erro ao deletar produto');
+            });            
+        },   
+        
+        editRecipeProduct(produto,recipe){
+            produto.minvalue = "1"; produto.maxvalue = "1";
+            produto.mesuaremntUnit = "Kg";           
+            axios.post(this.url + "recipes/product/"+this.recipe.recipeId, produto).then((response) => {
+                this.putRecipe(recipe);                
+            }, (error) => {                                          
+                this.carregando = false;                        
+                this.codigosErro(error.response.status, "Erro ao editar produto final da liga!<br>Ediçao de Liga cancelada");
+            });
+        },  
         /*****************/
         /*               */
         /*               */
@@ -377,7 +383,6 @@ export default {
             else    
                 this.showModalErro("Erro desconhecido "+text+" código" + status);
         },
-
 
         
         /*****************/

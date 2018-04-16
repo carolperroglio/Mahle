@@ -627,7 +627,7 @@ export default {
         this.showModal();
         this.getThings();
         this.getOP();
-        this.getRecipe();
+        this.getRecipe();  
     },
 
 }
