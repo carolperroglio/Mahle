@@ -153,7 +153,9 @@ export default {
             filterSelected: "",
             opList: [],
             recipeList: [],
-            providertable: []
+            providertable: [],
+            opName:'',
+            prosFim:[]
         }
     },
     components: {
@@ -206,6 +208,7 @@ export default {
 
             })
         },
+
         getReportDate() {
 
             this.carregando = true;
@@ -629,6 +632,27 @@ export default {
 
         },
 
+    },
+
+    /*****************/
+    /*               */
+    /*               */
+    /*Busca Produtos */
+    /*               */
+    /*               */
+    /*****************/
+    getResults(url, name, pros) {                       
+        pros = [];     
+        if (name.length > 3){                  
+            axios.get(url + name, this.config).then((response) => {                                        
+                response.data.values.forEach((pro) => {                        
+                    pros.push(pro);
+                });
+            }, (error) => {
+                console.log(error);
+            })
+        }
+        return pros;            
     },
     beforeMount: function() {
         this.showModal();

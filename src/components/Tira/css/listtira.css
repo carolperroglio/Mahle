@@ -69,9 +69,32 @@
         margin-left: 2%;
     }
     .table-listtira {
-        margin: 14.3% 0 6% 0;
+        margin: 15% 0 6% 0;
     }
 }
 
 
 /*  tabela 1920 x 1080 */
+@media (min-width:1900px) {
+    .header-table-listtira {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -1.5% 0 0 0;
+        padding: 0 0 0 0.2%;
+        z-index: 4;
+    }
+    /*Barra de carregamento*/
+    #load-listtira {
+        margin: 18.5% 0 0 50%;
+    }
+    .tiras {
+        margin-top: 13%;
+        padding-bottom: 6%;
+        width: 95%;
+        margin-left: 2%;
+    }
+    .table-listtira {
+        margin: 14.3% 0 6% 0;
+    }
+}

@@ -1,5 +1,5 @@
 @import url("./../../genericcss/generico.css");
-@media (min-width: 768px) {
+@media (min-width: 599px) {
     /* Menu de nav */
     .nav-items-listliga {
         margin-left: 1%;
@@ -44,6 +44,28 @@
 }
 
 @media (min-width: 1400px) {
+    /* Menu de nav */
+    .nav-items-listliga {
+        margin-left: 1%;
+        padding: 1.2% 0 1% 0;
+    }
+    /* Listagem de ligas */
+    .ligas {
+        margin-top: 15.3%;
+    }
+    #load-listliga {
+        margin: 18% 0 0 50% !important;
+    }
+    .cabecalho-table-listliga {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -1.7% 0 7% 0;
+        z-index: 4;
+    }
+}
+
+@media (min-width: 1800px) {
     /* Menu de nav */
     .nav-items-listliga {
         margin-left: 1%;
