@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 //const api = 'http://35.170.191.75'
 const api = process.env.API_ADDRESS
-//const api = 'http://spi067'
+    //const api = 'http://spi067'
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -44,7 +44,7 @@ module.exports = {
             'vue$': 'vue/dist/vue.esm.js',
             '@': resolve('src'),
             'vue$': 'vue/dist/vue.common.js'
-        }
+        },
     },
 
     plugins: [
@@ -116,6 +116,10 @@ module.exports = {
                     name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
                 }
             },
+            {
+                test: /\.js$/,
+                loader: 'ify-loader'
+            }
         ]
     },
     node: {
