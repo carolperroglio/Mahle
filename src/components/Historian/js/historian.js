@@ -43,7 +43,6 @@ import {
 import {
     error
 } from 'util';
-
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -208,7 +207,6 @@ export default {
 
             })
         },
-
         getReportDate() {
 
             this.carregando = true;
@@ -659,6 +657,7 @@ export default {
         this.getThings();
         this.getOP();
         this.getRecipe();
+        this.getchart();
     },
 
 }

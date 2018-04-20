@@ -57,6 +57,9 @@
                                     <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                 </button>
+                                <button type="button" class="btn btn-primary"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
+                                <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
+                                </button>
                                 <!-- <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='output'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar rolo de tira
                                 </button> -->
