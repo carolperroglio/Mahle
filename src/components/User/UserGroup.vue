@@ -57,8 +57,8 @@
             <i class="fa fa-remove" aria-hidden="true"></i>
         </label>
         <label class="ls1-usergroup col-md-1">
-            <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUser = u;showModal('deleteUsergroup')"></i>
-            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUser = u;objUser.password = b64DecodeUnicode(objUser.password);showModal('editUser')"></i>
+            <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUserGroup = u;showModal('deleteUsergroup')"></i>
+            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUserGroup = u; checkUserList(u);showModal('editUserGroup')"></i>
         </label>
     </div>
     </div>  
@@ -146,17 +146,18 @@
                             <!--                             -->
                             <!-- MODALZÃO EDITAR DE GRUPO DE USUÁRIO  -->
 
-<b-modal size="lg" ref="cadUserGroup" hide-footer title="Cadastrar Grupo de Usuário" modal-header-close>
+
+<b-modal size="lg" ref="editUserGroup" hide-footer title="Cadastrar Grupo de Usuário" modal-header-close>
 <div class="modal-body">
     <form>
     <div class="form-group row">
         <div class="form-group col-md-6">
         <label for="name">Nome </label>
-            <input required type="text" class="form-control" id="name"  placeholder="Ex: Mauricio" v-model="name">
+            <input required type="text" class="form-control" id="name"  placeholder="Ex: Mauricio" v-model="objUserGroup.name">
         </div>
         <div class="form-group col-md-6">
         <label for="descrip">Descrição</label>
-            <input required type="text" class="form-control" id="descrip" placeholder="Ex: mauriciot" v-model="description">
+            <input required type="text" class="form-control" id="descrip" placeholder="Ex: mauriciot" v-model="objUserGroup.description">
         </div>
     </div>
     <div class="form-group row">
@@ -193,12 +194,12 @@
     </div>
     <div class="form-group row">
     <div class="form-group col-md-6">
-    <ul class="list-group" v-for="(us,index) in users" v-bind:key="index">
+    <ul class="list-group" v-for="(us,index) in objUserGroup.users" v-bind:key="index">
         <li class="list-group-item">{{us.name}} <i class="fa fa-remove pull-right cursor-class" style="color:red" @click="removeUserFromGroup(us)" aria-hidden="true"></i></li>
     </ul>
     </div>
     <div class="form-group col-md-6">
-    <ul class="list-group" v-for="(per,index) in permissions" v-bind:key="index">
+    <ul class="list-group" v-for="(per,index) in objUserGroup.permissions" v-bind:key="index">
         <li class="list-group-item">{{per}} <i class="fa fa-remove pull-right cursor-class" style="color:red" aria-hidden="true" @click="removePermissionOfGroup(per)"></i></li>
     </ul>
     </div>
@@ -209,11 +210,11 @@
 <!--                    -->
 <div class="modal-footer">
     <div class="btn-group" role="group">
-        <button class="btn btn-success" :disabled="name == ''|| description == ''" @click="createUser();hideModal('cadUserGroup');">
+        <button class="btn btn-success" :disabled="objUserGroup.name == ''|| objUserGroup.description == ''" @click="showModal('editUserGroupConfirm');">
             <i  class="fa fa-check-square" aria-hidden="true"></i>
             Confirmar
         </button>
-        <button @click.stop.prevent="name = ''; description = '';" class="btn btn-primary pull-right">
+        <button @click.stop.prevent="objUserGroup.name = ''; objUserGroup.description = '';" class="btn btn-primary pull-right">
             <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
         </button> 
     </div>
@@ -222,7 +223,7 @@
 
 <!-- MODAL PARA CONFIRMAR DELETE  -->
 <b-modal ref="deleteUsergroup" title="Deseja realmente excluir este grupo de usuários ?" hide-footer>
-<button class="btn btn-success" @click="deleteUsergroup(objUser.userId);hideModal('deleteUsergroup');">
+<button class="btn btn-success" @click="deleteUsergroup(objUserGroup.userGroupId);hideModal('deleteUsergroup');">
     <i  class="fa fa-check-square" aria-hidden="true"></i>
     Confirmar
 </button>
@@ -233,7 +234,7 @@
 </b-modal>
 <!-- MODAL PARA CONFIRMAR EDIT  -->
 <b-modal ref="editUserGroupConfirm" title="Deseja realmente editar este usuário ?" hide-footer>
-<button class="btn btn-success" @click="updateUserGroup(objUser.userId);hideModal('editUserGroupConfirm');">
+<button class="btn btn-success" @click="updateUserGroup(objUserGroup.userGroupId);hideModal('editUserGroupConfirm');">
     <i  class="fa fa-check-square" aria-hidden="true"></i>
     Confirmar
 </button>

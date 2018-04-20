@@ -79,7 +79,7 @@
         </label>
         <label class="ls1-user col-md-1">
             <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUser = u;showModal('deleteUser')"></i>
-            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUser = u;objUser.password = b64DecodeUnicode(objUser.password);showModal('editUser')"></i>
+            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUser = u;objUser.password = '';showModal('editUser')"></i>
         </label>
     </div>
     </div>  
@@ -142,6 +142,61 @@
 
                             <!--                             -->
                             <!-- MODALZÃO EDITAR DE USUÁRIO  -->
+
+
+
+                            <!--                             -->
+                            <!-- MODALZÃO EDITAR DE GRUPO DE USUÁRIO  -->
+
+<b-modal size="md" ref="editUser" hide-footer title="Editar Grupo de Usuário" modal-header-close>
+<div class="modal-body">
+    <form>
+    <div class="form-group row">
+        <div class="form-group col-md-6">
+        <label for="name">Nome </label>
+            <input required type="text" class="form-control" id="name"  placeholder="Ex: Mauricio" v-model="objUser.name">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="username">Nome de usuário</label>
+            <input required type="text" class="form-control" id="username" placeholder="Ex: mauriciot" v-model="objUser.username">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="form-group col-md-6">
+        <label for="password">Senha</label>
+         <!-- <vue-password v-model="user.password"
+                    classes="input"
+                    :user-inputs="[user.email]">
+      </vue-password> -->
+            <input required type="text" class="form-control" min="8" max="15" id="password" v-model="objUser.password">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="passwordconfirm">Confirmar senha</label>
+            <input required type="text" class="form-control"  min="8" max="15" id="passwordconfirm" v-model="objUser.passwordconfirm">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="form-group col-md-8">
+        <label for="desc">E-mail</label>
+            <input required type="email" class="form-control" placeholder="Ex: mauriocio@empresa.com.br" id="email" v-model="objUser.email">
+        </div>
+    </div>
+    </form>
+</div>
+<!-- Botão que Edita o Usuário-->
+<!--                    -->
+<div class="modal-footer">
+    <div class="btn-group" role="group">
+        <button class="btn btn-success" :disabled="objUser.username == ''|| objUser.name == ''|| objUser.password == ''|| objUser.passwordconfirm == ''|| objUser.email == ''" @click="updateUser(objUser.userId);hideModal('cadUser');">
+            <i  class="fa fa-check-square" aria-hidden="true"></i>
+            Confirmar
+        </button>
+        <button @click.stop.prevent="objUser.username = ''; objUser.name = ''; objUser.password = ''; objUser.passwordconfirm = ''; objUser.email = ''" class="btn btn-primary pull-right">
+            <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+        </button> 
+    </div>
+</div>
+</b-modal>
 
 
 <!-- MODAL PARA CONFIRMAR DELETE  -->
