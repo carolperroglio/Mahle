@@ -32,7 +32,7 @@ export default {
             cabecalhoSetas: [false, false, false, false, false],
             msgErro: "",
             /*OBJ UPDATE Usergroup*/
-            objUser: {},
+            objUserGroup: {},
             /* ---------------*/
             erro: false,
             keyhashed: "",
@@ -125,36 +125,44 @@ export default {
             this.permissions = [];
         },
         getUsers() {
+            this.userlist = [];
             axios.get(this.urluser).then((response) => {
                 this.userlist = response.data.values;
 
             }).catch(error => {
                 this.erro = true;
                 this.msgErro = error.message;
-                showModal("modaInfo");
+                this.showModal("modaInfo");
             })
         },
         getPermissions() {
+            this.permissionsList = [];
+
             axios.get(this.urlpermission).then((response) => {
-                this.permissionsList.push(response.data);
+                var data = response.data;
+                var obj = {};
+                for (var key in data) {
+                    this.permissionsList.push(key);
+                }
 
             }).catch(error => {
                 this.erro = true;
                 this.msgErro = error.message;
-                showModal("modaInfo");
+                this.showModal("modaInfo");
             })
         },
         /**
          * CRUD Usergroup
          */
         getUsergroups() {
+            this.usergrouplist = [];
             axios.get(this.urlusergroup).then((response) => {
                 this.usergrouplist = response.data.values;
 
             }).catch(error => {
                 this.erro = true;
                 this.msgErro = error.message;
-                showModal("modaInfo");
+                this.showModal("modaInfo");
             })
         },
         createUser() {
@@ -171,6 +179,8 @@ export default {
                     this.msgErro = "Usuário criado com Sucesso";
                     this.showModal("modaInfo");
                     this.getUsergroups();
+                    this.getUsers();
+                    this.getPermissions();
                 }).catch(error => {
                     this.erro = true;
                     this.msgErro = error.message;
@@ -179,13 +189,15 @@ export default {
             }, 1000)
         },
         updateUserGroup(id) {
-            console.log(this.objUser);
+            console.log(this.objUserGroup);
             console.log("id:" + id);
 
-            axios.put(this.urlusergroup + id, this.objUser).then((response) => {
+            axios.put(this.urlusergroup + id, this.objUserGroup).then((response) => {
                 this.msgErro = "Usuário atualizado com Sucesso";
                 this.showModal("modaInfo");
                 this.getUsergroups();
+                this.getUsers();
+                this.getPermissions();
             }).catch(error => {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro:" + error.message;
@@ -193,13 +205,15 @@ export default {
             })
         },
         deleteUsergroup(id) {
-            console.log(this.objUser);
+            console.log(this.objUserGroup);
             console.log("id:" + id);
 
-            axios.delete(this.urlusergroup + id, this.objUser).then((response) => {
+            axios.delete(this.urlusergroup + id, this.objUserGroup).then((response) => {
                 this.msgErro = "Usuário excluido com Sucesso";
                 this.showModal("modaInfo");
                 this.getUsergroups();
+                this.getUsers();
+                this.getPermissions();
             }).catch(error => {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro:" + error.message;
@@ -223,16 +237,28 @@ export default {
 
         },
         addPermissionToGroup(obj) {
+            var newPermissionList = this.permissionsList.filter(p => {
+                return p != obj;
+            })
+            this.permissionsList = newPermissionList;
             this.permissions.push(obj);
 
         },
         // EM CONSTRUÇÃO
         removePermissionOfGroup(obj) {
-            for (var x = 0; x < this.permissions.lenth; x++) {
-                if (this.permissions[x].userId == obj.userId) {
-                    delete this.users[x];
-                }
-            }
+            var newpermission = this.permissions.filter(perm => {
+                return perm != obj;
+            })
+            this.permissions = newpermission;
+            this.permissionsList.push(obj)
+        },
+        checkUserList(obj) {
+            var newListUser = this.userlist.filter(user => {
+                return obj.users.filter(u => {
+                    return u.userId != user.userId;
+                })
+            })
+            this.userlist = newListUser;
         }
         /**
          * END CRUD Usergroup

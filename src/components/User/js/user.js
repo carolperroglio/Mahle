@@ -8,6 +8,7 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import VuePassword from 'vue-password'
 import passwordHash from 'password-hash-and-salt'
+import { setTimeout } from 'timers';
 Vue.component(VuePassword)
 es6promisse.polyfill();
 
@@ -166,15 +167,20 @@ export default {
             console.log(this.objUser);
             console.log("id:" + id);
 
-            axios.put(this.urluser + id, this.objUser).then((response) => {
-                this.msgErro = "Usuário atualizado com Sucesso";
-                this.showModal("modaInfo");
-                this.getUsers();
-            }).catch(error => {
-                this.erro = true;
-                this.msgErro = "Ocorreu um erro:" + error.message;
-                this.showModal("modaInfo");
-            })
+            this.hashKey(this.objUser.password, this);
+
+            setTimeout(() => {
+                this.objUser.password = this.keyhashed;
+                axios.put(this.urluser + id, this.objUser).then((response) => {
+                    this.msgErro = "Usuário atualizado com Sucesso";
+                    this.showModal("modaInfo");
+                    this.getUsers();
+                }).catch(error => {
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro:" + error.message;
+                    this.showModal("modaInfo");
+                })
+            }, 1500)
         },
         deleteUser(id) {
             console.log(this.objUser);
