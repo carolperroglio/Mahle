@@ -99,3 +99,23 @@
     }
     /*Box das Fases*/
 }
+
+@media (min-width:1400px) {
+    /* Tabela */
+    .cabecalho-table-liga {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -1.7% 0 0 0;
+        z-index: 4;
+    }
+ 
+    .liga-produtos {
+        margin-top: 19.5%;
+    }
+
+    .fim{
+        padding-left: 15%;
+    }
+    /*Box das Fases*/
+}
