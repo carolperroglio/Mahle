@@ -102,20 +102,16 @@
                     </div>
                     <div class="form-row">
                     <div class="form-group col-md-6" v-if="filterSelected == 'op'">
-                    <label><b>OP </b></label>  
-                       <select class="form-control" v-model="OP">    
-                            <option v-for="(op,index) in opList" :value="op.productionOrderId" v-bind:key="index">{{ op.productionOrderNumber }}
-                            </option>
-                        </select>
+                    <label><b>OP </b></label>                         
 
-                        <input :disabled="recipeCadastrada" placeholder="Nome do produto" class="form-control form-control-sm" 
+                        <input placeholder="Nome do produto" class="form-control form-control-sm" 
                         v-model="opName" @keyup="prosFim=getResults(api+':8007/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=', opName, prosFim); OP={}" >                                                                                 
                         
                         <select id="dropdownMenuButton" @change="productRecipeName=recipeProduct.productName" 
                             v-show="prosFim.length>0" v-model="OP" class="form-control form-control-sm">
-                            <option :value="op.productionOrderId" 
-                            v-for="(op,index) in prosFim" v-bind:key="index">
-                            {{ op.productionOrderNumber}}</option>                   
+                            <option :value="op.productionOrderId" v-for="(op,index) in prosFim" v-bind:key="index">
+                                {{ op.productionOrderNumber}}
+                            </option>                   
                         </select>
 
                     </div>

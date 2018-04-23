@@ -127,9 +127,7 @@ export default {
                 string["background-color"] = '#ed0404';
             } else if (objeto.hasLowAlert && !objeto.hasRedAlert) {
                 string["background-color"] = '#f5fc28';
-            } else if (objeto.hasGreenAlert && !objeto.hasRedAlert && !objeto.hasLowAlert) {
-                string["background-color"] = '#4bff30';
-            }
+            } 
 
             return string;
         }
