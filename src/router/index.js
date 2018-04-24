@@ -158,7 +158,7 @@ export default new Router({
             component: HomePage
         },
         {
-            path: '/statusMES',
+            path: '',
             name: 'StatusMES',
             component: StatusMES
         },

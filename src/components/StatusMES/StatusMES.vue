@@ -27,9 +27,9 @@
                             <div class="col-md-3">
                             Fora dos limites de controle: <i class="fa fa-square" style="color:#f5fc28" aria-hidden="true"></i>  
                             </div> 
-                            <div class="col-md-3">
+                            <!--<div class="col-md-3">
                             Normal: <i class="fa fa-square" style="color:#90EE90" aria-hidden="true"></i>  
-                            </div> 
+                            </div>--> 
                             <div class="col-md-2">
                             Offline: <i class="fa fa-square" style="color:#b2b7b2" aria-hidden="true"></i>
                             </div> 
@@ -38,7 +38,7 @@
                     </div>
                     </div>
                     <div class="row">
-                        <div v-for="(s, index) in status" v-bind:key="index" id="constat" v-if="!s.hasGreenAlert" class="">
+                        <div v-for="(s, index) in status" v-bind:key="index" id="constat" class="">
                             <div :style="getClass(s)">
                                 <h4 class="ls ls22" >
                                     {{s.thingName}}
@@ -47,14 +47,21 @@
                                 <label v-if="s.hasRedAlert == true">
                                     <b>Parâmetro:</b>
                                     <span v-for="(a, index) in s.alarms" v-bind:key="index" v-if="a.priority == 2">
-                                        {{a.alarmName}}, </span>
+                                        {{a.alarmName}}, 
+                                    </span>
                                 </label>
                                 <label v-else-if="s.hasLowAlert == true">
                                     <b>Parâmetro:</b>
                                     <span v-for="(a, index) in s.alarms" v-bind:key="index"  v-if="a.priority == 1">
-                                        {{a.alarmName}}, </span>
+                                        {{a.alarmName}}, 
+                                    </span>
                                 </label>
-                                
+                                 <label v-else-if="s.hasGreenAlert == true">
+                                    <b>Parâmetro:</b>
+                                    <span v-for="(a, index) in s.alarms" v-bind:key="index"  v-if="a.priority == 1">
+                                        {{a.alarmName}}, 
+                                    </span>
+                                </label>                                
                                 <br>
                                 </div>
                                 <!-- <button class="btn btn-outline-info btn-sm pull-right"

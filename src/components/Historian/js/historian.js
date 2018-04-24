@@ -270,7 +270,7 @@ export default {
             var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
             var ticksF = this.dateToTicks(Fim);
 
-            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP.productionOrderId + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
                 this.data = response.data;
                 this.tags = response.data.tags;
                 this.tags.forEach((T) => {
