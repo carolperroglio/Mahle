@@ -32,7 +32,6 @@
     "moment": "^2.20.1",
     "moment-timezone": "^0.5.14",
     "momentjs": "^2.0.0",
-    "password-hash-and-salt": "^0.1.4",
     "plotly.js": "^1.36.1",
     "popper": "^1.0.1",
     "popper.js": "^1.12.9",

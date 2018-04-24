@@ -11,7 +11,9 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
     // const api = process.env.DEV_API_ADDRESS
+
 const api = process.env.DEV_API_ADDRESS;
+
 console.log("Build Env Dev:" + api)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
