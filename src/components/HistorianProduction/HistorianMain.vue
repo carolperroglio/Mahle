@@ -29,7 +29,7 @@
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                     </font></b>
                 </label>
-                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(orderHistorian, 'thingName',1):organizar(orderHistorian, 'thingName',1);" class="ls2-cabecalho-ap col-md-3">
+                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(orderHistorian, 'thingName',1):organizar(orderHistorian, 'thingName',1);" class="ls2-cabecalho-ap col-md-2">
                     <b><font class="cursor-class" color="#ffffff">
                         Estação 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
@@ -48,16 +48,25 @@
             <div v-for="(o, index) in orderHistorian" v-bind:key="index" :class="{cinza: index%2==0}">
                 <label class="ls ls10 col-md-3">
                     {{o.productionOrderNumber}}</label>
-                <label class="ls ls10 col-md-3">
+                <label class="ls ls10 col-md-2">
                     {{o.thingName}} </label>
                 <label class="ls ls10 col-md-2">
                     {{o.typeDescription}}</label>
-                <label class="ls ls10 col-md-2 router" v-if="o.typeDescription == 'Liga'">
+                <label v-if="o.typeDescription == 'Liga'" class="col-md-4">
+                <label class="ls ls10 col-md-6 router">
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
+                </label> 
+                <label class="ls ls10 col-md-4 router">
+                    <router-link class="btn btn-success"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">
+                        <i class="fa fa-calculator" aria-hidden="true"></i> Exibir Calculo</router-link>
                 </label>  
-                <label class="ls ls10 col-md-2 router" v-else-if="o.typeDescription == 'Tira'">
+                </label>
+                <label  class="col-md-4" v-else-if="o.typeDescription == 'Tira'">
+                <label class="ls ls10 col-md-6 router" >
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">Realizar Apontamento</router-link>
                 </label>  
+                
+            </label>
             </div>
             </div>
             <div class="paginacao" v-show="total>0">

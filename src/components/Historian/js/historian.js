@@ -43,7 +43,6 @@ import {
 import {
     error
 } from 'util';
-
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -209,7 +208,6 @@ export default {
 
             })
         },
-
         getReportDate() {
 
             this.carregando = true;
@@ -272,7 +270,7 @@ export default {
             var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
             var ticksF = this.dateToTicks(Fim);
 
-            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP.productionOrderId + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
                 this.data = response.data;
                 this.tags = response.data.tags;
                 this.tags.forEach((T) => {
@@ -661,6 +659,7 @@ export default {
         this.getThings();
         this.getOP();
         this.getRecipe();
+        this.getchart();
     },
 
 }

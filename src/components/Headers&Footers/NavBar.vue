@@ -12,7 +12,7 @@
                 <img src="./../../assets/imagens/mahle.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
                     <li class="nav-item-cab col-md-3">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" to="/"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
                     </li>                    
                     <li class="nav-item-cab col-md-3">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
@@ -66,12 +66,12 @@
                             </router-link>
                         </b-collapse> -->
 
-                        <!-- <router-link to="/statusmes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
+                        <!--<router-link to="/statusmes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-check-square"></i> 
                             <span class="hidden-sm-down">  
                                 STATUS DO MES
                             </span>
-                        </router-link> -->
+                        </router-link>-->
 
                         <router-link to="/generateproducts" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
                             <i class="fa fa-barcode"></i> 
