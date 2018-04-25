@@ -1,0 +1,121 @@
+@import url("./../../genericcss/generico.css");
+@media (min-width: 768px) {
+    /*Menu de cadastro da receita*/
+    .nav-items-alarms {
+        margin-left: 0.3%;
+        padding: 1.2% 0 0.3% 0;
+    }
+    /* Tabela */
+    .cabecalho-table-alarms {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -9% 0 0 0;
+        z-index: 4;
+    }
+    .alarms-produtos {
+        margin-top: 48.5%;
+    }
+    .nome-alarms {
+        width: 100%;
+        position: fixed;
+        background-color: white;
+        text-align: center;
+        margin-top: -16%;
+    }
+    /*Título menu superior da tela de receita*/
+    .title-recipe-alarms {
+        list-style: none;
+        font-family: sans-serif;
+        font-size: 22px;
+        color: rgb(68, 68, 70);
+        text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+        margin-left: 1%;
+        margin-top: 1.2%;
+    }
+    #load-alarms {
+        margin: 15% 0 0 50% !important;
+    }
+
+}
+
+
+@media (min-width: 960px) {
+    /*Menu de cadastro da receita*/
+    .nav-items-alarms {
+        margin-left: 0.3%;
+        padding: 1.2% 0 0.3% 0;
+    }  
+    /* Tabela */
+    .cabecalho-table-alarms {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -2% 0 0 0;
+        z-index: 4;
+    }
+    .alarms-produtos {
+        margin-top: 22.5%;
+    }
+    .nome-alarms {
+        width: 100%;
+        position: fixed;
+        background-color: white;
+        text-align: center;
+        margin-top: -5%;
+    }
+    /*Título menu superior da tela de receita*/
+    .title-recipe-alarms {
+        list-style: none;
+        font-family: sans-serif;
+        font-size: 22px;
+        color: rgb(68, 68, 70);
+        text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+        margin-left: 1%;
+        margin-top: 1.2%;
+    }
+    #load-alarms {
+        margin: 15% 0 0 50% !important;
+    }    
+}
+
+
+@media (min-width:1400px) {
+    /* Tabela */
+    .cabecalho-table-alarms {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -1.7% 0 0 0;
+        z-index: 4;
+    }
+ 
+    .alarms-produtos {
+        margin-top: 19.5%;
+    }
+
+    .fim{
+        padding-left: 15%;
+    }
+    /*Box das Fases*/
+}
+
+@media (min-width:1400px) {
+    /* Tabela */
+    .cabecalho-table-alarms {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -1.7% 0 0 0;
+        z-index: 4;
+    }
+ 
+    .alarms-produtos {
+        margin-top: 19.5%;
+    }
+
+    .fim{
+        padding-left: 15%;
+    }
+    /*Box das Fases*/
+}
