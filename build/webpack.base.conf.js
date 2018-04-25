@@ -53,7 +53,7 @@ module.exports = {
             jquery: 'jquery',
             'window.jQuery': 'jquery',
             jQuery: 'jquery',
-            Popper: ['popper.js', 'default'],
+            Popper: ['popper.js', 'default'],            
             Util: "exports-loader?Util!bootstrap/js/dist/util",
             Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
             Vue: ['vue/dist/vue.esm.js', 'default'],
