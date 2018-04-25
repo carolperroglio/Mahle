@@ -13,11 +13,7 @@ Vue.use({
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'amcharts3/amcharts/plugins/export/export.css'
-import 'amcharts3/amcharts/plugins/export/export.min.js'
-import 'amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js'
-import 'amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js'
-import 'amcharts3/amcharts/plugins/export/libs/blob.js/blob.js'
+
 // import 'amcharts3/amcharts/plugins/export/libs/jszip/jszip.js'
 // import 'amcharts3/amcharts/plugins/export/libs/fabric/fabric.js'
 // import 'amcharts3/amcharts/plugins/export/libs/xlsx/xlsx.js'
@@ -27,11 +23,10 @@ import 'amcharts3/amcharts/plugins/export/libs/blob.js/blob.js'
 
 import popper from '.././node_modules/popper.js/dist/umd/popper.js'
 import icones from '.././node_modules/font-awesome/css/font-awesome.min.css'
-import '.././node_modules/amcharts3/amcharts/plugins/export/export.min.js'
-import '.././node_modules/amcharts3/amcharts/plugins/export/export.js'
+
 // import '.././node_modules/plotly.js/dist/plotly.js'
 // import '.././node_modules/amcharts3/amcharts/plugins/export/libs'
-import 'amcharts3/amcharts/amcharts'
+
 // import 'amcharts3/amcharts/amcharts/plugins/export'
 
 

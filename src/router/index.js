@@ -4,6 +4,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import ThingCreate from '@/components/things/ThingCreate'
 import GenerateProducts from '@/components/Products/GenerateProducts'
+import Alarms from '@/components/Alarms/Alarms'
 import Tira from '@/components/Tira/Tira'
 import ListTira from '@/components/Tira/ListTira'
 import Liga from '@/components/Liga/Liga'
@@ -33,6 +34,7 @@ import HistorianMain from '@/components/HistorianProduction/HistorianMain'
 import ReportAlarm from '@/components/ReportAlarm/ReportAlarm'
 import User from '@/components/User/User'
 import UserGroup from '@/components/User/UserGroup'
+
 // import Alarms from '@/components/Alarms/Alarms'
 
 
@@ -49,6 +51,11 @@ export default new Router({
             path: '/generateproducts',
             name: 'GenerateProducts',
             component: GenerateProducts
+        },
+        {
+            path: '/alarms',
+            name: 'Alarms',
+            component: Alarms
         },
         {
             path: '/tira/:id',

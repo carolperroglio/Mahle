@@ -72,7 +72,12 @@
                                 STATUS DO MES
                             </span>
                         </router-link>-->
-
+                        <router-link to="/alarms" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
+                            <i class="fa fa-check-square"></i> 
+                            <span class="hidden-sm-down">  
+                                RELATÓRIO DE ALARMES
+                            </span>
+                        </router-link>
                         <router-link to="/generateproducts" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
                             <i class="fa fa-barcode"></i> 
                             <span class="hidden-sm-down">  
