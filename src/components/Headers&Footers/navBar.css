@@ -39,6 +39,15 @@ body {
 }
 
 @media (min-width:768px) {
+    .bgcolor {
+        color: white;
+        padding-top: 0.5%;
+    }
+    .bgcolor-u-delete {
+        color: white;
+        padding-top: 0.5%;
+        margin-top: 4%;
+    }
     /*Logo do sistema*/
     .logo-system {
         position: fixed;
@@ -78,6 +87,15 @@ body {
 }
 
 @media (min-width: 960px) {
+    .bgcolor {
+        color: white;
+        padding-top: 0.5%;
+    }
+    .bgcolor-u-delete {
+        color: white;
+        padding-top: 0.5%;
+        margin-top: 4%;
+    }
     /*Logo do sistema*/
     .logo-system {
         position: fixed;
@@ -115,6 +133,15 @@ body {
 }
 
 @media (min-width: 1400px) {
+    .bgcolor {
+        color: white;
+        padding-top: 0.5%;
+    }
+    .bgcolor-u-delete {
+        color: white;
+        padding-top: 0.5%;
+        margin-top: 4%;
+    }
     /*Logo do sistema*/
     .logo-system {
         position: fixed;

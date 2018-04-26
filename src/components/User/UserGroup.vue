@@ -1,6 +1,7 @@
 <template>
 <div>
     <nav class="fixed-top nav-cinza">
+        <!-- <button @click="getTesteInterceptor()">Teste</button> -->
         <ul class="nav d-flex align-items-center">
             <li class="nav-item-hist nav-item-gp col-md-12">
             <h1 class="title-page-gp"><b>Grupo de Usuários</b></h1>
@@ -9,7 +10,7 @@
             <form class="form-inline my-3 form-control-sm">
                 <!-- Button trigger modal -->
                 <div class="col-md-3">
-                    <button @click="showModal('cadUserGroup');cleanVariableCreate()" type="button" class="btn btn-success btn-lg">
+                    <button @click="showModal('cadUserGroup');cleanVariableCreate(); userlist = inicialuserlist" type="button" class="btn btn-success btn-lg">
                         <i class="fa fa-plus"></i> Cadastrar Grupo de Usuário
                     </button>
                 </div>
@@ -58,7 +59,7 @@
         </label>
         <label class="ls1-usergroup col-md-1">
             <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUserGroup = u;showModal('deleteUsergroup')"></i>
-            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUserGroup = u; checkUserList(u);showModal('editUserGroup')"></i>
+            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUserGroup = u;checkUserList(u);showModal('editUserGroup')"></i>
         </label>
     </div>
     </div>  
@@ -87,13 +88,13 @@
     <select class="form-control  mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="uSelected">
         <option value="" selected disabled></option>
         <option v-for="(u,index) in userlist" v-bind:value="u" v-bind:key="index" >
-            {{ u.name }}
+            {{ u.username }}
         </option>
     </select>
     </div>
     <div class="form-group col-md-1">
         <br>
-    <button class="btn btn-outline-success btn-sm"  @click.stop.prevent="addUserToGroup(uSelected)">
+    <button class="btn btn-outline-success btn-sm"  @click.stop.prevent="addUserToGroup(uSelected,objUserGroup.userGroupId)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </button>
     </div>
@@ -108,20 +109,20 @@
     </div>
     <div class="form-group col-md-1">
         <br>
-    <button class="btn btn-outline-success btn-sm" @click.stop.prevent="addPermissionToGroup(pSelected)">
+    <button class="btn btn-outline-success btn-sm" @click.stop.prevent="addPermissionToGroup(pSelected,objUserGroup.userGroupId)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </button>
     </div>
     </div>
     <div class="form-group row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6"> 
     <ul class="list-group" v-for="(us,index) in users" v-bind:key="index">
-        <li class="list-group-item">{{us.name}} <i class="fa fa-remove pull-right cursor-class" style="color:red" @click="removeUserFromGroup(us)" aria-hidden="true"></i></li>
+        <li class="list-group-item">{{us.username}} <i class="fa fa-remove pull-right cursor-class" style="color:red" @click="removeUserFromGroup(us,objUserGroup.userGroupId)" aria-hidden="true"></i></li>
     </ul>
     </div>
     <div class="form-group col-md-6">
     <ul class="list-group" v-for="(per,index) in permissions" v-bind:key="index">
-        <li class="list-group-item">{{per}} <i class="fa fa-remove pull-right cursor-class" style="color:red" aria-hidden="true" @click="removePermissionOfGroup(per)"></i></li>
+        <li class="list-group-item">{{per}} <i class="fa fa-remove pull-right cursor-class" style="color:red" aria-hidden="true" @click="removePermissionOfGroup(per,objUserGroup.userGroupId)"></i></li>
     </ul>
     </div>
     </div>
@@ -165,14 +166,14 @@
     <label for="password">Usuários</label>
     <select class="form-control  mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="uSelected">
         <option value="" selected disabled></option>
-        <option v-for="(u,index) in userlist" v-bind:value="u" v-bind:key="index" >
-            {{ u.name }}
+        <option v-for="(u,index2) in userlist" v-bind:value="u" v-bind:key="index2" >
+            {{ u.username }}
         </option>
     </select>
     </div>
     <div class="form-group col-md-1">
         <br>
-    <button class="btn btn-outline-success btn-sm"  @click.stop.prevent="addUserToGroup(uSelected)">
+    <button class="btn btn-outline-success btn-sm"  @click.stop.prevent="addUserToGroup(uSelected,objUserGroup.userGroupId)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </button>
     </div>
@@ -187,20 +188,20 @@
     </div>
     <div class="form-group col-md-1">
         <br>
-    <button class="btn btn-outline-success btn-sm" @click.stop.prevent="addPermissionToGroup(pSelected)">
+    <button class="btn btn-outline-success btn-sm" @click.stop.prevent="addPermissionToGroup(pSelected,objUserGroup.userGroupId)">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </button>
     </div>
     </div>
     <div class="form-group row">
     <div class="form-group col-md-6">
-    <ul class="list-group" v-for="(us,index) in objUserGroup.users" v-bind:key="index">
-        <li class="list-group-item">{{us.name}} <i class="fa fa-remove pull-right cursor-class" style="color:red" @click="removeUserFromGroup(us)" aria-hidden="true"></i></li>
+    <ul class="list-group" v-for="(us,index) in users" v-bind:key="index">
+        <li class="list-group-item">{{us.username}}<i class="fa fa-remove pull-right cursor-class" style="color:red" @click="removeUserFromGroup(us,objUserGroup.userGroupId)" aria-hidden="true"></i></li>
     </ul>
     </div>
     <div class="form-group col-md-6">
-    <ul class="list-group" v-for="(per,index) in objUserGroup.permissions" v-bind:key="index">
-        <li class="list-group-item">{{per}} <i class="fa fa-remove pull-right cursor-class" style="color:red" aria-hidden="true" @click="removePermissionOfGroup(per)"></i></li>
+    <ul class="list-group" v-for="(per,index) in permissions" v-bind:key="index">
+        <li class="list-group-item">{{per}} <i class="fa fa-remove pull-right cursor-class" style="color:red" aria-hidden="true" @click="removePermissionOfGroup(per,objUserGroup.userGroupId)"></i></li>
     </ul>
     </div>
     </div>

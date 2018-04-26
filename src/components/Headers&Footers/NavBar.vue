@@ -11,21 +11,32 @@
             <nav class="fixed-top">
                 <img src="./../../assets/imagens/mahle.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
-                    <li class="nav-item-cab col-md-3">
-                        <router-link class="nav-link bg-dark active btn-config" to="/"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
+                    <li class="nav-item-cab col-md-2">
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
                     </li>                    
-                    <li class="nav-item-cab col-md-3">
+                    <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
                     </li> 
                     <!-- <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:44px; cursor:pointer"></i>  <br>Ferramentas</router-link>
                     </li>  -->
-                    <li class="nav-item-cab col-md-4">
+                    <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historianMain"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos</router-link>
                     </li> 
                     <!-- <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionTira"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos Tira</router-link>
                     </li>  -->
+                    <li class="nav-item-cab col-md-1" v-show="username != null">
+                        <router-link to="#" class="nav-link bg-dark active btn-config">
+                            <i class= "fa fa-user bgcolor" style="font-size:20px; cursor:pointer"></i> <br>
+                        <p style="font-size:15px; cursor:pointer"> {{username}}  </p>
+                        
+                        </router-link>
+                    </li>
+                    <li class="nav-item-cab col-md-1 bgcolor" @click.stop.prevent="Logout()" v-show="username != null">
+                        <i class="fa fa-user-times bgcolor-u-delete" style="font-size:20px; cursor:pointer" ></i><br>  
+                        <p style="font-size:15px; cursor:pointer"> Logout </p>
+                    </li> 
                 </ul>    
             </nav>
         </div> 
@@ -59,12 +70,29 @@
                         <!-- <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki"></i> 
                             OPERADOR
                             <i class="fa fa-chevron-down pull-right"></i>
-                        </div>
-                        <b-collapse id="menu2">                      
-                            <router-link to="#" data-parent="#menu1" class="list-group-item collapsed" cursor="pointer"> 
-                                Logout 
-                            </router-link>
-                        </b-collapse> -->
+                        </div> -->
+                        <!-- <b-collapse id="menu2">    -->
+                            <router-link to="/login"  class="list-group-item collapsed" cursor="pointer" v-b-toggle.sidebar v-show="username == null"> 
+                                <i class="fa fa-user-circle"></i> Login 
+                                
+                            </router-link>                   
+                            <!-- <button to="" @click.stop.prevent="Logout()"  class="list-group-item collapsed" cursor="pointer" v-b-toggle.sidebar> 
+                                <i class="fa fa-user-times"></i> Logout 
+                            </button> -->
+                        <!-- </b-collapse> -->
+
+                        <router-link to="/user" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
+                            <i class="fa fa-barcode"></i> 
+                            <span class="hidden-sm-down">  
+                                USUÁRIOS
+                            </span>
+                        </router-link>
+                        <router-link to="/usergroup" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
+                            <i class="fa fa-barcode"></i> 
+                            <span class="hidden-sm-down">  
+                                GRUPO DE USUÁRIOS
+                            </span>
+                        </router-link>
 
                         <!--<router-link to="/statusmes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
                             <i class="fa fa-check-square"></i> 
@@ -170,7 +198,7 @@
                         <!-- </b-collapse> -->
                     </b-collapse>      
                     </div>   
-        <router-view/>
+        <!-- <router-view/> -->
             </div>
 
 </template>

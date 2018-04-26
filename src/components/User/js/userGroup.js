@@ -6,7 +6,6 @@ import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import VuePassword from 'vue-password'
-import passwordHash from 'password-hash-and-salt'
 Vue.component(VuePassword)
 es6promisse.polyfill();
 
@@ -19,6 +18,8 @@ export default {
             urlusergroup: ipusergroup + "/api/usergroups/",
             urluser: ipusergroup + "/api/users/",
             urlpermission: ipusergroup + "/api/permissions/",
+            urladdpermission: ipusergroup + "/api/usergroups/permissions/",
+            urladduser: ipusergroup + "/api/usergroups/users/",
             chart: {},
             password: "",
             carregando: false,
@@ -37,9 +38,11 @@ export default {
             erro: false,
             keyhashed: "",
             userlist: [],
+            inicialuserlist: [],
             permissionsList: [],
             uSelected: {},
-            pSelected: {}
+            pSelected: {},
+            users2: '',
         }
     },
     components: {
@@ -128,11 +131,14 @@ export default {
             this.userlist = [];
             axios.get(this.urluser).then((response) => {
                 this.userlist = response.data.values;
+                this.inicialuserlist = response.data.values;
+
 
             }).catch(error => {
                 this.erro = true;
                 this.msgErro = error.message;
                 this.showModal("modaInfo");
+                VueCookies.set('status', error.message);
             })
         },
         getPermissions() {
@@ -149,6 +155,7 @@ export default {
                 this.erro = true;
                 this.msgErro = error.message;
                 this.showModal("modaInfo");
+                VueCookies.set('status', error.message);
             })
         },
         /**
@@ -163,6 +170,7 @@ export default {
                 this.erro = true;
                 this.msgErro = error.message;
                 this.showModal("modaInfo");
+                VueCookies.set('status', error.message);
             })
         },
         createUser() {
@@ -185,6 +193,7 @@ export default {
                     this.erro = true;
                     this.msgErro = error.message;
                     this.showModal("modaInfo");
+                    VueCookies.set('status', error.message);
                 })
             }, 1000)
         },
@@ -202,6 +211,7 @@ export default {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro:" + error.message;
                 this.showModal("modaInfo");
+                VueCookies.set('status', error.message);
             })
         },
         deleteUsergroup(id) {
@@ -218,51 +228,144 @@ export default {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro:" + error.message;
                 this.showModal("modaInfo");
+                VueCookies.set('status', error.message);
             })
         },
-        addUserToGroup(obj) {
-            this.users.push(obj);
-            var newListUser = this.userlist.filter(user => {
-                return user.userId != obj.userId;
-            })
-            this.userlist = newListUser;
-        },
-        removeUserFromGroup(obj) {
-            var newUser = this.users.filter(user => {
-                return user.userId != obj.userId;
-            })
+        addUserToGroup(obj, id) {
+            console.log("id:" + id);
 
-            this.userlist.push(obj);
-            this.users = newUser;
+            axios.post(this.urladduser + id, obj)
+                .then((response) => {
+                    this.users.push(obj);
+
+                    var newListUser = this.userlist.filter(user => {
+                        return user.userId != obj.userId;
+                    })
+                    this.userlist = newListUser;
+                }).catch(error => {
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro:" + error.message;
+                    this.showModal("modaInfo");
+                    VueCookies.set('status', error.message);
+                })
+        },
+        removeUserFromGroup(obj, id) {
+            var config = {
+                data: obj
+            }
+            console.log("id:" + id);
+            console.log(obj);
+
+            axios.delete(this.urladduser + id, config)
+                .then((response) => {
+                    var newUser = this.users.filter(user => {
+                        return user.userId != obj.userId;
+                    })
+
+                    this.userlist.push(obj);
+                    this.users = newUser;
+                }).catch(error => {
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro:" + error.message;
+                    this.showModal("modaInfo");
+                    VueCookies.set('status', error.message);
+                })
+        },
+        addPermissionToGroup(obj, id) {
+            axios.post(this.urladdpermission + id + "?&permission=" + obj)
+                .then((response) => {
+                    var newPermissionList = this.permissionsList.filter(p => {
+                        return p != obj;
+                    })
+                    this.permissionsList = newPermissionList;
+                    this.permissions.push(obj);
+                }).catch(error => {
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro:" + error.message;
+                    this.showModal("modaInfo");
+                    VueCookies.set('status', error.message);
+                })
+
+
 
         },
-        addPermissionToGroup(obj) {
-            var newPermissionList = this.permissionsList.filter(p => {
-                return p != obj;
-            })
-            this.permissionsList = newPermissionList;
-            this.permissions.push(obj);
+        removePermissionOfGroup(obj, id) {
+            axios.delete(this.urladdpermission + id + "?&permission=" + obj)
+                .then((response) => {
+                    var newpermission = this.permissions.filter(perm => {
+                        return perm != obj;
+                    })
+                    this.permissions = newpermission;
+                    this.permissionsList.push(obj)
+                }).catch(error => {
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro:" + error.message;
+                    this.showModal("modaInfo");
+                    VueCookies.set('status', error.message);
+                })
 
-        },
-        // EM CONSTRUÇÃO
-        removePermissionOfGroup(obj) {
-            var newpermission = this.permissions.filter(perm => {
-                return perm != obj;
-            })
-            this.permissions = newpermission;
-            this.permissionsList.push(obj)
         },
         checkUserList(obj) {
-            var newListUser = this.userlist.filter(user => {
-                return obj.users.filter(u => {
-                    return u.userId != user.userId;
-                })
-            })
-            this.userlist = newListUser;
-        }
+            this.users = [];
+            var newListUser = [];
+            // verifica se p usuário ja exite no grupo, se sim, remove da lista
+            if (obj.users.length > 0) {
+                for (var i = 0; i < this.userlist.length; i++) {
+                    for (var x = 0; x < obj.users.length; x++) {
+                        if (obj.users[x].userId != this.userlist[i].userId) {
+                            newListUser.push(this.userlist[i]);
+                        }
+                    }
+                }
+                this.userlist = newListUser;
+            } else {
+                this.userlist = this.inicialuserlist;
+            }
+
+
+            if (obj.users.length >= 0) {
+                this.users = obj.users;
+            }
+            if (obj.permissions.length >= 0) {
+                this.permissions = obj.permissions;
+            }
+
+        },
         /**
          * END CRUD Usergroup
          */
+        getTesteInterceptor() {
+            var config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'security': 'CfDJ8D81hm4ZEFZJlBwEqRbZXj9XCdNtlEGuoRm4d42LbQxy-L_EDU61QwmmMF2N82UsdfJD4hexGKe8d3QECAN4DfjC5cXpXwnYEr2ymidc8jyG-9y8NThRJtHhGnC66AiJvG__SHLUEccL5YF2ZG2_682amxDwKgUj0RhloTPzIFmA2i4BYNPPftDd6a9_ULbe1Szor5EOuF2jAlD-WLVjFq1qCSHyQQ_8E2MFjK1V5LQx3wy7eeANxZCpq9Vkpaxvv7NoNQJC941AGJB8-WOEx8mjVQdtLc_x-24JvPPEvXbLFDyH5DThih5ibJptLXdNjlcjqOGpVlmCEyzGFO-qxHlmj20ZoFBg2piX7cvauRB2GcTrJuWSo5eLyI-X23ewj_PpTfFz4OL0ngPZrMd-7U6pMt2mQB6ZJQ7TNziYVPO8WR93nXdMXKSPWC4-yWUDXflXmU5MLqwyW4XrjURktow'
+                }
+            }
+            this.userlist = [];
+            axios.get(this.urluser, config).then((response) => {
+                this.userlist = response.data.values;
+                this.inicialuserlist = response.data.values;
+
+
+            }).catch(error => {
+                this.erro = true;
+                this.msgErro = error.message;
+                this.showModal("modaInfo");
+            })
+            axios.interceptors.request.use(function(config) {
+                // Do something before request is sent
+                console.log(config);
+                return config;
+            })
+        }
+    },
+    watch: {
+        users: function() {
+            this.msgErro = "banana"
+            console.log(this.users);
+            return this.users;
+        }
+
     },
     beforeMount: function() {
         this.getUsergroups();
