@@ -14,7 +14,7 @@
         <div class="form-row">
         <div class="form-group col-md-12">
         <label for="name">Senha</label>
-        <input type="text" class="form-control" placeholder="" v-model="password">
+        <input type="password" class="form-control" placeholder="" v-model="password">
         </div>
         </div>
         <div class="form-row">
