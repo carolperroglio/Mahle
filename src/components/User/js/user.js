@@ -137,26 +137,35 @@ export default {
         createUser() {
             // this.keyhashed;
             this.hashKey(this.password, this);
-            setTimeout(() => {
-                var userInfo = {
-                    username: this.username,
-                    name: this.name,
-                    password: this.keyhashed,
-                    email: this.email,
-                    enabled: true,
-                }
-                axios.post(this.urluser, userInfo).then((response) => {
-                    this.userlist = response.data.values;
-                    this.msgErro = "Usuário criado com Sucesso";
-                    this.showModal("modaInfo");
-                    this.getUsers();
-                }).catch((error) => {
-                    this.erro = true;
-                    this.msgErro = error.message;
-                    this.showModal("modaInfo");
-                    VueCookies.set('status', error.message);
-                })
-            }, 1000)
+            var contains = false;
+            this.objUser.password.contains()
+            //Verifica se as senhas conferem para cadastrar o usuário
+            if (this.objUser.password == this.objUser.passwordconfirm) {
+                setTimeout(() => {
+                    var userInfo = {
+                        username: this.username,
+                        name: this.name,
+                        password: this.keyhashed,
+                        email: this.email,
+                        enabled: true,
+                    }
+                    axios.post(this.urluser, userInfo).then((response) => {
+                        this.userlist = response.data.values;
+                        this.msgErro = "Usuário criado com Sucesso";
+                        this.showModal("modaInfo");
+                        this.getUsers();
+                    }).catch((error) => {
+                        this.erro = true;
+                        this.msgErro = error.message;
+                        this.showModal("modaInfo");
+                        VueCookies.set('status', error.message);
+                    })
+                }, 1000)
+            } else {
+                this.erro = true;
+                this.msgErro = "Senhas não conferem"
+                this.showModal("modaInfo");
+            }
         },
         updateUser(id) {
             console.log(this.objUser);
@@ -164,19 +173,26 @@ export default {
 
             this.hashKey(this.objUser.password, this);
 
-            setTimeout(() => {
-                this.objUser.password = this.keyhashed;
-                axios.put(this.urluser + id, this.objUser).then((response) => {
-                    this.msgErro = "Usuário atualizado com Sucesso";
-                    this.showModal("modaInfo");
-                    this.getUsers();
-                }).catch((error) => {
-                    this.erro = true;
-                    this.msgErro = "Ocorreu um erro:" + error.message;
-                    this.showModal("modaInfo");
-                    VueCookies.set('status', error.message);
-                })
-            }, 1500)
+            //Verifica se as senhas conferem para atualizar o usuário
+            if (this.objUser.password == this.objUser.passwordconfirm) {
+                setTimeout(() => {
+                    this.objUser.password = this.keyhashed;
+                    axios.put(this.urluser + id, this.objUser).then((response) => {
+                        this.msgErro = "Usuário atualizado com Sucesso";
+                        this.showModal("modaInfo");
+                        this.getUsers();
+                    }).catch((error) => {
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro:" + error.message;
+                        this.showModal("modaInfo");
+                        VueCookies.set('status', error.message);
+                    })
+                }, 1500)
+            } else {
+                this.erro = true;
+                this.msgErro = "Senhas não conferem"
+                this.showModal("modaInfo");
+            }
         },
         deleteUser(id) {
             console.log(this.objUser);

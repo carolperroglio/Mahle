@@ -5,13 +5,13 @@
 @import url("./../../genericcss/generico.css");
 @media (min-width: 768px) {
     .table-margin-usergroup {
-        margin: 32% 0 6% 0;
+        margin: 31% 0 6% 0;
     }
     .cabecalho-table-po-usergroup {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: 23.8% 0 0 0;
+        margin: -4.2% 0 0 0;
         z-index: 4;
     }
     .cabecalho-table-po-modal-usergroup {
@@ -89,13 +89,13 @@
 
 @media (min-width: 960px) {
     .table-margin-usergroup {
-        margin: 20% 0 6% 0;
+        margin: 17% 0 6% 0;
     }
     .cabecalho-table-po-usergroup {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -3.5% 0 0 0;
+        margin: -2.5% 0 0 0;
         z-index: 4;
     }
     .cabecalho-table-po-modal-usergroup {
@@ -171,9 +171,9 @@
     }
 }
 
-@media (min-width:1400px) {
+@media (min-width:1900px) {
     .table-margin-usergroup {
-        margin: 16.5% 0 6% 0;
+        margin: 15.5% 0 6% 0;
     }
     .cabecalho-table-po-usergroup {
         position: fixed;

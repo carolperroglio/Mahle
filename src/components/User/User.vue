@@ -109,11 +109,12 @@
                     classes="input"
                     :user-inputs="[user.email]">
       </vue-password> -->
-            <input required type="text" class="form-control" min="8" max="15" id="password" v-model="password">
+            <input required type="password" class="form-control" min="8" max="15" id="password" v-model="password">
+            <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 6 caractéres, uma letra e um número</p>
         </div>
         <div class="form-group col-md-6">
         <label for="passwordconfirm">Confirmar senha</label>
-            <input required type="text" class="form-control"  min="8" max="15" id="passwordconfirm" v-model="passwordconfirm">
+            <input required type="password" class="form-control"  min="8" max="15" id="passwordconfirm" v-model="passwordconfirm">
         </div>
     </div>
     <div class="form-group row">
@@ -168,11 +169,12 @@
                     classes="input"
                     :user-inputs="[user.email]">
       </vue-password> -->
-            <input required type="text" class="form-control" min="8" max="15" id="password" v-model="objUser.password">
+            <input required type="password" class="form-control" min="8" max="15" id="password" v-model="objUser.password">
+            <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 6 caractéres, uma letra e um número</p>
         </div>
         <div class="form-group col-md-6">
         <label for="passwordconfirm">Confirmar senha</label>
-            <input required type="text" class="form-control"  min="8" max="15" id="passwordconfirm" v-model="objUser.passwordconfirm">
+            <input required type="password" class="form-control"  min="8" max="15" id="passwordconfirm" v-model="objUser.passwordconfirm">
         </div>
     </div>
     <div class="form-group row">
