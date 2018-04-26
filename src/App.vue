@@ -3,23 +3,37 @@
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
-    <nav-bar></nav-bar>
+    <nav-bar :username="getUsername()"></nav-bar>
 
-    <!--<router-view/>-->
+    <router-view/>
   </div>
 </template>
 
 <script>
-import NavBar from './components/Headers&Footers/NavBar.vue'
-// import Autocomplete from 'v-autocomplete'
-import Vue from 'vue'
-// import 'v-autocomplete/dist/v-autocomplete.css'
-// Vue.use(Autocomplete)
+import NavBar from "./components/Headers&Footers/NavBar.vue";
+import Vue from "vue";
+import axios from "axios";
+import Router from 'vue-router'
+import VueCookies from "vue-cookies";
+Vue.use("vue-cookies");
+Vue.use("vue-router");
 
 export default {
-  name: 'app',
-  components: { NavBar }
-}
+  name: "app",
+  data() {
+    return {};
+  },
+  components: { NavBar,Router },
+  methods: {
+    getUsername() {
+      var username = VueCookies.get("username");
+      return username;
+    },
+    redirectToLogin() {
+      this.$router.push({ name: "Login" });
+    }
+  }
+};
 </script>
 
 <style>

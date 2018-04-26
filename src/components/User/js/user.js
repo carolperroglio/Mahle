@@ -7,8 +7,11 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import VuePassword from 'vue-password'
-import passwordHash from 'password-hash-and-salt'
 import { setTimeout } from 'timers';
+import pbkdf2 from 'pbkdf2'
+import crypto from 'crypto'
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 Vue.component(VuePassword)
 es6promisse.polyfill();
 
@@ -94,28 +97,13 @@ export default {
             }).join(''));
         },
         hashKey(keytohash, este) {
-            var keyhashed;
-            // Creating hash and salt 
-            passwordHash(keytohash).hash(function(error, hash) {
-                if (error)
-                    throw new Error('Something went wrong!');
+            // encripta
+            var key = pbkdf2.pbkdf2Sync(keytohash, 'salt', 1, 32, 'sha512')
+            key = key.toString('hex');
 
-                // Store hash (incl. algorithm, iterations, and salt) 
+            console.log(key);
 
-                // Verifying a hash 
-                passwordHash('hack').verifyAgainst(keyhashed, function(error, verified) {
-                    if (error)
-                        throw new Error('Something went wrong!');
-                    if (!verified) {
-                        console.log("Don't try! We got you!");
-                    } else {
-                        console.log("The secret is...");
-                    }
-                });
-                keyhashed = hash;
-                este.keyhashed = hash;
-                console.log("keyhashed" + keyhashed);
-            })
+            this.keyhashed = key;
         },
         assignValue(keyhashed) {
             this.keyhashed = keyhashed;
@@ -131,13 +119,19 @@ export default {
          * CRUD USER
          */
         getUsers() {
+
             axios.get(this.urluser).then((response) => {
                 this.userlist = response.data.values;
 
-            }).catch(error => {
-                this.erro = true;
-                this.msgErro = error.message;
-                showModal("modaInfo");
+            }).catch((error) => {
+                if (error.message == "Network Error") {
+                    this.erro = true;
+                    console.log(error);
+                    this.msgErro = "Sem acesso a esta tela";
+                    this.showModal("modaInfo");
+                    VueCookies.set('status', error.message);
+                }
+
             })
         },
         createUser() {
@@ -156,10 +150,11 @@ export default {
                     this.msgErro = "Usuário criado com Sucesso";
                     this.showModal("modaInfo");
                     this.getUsers();
-                }).catch(error => {
+                }).catch((error) => {
                     this.erro = true;
                     this.msgErro = error.message;
                     this.showModal("modaInfo");
+                    VueCookies.set('status', error.message);
                 })
             }, 1000)
         },
@@ -175,10 +170,11 @@ export default {
                     this.msgErro = "Usuário atualizado com Sucesso";
                     this.showModal("modaInfo");
                     this.getUsers();
-                }).catch(error => {
+                }).catch((error) => {
                     this.erro = true;
                     this.msgErro = "Ocorreu um erro:" + error.message;
                     this.showModal("modaInfo");
+                    VueCookies.set('status', error.message);
                 })
             }, 1500)
         },
@@ -190,10 +186,11 @@ export default {
                 this.msgErro = "Usuário excluido com Sucesso";
                 this.showModal("modaInfo");
                 this.getUsers();
-            }).catch(error => {
+            }).catch((error) => {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro:" + error.message;
                 this.showModal("modaInfo");
+                VueCookies.set('status', error.message);
             })
         }
         /**

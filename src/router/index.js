@@ -33,6 +33,7 @@ import HistorianMain from '@/components/HistorianProduction/HistorianMain'
 import ReportAlarm from '@/components/ReportAlarm/ReportAlarm'
 import User from '@/components/User/User'
 import UserGroup from '@/components/User/UserGroup'
+import Login from '@/components/Login/Login'
 // import Alarms from '@/components/Alarms/Alarms'
 
 
@@ -180,28 +181,29 @@ export default new Router({
             component: GenealogyReport
         },
         {
-
             path: '/historianMain',
             name: 'HistorianMain',
             component: HistorianMain
         },
         {
-
             path: '/alarmReport',
             name: 'AlarmReport',
             component: ReportAlarm
         },
         {
-
             path: '/user',
             name: 'User',
             component: User
         },
         {
-
             path: '/usergroup',
             name: 'UserGroup',
             component: UserGroup
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
         }
     ]
 })
