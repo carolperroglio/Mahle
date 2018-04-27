@@ -123,12 +123,12 @@ export default {
                 'box-shadow': '1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070',
                 'height': '100%'
             }
-            if (objeto.hasRedAlert) 
+            if (objeto.hasRedAlert)
                 string["background-color"] = '#ed0404';
-            else if (objeto.hasLowAlert && !objeto.hasRedAlert) 
+            else if (objeto.hasLowAlert && !objeto.hasRedAlert)
                 string["background-color"] = '#f5fc28';
             else
-                string["background-color"] = '#90EE90';    
+                string["background-color"] = '#90EE90';
             return string;
         }
     },

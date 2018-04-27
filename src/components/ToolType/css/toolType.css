@@ -1,63 +1,18 @@
-
 @import url("./../../genericcss/generico.css");
 .btn-add-tt {
     padding-top: 38px;
-}
-
-.nav-tool-type {
-    position: fixed;
-    margin-top: 5%;
-    z-index: 1;
-    background: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
-    width: 100%;
-    height: 16%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.nav-item-tt {
-    margin-top: 2%;
-    margin-left: 1%;
-}
-
-.conteudo-tt {
-    margin-top: 14%;
-    width: 98%;
-    left: 1%;
-    padding-bottom: 5%;
 }
 
 .card-tt {
     height: 10%;
 }
 
-.title-page-TT {
-    text-align: left;
-    color: rgb(68, 68, 70);
-    font-family: sans-serif;
-    font-size: 22px;
-    text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-    margin-left: 1%;
-    top: 2%;
-}
-
 .cabecalho-table-tt {
-    position: relative;
-    top: 12%;
-    /* left: 1.8%; */
+    position: fixed;
     width: 100%;
-    padding: 0 0 0 0.1%;
     background-color: black;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0.2%;
-}
-
-.fundo-branco-tt {
-    background-color: #ffffff;
-    margin: 0 0 0 0;
-    width: 100%;
-    height: 30%;
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
+    margin: -2% 0 0 0;
+    z-index: 4;
 }
 
 .ls2-cabecalho-tt {
@@ -85,10 +40,6 @@
     width: 95%;
 }
 
-.cadbtn {
-    margin-top: 10%;
-}
-
 .card-header7 {
     margin-top: 0.3%;
     margin-bottom: 0.3%;
@@ -100,11 +51,16 @@
     text-align: center;
 }
 
-.conteudo-tt h3 {
-    color: rgb(41, 39, 39);
+.table-margin-tf {
+    margin: 15% 0 6% 0;
 }
 
-@media only screen and (max-width: 800px) {
+.nav-prod {
+    padding-left: 0.5%;
+}
+
+
+/* @media only screen and (max-width: 800px) {
     .nav-tool-type {
         background-color: rgba(249, 247, 247, 1);
         position: fixed;
@@ -129,4 +85,4 @@
         width: 28%;
         font-size: 12px;
     }
-}
+} */

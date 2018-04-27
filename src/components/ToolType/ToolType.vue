@@ -1,56 +1,57 @@
 <template>
   <div>
-        <nav class="fixed-top nav-tool-type">
-            <h1 class="title-page-TT"><b>Tipo de Ferramentas</b></h1>
+        <nav class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
-                 <li class="nav-item-tt">
-                    <button type="button" class="btn btn-primary cadFer" @click.stop.prevent="showModal()">
-                        Cadastrar Tipo de Ferramenta
+                <form class="form-inline my-3 form-control-sm">
+                <li class="nav-prod nav-item-gp col-md-12">
+                    <h1 class="title-page-gp"><b>Tipo de Ferramentas</b></h1>
+                </li>
+                <li class="nav-prod col-md-1">
+                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModal()">
+                        <i class="fa fa-plus"></i> Cadastrar Tipo de Ferramenta
                     </button>
                 </li>
+                </form>
             </ul>
         </nav>
-        <div class="row conteudo-tt col">
-            <div class="fundo-branco-tt">
-                <div class="cabecalho-table-tt">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(toolsType, 'name',0):organizar(toolsType, 'name',0);" class="ls2-cabecalho-tt col-md-2">
-                        <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(toolsType, 'description',1):organizar(toolsType, 'description',1);" class="ls2-cabecalho-tt col-md-4">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Descrição &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(toolsType, 'serialNumber',2):organizar(toolsType, 'status',2);" class="ls2-cabecalho-tt col-md-2">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Status&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label> 
-            </div>
-            <div v-for="(ttype,index) in toolsType" :key="index" :class="{cinza: index%2==0}">
-                <label class="ls ls21 col-md-2">
-                    {{ttype.name}}
-                </label>
-                <label class="ls ls21 col-md-4">
-                    {{ttype.description}}
-                </label>
-                <label class="ls ls21 col-md-2">
-                    {{ttype.status}}
-                </label>
-                <label class="ls ls21 col-md-1">
-                    <i class="fa fa-edit icon-right" style="font-size:22px; cursor:pointer"  @click.prevent="showModalEdit();catchObjToUpdate(ttype)"></i>
-                </label>
-                
-            </div>
-            </div>
+        <div class="cabecalho-table-tt">
+            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(toolsType, 'name',0):organizar(toolsType, 'name',0);" class="ls2-cabecalho-tt col-md-2">
+                <b><font class="cursor-class" color="#ffffff">Nome 
+                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(toolsType, 'description',1):organizar(toolsType, 'description',1);" class="ls2-cabecalho-tt col-md-4">
+                <b><font class="cursor-class" color="#ffffff">
+                    Descrição 
+                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(toolsType, 'serialNumber',2):organizar(toolsType, 'status',2);" class="ls2-cabecalho-tt col-md-2">
+                <b><font class="cursor-class" color="#ffffff">
+                    Status
+                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                </font></b>
+            </label> 
         </div>
+    <div class="table-margin-tf"  v-show="!carregando">
+    <div v-for="(ttype,index) in toolsType" :key="index" :class="{cinza: index%2==0}">
+        <label class="ls ls21 col-md-2">
+            {{ttype.name}}
+        </label>
+        <label class="ls ls21 col-md-4">
+            {{ttype.description}}
+        </label>
+        <label class="ls ls21 col-md-2">
+            {{ttype.status}}
+        </label>
+        <label class="ls ls21 col-md-1">
+            <i class="fa fa-edit icon-right" style="font-size:22px; cursor:pointer"  @click.prevent="showModalEdit();catchObjToUpdate(ttype)"></i>
+        </label>
+    </div>
+    </div>
         <!--                       -->
         <!--                       -->
         <!--                       -->

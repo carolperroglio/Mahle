@@ -58,42 +58,42 @@ function showModal(id) {
   $refs[id].show();
 }
 
-axios.interceptors.request.use(
-  function(config) {
-    // Do something before request is sent
-    var sec = VueCookies.get("security");
-    console.log(sec);
-    config.headers.common["security"] = sec;
-    config.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
-    config.headers.common["Accept"] = "application/json";
+// axios.interceptors.request.use(
+//   function(config) {
+//     // Do something before request is sent
+//     var sec = VueCookies.get("security");
+//     console.log(sec);
+//     config.headers.common["security"] = sec;
+//     config.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
+//     config.headers.common["Accept"] = "application/json";
 
-    return config;
-  },
-  function(error) {
-    // Do something with request error
-    return Promise.reject(error);
-  }
-);
+//     return config;
+//   },
+//   function(error) {
+//     // Do something with request error
+//     return Promise.reject(error);
+//   }
+// );
 
-axios.interceptors.response.use(
-  response => {
-    // intercept the global error
-    return response;
-  },
-  function(error) {
-    var statuscode = VueCookies.get("status");
-    //&& errorResponse.config && !errorResponse.config.__isRetryRequest
-    if (statuscode === 401) {
-      router.push({ name: "Login" });
-    } else if (error.message == "Network Error") {
-      router.push({ name: "Login" });
-      showModal("modaInfo");
-    } else {
-      VueCookies.set("status", "ok");
-    }
-    return Promise.reject(error);
-  }
-);
+// axios.interceptors.response.use(
+//   response => {
+//     // intercept the global error
+//     return response;
+//   },
+//   function(error) {
+//     var statuscode = VueCookies.get("status");
+//     //&& errorResponse.config && !errorResponse.config.__isRetryRequest
+//     if (statuscode === 401) {
+//       router.push({ name: "Login" });
+//     } else if (error.message == "Network Error") {
+//       router.push({ name: "Login" });
+//       showModal("modaInfo");
+//     } else {
+//       VueCookies.set("status", "ok");
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 export default {
   name: "app",
@@ -115,12 +115,12 @@ export default {
     redirectToLogin() {
       this.$router.push({ name: "Login" });
     },
-    showModal(id) {
-      this.$refs[id].show();
-    }
+    // showModal(id) {
+    //   this.$refs[id].show();
+    // }
   },
   beforeMount(){
-    this.showModal("modaInfo");
+    // this.showModal("modaInfo");
   }
 };
 </script>
