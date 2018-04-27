@@ -10,7 +10,6 @@ import AmCharts from 'amcharts3'
 import router from './router'
 import Router from 'vue-router'
 import es6promisse from 'es6-promise'
-import bModal from 'bootstrap-vue/es/components/modal/modal'
 es6promisse.polyfill();
 
 Vue.use({
@@ -42,42 +41,6 @@ import Login from './components/Login/Login'
 
 Vue.config.productionTip = false
 
-
-
-
-// axios.interceptors.request.use(function(config) {
-//     // Do something before request is sent
-//     var sec = VueCookies.get('security');
-//     console.log(sec);
-//     config.headers.common['security'] = sec
-//     config.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
-//     config.headers.common['Accept'] = 'application/json'
-
-//     return config;
-// }, function(error) {
-//     // Do something with request error
-//     return Promise.reject(error);
-// });
-
-
-
-// axios.interceptors.response.use((response) => { // intercept the global error
-//     return response
-// }, function(error) {
-//     var statuscode = VueCookies.get('status');
-//     //&& errorResponse.config && !errorResponse.config.__isRetryRequest
-//     if (statuscode === 401) {
-//         router.push({ name: "Login" })
-//     } else if (error.message == "Network Error") {
-//         router.push({ name: "Login" })
-//         showModal('modaInfo');
-//     } else {
-//         VueCookies.set('status', 'ok');
-//     }
-//     return Promise.reject(error);
-// });
-
-
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
@@ -86,7 +49,6 @@ new Vue({
     components: {
         App,
         Router,
-        'b-modal': bModal,
         Login
     }
 })

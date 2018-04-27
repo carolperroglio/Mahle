@@ -109,7 +109,6 @@
             </div>
             <!--</Botão que cria a OP -->
             <!--                      -->
-        
         </b-modal>
         <!-- Fechamento do Modal  -->
         <!-- Do formulário de     -->
