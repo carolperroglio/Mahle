@@ -14,27 +14,6 @@
             <li class="nav-prod nav-item-gp col-md-12">
                 <h1 class="title-page-gp"> <b>Cadastrar Ferramentas/Insumos</b> </h1>
             </li>
-            <!-- <li class="col-md-2">
-                <select class="form-control form-control-lg" v-model="orderField">
-                    <option value="" selected disabled="disabled">Buscar por:</option>
-                    <option value="name">Nome</option>
-                    <option value="description">Descrição</option>
-                    <option value="serialNumber">Número serial</option>
-                    <option value="code">Código</option>
-                    <option value="lifeCycle">Vida Útil</option>
-                    <option value="currentLife">Ciclo de vida atual</option>
-                    <option value="unitOfMeasurement">Unidade de Medida</option>
-                    <option value="typeName">Tipo</option>
-                    <option value="status">Status</option>
-                </select>
-                </li> -->
-                <!-- <li class="nav-item-tool col-md-1">
-                        <select class="form-control form-control-lg" v-model="order">                        
-                           <option value="" selected disabled="disabled">Cresc./Decresc.</option>
-                            <option value="ascending">Crescente</option>
-                            <option value="descending">Decrescente</option>
-                    </select>
-                </li> -->
                 <li class="nav-item-tool col-md-2">
                     <select class="form-control form-control-lg" v-model="fieldFilter">
                         <option value="" selected disabled="disabled">Buscar por:</option>
@@ -317,32 +296,18 @@
                 <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 </div>
-                <!-- <label>
-                    <b>Vida útil atual: </b>
-                </label>
-                <input type="text" id="currL" v-model="ferramenta.currentLife" class="form-control" placeholder="vida útil atual" disabled>
-                -->
                 <div class="form-row">
                 <div class="form-group col-md-6">
                 <label>
                     <b>Tipo: </b>
                 </label>
-                    <select class="form-control" v-model="ferramenta.typeId" disabled>
-                    <option v-for="(tipo,index) in tipos" :value="tipo.name" v-bind:key="index">{{ tipo.name }}</option>
-                    </select>
+                <input type="text" id="unitMeas" v-model="ferramenta.typeName" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 <div class="form-group col-md-6">
                 <label>
                     <b>Status: </b>
                 </label>
-                <select class="form-control" v-model="ferramenta.status" disabled>
-                    <option value="available">Disponível</option>
-                    <option value="in_use">Em uso</option>
-                    <option value="in_maintenance">Em manutenção</option>
-                    <option value="in_test">Em Teste</option>
-                    <option value="not_available">Indisponível</option>
-                    <option value="inactive">Inativo</option>
-                </select>
+                <input type="text" id="unitMeas" v-model="ferramenta.status" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 </div>
 

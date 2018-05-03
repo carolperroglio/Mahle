@@ -122,7 +122,7 @@ export default new Router({
         },
         {
             path: '/toolTypeAssoc',
-            name: 'toolTypeAssoc',
+            name: 'ToolTypeAssoc',
             component: ToolTypeAssoc
         },
         {

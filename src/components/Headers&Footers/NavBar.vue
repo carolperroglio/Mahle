@@ -149,18 +149,18 @@
                             <router-link to="/toolCreate" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Cadastro de Ferramentas/Insumos 
                             </router-link>
-                            <router-link to="/toolType" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
+                            <!-- <router-link to="/toolType" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Tipo de Ferramentas/Insumos 
-                            </router-link>
+                            </router-link> -->
                             <router-link to="/toolTypeAssoc" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Associação de Ferramentas/Insumos 
                             </router-link>
-                             <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
+                            <!-- <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Ferramentas/Insumos em uso
                             </router-link>
                             <router-link to="/ToolsManagement" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Gerenciamento de Ferramentas/Insumos
-                            </router-link>
+                            </router-link> -->
                             <div class="collapse" id="menu1sub1">
                                 <div class="collapse" id="menu1sub1">
                                 </div>

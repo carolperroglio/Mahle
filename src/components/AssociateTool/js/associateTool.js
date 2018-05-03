@@ -7,6 +7,7 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import positionQtd from '../config/positiontooltype.json'
 import { setTimeout } from 'timers';
+import { position } from 'bootstrap-vue/es/utils/dom';
 
 es6promisse.polyfill();
 
@@ -38,7 +39,8 @@ export default {
             thing: false,
             carregando: false,
             url: process.env.TOOLS_API,
-            toolType: []
+            toolType: [],
+            pos: 0
         }
     },
     computed: {},
@@ -70,31 +72,75 @@ export default {
 
             axios.get(this.url + '/api/tool?fieldFilter=' + '' + '&fieldValue=' + name).then((response) => {
                 // positionQtd.positions.forEach(obj => {
+                var x = 0;
+                var positions = [];
+                while (x < this.positionLength) {
+                    positions.push(x + 1);
+                    x++
+                }
+                for (var r = 0; r < response.data.values.length; r++) {
+                    if (response.data.values[r].currentThing != undefined) {
+                        response.data.values[r].position = 2;
+                    }
+                }
+                x = 0;
+                var posAux = {}
                 response.data.values.forEach(obj => {
+                    // obj.position = x + 1;
+                    // x++;
                     if (obj.typeId == id) {
                         if (obj.currentThing != undefined) {
-                            this.tools.push(obj);
+                            var newObj = {};
+                            // PRECISA SER MODIFICADO, ISSO FOI FEITO DESSA FORMA PORQUE AINDA NÃO EXISTE POSITION NO JSON RECEBIDO
+                            // if(obj.posiiton == null)
+                            // newObj.position = obj.position
+                            // newObj.position = x
+                            var objaux = {};
+                            for (var c = 0; c < positions.length; c++) {
+                                if (positions[c] == obj.position) {
+                                    positions[c] = null;
+                                }
+                            }
+                            newObj.position = obj.position;
+                            newObj["tool"] = obj;
+                            this.tools.push(newObj);
+                        } else {
+                            this.toolList.push(obj);
                         }
-                        this.toolList.push(obj);
                     }
                 });
 
-                while (this.tools.length < this.positionLength) {
+                var positiiionnnn = [];
+                for (var s = 0; s < positions.length; s++) {
+                    if (positions[s] != null) {
+                        positiiionnnn.push(positions[s]);
+                    }
+                }
+
+                var count = 0;
+                // while (this.tools.length < this.positionLength) {
+                while (count < positiiionnnn.length) {
+                    var pos = positiiionnnn[count];
                     var objeto = new Object();
                     var objeto = {
-                        "id": "",
-                        "name": "",
-                        "description": "",
-                        "serialNumber": null,
-                        "code": null,
-                        "lifeCycle": "",
-                        "currentLife": "",
-                        "unitOfMeasurement": "",
-                        "typeId": undefined,
-                        "typeName": "",
-                        "status": "",
-                        "currentThingId": undefined
+                        "position": pos,
+                        "tool": {
+                            "toolId": null,
+                            "name": "",
+                            "description": "",
+                            "serialNumber": null,
+                            "code": null,
+                            "lifeCycle": "",
+                            "currentLife": "",
+                            "unitOfMeasurement": "",
+                            "typeId": undefined,
+                            "typeName": "",
+                            "status": "",
+                            "currentThingId": undefined
+                        }
                     }
+
+                    count++;
                     this.tools.push(objeto);
                 }
             }).catch((error) => {
@@ -151,7 +197,7 @@ export default {
             this.getToolType(id);
 
             setTimeout(() => {
-                axios.put(this.url + '/api/tool/AssociateTool/disassociate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId, fSelected).then((response) => {
+                axios.put(this.url + '/api/tool/AssociateTool/disassociate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId, this.fSelected).then((response) => {
                     this.erro = false;
                     this.carregando = false;
                     this.msg = 'Ferramenta desassociada com sucesso';

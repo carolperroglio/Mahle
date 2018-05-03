@@ -31,22 +31,26 @@
         </div>  
 
         <div class="row container-tt">
-            <div  v-for="(t,index) in tools" v-bind:key="index" id="constat">
+            <div  v-for="(t,index) in tools" :key="index = t.position"  id="constat">
                 <div class="tileConfig">
                     <div>
                     <div class="col-md-12">
-                    <h4 class="ls11" >
-                        {{"Posição" + " " +  index}}
+                    <h4 class="ls11" :id="index + 1" >
+                        {{"Posição" + " " }} {{t.position}}
                     </h4>
-                    <p v-if="t.id != ''">
-                        Código: {{t.code}}
+                    <!-- <h4 class="ls11" :id="index + 1" v-else>
+                        {{"Posição" + " " }} {{index + 1}}
+                    </h4> -->
+                    <p :id="index + 1" v-if="t.tool.currentThing != undefined">
+                    <!-- <p :id="index + 1" v-if="t.id != ''"> -->
+                        Código: {{t.tool.code}}
                     </p>
                     </div>
                     <div class="col-md-12 btn-view-pos">
-                        <button class="btn btn-danger" v-if="t.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t">
+                        <button class="btn btn-danger btn-block" v-if="t.tool.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t.tool">
                             Dessassociar
                         </button>
-                        <button class="btn btn-success" v-if="t.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate')">
+                        <button class="btn btn-success" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate')">
                             Associar
                         </button>
                     </div>
@@ -54,18 +58,23 @@
                 </div>
         </div>
         </div>
+        <br>
+        <div class="row container-fluid">
+            <router-link :to="{name: 'ToolTypeAssoc'}" class="btn btn-info"><i class="fa fa-arrow-left"></i> Voltar</router-link>
+        </div>
 
         <!-- MODAL DE ASSOCIAÇÃO DE FERRAMENTAS-->
-        <b-modal ref="modalAssociate" hide-footer title="Cadastrar Ordem de Produção de Tira" modal-header-close>
+        <b-modal ref="modalAssociate" hide-footer title="Associar Ferramenta" modal-header-close>
             <div class="modal-body">
             <div class="form-group row">
                 <div class="form-group col-sm-10">
                 <label for="ferramentas">Ferramentas</label>
                     <select class="form-control" aria-placeholder="tipo de ordem" v-model="fSelected">
-                        <option value="" selected disabled>Selecione</option>
-                        <option v-for="(t,index) in toolList" v-bind:value="t" v-bind:key="index">
+                        <option value="" selected disabled  v-show="toolList.length > 0">Selecione</option>
+                        <option v-for="(t,index) in toolList" v-bind:value="t" v-bind:key="index" v-if="toolList.length > 0">
                             {{ t.name }}
                         </option>
+                        <option  v-if="toolList.length == 0" disabled>Não há ferramentas disponíveis</option>
                     </select>
                 </div>
             </div>

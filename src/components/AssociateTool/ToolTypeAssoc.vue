@@ -16,22 +16,11 @@
             <li class="colmd2">
                 <p></p>
             </li>
-            <!-- <label for="">Nome da ferramenta:</label>
-                <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                    <ul class="list-group">
-                    <b-dropdown-item class="" v-if="notSelected" @click.stop.prevent="toolName = t.name;
-                        toolId = t.id;
-                        tool = t.name;
-                        typeId = t.typeId;
-                        notSelected = false;  
-                        openSelectGroup()" v-for="(t,index) in Tools" v-bind:key="index">
-                        <li class="list-group-item">{{t.name}}</li>
-                    </b-dropdown-item>   -->                           
             </ul> 
         </div>  
 
         <div class="row container-tt">
-            <div v-for="(tt, index) in toolType" v-bind:key="index" id="constat" class="">
+            <div v-for="(tt, index) in toolType" v-bind:key="index" id="tilett" class="">
                 <div class="tileConfig">
                     <div class="col-md-12">
                     <h4 class="ls11">
@@ -39,7 +28,7 @@
                     </h4>
                     </div>
                     <div class="col-md-12 btn-view-pos">
-                        <router-link :to="{name: 'AssociateTool', params:{id:tt.toolTypeId}}" class="btn btn-success">
+                        <router-link :to="{name: 'AssociateTool', params:{id:tt.toolTypeId}}" class="btn btn-success btn-block">
                             Visualizar Posições
                         </router-link>
                     </div>
