@@ -338,8 +338,8 @@
             </b-modal>
 
             <!-- MODAL PARA EXIBIR ERRO  -->
-            <b-modal ref="modalErro" title="Erro" hide-footer="">
-                <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
+            <b-modal ref="modaInfo" title="Mensagem" hide-footer>
+            <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
             </b-modal>
     </div>
 

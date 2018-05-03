@@ -100,24 +100,10 @@ export default {
     },
     methods: {
         showModal(id) {
-            if (id == "visualizarParams") {
-                this.$refs.visualizarParams.show();
-            } else if (id == "modalCadOP") {
-                this.$refs.modalCadOP.show();
-            } else if (id == "modalErro") {
-                this.$refs.modalErro.show();
-                this.$refs.visualizarParams.hide();
-                this.$refs.modalCadOP.hide();
-            }
+            this.$refs[id].show();
         },
         hideModal(id) {
-            if (id == "visualizarParams") {
-                this.$refs.visualizarParams.hide();
-            } else if (id == "modalCadOP") {
-                this.$refs.modalCadOP.hide();
-            } else if (id == "modalErro") {
-                this.$refs.modalErro.hide();
-            }
+            this.$refs[id].hide();
         },
         organizar(hp, campo, pos) {
             hp.sort(function(a, b) {
@@ -152,9 +138,10 @@ export default {
                     this.canAdd = true;
                 });
             }).catch((error) => {
-                this.carregando = false;
-                this.msgErro = error.message;
-                this.showModal("modalErro");
+                console.log(error);
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro: " + error.message;
+                this.showModal("modalInfo");
             })
             return array;
         },
@@ -189,9 +176,10 @@ export default {
                     this.carregando = false;
 
                 }).catch((error) => {
-                    this.carregando = false;
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    console.log(error);
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
                 })
                 // }, 1000);
 
@@ -310,9 +298,10 @@ export default {
                     this.carregando = false;
                 })
                 .catch((error) => {
-                    this.carregando = false;
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    console.log(error);
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
                 })
 
         },
@@ -339,9 +328,10 @@ export default {
                     this.carregando = false;
                 })
                 .catch((error) => {
-                    this.carregando = false;
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    console.log(error);
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
                 })
         },
         getRecipeGateway: function(id) {
@@ -354,9 +344,10 @@ export default {
                     this.carregando = false;
                 })
                 .catch((error) => {
-                    this.carregando = false;
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    console.log(error);
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
                 })
         },
         addRecipe: function(recipe, id) {
@@ -400,9 +391,10 @@ export default {
                     this.carregando = false;
                 })
                 .catch((error) => {
-                    this.carregando = false;
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    console.log(error);
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
                 })
         },
         getOPTypeToAssoc(idOP) {
@@ -418,9 +410,10 @@ export default {
 
                 })
             }).catch((error) => {
-                this.carregando = false;
-                this.msgErro = error.message;
-                this.showModal("modalErro");
+                console.log(error);
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro: " + error.message;
+                this.showModal("modalInfo");
             })
         },
         getAssoc(idOP, idallowed) {
@@ -430,12 +423,17 @@ export default {
                 console.log(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + this.idLinha + '&productionOrderId=' + this.OPId);
                 console.log(response.data);
 
+                this.carregando = false;
+                this.erro = false;
+                this.msgErro = "OP criada com sucesso";
+                this.showModal("modalInfo");
                 this.buscar();
 
             }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
-                this.carregando = false;
+                console.log(error);
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro ao associar: " + error.message;
+                this.showModal("modalInfo");
             })
 
         },
@@ -452,9 +450,10 @@ export default {
                     console.log(response.data);
                     this.mensagemSuc = 'Ordem desassociada com sucesso.';
                 }).catch((error) => {
-                    this.carregando = false;
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    console.log(error);
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao disassociar: " + error.message;
+                    this.showModal("modalInfo");
                 })
         },
         desativarOP(id) {
@@ -462,8 +461,10 @@ export default {
                 .then(response => {
                     console.log("OP Desativada" + response.statusText)
                 }).catch((error) => {
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    console.log(error);
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao desativar a OP: " + error.message;
+                    this.showModal("modalInfo");
                     console.log("OP Desativada Falhou" + response.statusText)
                 })
 
@@ -511,9 +512,10 @@ export default {
                             })
                         })
                         .catch((error) => {
-                            this.carregando = false;
-                            this.msgErro = error.message;
-                            this.showModal("modalErro");
+                            console.log(error);
+                            this.erro = true;
+                            this.msgErro = "Ocorreu um erro: " + error.message;
+                            this.showModal("modalInfo");
                         })
                 }, 400)
             }
