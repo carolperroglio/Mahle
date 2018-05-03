@@ -74,8 +74,9 @@ export default {
                     if (obj.typeId == id) {
                         if (obj.currentThing != undefined) {
                             this.tools.push(obj);
+                        } else {
+                            this.toolList.push(obj);
                         }
-                        this.toolList.push(obj);
                     }
                 });
 
@@ -151,7 +152,7 @@ export default {
             this.getToolType(id);
 
             setTimeout(() => {
-                axios.put(this.url + '/api/tool/AssociateTool/disassociate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId, fSelected).then((response) => {
+                axios.put(this.url + '/api/tool/AssociateTool/disassociate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId, this.fSelected).then((response) => {
                     this.erro = false;
                     this.carregando = false;
                     this.msg = 'Ferramenta desassociada com sucesso';

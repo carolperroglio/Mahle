@@ -62,10 +62,11 @@
                 <div class="form-group col-sm-10">
                 <label for="ferramentas">Ferramentas</label>
                     <select class="form-control" aria-placeholder="tipo de ordem" v-model="fSelected">
-                        <option value="" selected disabled>Selecione</option>
-                        <option v-for="(t,index) in toolList" v-bind:value="t" v-bind:key="index">
+                        <option value="" selected disabled  v-show="toolList.length > 0">Selecione</option>
+                        <option v-for="(t,index) in toolList" v-bind:value="t" v-bind:key="index" v-if="toolList.length > 0">
                             {{ t.name }}
                         </option>
+                        <option  v-if="toolList.length == 0" disabled>Não há ferramentas disponíveis</option>
                     </select>
                 </div>
             </div>

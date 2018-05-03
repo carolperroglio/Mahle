@@ -14,27 +14,6 @@
             <li class="nav-prod nav-item-gp col-md-12">
                 <h1 class="title-page-gp"> <b>Cadastrar Ferramentas/Insumos</b> </h1>
             </li>
-            <!-- <li class="col-md-2">
-                <select class="form-control form-control-lg" v-model="orderField">
-                    <option value="" selected disabled="disabled">Buscar por:</option>
-                    <option value="name">Nome</option>
-                    <option value="description">Descrição</option>
-                    <option value="serialNumber">Número serial</option>
-                    <option value="code">Código</option>
-                    <option value="lifeCycle">Vida Útil</option>
-                    <option value="currentLife">Ciclo de vida atual</option>
-                    <option value="unitOfMeasurement">Unidade de Medida</option>
-                    <option value="typeName">Tipo</option>
-                    <option value="status">Status</option>
-                </select>
-                </li> -->
-                <!-- <li class="nav-item-tool col-md-1">
-                        <select class="form-control form-control-lg" v-model="order">                        
-                           <option value="" selected disabled="disabled">Cresc./Decresc.</option>
-                            <option value="ascending">Crescente</option>
-                            <option value="descending">Decrescente</option>
-                    </select>
-                </li> -->
                 <li class="nav-item-tool col-md-2">
                     <select class="form-control form-control-lg" v-model="fieldFilter">
                         <option value="" selected disabled="disabled">Buscar por:</option>
