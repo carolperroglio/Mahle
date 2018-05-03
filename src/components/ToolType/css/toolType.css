@@ -49,40 +49,13 @@
 
 .ls21 {
     text-align: center;
+    vertical-align: middle;
 }
 
 .table-margin-tf {
-    margin: 15% 0 6% 0;
+    margin: 16% 0 6% 0;
 }
 
 .nav-prod {
     padding-left: 0.5%;
 }
-
-
-/* @media only screen and (max-width: 800px) {
-    .nav-tool-type {
-        background-color: rgba(249, 247, 247, 1);
-        position: fixed;
-        z-index: 1;
-        margin-top: 10%;
-        width: 100%;
-        height: 20%;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    }
-    .conteudo-tt {
-        margin-top: 25%;
-    }
-    .title-page {
-        font-size: 16px;
-        top: 21%;
-    }
-    .tool-type {
-        padding-top: 7%;
-        padding-bottom: 7%;
-    }
-    .ls21 {
-        width: 28%;
-        font-size: 12px;
-    }
-} */

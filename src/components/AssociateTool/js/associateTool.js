@@ -5,6 +5,8 @@ import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
+import positionQtd from '../config/positiontooltype.json'
+import { setTimeout } from 'timers';
 
 es6promisse.polyfill();
 
@@ -13,29 +15,30 @@ export default {
     data() {
         return {
             carregando: false,
-            Tools: [],
-            AllTools: [],
+            erro: false,
+            msg: '',
+            typeName: '',
+            positionLength: '',
+            fSelected: {},
+            tools: [],
+            toolList: [],
             Groups: [],
             Things: [],
             Tool: [],
             Thing: [],
             tool: '',
             toolName: '',
-            toolId: '',
-            thingId: '',
             typeId: '',
+            thingId: '',
             groupId: '',
-            mensagem: '',
-            mensagemSuc: '',
             fieldFilter: '',
             fieldValue: '',
             notSelected: true,
             group: false,
             thing: false,
-            lista: false,
-            lista2: false,
             carregando: false,
-            url: process.env.TOOLS_API
+            url: process.env.TOOLS_API,
+            toolType: []
         }
     },
     computed: {},
@@ -49,75 +52,119 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
+        showModal(id) {
+            this.$refs[id].show();
+        },
+        hideModal(id) {
+            this.$refs[id].hide();
+        },
+        getTools() {
+            console.log(positionQtd);
 
-        getTools(name) {
-            var array = [];
-            if (name.length < 3) { return; }
-            axios.get(this.url + '/api/tool?fieldFilter=name&fieldValue=' + name).then((response) => {
-                response.data.values.forEach((pro) => {
-                    array.push(pro);
-                    console.log(response);
-                });
-            }, (error) => {
-                console.log(error);
+            var id = this.$route.params.id;
+            positionQtd.forEach(obj => {
+                if (obj.toolTypeId == id) {
+                    this.positionLength = obj.positionQtd;
+                }
             })
-            return array;
-        },
-        getAllTools() {
-            axios.get(this.url + '/api/tool').then((response) => {
-                response.data.values.forEach((pro) => {
-                    this.AllTools.push(pro);
+
+            axios.get(this.url + '/api/tool?fieldFilter=' + '' + '&fieldValue=' + name).then((response) => {
+                // positionQtd.positions.forEach(obj => {
+                response.data.values.forEach(obj => {
+                    if (obj.typeId == id) {
+                        if (obj.currentThing != undefined) {
+                            this.tools.push(obj);
+                        }
+                        this.toolList.push(obj);
+                    }
                 });
-                console.log(this.AllTools);
-            }, (error) => {
-                console.log(error);
+
+                while (this.tools.length < this.positionLength) {
+                    var objeto = new Object();
+                    var objeto = {
+                        "id": "",
+                        "name": "",
+                        "description": "",
+                        "serialNumber": null,
+                        "code": null,
+                        "lifeCycle": "",
+                        "currentLife": "",
+                        "unitOfMeasurement": "",
+                        "typeId": undefined,
+                        "typeName": "",
+                        "status": "",
+                        "currentThingId": undefined
+                    }
+                    this.tools.push(objeto);
+                }
+            }).catch((error) => {
+                this.erro = true;
+                this.carregando = false;
+                this.msg = error.message;
+                this.showModal("modalErro");
             })
         },
-        openSelectGroup() {
+        getThingAllowedToAssociate(groupIdAllowed) {
+            axios.get(this.url + '/gateway/thinggroups/' + groupIdAllowed).then((response) => {
+                var thinggroup = response.data;
+                this.thingId = thinggroup.things[0].thingId;
+            })
+        },
+        getToolType(id) {
             this.carregando = true;
             this.group = true;
-            axios.get(this.url + '/api/tooltype/' + this.typeId).then((response) => {
-                this.Groups = response.data.thingGroups;
-            }, (error) => {
+            axios.get(this.url + '/api/tooltype/' + id).then((response) => {
+                this.toolType = response.data;
+                this.getThingAllowedToAssociate(this.toolType.thingGroupIds[0]);
+            }).catch((error) => {
                 console.log(error);
-            })
-            this.lista = true;
-            axios.get(this.url + '/api/tool/' + this.toolId).then((response) => {
-                this.Tool = response.data;
-                console.log(response.data);
-                this.Tool.status = this.getStatus(response.data.status);
-                this.carregando = false;
-            }, (r) => {
-                this.mensagem = r;
-                this.carregando = false;
+                this.erro = true;
+                this.msg = error.message;
+                this.showModal("modalErro");
             })
 
         },
-        openSelectThings() {
-            this.thing = true;
-            axios.get(this.url + '/gateway/thinggroups/' + this.groupId).then((response) => {
-                this.Things = response.data.things;
-                console.log(this.Things);
-            }, (error) => {
-                console.log(error);
-            })
+
+        AssociateTool(fSelected) {
+            var id = this.$route.params.id;
+            this.getToolType(id);
+
+            setTimeout(() => {
+                axios.put(this.url + '/api/tool/AssociateTool/associate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId).then((response) => {
+                    this.erro = false;
+                    this.carregando = false;
+                    this.msg = 'Ferramenta associada com sucesso';
+                    this.showModal("modalErro");
+                    this.getTools();
+                    location.reload();
+                }).catch((error) => {
+                    this.erro = true;
+                    this.carregando = false;
+                    this.msg = error.message;
+                    this.showModal("modalErro");
+                })
+            }, 1500)
 
         },
-        getAssoc() {
-            this.mensagemSuc = '';
-            this.mensagem = '';
-            axios.put(this.url + '/api/tool/AssociateTool/associate?thingId=' + this.thingId + '&toolid=' + this.toolId).then((response) => {
-                this.Tool = response.data;
-                console.log(response.data);
-                this.Tool.status = this.getStatus(response.data.status);
-                this.Thing = response.data.currentThing;
-                this.lista2 = true;
-                this.mensagemSuc = 'Ferramenta associada com sucesso.';
-            }, (r) => {
-                this.mensagem = r.response.data;
-                this.carregando = false;
-            })
+        DessassociateTool() {
+            var id = this.$route.params.id;
+            this.getToolType(id);
 
+            setTimeout(() => {
+                axios.put(this.url + '/api/tool/AssociateTool/disassociate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId, fSelected).then((response) => {
+                    this.erro = false;
+                    this.carregando = false;
+                    this.msg = 'Ferramenta desassociada com sucesso';
+                    this.showModal("modalErro");
+                    this.getTools();
+                    location.reload();
+                }).catch((error) => {
+                    this.erro = true;
+                    this.carregando = false;
+                    this.msg = error.message;
+                    this.showModal("modalErro");
+                })
+            }, 1500)
         },
         getStatus(status) {
             var state = {
@@ -132,6 +179,6 @@ export default {
         },
     },
     beforeMount: function() {
-        this.getAllTools();
+        this.getTools();
     }
 };
