@@ -16,8 +16,9 @@ import ToolCreate from '@/components/Tools/ToolCreate'
 import HistorianProductionLiga from '@/components/HistorianProduction/HistorianProductionLiga'
 import HistorianProductionTira from '@/components/HistorianProduction/HistorianProductionTira'
 import StateManagement from '@/components/OPStateManagement/StateManagement'
+import ToolTypeAssoc from '@/components/AssociateTool/ToolTypeAssoc'
 import AssociateTool from '@/components/AssociateTool/AssociateTool'
-import AssociateTool2 from '@/components/AssociateTool/AssociateTool2'
+// import AssociateTool2 from '@/components/AssociateTool/AssociateTool2'
 import ToolType from '@/components/ToolType/ToolType'
 import StatusManagement from '@/components/ToolsManagement/ToolsManagement'
 import OPManagement from '@/components/OPManagement/OPManagement'
@@ -120,9 +121,15 @@ export default new Router({
             component: StateManagement
         },
         {
-            path: '/associateTool',
+            path: '/toolTypeAssoc',
+            name: 'toolTypeAssoc',
+            component: ToolTypeAssoc
+        },
+        {
+            path: '/toolAssoc/:id',
             name: 'AssociateTool',
-            component: AssociateTool2
+            component: AssociateTool,
+            props: true
         },
         {
             path: '/toolType',

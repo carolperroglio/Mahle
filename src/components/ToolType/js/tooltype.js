@@ -218,5 +218,29 @@ export default {
     beforeMount() {
         this.buscar();
         this.getThingsGroup();
+    },
+    filters: {
+        filterStatus: function(value) {
+            switch (value) {
+                case 'created':
+                    return "Criado"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativo"
+                    break;
+                case 'reproved':
+                    return "Reprovado"
+                    break;
+                case 'ended':
+                    return "Finalizado"
+                    break;
+                default:
+                    break;
+
+            }
+        },
     }
 }

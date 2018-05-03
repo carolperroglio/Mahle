@@ -1,0 +1,96 @@
+[{
+        "toolTypeName": "Chuveiro",
+        "toolTypeId": 2,
+        "positionQtd": 4
+    },
+    {
+        "toolTypeName": "Fresa de Desbaste Helicoidal",
+        "toolTypeId": 3,
+        "positionQtd": 1
+    },
+    {
+        "toolTypeName": "Bucha para regulagem",
+        "toolTypeId": 4,
+        "positionQtd": 2
+    },
+    {
+        "toolTypeName": "Flange da Formadora de canal superior",
+        "toolTypeId": 5,
+        "positionQtd": 2
+    },
+    {
+        "toolTypeName": "Flange da Formadora de canal inferior",
+        "toolTypeId": 6,
+        "positionQtd": 2
+    },
+    {
+        "toolTypeName": "Coquilha",
+        "toolTypeId": 7,
+        "positionQtd": 2
+    },
+    {
+        "toolTypeName": "Estrela de Malta",
+        "toolTypeId": 8,
+        "positionQtd": 1
+    },
+    {
+        "toolTypeName": "Eixo de trava cruz de malta - desbobinador",
+        "toolTypeId": 9,
+        "positionQtd": 1
+    },
+    {
+        "toolTypeName": "Régua superior da calha de rersfriamento",
+        "toolTypeId": 10,
+        "positionQtd": 16
+    },
+    {
+        "toolTypeName": "Faca circular",
+        "toolTypeId": 11,
+        "positionQtd": 4
+    },
+    {
+        "toolTypeName": "Cilindro de apoio  Fresa de Desbaste",
+        "toolTypeId": 12,
+        "positionQtd": 0
+    },
+    {
+        "toolTypeName": "Óleo de Têmpera Fuchs",
+        "toolTypeId": 13,
+        "positionQtd": 0
+    },
+    {
+        "toolTypeName": "Bica",
+        "toolTypeId": 14,
+        "positionQtd": 0
+    },
+    {
+        "toolTypeName": "Funil",
+        "toolTypeId": 15,
+        "positionQtd": 2
+    },
+    {
+        "toolTypeName": "Forno de Fusão",
+        "toolTypeId": 16,
+        "positionQtd": 1
+    },
+    {
+        "toolTypeName": "Forno de Bronze",
+        "toolTypeId": 17,
+        "positionQtd": 2
+    },
+    {
+        "toolTypeName": "Filtros de papel",
+        "toolTypeId": 18,
+        "positionQtd": 32
+    },
+    {
+        "toolTypeName": "Filtros de areia",
+        "toolTypeId": 19,
+        "positionQtd": 16
+    },
+    {
+        "toolTypeName": "Cilindro tracionador",
+        "toolTypeId": 20,
+        "positionQtd": 0
+    }
+]

@@ -7,95 +7,95 @@
         <!--                -->
         <b-modal ref="modalCadOP" hide-footer title="Cadastrar Ordem de Produção de Tira" modal-header-close>
                                        
-                    <div class="modal-body">
-                        <form>
-                            <!-- <div class="alert alert-success" role="alert" v-if="opCreated">
-                                OP criada com sucesso !
-                            </div> -->
-                            <div class="form-group row">
-                                <div class="form-group col-sm-6">
-                                <label for="op">OP</label>
-                                    <input required type="text" class="form-control" id="op" aria-describedby="prodorder" placeholder="ex:20405060" v-model="productionOrderObj.productionOrderNumber">
-                                </div>
-                                <div class="form-group col-sm-4">
-                                <label for="desc">Descrição</label>
-                                    <input type="text" disabled class="form-control" id="desc" v-model="descriptionTira" value="opDesc">
-                                </div>
-                            </div>
-                            <!-- <div class="form-group row">
-                                <div class="form-group col-sm-6">
-                                <label for="opType" >Tipo de Ordem</label>
-                                    <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="opSelected">
-                                        <option value="" selected disabled>Tipo de Ordem</option>
-                                        <option v-for="(opType,index) in opTypeArray" v-bind:value="opType.productionOrderTypeId" v-bind:key="index" @click.stop="VOpType = opTypeArray[index].typeDescription">
-                                            {{ opType.typeDescription }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div> -->
-                            <div class="form-group row">
-                                <div class="form-group col-md-12">
-                                <label for="opType">Código da Tira</label>
-                                <input autocomplete="off" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" placeholder="Ex: Receita1" />
-                                <button class="btn btn-outline-success btn-sm col-md-1" :disabled="!productionOrderObj.productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                </button>
-                                <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeCode; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeCode }}</b-dropdown-item>
-                                </div>
-                                
-                            </div>
-
-                            <!--  Acordion que mostra qual   -->
-                            <!--  receita foi selecionada    -->
-                            
-                            <div id="accordion" role="tablist" v-if="recipeAdded">
-                                <div class="card">
-                                    <div class="card-header card-header-op" role="tab" id="headingOne">
-                                        <h5 class="mb-0">
-                                            <a class="collapse-color" data-toggle="collapse" href="#recipeAdded" aria-expanded="true" aria-controls="recipeAdded">
-                                                {{recipeAdded}}
-                                            </a>
-                                        </h5>
-                                    </div>
-
-                                    <!--  Mostra as fases da Receita-->
-                                    <div id="recipeAdded" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                        <div class="card-body card-body-op" v-if="recipeObj.phases.length != 0 || carregando == true">
-                                            <!-- <h5>Fases</h5> -->
-                                            <!-- <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases"> -->
-                                            <ul class="list-group" v-if="recipeAdded.length != 0">
-                                                <!-- <li class="list-group-item" > -->
-                                                    <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>
-                                                    <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>
-                                                    
-                                            </ul>
-
-                                        </div>
-                                        <!-- Fim - </Mostra as fases da Receita>-->
-                                    </div>
-                                </div>
-                            </div>
-                           
-                        </form>
-                    </div>
-                    <!-- {{objetooo}} -->
-                    <!-- Botão que cria a OP-->
-                    <!--                    -->
-                    <div class="modal-footer">
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled="!recipeAdded || !productionOrderObj.productionOrderNumber || productionOrderObj.productionOrderNumber == ' '" @click="createOp(productionOrderObj); hideModal('modalCadOP');">
-                                <i  class="fa fa-check-square" aria-hidden="true"></i>
-                                Confirmar
-                            </button>
-                            <button @click.stop.prevent="productionOrderObj.productionOrderNumber = ''; recipeAdded = ''; idAllowed  = '';recipeName=''" class="btn btn-primary pull-right">
-                                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
-                            </button> 
+            <div class="modal-body">
+                <form>
+                    <!-- <div class="alert alert-success" role="alert" v-if="opCreated">
+                        OP criada com sucesso !
+                    </div> -->
+                    <div class="form-group row">
+                        <div class="form-group col-sm-6">
+                        <label for="op">OP</label>
+                            <input required type="text" class="form-control" id="op" aria-describedby="prodorder" placeholder="ex:20405060" v-model="productionOrderObj.productionOrderNumber">
+                        </div>
+                        <div class="form-group col-sm-4">
+                        <label for="desc">Descrição</label>
+                            <input type="text" disabled class="form-control" id="desc" v-model="descriptionTira" value="opDesc">
                         </div>
                     </div>
-                    <!--</Botão que cria a OP -->
-                    <!--                      -->
-              
-              </b-modal>
+                    <!-- <div class="form-group row">
+                        <div class="form-group col-sm-6">
+                        <label for="opType" >Tipo de Ordem</label>
+                            <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="opSelected">
+                                <option value="" selected disabled>Tipo de Ordem</option>
+                                <option v-for="(opType,index) in opTypeArray" v-bind:value="opType.productionOrderTypeId" v-bind:key="index" @click.stop="VOpType = opTypeArray[index].typeDescription">
+                                    {{ opType.typeDescription }}
+                                </option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="form-group row">
+                        <div class="form-group col-md-12">
+                        <label for="opType">Código da Tira</label>
+                        <input autocomplete="off" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                        <button class="btn btn-outline-success btn-sm col-md-1" :disabled="!productionOrderObj.productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        </button>
+                        <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeCode; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeCode }}</b-dropdown-item>
+                        </div>
+                        
+                    </div>
+
+                    <!--  Acordion que mostra qual   -->
+                    <!--  receita foi selecionada    -->
+                    
+                    <div id="accordion" role="tablist" v-if="recipeAdded">
+                        <div class="card">
+                            <div class="card-header card-header-op" role="tab" id="headingOne">
+                                <h5 class="mb-0">
+                                    <a class="collapse-color" data-toggle="collapse" href="#recipeAdded" aria-expanded="true" aria-controls="recipeAdded">
+                                        {{recipeAdded}}
+                                    </a>
+                                </h5>
+                            </div>
+
+                            <!--  Mostra as fases da Receita-->
+                            <div id="recipeAdded" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body card-body-op" v-if="recipeObj.phases.length != 0 || carregando == true">
+                                    <!-- <h5>Fases</h5> -->
+                                    <!-- <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases"> -->
+                                    <ul class="list-group" v-if="recipeAdded.length != 0">
+                                        <!-- <li class="list-group-item" > -->
+                                            <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>
+                                            <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>
+                                            
+                                    </ul>
+
+                                </div>
+                                <!-- Fim - </Mostra as fases da Receita>-->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+            <!-- {{objetooo}} -->
+            <!-- Botão que cria a OP-->
+            <!--                    -->
+            <div class="modal-footer">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-success" :disabled="!recipeAdded || !productionOrderObj.productionOrderNumber || productionOrderObj.productionOrderNumber == ' '" @click="createOp(productionOrderObj); hideModal('modalCadOP');">
+                        <i  class="fa fa-check-square" aria-hidden="true"></i>
+                        Confirmar
+                    </button>
+                    <button @click.stop.prevent="productionOrderObj.productionOrderNumber = ''; recipeAdded = ''; idAllowed  = '';recipeName=''" class="btn btn-primary pull-right">
+                        <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                    </button> 
+                </div>
+            </div>
+            <!--</Botão que cria a OP -->
+            <!--                      -->
+        
+        </b-modal>
         <!-- Fechamento do Modal  -->
         <!-- Do formulário de     -->
         <!-- Criação de OP        -->

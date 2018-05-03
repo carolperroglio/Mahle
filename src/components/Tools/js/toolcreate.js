@@ -34,8 +34,8 @@ export default {
             ferramentas: [],
             ferramenta: {},
             url: IpServer + '/api/tool',
-            mensagem: '',
-            mensagemSuc: '',
+            msg: '',
+            erro: false,
             f: [],
             tipos: [],
             orderField: '',
@@ -49,10 +49,8 @@ export default {
             pageAtual: 0,
             errors: [],
             cabecalhoSetas: [false, false, false, false, false, false, false, false, false],
-
         }
     },
-    computed: {},
     components: {
         'b-modal': bModal,
         Stretch
@@ -61,16 +59,11 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
-        showModal() {
-            this.errors = [];
-            this.$refs.myModalRef.show()
+        showModal(id) {
+            this.$refs[id].show()
         },
-        hideModal() {
-            this.$refs.myModalRef.hide()
-        },
-        showModalCad() {
-            this.errors = [];
-            this.$refs.modalCadTool.show()
+        hideModal(id) {
+            this.$refs[id].hide()
         },
         organizar(hp, campo, pos) {
             hp.sort(function(a, b) {
@@ -98,21 +91,34 @@ export default {
         /*                         */
         /***************************/
 
+        cleanVariables() {
+            this.ferramenta = {
+                name: '',
+                code: '',
+                description: '',
+                serialNumber: '',
+                unitOfMeasurement: '',
+                status: '',
+                typeId: '',
 
+            }
+        },
         cadastrar(ferramenta) {
-            // this.carregando = true; 
-            this.mensagem = '';
-            this.mensagemSuc = '';
-            ferramenta.typeId = this.encontraObj(this.tipos, "name", ferramenta.typeName).id;
             console.log(ferramenta);
+
             axios.post(this.url, ferramenta).then((response) => {
-                this.mensagemSuc = 'Ferramenta ' + ferramenta.name + ' cadastrada com sucesso.';
+                this.msg = ferramenta.name + ' cadastrada com sucesso.';
+                this.erro = false;
+                this.showModal("modalErro");
                 this.ferramenta = {};
-                this.ferramentas.push(ferramenta);
+                this.listar();
                 this.carregando = false;
-            }, (r) => {
-                this.mensagem = 'Erro no server ' + r;
+            }).catch((error) => {
+                console.log(error);
+                this.erro = true;
                 this.carregando = false;
+                this.msg = "Erro ao cadastrar ferramentas:" + error.message;
+                this.showModal("modalErro");
             })
 
         },
@@ -123,6 +129,29 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
 
+            // switch (this.fieldValue) {
+            //     case 'Criado':
+            //         return "created"
+            //         break;
+            //     case 'Disponível':
+            //         return "available"
+            //         break;
+            //     case 'Ativo':
+            //         return "active"
+            //         break;
+            //     case 'Reprovado':
+            //         return "reproved"
+            //         break;
+            //     case 'Finalizado':
+            //         return "ended"
+            //         break;
+            //     default:
+            //         this.erro = true;
+            //         this.msg = "Digite o status procurado corretamente"
+            //         this.showModal('modalErro')
+
+            // }
+
             axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage).then((response) => {
                 this.ferramentas = response.data.values;
                 console.log(this.ferramentas);
@@ -131,28 +160,42 @@ export default {
                 }
                 this.carregando = false;
                 paginacao(response, this);
-            }, (error) => {
-                this.mensagem = 'Erro no server ' + error;
+            }).catch((error) => {
+                console.log(error);
+                this.erro = true;
                 this.carregando = false;
+                this.msg = error.message;
+                this.showModal("modalErro");
             })
         },
         editar(ferramenta) {
             this.carregando = true;
             this.mensagem = '';
             this.mensagemSuc = '';
-            axios.put(this.url + '/' + ferramenta.id, ferramenta).then((response) => {
-                this.mensagemSuc = 'Ferramenta ' + ferramenta.name + ' atualizada com sucesso.';
+            axios.put(this.url + '/' + ferramenta.toolId, ferramenta).then((response) => {
+                this.msg = ferramenta.name + ' atualizada com sucesso.';
+                this.erro = false;
                 this.ferramenta = {};
-            }, (error) => {
-                this.mensagem = 'Erro no server ' + error;
+                this.showModal("modalErro");
+            }).catch((error) => {
+                console.log(error);
+                this.erro = true;
                 this.carregando = false;
+                this.msg = error.message;
+                this.showModal("modalErro");
             })
         },
         buscaTipo() {
             axios.get(this.url + "type").then((response) => {
                 this.tipos = response.data;
                 console.log(this.tipos);
-            }, (error) => {})
+            }).catch((error) => {
+                console.log(error);
+                this.erro = true;
+                this.carregando = false;
+                this.msg = error.message;
+                this.showModal("modalErro");
+            })
         },
         encontraObj(arr, key, valor) {
             for (var i = 0; i < arr.length; i++) {
@@ -179,7 +222,6 @@ export default {
             return state[status];
         },
     },
-
     beforeMount: function() {
         this.buscaTipo();
         this.listar();

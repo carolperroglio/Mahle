@@ -2,16 +2,33 @@
   <div>
         <nav class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
-                <form class="form-inline my-3 form-control-sm">
                 <li class="nav-prod nav-item-gp col-md-12">
                     <h1 class="title-page-gp"><b>Tipo de Ferramentas</b></h1>
                 </li>
-                <li class="nav-prod col-md-1">
+                <li class="nav-prod col-md-2">
+                    <select class="form-control form-control-lg" v-model="fieldFilter">
+                        <option value="" selected disabled="disabled">Buscar por:</option>
+                        <option value="name">Nome</option>
+                        <option value="description">Descrição</option>
+                    </select>
+                </li>    
+                <li class="nav-prod col-md-2">
+                    <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-lg" placeholder="Ex: Faca">                              
+                </li> 
+                <li class="nav-prod col-md-6">        
+                <form class="form-inline my-3">
+                    <div class="col-md-auto">      
+                    <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="buscar()">
+                        <i class="fa fa-search"></i> Buscar
+                    </button>
+                    </div>
+                    <div class="col-md-3">
                     <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModal()">
                         <i class="fa fa-plus"></i> Cadastrar Tipo de Ferramenta
                     </button>
-                </li>
+                    </div>
                 </form>
+                </li>
             </ul>
         </nav>
         <div class="cabecalho-table-tt">
@@ -45,7 +62,7 @@
             {{ttype.description}}
         </label>
         <label class="ls ls21 col-md-2">
-            {{ttype.status}}
+            {{ttype.status | filterStatus}}
         </label>
         <label class="ls ls21 col-md-1">
             <i class="fa fa-edit icon-right" style="font-size:22px; cursor:pointer"  @click.prevent="showModalEdit();catchObjToUpdate(ttype)"></i>
@@ -69,17 +86,17 @@
                         <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="">Ferramenta</label>
-                            <input type="text" class="form-control form-control-sm" v-model="tooltype.name" placeholder="Ex: Ferramenta Guilhotina">
+                            <input type="text" class="form-control" v-model="tooltype.name" placeholder="Ex: Ferramenta Guilhotina">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Descrição</label>
-                            <input type="text" class="form-control form-control-sm" v-model="tooltype.description" placeholder="Ex:21721098">
+                            <input type="text" class="form-control" v-model="tooltype.description" placeholder="Ex:21721098">
                         </div>
                         </div>
                         <div class="form-row">
                            <div class="col-md-6">
                             <label for="opType" class="col-form-label">Estação</label>
-                                    <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="groupSelected">
+                                    <select class="form-control mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="groupSelected">
                                         <option value="" selected disabled>Selecione um grupo</option>
                                         <option v-for="(tgroup,index) in thingsGroup" v-bind:value="tgroup" :key="index">
                                             {{ tgroup.groupName }}
@@ -128,17 +145,17 @@
                         <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="">Ferramenta</label>
-                            <input type="text" class="form-control form-control-sm" v-model="tooltypeUp.name" placeholder="Nome">
+                            <input type="text" class="form-control" v-model="tooltypeUp.name" placeholder="Nome">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Descrição</label>
-                            <input type="text" class="form-control form-control-sm" v-model="tooltypeUp.description" placeholder="Código">
+                            <input type="text" class="form-control" v-model="tooltypeUp.description" placeholder="Código">
                         </div>
                         </div>
                         <div class="form-row">
                            <div class="col-md-6">
                             <label for="opType" class="col-form-label">Grupo</label>
-                                    <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="groupSelected">
+                                    <select class="form-control mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="groupSelected">
                                         <option value="" selected disabled>Selecione um grupo</option>
                                         <option v-for="(tgroup,index) in thingsGroup" v-bind:value="tgroup" :key="index">
                                             {{ tgroup.groupName }}

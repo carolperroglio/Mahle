@@ -100,24 +100,10 @@ export default {
     methods: {
         showModal(id) {
             this.$refs[id].show();
-            // if (id == "visualizarParams") {
-            //     this.$refs['visualizarParams'].show();
-            // } else if (id == "modalCadOP") {
-            //     this.$refs.modalCadOP.show();
-            if (id == "modalErro") {
-                this.$refs.modalErro.show();
-                this.$refs.visualizarParams.hide();
-                this.$refs.modalCadOP.hide();
-            }
         },
         hideModal(id) {
-            if (id == "visualizarParams") {
-                this.$refs.visualizarParams.hide();
-            } else if (id == "modalCadOP") {
-                this.$refs.modalCadOP.hide();
-            } else if (id == "modalErro") {
-                this.$refs.modalErro.hide();
-            }
+            this.$refs[id].hide();
+
         },
         organizar(hp, campo, pos) {
             hp.sort(function(a, b) {

@@ -14,9 +14,9 @@
             <li class="nav-prod nav-item-gp col-md-12">
                 <h1 class="title-page-gp"> <b>Cadastrar Ferramentas/Insumos</b> </h1>
             </li>
-            <li class="col-md-2">
+            <!-- <li class="col-md-2">
                 <select class="form-control form-control-lg" v-model="orderField">
-                    <option value="" selected disabled="disabled">Ordenar por:</option>
+                    <option value="" selected disabled="disabled">Buscar por:</option>
                     <option value="name">Nome</option>
                     <option value="description">Descrição</option>
                     <option value="serialNumber">Número serial</option>
@@ -27,33 +27,33 @@
                     <option value="typeName">Tipo</option>
                     <option value="status">Status</option>
                 </select>
-                </li>
-                <li class="nav-item-tool col-md-1">
+                </li> -->
+                <!-- <li class="nav-item-tool col-md-1">
                         <select class="form-control form-control-lg" v-model="order">                        
                            <option value="" selected disabled="disabled">Cresc./Decresc.</option>
                             <option value="ascending">Crescente</option>
                             <option value="descending">Decrescente</option>
                     </select>
-                </li>
+                </li> -->
                 <li class="nav-item-tool col-md-2">
-                            <select class="form-control form-control-lg" v-model="fieldFilter">
-                            <option value="" selected disabled="disabled">Buscar por campo:</option>
-                            <option value="name">Nome</option>
-                            <option value="description">Descrição</option>
-                            <option value="serialNumber">Número serial</option>
-                            <option value="code">Código</option>
-                            <option value="lifeCycle">Vida Útil</option>
-                            <option value="currentLife">Ciclo de vida atual</option>
-                            <option value="unitOfMeasurement">Unidade de Medida</option>
-                            <option value="typeName">Tipo</option>
-                            <option value="status">Status</option>
+                    <select class="form-control form-control-lg" v-model="fieldFilter">
+                        <option value="" selected disabled="disabled">Buscar por:</option>
+                        <option value="name">Nome</option>
+                        <option value="description">Descrição</option>
+                        <option value="serialNumber">Número serial</option>
+                        <option value="code">Código</option>
+                        <option value="lifeCycle">Vida Útil</option>
+                        <!-- <option value="currentLife">Ciclo de vida atual</option> -->
+                        <option value="unitOfMeasurement">Unidade de Medida</option>
+                        <!-- <option value="typeName">Tipo</option> -->
+                        <option value="status">Status</option>
                     </select>
                 </li>    
-                <li class="nav-item-tool col-md-1">
-                    <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-lg" placeholder="Valor">                              
+                <li class="nav-item-tool col-md-2">
+                    <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-lg" placeholder="Ex: Faca">                              
                 </li> 
                 <li class="nav-item-tool col-md-6">        
-                <form class="form-inline my-3 form-control-sm">
+                <form class="form-inline my-3">
                     <div class="col-md-auto">      
                         <button type="button" class="btn btn-primary btn-lg" @click.stop.prevent="listar()">
                             <i class="fa fa-search"></i> Buscar
@@ -61,7 +61,7 @@
                     </div>
                     <!-- Button trigger modal -->
                     <div class="col-md-3">
-                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModalCad">
+                    <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="showModal('modalCadTool');cleanVariables()">
                             <i class="fa fa-plus"></i> Cadastrar Ferramentas/Insumos
                     </button>
                 </div>
@@ -77,8 +77,6 @@
             <!--                            -->
             <!--                            -->
             <!--                            -->
-
-        <div class="" style="">
             <div id="load" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>
             </div> 
@@ -120,26 +118,26 @@
                 <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(ferramentas, 'unitOfMeasurement',5):organizar(ferramentas, 'unitOfMeasurement',5);" class="ls2-cabecalho-tc col-md-1">
                     <b><font class="cursor-class" color="#ffffff">
                         Unidade de Medida 
-                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
                     </font></b>
                 </label> 
                 <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(ferramentas, 'typeName',6):organizar(ferramentas, 'typeName',6);" class="ls2-cabecalho-tc col-md-1">
                     <b><font class="cursor-class" color="#ffffff">
                         Tipo 
-                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
                     </font></b>
                 </label> 
                 <label @click.stop.prevent="cabecalhoSetas[7]==false?desorganizar(ferramentas, 'status',7):organizar(ferramentas, 'status',7);" class="ls2-cabecalho-tc col-md-1">
                     <b><font class="cursor-class" color="#ffffff">
                         Status 
-                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[7]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[7]==true" aria-hidden="true"></i>
                     </font></b>
                 </label>               
             </div>
-        <div class="margin-table">
+        <div class="margin-table-tc">
         <div v-for="(f, indexF) in ferramentas" :key="indexF" :class="{cinza: indexF%2==0}">
                     <label class="ls ls30 col-md-1">
                         {{f.name}}</label>
@@ -158,7 +156,7 @@
                     <label class="ls ls30 col-md-1">
                         {{f.status}}</label>
                     <label class="ls ls30 col-md-1">
-                        <i class="fa fa-edit icon-style" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
+                        <i class="fa fa-edit" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
                     </label>
             </div>
         </div>
@@ -189,90 +187,81 @@
         
         <b-modal ref="modalCadTool" hide-footer title="Cadastrar Ferramentas/Insumos">
             <form>
-                <div class="">
-
-                    <p v-if="errors.length > 0">
-                            <ul v-for="(error, index) in errors" :key="index">
-                            <li class="alert alert-danger form-control" >{{ error }}</li>
-                            </ul>
-                    </p>
-                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                    
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Nome </b>
+                </label>
+                <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Descrição </b>
+                </label>
+                <input type="text" id="desc" class="form-control" v-model="ferramenta.description" placeholder="Ex: Ferramenta usada na Guilhotina">
+                </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Número Serial </b>
+                </label>
+                <input type="text" id="sernum" class="form-control" v-model="ferramenta.serialNumber" placeholder="Ex:124856648">
+                </div>
+                <div class="form-group col-md-6">
                     <label>
-                        <b>Nome </b>
+                        <b>Código: </b>
                     </label>
-                    <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control form-control-sm">
-                    </div>
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Descrição </b>
-                    </label>
-                    <input type="text" id="desc" class="form-control form-control-sm" v-model="ferramenta.description" placeholder="Ex: Ferramenta usada na Guilhotina">
-                    </div>
-                    </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Número Serial </b>
-                    </label>
-                    <input type="text" id="sernum" class="form-control form-control-sm" v-model="ferramenta.serialNumber" placeholder="Ex:124856648">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>
-                            <b>Código: </b>
-                        </label>
-                        <input type="text" id="code" class="form-control form-control-sm" v-model="ferramenta.code" placeholder="código">
-                    </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-4">
-                    <label>
-                        <b>Vida Útil </b>
-                    </label>
-                    <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="Ex: 100" id="lifec">
-                    </div>
-                    <div class="form-group col-md-5">
-                    <label>
-                        <b>Unidade de Medida </b>
-                    </label>
-                    <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control form-control-sm" placeholder="Ex.: dias">                              
-                    </div>
-                    </div>
-                    </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Tipo </b>
-                    </label>
-                        <select class="form-control form-control-sm" v-model="ferramenta.typeName">
-                        <option v-for="(tipo, indexOp) in tipos" :value="tipo.name" v-bind:key="indexOp">{{ tipo.name }}</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Status </b>
-                    </label>
-                    <select class="form-control form-control-sm" v-model="ferramenta.status">
-                        <option value="available">Disponível</option>
-                        <option value="in_use">Em uso</option>
-                        <option value="in_maintenance">Em manutenção</option>
-                        <option value="not_available">Indisponível</option>
-                        <option value="inactive">Inativo</option>
+                    <input type="text" id="code" class="form-control" v-model="ferramenta.code" placeholder="Ex:código">
+                </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                <label>
+                    <b>Vida Útil </b>
+                </label>
+                <input class="form-control" type="text" v-model="ferramenta.lifeCycle" placeholder="Ex: 100" id="lifec">
+                </div>
+                <div class="form-group col-md-5">
+                <label>
+                    <b>Unidade de Medida </b>
+                </label>
+                <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control" placeholder="Ex: dias">                              
+                </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Tipo </b>
+                </label>
+                    <select class="form-control" v-model="ferramenta.typeId">
+                    <option v-for="(tipo, indexOp) in tipos" :value="tipo.toolTypeId" v-bind:key="indexOp">{{ tipo.name }}</option>
                     </select>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="btn btn-primary pull-left" style="margin-top:3%" @click.stop.prevent="ferramenta={};errors=[];">
-                            Limpar
-                    </div>
-                    <div class="modal-footer">
-                    <div class="btn-group pull-right" role="group">
-                        <button class="btn btn-success pull-right">
-                            <i @click.stop.prevent="cadastrar(ferramenta)" class="fa fa-check-square" aria-hidden="true"></i>
-                        </button>
-                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Status </b>
+                </label>
+                <select class="form-control" v-model="ferramenta.status">
+                    <option value="available">Disponível</option>
+                    <option value="in_use">Em uso</option>
+                    <option value="in_maintenance">Em manutenção</option>
+                    <option value="not_available">Indisponível</option>
+                    <option value="inactive">Inativo</option>
+                </select>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-success" :disabled="!ferramenta.unitOfMeasurement || !ferramenta.lifeCycle || !ferramenta.name 
+                    || !ferramenta.code || !ferramenta.serialNumber || !ferramenta.description || !ferramenta.status || !ferramenta.typeId" @click.stop.prevent="cadastrar(ferramenta);hideModal('modalCadTool');">
+                        <i  class="fa fa-check-square" aria-hidden="true"></i>
+                        Confirmar
+                    </button>
+                   <button @click.stop.prevent="ferramenta={}" class="btn btn-primary pull-right">
+                        <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                    </button> 
+                </div>
                 </div>
             </form>
         </b-modal>    
@@ -285,95 +274,97 @@
             <!--                            -->
 
         <b-modal ref="myModalRef" hide-footer title="Editar Ferramentas">
-            
             <form>
-                <div>
-                    <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
-                    <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Nome:</b>
-                    </label>
-                    <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control form-control-sm">
-                    </div>
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Descrição: </b>
-                    </label>
-                    <input type="text" id="desc" class="form-control form-control-sm" v-model="ferramenta.description" placeholder="descrição">
-                    </div>
-                    </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Número Serial: </b>
-                    </label>
-                    <input type="text" id="sernum" class="form-control form-control-sm" v-model="ferramenta.serialNumber" placeholder="124856648">
-                    </div>
-                    <div class="form-group col-md-4">
-                    <label>
-                        <b>Código: </b>
-                    </label>
-                    <input type="text" id="code" class="form-control form-control-sm" v-model="ferramenta.code" placeholder="código">
-                    </div>
-                    <div class="form-group col-md-4">
-                    <label>
-                        <b>Vida Útil: </b>
-                    </label>
-                    <input class="form-control form-control-sm" type="text" v-model="ferramenta.lifeCycle" placeholder="Ex: 100" id="lifec" disabled>
-                    </div>
-                    <div class="form-group col-md-4">
-                    <label>
-                        <b>Unidade de Medida: </b>
-                    </label>
-                    <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control form-control-sm" placeholder="Ex.: minutos" disabled>                              
-                    </div>
-                    </div>
-                    <!-- <label>
-                        <b>Vida útil atual: </b>
-                    </label>
-                    <input type="text" id="currL" v-model="ferramenta.currentLife" class="form-control form-control-sm" placeholder="vida útil atual" disabled>
-                    -->
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Tipo: </b>
-                    </label>
-                        <select class="form-control form-control-sm" v-model="ferramenta.typeName" disabled>
-                        <option v-for="tipo in tipos" :value="tipo.name" v-bind:key="tipo">{{ tipo.name }}</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                    <label>
-                        <b>Status: </b>
-                    </label>
-                    <select class="form-control form-control-sm" v-model="ferramenta.status" disabled>
-                        <option value="available">Disponível</option>
-                        <option value="in_use">Em uso</option>
-                        <option value="in_maintenance">Em manutenção</option>
-                        <option value="in_test">Em Teste</option>
-                        <option value="not_available">Indisponível</option>
-                        <option value="inactive">Inativo</option>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Nome:</b>
+                </label>
+                <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Descrição: </b>
+                </label>
+                <input type="text" id="desc" class="form-control" v-model="ferramenta.description" placeholder="">
+                </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Número Serial: </b>
+                </label>
+                <input type="text" id="sernum" class="form-control" v-model="ferramenta.serialNumber" placeholder="Ex: 124856648">
+                </div>
+                <div class="form-group col-md-4">
+                <label>
+                    <b>Código: </b>
+                </label>
+                <input type="text" id="code" class="form-control" v-model="ferramenta.code" placeholder="Ex: 4565">
+                </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                <label>
+                    <b>Vida Útil: </b>
+                </label>
+                <input class="form-control" type="text" v-model="ferramenta.lifeCycle" placeholder="Ex: 100" id="lifec" disabled>
+                </div>
+                <div class="form-group col-md-5">
+                <label>
+                    <b>Unidade de Medida: </b>
+                </label>
+                <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control" placeholder="Ex: minutos" disabled>                              
+                </div>
+                </div>
+                <!-- <label>
+                    <b>Vida útil atual: </b>
+                </label>
+                <input type="text" id="currL" v-model="ferramenta.currentLife" class="form-control" placeholder="vida útil atual" disabled>
+                -->
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Tipo: </b>
+                </label>
+                    <select class="form-control" v-model="ferramenta.typeId" disabled>
+                    <option v-for="(tipo,index) in tipos" :value="tipo.name" v-bind:key="index">{{ tipo.name }}</option>
                     </select>
-                    </div>
-                    </div>
-                    <div class="btn btn-primary pull-left" style="margin-top:3%" @click.stop.prevent="errors=[];ferramenta={}">
-                            Limpar
-                    </div>
-                    <div class="modal-footer">
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-success">
-                            <i @click.stop.prevent="editar(ferramenta)" class="fa fa-check-square" aria-hidden="true"></i>
-                        </button>
-                        </div>
-                    </div>
-                    </div>
-                    
+                </div>
+                <div class="form-group col-md-6">
+                <label>
+                    <b>Status: </b>
+                </label>
+                <select class="form-control" v-model="ferramenta.status" disabled>
+                    <option value="available">Disponível</option>
+                    <option value="in_use">Em uso</option>
+                    <option value="in_maintenance">Em manutenção</option>
+                    <option value="in_test">Em Teste</option>
+                    <option value="not_available">Indisponível</option>
+                    <option value="inactive">Inativo</option>
+                </select>
+                </div>
+                </div>
+
+                <div class="modal-footer">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-success" :disabled="!ferramenta.unitOfMeasurement || !ferramenta.lifeCycle || !ferramenta.name 
+                    || !ferramenta.code || !ferramenta.serialNumber || !ferramenta.description || !ferramenta.status || !ferramenta.typeId" @click.stop.prevent="editar(ferramenta);hideModal('modalCadTool');">
+                        <i  class="fa fa-check-square" aria-hidden="true"></i>
+                        Confirmar
+                    </button>
+                    <button @click.stop.prevent="ferramenta={}" class="btn btn-primary pull-right">
+                        <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+                    </button> 
+                </div>
+                </div>
             </form>
         </b-modal>
-            </div>
             <br>
+            <!-- MODAL PARA EXIBIR ERRO  -->
+            <b-modal ref="modalErro" title="Erro" hide-footer="">
+                <p :class="erro ? 'alert alert-danger':'alert alert-info'">{{msg}}</p>
+            </b-modal>
         </div>
 </template>
 <script src="./js/toolcreate.js">
