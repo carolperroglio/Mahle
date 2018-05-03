@@ -31,22 +31,26 @@
         </div>  
 
         <div class="row container-tt">
-            <div  v-for="(t,index) in tools" v-bind:key="index" id="constat">
+            <div  v-for="(t,index) in tools" :key="index = t.position"  id="constat">
                 <div class="tileConfig">
                     <div>
                     <div class="col-md-12">
-                    <h4 class="ls11" >
-                        {{"Posição" + " " +  index}}
+                    <h4 class="ls11" :id="index + 1" >
+                        {{"Posição" + " " }} {{t.position}}
                     </h4>
-                    <p v-if="t.id != ''">
-                        Código: {{t.code}}
+                    <!-- <h4 class="ls11" :id="index + 1" v-else>
+                        {{"Posição" + " " }} {{index + 1}}
+                    </h4> -->
+                    <p :id="index + 1" v-if="t.tool.currentThing != undefined">
+                    <!-- <p :id="index + 1" v-if="t.id != ''"> -->
+                        Código: {{t.tool.code}}
                     </p>
                     </div>
                     <div class="col-md-12 btn-view-pos">
-                        <button class="btn btn-danger btn-block" v-if="t.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t">
+                        <button class="btn btn-danger btn-block" v-if="t.tool.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t.tool">
                             Dessassociar
                         </button>
-                        <button class="btn btn-success" v-if="t.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate')">
+                        <button class="btn btn-success" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate')">
                             Associar
                         </button>
                     </div>

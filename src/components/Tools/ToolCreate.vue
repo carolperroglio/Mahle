@@ -296,32 +296,18 @@
                 <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 </div>
-                <!-- <label>
-                    <b>Vida útil atual: </b>
-                </label>
-                <input type="text" id="currL" v-model="ferramenta.currentLife" class="form-control" placeholder="vida útil atual" disabled>
-                -->
                 <div class="form-row">
                 <div class="form-group col-md-6">
                 <label>
                     <b>Tipo: </b>
                 </label>
-                    <select class="form-control" v-model="ferramenta.typeId" disabled>
-                    <option v-for="(tipo,index) in tipos" :value="tipo.name" v-bind:key="index">{{ tipo.name }}</option>
-                    </select>
+                <input type="text" id="unitMeas" v-model="ferramenta.typeName" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 <div class="form-group col-md-6">
                 <label>
                     <b>Status: </b>
                 </label>
-                <select class="form-control" v-model="ferramenta.status" disabled>
-                    <option value="available">Disponível</option>
-                    <option value="in_use">Em uso</option>
-                    <option value="in_maintenance">Em manutenção</option>
-                    <option value="in_test">Em Teste</option>
-                    <option value="not_available">Indisponível</option>
-                    <option value="inactive">Inativo</option>
-                </select>
+                <input type="text" id="unitMeas" v-model="ferramenta.status" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 </div>
 
