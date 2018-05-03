@@ -43,7 +43,7 @@
                     </p>
                     </div>
                     <div class="col-md-12 btn-view-pos">
-                        <button class="btn btn-danger" v-if="t.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t">
+                        <button class="btn btn-danger btn-block" v-if="t.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t">
                             Dessassociar
                         </button>
                         <button class="btn btn-success" v-if="t.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate')">
@@ -54,9 +54,13 @@
                 </div>
         </div>
         </div>
+        <br>
+        <div class="row container-fluid">
+            <router-link :to="{name: 'ToolTypeAssoc'}" class="btn btn-info"><i class="fa fa-arrow-left"></i> Voltar</router-link>
+        </div>
 
         <!-- MODAL DE ASSOCIAÇÃO DE FERRAMENTAS-->
-        <b-modal ref="modalAssociate" hide-footer title="Cadastrar Ordem de Produção de Tira" modal-header-close>
+        <b-modal ref="modalAssociate" hide-footer title="Associar Ferramenta" modal-header-close>
             <div class="modal-body">
             <div class="form-group row">
                 <div class="form-group col-sm-10">
