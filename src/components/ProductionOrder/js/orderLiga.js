@@ -84,7 +84,8 @@ export default {
             equipaments: [],
             idAllowed: "",
             canAdd: false,
-            msgErro: ""
+            msgErro: "",
+            erro: false
 
         }
     },
@@ -141,9 +142,9 @@ export default {
                 // this.carregando = false;
             }).catch((error) => {
                 console.log(error);
-                // this.carregando = false;
-                this.msgErro = error.message;
-                this.showModal("modalErro");
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro: " + error.message;
+                this.showModal("modalInfo");
             })
             return array;
         },
@@ -179,21 +180,25 @@ export default {
                     console.log(this.opArray);
                     this.carregando = false;
                 }).catch((error) => {
-                    this.mensagem = 'Erro no server ao buscar ' + error;
                     this.carregando = false;
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
                     // }, 1000);
                 })
             console.log(this.opArray);
         },
         getThings() {
+            this.carregando = true;
             //ID Grupo do forno de fusao: 11
             axios.get(this.urlGateway + "11").then((response) => {
                 this.equipaments = response.data.things;
+                this.carregando = false;
             }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
+                this.carregando = false;
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro: " + error.message;
+                this.showModal("modalInfo");
             })
         },
         getGatewayRecipe: function(obj) {
@@ -254,8 +259,10 @@ export default {
                     this.carregando = false;
                 })
                 .catch(error => {
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
                 })
 
         },
@@ -282,8 +289,10 @@ export default {
                     this.carregando = false;
                 })
                 .catch(error => {
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
 
                 })
         },
@@ -297,8 +306,10 @@ export default {
                     this.carregando = false;
                 })
                 .catch(error => {
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
                 })
         },
         addRecipe: function(recipe, id) {
@@ -343,8 +354,9 @@ export default {
                 })
                 .catch(error => {
                     this.carregando = false;
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
 
                 })
         },
@@ -363,8 +375,10 @@ export default {
                 })
             }).catch((error) => {
                 console.log(error);
-                this.msgErro = error.message;
-                this.showModal("modalErro");
+                this.carregando = false;
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro: " + error.message;
+                this.showModal("modalInfo");
             })
         },
         getAssoc(idOP, idallowed) {
@@ -374,9 +388,12 @@ export default {
                 console.log(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + this.idLinha + '&productionOrderId=' + this.OPId);
                 console.log(response.data);
 
-            }, (r) => {
-                this.mensagem = r.response.data;
+            }).catch((error) => {
+                console.log(error);
                 this.carregando = false;
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro ao associar: " + error.message;
+                this.showModal("modalInfo");
             })
 
         },
@@ -392,9 +409,12 @@ export default {
                     }
                     console.log(response.data);
                     this.mensagemSuc = 'Ordem desassociada com sucesso.';
-                }, (r) => {
-                    this.mensagem = r.response.data;
+                }).catch((error) => {
+                    console.log(error);
                     this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao desassociar: " + error.message;
+                    this.showModal("modalInfo");
                 })
         },
         desativarOP(id) {
@@ -402,8 +422,11 @@ export default {
                 .then(response => {
                     console.log("OP Desativada" + response.statusText)
                 }).catch((error) => {
-                    this.msgErro = error.message;
-                    this.showModal("modalErro");
+                    console.log(error);
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao desativar OP: " + error.message;
+                    this.showModal("modalInfo");
                     console.log("OP Desativada Falhou" + response.statusText)
                 })
 
@@ -421,40 +444,46 @@ export default {
                 // Criando OP
                 setTimeout(() => {
                     axios.post(this.urlOp, data).then(response => {
-                            //this.opArray = response.data;
-                            this.opCreated = true;
-                            data.currentstatus = "active";
+                        //this.opArray = response.data;
+                        this.opCreated = true;
+                        data.currentstatus = "active";
 
-                            //Ativando OP
-                            var id = response.data.productionOrderId;
-                            axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active").then(response => {
+                        //Ativando OP
+                        var id = response.data.productionOrderId;
+                        axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active").then(response => {
 
-                                // Dessassociar OP anterior, a linha
-                                for (var i = 0; i < this.opArray.values.length; i++) {
-                                    if (this.opArray.values[i].currentThingId != undefined) {
-                                        var currentID = this.opArray.values[i].currentThingId
-                                        var OPId = this.opArray.values[i].productionOrderId;
-                                        var obj = this.opArray.values[i];
-                                        if (currentID == this.idAllowed) {
-                                            this.getDisAssoc(currentID, OPId, obj);
+                            // Dessassociar OP anterior, a linha
+                            for (var i = 0; i < this.opArray.values.length; i++) {
+                                if (this.opArray.values[i].currentThingId != undefined) {
+                                    var currentID = this.opArray.values[i].currentThingId
+                                    var OPId = this.opArray.values[i].productionOrderId;
+                                    var obj = this.opArray.values[i];
+                                    if (currentID == this.idAllowed) {
+                                        this.getDisAssoc(currentID, OPId, obj);
 
-                                        }
                                     }
                                 }
-                                //Associar OP criada a linha
-                                this.getOPTypeToAssoc(id);
-                                // this.getAssoc(id);
+                            }
+                            //Associar OP criada a linha
+                            this.getOPTypeToAssoc(id);
+                            // this.getAssoc(id);
 
-                                setTimeout(() => {
-                                    this.buscar();
-                                }, 1250)
+                            setTimeout(() => {
+                                this.carregando = false;
+                                this.erro = false;
+                                this.msgErro = "OP criada com sucesso";
+                                this.showModal("modalInfo");
+                                this.buscar();
+                            }, 1250)
 
-                            })
                         })
-                        .catch(error => {
-                            this.msgErro = error.message;
-                            this.showModal("modalErro");
-                        })
+                    }).catch((error) => {
+                        console.log(error);
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro ao criar a OP: " + error.message;
+                        this.showModal("modalInfo");
+                    })
                 }, 400)
             }
             //           //
