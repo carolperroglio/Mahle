@@ -110,7 +110,7 @@
                     </div>
                     <div class="form-group-col-md-1">
                         <br>
-                        <button class="btn btn-outline-success btn-sm" @click.stop.prevent="addComponente(comp)">
+                        <button class="btn btn-success btn-sm" @click.stop.prevent="addComponente(comp)">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </button>
                     </div>
