@@ -40,7 +40,7 @@ export default {
             carregando: false,
             url: process.env.TOOLS_API,
             toolType: [],
-            pos: 0
+            pos: 0,
         }
     },
     computed: {},
@@ -62,54 +62,65 @@ export default {
         },
         getTools() {
             console.log(positionQtd);
-
+            var positions;
             var id = this.$route.params.id;
+            //pega as position do Tipo de Ferramenta do toolTypeId = id
             positionQtd.forEach(obj => {
                 if (obj.toolTypeId == id) {
                     this.positionLength = obj.positionQtd;
+                    positions = obj.positions
                 }
             })
 
             axios.get(this.url + '/api/tool?fieldFilter=' + '' + '&fieldValue=' + name).then((response) => {
-                // positionQtd.positions.forEach(obj => {
                 var x = 0;
-                var positions = [];
-                while (x < this.positionLength) {
-                    positions.push(x + 1);
-                    x++
-                }
-                for (var r = 0; r < response.data.values.length; r++) {
-                    if (response.data.values[r].currentThing != undefined) {
-                        response.data.values[r].position = 2;
-                    }
-                }
+                // var positions = [];
+                // while (x < this.positionLength) {
+                //     positions.push(x + 1);
+                //     x++
+                // }
+                // for (var r = 0; r < response.data.values.length; r++) {
+                //     if (response.data.values[r].currentThing != undefined) {
+                //         response.data.values[r].position = 2;
+                //     }
+                // }
+
                 x = 0;
                 var posAux = {}
                 response.data.values.forEach(obj => {
-                    // obj.position = x + 1;
-                    // x++;
                     if (obj.typeId == id) {
+                        // Se a tool estiver associada
                         if (obj.currentThing != undefined) {
                             var newObj = {};
-                            // PRECISA SER MODIFICADO, ISSO FOI FEITO DESSA FORMA PORQUE AINDA NÃO EXISTE POSITION NO JSON RECEBIDO
-                            // if(obj.posiiton == null)
-                            // newObj.position = obj.position
-                            // newObj.position = x
-                            var objaux = {};
+
+                            if (obj.posiiton != null || obj.posiiton != undefined) {
+                                newObj.position = obj.position
+                                newObj.pos = obj.position
+                            } else {
+
+                            }
+
+                            // Se a posição da tool associada for igual a alguma posição
+                            // no array de positions allowed para aquele tooltype, esta posição
+                            // será eliminada(assigned to null) do array de positions allowed
                             for (var c = 0; c < positions.length; c++) {
                                 if (positions[c] == obj.position) {
                                     positions[c] = null;
                                 }
                             }
-                            newObj.position = obj.position;
+                            // newObj.position = obj.position;
                             newObj["tool"] = obj;
                             this.tools.push(newObj);
+
+                            //  Caso contrário se a tool não estiver associada é enviada para a lista de tools para associar
                         } else {
                             this.toolList.push(obj);
                         }
                     }
                 });
 
+                //Elimina os objetos do array com valor nulo
+                // e deixa só as "posições allowed" que não possuem ferramenta 
                 var positiiionnnn = [];
                 for (var s = 0; s < positions.length; s++) {
                     if (positions[s] != null) {
@@ -118,13 +129,17 @@ export default {
                 }
 
                 var count = 0;
-                // while (this.tools.length < this.positionLength) {
+                // Cria tools para completar a quantidade existente de posições
+                // Ex: tools.length = 2 , positions available to use = 3
+                // tools.length must have length = 5
+                //Pois a positionQtd = 5 (posiçoes máximas para o tipo de ferramenta selecionada)
                 while (count < positiiionnnn.length) {
                     var pos = positiiionnnn[count];
                     var objeto = new Object();
                     var objeto = {
-                        "position": pos,
                         "tool": {
+                            "position": pos,
+                            "pos": pos,
                             "toolId": null,
                             "name": "",
                             "description": "",
@@ -176,7 +191,7 @@ export default {
             this.getToolType(id);
 
             setTimeout(() => {
-                axios.put(this.url + '/api/tool/AssociateTool/associate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId).then((response) => {
+                axios.put(this.url + '/api/tool/AssociateTool/associate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId + "&position=" + this.pos).then((response) => {
                     this.erro = false;
                     this.carregando = false;
                     this.msg = 'Ferramenta associada com sucesso';

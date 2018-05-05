@@ -32,34 +32,14 @@ export default {
             },
             id: "",
             carregando: false,
-            ordens: [],
             ordem: {},
-            productionOrder: {},
-            ProductionOrders: [],
-            productionOrdersRecipe: {},
-            orderPhaseProducts: [],
-            phaseProducts: [],
             orderHistorian: [],
             orderHistorianAllProducts: [],
-            allProducts: {},
             cabecalhoSetas: [false, false, false, false, false],
             productionOrderId: '',
             consumo: false,
-            rolo: 1,
-            lote: 0,
-            OPs: [],
-            op: '',
-            mensagem: '',
-            mensagemSuc: '',
             fieldFilter: '',
             fieldValue: '',
-            phaseIndex: '',
-            btndisable: false,
-            pReceita: false,
-            sel: true,
-            order: false,
-            pFase: false,
-            lista: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
             quantityPage: 100,
@@ -85,46 +65,11 @@ export default {
     },
     methods: {
         showModal(id) {
-            this.mensagem = '';
-            this.mensagemSuc = '';
-            setTimeout(() => {
-                if (this.ordem.type === "output") {
-                    this.pReceita = true;
-                    this.consumo = false;
-                    this.pFase = false;
-                    console.log(this.productionOrdersRecipe);
-                    console.log(this.productionOrder);
-                    this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;
-                    this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                    this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
-                    this.rolo = this.orderHistorian.productsOutput.length + 1;
-                } else {
-                    this.consumo = true;
-                    this.pReceita = false;
-                    this.pFase = true;
-                    this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                    this.orderPhaseProducts = this.productionOrdersRecipe.phases[0];
-                    this.lote = "OPL";
-                }
-            }, 100);
-
-            setTimeout(() => {
-                if (id == "myModalRef") {
-                    this.$refs.myModalRef.show();
-                } else if (id == "modalErro") {
-                    this.$refs.modalErro.show();
-                }
-            }, 150);
+            this.$refs[id].show();
 
         },
         hideModal(id) {
-            if (id == "myModalRef") {
-                this.$refs.myModalRef.hide();
-            } else if (id == "modalErro") {
-                this.$refs.modalErro.hide();
-            }
-            this.pReceita = false;
-            this.consumo = false;
+            this.$refs[id].hide();
         },
         organizar(hp, campo, pos) {
             hp.sort(function(a, b) {
@@ -144,74 +89,6 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
-        cadastrarApont(ordem) {
-
-            this.mensagem = '';
-            this.mensagemSuc = '';
-            console.log(ordem);
-            console.log(this.url + '/api/producthistorian');
-            if (this.ordem.type == "output") {
-                ordem.batch = this.rolo;
-            } else {
-                ordem.batch = this.lote;
-            }
-            // confirm("Confirma apontamento?");
-            axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
-                this.mensagemSuc = 'Produto apontado com sucesso.';
-                this.productionOrderId = this.ordem.productionOrderId;
-                this.carregando = false;
-                this.pReceita = false;
-                this.pFase = false;
-                this.rolo++;
-                this.ordem = {};
-                console.log(response);
-
-            }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
-                this.mensagem = r.response.data;
-                this.carregando = false;
-            })
-            this.pReceita = false;
-            this.consumo = false;
-        },
-        changeJson(obj) {
-            if (this.orderHistorianAllProducts.products == undefined) {
-                this.orderHistorianAllProducts.products = []
-            }
-            if (this.orderHistorianAllProducts.id != undefined) {
-                this.orderHistorianAllProducts.products.push(obj)
-            } else {
-                this.orderHistorianAllProducts.id = this.orderHistorian.id;
-                this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
-                this.orderHistorianAllProducts.order = this.orderHistorian.order
-                this.orderHistorianAllProducts.products.push(obj)
-            }
-            this.allProducts = this.orderHistorianAllProducts.products
-        },
-        listar() {
-            this.lista = true;
-            this.carregando = true;
-            axios.get(this.url + '/api/OrderHistorian/' + this.productionOrder.productionOrderId).then((response) => {
-                this.orderHistorian = response.data.values;
-            }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
-                this.carregando = false;
-                this.orderHistorian = [];
-            })
-
-        },
-
-        listaOp(p) {
-            console.log(p);
-            this.productionOrdersRecipe = p.recipe;
-            this.order = true;
-            this.carregando = true;
-            setTimeout(() => {
-                this.listar();
-            }, 1000);
-        },
         getResults() {
             this.carregando = true;
             this.orderHistorian = [];
@@ -219,10 +96,11 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             console.log(this.urlOP + '/api/productionorders');
-            axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,active' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
+            // axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,active' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
+            axios.get(this.urlOP + '/api/productionorders/v2?' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
                 console.log(response.data);
                 response.data.values.forEach((pro) => {
-                    if (pro.currentThing && pro.currentStatus == "active") {
+                    if (pro.currentThing && pro.currentStatus == "active" || pro.currentStatus == "waiting_approval") {
                         pro.thingName = pro.currentThing.thingName
                         this.orderHistorian.push(pro);
                     }
@@ -231,7 +109,6 @@ export default {
                 paginacao(response, this);
                 this.carregando = false;
 
-                console.log(this.OPs);
             }).catch((error) => {
                 this.msgErro = error.message;
                 this.showModal("modalErro");
@@ -243,7 +120,5 @@ export default {
     },
     beforeMount: function() {
         this.getResults();
-        this.productionOrdersRecipe.recipeName = '';
-        this.productionOrdersRecipe.recipeProduct.product.productName = '';
     }
 };

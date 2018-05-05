@@ -36,13 +36,13 @@
                 <div class="card-header card-header-hp">
                     
                     <b><label class="ls">
-                        <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
+                        <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>
                     <label class="ls">
-                        <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>&nbsp;&nbsp;&nbsp;
+                        <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>
                     <!--<label class="ls">
-                        <b><font color="#9BA6A5">Receita da OP: </font></b>{{productionOrderRecipe.recipeName}}</label>&nbsp;&nbsp;&nbsp;
+                        <b><font color="#9BA6A5">Receita da OP: </font></b>{{productionOrderRecipe.recipeName}}</label>
                     <label class="ls">
-                        <b><font color="#9BA6A5">Produto da Receita: </font></b>{{productionOrderRecipe.recipeProduct.product.productName}}</label>&nbsp;&nbsp;&nbsp; -->
+                        <b><font color="#9BA6A5">Produto da Receita: </font></b>{{productionOrderRecipe.recipeProduct.product.productName}}</label> -->
                     </b>
                     
                     <!-- <button type="button" class="btn btn-secondary pull-right" style="font-size:21px;" @click.stop.prevent="listar()">
@@ -54,15 +54,15 @@
                             <div class="card-header card-header-hp">
                                 <b>Materiais Apontados</b>
                                 <div style="margin-right:1%" class="pull-right">
-                                    <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
+                                <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                 </button>
-                                <button type="button" class="btn btn-primary"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
+                                <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()">
                                 <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
                                 </button>
-                                <!-- <button type="button" class="btn btn-success"  @click.stop.prevent=" showModal(); ordem.type='output'">
-                                <i aria-hidden="true" class="fa fa-plus"></i> Registrar rolo de tira
-                                </button> -->
+                                <button type="button" class="btn btn-warning"  @click.stop.prevent="showModal('exibirCalculo'); ordem.type='input'">
+                                <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
+                                </button>
                                 </div>
                             </div>
                         <div class="card-body card-body-hp">
@@ -70,35 +70,35 @@
                         <div class="fundo-branco-ap-liga">
                             <div class="cabecalho-table-ap-liga">
                                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(allProducts, 'product',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-2">
-                                    <b><font class="cursor-class" color="#ffffff">Material &nbsp;&nbsp;&nbsp;
+                                    <b><font class="cursor-class" color="#ffffff">Material 
                                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                                     </font></b>
                                 </label>
                                 <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(allProducts, 'quantity',1):organizar(allProducts, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-2">
                                     <b><font class="cursor-class" color="#ffffff">
-                                        Quantidade &nbsp;&nbsp;&nbsp;
+                                        Quantidade 
                                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                                     </font></b>
                                 </label>
                                 <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(allProducts, 'lote',2):organizar(allProducts, 'lote',2);" class="ls2-cabecalho-ap-liga col-md-2">
                                     <b><font class="cursor-class" color="#ffffff">
-                                        Lote/OPL &nbsp;&nbsp;&nbsp;
+                                        Lote/OPL 
                                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                                     </font></b>
                                 </label>
                                 <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(allProducts, 'date',3):organizar(allProducts, 'date',3);" class="ls2-cabecalho-ap-liga col-md-2">
                                     <b><font class="cursor-class" color="#ffffff">
-                                        Data &nbsp;&nbsp;&nbsp;
+                                        Data 
                                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                                     </font></b>
                                 </label> 
                                 <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(allProducts, 'hour',4):organizar(allProducts, 'hour',4);" class="ls2-cabecalho-ap-liga col-md-2">
                                     <b><font class="cursor-class" color="#ffffff">
-                                        Hora &nbsp;&nbsp;&nbsp;
+                                        Hora 
                                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                                     </font></b>
@@ -109,15 +109,15 @@
                             </div> 
                             <div v-for="(o, index) in allProducts" v-bind:key="index" :class="{cinza: index%2==0}">
                                 <label class="ls ls10 col-md-2">
-                                    {{o.product}}</label>&nbsp;
+                                    {{o.product}}</label>
                                 <label class="ls ls10 col-md-2">
-                                    {{o.quantity}}</label>&nbsp;
+                                    {{o.quantity}}</label>
                                 <label class="ls ls10 col-md-2">
-                                    {{o.lote}}</label>&nbsp;
+                                    {{o.lote}}</label>
                                 <label class="ls ls10 col-md-2">
-                                    {{o.date}}</label>&nbsp;
+                                    {{o.date}}</label>
                                 <label class="ls ls10 col-md-2">
-                                    {{o.hour}}</label>&nbsp;    
+                                    {{o.hour}}</label>    
                             </div>
                         </div>
                             
@@ -128,13 +128,38 @@
                     
             </div>
          </div>
+        <!-- ||||||||||||||| -->
+        <!-- EXIBIR CÁLCULO  -->
+         <b-modal size="lg" ref="exibirCalculo" hide-footer title="Cálculo da Análise Química Realizada">
+            <form>
+                <div v-if="calculoOK">
+                    <div class="cabecalho-table-exibir-cálculo">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(allProducts, 'product',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
+                        <b><font class="cursor-class" color="#ffffff">Material 
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(allProducts, 'quantity',1):organizar(allProducts, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-6">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Quantidade necessária a ser adicionada no forno
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                </div>
+                <div v-for="(c, index) in calculos" v-bind:key="index" :class="{cinza: index%2==0}">
+                    <label class="ls ls10 col-md-2">
+                        {{o.product}}</label>
+                    <label class="ls ls10 col-md-2">
+                        {{o.quantity}}</label>
+                </div>
+                </div>
+            </form>
+         </b-modal>
 
         <!--                                 -->
-        <!--                                 -->
-        <!--                                 -->
         <!--   Cadastro de orderHistorian    -->
-        <!--                                 -->
-        <!--                                 -->
         <!--               Modal             -->
         <b-modal ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
             <form>
@@ -184,7 +209,7 @@
          </b-modal>
 
          <b-modal ref="modalErro" title="Erro" hide-footer="">
-            <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
+            <p :class="erro? 'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div>
 </template>

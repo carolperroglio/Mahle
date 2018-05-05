@@ -47,6 +47,7 @@ export default {
             paramArray: [],
             recipeObj: {},
             productArray: [],
+            opInAnalysis: [],
             recipeSelected: '',
             errors: [],
             opDesc: '',
@@ -432,63 +433,98 @@ export default {
 
         },
         createOp: function(data) {
-                // adiciona propriedades necessárias na op que são mandatory
-                data.recipe = this.recipeObj;
-                console.log(this.recipeObj);
-                data.productionOrderTypeId = 2;
-                data.typeDescription = "Liga";
-                data.currentstatus = "created";
-                data.recipe.recipeProduct.measurementUnit = "kg";
-                this.objetooo = data;
-                console.log('OP sendo criada!!!!!!!!');
-                // Criando OP
-                setTimeout(() => {
-                    axios.post(this.urlOp, data).then(response => {
-                        //this.opArray = response.data;
-                        this.opCreated = true;
-                        data.currentstatus = "active";
+            // adiciona propriedades necessárias na op que são mandatory
+            data.recipe = this.recipeObj;
+            console.log(this.recipeObj);
+            data.productionOrderTypeId = 2;
+            data.typeDescription = "Liga";
+            data.currentstatus = "created";
+            data.recipe.recipeProduct.measurementUnit = "kg";
+            this.objetooo = data;
+            console.log('OP sendo criada!!!!!!!!');
+            // Criando OP
+            setTimeout(() => {
+                axios.post(this.urlOp, data).then(response => {
+                    //this.opArray = response.data;
+                    this.opCreated = true;
+                    data.currentstatus = "active";
 
-                        //Ativando OP
-                        var id = response.data.productionOrderId;
-                        axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active").then(response => {
+                    //Ativando OP
+                    var id = response.data.productionOrderId;
+                    axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active").then(response => {
 
-                            // Dessassociar OP anterior, a linha
-                            for (var i = 0; i < this.opArray.values.length; i++) {
-                                if (this.opArray.values[i].currentThingId != undefined) {
-                                    var currentID = this.opArray.values[i].currentThingId
-                                    var OPId = this.opArray.values[i].productionOrderId;
-                                    var obj = this.opArray.values[i];
-                                    if (currentID == this.idAllowed) {
-                                        this.getDisAssoc(currentID, OPId, obj);
+                        // Dessassociar OP anterior, a linha
+                        for (var i = 0; i < this.opArray.values.length; i++) {
+                            if (this.opArray.values[i].currentThingId != undefined) {
+                                var currentID = this.opArray.values[i].currentThingId
+                                var OPId = this.opArray.values[i].productionOrderId;
+                                var obj = this.opArray.values[i];
+                                if (currentID == this.idAllowed) {
+                                    this.getDisAssoc(currentID, OPId, obj);
 
-                                    }
                                 }
                             }
-                            //Associar OP criada a linha
-                            this.getOPTypeToAssoc(id);
-                            // this.getAssoc(id);
+                        }
+                        //Associar OP criada a linha
+                        this.getOPTypeToAssoc(id);
+                        // this.getAssoc(id);
 
-                            setTimeout(() => {
-                                this.carregando = false;
-                                this.erro = false;
-                                this.msgErro = "OP criada com sucesso";
-                                this.showModal("modalInfo");
-                                this.buscar();
-                            }, 1250)
+                        setTimeout(() => {
+                            this.carregando = false;
+                            this.erro = false;
+                            this.msgErro = "OP criada com sucesso";
+                            this.showModal("modalInfo");
+                            this.buscar();
+                        }, 1250)
 
-                        })
-                    }).catch((error) => {
-                        console.log(error);
-                        this.carregando = false;
-                        this.erro = true;
-                        this.msgErro = "Ocorreu um erro ao criar a OP: " + error.message;
-                        this.showModal("modalInfo");
                     })
-                }, 400)
-            }
-            //           //
-            //  END CRUD //
-            //           //
+                }).catch((error) => {
+                    console.log(error);
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao criar a OP: " + error.message;
+                    this.showModal("modalInfo");
+                })
+            }, 400)
+        },
+        //           //
+        //  END CRUD //
+        //           //
+        getOpInAnalysis() {
+            this.error = [];
+
+            this.opArray = [];
+            // setTimeout(() => {
+            axios.get(this.urlOp + "/v2?&filters=productionOrderTypeId,2" + "&currentStatus,waiting_approval&" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config)
+                .then((response) => {
+                    this.opArray.values = [];
+                    response.data.values.forEach((obj) => {
+                        if (obj.currentThing) {
+                            obj.thingName = obj.currentThing.thingName
+                            obj.recipeName = obj.recipe.recipeName
+                            obj.recipeCode = obj.recipe.recipeCode
+                            this.opInAnalysis.values.push(obj);
+                        } else {
+                            obj.recipeName = obj.recipe.recipeName
+                            obj.recipeCode = obj.recipe.recipeCode
+                            this.opInAnalysis.values.push(obj);
+                        }
+                    })
+                    this.opArrarKeep = this.opArray.values;
+                    response.data.values = this.opArray.values;
+                    response.data.total = this.opArray.values.length;
+                    paginacao(response, this);
+                    console.log(this.opArray);
+                    this.carregando = false;
+                }).catch((error) => {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    this.showModal("modalInfo");
+                    // }, 1000);
+                })
+            console.log(this.opArray);
+        }
     },
     filters: {
         filterStatus: function(value) {
@@ -528,5 +564,6 @@ export default {
     beforeMount: function() {
         this.buscar();
         this.getThings();
+        this.getOpInAnalysis();
     },
 };

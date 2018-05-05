@@ -116,13 +116,43 @@ export default {
             })
             console.log(obj);
         },
+        getStatusCorresponding(obj) {
+            switch (obj.status) {
+                case 'in_use':
+                    obj.status = "Em uso"
+                    return obj
+                    break;
+                case 'in_maintenance':
+                    obj.status = "Em Manutenção"
+                    return obj
+                    break;
+                case 'not_available':
+                    obj.status = "Indisponível"
+                    return obj
+                    break;
+                case 'inactive':
+                    obj.status = "Inativo"
+                    return obj
+                    break;
+                case 'active':
+                    obj.status = "Ativo"
+                    return obj
+                    break;
+                case 'available':
+                    obj.status = "Disponível"
+                    return obj
+                    break;
+                default:
+                    break;
+            }
+        },
         catchToolToChange: function(tool) {
             this.$refs.modalGerT.show()
             this.buttons = {};
             var obj = {};
             var count = 0;
             var nextPossibilityString = '';
-            this.tool = tool;
+            // this.tool = tool;
             for (var x = 0; x < this.statesConfig.length; x++) {
                 if (this.statesConfig[x].state == tool.status) {
                     var nextLenth = this.statesConfig[x].possibleNextStates.length;
@@ -134,12 +164,13 @@ export default {
                 }
             }
             this.buttons = obj;
-
+            this.tool = this.getStatusCorresponding(tool);
         },
+
         changeStatus: function(obj, status) {
             this.needJustification = false;
             obj.status = status;
-            this.tool = obj;
+            // this.tool = obj;
             for (var x = 0; x < this.statesConfig.length; x++) {
                 if (this.statesConfig[x].state == status) {
                     if (this.statesConfig[x].needsJustification == true) {
@@ -147,6 +178,8 @@ export default {
                     }
                 }
             }
+
+            this.tool = this.getStatusCorresponding(obj);
         },
         buscar(id = "") {
             this.carregando = true;
@@ -169,15 +202,46 @@ export default {
     },
     filters: {
         StatusName: function(status) {
-            var state = {
-                'available': "Disponível",
-                'in_use': "Em uso",
-                'in_maintenance': "Em manutenção",
-                'not_available': "Indisponível",
-                'inactive': "Inativo",
-                'active': "Disponível"
-            };
-            return state[status];
+            switch (status) {
+                case 'in_use':
+                    return "Em uso"
+                    break;
+                case 'in_maintenance':
+                    return status = "Em Manutenção"
+                    break;
+                case 'not_available':
+                    return "Indisponível"
+                    break;
+                case 'inactive':
+                    return "Inativo"
+                    break;
+                case 'active':
+                    return "Ativo"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'Em uso':
+                    return "Em uso"
+                    break;
+                case 'Em Manutenção':
+                    return status = "Em Manutenção"
+                    break;
+                case 'Indisponível':
+                    return "Indisponível"
+                    break;
+                case 'Inativo':
+                    return "Inativo"
+                    break;
+                case 'Ativo':
+                    return "Ativo"
+                    break;
+                case 'Disponível':
+                    return "Disponível"
+                    break;
+                default:
+                    break;
+            }
         }
 
     },

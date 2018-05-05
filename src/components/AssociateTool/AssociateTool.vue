@@ -31,12 +31,12 @@
         </div>  
 
         <div class="row container-tt">
-            <div  v-for="(t,index) in tools" :key="index = t.position"  id="constat">
+            <div  v-for="(t,index) in tools" :key="t.position"  id="constat">
                 <div class="tileConfig">
                     <div>
                     <div class="col-md-12">
                     <h4 class="ls11" :id="index + 1" >
-                        {{"Posição" + " " }} {{t.position}}
+                        {{"Posição" + " " }} {{t.tool.position}}
                     </h4>
                     <!-- <h4 class="ls11" :id="index + 1" v-else>
                         {{"Posição" + " " }} {{index + 1}}
@@ -50,7 +50,7 @@
                         <button class="btn btn-danger btn-block" v-if="t.tool.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t.tool">
                             Dessassociar
                         </button>
-                        <button class="btn btn-success" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate')">
+                        <button class="btn btn-success" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate'); pos = t.tool.pos">
                             Associar
                         </button>
                     </div>
@@ -95,7 +95,7 @@
 
         <b-modal ref="modalConfirmDissac" hide-footer title="Dessassociar Ferramenta">            
             <div class="modal-body">
-                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja dessassociat a Ferramenta ?</b>
+                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja desassociar a Ferramenta ?</b>
             </div>    
             <div class="modal-footer">
                 <div>

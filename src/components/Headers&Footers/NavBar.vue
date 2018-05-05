@@ -82,13 +82,13 @@
                         <!-- </b-collapse> -->
 
                         <router-link to="/user" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
-                            <i class="fa fa-barcode"></i> 
+                            <i class="fa fa-user-md"></i> 
                             <span class="hidden-sm-down">  
                                 USUÁRIOS
                             </span>
                         </router-link>
                         <router-link to="/usergroup" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
-                            <i class="fa fa-barcode"></i> 
+                            <i class="fa fa-users"></i> 
                             <span class="hidden-sm-down">  
                                 GRUPO DE USUÁRIOS
                             </span>
@@ -155,12 +155,12 @@
                             <router-link to="/toolTypeAssoc" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Associação de Ferramentas/Insumos 
                             </router-link>
-                            <!-- <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
+                            <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Ferramentas/Insumos em uso
                             </router-link>
                             <router-link to="/ToolsManagement" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Gerenciamento de Ferramentas/Insumos
-                            </router-link> -->
+                            </router-link>
                             <div class="collapse" id="menu1sub1">
                                 <div class="collapse" id="menu1sub1">
                                 </div>
@@ -180,6 +180,9 @@
                             </router-link>
                             <router-link to="/prodOrderLiga" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
                                 <i class="fa fa-gear"></i> ORDENS DE PRODUÇÃO - LIGAS (OPL)
+                            </router-link>
+                            <router-link to="/opInAnalysis" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
+                                <i class="fa fa-thermometer-quarter"></i> ORDENS DE PRODUÇÃO EM ANÁLISE
                             </router-link>
                             <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 

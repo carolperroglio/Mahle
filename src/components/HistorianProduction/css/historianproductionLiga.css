@@ -28,6 +28,17 @@
     padding: 0 0 0 0.2%;
 }
 
+.cabecalho-table-exibir-cálculo {
+    position: relative;
+    top: 12%;
+    /* left: 1.8%; */
+    width: 100%;
+    padding: 0 0 0 0.1%;
+    background-color: black;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0.2%;
+}
+
 .fundo-branco-ap-liga {
     background-color: #ffffff;
     margin: 0 0 0 0;
