@@ -10,40 +10,38 @@
         </li>
         </ul>
     </div>
-  <div class="row conteudo-tm">
-    <div class="tools-manag col-md-12">
-        <div id="load" v-show="carregando">
-        <stretch background="#4d4d4d"></stretch>
-        </div> 
-        <div class="cabecalho-table-tm">
-            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(ferramentas, 'name',0):organizar(ferramentas, 'name',0);" class="ls2-cabecalho-tm col-md-2">
-                <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(ferramentas, 'description',1):organizar(ferramentas, 'description',1);" class="ls2-cabecalho-tm col-md-2">
-                <b><font class="cursor-class" color="#ffffff">
-                    Descrição &nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'serialNumber',2):organizar(ferramentas, 'serialNumber',2);" class="ls2-cabecalho-tm col-md-2">
-                <b><font class="cursor-class" color="#ffffff">
-                    Número Serial&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                </font></b>
-            </label> 
-            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'status',3):organizar(ferramentas, 'status',3);" class="ls2-cabecalho-tm col-md-2">
-                <b><font class="cursor-class" color="#ffffff">
-                    Status&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                </font></b>
-            </label> 
-        </div>
+    <div id="load" v-show="carregando">
+    <stretch background="#4d4d4d"></stretch>
+    </div> 
+    <div class="cabecalho-table-tm">
+        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(ferramentas, 'name',0):organizar(ferramentas, 'name',0);" class="ls2-cabecalho-tm col-md-2">
+            <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+            </font></b>
+        </label>
+        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(ferramentas, 'description',1):organizar(ferramentas, 'description',1);" class="ls2-cabecalho-tm col-md-2">
+            <b><font class="cursor-class" color="#ffffff">
+                Descrição &nbsp;&nbsp;&nbsp;
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+            </font></b>
+        </label>
+        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'serialNumber',2):organizar(ferramentas, 'serialNumber',2);" class="ls2-cabecalho-tm col-md-2">
+            <b><font class="cursor-class" color="#ffffff">
+                Número Serial&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+            </font></b>
+        </label> 
+        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'status',3):organizar(ferramentas, 'status',3);" class="ls2-cabecalho-tm col-md-2">
+            <b><font class="cursor-class" color="#ffffff">
+                Status&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+            </font></b>
+        </label> 
+    </div>
     <div class="table-margin-tm"> 
     <div v-for="(t,index) in tools" :key="index" :class="{cinza: index%2==0}">
         <label class="ls20 col-md-2">

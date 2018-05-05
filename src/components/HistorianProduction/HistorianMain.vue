@@ -56,10 +56,6 @@
                 <label class="ls ls10 col-md-6 router">
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
                 </label> 
-                <label class="ls ls10 col-md-4 router">
-                    <router-link class="btn btn-success"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">
-                        <i class="fa fa-calculator" aria-hidden="true"></i> Exibir Calculo</router-link>
-                </label>  
                 </label>
                 <label  class="col-md-4" v-else-if="o.typeDescription == 'Tira'">
                 <label class="ls ls10 col-md-6 router" >

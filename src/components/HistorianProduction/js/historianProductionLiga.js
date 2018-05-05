@@ -46,6 +46,7 @@ export default {
             order: false,
             pFase: false,
             lista: false,
+            erro: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
             msgErro: "",
@@ -53,6 +54,7 @@ export default {
             productionOrderId: "",
             prodRolo: "",
             unity: "",
+            calculos: []
 
         }
     },
@@ -95,11 +97,7 @@ export default {
             }, 100);
 
             setTimeout(() => {
-                if (id == "myModalRef") {
-                    this.$refs.myModalRef.show();
-                } else if (id == "modalErro") {
-                    this.$refs.modalErro.show();
-                }
+                this.$refs[id].show();
             }, 150);
 
         },
@@ -130,6 +128,33 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        //
+        // MUDA O STATUS DA OPL PARA EM ANÁLISES - FEITA PELO SETOR DE ANÁLISE QUÍMICA
+        changeStatusToWaitingAnalysis() {
+            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId + "&state=waiting_approval")
+                .then(response => {
+                    this.erro = false;
+                    this.msgErro = "OPL Em Análise !"
+                    this.showModal('modalErro');
+                }).catch((error) => {
+                    this.erro = true;
+                    this.msgErro = "Falha ao mandar OPL para análise: " + error.message;
+                    this.showModal('modalErro');
+                })
+        },
+        //EM CONSTRUÇÃO
+        getCalculation() {
+            axios.get(this.url + '/api/OrderHistorian/' + this.productionOrder.productionOrderId)
+                .then((response) => {
+                    this.calculos = response.data;
+                    this.calculoOK = true;
+                }).catch((error) => {
+                    this.calculoOK = false;
+                    this.erro = true;
+                    this.msgErro = "" + error.message;
+                    this.showModal('modalErro');
+                })
+        },
         cadastrarApont(ordem) {
             // MODELO JSON
             // {
@@ -153,7 +178,8 @@ export default {
                 ordem.batch = this.lote;
             }
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
-                this.mensagemSuc = 'Produto apontado com sucesso.';
+                this.erro = false;
+                this.msgErro = 'Produto apontado com sucesso.';
                 this.productionOrderId = this.ordem.productionOrderId;
                 this.carregando = false;
                 this.pReceita = false;
@@ -163,7 +189,8 @@ export default {
                 console.log(response);
                 this.getResults();
             }).catch((error) => {
-                this.msgErro = error.message;
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro: " + error.message;
                 this.showModal("modalErro");
                 this.carregando = false;
             })
@@ -229,10 +256,12 @@ export default {
             }).catch((error) => {
                 this.carregando = false;
                 if (error.response.status == 404) {
+                    this.erro = true;
                     this.msgErro = "Sem registros na tabela";
                     this.showModal("modalErro");
                 } else {
-                    this.msgErro = error.message;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
                     this.showModal("modalErro");
                 }
                 this.orderHistorian = [];
@@ -262,7 +291,8 @@ export default {
                 this.listaOp(response.data);
                 return response.data;
             }).catch((error) => {
-                this.carregando = false;
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro: " + error.message;
                 this.msgErro = error.message;
                 this.showModal("modalErro");
                 console.log(error);

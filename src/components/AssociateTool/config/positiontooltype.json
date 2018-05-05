@@ -1,47 +1,56 @@
 [{
         "toolTypeName": "Chuveiro",
         "toolTypeId": 2,
-        "positionQtd": 4
+        "positionQtd": 4,
+        "positions": [1, 2, 3, 4]
     },
     {
         "toolTypeName": "Fresa de Desbaste Helicoidal",
         "toolTypeId": 3,
-        "positionQtd": 1
+        "positionQtd": 1,
+        "positions": [5]
     },
     {
         "toolTypeName": "Bucha para regulagem",
         "toolTypeId": 4,
-        "positionQtd": 2
+        "positionQtd": 2,
+        "positions": [6, 7]
     },
     {
         "toolTypeName": "Flange da Formadora de canal superior",
         "toolTypeId": 5,
-        "positionQtd": 2
+        "positionQtd": 2,
+        "positions": [8, 9]
     },
     {
         "toolTypeName": "Flange da Formadora de canal inferior",
         "toolTypeId": 6,
-        "positionQtd": 2
+        "positionQtd": 2,
+        "positions": [10, 11]
     },
     {
         "toolTypeName": "Coquilha",
         "toolTypeId": 7,
-        "positionQtd": 2
+        "positionQtd": 2,
+        "positions": [12, 13]
     },
     {
         "toolTypeName": "Estrela de Malta",
         "toolTypeId": 8,
-        "positionQtd": 1
+        "positionQtd": 1,
+        "positions": [14]
     },
     {
         "toolTypeName": "Eixo de trava cruz de malta - desbobinador",
         "toolTypeId": 9,
-        "positionQtd": 1
+        "positionQtd": 1,
+        "positions": [15]
     },
     {
         "toolTypeName": "Régua superior da calha de rersfriamento",
         "toolTypeId": 10,
-        "positionQtd": 16
+        "positionQtd": 16,
+        "positions": [16, 17, 18]
     },
     {
         "toolTypeName": "Faca circular",

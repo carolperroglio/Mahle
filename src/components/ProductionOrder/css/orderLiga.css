@@ -5,6 +5,16 @@
         .table-margin-liga {
             margin: 32% 0 6% 0;
         }
+        .table-margin-analysis {
+            margin: 30% 0 6% 0;
+        }
+        .cabecalho-table-analysis {
+            position: fixed;
+            width: 100%;
+            background-color: black;
+            margin: -6% 0 0 0;
+            z-index: 4;
+        }
         .cabecalho-table-po-liga {
             position: fixed;
             width: 100%;
@@ -20,12 +30,10 @@
             padding: 0 0 0 0.2%;
         }
         .width-table-context-liga {
-            /* width: 13%; */
             text-align: center;
             margin-left: 1%;
         }
         .width-table-context-wider-liga {
-            /* width: 16%; */
             text-align: center;
         }
         .col1-5 {
@@ -40,6 +48,13 @@
             font-size: 14px;
             margin-bottom: 0.3%;
             margin-left: 1%;
+        }
+        .ls2-cabecalho-analysis {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            margin-bottom: 0.3%;
+            /* margin-left: 1%; */
         }
         .nav-prod {
             padding-left: 0.5%;
@@ -79,6 +94,7 @@
         }
         .ls1 {
             text-align: center;
+            vertical-align: middle;
         }
         .aling-lb-l {
             margin-left: 0.1%;
@@ -88,6 +104,16 @@
     @media (min-width: 960px) {
         .table-margin-liga {
             margin: 17% 0 6% 0;
+        }
+        .table-margin-analysis {
+            margin: 18% 0 6% 0;
+        }
+        .cabecalho-table-analysis {
+            position: fixed;
+            width: 100%;
+            background-color: black;
+            margin: -2% 0 0 0;
+            z-index: 4;
         }
         .cabecalho-table-po-liga {
             position: fixed;
@@ -125,6 +151,13 @@
             margin-bottom: 0.3%;
             margin-left: 1%;
         }
+        .ls2-cabecalho-analysis {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            margin-bottom: 0.3%;
+            /* margin-left: 1%; */
+        }
         .nav-prod {
             padding-left: 0.5%;
         }
@@ -163,6 +196,7 @@
         }
         .ls1 {
             text-align: center;
+            vertical-align: middle;
         }
         .aling-lb-l {
             margin-left: 0.1%;
@@ -172,6 +206,16 @@
     @media (min-width:1400px) {
         .table-margin-liga {
             margin: 14% 0 6% 0;
+        }
+        .table-margin-analysis {
+            margin: 32% 0 6% 0;
+        }
+        .cabecalho-table-analysis {
+            position: fixed;
+            width: 100%;
+            background-color: black;
+            margin: 12% 0 0 0;
+            z-index: 4;
         }
         .cabecalho-table-po-liga {
             position: fixed;
@@ -209,6 +253,13 @@
             margin-bottom: 0.3%;
             margin-left: 1%;
         }
+        .ls2-cabecalho-analysis {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            margin-bottom: 0.3%;
+            /* margin-left: 1%; */
+        }
         .nav-prod {
             padding-left: 0.5%;
         }
@@ -247,6 +298,7 @@
         }
         .ls1 {
             text-align: center;
+            vertical-align: middle;
         }
         .aling-lb-l {
             margin-left: 0.7%;

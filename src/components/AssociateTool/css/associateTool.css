@@ -31,6 +31,7 @@
         bottom: 5%;
         position: absolute;
         display: grid;
+        margin-left: -2%;
     }
     .ferAssoc {
         position: relative;
@@ -77,6 +78,7 @@
         bottom: 5%;
         position: absolute;
         display: grid;
+        margin-left: -2%;
     }
     .ferAssoc {
         position: relative;
@@ -123,6 +125,7 @@
         bottom: 5%;
         position: absolute;
         display: grid;
+        margin-left: -2%;
     }
     .ferAssoc {
         position: relative;
