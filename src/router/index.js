@@ -13,6 +13,7 @@ import ListLineParameters from '@/components/LineParameters/ListLineParameters'
 import ProductionOrderTira from '@/components/ProductionOrder/ProductionOrderTira'
 import ProductionOrderLiga from '@/components/ProductionOrder/ProductionOrderLiga'
 import OPInAnalysis from '@/components/ProductionOrder/OPInAnalysis'
+import OPInicio from '@/components/ProductionOrder/OPInicio'
 import ToolCreate from '@/components/Tools/ToolCreate'
 import HistorianProductionLiga from '@/components/HistorianProduction/HistorianProductionLiga'
 import HistorianProductionTira from '@/components/HistorianProduction/HistorianProductionTira'
@@ -103,6 +104,11 @@ export default new Router({
             component: OPInAnalysis
         },
 
+        {
+            path: '/opInicio',
+            name: 'OPInicio',
+            component: OPInicio
+        },
         {
             path: '/toolCreate',
             name: 'ToolCreate',

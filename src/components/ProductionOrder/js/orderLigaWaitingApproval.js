@@ -55,9 +55,6 @@ export default {
             prod: {}
         }
     },
-    computed: {
-
-    },
     components: {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,

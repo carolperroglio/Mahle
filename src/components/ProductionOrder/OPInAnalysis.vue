@@ -101,7 +101,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="">Componente</label>
-                        <input autocomplete="off" @keyup="recipeArray=getProducts(productName)" v-model="productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
+                        <input autocomplete="off" @keyup="getProducts(productName)" v-model="productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
                         <b-dropdown-item @click.stop.prevent="productName = p.productName; comp.productId = p.productId;comp.productName = p.productName;products=[]" v-for="(p,index) in products" :key="index">{{ p.productName }}</b-dropdown-item>
                     </div>
                     <div class="form-group col-md-5">
