@@ -52,6 +52,8 @@ export default {
             fieldValue: '',
             id: '',
             cabecalhoSetas: [false, false, false, false, false],
+            erro: false,
+            msgErro: ''
 
         }
     },
@@ -65,6 +67,10 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
+        showModal(id) {
+            this.$refs[id].show()
+
+        },
         hideModal() {
             this.$refs.modalGerT.hide()
         },
@@ -106,12 +112,38 @@ export default {
             })
         },
         updateStatus: function(obj) {
-            axios.put(this.urlStateManagement + obj.id + '&state=' + obj.status, this.obj).then(response => {
+            switch (obj.status) {
+                case 'Em uso':
+                    obj.status = "in_use"
+                    break;
+                case 'Em Manutenção':
+                    obj.status = "in_maintenance"
+                    break;
+                case 'Indisponível':
+                    obj.status = "not_available"
+                    break;
+                case 'Inativo':
+                    obj.status = "inactive"
+                    break;
+                case 'Ativo':
+                    obj.status = "active"
+                    break;
+                case 'Disponível':
+                    obj.status = "available"
+                    break;
+                default:
+                    break;
+            }
+            axios.put(this.urlStateManagement + obj.toolId + '&state=' + obj.status, this.obj).then(response => {
                 this.tsUpdated = true;
-                setTimeout(function() {
-                    this.tsUpdated = false;
-                }, 200);
-            }).catch(error => {
+                this.erro = false;
+                this.msgErro = "Status atualizado com sucesso";
+                this.showModal('modalInfo');
+                this.getTool();
+            }).catch((error) => {
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro ao atualizar o status: " + error.message;
+                this.showModal('modalInfo');
                 console.log(error);
             })
             console.log(obj);
@@ -147,6 +179,8 @@ export default {
             }
         },
         catchToolToChange: function(tool) {
+            var newTool = {}
+            newTool = JSON.parse(JSON.stringify(tool));
             this.$refs.modalGerT.show()
             this.buttons = {};
             var obj = {};
@@ -154,7 +188,7 @@ export default {
             var nextPossibilityString = '';
             // this.tool = tool;
             for (var x = 0; x < this.statesConfig.length; x++) {
-                if (this.statesConfig[x].state == tool.status) {
+                if (this.statesConfig[x].state == newTool.status) {
                     var nextLenth = this.statesConfig[x].possibleNextStates.length;
                     while (count < nextLenth) {
                         nextPossibilityString = this.statesConfig[x].possibleNextStates[count];
@@ -164,7 +198,7 @@ export default {
                 }
             }
             this.buttons = obj;
-            this.tool = this.getStatusCorresponding(tool);
+            this.tool = this.getStatusCorresponding(newTool);
         },
 
         changeStatus: function(obj, status) {

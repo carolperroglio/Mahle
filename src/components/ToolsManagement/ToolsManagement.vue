@@ -66,9 +66,6 @@
     <!-- Modal -->
         <b-modal ref="modalGerT" hide-footer title="Alterar Status da Ferramenta">
         <div class="modal-body">
-            <div class="alert alert-success" role="alert" v-if="tsUpdated">
-                Status da Ferramenta Alterado com Sucesso !
-            </div>
             <div class="form-row">
                 <div class="col-md-6">
                     <label for="" >Status</label>
@@ -110,13 +107,15 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-success" @click="updateStatus(tool)">
-                <i class="fa fa-check-square" aria-hidden="true"></i>
+                <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
             </button>   
         </div>
     </b-modal>
-                </div>
-            </div>
-        </div>
+    <!-- MODAL PARA EXIBIR ERRO  -->
+    <b-modal ref="modalInfo" title="Mensagem" hide-footer>
+    <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
+    </b-modal>
+</div>
 </template>
 
 <script src="./js/toolsmanagement.js">
