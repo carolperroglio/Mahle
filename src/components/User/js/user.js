@@ -189,7 +189,6 @@ export default {
             console.log("isValid: " + isValid);
             //Verifica se as senhas conferem para cadastrar o usuário
             if (this.objUser.password == this.objUser.passwordconfirm && isValid) {
-                //Verifica se as senhas conferem para atualizar o usuário
                 setTimeout(() => {
                     this.objUser.password = this.keyhashed;
                     console.log(this.objUser);
