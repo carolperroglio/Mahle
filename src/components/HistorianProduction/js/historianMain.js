@@ -96,25 +96,48 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             console.log(this.urlOP + '/api/productionorders');
-            // axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,active' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
-            axios.get(this.urlOP + '/api/productionorders/v2?' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
-                console.log(response.data);
-                response.data.values.forEach((pro) => {
-                    if (pro.currentThing && pro.currentStatus == "active" || pro.currentStatus == "waiting_approval") {
-                        pro.thingName = pro.currentThing.thingName
-                        this.orderHistorian.push(pro);
-                    }
-                });
+            // 3 GETS SÃO FEITOS PARA FILTRAR E TRAZER AS OPS QUE ESTÃO ATIVAS, APROVADAS OU EM ANÁLISE
+            // STATUS = WAITING APPROVAL
+            axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,waiting_approval' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
+                .then((response) => {
+                    console.log(response.data);
+                    response.data.values.forEach((pro) => {
+                        if (pro.currentThing) {
+                            pro.thingName = pro.currentThing.thingName
+                            this.orderHistorian.push(pro);
+                        }
+                    });
+                    // STATUS = ACTIVE
+                    axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,active' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
+                        .then((response) => {
+                            console.log(response.data);
 
-                paginacao(response, this);
-                this.carregando = false;
-
-            }).catch((error) => {
-                this.msgErro = error.message;
-                this.showModal("modalErro");
-                this.carregando = false;
-                console.log(error);
-            })
+                            response.data.values.forEach((pro) => {
+                                if (pro.currentThing) {
+                                    pro.thingName = pro.currentThing.thingName
+                                    this.orderHistorian.push(pro);
+                                }
+                            });
+                            // STATUS = APPROVED
+                            axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,approved' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
+                                .then((response) => {
+                                    console.log(response.data);
+                                    response.data.values.forEach((pro) => {
+                                        if (pro.currentThing) {
+                                            pro.thingName = pro.currentThing.thingName
+                                            this.orderHistorian.push(pro);
+                                        }
+                                    });
+                                    paginacao(response, this);
+                                    this.carregando = false;
+                                })
+                        })
+                }).catch((error) => {
+                    this.msgErro = error.message;
+                    this.showModal("modalErro");
+                    this.carregando = false;
+                    console.log(error);
+                })
         },
 
     },
