@@ -9,6 +9,7 @@ import vBToggle from 'bootstrap-vue/es/directives/toggle/toggle'
 import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import VueTimepicker from 'vue2-timepicker'
 import VueTiles from 'vue-tiles'
@@ -87,6 +88,9 @@ Array.prototype.groupByProperties = function(properties) {
     }
     return groups;
 };
+
+var ipReport = process.env.REPORT_API;
+
 export default {
     name: "Historian",
     data() {
@@ -94,8 +98,10 @@ export default {
             api: process.env.API_ADDRESS,
             url: process.env.THINGS_API,
             urlHist: process.env.HIST_BIGTABLE_API,
-            urlReport: process.env.REPORT_API,
+            urlReport: ipReport,
             urlGatRec: process.env.OP_API,
+            urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
+            urlGatewayRecipe: ipReport + '/gateway/recipe?fieldFilter=recipeCode&fieldValue=',
             carregando: false,
             date: '',
             datef: '',
@@ -155,7 +161,9 @@ export default {
             recipeList: [],
             providertable: [],
             opName: '',
-            prosFim: []
+            prosFim: [],
+            erro: '',
+            msgErro: ''
         }
     },
     components: {
@@ -169,6 +177,7 @@ export default {
         'date-picker': datePicker,
         'vue-timepicker': VueTimepicker,
         'downloadExcel': JsonExcel,
+        'b-dropdown-item': bDropdownItem,
         Stretch
     },
     directives: {
@@ -177,6 +186,9 @@ export default {
         'b-modal': bModalDirective
     },
     methods: {
+        showModal(id) {
+            this.$refs[id].show();
+        },
         getThingName(t) {
             this.thingName = t.thingName;
         },
@@ -209,6 +221,7 @@ export default {
             })
         },
         getReportDate() {
+            this.providertable = [];
 
             this.carregando = true;
 
@@ -219,25 +232,38 @@ export default {
 
             axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
                 '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+                if (response.data.length > 0) {
 
-
-                this.data = response.data;
-                this.tags = response.data.tags;
-                this.tags.forEach((T) => {
-                    if (!this.groups.includes(T.group)) {
-                        this.groups.push(T.group);
-                    }
-                })
-                this.editGroup(this.groups[0]);
-                this.newGroup = this.groups[0];
-                this.carregando = false;
-                this.created();
-                this.hideModal();
+                    this.data = response.data;
+                    this.tags = response.data.tags;
+                    this.tags.forEach((T) => {
+                        if (!this.groups.includes(T.group)) {
+                            this.groups.push(T.group);
+                        }
+                    })
+                    this.editGroup(this.groups[0]);
+                    this.newGroup = this.groups[0];
+                    this.carregando = false;
+                    this.created();
+                    this.hideModal();
+                }
             }).catch((error) => {
-
+                if (error.response.status == '404') {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Sem dados no período selecionado";
+                    this.showModal("modalInfo");
+                } else {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = error.message;
+                    this.showModal("modalInfo");
+                }
             });
         },
         getReportCode() {
+            this.providertable = [];
+
             this.carregando = true;
 
             var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
@@ -259,10 +285,21 @@ export default {
                 this.created();
                 this.hideModal();
             }).catch((error) => {
-
+                if (error.response.status == '404') {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Sem dados no período selecionado";
+                    this.showModal("modalInfo");
+                } else {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = error.message;
+                    this.showModal("modalInfo");
+                }
             });
         },
         getReportOP() {
+            this.providertable = [];
             this.carregando = true;
 
             var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
@@ -270,22 +307,35 @@ export default {
             var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
             var ticksF = this.dateToTicks(Fim);
 
-            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP.productionOrderId + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
-                this.data = response.data;
-                this.tags = response.data.tags;
-                this.tags.forEach((T) => {
-                    if (!this.groups.includes(T.group)) {
-                        this.groups.push(T.group);
+            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF)
+                .then((response) => {
+                    comsole.log(reponse)
+                    console.log('Entrou no retorno do get report code')
+                    this.data = response.data;
+                    this.tags = response.data.tags;
+                    this.tags.forEach((T) => {
+                        if (!this.groups.includes(T.group)) {
+                            this.groups.push(T.group);
+                        }
+                    })
+                    this.editGroup(this.groups[0]);
+                    this.newGroup = this.groups[0];
+                    this.carregando = false;
+                    this.created();
+                    this.hideModal();
+                }).catch((error) => {
+                    if (error.response.status == '404') {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Sem dados no período selecionado";
+                        this.showModal("modalInfo");
+                    } else {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = error.message;
+                        this.showModal("modalInfo");
                     }
-                })
-                this.editGroup(this.groups[0]);
-                this.newGroup = this.groups[0];
-                this.carregando = false;
-                this.created();
-                this.hideModal();
-            }).catch((error) => {
-
-            });
+                });
         },
         toPdf() {
             // html2canvas(document.body).then(function(canvas) {
@@ -574,9 +624,9 @@ export default {
 
         },
 
-        showModal() {
+        showModal(id) {
             setTimeout(() => {
-                this.$refs.myModalEdit.show()
+                this.$refs[id].show()
             }, 200);
         },
 
@@ -632,7 +682,7 @@ export default {
         },
         getResults(url, name, pros) {
             pros = [];
-            if (name.length > 3) {
+            if (name.length >= 3) {
                 axios.get(url + name, this.config).then((response) => {
                     response.data.forEach((pro) => {
                         pros.push(pro);
@@ -643,7 +693,6 @@ export default {
             }
             return pros;
         },
-
     },
 
     /*****************/
@@ -655,11 +704,8 @@ export default {
     /*****************/
 
     beforeMount: function() {
-        this.showModal();
+        this.showModal('myModalEdit');
         this.getThings();
-        this.getOP();
-        this.getRecipe();
-        // this.getchart();
     },
 
 }
