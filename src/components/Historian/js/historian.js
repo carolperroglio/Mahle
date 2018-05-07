@@ -154,8 +154,8 @@ export default {
             opList: [],
             recipeList: [],
             providertable: [],
-            opName:'',
-            prosFim:[]
+            opName: '',
+            prosFim: []
         }
     },
     components: {
@@ -630,18 +630,18 @@ export default {
             });
 
         },
-        getResults(url, name, pros) {                       
-            pros = [];     
-            if (name.length > 3){                  
-                axios.get(url + name, this.config).then((response) => {                                        
-                    response.data.values.forEach((pro) => {                        
+        getResults(url, name, pros) {
+            pros = [];
+            if (name.length > 3) {
+                axios.get(url + name, this.config).then((response) => {
+                    response.data.forEach((pro) => {
                         pros.push(pro);
                     });
                 }, (error) => {
                     console.log(error);
                 })
             }
-            return pros;            
+            return pros;
         },
 
     },
@@ -653,13 +653,13 @@ export default {
     /*               */
     /*               */
     /*****************/
-    
+
     beforeMount: function() {
         this.showModal();
         this.getThings();
         this.getOP();
         this.getRecipe();
-        this.getchart();
+        // this.getchart();
     },
 
 }
