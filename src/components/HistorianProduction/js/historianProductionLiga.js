@@ -293,7 +293,6 @@ export default {
             }).catch((error) => {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro: " + error.message;
-                this.msgErro = error.message;
                 this.showModal("modalErro");
                 console.log(error);
             })
