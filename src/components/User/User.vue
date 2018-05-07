@@ -109,8 +109,10 @@
                     classes="input"
                     :user-inputs="[user.email]">
       </vue-password> -->
-            <input required type="password" class="form-control" min="8" max="15" id="password" v-model="password">
-            <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 6 caractéres, uma letra e um número</p>
+      <input required type="password" class="form-control" min="8" max="15" id="password" v-model="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" ref="ruleForm">
+            <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 8 caractéres, uma letra e um número</p>
+            <!-- <input required type="password" class="form-control" min="8" max="15" id="password" v-model="password"> -->
+            <!-- <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 6 caractéres, uma letra e um número</p> -->
         </div>
         <div class="form-group col-md-6">
         <label for="passwordconfirm">Confirmar senha</label>
@@ -154,22 +156,22 @@
     <form>
     <div class="form-group row">
         <div class="form-group col-md-6">
-        <label for="name">Nome </label>
-            <input required type="text" class="form-control" id="name"  placeholder="Ex: Mauricio" v-model="objUser.name">
+        <label for="nameedit">Nome </label>
+            <input required type="text" class="form-control" id="nameedit"  placeholder="Ex: Mauricio" v-model="objUser.name">
         </div>
         <div class="form-group col-md-6">
-        <label for="username">Nome de usuário</label>
-            <input required type="text" class="form-control" id="username" placeholder="Ex: mauriciot" v-model="objUser.username">
+        <label for="usernameedit">Nome de usuário</label>
+            <input required type="text" class="form-control" id="usernameedit" placeholder="Ex: mauriciot" v-model="objUser.username">
         </div>
     </div>
     <div class="form-group row">
         <div class="form-group col-md-6">
-        <label for="password">Senha</label>
+        <label for="passwordedit">Senha</label>
          <!-- <vue-password v-model="user.password"
                     classes="input"
                     :user-inputs="[user.email]">
       </vue-password> -->
-            <input required type="password" class="form-control" min="8" max="15" id="password" v-model="objUser.password">
+            <input required type="password" class="form-control" min="8" max="15" id="passwordedit" v-model="objUser.password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" ref="ruleFormEdit">
             <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 6 caractéres, uma letra e um número</p>
         </div>
         <div class="form-group col-md-6">

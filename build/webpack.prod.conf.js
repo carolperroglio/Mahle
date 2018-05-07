@@ -61,7 +61,7 @@ const webpackConfig = merge(baseWebpackConfig, {
                 HIST_ALARM_API: JSON.stringify(api + ":8012"),
                 REPORT_API: JSON.stringify(api + ":8007"),
                 LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
-                USER_API: JSON.stringify(api + ":8010"),
+                USER_API: JSON.stringify(api + ":8015"),
             }
         }),
         new webpack.DefinePlugin({
@@ -95,17 +95,14 @@ const webpackConfig = merge(baseWebpackConfig, {
         // Compress extracted CSS. We are using this plugin so that possible
         // duplicated CSS from different components can be deduped.
         new OptimizeCSSPlugin({
-            cssProcessorOptions: config.build.productionSourceMap ?
-                { safe: true, map: { inline: false } } :
-                { safe: true }
+            cssProcessorOptions: config.build.productionSourceMap ? { safe: true, map: { inline: false } } : { safe: true }
         }),
         // generate dist index.html with correct asset hash for caching.
         // you can customize output by editing /index.html
         // see https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             filename: process.env.NODE_ENV === 'testing' ?
-                'index.html' :
-                config.build.index,
+                'index.html' : config.build.index,
             template: 'index.html',
             inject: true,
             minify: {
