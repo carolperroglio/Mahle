@@ -26,14 +26,14 @@
                     <!-- <li class="nav-item-cab col-md-1.5">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionTira"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos Tira</router-link>
                     </li>  -->
-                    <li class="nav-item-cab col-md-1" v-show="username != 'ok'">
+                    <li class="nav-item-cab col-md-1" v-show="username != null">
                         <router-link to="#" class="nav-link bg-dark active btn-config">
                             <i class= "fa fa-user bgcolor" style="font-size:20px; cursor:pointer"></i> <br>
                         <p style="font-size:15px; cursor:pointer"> {{username}}  </p>
                         
                         </router-link>
                     </li>
-                    <li class="nav-item-cab col-md-1 bgcolor" @click.stop.prevent="Logout()" v-show="username != 'ok'">
+                    <li class="nav-item-cab col-md-1 bgcolor" @click.stop.prevent="Logout()" v-show="username != null">
                         <i class="fa fa-user-times bgcolor-u-delete" style="font-size:20px; cursor:pointer" ></i><br>  
                         <p style="font-size:15px; cursor:pointer"> Logout </p>
                     </li> 

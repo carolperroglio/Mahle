@@ -19,7 +19,7 @@
                         <h3>Equipamento: {{thingNameCabeçalho}} Grupo: {{thingGroup}}</h3>
                     </div>
                     <div class="col-md-4">
-                    <button type="button" class="btn btn-info btn-sm btn-sm"  @click.prevent="showModal()">
+                    <button type="button" class="btn btn-info btn-sm btn-sm"  @click.prevent="showModal('myModalEdit')">
                         Filtrar Busca
                     </button>
                     
@@ -92,7 +92,7 @@
             </div>
             <div class="form-row">
             <div class="form-group col-md-9">
-            <label><b>Equipamento </b></label>  
+            <label><b>Equipamento </b></label>
                 <select class="form-control" v-model="thingId">    
                     <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
                     </option>
@@ -102,24 +102,30 @@
             <div class="form-row">
             <div class="form-group col-md-6" v-if="filterSelected == 'op'">
             <label><b>OP </b></label>                         
+                <input placeholder="Número da OP" class="form-control" 
+                v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP={}" >                                                                                 
+                <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]" 
+                v-for="(op,index) in prosFim" :key="index" style="cursor:pointer">{{ op.productionOrderNumber }}</b-dropdown-item>
 
-                <input placeholder="Número da OP" class="form-control form-control-sm" 
-                v-model="opName" @keyup="prosFim=getResults(api+':8007/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=', opName, prosFim); OP={}" >                                                                                 
-                
-                <select id="dropdownMenuButton" @change="productRecipeName=recipeProduct.productName" 
+                <!-- <select id="dropdownMenuButton" @change="productRecipeName=recipeProduct.productName" 
                     v-show="prosFim.length>0" v-model="OP" class="form-control form-control-sm">
                     <option :value="op.productionOrderId" v-for="(op,index) in prosFim" v-bind:key="index">
                         {{ op.productionOrderNumber}}
                     </option>                   
-                </select>
+                </select> -->
 
             </div>
             <div class="form-group col-md-6"  v-if="filterSelected == 'code'">
                 <label><b>Código da Receita </b></label>  
-                    <select class="form-control" v-model="recipeCode">    
+                <input placeholder="Número da OP" class="form-control" 
+                v-model="recipeCode" @keyup="prosFim=getResults(urlGatewayRecipe,recipeCode, prosFim); OP={}" >                                                                                 
+                <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;OP=r.recipeId;prosFim=[]" 
+                v-for="(r,index) in prosFim" :key="index" style="cursor:pointer">{{ r.recipeCode }}</b-dropdown-item>
+
+                    <!-- <select class="form-control" v-model="recipeCode">    
                         <option v-for="(r,index) in recipeList" :value="r.recipeId" v-bind:key="index">{{ r.recipeName }}
                         </option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
             
@@ -145,21 +151,25 @@
             </div>
             <div class="modal-footer">
                 <div class="btn-group" role="group">
-                    <button class="btn btn-success" @click.stop.prevent="getReportDate(); editGroup(groups[0])" 
+                    <button class="btn btn-success" @click.stop.prevent="getReportDate();" 
                     :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
-                    <button class="btn btn-success" @click.stop.prevent="getReportOP(); editGroup(groups[0])" 
+                    <button class="btn btn-success" @click.stop.prevent="getReportOP();" 
                     :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !OP" v-if="filterSelected == 'op'">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
-                    <button class="btn btn-success" @click.stop.prevent="getReportCode(); editGroup(groups[0])" 
+                    <button class="btn btn-success" @click.stop.prevent="getReportCode();" 
                     :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !recipeCode" v-if="filterSelected == 'code'">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
                 </div>
             </div>
         </b-modal>
+    <!-- MODAL PARA EXIBIR ERRO  -->
+    <b-modal ref="modalInfo" title="Mensagem" hide-footer>
+    <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
+    </b-modal>
   </div>
 </template>
 
