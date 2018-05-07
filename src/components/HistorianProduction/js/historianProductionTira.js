@@ -202,7 +202,7 @@ export default {
                     this.getResults();
                     this.cleanVariables();
                 }).catch((error) => {
-                    this.msgErro = error.message;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
                     this.showModal("modalErro");
                     this.carregando = false;
                     console.log(teste);
@@ -286,7 +286,7 @@ export default {
                     this.msgErro = "Sem registros na tabela";
                     this.showModal("modalErro");
                 } else {
-                    this.msgErro = error.message;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
                     this.showModal("modalErro");
                 }
                 this.carregando = false;
@@ -321,7 +321,7 @@ export default {
                 return response.data;
                 console.log(this.OPs);
             }).catch((error) => {
-                this.msgErro = error.message;
+                this.msgErro = "Ocorreu um erro: " + error.message;
                 this.showModal("modalErro");
                 this.carregando = false;
             })
@@ -379,7 +379,7 @@ export default {
                         this.noop = true;
                     }
                 }).catch((error) => {
-                    this.msgErro = error.message;
+                    this.msgErro = "Ocorreu um erro" + error.message;
                     this.showModal("modalErro");
                     this.carregando = false;
                 })
