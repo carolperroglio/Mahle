@@ -39,7 +39,7 @@ export default {
             objUser: {},
             /* ---------------*/
             erro: false,
-            keyhashed: ""
+            keyhashed: "",
         }
     },
     components: {
@@ -115,6 +115,16 @@ export default {
             this.passwordconfirm = "";
             this.email = "";
         },
+        validateForm() {
+            var valid = this.$refs.ruleForm.validity;
+            if (valid.valid) {
+                return true;
+            } else {
+                console.log('error submit!!');
+                console.log(valid);
+                return false;
+            }
+        },
         /**
          * CRUD USER
          */
@@ -137,10 +147,11 @@ export default {
         createUser() {
             // this.keyhashed;
             this.hashKey(this.password, this);
-            var contains = false;
-            this.objUser.password.contains()
+            // Verifica se a senha possui pelo menos um número e uma letra
+            var isValid = this.validateForm();
+            console.log("isValid: " + isValid);
             //Verifica se as senhas conferem para cadastrar o usuário
-            if (this.objUser.password == this.objUser.passwordconfirm) {
+            if (this.objUser.password == this.objUser.passwordconfirm && isValid) {
                 setTimeout(() => {
                     var userInfo = {
                         username: this.username,
@@ -149,6 +160,7 @@ export default {
                         email: this.email,
                         enabled: true,
                     }
+                    console.log(userInfo);
                     axios.post(this.urluser, userInfo).then((response) => {
                         this.userlist = response.data.values;
                         this.msgErro = "Usuário criado com Sucesso";
@@ -172,11 +184,15 @@ export default {
             console.log("id:" + id);
 
             this.hashKey(this.objUser.password, this);
-
-            //Verifica se as senhas conferem para atualizar o usuário
-            if (this.objUser.password == this.objUser.passwordconfirm) {
+            // Verifica se a senha possui pelo menos um número e uma letra
+            var isValid = this.validateForm();
+            console.log("isValid: " + isValid);
+            //Verifica se as senhas conferem para cadastrar o usuário
+            if (this.objUser.password == this.objUser.passwordconfirm && isValid) {
+                //Verifica se as senhas conferem para atualizar o usuário
                 setTimeout(() => {
                     this.objUser.password = this.keyhashed;
+                    console.log(this.objUser);
                     axios.put(this.urluser + id, this.objUser).then((response) => {
                         this.msgErro = "Usuário atualizado com Sucesso";
                         this.showModal("modaInfo");
