@@ -42,12 +42,18 @@ export default {
             fieldValue: '',
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
+            urlAnalysis: process.env.ANALYSIS_API,
             quantityPage: 100,
             startat: 0,
             total: 0,
             pages: [],
             pageAtual: 0,
-            msgErro: ""
+            msgErro: "",
+            ops: [],
+            opNumber: '',
+            cargaUtilizada: '',
+            opSelected: {},
+            idOpAtual: ''
         }
     },
     computed: {
@@ -88,6 +94,68 @@ export default {
                     this.cabecalhoSetas[i] = true;
                 else
                     this.cabecalhoSetas[i] = false;
+        },
+        getOPResult() {
+            this.ops = [];
+            this.opSelected = {};
+            console.log('opNumber: ' + this.opNumber)
+            if (this.opNumber.length >= 3) {
+                axios.get(this.urlOP + "/api/productionorders/v2?&filters=productionOrderTypeId,2&filters=productionOrderNumber," + this.opNumber)
+                    .then((response) => {
+                        this.ops = response.data.values;
+                    }).catch((error) => {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro: " + error.message;
+                        this.showModal("modalErro");
+                    })
+            }
+        },
+        sendCalculation(lastAnalysis) {
+            console.log(lastAnalysis);
+            axios.put(this.urlAnalysis + '/api/CalculeAnalysis?productionOrderId=' + this.idOpAtual + '&furnaceQuantity=' + this.cargaUtilizada, lastAnalysis)
+                .then((response) => {
+                    this.erro = true;
+                    this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";
+                    this.showModal("modalErro");
+                }).catch((error) => {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao realizar o cálculo: " + error.message;
+                    this.showModal("modalErro");
+                })
+        },
+        getLastAnalysis() {
+            var lastAnalysis = {};
+            var idLastOp = '';
+
+            //verifica se o operador selecionou a ultima análise realizada - pois não é obrigatório selecionar
+            if (this.opSelected.productionOrderId == undefined) {
+                var idLastOp = '';
+            } else {
+                var idLastOp = this.opSelected.productionOrderId
+            }
+
+            //Obtem a última análise da OP selecionada pelo operador
+            axios.post(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + idLastOp)
+                .then((response) => {
+                    var posLastAnalysis = response.data.analysis.length - 1;
+                    lastAnalysis = response.data.analysis[posLastAnalysis];
+
+                    this.sendCalculation(lastAnalysis);
+
+                }).catch((error) => {
+                    if (error.response.status == '404') {
+                        lastAnalysis.analysisId = 0;
+                        lastAnalysis["comp"] = [];
+                        this.sendCalculation(lastAnalysis);
+                    } else {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro ao buscar a última análise realizada: " + error.message;
+                        this.showModal("modalErro");
+                    }
+                })
         },
         getResults() {
             this.carregando = true;

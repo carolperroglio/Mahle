@@ -128,6 +128,28 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        getAnalysis() {
+            axios.post(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.productionOrder.productionOrderId)
+                .then((response) => {
+
+                    var posLastAnalysis = response.data.analysis.length - 1;
+                    //pega o ultimo elemento do array de análise, para obter a última análise
+                    lastAnalysis = response.data.analysis[posLastAnalysis];
+
+                    this.calculos = response.data.analysis[lastAnalysis];
+
+                }).catch((error) => {
+                    if (error.response.status == '404') {
+                        this.erro = true;
+                        this.msgErro = "O cálculo desta OP não foi realizado, vá a apontamentos e realize o cálculo. " + error.message;
+                        this.showModal('modalErro');
+                    } else {
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro ao obter a última análise - " + error.message;
+                        this.showModal('modalErro');
+                    }
+                })
+        },
         //
         // MUDA O STATUS DA OPL PARA EM ANÁLISES - FEITA PELO SETOR DE ANÁLISE QUÍMICA
         changeStatusToWaitingAnalysis() {

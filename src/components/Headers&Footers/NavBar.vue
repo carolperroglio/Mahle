@@ -184,9 +184,6 @@
                             <router-link to="/opInAnalysis" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
                                 <i class="fa fa-thermometer-quarter"></i> ORDENS DE PRODUÇÃO EM ANÁLISE
                             </router-link>
-                            <router-link to="/opInicio" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
-                                <i class="fa fa-thermometer-quarter"></i> INÍCIO DE ORDEM DE PRODUÇÃO
-                            </router-link>
                             <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 
                             </router-link> -->

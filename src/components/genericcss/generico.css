@@ -87,6 +87,16 @@ button {
         text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
         padding-bottom: 5%;
     }
+    .btn-view-pos {
+        bottom: 5%;
+        position: absolute;
+        display: grid;
+        margin-left: -2%;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
 }
 
 @media screen and (min-width:960px) {
@@ -132,6 +142,16 @@ button {
     }
     .table-margin {
         margin: 17% 0 6% 0;
+    }
+    .btn-view-pos {
+        bottom: 5%;
+        position: absolute;
+        display: grid;
+        margin-left: -2%;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
     }
 }
 
@@ -179,6 +199,16 @@ button {
     }
     .table-margin {
         margin: 14% 0 6% 0;
+    }
+    .btn-view-pos {
+        bottom: 5%;
+        position: absolute;
+        display: grid;
+        margin-left: -2%;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
     }
 }
 

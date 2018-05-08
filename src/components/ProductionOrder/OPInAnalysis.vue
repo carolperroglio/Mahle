@@ -65,19 +65,19 @@
             </div>
             <div class="table-margin-analysis" v-show="!carregando">
             <div v-for="(o, index) in opInAnalysis" v-bind:key="index" :class="{cinza: index%2==0}">
-                <label class="ls1 col-md-1">
+                <label class="ls1-analysis col-md-1">
                     {{o.productionOrderNumber}}</label>
-                <label class="ls1 col-md-2">
+                <label class="ls1-analysis col-md-2">
                     {{o.recipeCode}}</label>
-                <label class="ls1 col-md-2">
+                <label class="ls1-analysis col-md-2">
                     {{o.recipeName}}</label>
-                <label class="ls1 col-md-2">
+                <label class="ls1-analysis col-md-2">
                     {{o.typeDescription}}</label>
-                <label class="ls1 col-md-2">
+                <label class="ls1-analysis col-md-2">
                     {{o.thingName}} </label>
-                <label class="ls1 col-md-1">
+                <label class="ls1-analysis col-md-1">
                     {{o.currentStatus | filterStatus}}</label>
-                <label class="ls1 col-md-1">
+                <label class="ls1-analysis col-md-1">
                     <button class="btn btn-primary" @click.stop.prevent="showModal('realizarAnalise'); idOP = o.productionOrderId" >Realizar Análise</button>   
                 </label>
             </div>
@@ -142,5 +142,5 @@
 <script src="./js/orderLigaWaitingApproval.js">
 </script>
 <style>
-@import url('./css/orderLiga.css');
+@import url('./css/opInAnalysis.css');
 </style>

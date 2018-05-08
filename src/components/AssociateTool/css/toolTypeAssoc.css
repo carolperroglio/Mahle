@@ -27,11 +27,6 @@
     .container-tt {
         margin: 21% 0 13% 2%;
     }
-    .btn-view-pos {
-        bottom: 5%;
-        position: absolute;
-        display: grid;
-    }
     .ferAssoc {
         position: relative;
         margin-top: 22%;
@@ -73,11 +68,6 @@
     .container-tt {
         margin: 12% 0 13% 2%;
     }
-    .btn-view-pos {
-        bottom: 5%;
-        position: absolute;
-        display: grid;
-    }
     .ferAssoc {
         position: relative;
         margin-top: 22%;
@@ -118,11 +108,6 @@
     }
     .container-tt {
         margin: 12% 0 5% 2%;
-    }
-    .btn-view-pos {
-        bottom: 5%;
-        position: absolute;
-        display: grid;
     }
     .ferAssoc {
         position: relative;

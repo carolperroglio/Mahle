@@ -46,11 +46,11 @@
                         Código: {{t.tool.code}}
                     </p>
                     </div>
-                    <div class="col-md-12 btn-view-pos">
+                    <div class="btn-view-pos">
                         <button class="btn btn-danger btn-block" v-if="t.tool.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t.tool">
                             Dessassociar
                         </button>
-                        <button class="btn btn-success" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate'); pos = t.tool.pos">
+                        <button class="btn btn-success btn-block" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate'); pos = t.tool.pos">
                             Associar
                         </button>
                     </div>
