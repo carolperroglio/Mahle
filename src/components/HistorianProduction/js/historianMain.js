@@ -49,6 +49,7 @@ export default {
             pages: [],
             pageAtual: 0,
             msgErro: "",
+            erro: false,
             ops: [],
             opNumber: '',
             cargaUtilizada: '',
@@ -115,7 +116,7 @@ export default {
             console.log(lastAnalysis);
             axios.put(this.urlAnalysis + '/api/CalculeAnalysis?productionOrderId=' + this.idOpAtual + '&furnaceQuantity=' + this.cargaUtilizada, lastAnalysis)
                 .then((response) => {
-                    this.erro = true;
+                    this.erro = false;
                     this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";
                     this.showModal("modalErro");
                 }).catch((error) => {

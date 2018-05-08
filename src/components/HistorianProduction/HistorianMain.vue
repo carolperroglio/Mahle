@@ -56,14 +56,14 @@
                 <label class="ls ls10 col-md-6 router">
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
                 </label> 
+                <label for="" class="col-md-1">
+                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId">Realizar Cálculo</button>
+                </label>
                 </label>
                 <label  class="col-md-4" v-else-if="o.typeDescription == 'Tira'">
                 <label class="ls ls10 col-md-6 router" >
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">Realizar Apontamento</router-link>
                 </label>
-                <label for="" class="col-md-1">
-                <button class="btn btn-outline-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId">Realizar Cálculo</button>
-                </label> 
             </label>
             </div>
             </div>

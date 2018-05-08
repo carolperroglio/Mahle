@@ -90,6 +90,10 @@ axios.interceptors.response.use(
       router.push({ name: "Login" });
       console.log('error.message: ' + error.message);
       // showModal("modaInfo");
+    } else if (error.response.status != undefined && error.response.status == "404") {
+      VueCookies.set("status", "404");
+      console.log('status code: ' + error.response.status);
+      // showModal("modaInfo");
     } else {
       VueCookies.set("status", "ok");
       console.log('status code: ' + statuscode);
