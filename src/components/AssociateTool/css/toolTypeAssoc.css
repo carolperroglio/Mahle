@@ -26,6 +26,8 @@
     }
     .container-tt {
         margin: 21% 0 13% 2%;
+        display: flex;
+        flex-wrap: wrap;
     }
     .ferAssoc {
         position: relative;
@@ -67,6 +69,8 @@
     }
     .container-tt {
         margin: 12% 0 13% 2%;
+        display: flex;
+        flex-wrap: wrap;
     }
     .ferAssoc {
         position: relative;
@@ -108,6 +112,8 @@
     }
     .container-tt {
         margin: 12% 0 5% 2%;
+        display: flex;
+        flex-wrap: wrap;
     }
     .ferAssoc {
         position: relative;

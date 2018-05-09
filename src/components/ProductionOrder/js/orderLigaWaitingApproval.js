@@ -52,7 +52,9 @@ export default {
             components: [],
             comp: {},
             products: [],
-            prod: {}
+            prod: {},
+            cobre: {},
+            cobreqtd: ''
         }
     },
     components: {
@@ -119,16 +121,36 @@ export default {
             console.log(newObj)
             this.components.push(newObj);
         },
+        addCobre(cobreqtd) {
+            this.cobre["cobreFosforoso"] = cobreqtd;
+            this.cobre = Object.assign({}, this.cobre)
+        },
+        removeCobre() {
+            this.cobre = {};
+        },
         realizarAnálise() {
             var components = this.components;
             var objComp = {};
+            if (this.cobre.cobreFosforoso != undefined) {
+                objComp = this.cobre
+            }
             objComp["comp"] = components;
-            axios.post(this.urlAnalysis + '/api/ProductionOrderQuality/Analysis/' + this.idOP, objComp).then((response) => {
-                this.erro = true;
-                this.msgErro = "Análise Realizada com Sucesso"
+
+            axios.post(this.urlAnalysis + '/api/ProductionOrderQuality/Analysis/ProductionOrder/' + this.idOP, objComp).then((response) => {
+                this.erro = false;
+                switch (response.data.status) {
+                    case 'reproved':
+                        response.data.status = 'Reprovada'
+                        break;
+                    case 'approved':
+                        response.data.status = 'Aprovada'
+                        break;
+                }
+                this.msgErro = "Análise Realizada com Sucesso. A análise foi: " + response.data.status;
                 this.showModal("modalErro");
                 this.carregando = false;
                 console.log(response.data);
+                this.getResults();
 
             }).catch((error) => {
                 this.erro = true;

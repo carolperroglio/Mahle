@@ -30,7 +30,7 @@
             </ul> 
         </div>  
 
-        <div class="row container-tt">
+        <div class="container-tt">
             <div  v-for="(t,index) in tools" :key="t.position"  id="constat">
                 <div class="tileConfig">
                     <div>

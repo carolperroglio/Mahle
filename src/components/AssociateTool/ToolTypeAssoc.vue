@@ -19,7 +19,7 @@
             </ul> 
         </div>  
 
-        <div class="row container-tt">
+        <div class="container-tt">
             <div v-for="(tt, index) in toolType" v-bind:key="index" id="tilett" class="">
                 <div class="tileConfig">
                     <div class="col-md-12">

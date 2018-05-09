@@ -78,7 +78,7 @@
                 <label class="ls1-analysis col-md-2">
                     {{o.status | filterStatus}}</label>
                 <label class="ls1-analysis col-md-2">
-                    <button class="btn btn-primary" @click.stop.prevent="showModal('realizarAnalise'); idOP = o.productionOrderId" >Realizar Análise</button>   
+                    <button class="btn btn-primary" @click.stop.prevent="showModal('realizarAnalise'); idOP = o.productionOrderId;cobreqtd = '';comp.value = '';productName='';cobre = {}" >Realizar Análise</button>   
                 </label>
             </div>
             </div>
@@ -99,6 +99,33 @@
             </div>
             <b-modal size="md" ref="realizarAnalise" hide-footer title="Realizar Análise">
                 <div class="form-row">
+                <div class="form-group col-md-5">
+                    <select class="form-control" id="" disabled>
+                        <!-- COLOCAR O ID FIXO DEPOIS -->
+                        <option value="someid" selected>Cobre Fosforoso</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="number" class="form-control" v-model="cobreqtd" placeholder="" />
+                </div>
+                <div class="form-group-col-md-2">
+                    <button class="btn btn-success" @click.stop.prevent="addCobre(cobreqtd)" :disabled="cobreqtd.length == 0">
+                        Adicionar Cobre
+                    </button>
+                    <!-- <button class="btn btn-warning btn-sm" @click.stop.prevent="addComponente(comp)">
+                        <i class="fa fa-remove" aria-hidden="true"></i>
+                    </button> -->
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                    <ul v-for="value in cobre" :key="value" class="list-group">
+                        <li class="list-group-item">{{'Cobre Fosforoso: ' + value}} 
+                            <i class="fa fa-remove pull-right" style="color:red" @click="removeCobre()"></i> </li>
+                    </ul>    
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="">Componente</label>
                         <input autocomplete="off" @keyup="getProducts(productName)" v-model="productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
@@ -110,7 +137,7 @@
                     </div>
                     <div class="form-group-col-md-1">
                         <br>
-                        <button class="btn btn-success btn-sm" @click.stop.prevent="addComponente(comp)">
+                    <button class="btn btn-success btn-sm" @click.stop.prevent="addComponente(comp)" :disabled="!productName || comp.value.length < 0 == true">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -134,7 +161,7 @@
                 </div>
             </div>
             </b-modal>
-        <b-modal ref="modalErro" title="Erro" hide-footer="">
+        <b-modal ref="modalErro" title="" hide-footer="">
             <p :class="erro?'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div>

@@ -130,6 +130,10 @@ export default {
             axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + id)
                 .then((response) => {
                     obj.showbutton = false;
+                    var newobj = obj;
+                    newobj.showbutton = true;
+                    obj = Object.assign({}, newobj)
+                    console.log(obj);
                     // return true;
 
                 }).catch((error) => {
@@ -138,7 +142,10 @@ export default {
                         this.msgErro = "Ocorreu um erro ao obter a última análise - " + error.message;
                         this.showModal('modalErro');
                     } else if (error.response.status == '404') {
-                        obj.showbutton = true;
+                        var newobj = obj;
+                        newobj.showbutton = true;
+                        obj = Object.assign({}, newobj)
+                        console.log(obj);
                         // return false;
                     }
                 })

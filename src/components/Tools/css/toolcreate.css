@@ -73,7 +73,7 @@
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -4% 0 0 0;
+        margin: -5% 0 0 0;
         z-index: 4;
     }
     .ls2-cabecalho-tc {
@@ -132,7 +132,7 @@
         vertical-align: middle;
     }
     .margin-table-tc {
-        margin-top: 19%;
+        margin-top: 20%;
     }
 }
 

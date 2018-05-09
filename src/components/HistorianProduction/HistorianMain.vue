@@ -57,7 +57,7 @@
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
                 </label> 
                 <label for="" class="col-md-1">
-                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId" v-show="o.showbutton == true">Realizar Cálculo</button>
+                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId" :disabled="o.showbutton == true">Realizar Cálculo</button>
                 </label>
                 </label>
                 <label  class="col-md-4" v-else-if="o.typeDescription == 'Tira'">
