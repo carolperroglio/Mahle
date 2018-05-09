@@ -32,7 +32,7 @@
 
         <div class="container-tt">
             <div  v-for="(t,index) in tools" :key="t.position"  id="constat">
-                <div class="tileConfig">
+                <div class="tileConfigAssTool">
                     <div>
                     <div class="col-md-12">
                     <h4 class="ls11" :id="index + 1" >

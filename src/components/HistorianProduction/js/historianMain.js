@@ -221,20 +221,31 @@ export default {
                                             this.orderHistorian.push(pro);
                                         }
                                     });
-                                    this.orderHistorian.forEach((obj) => {
-                                        setTimeout(() => {
-                                            var value = false;
-                                            value = this.getAnalysis(obj.productionOrderId, obj);
-                                        }, 500);
+                                    axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,reproved' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
+                                        .then((response) => {
+                                            console.log(response.data);
+                                            response.data.values.forEach((pro) => {
+                                                if (pro.currentThing) {
+                                                    pro.thingName = pro.currentThing.thingName
+                                                    this.orderHistorian.push(pro);
+                                                }
+                                            });
 
-                                        // if (value) {
-                                        //     obj.showbutton = false;
-                                        // } else {
-                                        //     obj.showbutton = true;
-                                        // }
-                                    })
-                                    paginacao(response, this);
-                                    this.carregando = false;
+                                            this.orderHistorian.forEach((obj) => {
+                                                setTimeout(() => {
+                                                    var value = false;
+                                                    value = this.getAnalysis(obj.productionOrderId, obj);
+                                                }, 500);
+
+                                                // if (value) {
+                                                //     obj.showbutton = false;
+                                                // } else {
+                                                //     obj.showbutton = true;
+                                                // }
+                                            })
+                                            paginacao(response, this);
+                                            this.carregando = false;
+                                        })
                                 })
                         })
                 }).catch((error) => {
@@ -245,6 +256,30 @@ export default {
                 })
         },
 
+    },
+    filters: {
+        filterStatus: function(value) {
+            switch (value) {
+                case 'created':
+                    return "Criada"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativa"
+                    break;
+                case 'reproved':
+                    return "Reprovada"
+                    break;
+                case 'ended':
+                    return "Finalizada"
+                    break;
+                default:
+                    break;
+
+            }
+        },
     },
     beforeMount: function() {
         this.getResults();

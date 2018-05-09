@@ -49,6 +49,8 @@ export default {
             erro: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
+            urlAnalysis: process.env.ANALYSIS_API,
+            urlParameters: process.env.LINE_PARAMETERS_API,
             msgErro: "",
             quantity: "",
             productionOrderId: "",
@@ -56,9 +58,8 @@ export default {
             unity: "",
             calculos: [],
             calculoOK: false,
-            urlAnalysis: process.env.ANALYSIS_API,
-            noRegister: ''
-
+            noRegister: '',
+            lastAnalysis: [],
         }
     },
     computed: {
@@ -131,9 +132,25 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        addCobre(cobreqtd) {
+            this.cobre["cobreFosforoso"] = cobreqtd;
+            this.cobre = Object.assign({}, this.cobre)
+        },
+        removeCobre() {
+            this.cobre = {};
+        },
         getAnalysis() {
             axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.productionOrder.productionOrderId)
                 .then((response) => {
+                    //pega a última análise de todas anáises
+                    if (response.data.analysis.length > 0) {
+                        var posLastAnalysis = response.data.analysis.length - 1;
+                        var lastAnalysis;
+                        console.log("posLastAnalysis: " + posLastAnalysis)
+                        lastAnalysis = response.data.analysis[posLastAnalysis];
+                        console.log("lastAnalysis: " + lastAnalysis)
+                        this.lastAnalysis = lastAnalysis.messages;
+                    }
 
                     this.calculos = response.data.calculateInitial;
 
@@ -201,6 +218,22 @@ export default {
                 ordem.batch = this.lote;
             }
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
+                // Se for necessário adicionar COBRE FOSFOROSO - SERÁ FEITO 2 POST - UM ESPECÍFICO PARA COBRE FOSFOROSO
+                if (ordem.productId == '70') {
+                    axios.post(this.urlParameters + '/api/WriteOrderLiga/AddCobre', this.productionOrder).then((response) => {
+                        this.erro = false;
+                        this.msgErro = 'Produto apontado com sucesso.';
+                        this.productionOrderId = this.ordem.productionOrderId;
+                        this.carregando = false;
+                        this.pReceita = false;
+                        this.pFase = false;
+                        this.rolo++;
+                        this.ordem = {};
+                        console.log(response);
+                        this.getResults();
+                    })
+                }
+
                 this.erro = false;
                 this.msgErro = 'Produto apontado com sucesso.';
                 this.productionOrderId = this.ordem.productionOrderId;

@@ -60,6 +60,10 @@
                                 <button type="button" class="btn btn-warning"  @click.stop.prevent="getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
                                 </button>
+                                <button type="button" class="btn btn-danger"  :disabled="productionOrder.currentStatus == 'approved' || productionOrder.currentStatus == 'active'
+                                                                                || productionOrder.currentStatus == 'waiting_approval'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
+                                <i aria-hidden="true" class="fa fa-eye"></i> Correção
+                                </button>
                                 <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()">
                                 <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
                                 </button>
@@ -157,6 +161,37 @@
                         {{c.key}}</label>
                     <label class="ls ls10 col-md-7">
                         {{c.value}}</label>
+                </div>
+                </div>
+            </form>
+         </b-modal>
+
+         <!-- 
+            CORREÇÃO - É EXIBIDA SE A OP FOI REPROVADA
+          -->
+         <b-modal size="lg" ref="correction" hide-footer title="Correção">
+            <form>
+                <div v-if="calculoOK">
+                    <div class="cabecalho-table-exibir-cálculo">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(lastAnalysis, 'key',0):organizar(lastAnalysis, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
+                        <b><font class="cursor-class" color="#ffffff">Material 
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(lastAnalysis, 'value',1):organizar(lastAnalysis, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-7">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Quantidade necessária a ser adicionada no forno(Kg)
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                </div>
+                <div v-for="(l, index) in lastAnalysis" v-bind:key="index" :class="{cinza: index%2==0}">
+                    <label class="ls ls10 col-md-4">
+                        {{l.key}}</label>
+                    <label class="ls ls10 col-md-7">
+                        {{l.value}}</label>
                 </div>
                 </div>
             </form>
