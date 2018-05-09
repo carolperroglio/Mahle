@@ -59,7 +59,7 @@
             <div id="load" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>
             </div> 
-            <div class="cabecalho-table-tc">
+            <div class="cabecalho-table-tc" v-show="!carregando">
                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(ferramentas, 'name',0):organizar(ferramentas, 'name',0);" class="ls2-cabecalho-tc col-md-1">
                     <b><font class="cursor-class" color="#ffffff">Nome 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -205,6 +205,12 @@
                 <label>
                     <b>Unidade de Medida </b>
                 </label>
+                <select class="form-control form-control-lg" v-model="fieldFilter">
+                        <option value="" selected disabled="disabled">Selecione a unidade de medida</option>
+                        <option value="metros">Metros</option>
+                        <option value="tempo">Tempo</option>
+                        <option value="corrida">Corrida</option>
+                    </select>
                 <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control" placeholder="Ex: dias">                              
                 </div>
                 </div>
