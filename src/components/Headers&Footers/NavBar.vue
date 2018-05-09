@@ -155,9 +155,9 @@
                             <router-link to="/toolTypeAssoc" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Associação de Ferramentas/Insumos 
                             </router-link>
-                            <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
+                            <!-- <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Ferramentas/Insumos em uso
-                            </router-link>
+                            </router-link> -->
                             <router-link to="/ToolsManagement" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Gerenciamento de Ferramentas/Insumos
                             </router-link>
@@ -183,9 +183,6 @@
                             </router-link>
                             <router-link to="/opInAnalysis" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
                                 <i class="fa fa-thermometer-quarter"></i> ORDENS DE PRODUÇÃO EM ANÁLISE
-                            </router-link>
-                            <router-link to="/opInicio" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
-                                <i class="fa fa-thermometer-quarter"></i> INÍCIO DE ORDEM DE PRODUÇÃO
                             </router-link>
                             <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
                                 Tipo de Ordem de Produção 

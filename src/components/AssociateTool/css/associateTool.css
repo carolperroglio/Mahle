@@ -14,7 +14,7 @@
         padding: 0.5%;
         width: 24%;
     }
-    .tileConfig {
+    .tileConfigAssTool {
         position: relative;
         border-radius: 4px;
         padding: 2%;
@@ -26,12 +26,8 @@
     }
     .container-tt {
         margin: 20% 0 0 2%;
-    }
-    .btn-view-pos {
-        bottom: 5%;
-        position: absolute;
-        display: grid;
-        margin-left: -2%;
+        display: flex;
+        flex-wrap: wrap;
     }
     .ferAssoc {
         position: relative;
@@ -61,7 +57,7 @@
         padding: 0.5%;
         width: 19%;
     }
-    .tileConfig {
+    .tileConfigAssTool {
         position: relative;
         border-radius: 4px;
         padding: 2%;
@@ -73,12 +69,8 @@
     }
     .container-tt {
         margin: 12% 0 0 2%;
-    }
-    .btn-view-pos {
-        bottom: 5%;
-        position: absolute;
-        display: grid;
-        margin-left: -2%;
+        display: flex;
+        flex-wrap: wrap;
     }
     .ferAssoc {
         position: relative;
@@ -108,7 +100,7 @@
         padding: 0.5%;
         width: 19%;
     }
-    .tileConfig {
+    .tileConfigAssTool {
         position: relative;
         border-radius: 4px;
         padding: 2%;
@@ -120,12 +112,8 @@
     }
     .container-tt {
         margin: 12% 0 0 2%;
-    }
-    .btn-view-pos {
-        bottom: 5%;
-        position: absolute;
-        display: grid;
-        margin-left: -2%;
+        display: flex;
+        flex-wrap: wrap;
     }
     .ferAssoc {
         position: relative;

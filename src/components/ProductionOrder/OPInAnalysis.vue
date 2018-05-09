@@ -23,13 +23,13 @@
         </div> 
         <h3 style="text-align:center"></h3>
             <div class="cabecalho-table-analysis" v-show="!carregando">
-                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'productionOrderNumber',0):organizar(opInAnalysis, 'productionOrderNumber',0);" class="ls2-cabecalho-analysis col-md-1">
+                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'productionOrderNumber',0):organizar(opInAnalysis, 'productionOrderNumber',0);" class="ls2-cabecalho-analysis col-md-2">
                     <b><font class="cursor-class" color="#ffffff">OPL
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                     </font></b>
                 </label>
-                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'recipeCode',1):organizar(opInAnalysis, 'recipeCode',1);" class="ls2-cabecalho-analysis col-md-2">
+                <!-- <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'recipeCode',1):organizar(opInAnalysis, 'recipeCode',1);" class="ls2-cabecalho-analysis col-md-2">
                     <b><font class="cursor-class" color="#ffffff">Código da Liga
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
@@ -47,15 +47,15 @@
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                     </font></b>
-                </label>
-                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opInAnalysis, 'thingName',4):organizar(opInAnalysis, 'thingName',4);" class="ls2-cabecalho-analysis col-md-2">
+                </label> -->
+                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opInAnalysis, 'thingName',4):organizar(opInAnalysis, 'thingName',4);" class="ls2-cabecalho-analysis col-md-3">
                     <b><font class="cursor-class" color="#ffffff">
                         Equipamento 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                     </font></b>
                 </label>
-                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opInAnalysis, 'currentStatus',5):organizar(opInAnalysis, 'currentStatus',5);" class="ls2-cabecalho-analysis col-md-1">
+                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opInAnalysis, 'currentStatus',5):organizar(opInAnalysis, 'currentStatus',5);" class="ls2-cabecalho-analysis col-md-2">
                     <b><font class="cursor-class" color="#ffffff">
                         Status 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
@@ -65,20 +65,20 @@
             </div>
             <div class="table-margin-analysis" v-show="!carregando">
             <div v-for="(o, index) in opInAnalysis" v-bind:key="index" :class="{cinza: index%2==0}">
-                <label class="ls1 col-md-1">
+                <label class="ls1-analysis col-md-2">
                     {{o.productionOrderNumber}}</label>
-                <label class="ls1 col-md-2">
+                <!-- <label class="ls1-analysis col-md-2">
                     {{o.recipeCode}}</label>
-                <label class="ls1 col-md-2">
+                <label class="ls1-analysis col-md-2">
                     {{o.recipeName}}</label>
-                <label class="ls1 col-md-2">
-                    {{o.typeDescription}}</label>
-                <label class="ls1 col-md-2">
-                    {{o.thingName}} </label>
-                <label class="ls1 col-md-1">
-                    {{o.currentStatus | filterStatus}}</label>
-                <label class="ls1 col-md-1">
-                    <button class="btn btn-primary" @click.stop.prevent="showModal('realizarAnalise'); idOP = o.productionOrderId" >Realizar Análise</button>   
+                <label class="ls1-analysis col-md-2">
+                    {{o.typeDescription}}</label> -->
+                <label class="ls1-analysis col-md-3">
+                    {{o.posicao}} </label>
+                <label class="ls1-analysis col-md-2">
+                    {{o.status | filterStatus}}</label>
+                <label class="ls1-analysis col-md-2">
+                    <button class="btn btn-primary" @click.stop.prevent="showModal('realizarAnalise'); idOP = o.productionOrderId;cobreqtd = '';comp.value = '';productName='';cobre = {}" >Realizar Análise</button>   
                 </label>
             </div>
             </div>
@@ -99,6 +99,33 @@
             </div>
             <b-modal size="md" ref="realizarAnalise" hide-footer title="Realizar Análise">
                 <div class="form-row">
+                <div class="form-group col-md-5">
+                    <select class="form-control" id="" disabled>
+                        <!-- COLOCAR O ID FIXO DEPOIS -->
+                        <option value="someid" selected>Cobre Fosforoso</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="number" class="form-control" v-model="cobreqtd" placeholder="" />
+                </div>
+                <div class="form-group-col-md-2">
+                    <button class="btn btn-success" @click.stop.prevent="addCobre(cobreqtd)" :disabled="cobreqtd.length == 0">
+                        Adicionar Cobre
+                    </button>
+                    <!-- <button class="btn btn-warning btn-sm" @click.stop.prevent="addComponente(comp)">
+                        <i class="fa fa-remove" aria-hidden="true"></i>
+                    </button> -->
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                    <ul v-for="value in cobre" :key="value" class="list-group">
+                        <li class="list-group-item">{{'Cobre Fosforoso: ' + value}} 
+                            <i class="fa fa-remove pull-right" style="color:red" @click="removeCobre()"></i> </li>
+                    </ul>    
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="">Componente</label>
                         <input autocomplete="off" @keyup="getProducts(productName)" v-model="productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
@@ -110,7 +137,7 @@
                     </div>
                     <div class="form-group-col-md-1">
                         <br>
-                        <button class="btn btn-success btn-sm" @click.stop.prevent="addComponente(comp)">
+                    <button class="btn btn-success btn-sm" @click.stop.prevent="addComponente(comp)" :disabled="!productName">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -134,7 +161,7 @@
                 </div>
             </div>
             </b-modal>
-        <b-modal ref="modalErro" title="Erro" hide-footer="">
+        <b-modal ref="modalErro" title="" hide-footer="">
             <p :class="erro?'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div>
@@ -142,5 +169,5 @@
 <script src="./js/orderLigaWaitingApproval.js">
 </script>
 <style>
-@import url('./css/orderLiga.css');
+@import url('./css/opInAnalysis.css');
 </style>

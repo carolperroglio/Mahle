@@ -5,6 +5,7 @@ import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import bBadge from 'bootstrap-vue/es/components/badge/badge'
+import vBTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip';
 import { Stretch } from 'vue-loading-spinner'
 import { setTimeout } from 'timers';
 
@@ -48,7 +49,7 @@ export default {
             lista: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
-            teste: {},
+            teste: [],
             msgErro: "",
             titleheader: "",
             listOP: [],
@@ -60,12 +61,10 @@ export default {
             roloSaidaID: "",
             loteAco: "",
             loteLiga: "",
-            noop: true
+            noop: true,
+            noRegister: ''
 
         }
-    },
-    computed: {
-
     },
     components: {
         'b-dropdown': bDropdown,
@@ -75,7 +74,8 @@ export default {
         Stretch
     },
     directives: {
-        'b-modal': bModalDirective
+        'b-modal': bModalDirective,
+        'b-tooltip': vBTooltip
     },
     methods: {
         showModal(id) {
@@ -90,16 +90,17 @@ export default {
                 }
             }
 
-            // setTimeout(() => {
             if (this.ordem.type === "output") {
                 this.pReceita = true;
                 this.consumo = false;
                 this.pFase = false;
                 console.log(this.productionOrdersRecipe);
                 console.log(this.productionOrder);
+                // if (this.productionOrdersRecipe.recipeProduct != undefined) {
                 this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;
-                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                 this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
+                // }
+                this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                 // if (this.orderHistorian.productsOutput != undefined) {
                 //     this.rolo = this.orderHistorian.productsOutput.length + 1;
                 // } else {
@@ -115,7 +116,6 @@ export default {
                 this.lote = "OF";
                 this.titleheader = "Registrar Aço"
             }
-            // }, 100);
 
             this.$refs[id].show();
 
@@ -282,9 +282,7 @@ export default {
                 this.carregando = false;
             }).catch((error) => {
                 if (error.response.status == 404) {
-
-                    this.msgErro = "Sem registros na tabela";
-                    this.showModal("modalErro");
+                    this.noRegister = "Sem registros na tabela!"
                 } else {
                     this.msgErro = "Ocorreu um erro: " + error.message;
                     this.showModal("modalErro");
@@ -349,7 +347,10 @@ export default {
 
                     response.data.values.forEach(obj => {
                         //pego o ID do produto final da LIGA
-                        var prodligaid = obj.recipe.recipeProduct.product.productId;
+                        var prodligaid;
+                        if (obj.recipe.recipeProduct != undefined) {
+                            prodligaid = obj.recipe.recipeProduct.product.productId;
+                        }
                         console.log("prodligaid");
                         console.log(prodligaid);
                         this.productionOrder.recipe.phases.forEach(phaseobjtira => {
@@ -379,7 +380,7 @@ export default {
                         this.noop = true;
                     }
                 }).catch((error) => {
-                    this.msgErro = "Ocorreu um erro" + error.message;
+                    this.msgErro = "Ocorreu um erro: " + error.message;
                     this.showModal("modalErro");
                     this.carregando = false;
                 })

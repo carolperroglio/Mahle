@@ -27,7 +27,7 @@ export default {
             phaseProducts: [],
             orderHistorian: [],
             orderHistorianAllProducts: [],
-            allProducts: {},
+            allProducts: [],
             cabecalhoSetas: [false, false, false, false, false],
             productionOrderId: '',
             consumo: false,
@@ -49,13 +49,18 @@ export default {
             erro: false,
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
+            urlAnalysis: process.env.ANALYSIS_API,
+            urlParameters: process.env.LINE_PARAMETERS_API,
             msgErro: "",
             quantity: "",
             productionOrderId: "",
             prodRolo: "",
             unity: "",
-            calculos: []
-
+            calculos: [],
+            calculoOK: false,
+            noRegister: '',
+            lastAnalysis: [],
+            cobreFosforoso: ''
         }
     },
     computed: {
@@ -128,6 +133,44 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        addCobre(cobreqtd) {
+            this.cobre["cobreFosforoso"] = cobreqtd;
+            this.cobre = Object.assign({}, this.cobre)
+        },
+        removeCobre() {
+            this.cobre = {};
+        },
+        getAnalysis() {
+            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.productionOrder.productionOrderId)
+                .then((response) => {
+                    //pega a última análise de todas anáises
+                    if (response.data.analysis.length > 0) {
+                        var posLastAnalysis = response.data.analysis.length - 1;
+                        this.cobreFosforoso = response.data.cobreFosforosoAtual;
+                        var lastAnalysis;
+                        console.log("posLastAnalysis: " + posLastAnalysis)
+                        lastAnalysis = response.data.analysis[posLastAnalysis];
+                        console.log("lastAnalysis: " + lastAnalysis)
+                        this.lastAnalysis = lastAnalysis;
+
+                    }
+
+                    this.calculos = response.data.calculateInitial;
+
+                    this.calculoOK = true
+
+                }).catch((error) => {
+                    if (error.response.status == '404') {
+                        this.erro = true;
+                        this.msgErro = "O cálculo desta OP não foi realizado, vá a apontamentos e realize o cálculo. ";
+                        this.showModal('modalErro');
+                    } else {
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro ao obter a última análise - " + error.message;
+                        this.showModal('modalErro');
+                    }
+                })
+        },
         //
         // MUDA O STATUS DA OPL PARA EM ANÁLISES - FEITA PELO SETOR DE ANÁLISE QUÍMICA
         changeStatusToWaitingAnalysis() {
@@ -178,6 +221,22 @@ export default {
                 ordem.batch = this.lote;
             }
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
+                // Se for necessário adicionar COBRE FOSFOROSO - SERÁ FEITO 2 POST - UM ESPECÍFICO PARA COBRE FOSFOROSO
+                if (ordem.productId == '70') {
+                    axios.post(this.urlParameters + '/api/WriteOrderLiga/AddCobre', this.productionOrder).then((response) => {
+                        this.erro = false;
+                        this.msgErro = 'Produto apontado com sucesso.';
+                        this.productionOrderId = this.ordem.productionOrderId;
+                        this.carregando = false;
+                        this.pReceita = false;
+                        this.pFase = false;
+                        this.rolo++;
+                        this.ordem = {};
+                        console.log(response);
+                        this.getResults();
+                    })
+                }
+
                 this.erro = false;
                 this.msgErro = 'Produto apontado com sucesso.';
                 this.productionOrderId = this.ordem.productionOrderId;
@@ -198,6 +257,7 @@ export default {
             this.consumo = false;
         },
         changeJson(obj, type) {
+            this.allProducts = []
             var array = this.orderHistorianAllProducts.products;
             if (this.orderHistorianAllProducts.products == undefined) {
                 this.orderHistorianAllProducts.products = []
@@ -256,9 +316,7 @@ export default {
             }).catch((error) => {
                 this.carregando = false;
                 if (error.response.status == 404) {
-                    this.erro = true;
-                    this.msgErro = "Sem registros na tabela";
-                    this.showModal("modalErro");
+                    this.noRegister = "Sem registros na tabela!"
                 } else {
                     this.erro = true;
                     this.msgErro = "Ocorreu um erro: " + error.message;

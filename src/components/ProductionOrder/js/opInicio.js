@@ -43,16 +43,19 @@ export default {
             this.$refs[id].hide();
         },
         getOPResult() {
+            this.ops = [];
             console.log('opNumber: ' + this.opNumber)
-            axios.get(this.urlOP + "/api/productionorders/v2?&filters=productionOrderTypeId,2&filters=productionOrderNumber," + this.opNumber)
-                .then((response) => {
-                    this.ops = response.data.values;
-                }).catch((error) => {
-                    this.carregando = false;
-                    this.erro = true;
-                    this.msgErro = "Ocorreu um erro: " + error.message;
-                    this.showModal("modalInfo");
-                })
+            if (this.opNumber.length >= 3) {
+                axios.get(this.urlOP + "/api/productionorders/v2?&filters=productionOrderTypeId,2&filters=productionOrderNumber," + this.opNumber)
+                    .then((response) => {
+                        this.ops = response.data.values;
+                    }).catch((error) => {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro: " + error.message;
+                        this.showModal("modalInfo");
+                    })
+            }
         },
         // EM CONSTRUÇÃO
         sendLastAnalysis() {

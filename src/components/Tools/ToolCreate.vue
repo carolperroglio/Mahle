@@ -59,7 +59,7 @@
             <div id="load" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>
             </div> 
-            <div class="cabecalho-table-tc">
+            <div class="cabecalho-table-tc" v-show="!carregando">
                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(ferramentas, 'name',0):organizar(ferramentas, 'name',0);" class="ls2-cabecalho-tc col-md-1">
                     <b><font class="cursor-class" color="#ffffff">Nome 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -93,7 +93,14 @@
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                     </font></b>
-                </label>  
+                </label>
+                 <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(ferramentas, 'currentLife',8):organizar(ferramentas, 'currentLife',8);" class="ls2-cabecalho-tc col-md-1">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Vida Atual 
+                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[8]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[8]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>   
                 <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(ferramentas, 'unitOfMeasurement',5):organizar(ferramentas, 'unitOfMeasurement',5);" class="ls2-cabecalho-tc col-md-1">
                     <b><font class="cursor-class" color="#ffffff">
                         Unidade de Medida 
@@ -128,6 +135,9 @@
                         {{f.code}}</label>
                     <label class="ls ls30 col-md-1">
                         {{f.lifeCycle}}</label>
+                    <label class="ls ls30 col-md-1">
+                        {{f.currentLife}}
+                    </label>
                     <label class="ls ls30 col-md-1">
                         {{f.unitOfMeasurement}}</label>
                     <label class="ls ls30 col-md-1">
@@ -205,7 +215,12 @@
                 <label>
                     <b>Unidade de Medida </b>
                 </label>
-                <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control" placeholder="Ex: dias">                              
+                <select class="form-control" v-model="ferramenta.unitOfMeasurement">
+                        <option value="" selected disabled="disabled">Selecione a unidade de medida</option>
+                        <option value="metros">Metros</option>
+                        <option value="tempo">Tempo</option>
+                        <option value="corrida">Corrida</option>
+                    </select>
                 </div>
                 </div>
                 <div class="form-row">

@@ -58,42 +58,49 @@ function showModal(id) {
   $refs[id].show();
 }
 
-// axios.interceptors.request.use(
-//   function(config) {
-//     // Do something before request is sent
-//     var sec = VueCookies.get("security");
-//     console.log(sec);
-//     config.headers.common["security"] = sec;
-//     config.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
-//     config.headers.common["Accept"] = "application/json";
+axios.interceptors.request.use(
+  function(config) {
+    // Do something before request is sent
+    var sec = VueCookies.get("security");
+    console.log(sec);
+    config.headers.common["security"] = sec;
+    config.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
+    config.headers.common["Accept"] = "application/json";
 
-//     return config;
-//   },
-//   function(error) {
-//     // Do something with request error
-//     return Promise.reject(error);
-//   }
-// );
+    return config;
+  },
+  function(error) {
+    // Do something with request error
+    return Promise.reject(error);
+  }
+);
 
-// axios.interceptors.response.use(
-//   response => {
-//     // intercept the global error
-//     return response;
-//   },
-//   function(error) {
-//     var statuscode = VueCookies.get("status");
-//     //&& errorResponse.config && !errorResponse.config.__isRetryRequest
-//     if (statuscode === 401) {
-//       router.push({ name: "Login" });
-//     } else if (error.message == "Network Error") {
-//       router.push({ name: "Login" });
-//       showModal("modaInfo");
-//     } else {
-//       VueCookies.set("status", "ok");
-//     }
-//     return Promise.reject(error);
-//   }
-// );
+axios.interceptors.response.use(
+  response => {
+    // intercept the global error
+    return response;
+  },
+  function(error) {
+    var statuscode = VueCookies.get("status");
+    //&& errorResponse.config && !errorResponse.config.__isRetryRequest
+    if (statuscode == '401') {
+      router.push({ name: "Login" });
+      console.log('status code: ' + statuscode);
+    } else if (error.message == "Network Error") {
+      router.push({ name: "Login" });
+      console.log('error.message: ' + error.message);
+      // showModal("modaInfo");
+    } else if (error.response.status != undefined && error.response.status == "404") {
+      VueCookies.set("status", "404");
+      console.log('status code: ' + error.response.status);
+      // showModal("modaInfo");
+    } else {
+      VueCookies.set("status", "ok");
+      console.log('status code: ' + statuscode);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default {
   name: "app",

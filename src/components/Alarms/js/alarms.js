@@ -15,6 +15,36 @@ var ipServerOP = process.env.OP_API;
 var ipServerThing = process.env.THINGS_API;
 
 
+Array.prototype.groupByProperties = function(properties) {
+    var arr = this;
+    var groups = [];
+    for (var i = 0, len = arr.length; i < len; i += 1) {
+        var obj = arr[i];
+        if (groups.length == 0) {
+            groups.push([obj]);
+        } else {
+            var equalGroup = false;
+            for (var a = 0, glen = groups.length; a < glen; a += 1) {
+                var group = groups[a];
+                var equal = true;
+                var firstElement = group[0];
+                if (firstElement[properties] !== obj[properties]) {
+                    equal = false;
+                }
+                if (equal) {
+                    equalGroup = group;
+                }
+            }
+            if (equalGroup) {
+                equalGroup.push(obj);
+            } else {
+                groups.push([obj]);
+            }
+        }
+    }
+    return groups;
+};
+
 export default {
     name: "Alarms",
     data() {
@@ -23,12 +53,14 @@ export default {
             config: {
                 headers: { 'Cache-Control': 'no-cache' }
             },
-            
+
             cabecalhoSetas: [false, false, false, false, false],
-            carregando: false,            
-            erro:'',
+            carregando: false,
+            erro: '',
             produtos: '',
-            produto:''
+            produto: '',
+            jSONReport: {}
+
         }
     },
     components: {
@@ -38,48 +70,105 @@ export default {
         Stretch
     },
     methods: {
-        
-        
-
-        desorganizar(produtos, product, num){
+        showModal() {
 
         },
-        organizar(produtos, product, num){
+        desorganizar(produtos, product, num) {
+
+        },
+        organizar(produtos, product, num) {
+
+        },
+        getReport() {
+            this.jSONReport = [{
+                    "thingId": 1,
+                    "groupTag": "Temperatura",
+                    "data": [{
+                            "date": "63541554554",
+                            "muito alto": "32",
+                            "alto": "52",
+                            "baixo": "39",
+                            "muito baixo": "72",
+                            "offline": "38"
+                        },
+                        {
+                            "date": "63541554554",
+                            "muito alto": "32",
+                            "alto": "52",
+                            "baixo": "39",
+                            "muito baixo": "72",
+                            "offline": "38"
+                        }
+                    ]
+                },
+                {
+                    "thingId": 1,
+                    "groupTag": "Agitação",
+                    "data": [{
+                            "date": "63541554554",
+                            "muito alto": "32",
+                            "alto": "52",
+                            "baixo": "39",
+                            "muito baixo": "72",
+                            "offline": "38"
+                        },
+                        {
+                            "date": "63541554554",
+                            "muito alto": "32",
+                            "alto": "52",
+                            "baixo": "39",
+                            "muito baixo": "72",
+                            "offline": "38"
+                        }
+                    ]
+                },
+            ]
+        },
+        makeGraph() {
+            this.jSONReport.forEach(obj => {
+                obj2["balloonColor"] = "#808080";
+                obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
+                obj2["color"] = "#000000";
+                obj2["lineThickness"] = 3;
+                obj2["type"] = "smoothedLine";
+                obj2["title"] = R.name;
+                obj2["valueField"] = R.name;
+                obj2["bulletColor"] = R.color;
+                obj2["fillColors"] = R.color;
+                obj2["legendColor"] = R.color;
+                obj2["lineColor"] = R.color;
+            });
 
         },
 
-        atualizaGraf(){
+        atualizaGraf() {
 
-            window.AmCharts.makeChart("chartdiv",
-            {
-                "path": "dist/amcharts/",    
+            window.AmCharts.makeChart("chartdiv", {
+                "path": "dist/amcharts/",
                 "type": "serial",
                 "categoryField": "type",
                 "chartCursor": {},
-                "graphs": [
-                {
+                "graphs": [{
                     "type": "column",
                     "title": "Pizza types",
                     "valueField": "sold",
                     "fillAlphas": 0.8
-                }
-                ],
+                }],
                 "dataProvider": [
                     { "type": "Margherita", "sold": 120 },
                     { "type": "Funghi", "sold": 82 },
                     { "type": "Capricciosa", "sold": 78 },
                     { "type": "Quattro Stagioni", "sold": 71 }
                 ]
-            }
-            ); 
+            });
         }
-    },  
-    beforeMount(){
+    },
+    beforeMount() {
         this.atualizaGraf();
     },
 
-    created() {  
-     
+    created() {
+
     },
 
 }

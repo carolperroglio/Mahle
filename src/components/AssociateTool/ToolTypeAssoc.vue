@@ -19,7 +19,7 @@
             </ul> 
         </div>  
 
-        <div class="row container-tt">
+        <div class="container-tt">
             <div v-for="(tt, index) in toolType" v-bind:key="index" id="tilett" class="">
                 <div class="tileConfig">
                     <div class="col-md-12">
@@ -27,7 +27,7 @@
                         {{tt.name}}
                     </h4>
                     </div>
-                    <div class="col-md-12 btn-view-pos">
+                    <div class="btn-view-pos">
                         <router-link :to="{name: 'AssociateTool', params:{id:tt.toolTypeId}}" class="btn btn-success btn-block">
                             Visualizar Posições
                         </router-link>

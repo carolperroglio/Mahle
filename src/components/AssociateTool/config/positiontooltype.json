@@ -50,25 +50,25 @@
         "toolTypeName": "Régua superior da calha de rersfriamento",
         "toolTypeId": 10,
         "positionQtd": 16,
-        "positions": [16, 17, 18]
+        "positions": [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
     },
     {
         "toolTypeName": "Faca circular",
         "toolTypeId": 11,
         "positionQtd": 4,
-        "positions": [19, 20, 21, 22]
+        "positions": [32, 33, 34, 35]
     },
     {
         "toolTypeName": "Cilindro de apoio  Fresa de Desbaste",
         "toolTypeId": 12,
         "positionQtd": 0,
-        "positions": [23]
+        "positions": [0]
     },
     {
         "toolTypeName": "Óleo de Têmpera Fuchs",
         "toolTypeId": 13,
         "positionQtd": 0,
-        "positions": [24]
+        "positions": [0]
     },
     {
         "toolTypeName": "Bica",

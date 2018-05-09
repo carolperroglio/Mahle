@@ -42,12 +42,19 @@ export default {
             fieldValue: '',
             url: process.env.PROD_HIST_API,
             urlOP: process.env.OP_API,
+            urlAnalysis: process.env.ANALYSIS_API,
             quantityPage: 100,
             startat: 0,
             total: 0,
             pages: [],
             pageAtual: 0,
-            msgErro: ""
+            msgErro: "",
+            erro: false,
+            ops: [],
+            opNumber: '',
+            cargaUtilizada: '',
+            opSelected: {},
+            idOpAtual: ''
         }
     },
     computed: {
@@ -89,6 +96,92 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        getOPResult() {
+            this.ops = [];
+            this.opSelected = {};
+            console.log('opNumber: ' + this.opNumber)
+            if (this.opNumber.length >= 3) {
+                axios.get(this.urlOP + "/api/productionorders/v2?&filters=productionOrderTypeId,2&filters=productionOrderNumber," + this.opNumber)
+                    .then((response) => {
+                        this.ops = response.data.values;
+                    }).catch((error) => {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro: " + error.message;
+                        this.showModal("modalErro");
+                    })
+            }
+        },
+        sendCalculation(lastAnalysis) {
+            console.log(lastAnalysis);
+            axios.put(this.urlAnalysis + '/api/CalculeAnalysis?productionOrderId=' + this.idOpAtual + '&furnaceQuantity=' + this.cargaUtilizada, lastAnalysis)
+                .then((response) => {
+                    this.erro = false;
+                    this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";
+                    this.showModal("modalErro");
+                }).catch((error) => {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao realizar o cálculo: " + error.message;
+                    this.showModal("modalErro");
+                })
+        },
+        getAnalysis(id, obj) {
+            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + id)
+                .then((response) => {
+                    obj.showbutton = false;
+                    var newobj = obj;
+                    newobj.showbutton = true;
+                    obj = Object.assign({}, newobj)
+                    console.log(obj);
+                    // return true;
+
+                }).catch((error) => {
+                    if (error.response.status != '404') {
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro ao obter a última análise - " + error.message;
+                        this.showModal('modalErro');
+                    } else if (error.response.status == '404') {
+                        var newobj = obj;
+                        newobj.showbutton = true;
+                        obj = Object.assign({}, newobj)
+                        console.log(obj);
+                        // return false;
+                    }
+                })
+        },
+        getLastAnalysis() {
+            var lastAnalysis = {};
+            var idLastOp = '';
+
+            //verifica se o operador selecionou a ultima análise realizada - pois não é obrigatório selecionar
+            if (this.opSelected.productionOrderId == undefined) {
+                var idLastOp = '';
+            } else {
+                var idLastOp = this.opSelected.productionOrderId
+            }
+
+            //Obtem a última análise da OP selecionada pelo operador
+            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + idLastOp)
+                .then((response) => {
+                    var posLastAnalysis = response.data.analysis.length - 1;
+                    lastAnalysis = response.data.analysis[posLastAnalysis];
+
+                    this.sendCalculation(lastAnalysis);
+
+                }).catch((error) => {
+                    if (error.response.status == '404') {
+                        lastAnalysis.analysisId = 0;
+                        lastAnalysis["comp"] = [];
+                        this.sendCalculation(lastAnalysis);
+                    } else {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro ao buscar a última análise realizada: " + error.message;
+                        this.showModal("modalErro");
+                    }
+                })
+        },
         getResults() {
             this.carregando = true;
             this.orderHistorian = [];
@@ -128,8 +221,31 @@ export default {
                                             this.orderHistorian.push(pro);
                                         }
                                     });
-                                    paginacao(response, this);
-                                    this.carregando = false;
+                                    axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,reproved' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
+                                        .then((response) => {
+                                            console.log(response.data);
+                                            response.data.values.forEach((pro) => {
+                                                if (pro.currentThing) {
+                                                    pro.thingName = pro.currentThing.thingName
+                                                    this.orderHistorian.push(pro);
+                                                }
+                                            });
+
+                                            this.orderHistorian.forEach((obj) => {
+                                                setTimeout(() => {
+                                                    var value = false;
+                                                    value = this.getAnalysis(obj.productionOrderId, obj);
+                                                }, 500);
+
+                                                // if (value) {
+                                                //     obj.showbutton = false;
+                                                // } else {
+                                                //     obj.showbutton = true;
+                                                // }
+                                            })
+                                            paginacao(response, this);
+                                            this.carregando = false;
+                                        })
                                 })
                         })
                 }).catch((error) => {
@@ -140,6 +256,36 @@ export default {
                 })
         },
 
+    },
+    filters: {
+        filterStatus: function(value) {
+            switch (value) {
+                case 'created':
+                    return "Criada"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativa"
+                    break;
+                case 'reproved':
+                    return "Reprovada"
+                    break;
+                case 'ended':
+                    return "Finalizada"
+                    break;
+                case 'waiting_approval':
+                    return "Em Análise"
+                    break;
+                case 'approved':
+                    return "Em Análise"
+                    break;
+                default:
+                    break;
+
+            }
+        },
     },
     beforeMount: function() {
         this.getResults();

@@ -30,9 +30,9 @@
             </ul> 
         </div>  
 
-        <div class="row container-tt">
+        <div class="container-tt">
             <div  v-for="(t,index) in tools" :key="t.position"  id="constat">
-                <div class="tileConfig">
+                <div class="tileConfigAssTool">
                     <div>
                     <div class="col-md-12">
                     <h4 class="ls11" :id="index + 1" >
@@ -46,11 +46,11 @@
                         Código: {{t.tool.code}}
                     </p>
                     </div>
-                    <div class="col-md-12 btn-view-pos">
+                    <div class="btn-view-pos">
                         <button class="btn btn-danger btn-block" v-if="t.tool.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t.tool">
                             Dessassociar
                         </button>
-                        <button class="btn btn-success" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate'); pos = t.tool.pos">
+                        <button class="btn btn-success btn-block" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate'); pos = t.tool.pos">
                             Associar
                         </button>
                     </div>

@@ -23,7 +23,7 @@
         </div> 
         <h3 style="text-align:center"></h3>
             <div class="cabecalho-table-ap" v-show="!carregando">
-                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(orderHistorian, 'productionOrderNumber',0):organizar(orderHistorian, 'productionOrderNumber',0);" class="ls2-cabecalho-ap col-md-3">
+                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(orderHistorian, 'productionOrderNumber',0):organizar(orderHistorian, 'productionOrderNumber',0);" class="ls2-cabecalho-ap col-md-2">
                     <b><font class="cursor-class" color="#ffffff">OP 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
@@ -36,6 +36,13 @@
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                     </font></b>
                 </label>
+                 <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(orderHistorian, 'currentStatus',3):organizar(orderHistorian, 'currentStatus',1);" class="ls2-cabecalho-ap col-md-1">
+                    <b><font class="cursor-class" color="#ffffff">
+                        Status 
+                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                    </font></b>
+                </label>
                 <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(orderHistorian, 'typeDescription',2):organizar(orderHistorian, 'typeDescription',2);" class="ls2-cabecalho-ap col-md-2">
                     <b><font class="cursor-class" color="#ffffff">
                         Tipo de Ordem 
@@ -46,22 +53,26 @@
             </div>
             <div class="table-margin-hm" v-show="!carregando">
             <div v-for="(o, index) in orderHistorian" v-bind:key="index" :class="{cinza: index%2==0}">
-                <label class="ls ls10 col-md-3">
+                <label class="ls ls10 col-md-2">
                     {{o.productionOrderNumber}}</label>
                 <label class="ls ls10 col-md-2">
                     {{o.thingName}} </label>
+                <label class="ls ls10 col-md-1">
+                    {{o.currentStatus | filterStatus}}</label>
                 <label class="ls ls10 col-md-2">
                     {{o.typeDescription}}</label>
-                <label v-if="o.typeDescription == 'Liga'" class="col-md-4">
+                <label v-if="o.typeDescription == 'Liga'" class="col-md-2">
                 <label class="ls ls10 col-md-6 router">
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
-                </label> 
                 </label>
-                <label  class="col-md-4" v-else-if="o.typeDescription == 'Tira'">
+                </label>
+                <label v-if="o.typeDescription == 'Liga'" class="col-md-2">
+                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId" :disabled="o.showbutton == true">Realizar Cálculo</button>
+                </label>
+                <label  class="col-md-2" v-else-if="o.typeDescription == 'Tira'">
                 <label class="ls ls10 col-md-6 router" >
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">Realizar Apontamento</router-link>
-                </label>  
-                
+                </label>
             </label>
             </div>
             </div>
@@ -80,8 +91,35 @@
                     </ul>
                 </nav>
             </div>
+        <b-modal ref="inicioOP" title="Realizar Cálculo" hide-footer>
+            <div class="form-row">
+            <div class="form-group col-md-10 offset-1">
+                <label for="">Última OP Utilizada no Forno</label>
+                <input autocomplete="off" @keyup="getOPResult(opNumber)" v-model="opNumber"  class="form-control" placeholder="Ex: OPL123" />
+                <b-dropdown-item @click.stop.prevent="opNumber = op.productionOrderNumber;ops=[];opSelected=op" 
+                v-for="(op,index) in ops" :key="index">{{ op.productionOrderNumber }}</b-dropdown-item>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-10 offset-1">
+                <label for="">Carga Utilizada</label>
+                <input type="text" class="form-control" v-model="cargaUtilizada" placeholder="Ex: 1000">
+            </div>
+        </div>
+        <div class="modal-footer">
+        <div class="btn-group pull-right" role="group">
+            <button class="btn btn-success" :disabled="!cargaUtilizada" @click="getLastAnalysis();">
+                <i  class="fa fa-check-square" aria-hidden="true"></i>
+                Confirmar
+            </button>
+            <button @click.stop.prevent="''" class="btn btn-primary">
+                <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
+            </button> 
+        </div>
+        </div>
+        </b-modal>
         <b-modal ref="modalErro" title="Erro" hide-footer="">
-            <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
+            <p :class="erro? 'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div>
 </template>
