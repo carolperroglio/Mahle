@@ -98,16 +98,9 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
-            axios.get(this.urlOP + '/api/productionorders/v2?' + 'v2?&filters=currentStatus,waiting_approval&startat=' + this.startat + '&quantity=' + this.quantityPage, config).then((response) => {
+            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/status/waiting').then((response) => {
                 console.log(response.data);
-                response.data.values.forEach((pro) => {
-                    if (pro.currentThing) {
-                        pro.thingName = pro.currentThing.thingName
-                        pro.recipeName = pro.recipe.recipeName
-                        pro.recipeCode = pro.recipe.recipeCode
-                        this.opInAnalysis.push(pro);
-                    }
-                });
+                this.opInAnalysis = response.data.values;
 
                 paginacao(response, this);
                 this.carregando = false;
@@ -164,22 +157,7 @@ export default {
     filters: {
         filterStatus: function(value) {
             switch (value) {
-                case 'created':
-                    return "Criado"
-                    break;
-                case 'available':
-                    return "Disponível"
-                    break;
-                case 'active':
-                    return "Ativo"
-                    break;
-                case 'reproved':
-                    return "Reprovado"
-                    break;
-                case 'ended':
-                    return "Finalizado"
-                    break;
-                case 'waiting_approval':
+                case 'waiting':
                     return "Em Análise"
                     break;
                 default:

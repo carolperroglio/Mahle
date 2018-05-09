@@ -23,13 +23,13 @@
         </div> 
         <h3 style="text-align:center"></h3>
             <div class="cabecalho-table-analysis" v-show="!carregando">
-                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'productionOrderNumber',0):organizar(opInAnalysis, 'productionOrderNumber',0);" class="ls2-cabecalho-analysis col-md-1">
+                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'productionOrderNumber',0):organizar(opInAnalysis, 'productionOrderNumber',0);" class="ls2-cabecalho-analysis col-md-2">
                     <b><font class="cursor-class" color="#ffffff">OPL
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                     </font></b>
                 </label>
-                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'recipeCode',1):organizar(opInAnalysis, 'recipeCode',1);" class="ls2-cabecalho-analysis col-md-2">
+                <!-- <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'recipeCode',1):organizar(opInAnalysis, 'recipeCode',1);" class="ls2-cabecalho-analysis col-md-2">
                     <b><font class="cursor-class" color="#ffffff">Código da Liga
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
@@ -47,15 +47,15 @@
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                     </font></b>
-                </label>
-                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opInAnalysis, 'thingName',4):organizar(opInAnalysis, 'thingName',4);" class="ls2-cabecalho-analysis col-md-2">
+                </label> -->
+                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opInAnalysis, 'thingName',4):organizar(opInAnalysis, 'thingName',4);" class="ls2-cabecalho-analysis col-md-3">
                     <b><font class="cursor-class" color="#ffffff">
                         Equipamento 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                     </font></b>
                 </label>
-                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opInAnalysis, 'currentStatus',5):organizar(opInAnalysis, 'currentStatus',5);" class="ls2-cabecalho-analysis col-md-1">
+                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opInAnalysis, 'currentStatus',5):organizar(opInAnalysis, 'currentStatus',5);" class="ls2-cabecalho-analysis col-md-2">
                     <b><font class="cursor-class" color="#ffffff">
                         Status 
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
@@ -65,19 +65,19 @@
             </div>
             <div class="table-margin-analysis" v-show="!carregando">
             <div v-for="(o, index) in opInAnalysis" v-bind:key="index" :class="{cinza: index%2==0}">
-                <label class="ls1-analysis col-md-1">
-                    {{o.productionOrderNumber}}</label>
                 <label class="ls1-analysis col-md-2">
+                    {{o.productionOrderNumber}}</label>
+                <!-- <label class="ls1-analysis col-md-2">
                     {{o.recipeCode}}</label>
                 <label class="ls1-analysis col-md-2">
                     {{o.recipeName}}</label>
                 <label class="ls1-analysis col-md-2">
-                    {{o.typeDescription}}</label>
+                    {{o.typeDescription}}</label> -->
+                <label class="ls1-analysis col-md-3">
+                    {{o.posicao}} </label>
                 <label class="ls1-analysis col-md-2">
-                    {{o.thingName}} </label>
-                <label class="ls1-analysis col-md-1">
-                    {{o.currentStatus | filterStatus}}</label>
-                <label class="ls1-analysis col-md-1">
+                    {{o.status | filterStatus}}</label>
+                <label class="ls1-analysis col-md-2">
                     <button class="btn btn-primary" @click.stop.prevent="showModal('realizarAnalise'); idOP = o.productionOrderId" >Realizar Análise</button>   
                 </label>
             </div>

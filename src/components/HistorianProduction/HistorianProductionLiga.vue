@@ -57,18 +57,21 @@
                                 <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                 </button>
+                                <button type="button" class="btn btn-warning"  @click.stop.prevent="getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
+                                <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
+                                </button>
                                 <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()">
                                 <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
-                                </button>
-                                <button type="button" class="btn btn-warning"  @click.stop.prevent="showModal('exibirCalculo'); ordem.type='input'">
-                                <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
                                 </button>
                                 </div>
                             </div>
                         <div class="card-body card-body-hp">
                             
                         <div class="fundo-branco-ap-liga">
-                            <div class="cabecalho-table-ap-liga">
+                            <p class="col-md-10" v-show="allProducts.length == 0">
+                                    {{noRegister}}
+                            </p>
+                            <div class="cabecalho-table-ap-liga" v-if="allProducts.length > 0">
                                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(allProducts, 'product',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-2">
                                     <b><font class="cursor-class" color="#ffffff">Material 
                                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -108,6 +111,7 @@
                                 <stretch background="#4d4d4d"></stretch>
                             </div> 
                             <div v-for="(o, index) in allProducts" v-bind:key="index" :class="{cinza: index%2==0}">
+                                
                                 <label class="ls ls10 col-md-2">
                                     {{o.product}}</label>
                                 <label class="ls ls10 col-md-2">
@@ -134,25 +138,25 @@
             <form>
                 <div v-if="calculoOK">
                     <div class="cabecalho-table-exibir-cálculo">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(allProducts, 'product',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(calculos, 'key',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
                         <b><font class="cursor-class" color="#ffffff">Material 
                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(allProducts, 'quantity',1):organizar(allProducts, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-6">
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(calculos, 'value',1):organizar(allProducts, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-7">
                         <b><font class="cursor-class" color="#ffffff">
-                            Quantidade necessária a ser adicionada no forno
+                            Quantidade necessária a ser adicionada no forno(Kg)
                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                         </font></b>
                     </label>
                 </div>
                 <div v-for="(c, index) in calculos" v-bind:key="index" :class="{cinza: index%2==0}">
-                    <label class="ls ls10 col-md-2">
-                        {{o.product}}</label>
-                    <label class="ls ls10 col-md-2">
-                        {{o.quantity}}</label>
+                    <label class="ls ls10 col-md-4">
+                        {{c.key}}</label>
+                    <label class="ls ls10 col-md-7">
+                        {{c.value}}</label>
                 </div>
                 </div>
             </form>
@@ -208,7 +212,7 @@
             </form>
          </b-modal>
 
-         <b-modal ref="modalErro" title="Erro" hide-footer="">
+         <b-modal ref="modalErro" title="" hide-footer="">
             <p :class="erro? 'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div>

@@ -27,7 +27,7 @@ export default {
             phaseProducts: [],
             orderHistorian: [],
             orderHistorianAllProducts: [],
-            allProducts: {},
+            allProducts: [],
             cabecalhoSetas: [false, false, false, false, false],
             productionOrderId: '',
             consumo: false,
@@ -54,7 +54,10 @@ export default {
             productionOrderId: "",
             prodRolo: "",
             unity: "",
-            calculos: []
+            calculos: [],
+            calculoOK: false,
+            urlAnalysis: process.env.ANALYSIS_API,
+            noRegister: ''
 
         }
     },
@@ -129,19 +132,17 @@ export default {
                     this.cabecalhoSetas[i] = false;
         },
         getAnalysis() {
-            axios.post(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.productionOrder.productionOrderId)
+            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.productionOrder.productionOrderId)
                 .then((response) => {
 
-                    var posLastAnalysis = response.data.analysis.length - 1;
-                    //pega o ultimo elemento do array de análise, para obter a última análise
-                    lastAnalysis = response.data.analysis[posLastAnalysis];
+                    this.calculos = response.data.calculateInitial;
 
-                    this.calculos = response.data.analysis[lastAnalysis];
+                    this.calculoOK = true
 
                 }).catch((error) => {
                     if (error.response.status == '404') {
                         this.erro = true;
-                        this.msgErro = "O cálculo desta OP não foi realizado, vá a apontamentos e realize o cálculo. " + error.message;
+                        this.msgErro = "O cálculo desta OP não foi realizado, vá a apontamentos e realize o cálculo. ";
                         this.showModal('modalErro');
                     } else {
                         this.erro = true;
@@ -278,9 +279,7 @@ export default {
             }).catch((error) => {
                 this.carregando = false;
                 if (error.response.status == 404) {
-                    this.erro = true;
-                    this.msgErro = "Sem registros na tabela";
-                    this.showModal("modalErro");
+                    this.noRegister = "Sem registros na tabela!"
                 } else {
                     this.erro = true;
                     this.msgErro = "Ocorreu um erro: " + error.message;

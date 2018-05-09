@@ -70,7 +70,10 @@
                                 </div>
                                 <div class="card-body card-body-hp">
                                 <div class="fundo-branco-ap-tira">
-                                <div class="cabecalho-table-ap-tira">
+                                <p class="col-md-10" v-show="teste.length == 0">
+                                    {{noRegister}}
+                                </p>
+                                <div class="cabecalho-table-ap-tira" v-show="teste.length > 0">
                                     <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(teste, 'product',0):organizar(teste, 'product',0);" class="ls2-cabecalho-ap-tira col-md-2">
                                         <b><font class="cursor-class" color="#ffffff">Material &nbsp;&nbsp;&nbsp;
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -289,8 +292,8 @@
             </form>
          </b-modal>
         <!-- MODAL ERRO -->
-          <b-modal ref="modalErro" title="Erro" hide-footer="">
-            <p class="alert alert-danger">Ocorreu um erro: {{msgErro}}</p>
+          <b-modal ref="modalErro" title="" hide-footer="">
+            <p class="alert alert-danger">{{msgErro}}</p>
         </b-modal>
     </div>
 </template>

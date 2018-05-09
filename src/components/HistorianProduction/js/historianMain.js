@@ -126,6 +126,23 @@ export default {
                     this.showModal("modalErro");
                 })
         },
+        getAnalysis(id, obj) {
+            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + id)
+                .then((response) => {
+                    obj.showbutton = false;
+                    // return true;
+
+                }).catch((error) => {
+                    if (error.response.status != '404') {
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro ao obter a última análise - " + error.message;
+                        this.showModal('modalErro');
+                    } else if (error.response.status == '404') {
+                        obj.showbutton = true;
+                        // return false;
+                    }
+                })
+        },
         getLastAnalysis() {
             var lastAnalysis = {};
             var idLastOp = '';
@@ -138,7 +155,7 @@ export default {
             }
 
             //Obtem a última análise da OP selecionada pelo operador
-            axios.post(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + idLastOp)
+            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + idLastOp)
                 .then((response) => {
                     var posLastAnalysis = response.data.analysis.length - 1;
                     lastAnalysis = response.data.analysis[posLastAnalysis];
@@ -197,6 +214,18 @@ export default {
                                             this.orderHistorian.push(pro);
                                         }
                                     });
+                                    this.orderHistorian.forEach((obj) => {
+                                        setTimeout(() => {
+                                            var value = false;
+                                            value = this.getAnalysis(obj.productionOrderId, obj);
+                                        }, 500);
+
+                                        // if (value) {
+                                        //     obj.showbutton = false;
+                                        // } else {
+                                        //     obj.showbutton = true;
+                                        // }
+                                    })
                                     paginacao(response, this);
                                     this.carregando = false;
                                 })
