@@ -135,7 +135,7 @@ export default {
             this.canAdd = false;
             var array = [];
             if (name.length < 3) { return; }
-            axios.get(url + "/api/recipes/v2?filters=recipeCode," + name + ",&filters=recipeTypeId,2", this.config).then((response) => {
+            axios.get(url + "/api/recipes/v2?filters=recipeCode," + name + ",&filters=recipeTypeId,2").then((response) => {
                 response.data.values.forEach((pro) => {
                     array.push(pro);
                     this.canAdd = true;
@@ -495,7 +495,7 @@ export default {
 
             this.opArray = [];
             // setTimeout(() => {
-            axios.get(this.urlOp + "/v2?&filters=productionOrderTypeId,2" + "&currentStatus,waiting_approval&" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config)
+            axios.get(this.urlOp + "/v2?&filters=productionOrderTypeId,2" + "&currentStatus,waiting_approval&" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage)
                 .then((response) => {
                     this.opArray.values = [];
                     response.data.values.forEach((obj) => {

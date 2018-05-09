@@ -187,12 +187,19 @@
                         </font></b>
                     </label>
                 </div>
-                <div v-for="(l, index) in lastAnalysis" v-bind:key="index" :class="{cinza: index%2==0}">
+                <div v-for="(l, index) in lastAnalysis.messages" v-bind:key="index" :class="{cinza: index%2==0}">
                     <label class="ls ls10 col-md-4">
                         {{l.key}}</label>
                     <label class="ls ls10 col-md-7">
                         {{l.value}}</label>
                 </div>
+                <div v-if="cobreFosforoso.length > 0" :class="{cinza: index%2==0}">
+                <label class="ls ls10 col-md-4">
+                    Cobre Fosforoso</label>
+                <label class="ls ls10 col-md-7">
+                    {{cobreFosforoso}}</label>
+                </div>
+                        
                 </div>
             </form>
          </b-modal>

@@ -275,6 +275,12 @@ export default {
                 case 'ended':
                     return "Finalizada"
                     break;
+                case 'waiting_approval':
+                    return "Em Análise"
+                    break;
+                case 'approved':
+                    return "Em Análise"
+                    break;
                 default:
                     break;
 

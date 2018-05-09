@@ -60,6 +60,7 @@ export default {
             calculoOK: false,
             noRegister: '',
             lastAnalysis: [],
+            cobreFosforoso: ''
         }
     },
     computed: {
@@ -145,11 +146,13 @@ export default {
                     //pega a última análise de todas anáises
                     if (response.data.analysis.length > 0) {
                         var posLastAnalysis = response.data.analysis.length - 1;
+                        this.cobreFosforoso = response.data.cobreFosforosoAtual;
                         var lastAnalysis;
                         console.log("posLastAnalysis: " + posLastAnalysis)
                         lastAnalysis = response.data.analysis[posLastAnalysis];
                         console.log("lastAnalysis: " + lastAnalysis)
-                        this.lastAnalysis = lastAnalysis.messages;
+                        this.lastAnalysis = lastAnalysis;
+
                     }
 
                     this.calculos = response.data.calculateInitial;
@@ -254,6 +257,7 @@ export default {
             this.consumo = false;
         },
         changeJson(obj, type) {
+            this.allProducts = []
             var array = this.orderHistorianAllProducts.products;
             if (this.orderHistorianAllProducts.products == undefined) {
                 this.orderHistorianAllProducts.products = []
