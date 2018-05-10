@@ -144,7 +144,7 @@
                         {{f.typeName}}</label>
                     <label class="ls ls30 col-md-1">
                         {{f.status}}</label>
-                    <label class="ls ls30 col-md-1">
+                    <label class="ls ls30" style="max-width:6%;flex:6%">
                         <i class="fa fa-edit" style="font-size:22px; cursor:pointer" @click.stop.prevent="itemClicado(f)"></i>
                     </label>
             </div>

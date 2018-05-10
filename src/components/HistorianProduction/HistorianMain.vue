@@ -66,14 +66,17 @@
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
                 </label>
                 </label>
-                <label v-if="o.typeDescription == 'Liga'" class="col-md-2">
-                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId" :disabled="o.showbutton == true">Realizar Cálculo</button>
+                <label v-if="o.typeDescription == 'Liga'" class="col-md-2" v-show="o.currentStatus == 'active'">
+                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId">Realizar Cálculo</button>
                 </label>
                 <label  class="col-md-2" v-else-if="o.typeDescription == 'Tira'">
                 <label class="ls ls10 col-md-6 router" >
                     <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">Realizar Apontamento</router-link>
                 </label>
-            </label>
+                </label>
+                <label class="col-md-2"  v-show="o.currentStatus == 'approved' || o.currentStatus == 'dumping'">
+                <button class="btn btn-danger" @click="encerrarOP(o.productionOrderId);">Encerrar OP</button>
+                </label>
             </div>
             </div>
             <div class="paginacao" v-show="total>0">

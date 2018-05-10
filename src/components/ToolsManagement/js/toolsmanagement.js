@@ -5,6 +5,8 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import datePicker from 'vue-bootstrap-datetimepicker'
+import VueTimepicker from 'vue2-timepicker'
 import { Stretch } from 'vue-loading-spinner'
 
 es6promisse.polyfill();
@@ -51,9 +53,31 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             id: '',
-            cabecalhoSetas: [false, false, false, false, false],
+            cabecalhoSetas: [false, false, false, false, false, false],
             erro: false,
-            msgErro: ''
+            msgErro: '',
+            toolsHistory: [],
+            // CONFIG TO DATE AND HOUR
+            date: '',
+            datef: '',
+            config: {
+                format: 'DD MM YYYY',
+                useCurrent: false,
+            },
+            config2: {
+                format: 'DD MM YYYY',
+                useCurrent: false,
+            },
+            timeIni: {
+                HH: "00",
+                mm: "00"
+            },
+            timeFim: {
+                HH: "23",
+                mm: "59"
+            },
+            toolId: ''
+                //
 
         }
     },
@@ -61,6 +85,8 @@ export default {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
         'b-modal': bModal,
+        'date-picker': datePicker,
+        'vue-timepicker': VueTimepicker,
         Stretch
     },
     directives: {
@@ -92,12 +118,73 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        // DATE AND TICKS CONVERTER
+        ticksToDate(dateTicks) {
+            var epochTicks = 621355968000000000,
+                ticksPerMillisecond = 10000,
+                jsTicks = 0,
+                jsDate;
+
+            jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
+
+            jsDate = new Date(jsTicks);
+            var timezone = jsDate.getTimezoneOffset() / 60;
+            var hour = jsDate.setHours(jsDate.getHours() + timezone);
+            hour = jsDate.getHours();
+            var min = "";
+
+            if (jsDate.getMinutes() < 10) {
+                min = "0" + jsDate.getMinutes();
+            } else {
+                min = jsDate.getMinutes();
+            }
+
+            var dateFormatted = jsDate.getDate() + "/" +
+                (jsDate.getMonth() + 1) + "/" +
+                jsDate.getFullYear() + " " + hour + ":" + min;
+            // var hours = jsDate.toString().slice(4, 21);
+            return dateFormatted;
+        },
+        dateToTicks(dateTime) {
+            var dateToTransform = dateTime.slice(3, 6) +
+                dateTime.slice(0, 3) +
+                dateTime.slice(6, 10) +
+                dateTime.slice(10, 16);
+            var date = new Date(dateToTransform);
+            var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
+            return ticks;
+        },
+        // ------------------------
         getStateConfig: function() {
             axios.get(this.urlStateConfig).then(response => {
                 this.statesConfig = response.data.states;
             }).catch(error => {
                 console.log(error);
             })
+        },
+        getToolHistory() {
+
+            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
+            var ticksI = this.dateToTicks(Ini);
+            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
+            var ticksF = this.dateToTicks(Fim);
+
+            axios.get(this.urlTool + 'StateTransitionHistory?toolId=' + this.toolId.toolId + '&from=' + ticksI + '&to=' + ticksF).then(response => {
+
+                var history = response.data.values;
+                //converte ticks to DateTime
+                for (var x = 0; x < history.length; x++) {
+                    history[x].timeStampTicks = this.ticksToDate(history[x].timeStampTicks);
+                }
+                this.toolsHistory = history;
+
+            }).catch((error) => {
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro ao buscar o histórico da ferramenta: " + error.message;
+                this.showModal('modalInfo');
+                console.log(error);
+            })
+
         },
         getTool: function() {
             this.carregando = true;
@@ -186,7 +273,6 @@ export default {
             var obj = {};
             var count = 0;
             var nextPossibilityString = '';
-            // this.tool = tool;
             for (var x = 0; x < this.statesConfig.length; x++) {
                 if (this.statesConfig[x].state == newTool.status) {
                     var nextLenth = this.statesConfig[x].possibleNextStates.length;
@@ -204,7 +290,6 @@ export default {
         changeStatus: function(obj, status) {
             this.needJustification = false;
             obj.status = status;
-            // this.tool = obj;
             for (var x = 0; x < this.statesConfig.length; x++) {
                 if (this.statesConfig[x].state == status) {
                     if (this.statesConfig[x].needsJustification == true) {

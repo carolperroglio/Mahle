@@ -29,9 +29,11 @@
     .ls10 {
         text-align: center;
         vertical-align: middle;
+        padding-bottom: 0.5%;
     }
     .table-margin-hm {
         margin-top: 28.5%;
+        margin-bottom: 6%;
     }
 }
 
@@ -68,6 +70,7 @@
     }
     .table-margin-hm {
         margin-top: 18%;
+        margin-bottom: 6%;
     }
     .cabecalho-table-ap {
         position: fixed;
@@ -111,6 +114,7 @@
     }
     .table-margin-hm {
         margin-top: 15.5%;
+        margin-bottom: 6%;
     }
     .cabecalho-table-ap {
         position: fixed;

@@ -146,7 +146,9 @@ export default {
                     //pega a última análise de todas anáises
                     if (response.data.analysis.length > 0) {
                         var posLastAnalysis = response.data.analysis.length - 1;
-                        this.cobreFosforoso = response.data.cobreFosforosoAtual;
+                        if (response.data.cobreFosforosoAtual != null) {
+                            this.cobreFosforoso = response.data.cobreFosforosoAtual;
+                        }
                         var lastAnalysis;
                         console.log("posLastAnalysis: " + posLastAnalysis)
                         lastAnalysis = response.data.analysis[posLastAnalysis];

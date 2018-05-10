@@ -68,7 +68,7 @@
     }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 968px) {
     .cabecalho-table-tc {
         position: fixed;
         width: 100%;
@@ -132,7 +132,7 @@
         vertical-align: middle;
     }
     .margin-table-tc {
-        margin-top: 20%;
+        margin-top: 20.5%;
     }
 }
 

@@ -9,11 +9,11 @@
         </nav> -->
         <div class="row conteudo-status">
               <div class="container-fluid">
-                <div id="load" v-show="carregando">
+                <!-- <div id="load" v-show="carregando">
                     <stretch background="#4d4d4d"></stretch>
-                </div> 
+                </div>  -->
                   <div class="status">
-                    <div class=" col-md-10" style="margin-bottom:5%;">
+                    <div class=" col-md-11" style="margin-bottom:5%;">
                     <div class="card">
                         <div class="card-header">
                             Legendas
@@ -21,10 +21,10 @@
                         <div class="card-body">
                             <div class="row">
 
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                             Fora do especificado: <i class="fa fa-square" style="color:#ed0404" aria-hidden="true"></i>
                             </div> 
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                             Fora dos limites de controle: <i class="fa fa-square" style="color:#f5fc28" aria-hidden="true"></i>  
                             </div> 
                             <!--<div class="col-md-3">
@@ -57,10 +57,10 @@
                                     </span>
                                 </label>
                                  <label v-else-if="s.hasGreenAlert == true">
-                                    <b>Parâmetro:</b>
-                                    <span v-for="(a, index) in s.alarms" v-bind:key="index"  v-if="a.priority == 1">
+                                    <!-- <b>Parâmetro:</b>
+                                    <span v-for="(a, index) in s.alarms" v-bind:key="index"  v-if="a.priority == 0">
                                         {{a.alarmName}}, 
-                                    </span>
+                                    </span> -->
                                 </label>                                
                                 <br>
                                 </div>

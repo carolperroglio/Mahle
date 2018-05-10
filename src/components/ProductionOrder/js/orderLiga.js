@@ -162,18 +162,19 @@ export default {
             axios.get(this.urlOp + "/v2?&filters=productionOrderTypeId,2" + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config)
                 .then((response) => {
                     this.opArray.values = [];
-                    response.data.values.forEach((obj) => {
-                        if (obj.currentThing) {
-                            obj.thingName = obj.currentThing.thingName
-                            obj.recipeName = obj.recipe.recipeName
-                            obj.recipeCode = obj.recipe.recipeCode
-                            this.opArray.values.push(obj);
+                    for (var x = 0; x < response.data.values.length; x++) {
+                        console.log(response.data.values[x])
+                        if (response.data.values[x].currentThing != undefined) {
+                            response.data.values[x].thingName = response.data.values[x].currentThing.thingName
+                            response.data.values[x].recipeName = response.data.values[x].recipe.recipeName
+                            response.data.values[x].recipeCode = response.data.values[x].recipe.recipeCode
+                            this.opArray.values.push(response.data.values[x]);
                         } else {
-                            obj.recipeName = obj.recipe.recipeName
-                            obj.recipeCode = obj.recipe.recipeCode
-                            this.opArray.values.push(obj);
+                            response.data.values[x].recipeName = response.data.values[x].recipe.recipeName
+                            response.data.values[x].recipeCode = response.data.values[x].recipe.recipeCode
+                            this.opArray.values.push(response.data.values[x]);
                         }
-                    })
+                    }
                     this.opArrarKeep = this.opArray.values;
                     response.data.values = this.opArray.values;
                     response.data.total = this.opArray.values.length;
@@ -490,41 +491,6 @@ export default {
         //           //
         //  END CRUD //
         //           //
-        getOpInAnalysis() {
-            this.error = [];
-
-            this.opArray = [];
-            // setTimeout(() => {
-            axios.get(this.urlOp + "/v2?&filters=productionOrderTypeId,2" + "&currentStatus,waiting_approval&" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage)
-                .then((response) => {
-                    this.opArray.values = [];
-                    response.data.values.forEach((obj) => {
-                        if (obj.currentThing) {
-                            obj.thingName = obj.currentThing.thingName
-                            obj.recipeName = obj.recipe.recipeName
-                            obj.recipeCode = obj.recipe.recipeCode
-                            this.opInAnalysis.values.push(obj);
-                        } else {
-                            obj.recipeName = obj.recipe.recipeName
-                            obj.recipeCode = obj.recipe.recipeCode
-                            this.opInAnalysis.values.push(obj);
-                        }
-                    })
-                    this.opArrarKeep = this.opArray.values;
-                    response.data.values = this.opArray.values;
-                    response.data.total = this.opArray.values.length;
-                    paginacao(response, this);
-                    console.log(this.opArray);
-                    this.carregando = false;
-                }).catch((error) => {
-                    this.carregando = false;
-                    this.erro = true;
-                    this.msgErro = "Ocorreu um erro: " + error.message;
-                    this.showModal("modalInfo");
-                    // }, 1000);
-                })
-            console.log(this.opArray);
-        }
     },
     filters: {
         filterStatus: function(value) {
@@ -564,6 +530,6 @@ export default {
     beforeMount: function() {
         this.buscar();
         this.getThings();
-        this.getOpInAnalysis();
+        // this.getOpInAnalysis();
     },
 };

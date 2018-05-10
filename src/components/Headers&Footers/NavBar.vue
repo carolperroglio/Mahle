@@ -12,7 +12,7 @@
                 <img src="./../../assets/imagens/mahle.png" class="logo-system"/>
                 <ul class="nav nav-pills nav-justified bg-dark">
                     <li class="nav-item-cab col-md-2">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/home"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
+                        <router-link class="nav-link bg-dark active btn-config" router-link to="/"><i class= "fa fa-home" style="font-size:44px; cursor:pointer"></i>  <br>Início</router-link>
                     </li>                    
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>

@@ -96,6 +96,22 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        encerrarOP(id) {
+            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended")
+                .then(response => {
+                    console.log("OP Desativada");
+                    this.msgErro = "OP desativada!";
+                    this.showModal("modalErro");
+                    this.getResults();
+                }).catch((error) => {
+                    console.log(error);
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao desativar OP: " + error.message;
+                    this.showModal("modalErro");
+                    console.log("OP Desativada Falhou" + response.statusText)
+                })
+        },
         getOPResult() {
             this.ops = [];
             this.opSelected = {};
@@ -201,6 +217,8 @@ export default {
                         }
                     });
                     // STATUS = ACTIVE
+                    this.carregando = false;
+                    this.carregando = true;
                     axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,active' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
                         .then((response) => {
                             console.log(response.data);
@@ -212,6 +230,8 @@ export default {
                                 }
                             });
                             // STATUS = APPROVED
+                            this.carregando = false;
+                            this.carregando = true;
                             axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,approved' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
                                 .then((response) => {
                                     console.log(response.data);
@@ -221,6 +241,8 @@ export default {
                                             this.orderHistorian.push(pro);
                                         }
                                     });
+                                    this.carregando = false;
+                                    this.carregando = true;
                                     axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,reproved' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
                                         .then((response) => {
                                             console.log(response.data);
@@ -237,17 +259,12 @@ export default {
                                                     value = this.getAnalysis(obj.productionOrderId, obj);
                                                 }, 500);
 
-                                                // if (value) {
-                                                //     obj.showbutton = false;
-                                                // } else {
-                                                //     obj.showbutton = true;
-                                                // }
                                             })
-                                            paginacao(response, this);
                                             this.carregando = false;
                                         })
                                 })
                         })
+                    paginacao(response, this);
                 }).catch((error) => {
                     this.msgErro = error.message;
                     this.showModal("modalErro");
@@ -279,7 +296,7 @@ export default {
                     return "Em Análise"
                     break;
                 case 'approved':
-                    return "Em Análise"
+                    return "Aprovada"
                     break;
                 default:
                     break;
