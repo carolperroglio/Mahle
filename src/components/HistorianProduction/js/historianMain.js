@@ -100,6 +100,7 @@ export default {
             axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended")
                 .then(response => {
                     console.log("OP Desativada");
+                    this.msgErro = "OP desativada!";
                     this.showModal("modalErro");
                     this.getResults();
                 }).catch((error) => {
