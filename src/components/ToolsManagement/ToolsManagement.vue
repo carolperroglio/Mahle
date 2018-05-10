@@ -13,30 +13,30 @@
     <div id="load" v-show="carregando">
     <stretch background="#4d4d4d"></stretch>
     </div> 
-    <div class="cabecalho-table-tm">
+    <div class="cabecalho-table-tm" v-show="!carregando">
         <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(ferramentas, 'name',0):organizar(ferramentas, 'name',0);" class="ls2-cabecalho-tm col-md-2">
-            <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
+            <b><font class="cursor-class" color="#ffffff">Nome 
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
             </font></b>
         </label>
         <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(ferramentas, 'description',1):organizar(ferramentas, 'description',1);" class="ls2-cabecalho-tm col-md-2">
             <b><font class="cursor-class" color="#ffffff">
-                Descrição &nbsp;&nbsp;&nbsp;
+                Descrição 
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
             </font></b>
         </label>
         <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'serialNumber',2):organizar(ferramentas, 'serialNumber',2);" class="ls2-cabecalho-tm col-md-2">
             <b><font class="cursor-class" color="#ffffff">
-                Número Serial&nbsp;&nbsp;&nbsp;
+                Número Serial
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
         </label> 
         <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'status',3):organizar(ferramentas, 'status',3);" class="ls2-cabecalho-tm col-md-2">
             <b><font class="cursor-class" color="#ffffff">
-                Status&nbsp;&nbsp;&nbsp;
+                Status
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
@@ -57,13 +57,84 @@
             {{t.status | StatusName}}
         </label>
         <label class="ls20 col-md-2" style="margin-top:0.2%">
-            <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t)">
+        <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t)">
             Alterar Status da Ferramenta
         </button>
         </label>
+        <label for="" class="ls20 col-md-1">
+            <i class="fa fa-eye" style="font-size:20px;cursor:pointer" @click="getToolHistory(t.toolId);showModal('viewHistory')"></i>
+        </label>
     </div>
     </div>
-    <!-- Modal -->
+    <b-modal size="lg" ref="viewHistory" hide-footer title="Histórico de Mudança de Status">
+        <div class="cabecalho-table-modal">
+        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(toolsHistory, 'name',0):organizar(toolsHistory, 'name',0);" class="ls2-cabecalho-tm col-md-2">
+            <b><font class="cursor-class" color="#ffffff">Nome 
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+            </font></b>
+        </label>
+        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(toolsHistory, 'description',1):organizar(toolsHistory, 'description',1);" class="ls2-cabecalho-tm col-md-2">
+            <b><font class="cursor-class" color="#ffffff">
+                Descrição 
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+            </font></b>
+        </label>
+        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(toolsHistory, 'previousState',2):organizar(toolsHistory, 'previousState',2);" class="ls2-cabecalho-tm col-md-2">
+            <b><font class="cursor-class" color="#ffffff">
+                Status Anterior
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+            </font></b>
+        </label> 
+        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(toolsHistory, 'nextState',3):organizar(toolsHistory, 'nextState',3);" class="ls2-cabecalho-tm col-md-2">
+            <b><font class="cursor-class" color="#ffffff">
+                Status Posterior
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+            </font></b>
+        </label> 
+        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(toolsHistory, 'previoustLife',4):organizar(toolsHistory, 'previoustLife',3);" class="ls2-cabecalho-tm col-md-1">
+            <b><font class="cursor-class" color="#ffffff">
+                Vida Útil
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+            </font></b>
+        </label> 
+        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(toolsHistory, 'timeStampTicks',5):organizar(toolsHistory, 'timeStampTicks',3);" class="ls2-cabecalho-tm col-md-1">
+            <b><font class="cursor-class" color="#ffffff">
+                Data
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
+            </font></b>
+        </label> 
+    </div>
+    <div class="table-margin-tm"> 
+    <div v-for="(t,index) in toolsHistory" :key="index" :class="{cinza: index%2==0}">
+        <label class="ls20 col-md-2">
+            {{t.name}}
+        </label>
+        <label class="ls20 col-md-2">
+            {{t.description}}
+        </label>
+        <label class="ls20 col-md-1">
+            {{t.previousState | StatusName}}
+        </label>
+        <label class="ls20 col-md-1">
+            {{t.nextState | StatusName}}
+        </label>
+        <label class="ls20 col-md-1">
+            {{t.previoustLife}}
+        </label>
+        <label class="ls20 col-md-1">
+            {{t.timeStampTicks}}
+        </label>
+    </div>
+    </div>
+    </b-modal>    
+
+    <!-- Modal   ALTERAR STATUS DA FERRAMENTA-->
         <b-modal ref="modalGerT" hide-footer title="Alterar Status da Ferramenta">
         <div class="modal-body">
             <div class="form-row">

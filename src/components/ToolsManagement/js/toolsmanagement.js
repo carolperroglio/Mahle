@@ -53,7 +53,8 @@ export default {
             id: '',
             cabecalhoSetas: [false, false, false, false, false],
             erro: false,
-            msgErro: ''
+            msgErro: '',
+            toolsHistory: []
 
         }
     },
@@ -98,6 +99,17 @@ export default {
             }).catch(error => {
                 console.log(error);
             })
+        },
+        getToolHistory(idtool) {
+            axios.get(this.urlTool + '/StateTransitionHistory/' + idtool + '&from=' + '' + '&to=' + '').then(response => {
+                this.toolsHistory = response.data;
+            }).catch((error) => {
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro ao buscar o histórico da ferramenta" + error.message;
+                this.showModal('modalInfo');
+                console.log(error);
+            })
+
         },
         getTool: function() {
             this.carregando = true;

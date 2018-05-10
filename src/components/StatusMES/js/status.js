@@ -82,19 +82,24 @@ export default {
         },
         getStatus() {
             this.carregando = true;
+            this.status = [];
             setTimeout(() => {
                 axios.get(this.url).then(response => {
-                    this.status = response.data;
+                    // this.status = response.data;
                     var alarms = [];
 
-                    this.status.forEach(s => {
-                        s.hasRedAlert = false;
-                        s.hasLowAlert = false;
-                        s.hasGreenAlert = false;
-                        for (var i = 0; i < this.things.length; i++) {
-                            if (s.thingId == this.things[i].thingId) {
-                                s.thingName = this.things[i].thingName;
+                    response.data.forEach(s => {
+                        if (s.thingId != 1 && s.thingId != 2) {
+
+                            s.hasRedAlert = false;
+                            s.hasLowAlert = false;
+                            s.hasGreenAlert = false;
+                            for (var i = 0; i < this.things.length; i++) {
+                                if (s.thingId == this.things[i].thingId) {
+                                    s.thingName = this.things[i].thingName;
+                                }
                             }
+                            this.status.push(s);
                         }
                     });
                     this.status.forEach(s => {
@@ -133,8 +138,10 @@ export default {
         }
     },
     beforeMount: function() {
-        this.getThings();
-        this.getStatus();
+        setInterval(() => {
+            this.getThings();
+            this.getStatus();
+        }, 30000)
 
     }
 }
