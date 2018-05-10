@@ -53,7 +53,7 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             id: '',
-            cabecalhoSetas: [false, false, false, false, false],
+            cabecalhoSetas: [false, false, false, false, false, false],
             erro: false,
             msgErro: '',
             toolsHistory: [],
@@ -76,7 +76,8 @@ export default {
                 HH: "23",
                 mm: "59"
             },
-            //
+            toolId: ''
+                //
 
         }
     },
@@ -161,18 +162,25 @@ export default {
                 console.log(error);
             })
         },
-        getToolHistory(idtool) {
+        getToolHistory() {
 
             var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
             var ticksI = this.dateToTicks(Ini);
             var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
             var ticksF = this.dateToTicks(Fim);
 
-            axios.get(this.urlTool + '/StateTransitionHistory/' + idtool + '&from=' + ticksI + '&to=' + ticksF).then(response => {
-                this.toolsHistory = response.data;
+            axios.get(this.urlTool + 'StateTransitionHistory?toolId=' + this.toolId.toolId + '&from=' + ticksI + '&to=' + ticksF).then(response => {
+
+                var history = response.data.values;
+                //converte ticks to DateTime
+                for (var x = 0; x < history.length; x++) {
+                    history[x].timeStampTicks = this.ticksToDate(history[x].timeStampTicks);
+                }
+                this.toolsHistory = history;
+
             }).catch((error) => {
                 this.erro = true;
-                this.msgErro = "Ocorreu um erro ao buscar o histórico da ferramenta" + error.message;
+                this.msgErro = "Ocorreu um erro ao buscar o histórico da ferramenta: " + error.message;
                 this.showModal('modalInfo');
                 console.log(error);
             })
@@ -265,7 +273,6 @@ export default {
             var obj = {};
             var count = 0;
             var nextPossibilityString = '';
-            // this.tool = tool;
             for (var x = 0; x < this.statesConfig.length; x++) {
                 if (this.statesConfig[x].state == newTool.status) {
                     var nextLenth = this.statesConfig[x].possibleNextStates.length;
@@ -283,7 +290,6 @@ export default {
         changeStatus: function(obj, status) {
             this.needJustification = false;
             obj.status = status;
-            // this.tool = obj;
             for (var x = 0; x < this.statesConfig.length; x++) {
                 if (this.statesConfig[x].state == status) {
                     if (this.statesConfig[x].needsJustification == true) {

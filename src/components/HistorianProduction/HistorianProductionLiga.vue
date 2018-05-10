@@ -69,7 +69,7 @@
                                 <i aria-hidden="true" class="fa fa-eye"></i> Correção
                                 </button>
                                 <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()"
-                                v-show="productionOrder.currentStatus != 'active' || productionOrder.currentStatus != 'reproved'">
+                                :disabled="productionOrder.currentStatus != 'active' || productionOrder.currentStatus != 'reproved'">
                                 <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
                                 </button>
                                 </div>

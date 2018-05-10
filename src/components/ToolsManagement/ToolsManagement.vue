@@ -62,7 +62,7 @@
         </button>
         </label>
         <label for="" class="ls20 col-md-1">
-            <i class="fa fa-eye" style="font-size:20px;cursor:pointer" @click="showModal('viewHistory')"></i>
+            <i class="fa fa-eye" style="font-size:20px;cursor:pointer" @click="date = '';datef = '';toolsHistory = [];toolId = t;showModal('viewHistory')"></i>
         </label>
     </div>
     </div>
@@ -71,66 +71,68 @@
             <div class="form-row">
             <!-- <div class="form-group col-md-4"> -->
             <!-- <div class="form-row"> -->
-            <div class="form-group col-md-6">
-                <label><b>Início </b></label>  
+            <div class="form-group col-md-3">
+                <label><b>Do dia: </b></label>  
                 <date-picker v-model="date" :config="config"></date-picker>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
+                <br>
                 <vue-timepicker format="HH:mm" v-model="timeIni"></vue-timepicker>
             </div>
             <!-- </div> -->
             <!-- </div> -->
             <!-- <div class="form-group col-md-4"> -->
             <!-- <div class="form-row"> -->
-            <div class="form-group col-md-6">
-                <label><b>Fim </b></label>  
-                    <date-picker v-model="datef" :config="config2"></date-picker>
-                </div>
-                <div class="form-group col-md-4">
-                    <vue-timepicker format="HH:mm" v-model="timeFim"></vue-timepicker>
-                </div>
+            <div class="form-group col-md-3">
+                <label><b>Ao dia: </b></label>
+                <date-picker v-model="datef" :config="config2"></date-picker>
+            </div>
+            <div class="form-group col-md-3">
+                <br>
+                <vue-timepicker format="HH:mm" v-model="timeFim"></vue-timepicker>
+            </div>
             <!-- </div> -->
             <!-- </div> -->
             <div class="form-group col-md-2">
-                <button class="btn btn-success" @click="getToolHistory(t.toolId);">Buscar Histórico</button>
+                <button class="btn btn-success" @click="getToolHistory();">Buscar Histórico</button>
             </div>
         </div>
-        <div class="cabecalho-table-modal">
-        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(toolsHistory, 'name',0):organizar(toolsHistory, 'name',0);" class="ls2-cabecalho-tm col-md-2">
+        <div class="cabecalho-table-modal" v-if="toolsHistory.length > 0">
+        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(toolsHistory, 'name',0):organizar(toolsHistory, 'name',0);" class="ls2-cabecalho-tm-modal col-md-2">
             <b><font class="cursor-class" color="#ffffff">Nome 
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
             </font></b>
         </label>
-        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(toolsHistory, 'description',1):organizar(toolsHistory, 'description',1);" class="ls2-cabecalho-tm col-md-2">
+        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(toolsHistory, 'description',1):organizar(toolsHistory, 'description',1);" class="ls2-cabecalho-tm-modal col-md-2">
             <b><font class="cursor-class" color="#ffffff">
                 Descrição 
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
             </font></b>
         </label>
-        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(toolsHistory, 'previousState',2):organizar(toolsHistory, 'previousState',2);" class="ls2-cabecalho-tm col-md-2">
+        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(toolsHistory, 'previousState',2):organizar(toolsHistory, 'previousState',2);" class="ls2-cabecalho-tm-modal col-md-2">
             <b><font class="cursor-class" color="#ffffff">
                 Status Anterior
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
         </label> 
-        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(toolsHistory, 'nextState',3):organizar(toolsHistory, 'nextState',3);" class="ls2-cabecalho-tm col-md-2">
+        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(toolsHistory, 'nextState',3):organizar(toolsHistory, 'nextState',3);" class="ls2-cabecalho-tm-modal col-md-2">
             <b><font class="cursor-class" color="#ffffff">
                 Status Posterior
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
             </font></b>
         </label> 
-        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(toolsHistory, 'previoustLife',4):organizar(toolsHistory, 'previoustLife',3);" class="ls2-cabecalho-tm col-md-1">
+        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(toolsHistory, 'previoustLife',4):organizar(toolsHistory, 'previoustLife',3);" class="ls2-cabecalho-tm-modal col-md-1">
             <b><font class="cursor-class" color="#ffffff">
                 Vida Útil
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
             </font></b>
         </label> 
-        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(toolsHistory, 'timeStampTicks',5):organizar(toolsHistory, 'timeStampTicks',3);" class="ls2-cabecalho-tm col-md-1">
+        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(toolsHistory, 'timeStampTicks',5):organizar(toolsHistory, 'timeStampTicks',3);" class="ls2-cabecalho-tm-modal col-md-2">
             <b><font class="cursor-class" color="#ffffff">
                 Data
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
@@ -138,24 +140,24 @@
             </font></b>
         </label> 
     </div>
-    <div class="table-margin-tm"> 
+    <div class="table-margin-tm-modal"> 
     <div v-for="(t,index) in toolsHistory" :key="index" :class="{cinza: index%2==0}">
         <label class="ls20 col-md-2">
-            {{t.name}}
+            {{t.tool.name}}
         </label>
         <label class="ls20 col-md-2">
-            {{t.description}}
+            {{t.tool.   description}}
         </label>
-        <label class="ls20 col-md-1">
+        <label class="ls20 col-md-2">
             {{t.previousState | StatusName}}
         </label>
-        <label class="ls20 col-md-1">
+        <label class="ls20 col-md-2">
             {{t.nextState | StatusName}}
         </label>
         <label class="ls20 col-md-1">
             {{t.previoustLife}}
         </label>
-        <label class="ls20 col-md-1">
+        <label class="ls20 col-md-2">
             {{t.timeStampTicks}}
         </label>
     </div>
