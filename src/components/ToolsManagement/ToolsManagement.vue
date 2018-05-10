@@ -62,11 +62,39 @@
         </button>
         </label>
         <label for="" class="ls20 col-md-1">
-            <i class="fa fa-eye" style="font-size:20px;cursor:pointer" @click="getToolHistory(t.toolId);showModal('viewHistory')"></i>
+            <i class="fa fa-eye" style="font-size:20px;cursor:pointer" @click="showModal('viewHistory')"></i>
         </label>
     </div>
     </div>
     <b-modal size="lg" ref="viewHistory" hide-footer title="Histórico de Mudança de Status">
+        <div class="modal-body">
+            <div class="form-row">
+            <!-- <div class="form-group col-md-4"> -->
+            <!-- <div class="form-row"> -->
+            <div class="form-group col-md-6">
+                <label><b>Início </b></label>  
+                <date-picker v-model="date" :config="config"></date-picker>
+            </div>
+            <div class="form-group col-md-4">
+                <vue-timepicker format="HH:mm" v-model="timeIni"></vue-timepicker>
+            </div>
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="form-group col-md-4"> -->
+            <!-- <div class="form-row"> -->
+            <div class="form-group col-md-6">
+                <label><b>Fim </b></label>  
+                    <date-picker v-model="datef" :config="config2"></date-picker>
+                </div>
+                <div class="form-group col-md-4">
+                    <vue-timepicker format="HH:mm" v-model="timeFim"></vue-timepicker>
+                </div>
+            <!-- </div> -->
+            <!-- </div> -->
+            <div class="form-group col-md-2">
+                <button class="btn btn-success" @click="getToolHistory(t.toolId);">Buscar Histórico</button>
+            </div>
+        </div>
         <div class="cabecalho-table-modal">
         <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(toolsHistory, 'name',0):organizar(toolsHistory, 'name',0);" class="ls2-cabecalho-tm col-md-2">
             <b><font class="cursor-class" color="#ffffff">Nome 
@@ -130,6 +158,7 @@
         <label class="ls20 col-md-1">
             {{t.timeStampTicks}}
         </label>
+    </div>
     </div>
     </div>
     </b-modal>    

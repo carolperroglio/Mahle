@@ -62,54 +62,54 @@
         "toolTypeName": "Cilindro de apoio  Fresa de Desbaste",
         "toolTypeId": 12,
         "positionQtd": 0,
-        "positions": [0]
+        "positions": [36]
     },
     {
         "toolTypeName": "Óleo de Têmpera Fuchs",
         "toolTypeId": 13,
         "positionQtd": 0,
-        "positions": [0]
+        "positions": [37]
     },
     {
         "toolTypeName": "Bica",
         "toolTypeId": 14,
         "positionQtd": 0,
-        "positions": [25]
+        "positions": [38]
     },
     {
         "toolTypeName": "Funil",
         "toolTypeId": 15,
         "positionQtd": 2,
-        "positions": [26, 27]
+        "positions": [39, 40]
     },
     {
         "toolTypeName": "Forno de Fusão",
         "toolTypeId": 16,
         "positionQtd": 1,
-        "positions": [28]
+        "positions": [41]
     },
     {
         "toolTypeName": "Forno de Bronze",
         "toolTypeId": 17,
         "positionQtd": 2,
-        "positions": [29, 30]
+        "positions": [42, 43]
     },
     {
         "toolTypeName": "Filtros de papel",
         "toolTypeId": 18,
         "positionQtd": 32,
-        "positions": [31, 32, 33, 34]
+        "positions": [44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75]
     },
     {
         "toolTypeName": "Filtros de areia",
         "toolTypeId": 19,
         "positionQtd": 16,
-        "positions": [35]
+        "positions": [76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
     },
     {
         "toolTypeName": "Cilindro tracionador",
         "toolTypeId": 20,
         "positionQtd": 0,
-        "positions": [36]
+        "positions": [0]
     }
 ]

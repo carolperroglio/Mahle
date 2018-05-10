@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="login col-md-4 offset-4">
-        <div class="card-header">
+        <div class="card-header" style="border-bottom: none;">
             <h4>Entrar no Sistema</h4>
         </div>
         <div class="card-body">

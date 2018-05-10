@@ -62,6 +62,8 @@ const webpackConfig = merge(baseWebpackConfig, {
                 REPORT_API: JSON.stringify(api + ":8007"),
                 LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
                 USER_API: JSON.stringify(api + ":8015"),
+                ANALYSIS_API: JSON.stringify(api + ":8014"),
+
             }
         }),
         new webpack.DefinePlugin({

@@ -67,7 +67,7 @@
                 </label>
                 </label>
                 <label v-if="o.typeDescription == 'Liga'" class="col-md-2">
-                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId" :disabled="o.showbutton == true">Realizar Cálculo</button>
+                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId" v-show="o.currentStatus == 'active'">Realizar Cálculo</button>
                 </label>
                 <label  class="col-md-2" v-else-if="o.typeDescription == 'Tira'">
                 <label class="ls ls10 col-md-6 router" >

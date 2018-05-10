@@ -138,6 +138,8 @@ export default {
         }
     },
     beforeMount: function() {
+        this.getStatus();
+        this.getThings();
         setInterval(() => {
             this.getThings();
             this.getStatus();

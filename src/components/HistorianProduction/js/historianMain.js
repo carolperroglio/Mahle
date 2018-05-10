@@ -237,11 +237,6 @@ export default {
                                                     value = this.getAnalysis(obj.productionOrderId, obj);
                                                 }, 500);
 
-                                                // if (value) {
-                                                //     obj.showbutton = false;
-                                                // } else {
-                                                //     obj.showbutton = true;
-                                                // }
                                             })
                                             paginacao(response, this);
                                             this.carregando = false;
@@ -279,7 +274,7 @@ export default {
                     return "Em Análise"
                     break;
                 case 'approved':
-                    return "Em Análise"
+                    return "Aprovada"
                     break;
                 default:
                     break;
