@@ -146,7 +146,7 @@
             {{t.tool.name}}
         </label>
         <label class="ls20 col-md-2">
-            {{t.tool.   description}}
+            {{t.tool.description}}
         </label>
         <label class="ls20 col-md-2">
             {{t.previousState | StatusName}}
@@ -159,6 +159,10 @@
         </label>
         <label class="ls20 col-md-2">
             {{t.timeStampTicks}}
+        </label>
+        <hr v-if="t.justificationNeeded">
+        <label class="col-md-8" v-if="t.justificationNeeded">
+            <b>Justificativa</b> : {{t.justification.text}}
         </label>
     </div>
     </div>
