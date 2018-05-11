@@ -59,7 +59,9 @@ export default {
             erro: '',
             produtos: '',
             produto: '',
-            jSONReport: {}
+            jSONReport: {},
+            graphs: [],
+            dataProvider: []
 
         }
     },
@@ -79,12 +81,50 @@ export default {
         organizar(produtos, product, num) {
 
         },
+        /*
+            TICKS CONVERTER
+        */
+        ticksToDate(dateTicks) {
+            var epochTicks = 621355968000000000,
+                ticksPerMillisecond = 10000,
+                jsTicks = 0,
+                jsDate;
+
+            jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
+
+            jsDate = new Date(jsTicks);
+            var timezone = jsDate.getTimezoneOffset() / 60;
+            var hour = jsDate.setHours(jsDate.getHours() + timezone);
+            hour = jsDate.getHours();
+            var min = "";
+
+            if (jsDate.getMinutes() < 10) {
+                min = "0" + jsDate.getMinutes();
+            } else {
+                min = jsDate.getMinutes();
+            }
+
+            var dateFormatted = jsDate.getDate() + "/" +
+                (jsDate.getMonth() + 1) + "/" +
+                jsDate.getFullYear() + " " + hour + ":" + min;
+            // var hours = jsDate.toString().slice(4, 21);
+            return dateFormatted;
+        },
+        dateToTicks(dateTime) {
+            var dateToTransform = dateTime.slice(3, 6) +
+                dateTime.slice(0, 3) +
+                dateTime.slice(6, 10) +
+                dateTime.slice(10, 16);
+            var date = new Date(dateToTransform);
+            var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
+            return ticks;
+        },
         getReport() {
             this.jSONReport = [{
                     "thingId": 1,
                     "groupTag": "Temperatura",
                     "data": [{
-                            "date": "63541554554",
+                            "category": "63541554554",
                             "muito alto": "32",
                             "alto": "52",
                             "baixo": "39",
@@ -92,7 +132,7 @@ export default {
                             "offline": "38"
                         },
                         {
-                            "date": "63541554554",
+                            "category": "63541554554",
                             "muito alto": "32",
                             "alto": "52",
                             "baixo": "39",
@@ -105,7 +145,7 @@ export default {
                     "thingId": 1,
                     "groupTag": "Agitação",
                     "data": [{
-                            "date": "63541554554",
+                            "category": "63541554554",
                             "muito alto": "32",
                             "alto": "52",
                             "baixo": "39",
@@ -113,7 +153,7 @@ export default {
                             "offline": "38"
                         },
                         {
-                            "date": "63541554554",
+                            "category": "63541554554",
                             "muito alto": "32",
                             "alto": "52",
                             "baixo": "39",
@@ -123,52 +163,65 @@ export default {
                     ]
                 },
             ]
+
+            this.makeGraph();
         },
         makeGraph() {
+            var obj2 = {};
+
             this.jSONReport.forEach(obj => {
-                obj2["balloonColor"] = "#808080";
-                obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
-                obj2["color"] = "#000000";
-                obj2["lineThickness"] = 3;
-                obj2["type"] = "smoothedLine";
-                obj2["title"] = R.name;
-                obj2["valueField"] = R.name;
-                obj2["bulletColor"] = R.color;
-                obj2["fillColors"] = R.color;
-                obj2["legendColor"] = R.color;
-                obj2["lineColor"] = R.color;
+                for (var key in obj.data[0]) {
+                    obj2["balloonColor"] = "#808080";
+                    obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
+                    obj2["color"] = "#000000";
+                    obj2["lineThickness"] = 3;
+                    obj2["type"] = "smoothedLine";
+                    obj2["title"] = key;
+                    obj2["valueField"] = key;
+                    // obj2["bulletColor"] = R.color;
+                    // obj2["fillColors"] = R.color;
+                    // obj2["legendColor"] = R.color;
+                    // obj2["lineColor"] = R.color;
+                    this.graphs.push(obj2)
+                }
+                console.log('this.graphs');
+                console.log(this.graphs);
             });
 
+            this.makeDataProvider();
+        },
+
+        makeDataProvider() {
+            var objProvider = {};
+
+            this.jSONReport.forEach(obj => {
+                for (var x = 0; x < obj.data.length; x++) {
+                    for (var key in obj.data[x]) {
+                        objProvider[key] = obj.data[x][key];
+                    }
+                }
+                this.dataProvider.push(objProvider);
+            });
+
+            console.log("this.dataProvider")
+            console.log(this.dataProvider)
+
+            this.atualizaGraf();
         },
 
         atualizaGraf() {
 
-            window.AmCharts.makeChart("chartdiv", {
-                "path": "dist/amcharts/",
+            window.AmCharts.makeChart("charAlarm", {
+                // "path": "dist/amcharts/",
                 "type": "serial",
                 "categoryField": "type",
                 "chartCursor": {},
-                "graphs": [{
-                    "type": "column",
-                    "title": "Pizza types",
-                    "valueField": "sold",
-                    "fillAlphas": 0.8
-                }],
-                "dataProvider": [
-                    { "type": "Margherita", "sold": 120 },
-                    { "type": "Funghi", "sold": 82 },
-                    { "type": "Capricciosa", "sold": 78 },
-                    { "type": "Quattro Stagioni", "sold": 71 }
-                ]
+                "graphs": this.graphs,
+                "dataProvider": this.dataProvider
             });
         }
     },
     beforeMount() {
-        this.atualizaGraf();
+        this.getReport();
     },
-
-    created() {
-
-    },
-
 }

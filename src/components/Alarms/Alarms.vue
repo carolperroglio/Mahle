@@ -17,7 +17,10 @@
         <div id="load-alarms" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>                
         </div>            
-        <div id="chartdiv" style="width: 100%; height: 400px;"></div>                           
+        <!-- GRÁFICO DOS ALARMES -->
+        <div id="charAlarm" style="width: 100%; height: 400px;"></div>                           
+        
+        <!-- TABELA DOS ALARMES -->
         <div class="cabecalho-table-alarms"  v-show="!carregando">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'product',0):organizar(produtos, 'product',0);" class="ls2 col-md-2">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro &nbsp;&nbsp;&nbsp;
@@ -62,7 +65,7 @@
             </label>                
         </div>                                             
 
-        <button class="btn btn-primary" @click="atualizaGraf()">Texto</button> 
+        <button class="btn btn-primary" @click="getReport()">Texto</button> 
         <!--                       -->
         <!--                       -->
         <!--                       -->
