@@ -18,7 +18,7 @@
             <stretch background="#4d4d4d"></stretch>                
         </div>            
         <!-- GRÁFICO DOS ALARMES -->
-        <div id="charAlarm" style="width: 100%; height: 400px;"></div>                           
+        <div id="charAlarm" style="width: 100%; height: 400px;margin-top: 15%;"></div>                           
         
         <!-- TABELA DOS ALARMES -->
         <div class="cabecalho-table-alarms"  v-show="!carregando">

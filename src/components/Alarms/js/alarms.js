@@ -168,25 +168,26 @@ export default {
         },
         makeGraph() {
             var obj2 = {};
-
-            this.jSONReport.forEach(obj => {
-                for (var key in obj.data[0]) {
+            var obj = this.jSONReport[0];
+            for (var key in obj.data[0]) {
+                if (key != 'category') {
                     obj2["balloonColor"] = "#808080";
                     obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
-                    obj2["color"] = "#000000";
-                    obj2["lineThickness"] = 3;
-                    obj2["type"] = "smoothedLine";
-                    obj2["title"] = key;
-                    obj2["valueField"] = key;
+                    obj2["fillAlphas"] = 1;
+                    // obj2["color"] = "#000000";
+                    // obj2["lineThickness"] = 3;
+                    obj2["type"] = "column";
+                    obj2["title"] = key; // offline, muito alto, alto, baixo, muito baixo
+                    obj2["valueField"] = key; // offline, muito alto, alto, baixo, muito baixo
                     // obj2["bulletColor"] = R.color;
                     // obj2["fillColors"] = R.color;
                     // obj2["legendColor"] = R.color;
                     // obj2["lineColor"] = R.color;
                     this.graphs.push(obj2)
                 }
-                console.log('this.graphs');
-                console.log(this.graphs);
-            });
+            }
+            console.log('this.graphs');
+            console.log(this.graphs);
 
             this.makeDataProvider();
         },
@@ -197,6 +198,9 @@ export default {
             this.jSONReport.forEach(obj => {
                 for (var x = 0; x < obj.data.length; x++) {
                     for (var key in obj.data[x]) {
+                        if (key == 'category') {
+                            this.ticksToDate(obj.data[x][key]);
+                        }
                         objProvider[key] = obj.data[x][key];
                     }
                 }
@@ -212,11 +216,25 @@ export default {
         atualizaGraf() {
 
             window.AmCharts.makeChart("charAlarm", {
-                // "path": "dist/amcharts/",
+                "path": "dist/amcharts/",
                 "type": "serial",
                 "categoryField": "type",
                 "chartCursor": {},
                 "graphs": this.graphs,
+                "guides": [],
+                "legend": {
+                    "enabled": true
+                },
+                "valueAxes": [{
+                    "id": "ValueAxis-1",
+                    "title": ""
+                }],
+                "export": {
+                    "enabled": false
+                },
+                "allLabels": [],
+                "balloon": {},
+                "titles": [],
                 "dataProvider": this.dataProvider
             });
         }
