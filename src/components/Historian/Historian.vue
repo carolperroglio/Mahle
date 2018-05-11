@@ -1,3 +1,10 @@
+<script src="./js/historian.js">
+</script>
+<style>
+@import url("./css/historian.css");
+</style>
+
+
 <template>
   <div id="teste">
         <nav class="fixed-top nav-cinza">
@@ -27,7 +34,7 @@
                     <br>
                     <br>
                     <div class="col-md-11" >
-                        <div id="chartdiv" style="width:100%; height:500px"></div>
+                        <div id="chartrast" style="width:100%; height:500px"></div>
                     </div>
               </div>
             </div>
@@ -173,8 +180,3 @@
   </div>
 </template>
 
-<script src="./js/historian.js">
-</script>
-<style>
-@import url("./css/historian.css");
-</style>

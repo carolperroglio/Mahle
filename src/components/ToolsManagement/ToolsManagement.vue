@@ -177,6 +177,10 @@
                     <label for="" >Status</label>
                     <input type="text" disabled class="form-control" v-model="tool.status">
                 </div>
+                <div class="col-md-6" v-show="tool.status == 'Disponível'">
+                    <label for="" >Vida Útil</label>
+                    <input type="text" class="form-control" v-model="tool.currentLife">
+                </div>
                 <!-- {{ tool }} -->
                 </div>
                 <div class="form-row">

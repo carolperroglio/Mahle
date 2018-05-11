@@ -305,6 +305,13 @@ export default {
                 })
 
         },
+        //EM CONSTRUÇÃO
+        checkPermissionList(obj) {
+            this.permissions = [];
+            var newListPermission;
+
+
+        },
         checkUserList(obj) {
             this.users = [];
             var newListUser = [];

@@ -47,10 +47,16 @@
         "positions": [15]
     },
     {
-        "toolTypeName": "Régua superior da calha de rersfriamento",
+        "toolTypeName": "Régua superior da calha de rersfriamento setup",
         "toolTypeId": 10,
-        "positionQtd": 16,
-        "positions": [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+        "positionQtd": 4,
+        "positions": [16, 17, 18, 19]
+    },
+    {
+        "toolTypeName": "Régua superior da calha de rersfriamento 60 dias",
+        "toolTypeId": 21,
+        "positionQtd": 12,
+        "positions": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
     },
     {
         "toolTypeName": "Faca circular",

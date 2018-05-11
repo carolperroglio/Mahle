@@ -205,31 +205,13 @@
                 </div>
                 </div>
                 <div class="form-row">
-                <div class="form-group col-md-4">
-                <label>
-                    <b>Vida Útil </b>
-                </label>
-                <input class="form-control" type="text" v-model="ferramenta.lifeCycle" placeholder="Ex: 100" id="lifec">
-                </div>
-                <div class="form-group col-md-5">
-                <label>
-                    <b>Unidade de Medida </b>
-                </label>
-                <select class="form-control" v-model="ferramenta.unitOfMeasurement">
-                        <option value="" selected disabled="disabled">Selecione a unidade de medida</option>
-                        <option value="metros">Metros</option>
-                        <option value="tempo">Tempo</option>
-                        <option value="corrida">Corrida</option>
-                    </select>
-                </div>
-                </div>
-                <div class="form-row">
                 <div class="form-group col-md-6">
                 <label>
                     <b>Tipo </b>
                 </label>
-                    <select class="form-control" v-model="ferramenta.typeId">
-                    <option v-for="(tipo, indexOp) in tipos" :value="tipo.toolTypeId" v-bind:key="indexOp">{{ tipo.name }}</option>
+                    <select class="form-control" v-model="tooltypeSelected" @change="getToolType(tooltypeSelected)">
+                    <option v-for="(tipo, indexOp) in tipos" :value="tipo" v-bind:key="indexOp" 
+                    >{{ tipo.name }}</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -245,10 +227,24 @@
                 </select>
                 </div>
                 </div>
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                <label>
+                    <b>Vida Útil </b>
+                </label>
+                <input disabled class="form-control" type="text" :value="ferramenta.lifeCycle = tooltypeSelected.lifeCycle" placeholder="Ex: 100" id="lifec">
+                </div>
+                <div class="form-group col-md-5">
+                <label>
+                    <b>Unidade de Medida </b>
+                </label>
+                <input disabled class="form-control" type="text" :value="ferramenta.unitOfMeasurement = tooltypeSelected.unitOfMeasurement">
+                </div>
+                </div>
                 <div class="modal-footer">
                 <div class="btn-group" role="group">
                     <button class="btn btn-success" :disabled="!ferramenta.unitOfMeasurement || !ferramenta.lifeCycle || !ferramenta.name 
-                    || !ferramenta.code || !ferramenta.serialNumber || !ferramenta.description || !ferramenta.status || !ferramenta.typeId" @click.stop.prevent="cadastrar(ferramenta);hideModal('modalCadTool');">
+                    || !ferramenta.code || !ferramenta.serialNumber || !ferramenta.description || !ferramenta.status || !tooltypeSelected" @click.stop.prevent="cadastrar(ferramenta);hideModal('modalCadTool');">
                         <i  class="fa fa-check-square" aria-hidden="true"></i>
                         Confirmar
                     </button>
