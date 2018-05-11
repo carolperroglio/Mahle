@@ -38,7 +38,6 @@ import ReportAlarm from '@/components/ReportAlarm/ReportAlarm'
 import User from '@/components/User/User'
 import UserGroup from '@/components/User/UserGroup'
 import Login from '@/components/Login/Login'
-// import Alarms from '@/components/Alarms/Alarms'
 
 
 Vue.use(Router)

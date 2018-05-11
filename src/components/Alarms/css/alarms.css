@@ -36,22 +36,20 @@
     #load-alarms {
         margin: 15% 0 0 50% !important;
     }
-
 }
-
 
 @media (min-width: 960px) {
     /*Menu de cadastro da receita*/
     .nav-items-alarms {
         margin-left: 0.3%;
         padding: 1.2% 0 0.3% 0;
-    }  
+    }
     /* Tabela */
     .cabecalho-table-alarms {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -2% 0 0 0;
+        margin: 6% 0 0 0;
         z-index: 4;
     }
     .alarms-produtos {
@@ -76,9 +74,8 @@
     }
     #load-alarms {
         margin: 15% 0 0 50% !important;
-    }    
+    }
 }
-
 
 @media (min-width:1400px) {
     /* Tabela */
@@ -89,12 +86,10 @@
         margin: -1.7% 0 0 0;
         z-index: 4;
     }
- 
     .alarms-produtos {
         margin-top: 19.5%;
     }
-
-    .fim{
+    .fim {
         padding-left: 15%;
     }
     /*Box das Fases*/
@@ -109,12 +104,10 @@
         margin: -1.7% 0 0 0;
         z-index: 4;
     }
- 
     .alarms-produtos {
         margin-top: 19.5%;
     }
-
-    .fim{
+    .fim {
         padding-left: 15%;
     }
     /*Box das Fases*/

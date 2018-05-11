@@ -49,6 +49,7 @@ export default {
             pageAtual: 0,
             errors: [],
             cabecalhoSetas: [false, false, false, false, false, false, false, false, false],
+            tooltypeSelected: {}
         }
     },
     components: {
@@ -102,8 +103,13 @@ export default {
                 typeId: '',
 
             }
+            this.tooltypeSelected = {};
+        },
+        getToolType(tipo) {
+            this.ferramenta.typeId = tipo.toolTypeId;
         },
         cadastrar(ferramenta) {
+
             console.log(ferramenta);
 
             axios.post(this.url, ferramenta).then((response) => {

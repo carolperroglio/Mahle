@@ -41,7 +41,8 @@
             </nav>
         </div> 
 
-       
+        <router-view/>
+
 
         <!--                        -->
         <!--   Rodapé da Página     -->

@@ -4,16 +4,14 @@
   <div id="app">
     <!--<img src="./assets/logo.png">-->
     <nav-bar :username="getUsername()"></nav-bar>
-    <b-modal ref="modaInfo" title="Mensagem" hide-footer>
-      <p :class=" 'alert alert-danger'">{{msgErro}}</p>
-    </b-modal>
-    <router-view/>
   </div>
 </template>
 
 <script>
-import NavBar from "./components/Headers&Footers/NavBar.vue";
 import Vue from "vue";
+import NavBar from "./components/Headers&Footers/NavBar.vue";
+// import AmCharts from 'amcharts3'
+// import AmSerial from 'amcharts3/amcharts/serial'
 import axios from "axios";
 import Router from "vue-router";
 import VueCookies from "vue-cookies";
@@ -25,9 +23,6 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import popper from ".././node_modules/popper.js/dist/umd/popper.js";
 import icones from ".././node_modules/font-awesome/css/font-awesome.min.css";
-import ".././node_modules/amcharts3/amcharts/plugins/export/export.min.js";
-import ".././node_modules/amcharts3/amcharts/plugins/export/export.js";
-import "amcharts3/amcharts/amcharts";
 import Login from "./components/Login/Login";
 
 es6promisse.polyfill();
@@ -43,12 +38,6 @@ Vue.use({
 Vue.use(VueCookies);
 Vue.use(Router);
 Vue.use(bModal);
-
-// import 'amcharts3/amcharts/plugins/export/libs/jszip/jszip.js'
-// import 'amcharts3/amcharts/plugins/export/libs/fabric/fabric.js'
-// import 'amcharts3/amcharts/plugins/export/libs/xlsx/xlsx.js'
-
-// import 'amcharts3/plugins/export/libs/export.css'
 
 
 Vue.config.productionTip = false;

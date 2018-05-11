@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import axios from '../../../.././node_modules/axios/index.js'
+// import AmCharts from 'amcharts3'
+// import AmSerial from 'amcharts3/amcharts/serial'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 import { setTimeout } from 'timers'
 import bButton from 'bootstrap-vue/es/components/button/button'
@@ -10,8 +12,6 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import VueTimepicker from 'vue2-timepicker'
 import VueTiles from 'vue-tiles'
-import AmCharts from 'amcharts3'
-import AmSerial from 'amcharts3/amcharts/serial'
 import JsonExcel from 'vue-json-excel'
 import PrintJs from 'print-js'
 import jsPDF from 'jspdf';
@@ -470,39 +470,39 @@ export default {
             this.$refs.myModalEdit.hide();
         },
 
-        created() {
-            window.AmCharts.makeChart("chartdiv", {
-                "type": "serial",
-                "categoryField": "category",
-                "autoMarginOffset": 40,
-                "marginRight": 60,
-                "marginTop": 30,
-                "startDuration": 0,
-                "borderColor": "#C67373",
-                "fontSize": 13,
-                "theme": "light",
-                "categoryAxis": {
-                    "gridPosition": "start"
-                },
-                "trendLines": [],
-                "graphs": this.graphProvider,
-                "guides": [],
-                "legend": {
-                    "enabled": true
-                },
-                "valueAxes": [{
-                    "id": "ValueAxis-1",
-                    "title": ""
-                }],
-                "export": {
-                    "enabled": true
-                },
-                "allLabels": [],
-                "balloon": {},
-                "titles": [],
-                "dataProvider": this.provider
-            });
-        },
+        // created() {
+        //     window.AmCharts.makeChart("chartdiv", {
+        //         "type": "serial",
+        //         "categoryField": "category",
+        //         "autoMarginOffset": 40,
+        //         "marginRight": 60,
+        //         "marginTop": 30,
+        //         "startDuration": 0,
+        //         "borderColor": "#C67373",
+        //         "fontSize": 13,
+        //         "theme": "light",
+        //         "categoryAxis": {
+        //             "gridPosition": "start"
+        //         },
+        //         "trendLines": [],
+        //         "graphs": this.graphProvider,
+        //         "guides": [],
+        //         "legend": {
+        //             "enabled": true
+        //         },
+        //         "valueAxes": [{
+        //             "id": "ValueAxis-1",
+        //             "title": ""
+        //         }],
+        //         "export": {
+        //             "enabled": true
+        //         },
+        //         "allLabels": [],
+        //         "balloon": {},
+        //         "titles": [],
+        //         "dataProvider": this.provider
+        //     });
+        // },
 
     },
     beforeMount: function() {

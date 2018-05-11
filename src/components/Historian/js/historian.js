@@ -13,8 +13,6 @@ import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import VueTimepicker from 'vue2-timepicker'
 import VueTiles from 'vue-tiles'
-import AmCharts from 'amcharts3'
-import AmSerial from 'amcharts3/amcharts/serial'
 import JsonExcel from 'vue-json-excel'
 import PrintJs from 'print-js'
 import jsPDF from 'jspdf';
@@ -44,6 +42,8 @@ import {
 import {
     error
 } from 'util';
+import AmCharts from 'amcharts3'
+import AmSerial from 'amcharts3/amcharts/serial'
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -232,33 +232,39 @@ export default {
 
             axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
                 '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
-                if (response.data.length > 0) {
-
-                    this.data = response.data;
-                    this.tags = response.data.tags;
-                    this.tags.forEach((T) => {
-                        if (!this.groups.includes(T.group)) {
-                            this.groups.push(T.group);
-                        }
-                    })
-                    this.editGroup(this.groups[0]);
-                    this.newGroup = this.groups[0];
-                    this.carregando = false;
-                    this.created();
-                    this.hideModal();
-                }
+                // if (response.data.length > 0) {
+                console.log('Entrou no retorno do get report date')
+                this.data = response.data;
+                this.tags = response.data.tags;
+                this.tags.forEach((T) => {
+                    if (!this.groups.includes(T.group)) {
+                        this.groups.push(T.group);
+                    }
+                })
+                this.editGroup(this.groups[0]);
+                this.newGroup = this.groups[0];
+                this.carregando = false;
+                this.created();
+                this.hideModal();
+                // }
             }).catch((error) => {
-                if (error.response.status == '404') {
-                    this.carregando = false;
-                    this.erro = true;
-                    this.msgErro = "Sem dados no período selecionado";
-                    this.showModal("modalInfo");
-                } else {
-                    this.carregando = false;
-                    this.erro = true;
-                    this.msgErro = error.message;
-                    this.showModal("modalInfo");
+                if (error.response != undefined) {
+                    if (error.response.status == '404') {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Sem dados no período selecionado";
+                        this.showModal("modalInfo");
+                    } else {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = error.message;
+                        this.showModal("modalInfo");
+                    }
                 }
+                this.carregando = false;
+                this.erro = true;
+                this.msgErro = error.message;
+                this.showModal("modalInfo");
             });
         },
         getReportCode() {
@@ -272,6 +278,8 @@ export default {
             var ticksF = this.dateToTicks(Fim);
 
             axios.get(this.urlReport + "/api/ReportParameter/RecipeCode/" + this.recipeCode + '?thingId' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+                console.log('Entrou no retorno do get report code')
+
                 this.data = response.data;
                 this.tags = response.data.tags;
                 this.tags.forEach((T) => {
@@ -310,7 +318,7 @@ export default {
             axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF)
                 .then((response) => {
                     comsole.log(reponse)
-                    console.log('Entrou no retorno do get report code')
+                    console.log('Entrou no retorno do get report op')
                     this.data = response.data;
                     this.tags = response.data.tags;
                     this.tags.forEach((T) => {
@@ -537,6 +545,7 @@ export default {
                      * Criação do JSON de criação das características do gráfico.
                      * Cada linha terá um objeto com as características dentro do array
                      */
+                    obj2["path"] = "dist/amcharts/";
                     obj2["balloonColor"] = "#808080";
                     obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
                     obj2["color"] = "#000000";
@@ -638,7 +647,11 @@ export default {
         },
 
         created() {
-            window.AmCharts.makeChart("chartdiv", {
+            console.log('Entrou no created que chama o makeChart()')
+            console.log(this.graphProvider);
+            console.log(this.provider);
+
+            window.AmCharts.makeChart("chartrast", {
                 "type": "serial",
                 "categoryField": "category",
                 "autoMarginOffset": 40,
@@ -674,7 +687,7 @@ export default {
                     "title": ""
                 }],
                 "export": {
-                    "enabled": true
+                    "enabled": false
                 },
                 "allLabels": [],
                 "balloon": {},

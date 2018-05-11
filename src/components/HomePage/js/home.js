@@ -1,12 +1,9 @@
 import axios from 'axios'
 import es6promisse from 'es6-promise'
 import $ from 'jquery'
-import AmCharts from 'amcharts3'
-import AmSerial from 'amcharts3/amcharts/serial'
+// import AmCharts from 'amcharts3'
+// import AmSerial from 'amcharts3/amcharts/serial'
 import jsPDF from 'jspdf';
-import 'amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js'
-import 'amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js'
-import 'amcharts3/amcharts/plugins/export/libs/blob.js/blob.js'
 import html2canvas from 'html2canvas';
 // import Plotly from 'plotly.js/dist/plotly';
 es6promisse.polyfill();

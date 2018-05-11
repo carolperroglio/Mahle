@@ -146,7 +146,7 @@
             {{t.tool.name}}
         </label>
         <label class="ls20 col-md-2">
-            {{t.tool.   description}}
+            {{t.tool.description}}
         </label>
         <label class="ls20 col-md-2">
             {{t.previousState | StatusName}}
@@ -160,6 +160,10 @@
         <label class="ls20 col-md-2">
             {{t.timeStampTicks}}
         </label>
+        <hr v-if="t.justificationNeeded">
+        <label class="col-md-8" v-if="t.justificationNeeded">
+            <b>Justificativa</b> : {{t.justification.text}}
+        </label>
     </div>
     </div>
     </div>
@@ -172,6 +176,10 @@
                 <div class="col-md-6">
                     <label for="" >Status</label>
                     <input type="text" disabled class="form-control" v-model="tool.status">
+                </div>
+                <div class="col-md-6" v-show="tool.status == 'Disponível'">
+                    <label for="" >Vida Útil</label>
+                    <input type="text" class="form-control" v-model="tool.currentLife">
                 </div>
                 <!-- {{ tool }} -->
                 </div>

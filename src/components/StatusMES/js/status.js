@@ -110,6 +110,8 @@ export default {
                                 s.hasLowAlert = true;
                             } else if (s.alarms[i].priority == 0 && s.hasRedAlert == false && s.hasLowAlert == false) {
                                 s.hasGreenAlert = true;
+                            } else if (s.alarms[i].priority == 3 && s.hasRedAlert == false && s.hasLowAlert == false && s.hasGreenAlert == false) {
+                                s.hasGreyAlert = true;
                             }
                         }
                     });
@@ -132,6 +134,8 @@ export default {
                 string["background-color"] = '#ed0404';
             else if (objeto.hasLowAlert && !objeto.hasRedAlert)
                 string["background-color"] = '#f5fc28';
+            else if (objeto.hasGreyAlert)
+                string["background-color"] = '#b2b7b2';
             else
                 string["background-color"] = '#90EE90';
             return string;
