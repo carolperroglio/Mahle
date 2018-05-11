@@ -465,23 +465,26 @@ export default {
         separateDateAndHour(providerar) {
             var finalprovider = new Array();
             var copyprovider = new Array();
+            //ISTO É FEITO PARA SE CRIAR UM NOVO OBJ - SENÃO A REFERÊNCIA PERMANECE NO ORIGINAL
             copyprovider = JSON.parse(JSON.stringify(providerar));
             var objaux = new Object();
             // copyprovider = providerar.slice();
             copyprovider.forEach((obj) => {
-                var dt = obj.category;
+                var newObj = JSON.parse(JSON.stringify(obj));
+                var dt = newObj.category;
                 var stringlength = dt.length;
-                var date = obj.category = dt.substring(0, stringlength - 5);
-                delete obj.category;
-                obj.category = date;
+                var date = newObj.category = dt.substring(0, stringlength - 5);
+                delete newObj.category;
+                newObj.category = date;
                 var hourformatted = dt.substring(stringlength - 5, stringlength);
-                obj.Hora = hourformatted;
-                objaux.category = obj.category;
-                objaux.Hora = obj.Hora;
-                for (var key in obj) {
-                    objaux[key] = obj[key]
+                newObj.Hora = hourformatted;
+                objaux.category = newObj.category;
+                objaux.Hora = newObj.Hora;
+                for (var key in newObj) {
+                    objaux[key] = newObj[key]
                 }
                 finalprovider.push(objaux);
+                objaux = {}
             });
 
             this.providertable = finalprovider;
@@ -662,7 +665,7 @@ export default {
                 "fontSize": 13,
                 "theme": "light",
                 "categoryAxis": {
-                    "autoRotateAngle": -90,
+                    "autoRotateAngle": -45,
                     "autoRotateCount": 0,
                     "gridPosition": "start",
                     "titleFontSize": 0,
