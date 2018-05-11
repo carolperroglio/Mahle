@@ -56,29 +56,11 @@
                                         {{a.alarmName}}, 
                                     </span>
                                 </label>
-                                 <label v-else-if="s.hasGreenAlert == true">
-                                    <!-- <b>Parâmetro:</b>
-                                    <span v-for="(a, index) in s.alarms" v-bind:key="index"  v-if="a.priority == 0">
-                                        {{a.alarmName}}, 
-                                    </span> -->
-                                </label>                                
+                                                              
                                 <br>
                                 </div>
-                                <!-- <button class="btn btn-outline-info btn-sm pull-right"
-                                @click.stop.prevent="onEnable('cont'+ s.thingId);" 
-                                :aria-controls="'cont'+ s.thingId">
-                                    <b>Listar Alarmes</b>
-                                </button> -->
                                 <br>
                                 <br>
-                                <!-- <b-collapse :id="'cont'+s.thingId" > -->
-                                    <!-- <div v-for="(st, index) in s.alarms" v-bind:key="index" :style="'background-color:'+st.alarmColor">
-                                       <b>Nome: </b>{{st.alarmName}}
-                                    <br>
-                                    <b>Status: </b>{{st.alarmDescription}} -->
-                                    <!-- <hr class="style13"> -->
-                                <!-- </div> -->
-                                <!-- </b-collapse> -->
                             </div>
                         </div>
                     </div>
