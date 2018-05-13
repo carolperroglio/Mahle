@@ -16,7 +16,10 @@
                 <button type="button" class="btn btn-info btn-lg"  @click.prevent="showModal('filterSearch')">
                     Filtrar Busca
                 </button>
-            </li>                         
+                </li>    
+                <li class="nav-item-alarms col-md-2">
+                    <button class="btn btn-primary" @click="getReport()">Texto</button> 
+                </li>                     
             </ul>
         </div>
         <div id="load-alarms" v-show="carregando">
@@ -25,6 +28,12 @@
         <!-- GRÁFICO DOS ALARMES -->
         <div id="charAlarm" style="width: 100%; height: 400px;margin-top: 15%;"></div>                           
         
+        <!-- Botão para escolher o grupo a ser exibido -->
+        <div class="col-sm-2">
+        <select class="form-control" v-model="groupselected" @change.prevent="makeGraph(groupselected)">    
+            <option v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
+        </select>
+        </div>        
         <!-- TABELA DOS ALARMES -->
         <div class="cabecalho-table-alarms"  v-show="!carregando">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'product',0):organizar(produtos, 'product',0);" class="ls2 col-md-2">
@@ -70,7 +79,6 @@
             </label>                
         </div>                                             
 
-        <button class="btn btn-primary" @click="getReport()">Texto</button> 
         <!--                       -->
         <!--                       -->
         <!--                       -->

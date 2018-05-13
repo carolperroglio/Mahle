@@ -98,7 +98,8 @@ export default {
             thingId: '',
             things: [],
             prosFim: [],
-            opName: ''
+            opName: '',
+            groupselected: ''
 
         }
     },
@@ -184,6 +185,9 @@ export default {
             })
         },
         getReport() {
+            this.groups = [];
+            this.groupselected = "";
+
             this.jSONReport = [{
                     "thingId": 1,
                     "groupTag": "Temperatura",
@@ -210,19 +214,19 @@ export default {
                     "groupTag": "Agitação",
                     "data": [{
                             "category": "636616840380000000",
-                            "muito alto": "32",
-                            "alto": "52",
-                            "baixo": "39",
-                            "muito baixo": "72",
-                            "offline": "38"
+                            "muito alto": "10",
+                            "alto": "5",
+                            "baixo": "5",
+                            "muito baixo": "10",
+                            "offline": "1"
                         },
                         {
-                            "category": "636616840380000000",
-                            "muito alto": "32",
-                            "alto": "52",
-                            "baixo": "39",
-                            "muito baixo": "72",
-                            "offline": "38"
+                            "category": "636616912380000000",
+                            "muito alto": "15",
+                            "alto": "5",
+                            "baixo": "5",
+                            "muito baixo": "15",
+                            "offline": "2"
                         }
                     ]
                 },
@@ -238,10 +242,11 @@ export default {
                 this.groups.push(this.jSONReport[x].groupTag);
             }
             console.log(this.groups);
+
             this.makeGraph(this.groups);
         },
 
-        makeGraph(groups) {
+        makeGraph(groupselected) {
             //LIMPA O JSON PARA TIRAR OS GRUPOS DA PESQUISA ANTERIOR
             this.graphs = []
 
@@ -267,28 +272,28 @@ export default {
             }
             console.log('this.graphs');
             console.log(this.graphs);
-
-            this.makeDataProvider(groups);
+            if (this.groupselected.length == 0) {
+                groupselected = this.groups[0]
+            }
+            this.makeDataProvider(groupselected);
         },
 
-        makeDataProvider(groups) {
+        makeDataProvider(groupselected) {
             var objProvider = {};
             this.dataProvider = [];
 
             this.jSONReport.forEach(obj => {
-                for (var i = 0; i < groups.length; i++) {
-                    var tagGroup = groups[i];
-                    if (obj.groupTag == tagGroup) {
-                        for (var x = 0; x < obj.data.length; x++) {
-                            for (var key in obj.data[x]) {
-                                if (key == 'category') {
-                                    objProvider[key] = this.ticksToDate(obj.data[x][key]);
-                                }
+                if (groupselected == obj.groupTag) {
+                    for (var x = 0; x < obj.data.length; x++) {
+                        for (var key in obj.data[x]) {
+                            if (key == 'category') {
+                                objProvider[key] = this.ticksToDate(obj.data[x][key]);
+                            } else {
                                 objProvider[key] = obj.data[x][key];
                             }
-                            this.dataProvider.push(objProvider);
-                            objProvider = {};
                         }
+                        this.dataProvider.push(objProvider);
+                        objProvider = {};
                     }
                 }
             });
@@ -304,7 +309,7 @@ export default {
             window.AmCharts.makeChart("charAlarm", {
                 "path": "dist/amcharts/",
                 "type": "serial",
-                "categoryField": "type",
+                "categoryField": "category",
                 "chartCursor": {},
                 "graphs": this.graphs,
                 "guides": [],
