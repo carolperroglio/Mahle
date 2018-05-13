@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import ThingCreate from '@/components/things/ThingCreate'
 import GenerateProducts from '@/components/Products/GenerateProducts'
 import Alarms from '@/components/Alarms/Alarms'
+import Resampling from '@/components/Resampling/Resampling'
 import Tira from '@/components/Tira/Tira'
 import ListTira from '@/components/Tira/ListTira'
 import Liga from '@/components/Liga/Liga'
@@ -58,6 +59,11 @@ export default new Router({
             path: '/alarms',
             name: 'Alarms',
             component: Alarms
+        },
+        {
+            path: '/resampling',
+            name: 'Resampling',
+            component: Resampling
         },
         {
             path: '/tira/:id',
