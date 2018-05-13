@@ -206,7 +206,144 @@ export default {
                             "baixo": "15",
                             "muito baixo": "20",
                             "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
+                        }, {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
+                        }, {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
+                        }, {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
+                        }, {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
+                        }, {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
+                        }, {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
+                        }, {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
+                        }, {
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
+                        },
+                        {
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
                         }
+
                     ]
                 },
                 {
@@ -313,6 +450,21 @@ export default {
                 "chartCursor": {},
                 "graphs": this.graphs,
                 "guides": [],
+                "valueScrollbar": {
+                    "enabled": true,
+                    "offset": 4,
+                    "tabIndex": 6
+                },
+                "chartScrollbar": {
+                    "enabled": true
+                },
+                "categoryAxis": {
+                    "autoRotateAngle": -20,
+                    "autoRotateCount": 0,
+                    "gridPosition": "start",
+                    "titleFontSize": 0,
+                    "titleRotation": 3
+                },
                 "legend": {
                     "enabled": true
                 },
