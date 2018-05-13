@@ -4,10 +4,13 @@ import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
 import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-import { Stretch } from 'vue-loading-spinner'
-import { setTimeout } from 'timers'
+import datePicker from 'vue-bootstrap-datetimepicker'
+import VueTimepicker from 'vue2-timepicker'
+import JsonExcel from 'vue-json-excel'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
+import { Stretch } from 'vue-loading-spinner'
+import { setTimeout } from 'timers'
 
 es6promisse.polyfill();
 var ipServerRecipe = process.env.RECIPE_API;
@@ -45,11 +48,15 @@ Array.prototype.groupByProperties = function(properties) {
     return groups;
 };
 
+//TROCAR PRA PORTA IP DO ENDPOINT DE RELATÓRIOS DE ALARMES
+var ipReport = process.env.REPORT_API;
+
 export default {
     name: "Alarms",
     data() {
         return {
-            json: JSON,
+            urlGatewayThings: ipReport + '/gateway/things',
+            urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
             config: {
                 headers: { 'Cache-Control': 'no-cache' }
             },
@@ -61,19 +68,55 @@ export default {
             produto: '',
             jSONReport: {},
             graphs: [],
-            dataProvider: []
+            dataProvider: [],
+            groups: [],
+            // to show server response
+            msgErro: '',
+            erro: false,
+            // config and variables to use in timepicker and datepicker
+            date: '',
+            datef: '',
+            config: {
+                format: 'DD MM YYYY',
+                useCurrent: false,
+            },
+            config2: {
+                format: 'DD MM YYYY',
+                useCurrent: false,
+            },
+            timeIni: {
+                HH: "00",
+                mm: "00"
+            },
+            timeFim: {
+                HH: "23",
+                mm: "59"
+            },
+            // Armazena dados para preencher a tabela
+            tableAlarms: [],
+            filterSelected: '',
+            thingId: '',
+            things: [],
+            prosFim: [],
+            opName: ''
 
         }
     },
     components: {
+        'date-picker': datePicker,
+        'vue-timepicker': VueTimepicker,
+        'downloadExcel': JsonExcel,
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
         'b-modal': bModal,
         Stretch
     },
     methods: {
-        showModal() {
-
+        showModal(id) {
+            this.$refs[id].show();
+        },
+        hideModal(id) {
+            this.$refs[id].show();
         },
         desorganizar(produtos, product, num) {
 
@@ -119,25 +162,46 @@ export default {
             var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
             return ticks;
         },
+        // SEARCH BASED ON NAME
+        getResults(url, name, pros) {
+            pros = [];
+            if (name.length >= 3) {
+                axios.get(url + name, this.config).then((response) => {
+                    response.data.forEach((pro) => {
+                        pros.push(pro);
+                    });
+                }, (error) => {
+                    console.log(error);
+                })
+            }
+            return pros;
+        },
+        getThings() {
+            axios.get(this.urlGatewayThings).then((response) => {
+                this.things = response.data;
+            }, (error) => {
+                console.log(error);
+            })
+        },
         getReport() {
             this.jSONReport = [{
                     "thingId": 1,
                     "groupTag": "Temperatura",
                     "data": [{
-                            "category": "63541554554",
-                            "muito alto": "32",
-                            "alto": "52",
-                            "baixo": "39",
-                            "muito baixo": "72",
-                            "offline": "38"
+                            "category": "636615976380000000",
+                            "muito alto": "8",
+                            "alto": "2",
+                            "baixo": "2",
+                            "muito baixo": "8",
+                            "offline": "2"
                         },
                         {
-                            "category": "63541554554",
-                            "muito alto": "32",
-                            "alto": "52",
-                            "baixo": "39",
-                            "muito baixo": "72",
-                            "offline": "38"
+                            "category": "636615976380000000",
+                            "muito alto": "20",
+                            "alto": "15",
+                            "baixo": "15",
+                            "muito baixo": "20",
+                            "offline": "2"
                         }
                     ]
                 },
@@ -145,7 +209,7 @@ export default {
                     "thingId": 1,
                     "groupTag": "Agitação",
                     "data": [{
-                            "category": "63541554554",
+                            "category": "636616840380000000",
                             "muito alto": "32",
                             "alto": "52",
                             "baixo": "39",
@@ -153,7 +217,7 @@ export default {
                             "offline": "38"
                         },
                         {
-                            "category": "63541554554",
+                            "category": "636616840380000000",
                             "muito alto": "32",
                             "alto": "52",
                             "baixo": "39",
@@ -164,9 +228,23 @@ export default {
                 },
             ]
 
-            this.makeGraph();
+            this.editGroup();
         },
-        makeGraph() {
+        editGroup() {
+            //LIMPA O JSON PARA TIRAR OS GRUPOS DA PESQUISA ANTERIOR
+            this.groups = [];
+            // pega todos os grupos existentes
+            for (var x = 0; x < this.jSONReport.length; x++) {
+                this.groups.push(this.jSONReport[x].groupTag);
+            }
+            console.log(this.groups);
+            this.makeGraph(this.groups);
+        },
+
+        makeGraph(groups) {
+            //LIMPA O JSON PARA TIRAR OS GRUPOS DA PESQUISA ANTERIOR
+            this.graphs = []
+
             var obj2 = {};
             var obj = this.jSONReport[0];
             for (var key in obj.data[0]) {
@@ -184,27 +262,35 @@ export default {
                     // obj2["legendColor"] = R.color;
                     // obj2["lineColor"] = R.color;
                     this.graphs.push(obj2)
+                    obj2 = {}
                 }
             }
             console.log('this.graphs');
             console.log(this.graphs);
 
-            this.makeDataProvider();
+            this.makeDataProvider(groups);
         },
 
-        makeDataProvider() {
+        makeDataProvider(groups) {
             var objProvider = {};
+            this.dataProvider = [];
 
             this.jSONReport.forEach(obj => {
-                for (var x = 0; x < obj.data.length; x++) {
-                    for (var key in obj.data[x]) {
-                        if (key == 'category') {
-                            this.ticksToDate(obj.data[x][key]);
+                for (var i = 0; i < groups.length; i++) {
+                    var tagGroup = groups[i];
+                    if (obj.groupTag == tagGroup) {
+                        for (var x = 0; x < obj.data.length; x++) {
+                            for (var key in obj.data[x]) {
+                                if (key == 'category') {
+                                    objProvider[key] = this.ticksToDate(obj.data[x][key]);
+                                }
+                                objProvider[key] = obj.data[x][key];
+                            }
+                            this.dataProvider.push(objProvider);
+                            objProvider = {};
                         }
-                        objProvider[key] = obj.data[x][key];
                     }
                 }
-                this.dataProvider.push(objProvider);
             });
 
             console.log("this.dataProvider")
@@ -240,6 +326,7 @@ export default {
         }
     },
     beforeMount() {
+        this.getThings();
         this.getReport();
     },
 }

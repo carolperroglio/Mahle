@@ -194,9 +194,9 @@ export default {
                 axios.put(this.url + '/api/tool/AssociateTool/associate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId + "&position=" + this.pos).then((response) => {
                     this.erro = false;
                     this.carregando = false;
-                    location.reload();
                     this.msg = 'Ferramenta associada com sucesso';
                     this.showModal("modalErro");
+                    location.reload();
                 }).catch((error) => {
                     this.erro = true;
                     this.carregando = false;

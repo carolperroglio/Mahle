@@ -96,13 +96,14 @@ export default {
     data() {
         return {
             api: process.env.API_ADDRESS,
-            url: process.env.THINGS_API,
+            url: ipReport + '/gateway/things',
             urlHist: process.env.HIST_BIGTABLE_API,
             urlReport: ipReport,
             urlGatRec: process.env.OP_API,
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
             urlGatewayRecipe: ipReport + '/gateway/recipe?fieldFilter=recipeCode&fieldValue=',
             carregando: false,
+            // config and variables to use in timepicker and datepicker
             date: '',
             datef: '',
             config: {
@@ -163,7 +164,7 @@ export default {
             opName: '',
             prosFim: [],
             erro: '',
-            msgErro: ''
+            msgErro: '',
         }
     },
     components: {
@@ -555,10 +556,10 @@ export default {
                     obj2["type"] = "smoothedLine";
                     obj2["title"] = R.name;
                     obj2["valueField"] = R.name;
-                    obj2["bulletColor"] = R.color;
-                    obj2["fillColors"] = R.color;
-                    obj2["legendColor"] = R.color;
-                    obj2["lineColor"] = R.color;
+                    // obj2["bulletColor"] = R.color;
+                    // obj2["fillColors"] = R.color;
+                    // obj2["legendColor"] = R.color;
+                    // obj2["lineColor"] = R.color;
 
                     var i = 0;
 
@@ -664,7 +665,7 @@ export default {
                 "fontSize": 13,
                 "theme": "light",
                 "categoryAxis": {
-                    "autoRotateAngle": -90,
+                    "autoRotateAngle": -45,
                     "autoRotateCount": 0,
                     "gridPosition": "start",
                     "titleFontSize": 0,

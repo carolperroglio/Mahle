@@ -95,13 +95,6 @@
                             </span>
                         </router-link>
 
-                        <!-- <router-link to="/statusmes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
-                            <i class="fa fa-check-square"></i> 
-                            <span class="hidden-sm-down">  
-                                STATUS DO MES
-                            </span>
-                        </router-link> -->
-
                         <router-link to="/generateproducts" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
                             <i class="fa fa-barcode"></i> 
                             <span class="hidden-sm-down">  
@@ -168,34 +161,47 @@
                             </div> 
                         </b-collapse>          
 
-                        <!-- <a class="list-group-item collapsed"  v-b-toggle.menu3  >
+                        <a class="list-group-item collapsed"  v-b-toggle.menu3  >
                             <i class="fa fa-industry"></i> 
                                 <span class="hidden-sm-down">   
                                  ORDEM DE PRODUÇÃO
                                 </span> 
                              <i class="fa fa-chevron-down pull-right"></i> 
-                        </a>   -->
-                        <!-- <b-collapse id="menu3" @click.stop="active = !active"> -->
+                        </a>  
+                        <b-collapse id="menu3" @click.stop="active = !active">
                             <router-link to="/prodOrderTira" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
-                                <i class="fa fa-industry"></i> ORDENS DE PRODUÇÃO - TIRAS
+                                <!-- <i class="fa fa-industry"></i>  -->
+                                Ordens de produção - Tiras
                             </router-link>
                             <router-link to="/prodOrderLiga" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
-                                <i class="fa fa-gear"></i> ORDENS DE PRODUÇÃO - LIGAS (OPL)
+                                <!-- <i class="fa fa-gear"></i>  -->
+                                Ordens de produção - Ligas (OPL)
                             </router-link>
                             <router-link to="/opInAnalysis" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
-                                <i class="fa fa-thermometer-quarter"></i> ORDENS DE PRODUÇÃO EM ANÁLISE
+                                <!-- <i class="fa fa-thermometer-quarter"></i>  -->
+                                Ordens de produção Em Análise
                             </router-link>
-                            <!-- <router-link to="/opType" class="list-group-item" data-parent="#menu3"> 
-                                Tipo de Ordem de Produção 
-                            </router-link> -->
-                            <!-- <router-link to="/AssociateOP" class="list-group-item" data-parent="#menu3" v-b-toggle.sidebar> 
-                                Associação de Ordem de Produção
-                            </router-link> -->
-                            <!-- <router-link to="/OPManagement" class="list-group-item" data-parent="#menu3"> 
-                                Gerenciamento de Ordem de Produção
-                            </router-link> -->
-                        <!-- </b-collapse> -->
-                    </b-collapse>      
+                        </b-collapse>
+
+                        <a class="list-group-item collapsed"  v-b-toggle.reports  >
+                            <i class="fa fa-line-chart"></i> 
+                                <span class="hidden-sm-down">   
+                                 RELATÓRIOS
+                                </span> 
+                             <i class="fa fa-chevron-down pull-right"></i> 
+                        </a>  
+                        <b-collapse id="reports" @click.stop="active = !active">
+                            <router-link to="/historian" class="list-group-item" data-parent="#reports" v-b-toggle.sidebar> 
+                                Rastreamento de Processos
+                            </router-link>
+                            <router-link to="/alarms" class="list-group-item" data-parent="#reports" v-b-toggle.sidebar> 
+                                Alarmes
+                            </router-link>
+                            <router-link to="/resampling" class="list-group-item" data-parent="#reports" v-b-toggle.sidebar> 
+                                Amostragem
+                            </router-link>
+                        </b-collapse>
+                    </b-collapse>   
                     </div>   
         <!-- <router-view/> -->
             </div>
