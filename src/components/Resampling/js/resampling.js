@@ -36,6 +36,7 @@ export default {
         return {
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderTypeId&fieldValue=2&fieldFilter=productionOrderNumber&fieldValue=',
             urlGatewayThings: ipReport + '/gateway/things',
+            url: ipReport,
             config: {
                 headers: { 'Cache-Control': 'no-cache' }
             },
@@ -73,7 +74,8 @@ export default {
             tableData: [],
             filterSelected: '',
             //
-            prosFim: []
+            prosFim: [],
+            opName: ''
         }
     },
     components: {
@@ -93,7 +95,7 @@ export default {
             this.$refs[id].show();
         },
         hideModal(id) {
-            this.$refs[id].show();
+            this.$refs[id].hide();
         },
         desorganizar(produtos, product, num) {
 
@@ -126,11 +128,11 @@ export default {
 
             var dateFormatted;
 
-            if (containsHour == true) {
+            if (containsHour) {
                 dateFormatted = jsDate.getDate() + "/" +
                     (jsDate.getMonth() + 1) + "/" +
                     jsDate.getFullYear() + " " + hour + ":" + min;
-            } else if (containsOnlyHour == true) {
+            } else if (containsOnlyHour) {
                 dateFormatted = " " + hour + ":" + min;
             } else {
                 dateFormatted = jsDate.getDate() + "/" +
@@ -170,212 +172,6 @@ export default {
                 console.log(error);
             })
         },
-        getMock() {
-            this.tableData = {
-                "report": [{
-                        "date": 636614801923361089,
-                        "op": "op0805",
-                        "numberAnalysis": 1,
-                        "productId": 21,
-                        "productName": "Ferro",
-                        "recipeMin": 0,
-                        "recipeMax": 0.5,
-                        "resultAnalysis": 15,
-                        "correction": "0",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614801923361089,
-                        "op": "op0805",
-                        "numberAnalysis": 1,
-                        "productId": 2,
-                        "productName": "Estanho",
-                        "recipeMin": 9.5,
-                        "recipeMax": 11,
-                        "resultAnalysis": 5,
-                        "correction": "126.5",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614910904536185,
-                        "op": "op0805",
-                        "numberAnalysis": 2,
-                        "productId": 21,
-                        "productName": "Ferro",
-                        "recipeMin": 0,
-                        "recipeMax": 0.5,
-                        "resultAnalysis": 0,
-                        "correction": "5.5",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614910904536185,
-                        "op": "op0805",
-                        "numberAnalysis": 2,
-                        "productId": 1,
-                        "productName": "Chumbo",
-                        "recipeMin": 9.5,
-                        "recipeMax": 11,
-                        "resultAnalysis": 10,
-                        "correction": "5.5",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614910904536185,
-                        "op": "op0805",
-                        "numberAnalysis": 2,
-                        "productId": 20,
-                        "productName": "Níquel",
-                        "recipeMin": 0,
-                        "recipeMax": 0.5,
-                        "resultAnalysis": 0,
-                        "correction": "5.5",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614910904536185,
-                        "op": "op0805",
-                        "numberAnalysis": 2,
-                        "productId": 22,
-                        "productName": "Fósforo",
-                        "recipeMin": 0,
-                        "recipeMax": 0.1,
-                        "resultAnalysis": 0,
-                        "correction": "1.1",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614910904536185,
-                        "op": "op0805",
-                        "numberAnalysis": 2,
-                        "productId": 23,
-                        "productName": "Zinco",
-                        "recipeMin": 0,
-                        "recipeMax": 0.3,
-                        "resultAnalysis": 0,
-                        "correction": "3.3",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614910904536185,
-                        "op": "op0805",
-                        "numberAnalysis": 2,
-                        "productId": 2,
-                        "productName": "Estanho",
-                        "recipeMin": 9.5,
-                        "recipeMax": 11,
-                        "resultAnalysis": 10,
-                        "correction": "5.5",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614912466350805,
-                        "op": "op0805",
-                        "numberAnalysis": 3,
-                        "productId": 2,
-                        "productName": "Estanho",
-                        "recipeMin": 9.5,
-                        "recipeMax": 11,
-                        "resultAnalysis": 0,
-                        "correction": "225.5",
-                        "status": "reproved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614923919786177,
-                        "op": "op0805",
-                        "numberAnalysis": 4,
-                        "productId": 1,
-                        "productName": "Chumbo",
-                        "recipeMin": 9.5,
-                        "recipeMax": 11,
-                        "resultAnalysis": 10,
-                        "correction": "0",
-                        "status": "approved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614923919786177,
-                        "op": "op0805",
-                        "numberAnalysis": 4,
-                        "productId": 21,
-                        "productName": "Ferro",
-                        "recipeMin": 0,
-                        "recipeMax": 0.5,
-                        "resultAnalysis": 0,
-                        "correction": "0",
-                        "status": "approved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614923919786177,
-                        "op": "op0805",
-                        "numberAnalysis": 4,
-                        "productId": 2,
-                        "productName": "Estanho",
-                        "recipeMin": 9.5,
-                        "recipeMax": 11,
-                        "resultAnalysis": 10,
-                        "correction": "0",
-                        "status": "approved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614923919786177,
-                        "op": "op0805",
-                        "numberAnalysis": 4,
-                        "productId": 20,
-                        "productName": "Níquel",
-                        "recipeMin": 0,
-                        "recipeMax": 0.5,
-                        "resultAnalysis": 0,
-                        "correction": "0",
-                        "status": "approved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614923919786177,
-                        "op": "op0805",
-                        "numberAnalysis": 4,
-                        "productId": 22,
-                        "productName": "Fósforo",
-                        "recipeMin": 0,
-                        "recipeMax": 0.1,
-                        "resultAnalysis": 0,
-                        "correction": "0",
-                        "status": "approved",
-                        "userName": null
-                    },
-                    {
-                        "date": 636614923919786177,
-                        "op": "op0805",
-                        "numberAnalysis": 4,
-                        "productId": 23,
-                        "productName": "Zinco",
-                        "recipeMin": 0,
-                        "recipeMax": 0.3,
-                        "resultAnalysis": 0,
-                        "correction": "0",
-                        "status": "approved",
-                        "userName": null
-                    }
-                ]
-            }
-            this.tableData.report.forEach((obj) => {
-                obj.date = this.ticksToDate(obj.date, false, false)
-                obj.hour = this.ticksToDate(obj.date, false, true)
-            });
-            this.tableData = response.data.report;
-            this.hideModal();
-        },
         // CALL REPORT ENDPOINT TO FILL TABLE
         getReportDate() {
             this.providertable = [];
@@ -388,17 +184,18 @@ export default {
             var ticksF = this.dateToTicks(Fim);
 
             // MUDAR PARA ENDPOINT DE REAMOSTRAGEM
-            axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
-                '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+            axios.get(this.url + "/api/ReportAnalisys/Date?startdate=" + ticksI + "&endDate=" + ticksF).then((response) => {
                 console.log('Entrou no retorno do get report date')
 
                 // convert ticks em datetime e seapra data e hora
                 response.data.report.forEach((obj) => {
-                    obj.date = this.ticksToDate(obj.date, false, false)
+                    obj.dateI = this.ticksToDate(obj.date, false, false)
                     obj.hour = this.ticksToDate(obj.date, false, true)
                 });
                 this.tableData = response.data.report;
-                this.hideModal();
+                this.hideModal('filterSearch');
+                this.carregando = false;
+
 
             }).catch((error) => {
                 if (error.response != undefined) {
@@ -413,11 +210,13 @@ export default {
                         this.msgErro = error.message;
                         this.showModal("modalInfo");
                     }
+                } else {
+
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = error.message;
+                    this.showModal("modalInfo");
                 }
-                this.carregando = false;
-                this.erro = true;
-                this.msgErro = error.message;
-                this.showModal("modalInfo");
             });
         },
         getReportOP() {
@@ -430,17 +229,18 @@ export default {
             var ticksF = this.dateToTicks(Fim);
 
             // MUDAR PARA ENDPOINT DE REAMOSTRAGEM
-            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF)
+            axios.get(this.url + "/api/ReportAnalisys/ProductionOrder/" + this.OP)
                 .then((response) => {
                     comsole.log(reponse)
                     console.log('Entrou no retorno do get report op')
                     response.data.report.forEach((obj) => {
-                        obj.date = this.ticksToDate(obj.date, false, false)
+                        obj.dateI = this.ticksToDate(obj.date, false, false)
                         obj.hour = this.ticksToDate(obj.date, false, true)
                     });
                     this.tableData = response.data.report;
-                    this.hideModal();
-                    this.hideModal();
+                    this.hideModal('filterSearch');
+                    this.carregando = false;
+
                 }).catch((error) => {
                     if (error.response.status == '404') {
                         this.carregando = false;
@@ -488,6 +288,5 @@ export default {
     },
     beforeMount() {
         this.getThings();
-        this.getMock();
     },
 }

@@ -12,6 +12,9 @@
             </li>
         </ul>
     </nav>
+    <div id="load" v-show="carregando">
+        <stretch background="#4d4d4d"></stretch>                
+    </div>  
     <div class="cabecalho-table-resampling"  v-show="!carregando">
         <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(tableData, 'product',0):organizar(tableData, 'product',0);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">Data 
@@ -92,11 +95,11 @@
         <!--                            -->
         <!--                            -->                            
         <div v-show="!carregando" class="table-margin-resampling">
-            <div v-for="(t, index) in tableData.report" v-bind:class="{cinza: index%2==0}" :key="index">                                    
+            <div v-for="(t, index) in tableData" v-bind:class="{cinza: index%2==0}" :key="index">                                    
                 <label class="ls2 col-md-1">
-                    {{t.date}}</label>
+                    {{t.dateI}}</label>
                 <label class="ls2 col-md-1">
-                    {{t.date}}</label>
+                    {{t.hour}}</label>
                 <label class="ls2 col-md-1">
                     {{t.op}}</label>
                 <label class="ls2 col-md-1">
@@ -107,7 +110,7 @@
                     {{t.recipeMin + "% - "}} {{t.recipeMax + "%"}}</label>
                 <label class="ls2 col-md-2">
                     {{t.resultAnalysis}}</label>
-                <label class="ls2 col-md-1">
+                <label class="ls2 col-md-1" style="">
                     {{t.status | filterStatus}}</label>
                 <label class="ls2 col-md-1">
                     {{t.correction}}</label>
@@ -161,7 +164,7 @@
     <div class="modal-footer">
         <div class="btn-group" role="group">
             <button class="btn btn-success" @click.stop.prevent="getReportDate();" 
-            :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
+            :disabled=" !date ||!timeIni ||!datef || !timeFim " v-if="filterSelected != 'op'">
                 <i class="fa fa-check-square"></i> Confirmar
             </button>
             <button class="btn btn-success" @click.stop.prevent="getReportOP();" 
@@ -172,6 +175,10 @@
         </div>
     </div>
 </b-modal>
+    <!-- MODAL PARA EXIBIR ERRO  -->
+    <b-modal ref="modalInfo" title="Mensagem" hide-footer>
+    <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
+    </b-modal>
 </div>
 </template>
 

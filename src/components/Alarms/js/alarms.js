@@ -125,11 +125,23 @@ export default {
         hideModal(id) {
             this.$refs[id].show();
         },
-        desorganizar(produtos, product, num) {
-
+        organizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
         },
-        organizar(produtos, product, num) {
-
+        desorganizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
         },
         /*
             TICKS CONVERTER
@@ -591,7 +603,7 @@ export default {
 
         atualizaGraf() {
 
-            window.AmCharts.makeChart("charAlarm", {
+            window.AmCharts.makeChart("chartAlarm", {
                 "path": "dist/amcharts/",
                 "type": "serial",
                 "categoryField": "category",

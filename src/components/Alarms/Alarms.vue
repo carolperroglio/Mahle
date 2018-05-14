@@ -22,11 +22,11 @@
                 </li>                     
             </ul>
         </div>
-        <div id="load-alarms" v-show="carregando">
+        <div id="load" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>                
         </div>            
         <!-- GRÁFICO DOS ALARMES -->
-        <div id="charAlarm" style="width: 100%; height: 400px;margin-top: 15%;"></div>                           
+        <div id="chartAlarm" style="width: 100%; height: 400px;margin-top: 15%;"></div>                           
         
         <!-- Botão para escolher o grupo a ser exibido -->
         <div class="col-sm-2">
