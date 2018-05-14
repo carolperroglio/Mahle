@@ -9,8 +9,12 @@ import VueTimepicker from 'vue2-timepicker'
 import JsonExcel from 'vue-json-excel'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
-import { Stretch } from 'vue-loading-spinner'
-import { setTimeout } from 'timers'
+import {
+    Stretch
+} from 'vue-loading-spinner'
+import {
+    setTimeout
+} from 'timers'
 
 es6promisse.polyfill();
 var ipServerRecipe = process.env.RECIPE_API;
@@ -58,7 +62,9 @@ export default {
             urlGatewayThings: ipReport + '/gateway/things',
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
             config: {
-                headers: { 'Cache-Control': 'no-cache' }
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
             },
 
             cabecalhoSetas: [false, false, false, false, false],
@@ -128,7 +134,7 @@ export default {
         /*
             TICKS CONVERTER
         */
-        ticksToDate(dateTicks) {
+        ticksToDate(dateTicks, containsHour, containsOnlyHour) {
             var epochTicks = 621355968000000000,
                 ticksPerMillisecond = 10000,
                 jsTicks = 0,
@@ -148,10 +154,20 @@ export default {
                 min = jsDate.getMinutes();
             }
 
-            var dateFormatted = jsDate.getDate() + "/" +
-                (jsDate.getMonth() + 1) + "/" +
-                jsDate.getFullYear() + " " + hour + ":" + min;
-            // var hours = jsDate.toString().slice(4, 21);
+            var dateFormatted;
+
+            if (containsHour) {
+                dateFormatted = jsDate.getDate() + "/" +
+                    (jsDate.getMonth() + 1) + "/" +
+                    jsDate.getFullYear() + " " + hour + ":" + min;
+            } else if (containsOnlyHour) {
+                dateFormatted = " " + hour + ":" + min;
+            } else {
+                dateFormatted = jsDate.getDate() + "/" +
+                    (jsDate.getMonth() + 1) + "/" +
+                    jsDate.getFullYear();
+            }
+
             return dateFormatted;
         },
         dateToTicks(dateTime) {
@@ -185,198 +201,330 @@ export default {
             })
         },
         getReport() {
+            console.log("getReport");
             this.groups = [];
             this.groupselected = "";
 
-            this.jSONReport = [{
-                    "thingId": 1,
-                    "groupTag": "Temperatura",
-                    "data": [{
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }, {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }, {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }, {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }, {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }, {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }, {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }, {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }, {
-                            "category": "636615976380000000",
-                            "muito alto": "8",
-                            "alto": "2",
-                            "baixo": "2",
-                            "muito baixo": "8",
-                            "offline": "2"
-                        },
-                        {
-                            "category": "636615976380000000",
-                            "muito alto": "20",
-                            "alto": "15",
-                            "baixo": "15",
-                            "muito baixo": "20",
-                            "offline": "2"
-                        }
+            this.jSONReport = {
+                "graphs": [{
+                        "thingId": 1,
+                        "groupTag": "Temperatura",
+                        "data": [{
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }, {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }, {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }, {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }, {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }, {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }, {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }, {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }, {
+                                "category": "636615976380000000",
+                                "muito alto": "8",
+                                "alto": "2",
+                                "baixo": "2",
+                                "muito baixo": "8",
+                                "offline": "2"
+                            },
+                            {
+                                "category": "636615976380000000",
+                                "muito alto": "20",
+                                "alto": "15",
+                                "baixo": "15",
+                                "muito baixo": "20",
+                                "offline": "2"
+                            }
 
-                    ]
-                },
-                {
-                    "thingId": 1,
-                    "groupTag": "Agitação",
-                    "data": [{
-                            "category": "636616840380000000",
-                            "muito alto": "10",
-                            "alto": "5",
-                            "baixo": "5",
-                            "muito baixo": "10",
-                            "offline": "1"
-                        },
-                        {
-                            "category": "636616912380000000",
-                            "muito alto": "15",
-                            "alto": "5",
-                            "baixo": "5",
-                            "muito baixo": "15",
-                            "offline": "2"
-                        }
-                    ]
-                },
-            ]
+                        ]
+                    },
+                    {
+                        "thingId": 1,
+                        "groupTag": "Agitação",
+                        "data": [{
+                                "category": "636616840380000000",
+                                "muito alto": "10",
+                                "alto": "5",
+                                "baixo": "5",
+                                "muito baixo": "10",
+                                "offline": "1"
+                            },
+                            {
+                                "category": "636616912380000000",
+                                "muito alto": "15",
+                                "alto": "5",
+                                "baixo": "5",
+                                "muito baixo": "15",
+                                "offline": "2"
+                            }
+                        ]
+                    }
+                ],
+                "table": [{
+                        "thingId": 1,
+                        "groupTag": "Temperatura",
+                        "data": [{
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "alto",
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "alto",
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "baixo"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "baixo"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "offline"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "muito alto"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "muito alto"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": " muito baixo"
+                            },
+                        ]
+                    },
+                    {
+                        "thingId": 1,
+                        "groupTag": "Agitação",
+                        "data": [{
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "alto",
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "alto",
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "alto",
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "alto",
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "baixo"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "baixo"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "offline"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "muito alto"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "muito alto"
+                            },
+                            {
+                                "dateIni": "636615976380000000",
+                                "dateEnd": "636615976380000000",
+                                "type": "muito baixo"
+                            },
+                        ]
+                    },
+                ]
+
+            }
+
 
             this.editGroup();
+        },
+        getTable(groupselected) {
+            var objTable = {};
+            this.tableAlarms = []
+
+            this.jSONReport.table.forEach(obj => {
+                if (groupselected == obj.groupTag) {
+                    for (var x = 0; x < obj.data.length; x++) {
+                        for (var key in obj.data[x]) {
+                            objTable["thingId"] = obj.thingId;
+                            objTable["groupTag"] = obj.groupTag;
+                            if (key == 'dateIni') {
+                                objTable[key] = this.ticksToDate(obj.data[x][key], false, false);
+                                objTable["hourIni"] = this.ticksToDate(obj.data[x][key], false, true);
+                            } else if (key == 'dateEnd') {
+                                objTable[key] = this.ticksToDate(obj.data[x][key], false, true);
+                            } else {
+                                objTable[key] = obj.data[x][key];
+                            }
+                        }
+                        this.tableAlarms.push(objTable);
+                        objTable = {};
+                    }
+                }
+            });
+            // this.tableAlarms = this.jSONReport.table;
         },
         editGroup() {
             //LIMPA O JSON PARA TIRAR OS GRUPOS DA PESQUISA ANTERIOR
             this.groups = [];
             // pega todos os grupos existentes
-            for (var x = 0; x < this.jSONReport.length; x++) {
-                this.groups.push(this.jSONReport[x].groupTag);
+            for (var x = 0; x < this.jSONReport.graphs.length; x++) {
+                this.groups.push(this.jSONReport.graphs[x].groupTag);
             }
             console.log(this.groups);
 
@@ -388,7 +536,7 @@ export default {
             this.graphs = []
 
             var obj2 = {};
-            var obj = this.jSONReport[0];
+            var obj = this.jSONReport.graphs[0];
             for (var key in obj.data[0]) {
                 if (key != 'category') {
                     obj2["balloonColor"] = "#808080";
@@ -419,12 +567,12 @@ export default {
             var objProvider = {};
             this.dataProvider = [];
 
-            this.jSONReport.forEach(obj => {
+            this.jSONReport.graphs.forEach(obj => {
                 if (groupselected == obj.groupTag) {
                     for (var x = 0; x < obj.data.length; x++) {
                         for (var key in obj.data[x]) {
                             if (key == 'category') {
-                                objProvider[key] = this.ticksToDate(obj.data[x][key]);
+                                objProvider[key] = this.ticksToDate(obj.data[x][key], false, false);
                             } else {
                                 objProvider[key] = obj.data[x][key];
                             }
@@ -437,7 +585,7 @@ export default {
 
             console.log("this.dataProvider")
             console.log(this.dataProvider)
-
+            this.getTable(groupselected);
             this.atualizaGraf();
         },
 

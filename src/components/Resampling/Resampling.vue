@@ -19,6 +19,12 @@
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
             </font></b>
         </label>
+        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(tableData, 'product',0):organizar(tableData, 'product',0);" class="ls2 col-md-1">
+            <b><font class="cursor-class" color="#ffffff">Hora 
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+            </font></b>
+        </label>
         <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(tableData, 'minValue',1):organizar(tableData, 'minValue',1);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">
                 OPL 
@@ -33,41 +39,49 @@
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
         </label>
-        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-2">
+        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">
-                Resultado da Análise (%)
+                Produto 
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
         </label>
-        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-1">
+        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">
-                Resultado
+                Especificado(%)
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+            </font></b>
+        </label>
+        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-2">
+            <b><font class="cursor-class" color="#ffffff">
+                Resultado da Análise (%)
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
         </label> 
         <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">
-                Correção (Kg) 
+                Resultado
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
         </label>  
-        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-2">
+        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">
-                Resultado Final da Amostra 
+                Correção (Kg)  
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
         </label>
-        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-2">
+        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(tableData, 'maxValue',2):organizar(tableData, 'maxValue',2);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">
                 Usuário
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
-        </label>                   
+        </label>     
+                     
     </div>                                             
 
 
@@ -78,9 +92,28 @@
         <!--                            -->
         <!--                            -->                            
         <div v-show="!carregando" class="table-margin-resampling">
-            <div v-for="(t, index) in tableData" v-bind:class="{cinza: index%2==0}" :key="index">                                    
+            <div v-for="(t, index) in tableData.report" v-bind:class="{cinza: index%2==0}" :key="index">                                    
+                <label class="ls2 col-md-1">
+                    {{t.date}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.date}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.op}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.numberAnalysis}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.productName}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.recipeMin + "% - "}} {{t.recipeMax + "%"}}</label>
                 <label class="ls2 col-md-2">
-                    {{t}}</label>
+                    {{t.resultAnalysis}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.status | filterStatus}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.correction}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.userName}}</label>
+
             </div>                       
         </div> 
 

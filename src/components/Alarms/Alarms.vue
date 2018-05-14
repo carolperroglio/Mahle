@@ -89,7 +89,17 @@
         <div v-show="!carregando" class="alarms-produtos">
             <div v-for="(t, index) in tableAlarms" v-bind:class="{cinza: index%2==0}" :key="index">                                    
                 <label class="ls2 col-md-2">
-                    {{t}}</label>
+                    {{t.groupTag}}</label>
+                <label class="ls2 col-md-2">
+                    {{t.thingId}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.type}}</label>
+                <label class="ls2 col-md-2">
+                    {{t.dateIni}}</label>
+                <label class="ls2 col-md-2">
+                    {{t.hourIni}}</label>
+                <label class="ls2 col-md-2">
+                    {{t.hourIni}}</label>
             </div>                       
         </div> 
         

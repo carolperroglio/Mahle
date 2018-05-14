@@ -104,7 +104,7 @@ export default {
         /*
             TICKS CONVERTER
         */
-        ticksToDate(dateTicks) {
+        ticksToDate(dateTicks, containsHour, containsOnlyHour) {
             var epochTicks = 621355968000000000,
                 ticksPerMillisecond = 10000,
                 jsTicks = 0,
@@ -124,10 +124,20 @@ export default {
                 min = jsDate.getMinutes();
             }
 
-            var dateFormatted = jsDate.getDate() + "/" +
-                (jsDate.getMonth() + 1) + "/" +
-                jsDate.getFullYear() + " " + hour + ":" + min;
-            // var hours = jsDate.toString().slice(4, 21);
+            var dateFormatted;
+
+            if (containsHour == true) {
+                dateFormatted = jsDate.getDate() + "/" +
+                    (jsDate.getMonth() + 1) + "/" +
+                    jsDate.getFullYear() + " " + hour + ":" + min;
+            } else if (containsOnlyHour == true) {
+                dateFormatted = " " + hour + ":" + min;
+            } else {
+                dateFormatted = jsDate.getDate() + "/" +
+                    (jsDate.getMonth() + 1) + "/" +
+                    jsDate.getFullYear();
+            }
+
             return dateFormatted;
         },
         dateToTicks(dateTime) {
@@ -160,6 +170,212 @@ export default {
                 console.log(error);
             })
         },
+        getMock() {
+            this.tableData = {
+                "report": [{
+                        "date": 636614801923361089,
+                        "op": "op0805",
+                        "numberAnalysis": 1,
+                        "productId": 21,
+                        "productName": "Ferro",
+                        "recipeMin": 0,
+                        "recipeMax": 0.5,
+                        "resultAnalysis": 15,
+                        "correction": "0",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614801923361089,
+                        "op": "op0805",
+                        "numberAnalysis": 1,
+                        "productId": 2,
+                        "productName": "Estanho",
+                        "recipeMin": 9.5,
+                        "recipeMax": 11,
+                        "resultAnalysis": 5,
+                        "correction": "126.5",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614910904536185,
+                        "op": "op0805",
+                        "numberAnalysis": 2,
+                        "productId": 21,
+                        "productName": "Ferro",
+                        "recipeMin": 0,
+                        "recipeMax": 0.5,
+                        "resultAnalysis": 0,
+                        "correction": "5.5",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614910904536185,
+                        "op": "op0805",
+                        "numberAnalysis": 2,
+                        "productId": 1,
+                        "productName": "Chumbo",
+                        "recipeMin": 9.5,
+                        "recipeMax": 11,
+                        "resultAnalysis": 10,
+                        "correction": "5.5",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614910904536185,
+                        "op": "op0805",
+                        "numberAnalysis": 2,
+                        "productId": 20,
+                        "productName": "Níquel",
+                        "recipeMin": 0,
+                        "recipeMax": 0.5,
+                        "resultAnalysis": 0,
+                        "correction": "5.5",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614910904536185,
+                        "op": "op0805",
+                        "numberAnalysis": 2,
+                        "productId": 22,
+                        "productName": "Fósforo",
+                        "recipeMin": 0,
+                        "recipeMax": 0.1,
+                        "resultAnalysis": 0,
+                        "correction": "1.1",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614910904536185,
+                        "op": "op0805",
+                        "numberAnalysis": 2,
+                        "productId": 23,
+                        "productName": "Zinco",
+                        "recipeMin": 0,
+                        "recipeMax": 0.3,
+                        "resultAnalysis": 0,
+                        "correction": "3.3",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614910904536185,
+                        "op": "op0805",
+                        "numberAnalysis": 2,
+                        "productId": 2,
+                        "productName": "Estanho",
+                        "recipeMin": 9.5,
+                        "recipeMax": 11,
+                        "resultAnalysis": 10,
+                        "correction": "5.5",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614912466350805,
+                        "op": "op0805",
+                        "numberAnalysis": 3,
+                        "productId": 2,
+                        "productName": "Estanho",
+                        "recipeMin": 9.5,
+                        "recipeMax": 11,
+                        "resultAnalysis": 0,
+                        "correction": "225.5",
+                        "status": "reproved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614923919786177,
+                        "op": "op0805",
+                        "numberAnalysis": 4,
+                        "productId": 1,
+                        "productName": "Chumbo",
+                        "recipeMin": 9.5,
+                        "recipeMax": 11,
+                        "resultAnalysis": 10,
+                        "correction": "0",
+                        "status": "approved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614923919786177,
+                        "op": "op0805",
+                        "numberAnalysis": 4,
+                        "productId": 21,
+                        "productName": "Ferro",
+                        "recipeMin": 0,
+                        "recipeMax": 0.5,
+                        "resultAnalysis": 0,
+                        "correction": "0",
+                        "status": "approved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614923919786177,
+                        "op": "op0805",
+                        "numberAnalysis": 4,
+                        "productId": 2,
+                        "productName": "Estanho",
+                        "recipeMin": 9.5,
+                        "recipeMax": 11,
+                        "resultAnalysis": 10,
+                        "correction": "0",
+                        "status": "approved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614923919786177,
+                        "op": "op0805",
+                        "numberAnalysis": 4,
+                        "productId": 20,
+                        "productName": "Níquel",
+                        "recipeMin": 0,
+                        "recipeMax": 0.5,
+                        "resultAnalysis": 0,
+                        "correction": "0",
+                        "status": "approved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614923919786177,
+                        "op": "op0805",
+                        "numberAnalysis": 4,
+                        "productId": 22,
+                        "productName": "Fósforo",
+                        "recipeMin": 0,
+                        "recipeMax": 0.1,
+                        "resultAnalysis": 0,
+                        "correction": "0",
+                        "status": "approved",
+                        "userName": null
+                    },
+                    {
+                        "date": 636614923919786177,
+                        "op": "op0805",
+                        "numberAnalysis": 4,
+                        "productId": 23,
+                        "productName": "Zinco",
+                        "recipeMin": 0,
+                        "recipeMax": 0.3,
+                        "resultAnalysis": 0,
+                        "correction": "0",
+                        "status": "approved",
+                        "userName": null
+                    }
+                ]
+            }
+            this.tableData.report.forEach((obj) => {
+                obj.date = this.ticksToDate(obj.date, false, false)
+                obj.hour = this.ticksToDate(obj.date, false, true)
+            });
+            this.tableData = response.data.report;
+            this.hideModal();
+        },
         // CALL REPORT ENDPOINT TO FILL TABLE
         getReportDate() {
             this.providertable = [];
@@ -175,8 +391,15 @@ export default {
             axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
                 '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
                 console.log('Entrou no retorno do get report date')
-                this.tableData = response.data;
+
+                // convert ticks em datetime e seapra data e hora
+                response.data.report.forEach((obj) => {
+                    obj.date = this.ticksToDate(obj.date, false, false)
+                    obj.hour = this.ticksToDate(obj.date, false, true)
+                });
+                this.tableData = response.data.report;
                 this.hideModal();
+
             }).catch((error) => {
                 if (error.response != undefined) {
                     if (error.response.status == '404') {
@@ -211,7 +434,12 @@ export default {
                 .then((response) => {
                     comsole.log(reponse)
                     console.log('Entrou no retorno do get report op')
-                    this.tableData = response.data;
+                    response.data.report.forEach((obj) => {
+                        obj.date = this.ticksToDate(obj.date, false, false)
+                        obj.hour = this.ticksToDate(obj.date, false, true)
+                    });
+                    this.tableData = response.data.report;
+                    this.hideModal();
                     this.hideModal();
                 }).catch((error) => {
                     if (error.response.status == '404') {
@@ -228,8 +456,38 @@ export default {
                 });
         },
     },
+    filters: {
+        filterStatus: function(value) {
+            switch (value) {
+                case 'created':
+                    return "Criada"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativa"
+                    break;
+                case 'reproved':
+                    return "Reprovada"
+                    break;
+                case 'ended':
+                    return "Finalizada"
+                    break;
+                case 'waiting_approval':
+                    return "Em Análise"
+                    break;
+                case 'approved':
+                    return "Aprovada"
+                    break;
+                default:
+                    break;
 
+            }
+        },
+    },
     beforeMount() {
         this.getThings();
+        this.getMock();
     },
 }

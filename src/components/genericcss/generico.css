@@ -41,6 +41,7 @@ button {
     /* Menu de navegação padrão cinza */
     .table-margin {
         margin: 29% 0 6% 0;
+        margin-bottom: 3%;
     }
     .nav-cinza {
         position: fixed;
@@ -142,6 +143,7 @@ button {
     }
     .table-margin {
         margin: 17% 0 6% 0;
+        margin-bottom: 3%;
     }
     .btn-view-pos {
         bottom: 5%;
@@ -199,6 +201,7 @@ button {
     }
     .table-margin {
         margin: 14% 0 6% 0;
+        margin-bottom: 3%;
     }
     .btn-view-pos {
         bottom: 5%;

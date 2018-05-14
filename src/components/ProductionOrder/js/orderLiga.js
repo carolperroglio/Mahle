@@ -496,19 +496,25 @@ export default {
         filterStatus: function(value) {
             switch (value) {
                 case 'created':
-                    return "Criado"
+                    return "Criada"
                     break;
                 case 'available':
                     return "Disponível"
                     break;
                 case 'active':
-                    return "Ativo"
+                    return "Ativa"
                     break;
                 case 'reproved':
-                    return "Reprovado"
+                    return "Reprovada"
                     break;
                 case 'ended':
-                    return "Finalizado"
+                    return "Finalizada"
+                    break;
+                case 'waiting_approval':
+                    return "Em Análise"
+                    break;
+                case 'approved':
+                    return "Aprovada"
                     break;
                 default:
                     break;
