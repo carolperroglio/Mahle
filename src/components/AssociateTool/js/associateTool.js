@@ -72,18 +72,8 @@ export default {
                 }
             })
 
-            axios.get(this.url + '/api/tool?fieldFilter=' + '' + '&fieldValue=' + name).then((response) => {
+            axios.get(this.url + '/api/tool?fieldFilter=status&fieldValue=available').then((response) => {
                 var x = 0;
-                // var positions = [];
-                // while (x < this.positionLength) {
-                //     positions.push(x + 1);
-                //     x++
-                // }
-                // for (var r = 0; r < response.data.values.length; r++) {
-                //     if (response.data.values[r].currentThing != undefined) {
-                //         response.data.values[r].position = 2;
-                //     }
-                // }
 
                 x = 0;
                 var posAux = {}
