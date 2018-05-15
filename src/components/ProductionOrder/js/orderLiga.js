@@ -194,8 +194,11 @@ export default {
             this.carregando = true;
             //ID Grupo do forno de fusao: 11
             axios.get(this.urlGateway + "11").then((response) => {
-                this.equipaments = response.data.things;
-                this.carregando = false;
+                this.equipaments.push(response.data.things[0]);
+                axios.get(this.urlGateway + "23").then((response) => {
+                    this.equipaments.push(response.data.things[0]);
+                    this.carregando = false;
+                })
             }).catch((error) => {
                 this.carregando = false;
                 this.erro = true;
@@ -496,19 +499,25 @@ export default {
         filterStatus: function(value) {
             switch (value) {
                 case 'created':
-                    return "Criado"
+                    return "Criada"
                     break;
                 case 'available':
                     return "Disponível"
                     break;
                 case 'active':
-                    return "Ativo"
+                    return "Ativa"
                     break;
                 case 'reproved':
-                    return "Reprovado"
+                    return "Reprovada"
                     break;
                 case 'ended':
-                    return "Finalizado"
+                    return "Finalizada"
+                    break;
+                case 'waiting_approval':
+                    return "Em Análise"
+                    break;
+                case 'approved':
+                    return "Aprovada"
                     break;
                 default:
                     break;

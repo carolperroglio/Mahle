@@ -271,11 +271,11 @@ footer {
 
 .logo-spi {
     position: fixed;
-    top: 95%;
+    top: 96%;
     z-index: 7;
     right: 0.4%;
-    width: 7%;
-    height: 5%;
+    width: 5%;
+    height: 4%;
 }
 
 .refactor-class-row {

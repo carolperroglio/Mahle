@@ -36,10 +36,13 @@ export default {
             objUserGroup: {},
             /* ---------------*/
             erro: false,
+            blockButton: true,
+            blockButtonUser: true,
             keyhashed: "",
             userlist: [],
             inicialuserlist: [],
             permissionsList: [],
+            incialPermissionList: [],
             uSelected: {},
             pSelected: {},
             users2: '',
@@ -54,7 +57,11 @@ export default {
     computed: {},
     methods: {
         showModal(id) {
+            var blockButton = true
+            var blockButtonUser = true
             this.$refs[id].show();
+            this.blockButton = JSON.parse(JSON.stringify(blockButton));
+            this.blockButtonUser = JSON.parse(JSON.stringify(blockButtonUser));
         },
         hideModal(id) {
             this.$refs[id].hide();
@@ -146,10 +153,15 @@ export default {
 
             axios.get(this.urlpermission).then((response) => {
                 var data = response.data;
+                var list = []
                 var obj = {};
                 for (var key in data) {
+                    list.push(key);
                     this.permissionsList.push(key);
                 }
+
+                this.incialPermissionList = list;
+
 
             }).catch(error => {
                 this.erro = true;
@@ -308,14 +320,44 @@ export default {
         //EM CONSTRUÇÃO
         checkPermissionList(obj) {
             this.permissions = [];
-            var newListPermission;
+            var newListPermission = [];
+            this.permissionsList = JSON.parse(JSON.stringify(this.incialPermissionList));
 
+            for (var x = 0; x < obj.permissions.length; x++) {
+                for (var i = 0; i < this.permissionsList.length; i++) {
+                    if (obj.permissions[x] == this.permissionsList[i])
+                        this.permissionsList[i] = null;
+                }
+            }
+
+            for (var i = 0; i < this.permissionsList.length; i++) {
+                if (this.permissionsList[i] != null) {
+                    newListPermission.push(this.permissionsList[i]);
+                }
+            }
+
+            this.permissionsList = newListPermission;
+
+            // if (obj.permissions.length > 0) {
+            //     for (var i = 0; i < obj.permissions.length; i++) {
+            //         for (var x = 0; x < this.permissionsList.length; x++) {
+            //             if (obj.permissions[i] != this.permissionsList[x]) {
+            //                 newListPermission.push(this.permissionsList[x]);
+            //             }
+            //         }
+            //     }
+            //     this.permissionsList = newListPermission;
+            // } else {
+            //     this.permissionsList = this.incialPermissionList;
+            // }
 
         },
         checkUserList(obj) {
             this.users = [];
             var newListUser = [];
-            // verifica se p usuário ja exite no grupo, se sim, remove da lista
+            this.userlist = JSON.parse(JSON.stringify(this.inicialuserlist));
+
+            // verifica se o usuário ja exite no grupo, se sim, remove da lista
             if (obj.users.length > 0) {
                 for (var i = 0; i < this.userlist.length; i++) {
                     for (var x = 0; x < obj.users.length; x++) {

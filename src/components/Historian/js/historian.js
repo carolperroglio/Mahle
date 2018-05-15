@@ -44,6 +44,8 @@ import {
 } from 'util';
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
+// import 'amcharts3/amcharts/plugins/export/'
+// import 'amcharts3/amcharts/plugins/export/'
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -165,6 +167,7 @@ export default {
             prosFim: [],
             erro: '',
             msgErro: '',
+            cabecalhoSetas: [false, false, false, false, false, false, false]
         }
     },
     components: {
@@ -188,7 +191,30 @@ export default {
     },
     methods: {
         showModal(id) {
-            this.$refs[id].show();
+            setTimeout(() => {
+                this.$refs[id].show();
+            }, 500);
+        },
+        hideModal(id) {
+            this.$refs[id].hide();
+        },
+        organizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
+        },
+        desorganizar(hp, campo, pos) {
+            hp.sort(function(a, b) {
+                return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);
+            });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
         },
         getThingName(t) {
             this.thingName = t.thingName;
@@ -201,7 +227,8 @@ export default {
             this.dataentry = ''
         },
         getThings() {
-            axios.get(this.url + '/api/things').then((response) => {
+            console.log('getThings')
+            axios.get(this.url).then((response) => {
                 this.things = response.data;
             }, (error) => {
                 console.log(error);
@@ -246,7 +273,7 @@ export default {
                 this.newGroup = this.groups[0];
                 this.carregando = false;
                 this.created();
-                this.hideModal();
+                this.hideModal('myModalEdit');
                 // }
             }).catch((error) => {
                 if (error.response != undefined) {
@@ -292,7 +319,7 @@ export default {
                 this.newGroup = this.groups[0];
                 this.carregando = false;
                 this.created();
-                this.hideModal();
+                this.hideModal('myModalEdit');
             }).catch((error) => {
                 if (error.response.status == '404') {
                     this.carregando = false;
@@ -331,7 +358,7 @@ export default {
                     this.newGroup = this.groups[0];
                     this.carregando = false;
                     this.created();
-                    this.hideModal();
+                    this.hideModal('myModalEdit');
                 }).catch((error) => {
                     if (error.response.status == '404') {
                         this.carregando = false;
@@ -481,7 +508,43 @@ export default {
                 objaux.category = newObj.category;
                 objaux.Hora = newObj.Hora;
                 for (var key in newObj) {
-                    objaux[key] = newObj[key]
+                    var newkey = '';
+                    switch (key) {
+                        case 'Data':
+                            newkey = "data"
+                            break;
+                        case 'Hora':
+                            newkey = "hora"
+                            break;
+                        case 'Valor Medição':
+                            newkey = "vm"
+                            break;
+                        case 'LIE Limite superior de especific':
+                            newkey = 'lse'
+                            break;
+                        case 'LSE Limite superior de especificação':
+                            newkey = "lse"
+                            break;
+                        case 'LSE Limite superior de especific':
+                            newkey = "lse"
+                            break;
+                        case 'LSC Limite superior de controle':
+                            newkey = "lsc"
+                            break;
+                        case 'LIC Limite inferior de controle':
+                            newkey = "lic"
+                            break;
+                        case 'LIE Limite inferior de especific':
+                            newkey = "lie"
+                            break;
+                        case 'LIE Limite inferior de especificação':
+                            newkey = "lie"
+                            break;
+                        default:
+                            break;
+                    }
+                    objaux[newkey] = newObj[key]
+
                 }
                 finalprovider.push(objaux);
                 objaux = {}
@@ -639,15 +702,6 @@ export default {
 
         },
 
-        showModal(id) {
-            setTimeout(() => {
-                this.$refs[id].show()
-            }, 200);
-        },
-
-        hideModal() {
-            this.$refs.myModalEdit.hide();
-        },
 
         created() {
             console.log('Entrou no created que chama o makeChart()')

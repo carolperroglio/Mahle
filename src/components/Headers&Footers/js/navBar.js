@@ -37,11 +37,12 @@ export default {
         Logout() {
             // Limpando o chace de segurança no cookie
             VueCookies.remove('security');
-            VueCookies.set('username', 'ok');
+            VueCookies.set('username', null);
             this.username = VueCookies.get('username');
             //chama o método que busca o username e atribui a nav
             app.default.methods.getUsername();
             //redireciona para a tela principal STATUS DO MES
+            location.reload();
             this.$router.push({
                 name: "Login"
             });

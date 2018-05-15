@@ -36,6 +36,7 @@ export default {
         return {
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderTypeId&fieldValue=2&fieldFilter=productionOrderNumber&fieldValue=',
             urlGatewayThings: ipReport + '/gateway/things',
+            url: ipReport,
             config: {
                 headers: { 'Cache-Control': 'no-cache' }
             },
@@ -73,7 +74,8 @@ export default {
             tableData: [],
             filterSelected: '',
             //
-            prosFim: []
+            prosFim: [],
+            opName: ''
         }
     },
     components: {
@@ -93,7 +95,7 @@ export default {
             this.$refs[id].show();
         },
         hideModal(id) {
-            this.$refs[id].show();
+            this.$refs[id].hide();
         },
         desorganizar(produtos, product, num) {
 
@@ -104,7 +106,7 @@ export default {
         /*
             TICKS CONVERTER
         */
-        ticksToDate(dateTicks) {
+        ticksToDate(dateTicks, containsHour, containsOnlyHour) {
             var epochTicks = 621355968000000000,
                 ticksPerMillisecond = 10000,
                 jsTicks = 0,
@@ -124,10 +126,20 @@ export default {
                 min = jsDate.getMinutes();
             }
 
-            var dateFormatted = jsDate.getDate() + "/" +
-                (jsDate.getMonth() + 1) + "/" +
-                jsDate.getFullYear() + " " + hour + ":" + min;
-            // var hours = jsDate.toString().slice(4, 21);
+            var dateFormatted;
+
+            if (containsHour) {
+                dateFormatted = jsDate.getDate() + "/" +
+                    (jsDate.getMonth() + 1) + "/" +
+                    jsDate.getFullYear() + " " + hour + ":" + min;
+            } else if (containsOnlyHour) {
+                dateFormatted = " " + hour + ":" + min;
+            } else {
+                dateFormatted = jsDate.getDate() + "/" +
+                    (jsDate.getMonth() + 1) + "/" +
+                    jsDate.getFullYear();
+            }
+
             return dateFormatted;
         },
         dateToTicks(dateTime) {
@@ -172,11 +184,19 @@ export default {
             var ticksF = this.dateToTicks(Fim);
 
             // MUDAR PARA ENDPOINT DE REAMOSTRAGEM
-            axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
-                '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+            axios.get(this.url + "/api/ReportAnalisys/Date?startdate=" + ticksI + "&endDate=" + ticksF).then((response) => {
                 console.log('Entrou no retorno do get report date')
-                this.tableData = response.data;
-                this.hideModal();
+
+                // convert ticks em datetime e seapra data e hora
+                response.data.report.forEach((obj) => {
+                    obj.dateI = this.ticksToDate(obj.date, false, false)
+                    obj.hour = this.ticksToDate(obj.date, false, true)
+                });
+                this.tableData = response.data.report;
+                this.hideModal('filterSearch');
+                this.carregando = false;
+
+
             }).catch((error) => {
                 if (error.response != undefined) {
                     if (error.response.status == '404') {
@@ -190,11 +210,13 @@ export default {
                         this.msgErro = error.message;
                         this.showModal("modalInfo");
                     }
+                } else {
+
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = error.message;
+                    this.showModal("modalInfo");
                 }
-                this.carregando = false;
-                this.erro = true;
-                this.msgErro = error.message;
-                this.showModal("modalInfo");
             });
         },
         getReportOP() {
@@ -207,12 +229,18 @@ export default {
             var ticksF = this.dateToTicks(Fim);
 
             // MUDAR PARA ENDPOINT DE REAMOSTRAGEM
-            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF)
+            axios.get(this.url + "/api/ReportAnalisys/ProductionOrder/" + this.OP)
                 .then((response) => {
                     comsole.log(reponse)
                     console.log('Entrou no retorno do get report op')
-                    this.tableData = response.data;
-                    this.hideModal();
+                    response.data.report.forEach((obj) => {
+                        obj.dateI = this.ticksToDate(obj.date, false, false)
+                        obj.hour = this.ticksToDate(obj.date, false, true)
+                    });
+                    this.tableData = response.data.report;
+                    this.hideModal('filterSearch');
+                    this.carregando = false;
+
                 }).catch((error) => {
                     if (error.response.status == '404') {
                         this.carregando = false;
@@ -228,7 +256,36 @@ export default {
                 });
         },
     },
+    filters: {
+        filterStatus: function(value) {
+            switch (value) {
+                case 'created':
+                    return "Criada"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativa"
+                    break;
+                case 'reproved':
+                    return "Reprovada"
+                    break;
+                case 'ended':
+                    return "Finalizada"
+                    break;
+                case 'waiting_approval':
+                    return "Em Análise"
+                    break;
+                case 'approved':
+                    return "Aprovada"
+                    break;
+                default:
+                    break;
 
+            }
+        },
+    },
     beforeMount() {
         this.getThings();
     },

@@ -10,7 +10,8 @@
             <form class="form-inline my-3 form-control-sm">
                 <!-- Button trigger modal -->
                 <div class="col-md-3">
-                    <button @click="showModal('cadUserGroup');cleanVariableCreate(); userlist = inicialuserlist" type="button" class="btn btn-success btn-lg">
+                    <button @click="showModal('cadUserGroup');cleanVariableCreate(); 
+                    userlist = inicialuserlist;permissionsList = incialPermissionList;uSelected = {};pSelected={}" type="button" class="btn btn-success btn-lg">
                         <i class="fa fa-plus"></i> Cadastrar Grupo de Usuário
                     </button>
                 </div>
@@ -59,7 +60,8 @@
         </label>
         <label class="ls1-usergroup col-md-1">
             <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUserGroup = u;showModal('deleteUsergroup')"></i>
-            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUserGroup = u;checkUserList(u);showModal('editUserGroup')"></i>
+            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUserGroup = u;checkPermissionList(u);checkUserList(u);
+            showModal('editUserGroup');uSelected = {};pSelected={};"></i>
         </label>
     </div>
     </div>  
@@ -82,10 +84,10 @@
             <input required type="text" class="form-control" id="descrip" placeholder="Ex: mauriciot" v-model="description">
         </div>
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
     <div class="form-group col-md-5">
     <label for="password">Usuários</label>
-    <select class="form-control  mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="uSelected">
+    <select class="form-control  mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="uSelected" @change="blockButtonUser = false">
         <option value="" selected disabled></option>
         <option v-for="(u,index) in userlist" v-bind:value="u" v-bind:key="index" >
             {{ u.username }}
@@ -94,26 +96,26 @@
     </div>
     <div class="form-group col-md-1">
         <br>
-    <button class="btn btn-outline-success btn-sm"  @click.stop.prevent="addUserToGroup(uSelected,objUserGroup.userGroupId)">
+    <button class="btn btn-outline-success btn-sm"  @click.stop.prevent="addUserToGroup(uSelected,objUserGroup.userGroupId)" :disabled="blockButtonUser">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </button>
     </div>
     <div class="form-group col-md-5">
     <label for="password">Permissões</label>
-    <select class="form-control  mr-sm-2.5" aria-placeholder="tipo de ordem"  v-model="pSelected">
-        <option value="" selected disabled></option>
-        <option v-for="(p,index) in permissionsList" v-bind:value="p" v-bind:key="index">
+    <select class="form-control  mr-sm-2.5" aria-placeholder="tipo de ordem"  v-model="pSelected"  @change="blockButton=false">
+        <option v-for="(p,index) in permissionsList" v-bind:value="p" v-bind:key="index" v-if="permissionsList.length > 0">
             {{ p }}
         </option>
+        <option value="" disabled v-show="permissionsList.length == 0">Sem permissões para adicionar</option>
     </select>
     </div>
     <div class="form-group col-md-1">
         <br>
-    <button class="btn btn-outline-success btn-sm" @click.stop.prevent="addPermissionToGroup(pSelected,objUserGroup.userGroupId)">
+    <button class="btn btn-outline-success btn-sm" @click.stop.prevent="addPermissionToGroup(pSelected,objUserGroup.userGroupId)" :disabled="blockButton" >
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </button>
     </div>
-    </div>
+    </div> -->
     <div class="form-group row">
     <div class="form-group col-md-6"> 
     <ul class="list-group" v-for="(us,index) in users" v-bind:key="index">

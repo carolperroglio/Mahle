@@ -7,14 +7,13 @@
     }
     /* Tabela */
     .cabecalho-table-alarms {
-        position: fixed;
         width: 100%;
         background-color: black;
-        margin: -9% 0 0 0;
+        margin: 4% 0 0 0;
         z-index: 4;
     }
     .alarms-produtos {
-        margin-top: 48.5%;
+        margin: 0.5% 0 3% 0;
     }
     .nome-alarms {
         width: 100%;
@@ -33,9 +32,6 @@
         margin-left: 1%;
         margin-top: 1.2%;
     }
-    #load-alarms {
-        margin: 15% 0 0 50% !important;
-    }
 }
 
 @media (min-width: 960px) {
@@ -46,14 +42,13 @@
     }
     /* Tabela */
     .cabecalho-table-alarms {
-        position: fixed;
         width: 100%;
         background-color: black;
         margin: 6% 0 0 0;
         z-index: 4;
     }
     .alarms-produtos {
-        margin-top: 22.5%;
+        margin: 0.5% 0 3% 0;
     }
     .nome-alarms {
         width: 100%;
@@ -72,40 +67,18 @@
         margin-left: 1%;
         margin-top: 1.2%;
     }
-    #load-alarms {
-        margin: 15% 0 0 50% !important;
-    }
 }
 
 @media (min-width:1400px) {
     /* Tabela */
     .cabecalho-table-alarms {
-        position: fixed;
         width: 100%;
         background-color: black;
-        margin: -1.7% 0 0 0;
+        margin: 1.3% 0 0 0;
         z-index: 4;
     }
     .alarms-produtos {
-        margin-top: 19.5%;
-    }
-    .fim {
-        padding-left: 15%;
-    }
-    /*Box das Fases*/
-}
-
-@media (min-width:1400px) {
-    /* Tabela */
-    .cabecalho-table-alarms {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -1.7% 0 0 0;
-        z-index: 4;
-    }
-    .alarms-produtos {
-        margin-top: 19.5%;
+        margin: 0.5% 0 3% 0;
     }
     .fim {
         padding-left: 15%;

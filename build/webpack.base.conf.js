@@ -66,9 +66,14 @@ module.exports = {
             inject: true
         }),
         new CopyWebpackPlugin([{
-            from: 'node_modules/amcharts3/amcharts/images',
-            to: 'amcharts/images'
-        }, ])
+                from: 'node_modules/amcharts3/amcharts/images',
+                to: 'amcharts/images'
+            },
+            {
+                from: 'node_modules/amcharts3/amcharts/plugins/export',
+                to: 'amcharts/export'
+            },
+        ])
     ],
 
     module: {
