@@ -1,6 +1,23 @@
 @import url("./../../genericcss/generico.css");
-body {
-    font-family: "Lucida Sans Unicode";
+@media (min-width: 768px) {
+    .history {
+        margin-left: 2%;
+        margin-top: 27%;
+    }
+}
+
+@media (min-width: 968px) {
+    .history {
+        margin-left: 2%;
+        margin-top: 19%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .history {
+        margin-left: 2%;
+        margin-top: 18%;
+    }
 }
 
 .cabecalho-table-rastreamento {

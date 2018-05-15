@@ -54,7 +54,8 @@ export default {
             products: [],
             prod: {},
             cobre: {},
-            cobreqtd: ''
+            cobreqtd: '',
+            blockAdd: false
         }
     },
     components: {
@@ -140,9 +141,11 @@ export default {
                 this.erro = false;
                 switch (response.data.status) {
                     case 'reproved':
+                        this.erro = true;
                         response.data.status = 'Reprovada'
                         break;
                     case 'approved':
+                        this.erro = false;
                         response.data.status = 'Aprovada'
                         break;
                 }

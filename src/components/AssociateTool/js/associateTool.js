@@ -64,19 +64,27 @@ export default {
             console.log(positionQtd);
             var positions;
             var id = this.$route.params.id;
+            var nameType;
             //pega as position do Tipo de Ferramenta do toolTypeId = id
             positionQtd.forEach(obj => {
                 if (obj.toolTypeId == id) {
                     this.positionLength = obj.positionQtd;
                     positions = obj.positions
+                    nameType = obj.toolTypeName;
                 }
             })
 
-            axios.get(this.url + '/api/tool?fieldFilter=status&fieldValue=available').then((response) => {
+            var getherTools = [];
+            axios.get(this.url + '/api/tool?fieldFilter=typeName&fieldValue=' + nameType).then((response) => {
+                getherTools = response.data.values;
+                // axios.get(this.url + '/api/tool').then((response) => {
+                // getherTools.concat(response.data.values);
+                // console.log(getherTools);
                 var x = 0;
 
                 x = 0;
                 var posAux = {}
+
                 response.data.values.forEach(obj => {
                     if (obj.typeId == id) {
                         // Se a tool estiver associada
@@ -148,6 +156,12 @@ export default {
                     count++;
                     this.tools.push(objeto);
                 }
+                // }).catch((error) => {
+                //     this.erro = true;
+                //     this.carregando = false;
+                //     this.msg = error.message;
+                //     this.showModal("modalErro");
+                // })
             }).catch((error) => {
                 this.erro = true;
                 this.carregando = false;

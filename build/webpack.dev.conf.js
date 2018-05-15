@@ -13,7 +13,9 @@ const PORT = process.env.PORT && Number(process.env.PORT)
     // const api = process.env.DEV_API_ADDRESS
 
 // const api = process.env.DEV_API_ADDRESS;
-const api = "http://35.170.191.75";
+// const api = "http://35.170.191.75";
+const api = "http://192.168.11.242";
+'192.168.11.242'
 
 console.log("Build Env Dev:" + api)
 

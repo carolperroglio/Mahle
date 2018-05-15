@@ -194,8 +194,11 @@ export default {
             this.carregando = true;
             //ID Grupo do forno de fusao: 11
             axios.get(this.urlGateway + "11").then((response) => {
-                this.equipaments = response.data.things;
-                this.carregando = false;
+                this.equipaments.push(response.data.things[0]);
+                axios.get(this.urlGateway + "23").then((response) => {
+                    this.equipaments.push(response.data.things[0]);
+                    this.carregando = false;
+                })
             }).catch((error) => {
                 this.carregando = false;
                 this.erro = true;

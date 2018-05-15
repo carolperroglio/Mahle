@@ -128,16 +128,16 @@
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="">Componente</label>
-                        <input autocomplete="off" @keyup="getProducts(productName)" v-model="productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
-                        <b-dropdown-item @click.stop.prevent="productName = p.productName; comp.productId = p.productId;comp.productName = p.productName;products=[]" v-for="(p,index) in products" :key="index">{{ p.productName }}</b-dropdown-item>
+                        <input autocomplete="off" @keyup="getProducts(productName);blockAdd=true;" v-model="productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
+                        <b-dropdown-item @click.stop.prevent="comp.value.length > 0 ?blockAdd=false:blockAdd=true;productName = p.productName; comp.productId = p.productId;comp.productName = p.productName;products=[]" v-for="(p,index) in products" :key="index">{{ p.productName }}</b-dropdown-item>
                     </div>
                     <div class="form-group col-md-5">
                         <label for="">Resultado da Análise(%)</label>
-                        <input type="text" class="form-control" v-model="comp.value">
+                        <input type="text" class="form-control" v-model="comp.value" @keyup="comp.value.length > 0 ?blockAdd=false:blockAdd=true">
                     </div>
                     <div class="form-group-col-md-1">
                         <br>
-                    <button class="btn btn-success btn-sm" @click.stop.prevent="addComponente(comp)" :disabled="!productName">
+                    <button class="btn btn-success btn-sm" @click.stop.prevent="addComponente(comp)" :disabled="blockAdd">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -162,7 +162,7 @@
             </div>
             </b-modal>
         <b-modal ref="modalErro" title="" hide-footer="">
-            <p :class="erro?'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
+            <p :class="erro?'alert alert-danger':'alert alert-success'">{{msgErro}}</p>
         </b-modal>
     </div>
 </template>

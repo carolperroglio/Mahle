@@ -44,6 +44,8 @@ import {
 } from 'util';
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
+// import 'amcharts3/amcharts/plugins/export/'
+// import 'amcharts3/amcharts/plugins/export/'
 es6promisse.polyfill();
 
 function paginacao(response, este) {

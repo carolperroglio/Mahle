@@ -175,7 +175,7 @@
                     <div class="form-row">
                     <div class="form-group col-md-5">
                     <label>
-                        <b>OPL: </b>
+                        <b>OF: </b>
                     </label>
                     <input type="text"  v-model="loteAco" class="form-control form-control-sm">
                     </div>

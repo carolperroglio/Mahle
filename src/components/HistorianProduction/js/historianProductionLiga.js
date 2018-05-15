@@ -343,13 +343,15 @@ export default {
         },
 
         getResults() {
+            this.productionOrder = []
             var id = this.$route.params.id;
             console.log(this.urlOP + '/api/productionorders');
             axios.get(this.urlOP + '/api/productionorders/' + id).then((response) => {
                 this.productionOrder = response.data;
+                this.productionOrder.status = response.data.currentStatus;
                 console.log(response.data);
                 this.listaOp(response.data);
-                return response.data;
+                // return response.data;
             }).catch((error) => {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro: " + error.message;

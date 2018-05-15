@@ -54,11 +54,12 @@ export default {
         storeUser(credential) {
 
             // Armazenando a chave de segurança no cookie
-            VueCookies.set('security', credential.security);
-            VueCookies.set('username', this.username);
+            VueCookies.set('security', credential.security, { expires: '1min' });
+            VueCookies.set('username', this.username, { expires: '1min' });
             //chama o método que busca o username e atribui a nav
             app.default.methods.getUsername();
             //redireciona para a tela principal STATUS DO MES
+            location.reload();
             this.$router.push({
                 name: "StatusMES"
             });

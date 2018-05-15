@@ -9,6 +9,8 @@ import VueTimepicker from 'vue2-timepicker'
 import JsonExcel from 'vue-json-excel'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
+import 'amcharts3/amcharts/plugins/export/export.js'
+import 'amcharts3/amcharts/plugins/export/export.css'
 import {
     Stretch
 } from 'vue-loading-spinner'
@@ -633,7 +635,10 @@ export default {
                     "title": ""
                 }],
                 "export": {
-                    "enabled": false
+                    "enabled": true
+                },
+                "libs": {
+                    "path": "../libs/"
                 },
                 "allLabels": [],
                 "balloon": {},
