@@ -204,6 +204,10 @@
                     </b-collapse>   
                     </div>   
         <!-- <router-view/> -->
+        <!-- MODAL PARA EXIBIR ERRO  -->
+        <b-modal ref="modalInfo" title="Mensagem" hide-footer>
+        <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msg}}</p>
+        </b-modal>
             </div>
 
 </template>

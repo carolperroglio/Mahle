@@ -36,7 +36,6 @@ export default {
     },
     components: {
         'b-modal': bModal,
-
     },
     methods: {
         showModal(id) {
@@ -54,8 +53,8 @@ export default {
         storeUser(credential) {
 
             // Armazenando a chave de segurança no cookie
-            VueCookies.set('security', credential.security, { expires: '1min' });
-            VueCookies.set('username', this.username, { expires: '1min' });
+            VueCookies.set('security', credential.security, { expires: '12h' });
+            VueCookies.set('username', this.username, { expires: '12h' });
             //chama o método que busca o username e atribui a nav
             app.default.methods.getUsername();
             //redireciona para a tela principal STATUS DO MES
