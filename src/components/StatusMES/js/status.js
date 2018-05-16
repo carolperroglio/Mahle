@@ -144,10 +144,10 @@ export default {
     beforeMount: function() {
         this.getStatus();
         this.getThings();
-        // setInterval(() => {
-        //     this.getThings();
-        //     this.getStatus();
-        // }, 30000)
+        setInterval(() => {
+            this.getThings();
+            this.getStatus();
+        }, 30000)
 
     }
 }

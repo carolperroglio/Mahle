@@ -27,7 +27,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import popper from ".././node_modules/popper.js/dist/umd/popper.js";
 import icones from ".././node_modules/font-awesome/css/font-awesome.min.css";
-import Login from "./components/Login/Login";
+var Login = require("./components/Login/Login");
 
 es6promisse.polyfill();
 Vue.use("vue-cookies");
@@ -82,6 +82,7 @@ axios.interceptors.response.use(
     } else if (error.message == "Network Error") {
       router.push({ name: "Login" });
       console.log('error.message: ' + error.message);
+      // Login.showModal('modaInfo');
       // showModal("modaInfo");
     } else if (error.response.status != undefined && error.response.status == "404") {
       VueCookies.set("status", "404");
@@ -105,7 +106,8 @@ export default {
   components: {
     NavBar,
     Router,
-    "b-modal": bModal
+    "b-modal": bModal,
+    Login:Login
   },
   methods: {
     getUsername() {
@@ -120,6 +122,7 @@ export default {
     // }
   },
   beforeMount(){
+    // Login.default.methods.showModal('modaInfo')
     // this.showModal("modaInfo");
   }
 };

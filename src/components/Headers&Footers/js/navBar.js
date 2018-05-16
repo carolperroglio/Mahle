@@ -3,6 +3,7 @@ import bCollapse from 'bootstrap-vue/es/components/collapse/collapse'
 import vBToggle from 'bootstrap-vue/es/directives/toggle/toggle'
 import bButton from 'bootstrap-vue/es/components/button/button'
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group'
+import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item'
 import { directive as onClickaway } from 'vue-clickaway';
 import VueCookies from 'vue-cookies'
@@ -15,7 +16,9 @@ export default {
     data() {
         return {
             active: true,
-            name: ''
+            name: '',
+            msg: 'TESTE',
+            erro: false
         }
     },
     computed: {},
@@ -23,13 +26,17 @@ export default {
         'b-collapse': bCollapse,
         'b-button': bButton,
         'b-list-group': bListGroup,
-        'b-list-group': bListGroupItem
+        'b-list-group': bListGroupItem,
+        'b-modal': bModal
     },
     directives: {
         'b-toggle': vBToggle,
         onClickaway: onClickaway
     },
     methods: {
+        showModal(id) {
+            this.$refs[id].show();
+        },
         away: function() {
             var divToHide = document.getElementById('sidebar');
             divToHide.style.display = 'none';
