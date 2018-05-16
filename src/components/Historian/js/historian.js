@@ -510,12 +510,12 @@ export default {
                 for (var key in newObj) {
                     var newkey = '';
                     switch (key) {
-                        case 'Data':
-                            newkey = "data"
-                            break;
-                        case 'Hora':
-                            newkey = "hora"
-                            break;
+                        // case 'Data':
+                        //     newkey = "data"
+                        //     break;
+                        // case 'Hora':
+                        //     newkey = "hora"
+                        //     break;
                         case 'Valor Medição':
                             newkey = "vm"
                             break;
@@ -540,8 +540,8 @@ export default {
                         case 'LIE Limite inferior de especificação':
                             newkey = "lie"
                             break;
-                        default:
-                            break;
+                            // default:
+                            //     break;
                     }
                     objaux[newkey] = newObj[key]
 

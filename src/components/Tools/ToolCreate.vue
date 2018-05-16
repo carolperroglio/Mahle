@@ -270,13 +270,13 @@
                 <label>
                     <b>Nome:</b>
                 </label>
-                <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control">
+                <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramentaEdit.name" id="nome" class="form-control">
                 </div>
                 <div class="form-group col-md-6">
                 <label>
                     <b>Descrição: </b>
                 </label>
-                <input type="text" id="desc" class="form-control" v-model="ferramenta.description" placeholder="">
+                <input type="text" id="desc" class="form-control" v-model="ferramentaEdit.description" placeholder="">
                 </div>
                 </div>
                 <div class="form-row">
@@ -284,13 +284,13 @@
                 <label>
                     <b>Número Serial: </b>
                 </label>
-                <input type="text" id="sernum" class="form-control" v-model="ferramenta.serialNumber" placeholder="Ex: 124856648">
+                <input type="text" id="sernum" class="form-control" v-model="ferramentaEdit.serialNumber" placeholder="Ex: 124856648">
                 </div>
                 <div class="form-group col-md-4">
                 <label>
                     <b>Código: </b>
                 </label>
-                <input type="text" id="code" class="form-control" v-model="ferramenta.code" placeholder="Ex: 4565">
+                <input type="text" id="code" class="form-control" v-model="ferramentaEdit.code" placeholder="Ex: 4565">
                 </div>
                 </div>
                 <div class="form-row">
@@ -298,13 +298,13 @@
                 <label>
                     <b>Vida Útil: </b>
                 </label>
-                <input class="form-control" type="text" v-model="ferramenta.lifeCycle" placeholder="Ex: 100" id="lifec" disabled>
+                <input class="form-control" type="text" v-model="ferramentaEdit.lifeCycle" placeholder="Ex: 100" id="lifec" disabled>
                 </div>
                 <div class="form-group col-md-5">
                 <label>
                     <b>Unidade de Medida: </b>
-                </label>
-                <input type="text" id="unitMeas" v-model="ferramenta.unitOfMeasurement" class="form-control" placeholder="Ex: minutos" disabled>                              
+                </label> {{ferramenta.unitOfMeasurement}}
+                <input type="text" id="unitMeas" v-model="ferramentaEdit.unitOfMeasurement" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 </div>
                 <div class="form-row">
@@ -312,13 +312,13 @@
                 <label>
                     <b>Tipo: </b>
                 </label>
-                <input type="text" id="unitMeas" v-model="ferramenta.typeName" class="form-control" placeholder="Ex: minutos" disabled>                              
+                <input type="text" id="unitMeas" v-model="ferramentaEdit.typeName" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 <div class="form-group col-md-6">
                 <label>
                     <b>Status: </b>
                 </label>
-                <input type="text" id="unitMeas" v-model="ferramenta.status" class="form-control" placeholder="Ex: minutos" disabled>                              
+                <input type="text" id="unitMeas" v-model="ferramentaEdit.status" class="form-control" placeholder="Ex: minutos" disabled>                              
                 </div>
                 </div>
 
@@ -329,7 +329,7 @@
                         <i  class="fa fa-check-square" aria-hidden="true"></i>
                         Confirmar
                     </button>
-                    <button @click.stop.prevent="ferramenta={}" class="btn btn-primary pull-right">
+                    <button @click.stop.prevent="ferramenta.name = '';ferramentaEdit.serialNumber = '';ferramentaEdit.code = '';ferramentaEdit.serialNumber = '';ferramentaEdit.description = ''" class="btn btn-primary pull-right">
                         <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                     </button> 
                 </div>

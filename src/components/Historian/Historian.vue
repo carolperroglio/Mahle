@@ -57,7 +57,7 @@
             <div class="col-sm-2">
             <download-excel
                 class   = "btn btn-success btn-sm btn-sm pull-left"
-                :data   = provider
+                :data   = providertable
                 :fields = jsonfields
                 :name = filename><i class="fa fa-file-excel-o"></i> Exportar para Excel
             </download-excel>

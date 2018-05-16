@@ -17,9 +17,9 @@
                     Filtrar Busca
                 </button>
                 </li>    
-                <li class="nav-item-alarms col-md-2">
+                <!-- <li class="nav-item-alarms col-md-2">
                     <button class="btn btn-primary" @click="getReport()">Texto</button> 
-                </li>                     
+                </li>                      -->
             </ul>
         </div>
         <div id="load" v-show="carregando">
@@ -29,11 +29,21 @@
         <div id="chartAlarm" style="width: 100%; height: 400px;margin-top: 15%;"></div>                           
         
         <!-- Botão para escolher o grupo a ser exibido -->
-        <div class="col-sm-2">
+        <div class="row">
+        <div class="col-md-2" style="margin-left:3%">
         <select class="form-control" v-model="groupselected" @change.prevent="makeGraph(groupselected)">    
             <option v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
         </select>
-        </div>        
+        </div>   
+        <div class="col-md-2 offset-4 pull-right">
+        <download-excel
+            class   = "btn btn-success btn-sm btn-sm pull-right"
+            :data   = dataProvider
+            :fields = jsonfields
+            name = 'alarmsreport.xls'><i class="fa fa-file-excel-o"></i> Exportar para Excel
+        </download-excel>    
+        </div>
+        </div>             
         <!-- TABELA DOS ALARMES -->
         <div class="cabecalho-table-alarms"  v-show="!carregando">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'product',0):organizar(produtos, 'product',0);" class="ls2 col-md-2">
@@ -91,7 +101,7 @@
                 <label class="ls2 col-md-2">
                     {{t.groupTag}}</label>
                 <label class="ls2 col-md-2">
-                    {{t.thingId}}</label>
+                    {{thingNameInTable}}</label>
                 <label class="ls2 col-md-1">
                     {{t.type}}</label>
                 <label class="ls2 col-md-2">
@@ -134,6 +144,7 @@
         </div>
         </div>
         
+        <div v-show="filterSelected != 'op'">
         <label><b>Início </b></label>  
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -154,18 +165,15 @@
             </div>
         </div>
         </div>
+        </div>
         <div class="modal-footer">
             <div class="btn-group" role="group">
-                <button class="btn btn-success" @click.stop.prevent="getReportDate();" 
+                <button class="btn btn-success" @click.stop.prevent="getReportByDate();" 
                 :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
                     <i class="fa fa-check-square"></i> Confirmar
                 </button>
-                <button class="btn btn-success" @click.stop.prevent="getReportOP();" 
-                :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !OP" v-if="filterSelected == 'op'">
-                    <i class="fa fa-check-square"></i> Confirmar
-                </button>
-                <button class="btn btn-success" @click.stop.prevent="getReportCode();" 
-                :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !recipeCode" v-if="filterSelected == 'code'">
+                <button class="btn btn-success" @click.stop.prevent="getReportByOP();" 
+                :disabled="!thingId || !OP" v-if="filterSelected == 'op'">
                     <i class="fa fa-check-square"></i> Confirmar
                 </button>
             </div>
