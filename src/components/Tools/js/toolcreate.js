@@ -11,10 +11,11 @@ function paginacao(response, este) {
     este.pageAtual = este.startat / 20;
     este.total = response.data.total;
     let fim = Math.ceil(este.total / 20);
-    if (este.pageAtual > 11) {
-        for (var i = this.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
+    este.pages=[];
+    if (este.pageAtual > 11) {        
+        for (var i = este.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
             este.pages[i] = i;
-    } else {
+    } else {        
         for (var i = 0; i < fim; i++)
             este.pages[i] = i;
     }
@@ -159,12 +160,12 @@ export default {
             // }
 
             axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage).then((response) => {
-                this.ferramentas = response.data.values;
-                console.log(this.ferramentas);
+                this.ferramentas = response.data.values;                
                 for (var index in response.data.values) {
                     this.ferramentas[index].status = this.getStatus(response.data.values[index].status);
                 }
                 this.carregando = false;
+                this.total = response.data.total;
                 paginacao(response, this);
             }).catch((error) => {
                 console.log(error);

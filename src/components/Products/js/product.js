@@ -13,9 +13,10 @@ es6promisse.polyfill();
 function paginacao(response, este) {
     este.pageAtual = este.startat / este.quantityPage;
     este.total = response.data.total;
+    este.pages=[];
     let fim = Math.ceil(este.total / este.quantityPage);
     if (este.pageAtual > 11) {
-        for (var i = this.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
+        for (var i = este.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
             este.pages[i] = i;
     } else {
         for (var i = 0; i < fim; i++)
@@ -183,7 +184,7 @@ export default {
             axios.get(u, config).then((response) => {
                 if (!response.data.values && response.data.productId)
                     this.produtos[0] = response.data;
-                else {
+                else {                    
                     paginacao(response, this);                        
                     this.produtos = response.data.values;                        
                 }
