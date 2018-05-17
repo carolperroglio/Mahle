@@ -416,9 +416,6 @@ export default {
                 "export": {
                     "enabled": true
                 },
-                "libs": {
-                    "path": "dist/amcharts/"
-                },
                 "allLabels": [],
                 "balloon": {},
                 "titles": [],
