@@ -60,12 +60,10 @@
                                 <button type="button" class="btn btn-warning"  @click.stop.prevent="getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
                                 </button>
-                                <button v-if="productionOrder.status == 'approved'" type="button" class="btn btn-danger"  v-show="productionOrder.status != 'approved' || productionOrder.status != 'active'
-                                                                                || productionOrder.status == 'waiting_approval'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
+                                <button v-if="productionOrder.status == 'approved'" type="button" class="btn btn-danger" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Exibir Última Análise
                                 </button>
-                                <button v-else type="button" class="btn btn-danger"  v-show="!productionOrder.status == 'approved' || !productionOrder.status == 'active'
-                                                                                || productionOrder.status == 'waiting_approval'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
+                                <button v-else type="button" class="btn btn-danger"  v-show="productionOrder.status == 'reproved'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Correção
                                 </button>
                                 <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()"

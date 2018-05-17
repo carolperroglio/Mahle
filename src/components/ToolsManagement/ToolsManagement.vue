@@ -57,7 +57,7 @@
             {{t.status | StatusName}}
         </label>
         <label class="ls20 col-md-2" style="margin-top:0.2%">
-        <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t)">
+        <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t);obj.text = ''">
             Alterar Status da Ferramenta
         </button>
         </label>
@@ -178,7 +178,7 @@
                     <input type="text" disabled class="form-control" v-model="tool.status">
                 </div>
                 <div class="col-md-6" v-show="tool.status == 'Disponível'">
-                    <label for="" >Vida Útil</label>
+                    <label for="" >Vida Útil Atual</label>
                     <input type="text" class="form-control" v-model="tool.currentLife">
                 </div>
                 <!-- {{ tool }} -->
@@ -195,10 +195,10 @@
                         @click.prevent="changeStatus(tool, 'not_available' )" v-if="buttons.not_available">
                         Indisponibilizar
                         </button> 
-                        <button type="button" class="btn btn-outline-warning btn-sm" 
+                        <!-- <button type="button" class="btn btn-outline-warning btn-sm" 
                         @click.prevent="changeStatus(tool, 'in_use')" v-show="buttons.in_use">
                         Em uso
-                        </button> 
+                        </button>  -->
                         <button type="button" class="btn btn-outline-danger btn-sm" 
                         @click.prevent="changeStatus(tool, 'in_maintenance')" v-if="buttons.in_maintenance">
                         Em Manutenção

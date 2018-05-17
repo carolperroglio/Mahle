@@ -10,14 +10,16 @@
 <script>
 import Vue from "vue";
 import NavBar from "./components/Headers&Footers/NavBar.vue";
-// import AmCharts from 'amcharts3'
-// import AmSerial from 'amcharts3/amcharts/serial'
 import axios from "axios";
 import Router from "vue-router";
 import AmCharts from "amcharts3";
 import AmSerial from "amcharts3/amcharts/serial";
-import "amcharts3/amcharts/plugins/export/export.js";
-import "amcharts3/amcharts/plugins/export/export.css";
+// import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/fabric.js/fabric.js";
+import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js";
+import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js";
+import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js";
+// import "amcharts3/amcharts/plugins/export/export.js";
+// import "amcharts3/amcharts/plugins/export/export.css";
 import VueCookies from "vue-cookies";
 import router from "./router";
 import Bootstrap from "bootstrap-vue";

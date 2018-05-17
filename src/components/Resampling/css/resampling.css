@@ -4,26 +4,26 @@
 
 @media (min-width: 768px) {
     .table-margin-resampling {
-        margin: 20% 0 6% 0;
-    }
-    .cabecalho-table-resampling {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: 16% 0 0 0;
-        z-index: 4;
-    }
-}
-
-@media (min-width: 960px) {
-    .table-margin-resampling {
-        margin: 32% 0 6% 0;
+        margin: 31% 0 6% 0;
     }
     .cabecalho-table-resampling {
         position: fixed;
         width: 100%;
         background-color: black;
         margin: 24% 0 0 0;
+        z-index: 4;
+    }
+}
+
+@media (min-width: 960px) {
+    .table-margin-resampling {
+        margin: 18% 0 6% 0;
+    }
+    .cabecalho-table-resampling {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: 16% 0 0 0;
         z-index: 4;
     }
 }

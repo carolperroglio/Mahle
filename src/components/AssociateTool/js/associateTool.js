@@ -70,12 +70,11 @@ export default {
                 if (obj.toolTypeId == id) {
                     this.positionLength = obj.positionQtd;
                     positions = obj.positions
-                    nameType = obj.toolTypeName;
                 }
             })
 
             var getherTools = [];
-            axios.get(this.url + '/api/tool?fieldFilter=typeName&fieldValue=' + nameType).then((response) => {
+            axios.get(this.url + '/api/tool?fieldFilter=typeId&fieldValue=' + id).then((response) => {
                 getherTools = response.data.values;
                 // axios.get(this.url + '/api/tool').then((response) => {
                 // getherTools.concat(response.data.values);

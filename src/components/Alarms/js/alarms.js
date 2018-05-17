@@ -9,6 +9,9 @@ import VueTimepicker from 'vue2-timepicker'
 import JsonExcel from 'vue-json-excel'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
+import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js";
+import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js";
+import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js";
 import 'amcharts3/amcharts/plugins/export/export.js'
 import 'amcharts3/amcharts/plugins/export/export.css'
 import {
@@ -63,6 +66,7 @@ export default {
         return {
             urlGatewayThings: ipReport + '/gateway/things',
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
+            url: ipReport,
             config: {
                 headers: {
                     'Cache-Control': 'no-cache'
@@ -107,7 +111,10 @@ export default {
             things: [],
             prosFim: [],
             opName: '',
-            groupselected: ''
+            groupselected: '',
+            OP: '',
+            thingNameInTable: '',
+            jsonfields: { Data: 'category', Alto: 'alto', Baixo: 'baixo', Muitoalto: 'muito alto', Muitobaixo: 'muito alto', Offline: 'offline' }
 
         }
     },
@@ -125,7 +132,7 @@ export default {
             this.$refs[id].show();
         },
         hideModal(id) {
-            this.$refs[id].show();
+            this.$refs[id].hide();
         },
         organizar(hp, campo, pos) {
             hp.sort(function(a, b) {
@@ -214,298 +221,70 @@ export default {
                 console.log(error);
             })
         },
-        getReport() {
-            console.log("getReport");
-            this.groups = [];
-            this.groupselected = "";
+        getThingNameById() {
+            this.things.forEach(t => {
+                if (t.thingId == this.thingId) {
+                    this.thingNameInTable = t.thingName;
+                }
+            });
+            axios.get(this.urlGatewayThings + '/' + this.thingId).then((response) => {
+                this.thingNameInTable = reponse.data.thingName;
 
-            this.jSONReport = {
-                "graphs": [{
-                        "thingId": 1,
-                        "groupTag": "Temperatura",
-                        "data": [{
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }, {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }, {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }, {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }, {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }, {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }, {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }, {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }, {
-                                "category": "636615976380000000",
-                                "muito alto": "8",
-                                "alto": "2",
-                                "baixo": "2",
-                                "muito baixo": "8",
-                                "offline": "2"
-                            },
-                            {
-                                "category": "636615976380000000",
-                                "muito alto": "20",
-                                "alto": "15",
-                                "baixo": "15",
-                                "muito baixo": "20",
-                                "offline": "2"
-                            }
+            }, (error) => {
+                console.log(error);
+            })
+        },
+        getReportByDate() {
+            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
+            var ticksI = this.dateToTicks(Ini);
+            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
+            var ticksF = this.dateToTicks(Fim);
 
-                        ]
-                    },
-                    {
-                        "thingId": 1,
-                        "groupTag": "Agitação",
-                        "data": [{
-                                "category": "636616840380000000",
-                                "muito alto": "10",
-                                "alto": "5",
-                                "baixo": "5",
-                                "muito baixo": "10",
-                                "offline": "1"
-                            },
-                            {
-                                "category": "636616912380000000",
-                                "muito alto": "15",
-                                "alto": "5",
-                                "baixo": "5",
-                                "muito baixo": "15",
-                                "offline": "2"
-                            }
-                        ]
+            axios.get(this.url + '/api/alarmreport?thingId=' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+                this.jSONReport = response.data;
+
+                this.getThingNameById();
+                this.hideModal('filterSearch');
+                this.editGroup();
+
+            }).catch((error) => {
+                if (error.response != undefined) {
+                    if (error.response.status == '404') {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Sem dados no período selecionado";
+                        this.showModal("modalInfo");
+                    } else {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = error.message;
+                        this.showModal("modalInfo");
                     }
-                ],
-                "table": [{
-                        "thingId": 1,
-                        "groupTag": "Temperatura",
-                        "data": [{
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "alto",
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "alto",
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "baixo"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "baixo"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "offline"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "muito alto"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "muito alto"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": " muito baixo"
-                            },
-                        ]
-                    },
-                    {
-                        "thingId": 1,
-                        "groupTag": "Agitação",
-                        "data": [{
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "alto",
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "alto",
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "alto",
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "alto",
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "baixo"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "baixo"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "offline"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "muito alto"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "muito alto"
-                            },
-                            {
-                                "dateIni": "636615976380000000",
-                                "dateEnd": "636615976380000000",
-                                "type": "muito baixo"
-                            },
-                        ]
-                    },
-                ]
+                }
+            })
+        },
+        getReportByOP() {
+            axios.get(this.url + '/api/alarmreport?thingId=' + this.thingId + '&opId=' + this.OP).then((response) => {
+                this.jSONReport = response.data;
 
-            }
-
-
-            this.editGroup();
+                this.getThingNameById();
+                this.hideModal('filterSearch');
+                this.editGroup();
+            }).catch((error) => {
+                if (error.response != undefined) {
+                    if (error.response.status == '404') {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Sem dados no período selecionado";
+                        this.showModal("modalInfo");
+                    } else {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = error.message;
+                        this.showModal("modalInfo");
+                    }
+                }
+            })
         },
         getTable(groupselected) {
             var objTable = {};
@@ -637,9 +416,6 @@ export default {
                 "export": {
                     "enabled": true
                 },
-                "libs": {
-                    "path": "../libs/"
-                },
                 "allLabels": [],
                 "balloon": {},
                 "titles": [],
@@ -649,6 +425,6 @@ export default {
     },
     beforeMount() {
         this.getThings();
-        this.getReport();
+        // this.getReport();
     },
 }

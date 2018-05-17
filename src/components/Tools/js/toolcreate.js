@@ -33,6 +33,7 @@ export default {
             carregando: false,
             ferramentas: [],
             ferramenta: {},
+            ferramentaEdit: {},
             url: IpServer + '/api/tool',
             msg: '',
             erro: false,
@@ -212,7 +213,7 @@ export default {
             return null;
         },
         itemClicado(f) {
-            this.ferramenta = f;
+            this.ferramentaEdit = JSON.parse(JSON.stringify(f));
             this.errors = [];
             this.$refs.myModalRef.show();
         },
