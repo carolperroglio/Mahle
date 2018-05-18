@@ -118,7 +118,7 @@
             <label class="ls2 col-md-1">
                 {{t.category}}</label>
             <label class="ls2 col-md-1">
-                {{t.hora}}</label>
+                {{t.Hora}}</label>
             <label class="ls2 col-md-1">
                 {{t.vm}}</label>
             <label class="ls2 col-md-2">
