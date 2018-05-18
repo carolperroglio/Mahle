@@ -30,7 +30,7 @@
             </ul> 
         </div>  
 
-        <div class="container-tt">
+        <div class="container-assoc">
             <div  v-for="(t,index) in tools" :key="t.position"  id="constat">
                 <div class="tileConfigAssTool">
                     <div>
