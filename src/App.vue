@@ -69,40 +69,40 @@ axios.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use(
-  response => {
-    // intercept the global error
-    return response;
-  },
-  function(error) {
-    var statuscode = VueCookies.get("status");
-    //&& errorResponse.config && !errorResponse.config.__isRetryRequest
-    if (statuscode == "401") {
-      router.push({ name: "Login" });
-      console.log("status code: " + statuscode);
-    } else if (error.message == "Network Error") {
-      VueCookies.set("status", "Network Error");
-      router.push({ name: "Login" });
-      console.log("error.message: " + error.message);
-      // Login.showModal('modaInfo');
-      // showModal("modaInfo");
-    } else if (error.response.status != undefined && error.response.status == "404") {
-      VueCookies.set("status", "404");
-      console.log("status code: " + error.response.status);
-      // showModal("modaInfo");
-    } else if (error.response.status != undefined && error.response.status == "400") {
-      VueCookies.set("status", "400");
-      console.log("status code: " + error.response.status);
-    } else if ( error.response.status != undefined && error.response.status == "500") {
-      VueCookies.set("status", "500");
-      console.log("status code: " + error.response.status);
-    } else {
-      VueCookies.set("status", "ok");
-      console.log("status code: " + statuscode);
-    }
-    return Promise.reject(error);
-  }
-);
+// axios.interceptors.response.use(
+//   response => {
+//     // intercept the global error
+//     return response;
+//   },
+//   function(error) {
+//     var statuscode = VueCookies.get("status");
+//     //&& errorResponse.config && !errorResponse.config.__isRetryRequest
+//     if (statuscode == "401") {
+//       router.push({ name: "Login" });
+//       console.log("status code: " + statuscode);
+//     } else if (error.message == "Network Error") {
+//       VueCookies.set("status", "Network Error");
+//       router.push({ name: "Login" });
+//       console.log("error.message: " + error.message);
+//       // Login.showModal('modaInfo');
+//       // showModal("modaInfo");
+//     } else if (error.response.status != undefined && error.response.status == "404") {
+//       VueCookies.set("status", "404");
+//       console.log("status code: " + error.response.status);
+//       // showModal("modaInfo");
+//     } else if (error.response.status != undefined && error.response.status == "400") {
+//       VueCookies.set("status", "400");
+//       console.log("status code: " + error.response.status);
+//     } else if ( error.response.status != undefined && error.response.status == "500") {
+//       VueCookies.set("status", "500");
+//       console.log("status code: " + error.response.status);
+//     } else {
+//       VueCookies.set("status", "ok");
+//       console.log("status code: " + statuscode);
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 export default {
   name: "app",
