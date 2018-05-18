@@ -40,6 +40,10 @@ export default {
             /* ---------------*/
             erro: false,
             keyhashed: "",
+            /*  Msg pra checagem de usuário*/
+            showMsg: false,
+            msgUser: '',
+            userExist: false,
         }
     },
     components: {
@@ -114,6 +118,9 @@ export default {
             this.password = "";
             this.passwordconfirm = "";
             this.email = "";
+            this.showMsg = false;
+            this.userExist = false;
+            this.msgUser = "";
         },
         validateForm() {
             var valid = this.$refs.ruleForm.validity;
@@ -123,6 +130,23 @@ export default {
                 console.log('error submit!!');
                 console.log(valid);
                 return false;
+            }
+        },
+        checkUser(username) {
+            this.showMsg = false;
+            this.userExist = false;
+
+            for (var x = 0; x < this.userlist.length; x++) {
+                if (this.userlist[x].username == username) {
+                    this.msgUser = "Nome de Usuário já existe!"
+                    this.showMsg = true;
+                    this.userExist = true;
+                }
+            }
+            if (!this.showMsg) {
+                this.showMsg = true;
+                this.msgUser = "Nome de Usuário OK!"
+                this.userExist = false;
             }
         },
         /**

@@ -92,15 +92,24 @@
 <b-modal size="md" ref="cadUser" hide-footer title="Cadastrar Usuário" modal-header-close>
 <div class="modal-body">
     <form>
+        <p :class="userExist?'alert alert-danger':'alert alert-success'" v-if="showMsg">{{msgUser}}</p>
     <div class="form-group row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-10">
         <label for="name">Nome </label>
             <input required type="text" class="form-control" id="name"  placeholder="Ex: Mauricio" v-model="name">
         </div>
-        <div class="form-group col-md-6">
+    </div>
+    <div class="form-group row">
+        <div class="form-group col-md-8">
         <label for="username">Nome de usuário</label>
             <input required type="text" class="form-control" id="username" placeholder="Ex: mauriciot" v-model="username">
         </div>
+        <div class="form-group col-md-4">
+            <br>
+        <button class="btn btn-success" @click.stop.prevent="checkUser(username)"> 
+            Validar nome 
+        </button>
+        </div>  
     </div>
     <div class="form-group row">
         <div class="form-group col-md-6">
@@ -131,7 +140,8 @@
 <!--                    -->
 <div class="modal-footer">
     <div class="btn-group" role="group">
-        <button class="btn btn-success" :disabled="username == ''|| name == ''|| password == ''|| passwordconfirm == ''|| email == ''" @click="createUser();hideModal('cadUser');">
+        <button class="btn btn-success" :disabled="username == ''|| name == ''|| password == ''|| passwordconfirm == ''
+        || email == '' || userexist == false" @click="createUser();hideModal('cadUser');">
             <i  class="fa fa-check-square" aria-hidden="true"></i>
             Confirmar
         </button>
@@ -155,14 +165,14 @@
 <div class="modal-body">
     <form>
     <div class="form-group row">
-        <div class="form-group col-md-6">
-        <label for="nameedit">Nome </label>
-            <input required type="text" class="form-control" id="nameedit"  placeholder="Ex: Mauricio" v-model="objUser.name">
-        </div>
-        <div class="form-group col-md-6">
-        <label for="usernameedit">Nome de usuário</label>
-            <input required type="text" class="form-control" id="usernameedit" placeholder="Ex: mauriciot" v-model="objUser.username">
-        </div>
+    <div class="form-group col-md-6">
+    <label for="nameedit">Nome </label>
+        <input required type="text" class="form-control" id="nameedit"  placeholder="Ex: Mauricio" v-model="objUser.name">
+    </div>
+    <div class="form-group col-md-6">
+    <label for="usernameedit">Nome de usuário</label>
+        <input required type="text" class="form-control" id="usernameedit" placeholder="Ex: mauriciot" v-model="objUser.username">
+    </div>  
     </div>
     <div class="form-group row">
         <div class="form-group col-md-6">
@@ -191,7 +201,8 @@
 <!--                    -->
 <div class="modal-footer">
     <div class="btn-group" role="group">
-        <button class="btn btn-success" :disabled="objUser.username == ''|| objUser.name == ''|| objUser.password == ''|| objUser.passwordconfirm == ''|| objUser.email == ''" @click="updateUser(objUser.userId);hideModal('cadUser');">
+        <button class="btn btn-success" :disabled="objUser.username == ''|| objUser.name == ''|| objUser.password == ''|| objUser.passwordconfirm == ''
+        || objUser.email == ''" @click="updateUser(objUser.userId);hideModal('cadUser');">
             <i  class="fa fa-check-square" aria-hidden="true"></i>
             Confirmar
         </button>
