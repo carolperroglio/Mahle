@@ -47,7 +47,9 @@ module.exports = {
             'vue$': 'vue/dist/vue.common.js'
         },
     },
-
+    externals: [
+        'canvas'
+    ],
     plugins: [
         new webpack.ProvidePlugin({
             $: "jquery",
@@ -102,7 +104,7 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 10000,
+                    limit: 10000000,
                     name: utils.assetsPath('img/[name].[hash:7].[ext]')
                 }
             },
@@ -138,6 +140,7 @@ module.exports = {
         fs: 'empty',
         net: 'empty',
         tls: 'empty',
-        child_process: 'empty'
+        child_process: 'empty',
+        canvas: 'empty'
     }
 }

@@ -9,6 +9,11 @@ import VueTimepicker from 'vue2-timepicker'
 import JsonExcel from 'vue-json-excel'
 import { Stretch } from 'vue-loading-spinner'
 import { setTimeout } from 'timers'
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import html2canvas from 'html2canvas';
+import logo from './onyx.jpeg'
+import logoMahle from './loooogomahle.png'
 
 es6promisse.polyfill();
 
@@ -151,6 +156,131 @@ export default {
             var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
             return ticks;
         },
+        getHeaderToPdf() {
+            var headers = [{
+                    'title': 'Data',
+                    'dataKey': 'dateI'
+                },
+                {
+                    'title': 'Hora',
+                    'dataKey': 'hour'
+                },
+                {
+                    'title': 'OPL',
+                    'dataKey': 'op'
+                },
+                {
+                    'title': 'Nº da Amostra',
+                    'dataKey': 'numberAnalysis'
+                },
+                {
+                    'title': 'Produto',
+                    'dataKey': 'productName'
+                },
+                {
+                    'title': 'Especificado(%)',
+                    'dataKey': 'especification'
+                },
+                {
+                    'title': 'Resultado da Análise(%)',
+                    'dataKey': 'resultAnalysis'
+                },
+                {
+                    'title': 'Resultado',
+                    'dataKey': 'status'
+                },
+                {
+                    'title': 'Correção(Kg)',
+                    'dataKey': 'correction'
+                },
+                {
+                    'title': 'Usuário(%)',
+                    'dataKey': 'userName'
+                },
+            ];
+
+            return headers;
+        },
+        // EXPORT TO PDF
+        toPdf() {
+
+            var PDFprovider = this.tableAlarms;
+            var thingName = this.thingNameInTable;
+            // OBTEM OS NOMES DAS COLUNAS DA TABELA
+            var columns = this.getHeaderToPdf();
+
+
+
+            var doc = new jsPDF('p', 'pt');
+            var table = new Image();
+            var img = new Image();
+            var imgLogo = new Image();
+
+            img.src = logo;
+            imgLogo.src = logoMahle;
+
+            // ADICIONA LOGO SISTEMA ONYX
+            doc.addImage(img, "PNG", 10, 10, 50, 20);
+
+            doc.setFontSize(20);
+            doc.setFontSize(20);
+            // ADICIONA LOGO MAHLE
+            doc.addImage(imgLogo, "PNG", 510, 10, 60, 20); // ADICIONA TÍTULO                            
+            doc.text(35, 65, "Relatório de Reamostragem ")
+                // doc.addImage(table, 'PNG', 15, 70, 600, 400); //works
+
+            // ADICIONA GRÁFICO                            
+
+            // ADICIONA TABELA
+            doc.autoTable(columns, this.tableData, {
+                // addPageContent: pageContent,
+                showHeader: 'everyPage',
+                margin: {
+                    top: 100,
+                    left: 10,
+                    right: 20
+                },
+                columnStyles: {
+                    dateI: {
+                        columnWidth: 60,
+                    },
+                    hour: {
+                        columnWidth: 50,
+                    },
+                    op: {
+                        columnWidth: 80,
+                    },
+                    numberAnalysis: {
+                        columnWidth: 50,
+                    },
+                    productName: {
+                        columnWidth: 70,
+                    },
+                    especification: {
+                        columnWidth: 60,
+                    },
+                    resultAnalysis: {
+                        columnWidth: 40,
+                    },
+                    status: {
+                        columnWidth: 60,
+                    },
+                    correction: {
+                        columnWidth: 50,
+                    },
+                    userName: {
+                        columnWidth: 60,
+                    },
+
+                    // etc
+                },
+                halign: 'middle', // left, center, right
+                valign: 'middle',
+                tableWidth: 600
+            });
+            doc.save("Relatório de Reamostragem" + Date.UTC() + ".pdf");
+
+        },
         // SEARCH BASED ON NAME
         getResults(url, name, pros) {
             pros = [];
@@ -191,6 +321,7 @@ export default {
                 response.data.report.forEach((obj) => {
                     obj.dateI = this.ticksToDate(obj.date, false, false)
                     obj.hour = this.ticksToDate(obj.date, false, true)
+                    obj.especification = obj.recipeMax + ' - ' + obj.recipeMin
                 });
                 this.tableData = response.data.report;
                 this.hideModal('filterSearch');
@@ -236,6 +367,7 @@ export default {
                     response.data.report.forEach((obj) => {
                         obj.dateI = this.ticksToDate(obj.date, false, false)
                         obj.hour = this.ticksToDate(obj.date, false, true)
+                        obj.especification = obj.recipeMax + ' - ' + obj.recipeMin
                     });
                     this.tableData = response.data.report;
                     this.hideModal('filterSearch');

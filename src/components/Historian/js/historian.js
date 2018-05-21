@@ -1,5 +1,14 @@
 import Vue from 'vue'
 import axios from '../../../.././node_modules/axios/index.js'
+import AmCharts from 'amcharts3'
+import AmSerial from 'amcharts3/amcharts/serial'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/fabric.js/fabric.min.js'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.min.js'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/vfs_fonts.js'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/export.js'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/export.css'
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 import {
     setTimeout
@@ -33,7 +42,7 @@ import {
 import {
     Stretch
 } from 'vue-loading-spinner'
-import logoMahle from './logomahle.jpeg'
+import logoMahle from './loooogomahle.png'
 import logo from './onyx.jpeg'
 
 import {
@@ -42,10 +51,8 @@ import {
 import {
     error
 } from 'util';
-import AmCharts from 'amcharts3'
-import AmSerial from 'amcharts3/amcharts/serial'
-// import 'amcharts3/amcharts/plugins/export/'
-// import 'amcharts3/amcharts/plugins/export/'
+
+// import 'amcharts3/amcharts/plugins/export/libs/xlsx/xlsx.js	'
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -167,7 +174,9 @@ export default {
             prosFim: [],
             erro: '',
             msgErro: '',
-            cabecalhoSetas: [false, false, false, false, false, false, false]
+            cabecalhoSetas: [false, false, false, false, false, false, false],
+            chart: {},
+            grafico: ''
         }
     },
     components: {
@@ -374,81 +383,66 @@ export default {
                 });
         },
         toPdf() {
-            // html2canvas(document.body).then(function(canvas) {
-            //     document.body.appendChild(canvas);
-            // });
-            // html2canvas(document.querySelector("#teste"), {
-            //     x: $("#chartdiv").offset().left,
-            //     y: $("#chartdiv").offset().top
-            // }).then(canvas => {
-            //     console.log(document);
-            //     var x = $("#chartdiv").offset().left;
-            //     console.log(x);
-            //     var y = $("#chartdiv").offset().top;
-            //     console.log(y);
-            //     // var x = $("#chartdiv").offset;
-            //     var xy = $("#teste");
-            //     // To PDF
-            //     var columns = [];
-            //     var title = "title";
-            //     var dataKey = "dataKey";
-            //     this.headers.forEach(e => {
-            //         var obj = new Object;
-            //         obj[title] = e;
-            //         obj[dataKey] = e;
-            //         columns.push(obj);
-            //     })
-            //     console.log(columns);
-            //     this.PDFprovider = this.provider;
-            //     this.PDFprovider.forEach(p => {
-            //         p.Data = p.category;
-            //         delete p.category;
-            //     });
-            //     this.things.forEach((t) => {
-            //         if (this.thingId == t.thingId) {
-            //             this.thingNameCabeçalho = t.thingName;
-            //         }
-            //     })
-            //     console.log(this.PDFprovider);
 
-            //     var doc = new jsPDF('p', 'pt');
-            //     var img = new Image();
-            //     var imgLogo = new Image();
-            //     var grafico = new Image();
-            //     //doc.readAsDataURL
-            //     img.src = logo;
-            //     imgLogo.src = logoMahle;
-            //     grafico.src = canvas.toDataURL();
+            var headersss = this.headers;
+            var PDFprovider = this.providertable;
+            var thingNameCabecalho = this.thingNameCabeçalho;
 
-            //     console.log("img.src = " + img.src)
-            //     console.log("imgLogo.src = " + imgLogo.src)
-            //         // var pageContent = function(data) {
-            //         // HEADER
-            //     doc.setFontSize(20);
 
-            //     // Screenshot do Gráfico e insere no PDF
-            //     // doc.addImage(grafico, "PNG", 100, 510, 300, 1000);
-            //     doc.addImage(img, "JPEG", 15, 15, 50, 30);
+            this.chart["export"].capture({}, function() {
+                this.grafico = new Image();
+                // var header = $('cabecalho-table');
 
-            //     // doc.addImage(grafico, "PNG", 510, 15, 60, 30);
-            //     // IMAGEM LOGO DA MAHLE N ESTA SENDO ENCODED
-            //     // doc.addImage(imgLogo, "JPEG", 510, 15, 60, 30);
 
-            //     doc.text(35, 65, "Rastreamento " + this.thingNameCabeçalho + " Grupo " + this.group)
-            //         // doc.autoTable(columns, this.PDFprovider, 15, 65);
-            //     doc.autoTable(columns, this.PDFprovider, {
-            //         // addPageContent: pageContent,
-            //         showHeader: 'everyPage',
-            //         margin: {
-            //             top: 80
-            //         }
-            //     });
-            //     // document.body.appendChild(canvas);
+                this.toPNG({}, function(data) {
+                    this.grafico.src = data;
+                    console.log("Export");
 
-            //     doc.save("RastreamentoThing_" + this.thingNameCabeçalho + "_" + this.group + ".pdf");
+                    var doc = new jsPDF('p', 'pt');
+                    var img = new Image();
+                    var imgLogo = new Image();
+                    img.src = logo;
+                    imgLogo.src = logoMahle;
 
-            // });
-            window.print();
+
+                    doc.setFontSize(20);
+                    doc.addImage(img, "PNG", 10, 10, 50, 20);
+                    doc.addImage(imgLogo, "JPG", 510, 10, 60, 20);
+                    doc.text(35, 65, "Rastreamento " + thingNameCabecalho)
+                    doc.addImage(this.grafico, "PNG", 10, 100, 600, 400);
+                    var columns = [];
+                    var title = "title";
+                    var dataKey = "dataKey";
+                    headersss.forEach(e => {
+                        if (e != 'category' && e != ":") {
+
+                            var obj = new Object;
+                            obj[title] = e;
+                            obj[dataKey] = e;
+                            columns.push(obj);
+                        }
+                    })
+
+                    console.log(columns);
+                    doc.autoTable(columns, PDFprovider, {
+                        // addPageContent: pageContent,
+                        showHeader: 'everyPage',
+                        margin: {
+                            top: 530,
+                            left: 20,
+                            right: 20
+                        },
+                        halign: 'middle', // left, center, right
+                        valign: 'middle',
+                        columnWidth: 20,
+                        tableWidth: 600
+                    });
+
+                    // doc.addImage(table, "PNG", 20, 550, 600, 200);
+
+                    doc.save("RastreamentoThing_" + thingNameCabecalho + ".pdf");
+                });
+            });
         },
 
         ticksToDate(dateTicks) {
@@ -516,34 +510,45 @@ export default {
                         // case 'Hora':
                         //     newkey = "hora"
                         //     break;
+                        case 'category':
+                            newkey = "Data"
+                            objaux[newkey] = newObj[key]
+                            break;
                         case 'Valor Medição':
                             newkey = "vm"
+                            objaux[newkey] = newObj[key]
                             break;
                         case 'LIE Limite superior de especific':
                             newkey = 'lse'
+                            objaux[newkey] = newObj[key]
                             break;
                         case 'LSE Limite superior de especificação':
                             newkey = "lse"
+                            objaux[newkey] = newObj[key]
                             break;
                         case 'LSE Limite superior de especific':
                             newkey = "lse"
+                            objaux[newkey] = newObj[key]
                             break;
                         case 'LSC Limite superior de controle':
                             newkey = "lsc"
+                            objaux[newkey] = newObj[key]
                             break;
                         case 'LIC Limite inferior de controle':
                             newkey = "lic"
+                            objaux[newkey] = newObj[key]
                             break;
                         case 'LIE Limite inferior de especific':
                             newkey = "lie"
+                            objaux[newkey] = newObj[key]
                             break;
                         case 'LIE Limite inferior de especificação':
                             newkey = "lie"
+                            objaux[newkey] = newObj[key]
                             break;
                             // default:
                             //     break;
                     }
-                    objaux[newkey] = newObj[key]
 
                 }
                 finalprovider.push(objaux);
@@ -708,7 +713,7 @@ export default {
             console.log(this.graphProvider);
             console.log(this.provider);
 
-            window.AmCharts.makeChart("chartrast", {
+            this.chart = window.AmCharts.makeChart("chartrast", {
                 "type": "serial",
                 "categoryField": "category",
                 "autoMarginOffset": 40,
@@ -718,6 +723,9 @@ export default {
                 "borderColor": "#C67373",
                 "fontSize": 13,
                 "theme": "light",
+                "libs": {
+                    "autoLoad": false
+                },
                 "categoryAxis": {
                     "autoRotateAngle": -45,
                     "autoRotateCount": 0,
@@ -744,7 +752,7 @@ export default {
                     "title": ""
                 }],
                 "export": {
-                    "enabled": false
+                    "enabled": true
                 },
                 "allLabels": [],
                 "balloon": {},

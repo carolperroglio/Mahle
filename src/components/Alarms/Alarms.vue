@@ -34,10 +34,15 @@
         <select class="form-control" v-model="groupselected" @change.prevent="makeGraph(groupselected)">    
             <option v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
         </select>
-        </div>   
-        <div class="col-md-2 offset-4 pull-right">
+        </div>
+        <div class="col-md-2  offset-4 pull-right">
+            <button type="button" class="btn btn-danger btn-sm pull-right" @click.prevent="toPdf()">
+               <i class="fa fa-file-pdf-o"></i> Exportar para PDF
+            </button>
+        </div>
+        <div class="col-md-2 pull-right">
         <download-excel
-            class   = "btn btn-success btn-sm btn-sm pull-right"
+            class   = "btn btn-success btn-sm pull-right"
             :data   = dataProvider
             :fields = jsonfields
             name = 'alarmsreport.xls'><i class="fa fa-file-excel-o"></i> Exportar para Excel
@@ -45,7 +50,7 @@
         </div>
         </div>             
         <!-- TABELA DOS ALARMES -->
-        <div class="cabecalho-table-alarms"  v-show="!carregando">
+        <div class="cabecalho-table-alarms"  v-show="!carregando" v-if="tableAlarms.length > 0">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'product',0):organizar(produtos, 'product',0);" class="ls2 col-md-2">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro
                     <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -109,7 +114,7 @@
                 <label class="ls2 col-md-2">
                     {{t.hourIni}}</label>
                 <label class="ls2 col-md-2">
-                    {{t.hourIni}}</label>
+                    {{t.dateEnd}}</label>
             </div>                       
         </div> 
         
