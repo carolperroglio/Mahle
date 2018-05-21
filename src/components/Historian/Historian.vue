@@ -63,7 +63,7 @@
             </download-excel>
             </div>
         </div>
-        <div class="cabecalho-table-rastreamento"  v-show="!carregando">
+        <div class="cabecalho-table-rastreamento" id="cabecalho-rastreamento" v-show="!carregando">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(providertable, 'product',0):organizar(providertable, 'product',0);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">Data
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -113,7 +113,7 @@
                 </font></b>
             </label>  
         </div> 
-        <div v-show="!carregando" class="table-margin-historian">
+        <div v-show="!carregando" class="table-margin-historian" id="table-historian">
         <div v-for="(t, index) in providertable" v-bind:class="{cinza: index%2==0}" :key="index">                                    
             <label class="ls2 col-md-1">
                 {{t.category}}</label>

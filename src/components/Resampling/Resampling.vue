@@ -5,17 +5,23 @@
             <li class="nav-item-hist nav-item-gp col-md-12">
             <h1 class="title-page-gp"><b>Relatório de Reamostragem</b></h1>
             </li>
-            <li class="nav-item-hist nav-item-gp col-md-2">
+            <li class="nav-item-hist nav-item-gp col-md-3 col-lg-2">
                 <button type="button" class="btn btn-info btn-lg"  @click.prevent="showModal('filterSearch')">
                     Filtrar Busca
                 </button>
+            </li>
+            <li class="nav-item-hist nav-item-gp col-md-3 col-lg-2"  v-if="tableData.length > 0">
+            <button type="button" class="btn btn-danger btn-lg pull-left" @click.prevent="toPdf()">
+               <i class="fa fa-file-pdf-o"></i> Exportar para PDF
+            </button>
             </li>
         </ul>
     </nav>
     <div id="load" v-show="carregando">
         <stretch background="#4d4d4d"></stretch>                
-    </div>  
-    <div class="cabecalho-table-resampling"  v-show="!carregando">
+    </div> 
+    <div id="table-to-pdf"> 
+    <div class="cabecalho-table-resampling"  v-show="!carregando" v-if="tableData.length > 0">
         <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(tableData, 'product',0):organizar(tableData, 'product',0);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">Data 
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -88,7 +94,6 @@
     </div>                                             
 
 
-        <button class="btn btn-primary" @click="getReport()">Texto</button> 
         <!--                            -->
         <!--                            -->
         <!-- Listagem das Reamostragens -->
@@ -119,6 +124,7 @@
 
             </div>                       
         </div> 
+    </div> 
 
 <!-- MODAL PARA FILTRAR RELATÓRIO -->
 <b-modal ref="filterSearch" hide-footer title="Filtrar Busca">

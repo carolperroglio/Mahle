@@ -4,39 +4,39 @@
 
 @media (min-width: 768px) {
     .table-margin-resampling {
-        margin: 31% 0 6% 0;
+        margin: 39% 0 6% 0;
     }
     .cabecalho-table-resampling {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: 24% 0 0 0;
+        margin: -13% 0 0 0;
         z-index: 4;
     }
 }
 
 @media (min-width: 960px) {
     .table-margin-resampling {
-        margin: 18% 0 6% 0;
+        margin: 19.5% 0 6% 0;
     }
     .cabecalho-table-resampling {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: 16% 0 0 0;
+        margin: -5% 0 0 0;
         z-index: 4;
     }
 }
 
-@media (min-width:1400px) {
+@media (min-width:1900px) {
     .table-margin-resampling {
-        margin: 15% 0 6% 0;
+        margin: 19.5% 0 6% 0;
     }
     .cabecalho-table-resampling {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: 14% 0 0 0;
+        margin: -3% 0 0 0;
         z-index: 4;
     }
 }

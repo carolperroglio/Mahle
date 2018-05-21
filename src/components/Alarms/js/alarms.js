@@ -7,55 +7,29 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import VueTimepicker from 'vue2-timepicker'
 import JsonExcel from 'vue-json-excel'
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
 import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js";
 import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js";
 import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js";
-import 'amcharts3/amcharts/plugins/export/export.js'
-import 'amcharts3/amcharts/plugins/export/export.css'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/export.js'
+import '../../../.././node_modules/amcharts3/amcharts/plugins/export/export.css'
 import {
     Stretch
 } from 'vue-loading-spinner'
 import {
     setTimeout
 } from 'timers'
+import logo from './onyx.jpeg'
+import logoMahle from './loooogomahle.png'
 
 es6promisse.polyfill();
 var ipServerRecipe = process.env.RECIPE_API;
 var ipServerOP = process.env.OP_API;
 var ipServerThing = process.env.THINGS_API;
 
-
-Array.prototype.groupByProperties = function(properties) {
-    var arr = this;
-    var groups = [];
-    for (var i = 0, len = arr.length; i < len; i += 1) {
-        var obj = arr[i];
-        if (groups.length == 0) {
-            groups.push([obj]);
-        } else {
-            var equalGroup = false;
-            for (var a = 0, glen = groups.length; a < glen; a += 1) {
-                var group = groups[a];
-                var equal = true;
-                var firstElement = group[0];
-                if (firstElement[properties] !== obj[properties]) {
-                    equal = false;
-                }
-                if (equal) {
-                    equalGroup = group;
-                }
-            }
-            if (equalGroup) {
-                equalGroup.push(obj);
-            } else {
-                groups.push([obj]);
-            }
-        }
-    }
-    return groups;
-};
 
 //TROCAR PRA PORTA IP DO ENDPOINT DE RELATÓRIOS DE ALARMES
 var ipReport = process.env.REPORT_API;
@@ -114,8 +88,10 @@ export default {
             groupselected: '',
             OP: '',
             thingNameInTable: '',
-            jsonfields: { Data: 'category', Alto: 'alto', Baixo: 'baixo', Muitoalto: 'muito alto', Muitobaixo: 'muito alto', Offline: 'offline' }
-
+            // to download to excel
+            jsonfields: { Data: 'category', Alto: 'alto', Baixo: 'baixo', Muitoalto: 'muito alto', Muitobaixo: 'muito alto', Offline: 'offline' },
+            // to usenin export to PDF
+            chart: ''
         }
     },
     components: {
@@ -214,6 +190,95 @@ export default {
             }
             return pros;
         },
+        //SET THE COLUMN HEADER
+        getHeaderToPdf() {
+            var headers = [{
+                    'title': 'Parâmetro',
+                    'dataKey': 'type'
+                },
+                {
+                    'title': 'Equipamento',
+                    'dataKey': 'thingName'
+                },
+                {
+                    'title': 'Tipo',
+                    'dataKey': 'groupTag'
+                },
+                {
+                    'title': 'Data',
+                    'dataKey': 'dateIni'
+                },
+                {
+                    'title': 'Hora Inicio',
+                    'dataKey': 'hourIni'
+                },
+                {
+                    'title': 'Hora Fim',
+                    'dataKey': 'dateEnd'
+                },
+            ];
+
+            return headers;
+        },
+        // EXPORT TO PDF
+        toPdf() {
+
+            var PDFprovider = this.tableAlarms;
+            var thingName = this.thingNameInTable;
+            // OBTEM OS NOMES DAS COLUNAS DA TABELA
+            var columns = this.getHeaderToPdf();
+
+            setTimeout(() => {
+
+                this.chart["export"].capture({}, function() {
+                    this.grafico = new Image();
+                    // var header = $('cabecalho-table');
+
+
+                    this.toPNG({}, function(data) {
+                        this.grafico.src = data;
+                        console.log("Export");
+
+                        var doc = new jsPDF('p', 'pt');
+                        var img = new Image();
+                        var imgLogo = new Image();
+                        img.src = logo;
+                        imgLogo.src = logoMahle;
+
+                        // ADICIONA LOGO MAHLE
+                        doc.addImage(imgLogo, "PNG", 510, 10, 60, 20);
+                        doc.setFontSize(20);
+                        // ADICIONA LOGO SISTEMA ONYX
+                        doc.addImage(img, "PNG", 10, 10, 50, 20);
+
+                        // ADICIONA TÍTULO                            
+                        doc.text(35, 65, "Relatório de Alarmes " + thingName)
+                            // ADICIONA GRÁFICO                            
+                        doc.addImage(this.grafico, "PNG", 10, 100, 600, 300);
+
+                        // ADICIONA TABELA
+                        doc.autoTable(columns, PDFprovider, {
+                            // addPageContent: pageContent,
+                            showHeader: 'everyPage',
+                            margin: {
+                                top: 480,
+                                left: 10,
+                                right: 20
+                            },
+                            halign: 'middle', // left, center, right
+                            valign: 'middle',
+                            columnWidth: 20,
+                            tableWidth: 600
+                        });
+
+                        // doc.addImage(table, "PNG", 20, 550, 600, 200);
+
+                        doc.save("Relatório de Alarmes " + thingName + ".pdf");
+                    });
+                });
+            }, 1500);
+        },
+        //
         getThings() {
             axios.get(this.urlGatewayThings).then((response) => {
                 this.things = response.data;
@@ -296,6 +361,8 @@ export default {
                         for (var key in obj.data[x]) {
                             objTable["thingId"] = obj.thingId;
                             objTable["groupTag"] = obj.groupTag;
+                            objTable["thingName"] = this.thingNameInTable;
+
                             if (key == 'dateIni') {
                                 objTable[key] = this.ticksToDate(obj.data[x][key], false, false);
                                 objTable["hourIni"] = this.ticksToDate(obj.data[x][key], false, true);
@@ -335,15 +402,10 @@ export default {
                     obj2["balloonColor"] = "#808080";
                     obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
                     obj2["fillAlphas"] = 1;
-                    // obj2["color"] = "#000000";
-                    // obj2["lineThickness"] = 3;
                     obj2["type"] = "column";
                     obj2["title"] = key; // offline, muito alto, alto, baixo, muito baixo
                     obj2["valueField"] = key; // offline, muito alto, alto, baixo, muito baixo
-                    // obj2["bulletColor"] = R.color;
-                    // obj2["fillColors"] = R.color;
-                    // obj2["legendColor"] = R.color;
-                    // obj2["lineColor"] = R.color;
+
                     this.graphs.push(obj2)
                     obj2 = {}
                 }
@@ -384,8 +446,11 @@ export default {
 
         atualizaGraf() {
 
-            window.AmCharts.makeChart("chartAlarm", {
+            this.chart = window.AmCharts.makeChart("chartAlarm", {
                 "path": "dist/amcharts/",
+                "libs": {
+                    "autoLoad": false
+                },
                 "type": "serial",
                 "categoryField": "category",
                 "chartCursor": {},
