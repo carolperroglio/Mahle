@@ -12,7 +12,11 @@ Vue.use(VueCookies);
 
 export default {
     name: "NavBar",
-    props: ['username'],
+    props: {
+        username: {
+            default: 'null'
+        }
+    },
     data() {
         return {
             active: true,

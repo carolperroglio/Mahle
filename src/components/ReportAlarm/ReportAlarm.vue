@@ -34,7 +34,7 @@
         </div>
         </div>
 
-        <div class="row conteudotabela">
+        <div class="row conteudotabelaAlarm">
             
             <div class="col-sm-2">
             <select class="form-control-outline-secondary" v-model="newGroup" @change.prevent="editGroup(newGroup)">    
