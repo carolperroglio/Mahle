@@ -254,7 +254,7 @@ export default {
                         // ADICIONA TÍTULO                            
                         doc.text(35, 65, "Relatório de Alarmes " + thingName)
                             // ADICIONA GRÁFICO                            
-                        doc.addImage(this.grafico, "PNG", 10, 100, 600, 300);
+                        doc.addImage(this.grafico, "PNG", 10, 100, 550, 300);
 
                         // ADICIONA TABELA
                         doc.autoTable(columns, PDFprovider, {
