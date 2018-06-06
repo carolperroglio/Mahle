@@ -48,7 +48,9 @@ module.exports = {
         },
     },
     externals: [
-        'canvas'
+        'canvas',
+        'jsdom',
+        'parse5'
     ],
     plugins: [
         new webpack.ProvidePlugin({

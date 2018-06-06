@@ -2,13 +2,13 @@ import Vue from 'vue'
 import axios from '../../../.././node_modules/axios/index.js'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/fabric.js/fabric.min.js'
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js'
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.min.js'
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/vfs_fonts.js'
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js'
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/export.js'
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/export.css'
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/fabric.js/fabric.min.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.min.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/vfs_fonts.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/export.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/export.css')
 import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise.min.js'
 import {
     setTimeout

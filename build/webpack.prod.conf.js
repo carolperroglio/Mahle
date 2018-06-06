@@ -31,6 +31,11 @@ const webpackConfig = merge(baseWebpackConfig, {
         filename: utils.assetsPath('js/[name].[chunkhash].js'),
         chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
     },
+    externals: [
+        'canvas',
+        'jsdom',
+        'parse5'
+    ],
     plugins: [
         new webpack.DefinePlugin({
             'process.env': env

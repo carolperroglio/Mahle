@@ -361,11 +361,19 @@ export default {
             if (obj.users.length > 0) {
                 for (var i = 0; i < this.userlist.length; i++) {
                     for (var x = 0; x < obj.users.length; x++) {
-                        if (obj.users[x].userId != this.userlist[i].userId) {
-                            newListUser.push(this.userlist[i]);
+                        if (obj.users[x].userId == this.userlist[i].userId) {
+                            this.userlist[i].hasUser = true;
+                            // newListUser.push(this.userlist[i]);
                         }
                     }
                 }
+
+                for (var i = 0; i < this.userlist.length; i++) {
+                    if (!this.userlist[i].hasUser) {
+                        newListUser.push(this.userlist[i]);
+                    }
+                }
+
                 this.userlist = newListUser;
             } else {
                 this.userlist = this.inicialuserlist;
