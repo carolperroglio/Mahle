@@ -15,11 +15,11 @@ import Router from "vue-router";
 import AmCharts from "amcharts3";
 import AmSerial from "amcharts3/amcharts/serial";
 // import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/fabric.js/fabric.js";
-import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js";
-import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js";
-import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js";
-// import "amcharts3/amcharts/plugins/export/export.js";
-// import "amcharts3/amcharts/plugins/export/export.css";
+// require.resolve( ".././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js");
+// require.resolve( ".././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js");
+// require.resolve( ".././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js");
+// require.resolve("amcharts3/amcharts/plugins/export/export.js");
+// require.resolve("amcharts3/amcharts/plugins/export/export.css");
 import VueCookies from "vue-cookies";
 import router from "./router";
 import Bootstrap from "bootstrap-vue";
@@ -56,7 +56,7 @@ axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
     var sec = VueCookies.get("security");
-    console.log(sec);
+    // console.log(sec);
     config.headers.common["security"] = sec;
     config.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
     config.headers.common["Accept"] = "application/json";
@@ -69,40 +69,40 @@ axios.interceptors.request.use(
   }
 );
 
-// axios.interceptors.response.use(
-//   response => {
-//     // intercept the global error
-//     return response;
-//   },
-//   function(error) {
-//     var statuscode = VueCookies.get("status");
-//     //&& errorResponse.config && !errorResponse.config.__isRetryRequest
-//     if (statuscode == "401") {
-//       router.push({ name: "Login" });
-//       console.log("status code: " + statuscode);
-//     } else if (error.message == "Network Error") {
-//       VueCookies.set("status", "Network Error");
-//       router.push({ name: "Login" });
-//       console.log("error.message: " + error.message);
-//       // Login.showModal('modaInfo');
-//       // showModal("modaInfo");
-//     } else if (error.response.status != undefined && error.response.status == "404") {
-//       VueCookies.set("status", "404");
-//       console.log("status code: " + error.response.status);
-//       // showModal("modaInfo");
-//     } else if (error.response.status != undefined && error.response.status == "400") {
-//       VueCookies.set("status", "400");
-//       console.log("status code: " + error.response.status);
-//     } else if ( error.response.status != undefined && error.response.status == "500") {
-//       VueCookies.set("status", "500");
-//       console.log("status code: " + error.response.status);
-//     } else {
-//       VueCookies.set("status", "ok");
-//       console.log("status code: " + statuscode);
-//     }
-//     return Promise.reject(error);
-//   }
-// );
+axios.interceptors.response.use(
+  response => {
+    // intercept the global error
+    return response;
+  },
+  function(error) {
+    var statuscode = VueCookies.get("status");
+    //&& errorResponse.config && !errorResponse.config.__isRetryRequest
+    if (statuscode == "401") {
+      router.push({ name: "Login" });
+      console.log("status code: " + statuscode);
+    } else if (error.message == "Network Error") {
+      VueCookies.set("status", "Network Error");
+      router.push({ name: "Login" });
+      console.log("error.message: " + error.message);
+      // Login.showModal('modaInfo');
+      // showModal("modaInfo");
+    } else if (error.response.status != undefined && error.response.status == "404") {
+      VueCookies.set("status", "404");
+      console.log("status code: " + error.response.status);
+      // showModal("modaInfo");
+    } else if (error.response.status != undefined && error.response.status == "400") {
+      VueCookies.set("status", "400");
+      console.log("status code: " + error.response.status);
+    } else if ( error.response.status != undefined && error.response.status == "500") {
+      VueCookies.set("status", "500");
+      console.log("status code: " + error.response.status);
+    } else {
+      VueCookies.set("status", "ok");
+      console.log("status code: " + statuscode);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default {
   name: "app",

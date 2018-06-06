@@ -11,11 +11,13 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
-import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js";
-import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js";
-import "../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js";
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/export.js'
-import '../../../.././node_modules/amcharts3/amcharts/plugins/export/export.css'
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/fabric.js/fabric.min.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.min.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/vfs_fonts.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/export.js')
+require('../../../.././node_modules/amcharts3/amcharts/plugins/export/export.css')
 import {
     Stretch
 } from 'vue-loading-spinner'
