@@ -27,31 +27,25 @@
                 <li class="nav-items-liga col-sm-0" id="produtoR">                        
                     <b>Produto <br>Final</b>
                 </li>                 
-                <li class="nav-items-liga form-group col-sm-2"><!--recipe.recipeProduct.product.productName-->
-                    <input :disabled="recipeCadastrada" placeholder="Nome do produto" class="form-control form-control-sm" 
-                        v-model="productRecipeName" @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim); recipeProduct={}" >                                                                                 
-                    
-                    <select id="dropdownMenuButton" @change="productRecipeName=recipeProduct.productName" 
-                        v-show="prosFim.length>0" v-model="recipeProduct" class="form-control form-control-sm">
-                        <option :value="p" 
-                        v-for="(p,index) in prosFim" v-bind:key="index">
-                        {{p.productName}}</option>                   
-                    </select>
-                      
+                <li class="nav-items-liga form-group col-sm-2">               
+                    <input :disabled="recipeCadastrada" placeholder="Nome do produto" class="form-control" 
+                        v-model="productRecipeName" @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim);  recipeProduct={}">
+                    <div style="position: absolute;">
+                        <b-dropdown-item @click.stop.prevent="recipeProduct=p;productRecipeName=recipeProduct.productName;prosFim=[]" 
+                            v-for="(p,index) in prosFim" v-bind:key="index" style="cursor:pointer">{{ p.productName }}</b-dropdown-item>
+                    </div>                      
                 </li>
                 <li class="nav-items-liga col-sm-2" v-if="!recipeCadastrada" >                    
                     <button type="button" class="btn btn-success btn-sm" :disabled="!recipe.recipeName || !recipe.recipeCode || recipeProduct==undefined || recipeProduct.productId==undefined || recipe.recipeCode==undefined || recipe.recipeName=='' || recipe.recipeCode==''"  @click.stop.prevent="createRecipe(recipe,recipeProduct)">
                         Enviar
                     </button>   
                 </li> 
-
                 <li class="nav-items-liga col-sm-0" v-if="recipeCadastrada">
                     <button class="btn btn-warning btn-sm" @click.stop.prevent="showModalEditRecipe(recipe)" >                        
                         <i class="fa fa-pencil" style="font-size:22px; cursor:pointer"></i>                          
                         Editar liga
                     </button>
-                </li>
-                
+                </li>                
                 <li class="nav-items-liga col-sm-0" id="produtoR" v-if="recipeCadastrada">                        
                     <button class="btn btn-danger btn-sm" aria-hidden="true" id="removerP" @click.stop.prevent="showModalRemoveLiga()">
                         <i class= "fa fa-trash-o" style="font-size:23px; cursor:pointer">
@@ -91,9 +85,15 @@
                     <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                 </font></b>
-            </label>                 
+            </label>  
+            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-2">
+                <b><font class="cursor-class" color="#ffffff">
+                    Tipo &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                </font></b>
+            </label>               
         </div>                                             
-
 
         <!--                       -->
         <!--                       -->
@@ -104,22 +104,19 @@
         <!--                       -->                            
         <div v-if="recipeCadastrada" v-show="!carregando" class="liga-produtos">
             <div v-for="(pro, index) in produtos" v-bind:class="{cinza: index%2==0}" :key="index">                                    
-                <label class="ls2 col-md-2">
-                    {{pro.product.productName}}</label>
-                <label class="ls2 col-md-2">
-                    {{pro.minValue}}</label>
-                <label class="ls2 col-md-2">
-                    {{pro.maxValue}}</label>                                        
-                <label class="ls2 fim col-md-5">                        
-                    <i class = "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto(pro, index)"></i>&nbsp;&nbsp;&nbsp;                     
-                    <!--<i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="phaseProduct = {};showModalEditProPhase(pro, index)"></i>-->
+                <label class="ls2 col-md-2">{{pro.product.productName}}</label>
+                <label class="ls2 col-md-2">{{pro.minValue}}</label>
+                <label class="ls2 col-md-2">{{pro.maxValue}}</label>                
+                <label v-if="pro.phaseProductType=='finished'" class="ls2 col-md-2">Elemento</label>                                    
+                <label v-if="pro.phaseProductType=='base_product'" class="ls2 col-md-2">Produto base</label>
+                <label v-if="pro.phaseProductType=='scrap'" class="ls2 col-md-2">Rejeito</label>            
+                <label class="ls2 fim col-md-3">                        
+                    <i class = "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto(pro, index)"></i>&nbsp;&nbsp;&nbsp;                                         
                 </label>
             </div>                       
         </div> 
-        
 
 
-                                      
         <!--                       -->
         <!--                       -->
         <!--                       -->
@@ -142,21 +139,16 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="">Escolha o produto</label>
-                        <input placeholder="Nome do produto" class="form-control form-control-sm" 
-                            v-model="productRecipeNameEdit" @keyup="prosFimEdit=getResults(urlProducts, productRecipeNameEdit, prosFimEdit); recipeProductEdit={}" >                                                                                 
-                                                
-                        <select id="dropdownMenuButton" @change="productRecipeNameEdit=recipeProductEdit.productName" 
-                            v-show="prosFimEdit.length>0" v-model="recipeProductEdit" class="form-control form-control-sm">
-                            <option :value="p" 
-                            v-for="(p,index) in prosFimEdit" v-bind:key="index">
-                            {{p.productName}}</option>                   
-                        </select>
+                        <input placeholder="Nome do produto" class="form-control form-control-sm" v-model="productRecipeNameEdit" 
+                            @keyup="prosFimEdit=getResults(urlProducts, productRecipeNameEdit, prosFimEdit); recipeProductEdit={}" >                                                                                 
+                        <b-dropdown-item @click.stop.prevent="recipeProductEdit=p;productRecipeNameEdit=recipeProductEdit.productName;prosFimEdit=[]" 
+                            v-for="(p,index) in prosFimEdit" v-bind:key="index" style="cursor:pointer">{{ p.productName }}</b-dropdown-item>                        
                     </div>       
                 </div>        
             </div>
             <div class="modal-footer">
                 <div class="btn-group" role="group">
-                   <button @click.stop.prevent="showModalConfirmEditLiga()" class="btn btn-success">
+                   <button @click.stop.prevent="showModalConfirmEditLiga()" :disabled="!recipeTemp.recipeName || !recipeTemp.recipeCode || !recipeProductEdit.productId" class="btn btn-success">
                         <i  class="fa fa-check-square" aria-hidden="true"></i> 
                         Confirmar
                    </button>
@@ -206,12 +198,21 @@
                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
                 <div class="form-row"> 
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <label>Nome do produto </label>
                         <input @keyup="pros=getResults(urlProducts, productPhaseName, pros);delete phaseProduct.productId;" v-model="productPhaseName" placeholder="Nome do produto"  class="fm form-control mr-sm-0" id="dropdownMenuButton"/>
                         <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; pros=[];" v-for="(p,index) in pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>
                     </div>                                                                                          
-                </div>
+                    <div class="form-group col-md-6">
+                        <label>Tipo do produto </label>
+                        <select v-model="phaseProduct.phaseProductType" class="fm form-control mr-sm-2">
+                            <option value="" selected disabled>Escolha uma opção</option>
+                            <option value="base_product">Produto Base</option>
+                            <option value="finished" >Elemento</option>
+                            <option value="contaminent" >Contaminante</option>                            
+                        </select>                            
+                    </div>   
+                </div>                
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Mín(%) </label><br>
@@ -225,8 +226,7 @@
             </div>
             <div class="modal-footer">
                 <div>
-                    <div class="btn-group" role="group">
-                        {{phaseProduct.phaseProductId}}
+                    <div class="btn-group" role="group">                        
                         <button @click.stop.prevent="createPhaseProduct(phaseProduct, recipe.phases[0]);" :disabled="!phaseProduct.productId || !phaseProduct.minValue || !phaseProduct.maxValue" class="btn btn-success">
                             <i  class="fa fa-check-square" aria-hidden="true"></i>
                             Confirmar
@@ -264,11 +264,6 @@
                 </div>
             </div>
         </b-modal> 
-
-
- 
-        
-
 
         <!--                       -->
         <!--                       -->

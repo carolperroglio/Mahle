@@ -73,8 +73,7 @@
         <!-- Listagem dos produtos -->
         <!--                       -->
         <!--                       -->
-        <!--                       -->            
-            
+        <!--                       -->                        
         <div class="margin-table-products" v-show="!carregando && produtos.length>0">
             <div v-for="(p, index) in produtos" v-bind:class="{cinza: index%2==0}" v-bind:key="index">                                    
                 <label class="ls2 col-md-2">
@@ -116,7 +115,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <div class="paginacao" v-show="total>0">
+        <div class="paginacao" v-show="pages.length>1">
             <nav aria-label="">
                 <ul class="pagination justify-content-center">
                     <li v-show="startat>0" class="page-item">
@@ -125,7 +124,7 @@
                     <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
                         <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*quantityPage, quantityPage)">{{num+1}}</a>
                     </li>
-                    <li class="page-item" v-show="pages.length>1 && startat+20<total">
+                    <li class="page-item" v-show="pages.length>1 && startat+quantityPage<total">
                         <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=quantityPage, quantityPage)">Próximo</a>
                     </li>
                 </ul>
