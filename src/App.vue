@@ -60,6 +60,7 @@ axios.interceptors.request.use(
     config.headers.common["security"] = sec;
     config.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
     config.headers.common["Accept"] = "application/json";
+    config.headers.common['Cache-Control'] = 'no-cache';
 
     return config;
   },
