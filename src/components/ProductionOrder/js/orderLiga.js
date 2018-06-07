@@ -366,31 +366,32 @@ export default {
                 })
         },
         getOPTypeToAssoc(idOP) {
-            //Get on OP of Type: Tira - ID: 1 
-            axios.get(this.url + "/api/productionordertypes/1").then((response) => {
-                //IDS from group allowed to associate to Op Type Tira
-                var thingGroupId = response.data.thingGroupIds[0];
 
-                //IDS of Things allowed to associate to Op of Type Tira
-                axios.get(this.urlGateway + thingGroupId).then((response) => {
-                    //ID choose in View
-                    this.idAllowed;
-                    this.getAssoc(idOP, this.idAllowed);
+            //Get on OP of Type: Liga - ID: 2 
+            // axios.get(this.url + "/api/productionordertypes/2").then((response) => {
+            //     //IDS from group allowed to associate to Op Type Tira
+            //     var thingGroupId = response.data.thingGroupIds[0];
 
-                })
-            }).catch((error) => {
-                console.log(error);
-                this.carregando = false;
-                this.erro = true;
-                this.msgErro = "Ocorreu um erro: " + error.message;
-                this.showModal("modalInfo");
-            })
+            //     //IDS of Things allowed to associate to Op of Type Tira
+            //     axios.get(this.urlGateway + thingGroupId).then((response) => {
+            //ID choose in View
+            this.idAllowed;
+            this.getAssoc(idOP, this.idAllowed);
+
+            //     })
+            // }).catch((error) => {
+            //     console.log(error);
+            //     this.carregando = false;
+            //     this.erro = true;
+            //     this.msgErro = "Ocorreu um erro: " + error.message;
+            //     this.showModal("modalInfo");
+            // })
         },
         getAssoc(idOP, idallowed) {
             this.mensagemSuc = '';
             this.mensagem = '';
             axios.put(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + idallowed + '&productionOrderId=' + idOP).then((response) => {
-                console.log(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + this.idLinha + '&productionOrderId=' + this.OPId);
+                console.log(this.url + '/api/productionorders/AssociateProductionOrder/associate?thingId=' + idallowed + '&productionOrderId=' + idOP);
                 console.log(response.data);
 
             }).catch((error) => {

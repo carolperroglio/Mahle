@@ -75,7 +75,7 @@
                 </label>
                 </label>
                 <label class="col-md-2"  v-show="o.currentStatus == 'approved' || o.currentStatus == 'dumping'">
-                <button class="btn btn-danger" @click="encerrarOP(o.productionOrderId);">Encerrar OP</button>
+                <button class="btn btn-danger" @click="encerrarOP(o);">Encerrar OP</button>
                 </label>
             </div>
             </div>
@@ -121,7 +121,7 @@
         </div>
         </div>
         </b-modal>
-        <b-modal ref="modalErro" title="Erro" hide-footer="">
+        <b-modal ref="modalErro" title="" hide-footer="">
             <p :class="erro? 'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div>

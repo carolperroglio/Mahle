@@ -46,7 +46,7 @@
         </div>
         </div>
         </div>
-        <b-modal ref="modalInfo" title="Erro" hide-footer="">
+        <b-modal ref="modalInfo" title="" hide-footer="">
             <p :class="erro?'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div> 
