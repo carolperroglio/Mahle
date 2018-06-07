@@ -96,10 +96,29 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
-        encerrarOP(id) {
+        getDisAssoc(idThing, idOP, op) {
+            //Thing ID Mahle SBC =  1 : Linha única
+
+            axios.put(this.urlOP + '/api/productionorders/AssociateProductionOrder/disassociate?thingId=' + idThing + '&productionOrderId=' + idOP, op)
+                .then((response) => {
+                    console.log("Desassociou !!!")
+                }).catch((error) => {
+                    console.log(error);
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao desassociar a OP: " + error.message;
+                    this.showModal("modalErro");
+                    console.log("OP Desassociação Falhou" + error.message)
+                })
+        },
+        encerrarOP(op) {
+            var id = op.productionOrderId;
             axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended")
                 .then(response => {
                     console.log("OP Desativada");
+
+                    this.getDisAssoc(op.currentThing.thingId, id, op);
+
                     this.msgErro = "OP desativada!";
                     this.showModal("modalErro");
                     this.getResults();

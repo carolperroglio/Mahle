@@ -75,7 +75,7 @@
                 </label>
                 </label>
                 <label class="col-md-2"  v-show="o.currentStatus == 'approved' || o.currentStatus == 'dumping'">
-                <button class="btn btn-danger" @click="encerrarOP(o.productionOrderId);">Encerrar OP</button>
+                <button class="btn btn-danger" @click="encerrarOP(o);">Encerrar OP</button>
                 </label>
             </div>
             </div>
