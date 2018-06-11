@@ -6,7 +6,8 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import bBadge from 'bootstrap-vue/es/components/badge/badge'
 import { Stretch } from 'vue-loading-spinner'
-
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -106,7 +107,7 @@ export default {
             }
         },
         getProductsOP(op) {
-            axios.get(this.urlOP + "/api/productionorders/" + this.idOP).then((response) => {
+            axios.get(this.urlAnalysis + "/gateway/productionorder/" + this.idOP).then((response) => {
                 op = response.data;
                 var comp = {};
                 for (var x = 0; x < op.recipe.phases[0].phaseProducts.length; x++) {
@@ -157,6 +158,8 @@ export default {
         realizarAnálise() {
             var components = this.components;
             var objComp = {};
+            objComp.username = VueCookies.get('username');
+
             if (this.cobre.cobreFosforoso != undefined) {
                 objComp = this.cobre
             }

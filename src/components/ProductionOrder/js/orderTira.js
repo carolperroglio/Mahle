@@ -460,7 +460,7 @@ export default {
         desativarOP(idThing, idOP, op) {
             if (op.currentStatus == "active" && op.typeDescription == "Tira") {
                 //Desativar OP anterior
-                axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + idOP + "&state=ended")
+                axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + idOP + "&state=ended", op)
                     .then(response => {
                         this.getDisAssoc(currentID, OPId, obj);
                         console.log("OP Desativada" + response.statusText)
@@ -494,7 +494,7 @@ export default {
 
                             //Ativando OP
                             var id = response.data.productionOrderId;
-                            axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active").then(response => {
+                            axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active", response.data).then(response => {
 
                                 // Desassociar OP anterior, a linha
                                 for (var i = 0; i < this.opArray.values.length; i++) {
