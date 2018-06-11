@@ -60,7 +60,7 @@
                                 <button type="button" class="btn btn-warning"  @click.stop.prevent="getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
                                 </button>
-                                <button v-if="productionOrder.status == 'approved'" type="button" class="btn btn-danger" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
+                                <button v-if="productionOrder.status == 'approved'" type="button" class="btn btn-danger" @click.stop.prevent="getAnalysis();showModal('lastAnalysis'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Exibir Última Análise
                                 </button>
                                 <button v-else type="button" class="btn btn-danger"  v-show="productionOrder.status == 'reproved'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
@@ -190,11 +190,49 @@
                         </font></b>
                     </label>
                 </div>
+                <div v-for="(l, index) in lastAnalysis.messages" v-bind:key="index" :class="{cinza: index%2==0}">
+                    <label class="ls ls10 col-md-4">
+                        {{l.key}}</label>
+                    <label class="ls ls10 col-md-7">
+                        {{l.value}}</label>
+                </div>
+                <div v-if="cobreFosforoso!= null">
+                <label class="ls ls10 col-md-4">
+                    Cobre Fosforoso</label>
+                <label class="ls ls10 col-md-7">
+                    {{cobreFosforoso}}</label>
+                </div>
+                        
+                </div>
+            </form>
+         </b-modal>
+
+         <!-- 
+            LAST ANALYSYS - É EXIBIDA SE A OP FOI APROVADA
+          -->
+         <b-modal size="lg" ref="lastAnalysis" hide-footer title="Última Análise">
+            <form>
+                <div v-if="calculoOK">
+                    <div class="cabecalho-table-exibir-cálculo">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(lastAnalysis, 'key',0):organizar(lastAnalysis, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
+                        <b><font class="cursor-class" color="#ffffff">Material 
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(lastAnalysis, 'value',1):organizar(lastAnalysis, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-7">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Resultado(%)
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                </div>
                 <div v-for="(l, index) in lastAnalysis.comp" v-bind:key="index" :class="{cinza: index%2==0}">
                     <label class="ls ls10 col-md-4">
                         {{l.productName}}</label>
                     <label class="ls ls10 col-md-7">
-                        {{l.valueKg}}</label>
+                        {{l.value}}</label>
                 </div>
                 <div v-if="cobreFosforoso!= null" :class="{cinza: index%2==0}">
                 <label class="ls ls10 col-md-4">

@@ -6,7 +6,8 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import { read } from 'fs';
-
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 es6promisse.polyfill();
 
 
@@ -444,6 +445,7 @@ export default {
             data.productionOrderTypeId = 2;
             data.typeDescription = "Liga";
             data.currentstatus = "created";
+            data.username = VueCookies.get('username');
             data.recipe.recipeProduct.measurementUnit = "kg";
             this.objetooo = data;
             console.log('OP sendo criada!!!!!!!!');

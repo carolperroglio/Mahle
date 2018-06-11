@@ -54,13 +54,13 @@
                         <div>
                             <div class="card">
                                 <div class="card-header card-header-hp">
-                                    <b>Materiais Consumidos e Apontados</b>{{quantity}}
+                                    <b>Materiais Consumidos e Apontados</b>
                                     <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
                                     <div style="margin-right:1%" class="pull-right">
                                     <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity='';loteAco=''; showModal('cadAco'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
                                     </button>
-                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';productionOrderId=''; unity='';loteLiga=''; showModal('cadLiga'); ordem.type = 'input'">
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="getOP();quantity = ''; ordem.productId = '';productionOrderId=''; unity='';loteLiga=''; showModal('cadLiga'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Liga
                                     </button>
                                     <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = ''; ordem.productName = ''; unity=''; showModal('cadRoloSaida');pReceita = true; ordem.type = 'output'">
@@ -120,7 +120,7 @@
                             <div id="load2" v-show="carregando">
                                 <stretch background="#4d4d4d"></stretch>
                             </div> 
-                            <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}">
+                            <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}" v-show="teste.length > 0">
                                     <label class="ls ls10 col-md-2">
                                         {{o.product}}</label>&nbsp;
                                     <label class="ls ls10  col-md-2">
@@ -205,7 +205,7 @@
                     <label>
                         <b>Liga: </b>
                     </label>
-                    <input disabled type="text"  class="form-control form-control-sm" v-b-tooltip.hover title="NÃO HÁ OPS ATIVAS PARA A OP DE TIRA DESEJADA" placeholder="NÃO HÁ OPS DE LIGA PARA ESSA TIRA" v-if="noop">
+                    <input disabled type="text"  class="form-control form-control-sm" v-b-tooltip.hover title="NÃO HÁ OPS ATIVAS PARA A OP DE TIRA DESEJADA" placeholder="NÃO HÁ OPS DE LIGA PARA ESSA TIRA" v-if="listOP.length == 0">
                     <select class="form-control form-control-sm" required v-model="productionOrderId" v-else >
                         <option v-for="(p,index) in listOP" :value="p" v-bind:key="index">{{ p.productionOrderNumber }}</option>
                     </select>

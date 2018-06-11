@@ -8,6 +8,8 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import VueTimepicker from 'vue2-timepicker'
 import { Stretch } from 'vue-loading-spinner'
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 
 es6promisse.polyfill();
 
@@ -199,6 +201,8 @@ export default {
             })
         },
         updateStatus: function(obj) {
+            this.obj.username = VueCookies.get('username');
+
             switch (obj.status) {
                 case 'Em uso':
                     obj.status = "in_use"

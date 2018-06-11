@@ -6,6 +6,8 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import bBadge from 'bootstrap-vue/es/components/badge/badge'
 import { Stretch } from 'vue-loading-spinner'
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 
 es6promisse.polyfill();
 
@@ -98,6 +100,7 @@ export default {
         },
         getDisAssoc(idThing, idOP, op) {
             //Thing ID Mahle SBC =  1 : Linha única
+            op.username = VueCookies.get('username');
 
             axios.put(this.urlOP + '/api/productionorders/AssociateProductionOrder/disassociate?thingId=' + idThing + '&productionOrderId=' + idOP, op)
                 .then((response) => {
@@ -112,6 +115,8 @@ export default {
                 })
         },
         encerrarOP(op) {
+            op.username = VueCookies.get('username');
+
             var id = op.productionOrderId;
             axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended")
                 .then(response => {

@@ -32,6 +32,7 @@ export default {
             },
             id: "",
             idOP: '',
+            opSelected: {},
             carregando: false,
             erro: false,
             opInAnalysis: [],
@@ -55,7 +56,7 @@ export default {
             prod: {},
             cobre: {},
             cobreqtd: '',
-            blockAdd: false
+            blockConfirm: true
         }
     },
     components: {
@@ -94,6 +95,30 @@ export default {
                     this.cabecalhoSetas[i] = true;
                 else
                     this.cabecalhoSetas[i] = false;
+        },
+        blockConfirmButton() {
+            this.blockConfirm = false
+
+            for (var x = 0; x < this.components.length; x++) {
+                if (this.components[x].value.length == 0) {
+                    this.blockConfirm = true
+                }
+            }
+        },
+        getProductsOP(op) {
+            axios.get(this.urlOP + "/api/productionorders/" + this.idOP).then((response) => {
+                op = response.data;
+                var comp = {};
+                for (var x = 0; x < op.recipe.phases[0].phaseProducts.length; x++) {
+                    if (op.recipe.phases[0].phaseProducts[x].product.productId != 70) {
+                        comp.productId = op.recipe.phases[0].phaseProducts[x].product.productId;
+                        comp.productName = op.recipe.phases[0].phaseProducts[x].product.productName;
+                        comp.value = '';
+                        this.addComponente(comp);
+                    }
+                }
+                console.log(this.components)
+            })
         },
         getResults() {
             this.carregando = true;
