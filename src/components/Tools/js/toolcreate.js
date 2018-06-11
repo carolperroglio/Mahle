@@ -4,18 +4,19 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import { setTimeout } from 'timers';
-
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 es6promisse.polyfill();
 
 function paginacao(response, este) {
     este.pageAtual = este.startat / 20;
     este.total = response.data.total;
     let fim = Math.ceil(este.total / 20);
-    este.pages=[];
-    if (este.pageAtual > 11) {        
+    este.pages = [];
+    if (este.pageAtual > 11) {
         for (var i = este.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
             este.pages[i] = i;
-    } else {        
+    } else {
         for (var i = 0; i < fim; i++)
             este.pages[i] = i;
     }
@@ -111,6 +112,7 @@ export default {
             this.ferramenta.typeId = tipo.toolTypeId;
         },
         cadastrar(ferramenta) {
+            ferramenta.username = VueCookies.get('username');
 
             console.log(ferramenta);
 
@@ -161,7 +163,7 @@ export default {
             // }
 
             axios.get(this.url + "?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage).then((response) => {
-                this.ferramentas = response.data.values;                
+                this.ferramentas = response.data.values;
                 for (var index in response.data.values) {
                     this.ferramentas[index].status = this.getStatus(response.data.values[index].status);
                 }
@@ -180,6 +182,8 @@ export default {
             this.carregando = true;
             this.mensagem = '';
             this.mensagemSuc = '';
+            ferramenta.username = VueCookies.get('username');
+
             axios.put(this.url + '/' + ferramenta.toolId, ferramenta).then((response) => {
                 this.msg = ferramenta.name + ' atualizada com sucesso.';
                 this.erro = false;

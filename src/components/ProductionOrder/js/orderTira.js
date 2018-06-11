@@ -7,7 +7,8 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 import { read } from 'fs';
 import { setTimeout } from 'timers';
-
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 es6promisse.polyfill();
 
 
@@ -85,7 +86,8 @@ export default {
             opSelectedParams: "",
             descriptionTira: "Tira",
             canAdd: false,
-            msgErro: ""
+            msgErro: "",
+            erro: false
 
         }
     },
@@ -441,12 +443,11 @@ export default {
             //Thing ID Mahle SBC =  1 : Linha única
             this.mensagemSuc = '';
             this.mensagem = '';
+            op.username = VueCookies.get('username');
+
             axios.put(this.url + '/api/productionorders/AssociateProductionOrder/disassociate?thingId=' + idThing + '&productionOrderId=' + idOP, op)
                 .then((response) => {
-                    if (op.currentStatus == "active" && op.typeDescription == "Tira") {
-                        //Desativar OP anterior
-                        this.desativarOP(op.productionOrderId);
-                    }
+
                     console.log(response.data);
                     this.mensagemSuc = 'Ordem desassociada com sucesso.';
                 }).catch((error) => {
@@ -456,18 +457,22 @@ export default {
                     this.showModal("modalInfo");
                 })
         },
-        desativarOP(id) {
-            axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended")
-                .then(response => {
-                    console.log("OP Desativada" + response.statusText)
-                }).catch((error) => {
-                    console.log(error);
-                    this.erro = true;
-                    this.msgErro = "Ocorreu um erro ao desativar a OP: " + error.message;
-                    this.showModal("modalInfo");
-                    console.log("OP Desativada Falhou" + response.statusText)
-                })
+        desativarOP(idThing, idOP, op) {
+            if (op.currentStatus == "active" && op.typeDescription == "Tira") {
+                //Desativar OP anterior
+                axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + idOP + "&state=ended")
+                    .then(response => {
+                        this.getDisAssoc(currentID, OPId, obj);
+                        console.log("OP Desativada" + response.statusText)
+                    }).catch((error) => {
+                        console.log(error);
+                        this.erro = true;
+                        this.msgErro = "Ocorreu um erro ao desativar a OP: " + error.message;
+                        this.showModal("modalInfo");
+                        console.log("OP Desativada Falhou" + response.statusText)
+                    })
 
+            }
         },
         createOp: function(data) {
                 this.opArrarKeep = [];
@@ -477,6 +482,7 @@ export default {
                 data.productionOrderTypeId = "1";
                 data.typeDescription = "Tira";
                 data.currentstatus = "created";
+                data.username = VueCookies.get('username');
                 this.objetooo = data;
                 console.log('OP sendo criada!!!!!!!!');
                 // Criando OP
@@ -497,7 +503,7 @@ export default {
                                     var currentID = this.opArray.values[i].currentThingId;
 
                                     if (this.opArray.values[i].currentThingId != undefined) {
-                                        this.getDisAssoc(currentID, OPId, obj);
+                                        this.desativarOP(currentID, OPId, obj);
                                         // A DESATIVAÇÃO DA OP FOI COLOCADA DENTRO DO getDisAssoc , APENAS APÓS DESASSOCIAR ELA DESATIVA A OP
                                         // if (obj.currentStatus == "active" && obj.typeDescription == "Tira") {
                                         //     //Desativar OP anterior

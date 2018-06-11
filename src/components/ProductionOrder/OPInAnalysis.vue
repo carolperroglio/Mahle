@@ -78,7 +78,7 @@
                 <label class="ls1-analysis col-md-2">
                     {{o.status | filterStatus}}</label>
                 <label class="ls1-analysis col-md-2">
-                    <button class="btn btn-primary" @click.stop.prevent="showModal('realizarAnalise'); idOP = o.productionOrderId;cobreqtd = '';comp.value = '';productName='';cobre = {}" >Realizar Análise</button>   
+                    <button class="btn btn-primary" @click.stop.prevent="showModal('realizarAnalise'); idOP = o.productionOrderId;cobreqtd = '';cobre = {}; getProductsOP(o);" >Realizar Análise</button>   
                 </label>
             </div>
             </div>
@@ -125,33 +125,34 @@
                     </ul>    
                     </div>
                 </div>
+                <div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
-                        <label for="">Componente</label>
-                        <input autocomplete="off" @keyup="getProducts(productName);blockAdd=true;" v-model="productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
-                        <b-dropdown-item @click.stop.prevent="comp.value.length > 0 ?blockAdd=false:blockAdd=true;productName = p.productName; comp.productId = p.productId;comp.productName = p.productName;products=[]" v-for="(p,index) in products" :key="index">{{ p.productName }}</b-dropdown-item>
+                    <label for="">Componente</label>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="">Resultado da Análise(%)</label>
+                </div>
+                </div>
+                <div class="form-row" v-for="comp in components" :key="comp.productId">
+                    <div class="form-group col-md-5">
+                        <input disabled v-model="comp.productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="">Resultado da Análise(%)</label>
-                        <input type="text" class="form-control" v-model="comp.value" @keyup="comp.value.length > 0 ?blockAdd=false:blockAdd=true">
-                    </div>
-                    <div class="form-group-col-md-1">
-                        <br>
-                    <button class="btn btn-success btn-sm" @click.stop.prevent="addComponente(comp)" :disabled="blockAdd">
-                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        </button>
+                        <input type="number" class="form-control" v-model="comp.value" @keyup="blockConfirmButton();">
                     </div>
                 </div>
-                <div class="form-row">
+                </div>
+                <!-- <div class="form-row">
                 <div class="col-md-10">
                     <ul class="list-group" v-for="(c,index) in components" :key="index">
                         <li class="list-group-item">{{c.productName + ': ' + c.value + '%'}}</li>
                     </ul>
                 </div>
-                </div>
+                </div> -->
                 <div class="modal-footer">
                 <div class="btn-group" role="group">
-                    <button class="btn btn-success" :disabled="components.length == 0" @click="realizarAnálise();hideModal('realizarAnalise');">
+                    <button class="btn btn-success" :disabled="blockConfirm" @click="realizarAnálise();hideModal('realizarAnalise');">
                         <i  class="fa fa-check-square" aria-hidden="true"></i>
                         Confirmar
                     </button>

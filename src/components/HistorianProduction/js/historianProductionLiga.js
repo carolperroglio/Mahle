@@ -6,7 +6,8 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import bBadge from 'bootstrap-vue/es/components/badge/badge'
 import { Stretch } from 'vue-loading-spinner'
-
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 es6promisse.polyfill();
 
 export default {
@@ -176,6 +177,8 @@ export default {
         //
         // MUDA O STATUS DA OPL PARA EM ANÁLISES - FEITA PELO SETOR DE ANÁLISE QUÍMICA
         changeStatusToWaitingAnalysis() {
+            this.productionOrder.username = VueCookies.get('username');
+
             axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId + "&state=waiting_approval")
                 .then(response => {
                     this.erro = false;
@@ -216,6 +219,8 @@ export default {
             ordem.type = this.ordem.type;
             ordem.unity = this.unity;
             ordem.productId = this.prodRolo;
+            this.productionOrder.username = VueCookies.get('username');
+            ordem.username = VueCookies.get('username');
 
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;

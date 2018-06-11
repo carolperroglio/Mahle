@@ -8,6 +8,8 @@ import bBadge from 'bootstrap-vue/es/components/badge/badge'
 import vBTooltip from 'bootstrap-vue/es/directives/tooltip/tooltip';
 import { Stretch } from 'vue-loading-spinner'
 import { setTimeout } from 'timers';
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 
 es6promisse.polyfill();
 
@@ -112,7 +114,7 @@ export default {
                 this.pReceita = false;
                 this.pFase = true;
                 this.ordem.productionOrderId = this.productionOrder.productionOrderId;
-                this.orderPhaseProducts = this.productionOrdersRecipe.phases[0];
+                // this.orderPhaseProducts = this.productionOrdersRecipe.phases[0];
                 this.lote = "OF";
                 this.titleheader = "Registrar Aço"
             }
@@ -176,6 +178,8 @@ export default {
             ordem.quantity = this.quantity;
             ordem.type = this.ordem.type;
             ordem.unity = this.unity;
+            ordem.username = VueCookies.get('username');
+
 
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;
@@ -315,8 +319,8 @@ export default {
                     this.roloSaidaID = this.productionOrder.recipe.recipeProduct.product.productId;
                 }
                 console.log(response.data);
-                this.listaOp(response.data);
-                return response.data;
+                    this.listaOp(response.data);
+                // return response.data;
                 console.log(this.OPs);
             }).catch((error) => {
                 this.msgErro = "Ocorreu um erro: " + error.message;
@@ -342,7 +346,7 @@ export default {
         },
 
         getOP() {
-            axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,active&filters=productionOrderTypeId,2", this.config)
+            axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,approved&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
 
                     response.data.values.forEach(obj => {
@@ -353,6 +357,8 @@ export default {
                         }
                         console.log("prodligaid");
                         console.log(prodligaid);
+                        console.log("this.productionOrder");
+                        console.log(this.productionOrder);
                         this.productionOrder.recipe.phases.forEach(phaseobjtira => {
                             console.log("this.phaseobjtira");
                             console.log(phaseobjtira);
@@ -362,7 +368,7 @@ export default {
                                     console.log("this.phaseprod");
                                     console.log(phaseprod);
                                     if (phaseprod.product.productId == prodligaid) {
-                                        this.noop = false;
+                                        // this.noop = false;
 
                                         this.listOP.push(obj);
                                         console.log("this.listOP");
@@ -376,9 +382,11 @@ export default {
                         // if (obj.currentThing != undefined) {
                     });
 
-                    if (this.listOP.length < 0) {
+                    if (this.listOP.length == 0) {
                         this.noop = true;
                     }
+
+
                 }).catch((error) => {
                     this.msgErro = "Ocorreu um erro: " + error.message;
                     this.showModal("modalErro");
@@ -439,8 +447,5 @@ export default {
     beforeMount: function() {
         // this.getResults();
         this.getResults();
-        this.getOP();
-        this.productionOrdersRecipe.recipeName = '';
-        this.productionOrdersRecipe.recipeProduct.product.productName = '';
     }
 };
