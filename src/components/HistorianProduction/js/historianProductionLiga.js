@@ -179,7 +179,7 @@ export default {
         changeStatusToWaitingAnalysis() {
             this.productionOrder.username = VueCookies.get('username');
 
-            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId + "&state=waiting_approval", this.productionOrder)
+            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId + "&state=waiting_approval&username=" + this.productionOrder.username)
                 .then(response => {
                     this.erro = false;
                     this.msgErro = "OPL Em Análise !"

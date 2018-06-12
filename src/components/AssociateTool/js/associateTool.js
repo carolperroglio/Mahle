@@ -8,6 +8,8 @@ import { Stretch } from 'vue-loading-spinner'
 import positionQtd from '../config/positiontooltype.json'
 import { setTimeout } from 'timers';
 import { position } from 'bootstrap-vue/es/utils/dom';
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
 
 es6promisse.polyfill();
 
@@ -192,9 +194,10 @@ export default {
         AssociateTool(fSelected) {
             var id = this.$route.params.id;
             this.getToolType(id);
+            var username = VueCookies.get('username');
 
             setTimeout(() => {
-                axios.put(this.url + '/api/tool/AssociateTool/associate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId + "&position=" + this.pos).then((response) => {
+                axios.put(this.url + '/api/tool/AssociateTool/associate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId + "&position=" + this.pos + "&username=" + username).then((response) => {
                     this.erro = false;
                     this.carregando = false;
                     this.msg = 'Ferramenta associada com sucesso';
@@ -212,9 +215,10 @@ export default {
         DessassociateTool() {
             var id = this.$route.params.id;
             this.getToolType(id);
+            var username = VueCookies.get('username');
 
             setTimeout(() => {
-                axios.put(this.url + '/api/tool/AssociateTool/disassociate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId, this.fSelected).then((response) => {
+                axios.put(this.url + '/api/tool/AssociateTool/disassociate?thingId=' + this.thingId + '&toolid=' + this.fSelected.toolId + "&username=" + username, this.fSelected).then((response) => {
                     this.erro = false;
                     this.carregando = false;
                     location.reload();

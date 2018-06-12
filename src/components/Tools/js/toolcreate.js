@@ -184,7 +184,7 @@ export default {
             this.mensagemSuc = '';
             ferramenta.username = VueCookies.get('username');
 
-            axios.put(this.url + '/' + ferramenta.toolId, ferramenta).then((response) => {
+            axios.put(this.url + '/' + ferramenta.toolId + "&username=" + ferramenta.username, ferramenta).then((response) => {
                 this.msg = ferramenta.name + ' atualizada com sucesso.';
                 this.erro = false;
                 this.ferramenta = {};

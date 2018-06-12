@@ -425,7 +425,9 @@ export default {
                 })
         },
         desativarOP(id, op) {
-            axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended", op)
+            op.username = VueCookies.get('username');
+
+            axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended&username=" + op.username)
                 .then(response => {
                     console.log("OP Desativada" + response.statusText)
                 }).catch((error) => {
@@ -458,7 +460,7 @@ export default {
 
                     //Ativando OP
                     var id = response.data.productionOrderId;
-                    axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active", response.data).then(response => {
+                    axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active&username=" + data.username).then(response => {
 
                         // Dessassociar OP anterior, a linha
                         for (var i = 0; i < this.opArray.values.length; i++) {

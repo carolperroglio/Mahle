@@ -201,7 +201,7 @@ export default {
             })
         },
         updateStatus: function(obj) {
-            this.obj.username = VueCookies.get('username');
+            var username = VueCookies.get('username');
 
             switch (obj.status) {
                 case 'Em uso':
@@ -225,7 +225,7 @@ export default {
                 default:
                     break;
             }
-            axios.put(this.urlStateManagement + obj.toolId + '&state=' + obj.status, this.obj).then(response => {
+            axios.put(this.urlStateManagement + obj.toolId + '&state=' + obj.status + "&username=" + username, this.obj).then(response => {
                 this.tsUpdated = true;
                 this.erro = false;
                 this.msgErro = "Status atualizado com sucesso";

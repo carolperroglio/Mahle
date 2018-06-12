@@ -118,7 +118,7 @@ export default {
             op.username = VueCookies.get('username');
 
             var id = op.productionOrderId;
-            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended", op)
+            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=ended&username=" + op.username)
                 .then(response => {
                     console.log("OP Desativada");
 
