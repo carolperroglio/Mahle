@@ -160,7 +160,10 @@
         <label class="ls20 col-md-2">
             {{t.timeStampTicks}}
         </label>
-        <hr v-if="t.justificationNeeded">
+        <hr>
+        <label class="ls20 col-md-3">
+            <b>Username</b> : {{t.username}}
+        </label>
         <label class="col-md-8" v-if="t.justificationNeeded">
             <b>Justificativa</b> : {{t.justification.text}}
         </label>

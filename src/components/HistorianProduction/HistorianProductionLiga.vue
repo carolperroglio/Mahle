@@ -112,7 +112,14 @@
                                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                                     </font></b>
-                                </label>                
+                                </label>
+                                <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(allProducts, 'username',5):organizar(allProducts, 'username',5);" class="ls2-cabecalho-ap-liga col-md-1">
+                                    <b><font class="cursor-class" color="#ffffff">
+                                        Username 
+                                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
+                                    </font></b>
+                                </label>               
                             </div>
                             <div id="load2" v-show="carregando">
                                 <stretch background="#4d4d4d"></stretch>
@@ -128,7 +135,9 @@
                                 <label class="ls ls10 col-md-2">
                                     {{o.date}}</label>
                                 <label class="ls ls10 col-md-2">
-                                    {{o.hour}}</label>    
+                                    {{o.hour}}</label>
+                                <label class="ls ls10 col-md-1" v-if="o.username != undefined">
+                                    {{o.username}}</label>    
                             </div>
                         </div>
                             
