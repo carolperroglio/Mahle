@@ -38,6 +38,7 @@ export default {
     },
     components: {
         'b-modal': bModal,
+        Stretch
     },
     methods: {
         showModal(id) {
