@@ -61,7 +61,8 @@ export default {
             calculoOK: false,
             noRegister: '',
             lastAnalysis: [],
-            cobreFosforoso: ''
+            cobreFosforoso: '',
+            cargaUtilizadaForno: 0
         }
     },
     computed: {

@@ -66,7 +66,7 @@
                                 <button v-else type="button" class="btn btn-danger"  v-show="productionOrder.status == 'reproved'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Correção
                                 </button>
-                                <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()"
+                                <button type="button" class="btn btn-primary"  @click.stop.prevent="showModal('releaseToAnalysis')"
                                 v-if="productionOrder.status == 'active' || productionOrder.status == 'reproved'">
                                 <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
                                 </button>
@@ -298,6 +298,30 @@
                             <button @click.stop.prevent="quantity =''; lote = ''; unity = ''" class="btn btn-primary pull-right">
                                 <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                             </button> 
+                        </div>
+                    </div>
+                </div>
+            </form>
+         </b-modal>
+         <!--                                 -->
+        <!--   Cadastro de orderHistorian    -->
+        <!--               Modal             -->
+        <b-modal size="sm" ref="releaseToAnalysis" hide-footer title="Liberar para análise">
+            <form>
+                <div>
+                    <div class="form-row">
+                    <div class="form-group col-md-12">
+                    <label>
+                        <b>Carga Utilizada do forno </b>
+                    </label>
+                    <input type="number" required v-model="cargaUtilizadaForno" class="form-control">
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" :disabled="!cargaUtilizadaForno" @click.stop.prevent="changeStatusToWaitingAnalysis()">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i> Liberar
+                            </button>
                         </div>
                     </div>
                 </div>
