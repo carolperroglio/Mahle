@@ -37,13 +37,13 @@
                         <div class="card-header card-header-hp">
                             
                             <b><label class="ls">
-                                <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Nº da OP: </font></b>{{productionOrder.productionOrderNumber}}</label>
                             <label class="ls">
-                                <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Id da OP: </font></b>{{productionOrder.productionOrderId}}</label>
                             <!--<label class="ls">
-                                <b><font color="#9BA6A5">Receita da OP: </font></b>{{productionOrderRecipe.recipeName}}</label>&nbsp;&nbsp;&nbsp;
+                                <b><font color="#9BA6A5">Receita da OP: </font></b>{{productionOrderRecipe.recipeName}}</label>
                             <label class="ls">
-                                <b><font color="#9BA6A5">Produto da Receita: </font></b>{{productionOrderRecipe.recipeProduct.product.productName}}</label>&nbsp;&nbsp;&nbsp; -->
+                                <b><font color="#9BA6A5">Produto da Receita: </font></b>{{productionOrderRecipe.recipeProduct.product.productName}}</label> -->
                            </b>
                             
                             <!-- <button type="button" class="btn btn-secondary pull-right" @click.stop.prevent="listar()">
@@ -75,46 +75,51 @@
                                 </p>
                                 <div class="cabecalho-table-ap-tira" v-show="teste.length > 0">
                                     <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(teste, 'product',0):organizar(teste, 'product',0);" class="ls2-cabecalho-ap-tira col-md-2">
-                                        <b><font class="cursor-class" color="#ffffff">Material &nbsp;&nbsp;&nbsp;
+                                        <b><font class="cursor-class" color="#ffffff">Material 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label>
                                     <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(teste, 'lote',2):organizar(teste, 'lote',2);" class="ls2-cabecalho-ap-tira col-md-2">
                                         <b><font class="cursor-class" color="#ffffff">
-                                            OF/OPL &nbsp;&nbsp;&nbsp;
+                                            OF/OPL 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label>
                                     <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(teste, 'rolo',5):organizar(teste, 'rolo',5);" class="ls2-cabecalho-ap-tira col-md-1">
                                         <b><font class="cursor-class" color="#ffffff">
-                                            Rolo &nbsp;&nbsp;&nbsp;
+                                            Rolo 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label> 
                                     <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(teste, 'quantity',1):organizar(teste, 'quantity',1);" class="ls2-cabecalho-ap-tira col-md-2">
                                         <b><font class="cursor-class" color="#ffffff">
-                                            Quantidade &nbsp;&nbsp;&nbsp;
+                                            Quantidade 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label>
                                     <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(teste, 'date',3):organizar(teste, 'date',3);" class="ls2-cabecalho-ap-tira col-md-2">
                                         <b><font class="cursor-class" color="#ffffff">
-                                            Data &nbsp;&nbsp;&nbsp;
+                                            Data 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label> 
-                                    <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(teste, 'hour',4):organizar(teste, 'hour',4);" class="ls2-cabecalho-ap-tira col-md-2">
+                                    <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(teste, 'hour',4):organizar(teste, 'hour',4);" class="ls2-cabecalho-ap-tira col-md-1">
                                         <b><font class="cursor-class" color="#ffffff">
-                                            Hora &nbsp;&nbsp;&nbsp;
+                                            Hora 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                                         </font></b>
-                                    </label>                
+                                    </label>
+                                    <label class="ls2-cabecalho-ap-tira col-md-1">
+                                    <b><font class="cursor-class" color="#ffffff">
+                                        Nome
+                                    </font></b>
+                                </label>                  
                                 </div>
                             </div>
                             <div id="load2" v-show="carregando">
@@ -122,17 +127,21 @@
                             </div> 
                             <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}" v-show="teste.length > 0">
                                     <label class="ls ls10 col-md-2">
-                                        {{o.product}}</label>&nbsp;
+                                        {{o.product}}</label>
                                     <label class="ls ls10  col-md-2">
-                                        {{o.lote}}</label>&nbsp;
+                                        {{o.lote}}</label>
                                     <label class="ls ls10  col-md-1">
-                                        {{o.rolo}}</label>&nbsp;
+                                        {{o.rolo}}</label>
                                     <label class="ls ls10  col-md-2">
-                                        {{o.quantity}}</label>&nbsp;
+                                        {{o.quantity}}</label>
                                     <label class="ls ls10  col-md-2">
-                                        {{o.date}}</label>&nbsp;
-                                    <label class="ls ls10  col-md-2">
-                                        {{o.hour}}</label>&nbsp;    
+                                        {{o.date}}</label>
+                                    <label class="ls ls10  col-md-1">
+                                        {{o.hour}}</label>  
+                                    <label class="ls ls10 col-md-1" v-if="o.username != undefined">
+                                    {{o.username}}</label> 
+                                    <label v-else>
+                                    </label>  
                                 </div>
                                 </div>
                             </div>

@@ -285,6 +285,7 @@ export default {
                 this.hideModal('myModalEdit');
                 // }
             }).catch((error) => {
+                this.hideModal('myModalEdit');
                 if (error.response != undefined) {
                     if (error.response.status == '404') {
                         this.carregando = false;
@@ -330,6 +331,7 @@ export default {
                 this.created();
                 this.hideModal('myModalEdit');
             }).catch((error) => {
+                this.hideModal('myModalEdit');
                 if (error.response.status == '404') {
                     this.carregando = false;
                     this.erro = true;
@@ -369,6 +371,7 @@ export default {
                     this.created();
                     this.hideModal('myModalEdit');
                 }).catch((error) => {
+                    this.hideModal('myModalEdit');
                     if (error.response.status == '404') {
                         this.carregando = false;
                         this.erro = true;
