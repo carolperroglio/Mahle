@@ -155,7 +155,10 @@
         <div id="load" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>
         </div>
-            <div class="cabecalho-table-po-liga"  v-show="!carregando">
+        <p class="col-md-10" v-show="opArrarKeep.length == 0">
+            Sem Ordens de Produção Cadastradas
+        </p>
+            <div class="cabecalho-table-po-liga"  v-show="!carregando" v-if="opArrarKeep.length > 0">
                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opArrarKeep, 'productionOrderNumber',0):organizar(opArrarKeep, 'productionOrderNumber',0);" class="ls2-cabecalho-po-liga col-md-2">
                     <b><font class="cursor-class" color="#ffffff">OPL &nbsp;&nbsp;&nbsp;
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>

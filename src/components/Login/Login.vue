@@ -1,6 +1,9 @@
 <template>
   <div>
-      <div class="login col-md-4 offset-4">
+      <div id="load-login" v-show="carregando">
+            <stretch background="#4d4d4d"></stretch>
+        </div> 
+      <div class="login col-md-4 offset-4" v-show="!carregando">
         <div class="card-header" style="border-bottom: none;">
             <h4>Entrar no Sistema</h4>
         </div>

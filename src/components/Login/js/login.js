@@ -32,6 +32,8 @@ export default {
             keyhashed: '',
             msgErro: "",
             erro: false,
+            carregando: false,
+
         }
     },
     components: {
@@ -67,6 +69,7 @@ export default {
             // VueCookies.set
         },
         login() {
+            this.carregando = true;
             this.keyhashed = this.hashKey(this.password, this);
             console.log(this);
             console.log(VueCookies);
@@ -82,6 +85,7 @@ export default {
 
                 axios.post(this.urllogin, obj)
                     .then((response) => {
+                        this.carregando = false;
                         var credential = response.data;
                         // store the username,password, and security in the scope (this)
                         this.storeUser(credential);
@@ -92,9 +96,16 @@ export default {
                             // Vue.Cookies. Cookies.set(credential.username, 'Hello world!');
 
                     }).catch((error) => {
+                        this.carregando = false;
                         if (error.response) {
                             var status = error.response.status;
                             if (status == 401) {
+                                this.erro = true;
+                                this.msgErro = "Usuário sem permissão";
+                                this.showModal("modaInfo");
+                                VueCookies.set('status', status);
+                                console.log(error.message);
+                            } else if (status == 404) {
                                 this.erro = true;
                                 this.msgErro = "Senha e/ou usuário inválido/inexistente";
                                 this.showModal("modaInfo");
@@ -114,17 +125,19 @@ export default {
         },
         returnToScreen() {
             var statuscode = VueCookies.get('status');
-            if (statuscode == 404) {
-                this.erro = true;
-                this.msgErro = "Senha inválida";
-                this.showModal("modaInfo");
-                this.$router.push({ name: "Login" })
-            } else if (statuscode == "Network Error") {
-                this.erro = true;
-                this.msgErro = "Sem acesso a esta tela";
-                this.showModal("modaInfo");
-                this.$router.push({ name: "Login" })
-            }
+            setTimeout(() => {
+                if (statuscode == 404) {
+                    this.erro = true;
+                    this.msgErro = "Senha inválida";
+                    this.showModal("modaInfo");
+                    this.$router.push({ name: "Login" })
+                } else if (statuscode == "Network Error") {
+                    this.erro = true;
+                    this.msgErro = "Sem acesso a esta tela";
+                    this.showModal("modaInfo");
+                    this.$router.push({ name: "Login" })
+                }
+            }, 1500);
 
         }
     },
