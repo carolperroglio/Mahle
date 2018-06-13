@@ -143,7 +143,7 @@
             <div id="load" v-show="carregando">
                 <stretch background="#4d4d4d"></stretch>
             </div>
-             <p class="col-md-10" v-show="opArrarKeep.length == 0">
+             <p class="col-md-10" v-show="opArrarKeep.length == 0" v-if="!carregando">
                 Sem Ordens de Produção Cadastradas
             </p>
                 <div class="cabecalho-table-po"  v-show="!carregando" v-if="opArrarKeep.length > 0">

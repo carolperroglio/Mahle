@@ -22,7 +22,7 @@
             <stretch background="#4d4d4d"></stretch>
         </div> 
         <h3 style="text-align:center"></h3>
-        <p class="col-md-10" v-show="opInAnalysis.length == 0">
+        <p class="col-md-10" v-show="opInAnalysis.length == 0" v-if="!carregando">
             Sem Ordens de Produção para Análise
         </p>
             <div class="cabecalho-table-analysis" v-show="!carregando" v-if="opInAnalysis.length > 0">
