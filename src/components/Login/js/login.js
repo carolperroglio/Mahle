@@ -86,6 +86,7 @@ export default {
 
                 axios.post(this.urllogin, obj)
                     .then((response) => {
+                        VueCookies.set('status', "200");
                         this.carregando = false;
                         var credential = response.data;
                         // store the username,password, and security in the scope (this)
@@ -135,6 +136,11 @@ export default {
                 } else if (statuscode == "Network Error") {
                     this.erro = true;
                     this.msgErro = "Sem acesso a esta tela";
+                    this.showModal("modaInfo");
+                    this.$router.push({ name: "Login" })
+                } else if (statuscode == "no-security") {
+                    this.erro = true;
+                    this.msgErro = "Login expirou - favor efetuar o login novamente";
                     this.showModal("modaInfo");
                     this.$router.push({ name: "Login" })
                 }

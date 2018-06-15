@@ -57,6 +57,9 @@
                                 <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                 </button>
+                                <button type="button" class="btn btn-success" @click.stop.prevent="showModal('cobreFosforoso'); ordem.type = 'input'">
+                                <i aria-hidden="true" class="fa fa-plus"></i> Registrar Cobre
+                                </button>
                                 <button type="button" class="btn btn-warning"  @click.stop.prevent="getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
                                 </button>
@@ -66,7 +69,7 @@
                                 <button v-else type="button" class="btn btn-danger"  v-show="productionOrder.status == 'reproved'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Correção
                                 </button>
-                                <button type="button" class="btn btn-primary"  @click.stop.prevent="showModal('releaseToAnalysis')"
+                                <button type="button" class="btn btn-primary"  @click.stop.prevent="cargaUtilizadaForno = '';showModal('releaseToAnalysis')"
                                 v-if="productionOrder.status == 'active' || productionOrder.status == 'reproved'">
                                 <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
                                 </button>
@@ -253,15 +256,29 @@
                 </div>
             </form>
          </b-modal>
-
         <!--                                 -->
         <!--   Cadastro de orderHistorian    -->
         <!--               Modal             -->
         <b-modal ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
             <form>
                 <div>
+                    <div class="form-row" >
+                        <div class="form-group col-md-8">
+                        <label><b>Escolha o produto: </b></label>
+                        <select class="form-control form-control-sm" v-model="prodChoose" @change="prodRolo = ''">
+                            <option value="cobre"> Cobre</option>
+                            <option value="prodRecipe"> Produtos da receita</option>
+                        </select>
+                        </div>
+                    </div>
                     <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6" v-if="prodChoose == 'cobre'">
+                        <label>Material</label>
+                        <select class="form-control form-control-sm" v-model="prodRolo">
+                            <option value="70">Cobre Fosforoso</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6" v-else>
                     <label>
                         <b>Materiais </b>
                     </label>

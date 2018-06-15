@@ -62,7 +62,8 @@ export default {
             noRegister: '',
             lastAnalysis: [],
             cobreFosforoso: '',
-            cargaUtilizadaForno: 0
+            cargaUtilizadaForno: 0,
+            prodChoose: ''
         }
     },
     computed: {
@@ -180,7 +181,8 @@ export default {
         changeStatusToWaitingAnalysis() {
             this.productionOrder.username = VueCookies.get('username');
 
-            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId + "&state=waiting_approval&username=" + this.productionOrder.username)
+            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId +
+                    "&state=waiting_approval&username=" + this.productionOrder.username + "&quantForno=" + this.cargaUtilizadaForno)
                 .then(response => {
                     this.erro = false;
                     this.msgErro = "OPL Em Análise !"
@@ -265,7 +267,7 @@ export default {
             this.consumo = false;
         },
         changeJson(obj, type) {
-            this.allProducts = []
+            this.allProducts = [];
             var array = this.orderHistorianAllProducts.products;
             if (this.orderHistorianAllProducts.products == undefined) {
                 this.orderHistorianAllProducts.products = []

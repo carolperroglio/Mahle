@@ -29,7 +29,7 @@ export default {
             urlPhases: ipServer + '/api/phases',
             recipes: [],
             phases: [],
-            cabecalhoSetas:[false, false, false],
+            cabecalhoSetas: [false, false, false],
             carregando: false,
             quantityPage: 20,
             startat: 0,
@@ -49,9 +49,9 @@ export default {
         Stretch,
     },
     methods: {
-        showModalErro(erro){
+        showModalErro(erro) {
             this.erro = erro;
-            this.$refs.modalErro.show();            
+            this.$refs.modalErro.show();
         },
 
         /*****************/
@@ -67,7 +67,7 @@ export default {
                 this.carregando = false;
 
             }).catch(error => {
-                this.carregando = false;                        
+                this.carregando = false;
                 this.codigosErro(error.response.status);
             })
         },
@@ -80,44 +80,44 @@ export default {
                 this.ok = true;
                 this.carregando = false;
             }, (error) => {
-                this.carregando = false;                        
+                this.carregando = false;
                 this.codigosErro(error.response.status);
             });
         },
-        recipeDelete(id){
+        recipeDelete(id) {
             this.carregando = true;
             console.log(this.urlRecipes);
-            axios.delete(this.urlRecipes+'/'+id).then(response => {
+            axios.delete(this.urlRecipes + '/' + id).then(response => {
                 console.log(response);
                 this.carregando = false;
             }).catch(error => {
-                this.carregando = false;                        
+                this.carregando = false;
                 this.codigosErro(error.response.status);
             })
         },
 
-        mudaPlace(fieldFilter){
+        mudaPlace(fieldFilter) {
             var place = 'Liga';
-            if(fieldFilter=='recipeName')
+            if (fieldFilter == 'recipeName')
                 place = 'Digite o Nome da Liga';
-            else if(fieldFilter=='recipeCode')
-                place = 'Digite o Código da Liga';            
-            return place;       
+            else if (fieldFilter == 'recipeCode')
+                place = 'Digite o Código da Liga';
+            return place;
         },
-        organizar(recipe, campo, pos){                         
-            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
-            for(var i=0; i<this.cabecalhoSetas.length; i++)
-                if(i==pos)    
-                    this.cabecalhoSetas[i]=false;
+        organizar(recipe, campo, pos) {
+            recipe.sort(function(a, b) { return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0); });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
 
         },
-        desorganizar(recipe, campo, pos){                         
-            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);});
-            for(var i=0; i<this.cabecalhoSetas.length; i++)
-                if(i==pos)    
-                    this.cabecalhoSetas[i]=true;
-                else   
-                    this.cabecalhoSetas[i]=false;             
+        desorganizar(recipe, campo, pos) {
+            recipe.sort(function(a, b) { return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0); });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
         },
         /*****************/
         /*               */
@@ -131,7 +131,7 @@ export default {
                 this.phases = response.data;
                 this.carregando = false;
             }).catch(error => {
-                this.carregando = false;                        
+                this.carregando = false;
                 this.codigosErro(error.response.status);
             })
         },
@@ -145,30 +145,30 @@ export default {
             };
             this.recipes = [];
             setTimeout(() => {
-                axios.get(this.urlRecipes + "/v2?filters=recipeTypeId,2&orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
-                    for(var i=0; i<response.data.values.length; i++)
-                        if(response.data.values[i].recipeTypeId == 2)
+                axios.get(this.urlRecipes + "/v2?filters=recipeTypeId,2&filter=orderField," + this.orderField + "&filter=order," + this.order + "&filter=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                    for (var i = 0; i < response.data.values.length; i++)
+                        if (response.data.values[i].recipeTypeId == 2)
                             this.recipes.push(response.data.values[i]);
                     paginacao(this.recipes.length, this);
-                    for(var i=0; i<this.recipes.length; i++)
-                        if(this.recipes[i].recipeDescription == undefined)
+                    for (var i = 0; i < this.recipes.length; i++)
+                        if (this.recipes[i].recipeDescription == undefined)
                             this.recipes[i].recipeDescription = '';
                     this.carregando = false;
                 }, (error) => {
-                    this.carregando = false;                        
+                    this.carregando = false;
                     this.codigosErro(error.response.status);
                 })
-            },500);    
+            }, 500);
         },
 
-        codigosErro(status){
-            if(status == 400)
+        codigosErro(status) {
+            if (status == 400)
                 this.showModalErro("Erro de requisição código 400");
-            else if(status == 404)
+            else if (status == 404)
                 this.showModalErro("Serviço não encontrado código 404");
-            else if(status == 500)
-                this.showModalErro("Erro no servidor código 500"); 
-            else    
+            else if (status == 500)
+                this.showModalErro("Erro no servidor código 500");
+            else
                 this.showModalErro("Erro desconhecido código" + status);
         },
     },
