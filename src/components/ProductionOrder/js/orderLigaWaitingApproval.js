@@ -99,12 +99,20 @@ export default {
         },
         blockConfirmButton() {
             this.blockConfirm = false
+            var qtdPorcentagem = 0;
 
             for (var x = 0; x < this.components.length; x++) {
                 if (this.components[x].value.length == 0) {
                     this.blockConfirm = true
                 }
+                qtdPorcentagem = qtdPorcentagem + parseFloat(this.components[x].value);
+                console.log(qtdPorcentagem);
             }
+
+            if (qtdPorcentagem < 99.8) {
+                this.blockConfirm = true;
+            }
+
         },
         getProductsOP(op) {
             axios.get(this.urlAnalysis + "/gateway/productionorder/" + this.idOP).then((response) => {
@@ -158,11 +166,13 @@ export default {
         realizarAnálise() {
             var components = this.components;
             var objComp = {};
-            objComp.username = VueCookies.get('username');
 
             if (this.cobre.cobreFosforoso != undefined) {
                 objComp = this.cobre
             }
+
+            objComp.username = VueCookies.get('username');
+
             objComp["comp"] = components;
 
             axios.post(this.urlAnalysis + '/api/ProductionOrderQuality/Analysis/ProductionOrder/' + this.idOP, objComp).then((response) => {

@@ -218,6 +218,7 @@ export default {
         },
 
         changeJson(obj, type) {
+            this.teste = [];
 
             var array = this.orderHistorianAllProducts.products;
             if (this.orderHistorianAllProducts.products == undefined) {
@@ -319,7 +320,7 @@ export default {
                     this.roloSaidaID = this.productionOrder.recipe.recipeProduct.product.productId;
                 }
                 console.log(response.data);
-                    this.listaOp(response.data);
+                this.listaOp(response.data);
                 // return response.data;
                 console.log(this.OPs);
             }).catch((error) => {
@@ -346,6 +347,7 @@ export default {
         },
 
         getOP() {
+            this.listOP = [];
             axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,approved&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
 

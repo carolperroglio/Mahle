@@ -140,44 +140,47 @@
         <!--  LISTAR OPs -->
         <!--             -->
         <div>
-                <div id="load" v-show="carregando">
-                    <stretch background="#4d4d4d"></stretch>
-                </div>
-                    <div class="cabecalho-table-po"  v-show="!carregando">
-                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opArrarKeep, 'productionOrderNumber',0):organizar(opArrarKeep, 'productionOrderNumber',0);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">OP &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                            </font></b>
-                        </label>
-                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(opArrarKeep, 'recipeCode',4):organizar(opArrarKeep, 'recipeCode',4);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">
-                                Código da Tira &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-                            </font></b>
-                        </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeName',3):organizar(opArrarKeep, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">
-                                Nome da Tira &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                            </font></b>
-                        </label>
-                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2" style="margin-left:1%">
-                            <b><font class="cursor-class" color="#ffffff">
-                                Descrição &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                            </font></b>
-                        </label>
-                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArrarKeep, 'quantity',2):organizar(opArrarKeep, 'quantity',2);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff">
-                                Status&nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                            </font></b>
-                        </label> 
+            <div id="load" v-show="carregando">
+                <stretch background="#4d4d4d"></stretch>
+            </div>
+             <p class="col-md-10" v-show="opArrarKeep.length == 0" v-if="!carregando">
+                Sem Ordens de Produção Cadastradas
+            </p>
+                <div class="cabecalho-table-po"  v-show="!carregando" v-if="opArrarKeep.length > 0">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opArrarKeep, 'productionOrderNumber',0):organizar(opArrarKeep, 'productionOrderNumber',0);" class="ls2-cabecalho-po col-md-2">
+                        <b><font class="cursor-class" color="#ffffff">OP &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(opArrarKeep, 'recipeCode',4):organizar(opArrarKeep, 'recipeCode',4);" class="ls2-cabecalho-po col-md-2">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Código da Tira &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label> 
+                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeName',3):organizar(opArrarKeep, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Nome da Tira &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2" style="margin-left:1%">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Descrição &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArrarKeep, 'quantity',2):organizar(opArrarKeep, 'quantity',2);" class="ls2-cabecalho-po col-md-2">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Status&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label> 
                 </div>   
                 <div class="table-margin"  v-show="!carregando">
                 <div v-for="(op, index) in opArrarKeep" v-bind:key="index" :class="{cinza: index%2==0}">

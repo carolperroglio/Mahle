@@ -39,7 +39,7 @@ export default {
     name: "Reamostragem",
     data() {
         return {
-            urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderTypeId&fieldValue=2&fieldFilter=productionOrderNumber&fieldValue=',
+            urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
             urlGatewayThings: ipReport + '/gateway/things',
             url: ipReport,
             config: {
@@ -362,7 +362,7 @@ export default {
             // MUDAR PARA ENDPOINT DE REAMOSTRAGEM
             axios.get(this.url + "/api/ReportAnalisys/ProductionOrder/" + this.OP)
                 .then((response) => {
-                    comsole.log(reponse)
+                    console.log(response)
                     console.log('Entrou no retorno do get report op')
                     response.data.report.forEach((obj) => {
                         obj.dateI = this.ticksToDate(obj.date, false, false)
@@ -374,7 +374,7 @@ export default {
                     this.carregando = false;
 
                 }).catch((error) => {
-                    if (error.response.status == '404') {
+                    if (error.response != undefined && error.response.status == '404') {
                         this.carregando = false;
                         this.erro = true;
                         this.msgErro = "Sem dados no período selecionado";

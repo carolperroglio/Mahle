@@ -22,7 +22,10 @@
             <stretch background="#4d4d4d"></stretch>
         </div> 
         <h3 style="text-align:center"></h3>
-            <div class="cabecalho-table-analysis" v-show="!carregando">
+        <p class="col-md-10" v-show="opInAnalysis.length == 0" v-if="!carregando">
+            Sem Ordens de Produção para Análise
+        </p>
+            <div class="cabecalho-table-analysis" v-show="!carregando" v-if="opInAnalysis.length > 0">
                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opInAnalysis, 'productionOrderNumber',0):organizar(opInAnalysis, 'productionOrderNumber',0);" class="ls2-cabecalho-analysis col-md-2">
                     <b><font class="cursor-class" color="#ffffff">OPL
                         <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>

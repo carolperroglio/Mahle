@@ -57,7 +57,7 @@
                                 <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                 </button>
-                                <button type="button" class="btn btn-warning"  @click.stop.prevent="getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
+                                <button type="button" class="btn btn-warning"  @click.stop.prevent="cavaco ='';getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
                                 </button>
                                 <button v-if="productionOrder.status == 'approved'" type="button" class="btn btn-danger" @click.stop.prevent="getAnalysis();showModal('lastAnalysis'); ordem.type='input'">
@@ -66,7 +66,7 @@
                                 <button v-else type="button" class="btn btn-danger"  v-show="productionOrder.status == 'reproved'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Correção
                                 </button>
-                                <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()"
+                                <button type="button" class="btn btn-primary"  @click.stop.prevent="cargaUtilizadaForno = '';showModal('releaseToAnalysis')"
                                 v-if="productionOrder.status == 'active' || productionOrder.status == 'reproved'">
                                 <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
                                 </button>
@@ -113,11 +113,9 @@
                                         <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                                     </font></b>
                                 </label>
-                                <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(allProducts, 'username',5):organizar(allProducts, 'username',5);" class="ls2-cabecalho-ap-liga col-md-1">
+                                <label class="ls2-cabecalho-ap-liga col-md-1">
                                     <b><font class="cursor-class" color="#ffffff">
-                                        Username 
-                                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
-                                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
+                                        Nome 
                                     </font></b>
                                 </label>               
                             </div>
@@ -137,7 +135,9 @@
                                 <label class="ls ls10 col-md-2">
                                     {{o.hour}}</label>
                                 <label class="ls ls10 col-md-1" v-if="o.username != undefined">
-                                    {{o.username}}</label>    
+                                    {{o.username}}</label>  
+                                <label v-else>
+                                </label>  
                             </div>
                         </div>
                             
@@ -152,6 +152,16 @@
         <!-- EXIBIR CÁLCULO  -->
          <b-modal size="lg" ref="exibirCalculo" hide-footer title="Cálculo da Análise Química Realizada">
             <form>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                    <label for="">Quantidade de cavaco utilizada:</label>
+                        <input type="number" class="form-control" v-model="cavaco">
+                    </div>
+                    <div class="col-md-2">
+                        <br>
+                        <button class="btn btn-warning" @click.stop.prevent="quantityToAddWhenUserCavaco()">Recalcular</button>
+                    </div>
+                </div>
                 <div v-if="calculoOK">
                     <div class="cabecalho-table-exibir-cálculo">
                     <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(calculos, 'key',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
@@ -253,15 +263,29 @@
                 </div>
             </form>
          </b-modal>
-
         <!--                                 -->
         <!--   Cadastro de orderHistorian    -->
         <!--               Modal             -->
         <b-modal ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
             <form>
                 <div>
+                    <div class="form-row" >
+                        <div class="form-group col-md-8">
+                        <label><b>Escolha o produto: </b></label>
+                        <select class="form-control form-control-sm" v-model="prodChoose" @change="prodRolo = ''">
+                            <option value="cobre"> Cobre</option>
+                            <option value="prodRecipe"> Produtos da receita</option>
+                        </select>
+                        </div>
+                    </div>
                     <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6" v-if="prodChoose == 'cobre'">
+                        <label>Material</label>
+                        <select class="form-control form-control-sm" v-model="prodRolo">
+                            <option value="70">Cobre Fosforoso</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6" v-else>
                     <label>
                         <b>Materiais </b>
                     </label>
@@ -298,6 +322,30 @@
                             <button @click.stop.prevent="quantity =''; lote = ''; unity = ''" class="btn btn-primary pull-right">
                                 <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                             </button> 
+                        </div>
+                    </div>
+                </div>
+            </form>
+         </b-modal>
+         <!--                                 -->
+        <!--   Cadastro de orderHistorian    -->
+        <!--               Modal             -->
+        <b-modal size="sm" ref="releaseToAnalysis" hide-footer title="Liberar para análise">
+            <form>
+                <div>
+                    <div class="form-row">
+                    <div class="form-group col-md-12">
+                    <label>
+                        <b>Carga Utilizada do forno </b>
+                    </label>
+                    <input type="number" required v-model="cargaUtilizadaForno" class="form-control">
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success" :disabled="!cargaUtilizadaForno" @click.stop.prevent="changeStatusToWaitingAnalysis()">
+                                <i  class="fa fa-check-square" aria-hidden="true"></i> Liberar
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -29,9 +29,9 @@ export default {
             urlPhases: ipServer + '/api/phases',
             recipes: [],
             phases: [],
-            cabecalhoSetas:[false, false, false],
+            cabecalhoSetas: [false, false, false],
             carregando: false,
-            quantityPage: 100,
+            quantityPage: 300,
             startat: 0,
             total: 0,
             pages: [],
@@ -41,7 +41,7 @@ export default {
             fieldFilter: '',
             fieldValue: '',
             id: '',
-            erro:'',
+            erro: '',
         }
     },
     components: {
@@ -50,9 +50,9 @@ export default {
     },
     methods: {
 
-        showModalErro(erro){
+        showModalErro(erro) {
             this.erro = erro;
-            this.$refs.modalErro.show();            
+            this.$refs.modalErro.show();
         },
         /*****************/
         /*               */
@@ -69,7 +69,7 @@ export default {
 
             }).catch(error => {
                 this.carregando = false;
-                this.codigosErro(error.response.status); 
+                this.codigosErro(error.response.status);
             })
         },
         putRecipe(recipe) {
@@ -82,43 +82,43 @@ export default {
                 this.carregando = false;
             }, (error) => {
                 this.carregando = false;
-                this.codigosErro(error.response.status); 
+                this.codigosErro(error.response.status);
             });
         },
-        recipeDelete(id){
+        recipeDelete(id) {
             this.carregando = true;
             console.log(this.urlRecipes);
-            axios.delete(this.urlRecipes+'/'+id).then(response => {
+            axios.delete(this.urlRecipes + '/' + id).then(response => {
                 console.log(response);
                 this.carregando = false;
             }).catch(error => {
                 this.carregando = false;
-                this.codigosErro(error.response.status); 
+                this.codigosErro(error.response.status);
             })
         },
 
-        mudaPlace(fieldFilter){
+        mudaPlace(fieldFilter) {
             var place = 'Tira';
-            if(fieldFilter=='recipeName')
-                place = 'Digite o Nome da Tira';       
-            else if(fieldFilter=='recipeCode')
+            if (fieldFilter == 'recipeName')
+                place = 'Digite o Nome da Tira';
+            else if (fieldFilter == 'recipeCode')
                 place = 'Digite o Código da Tira';
-            return place;       
+            return place;
         },
-        organizar(recipe, campo, pos){                         
-            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0);});
-            for(var i=0; i<this.cabecalhoSetas.length; i++)
-                if(i==pos)    
-                    this.cabecalhoSetas[i]=false;
+        organizar(recipe, campo, pos) {
+            recipe.sort(function(a, b) { return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0); });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = false;
 
         },
-        desorganizar(recipe, campo, pos){                         
-            recipe.sort(function(a,b) {return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0);});
-            for(var i=0; i<this.cabecalhoSetas.length; i++)
-                if(i==pos)    
-                    this.cabecalhoSetas[i]=true;
-                else   
-                    this.cabecalhoSetas[i]=false;             
+        desorganizar(recipe, campo, pos) {
+            recipe.sort(function(a, b) { return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0); });
+            for (var i = 0; i < this.cabecalhoSetas.length; i++)
+                if (i == pos)
+                    this.cabecalhoSetas[i] = true;
+                else
+                    this.cabecalhoSetas[i] = false;
         },
         /*****************/
         /*               */
@@ -133,7 +133,7 @@ export default {
                 this.carregando = false;
             }).catch(error => {
                 this.carregando = false;
-                this.codigosErro(error.response.status); 
+                this.codigosErro(error.response.status);
             })
         },
         //
@@ -145,23 +145,23 @@ export default {
                 headers: { 'Cache-Control': 'no-cache' }
             };
             this.recipes = [];
-            setTimeout(() => {},500);
-            axios.get(this.urlRecipes + "v2?filters=recipeTypeId,1&orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {                
-                this.recipes = response.data.values;                                                
+            setTimeout(() => {}, 500);
+            axios.get(this.urlRecipes + "v2?filters=recipeTypeId,1&filters=orderField," + this.orderField + "&filters=order," + this.order + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
+                this.recipes = response.data.values;
                 this.carregando = false;
             }, (error) => {
                 this.carregando = false;
-                this.codigosErro(error.response.status); 
-            })                            
+                this.codigosErro(error.response.status);
+            })
         },
-        codigosErro(status){
-            if(status == 400)
+        codigosErro(status) {
+            if (status == 400)
                 this.showModalErro("Erro de requisição código 400");
-            else if(status == 404)
+            else if (status == 404)
                 this.showModalErro("Serviço não encontrado código 404");
-            else if(status == 500)
-                this.showModalErro("Erro no servidor código 500"); 
-            else    
+            else if (status == 500)
+                this.showModalErro("Erro no servidor código 500");
+            else
                 this.showModalErro("Erro desconhecido código" + status);
         },
     },

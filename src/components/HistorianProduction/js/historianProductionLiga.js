@@ -61,7 +61,10 @@ export default {
             calculoOK: false,
             noRegister: '',
             lastAnalysis: [],
-            cobreFosforoso: ''
+            cobreFosforoso: '',
+            cargaUtilizadaForno: 0,
+            prodChoose: '',
+            cavaco: ''
         }
     },
     computed: {
@@ -141,6 +144,28 @@ export default {
         removeCobre() {
             this.cobre = {};
         },
+        quantityToAddWhenUserCavaco() {
+
+            var qtdTotalToBeAdded = 0.0;
+            var newQtddToBeAdded = 0.0;
+            var percentage = 0.0;
+            var newValueToAdd = 0.0;
+            var newCalc = JSON.parse(JSON.stringify(this.calculos));
+
+            for (var x = 0; x < newCalc.length; x++) {
+                qtdTotalToBeAdded += parseFloat(newCalc[x].value);
+            }
+
+            // subtrai do valor total que pode ser adicionado no forno, o valor que vai ser adicionado de cavaco
+            newQtddToBeAdded = qtdTotalToBeAdded - parseFloat(this.cavaco);
+
+            for (var y = 0; y < newCalc.length; y++) {
+                newCalc[y].percentage = parseFloat(newCalc[y].value) / qtdTotalToBeAdded;
+                newValueToAdd = newCalc[y].percentage * newQtddToBeAdded;
+                newCalc[y].value = newValueToAdd.toFixed(2);
+            }
+            this.calculos = newCalc;
+        },
         getAnalysis() {
             axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.productionOrder.productionOrderId)
                 .then((response) => {
@@ -179,7 +204,8 @@ export default {
         changeStatusToWaitingAnalysis() {
             this.productionOrder.username = VueCookies.get('username');
 
-            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId + "&state=waiting_approval&username=" + this.productionOrder.username)
+            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId +
+                    "&state=waiting_approval&username=" + this.productionOrder.username + "&quantForno=" + this.cargaUtilizadaForno)
                 .then(response => {
                     this.erro = false;
                     this.msgErro = "OPL Em Análise !"
@@ -264,7 +290,7 @@ export default {
             this.consumo = false;
         },
         changeJson(obj, type) {
-            this.allProducts = []
+            this.allProducts = [];
             var array = this.orderHistorianAllProducts.products;
             if (this.orderHistorianAllProducts.products == undefined) {
                 this.orderHistorianAllProducts.products = []
@@ -417,7 +443,7 @@ export default {
     },
     beforeMount: function() {
         this.getResults();
-        this.productionOrdersRecipe.recipeName = '';
-        this.productionOrdersRecipe.recipeProduct.product.productName = '';
+        //this.productionOrdersRecipe.recipeName = '';
+        //this.productionOrdersRecipe.recipeProduct.product.productName = '';
     }
 };

@@ -259,6 +259,7 @@ export default {
         },
         getReportDate() {
             this.providertable = [];
+            this.groups = [];
 
             this.carregando = true;
 
@@ -278,13 +279,17 @@ export default {
                         this.groups.push(T.group);
                     }
                 })
-                this.editGroup(this.groups[0]);
-                this.newGroup = this.groups[0];
-                this.carregando = false;
-                this.created();
-                this.hideModal('myModalEdit');
+                setTimeout(() => {
+
+                    this.editGroup(this.groups[0]);
+                    this.newGroup = this.groups[0];
+                    this.carregando = false;
+                    this.created();
+                    this.hideModal('myModalEdit');
+                }, 1000);
                 // }
             }).catch((error) => {
+                this.hideModal('myModalEdit');
                 if (error.response != undefined) {
                     if (error.response.status == '404') {
                         this.carregando = false;
@@ -306,6 +311,7 @@ export default {
         },
         getReportCode() {
             this.providertable = [];
+            this.groups = [];
 
             this.carregando = true;
 
@@ -324,12 +330,17 @@ export default {
                         this.groups.push(T.group);
                     }
                 })
-                this.editGroup(this.groups[0]);
-                this.newGroup = this.groups[0];
-                this.carregando = false;
-                this.created();
-                this.hideModal('myModalEdit');
+                setTimeout(() => {
+                    this.editGroup(this.groups[0]);
+                    this.newGroup = this.groups[0];
+                    this.carregando = false;
+                    this.created();
+                    this.hideModal('myModalEdit');
+                }, 1000);
+
             }).catch((error) => {
+                this.carregando = false;
+                this.hideModal('myModalEdit');
                 if (error.response.status == '404') {
                     this.carregando = false;
                     this.erro = true;
@@ -346,6 +357,7 @@ export default {
         getReportOP() {
             this.providertable = [];
             this.carregando = true;
+            this.groups = [];
 
             var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
             var ticksI = this.dateToTicks(Ini);
@@ -354,22 +366,34 @@ export default {
 
             axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF)
                 .then((response) => {
-                    comsole.log(reponse)
-                    console.log('Entrou no retorno do get report op')
-                    this.data = response.data;
-                    this.tags = response.data.tags;
-                    this.tags.forEach((T) => {
-                        if (!this.groups.includes(T.group)) {
-                            this.groups.push(T.group);
-                        }
-                    })
-                    this.editGroup(this.groups[0]);
-                    this.newGroup = this.groups[0];
-                    this.carregando = false;
-                    this.created();
-                    this.hideModal('myModalEdit');
+                    if (response.data.tags.length > 0) {
+
+                        console.log(response)
+                        console.log('Entrou no retorno do get report op')
+                        this.data = response.data;
+                        this.tags = response.data.tags;
+                        this.tags.forEach((T) => {
+                            if (!this.groups.includes(T.group)) {
+                                this.groups.push(T.group);
+                            }
+                        })
+                        setTimeout(() => {
+                            this.editGroup(this.groups[0]);
+                            this.newGroup = this.groups[0];
+                            this.carregando = false;
+                            this.created();
+                            this.hideModal('myModalEdit');
+                        }, 1000);
+                    } else {
+                        this.carregando = false;
+                        this.erro = true;
+                        this.msgErro = "Sem dados no período selecionado";
+                        this.showModal("modalInfo");
+                    }
+
                 }).catch((error) => {
-                    if (error.response.status == '404') {
+                    this.hideModal('myModalEdit');
+                    if (error.response != undefined && error.response.status == '404') {
                         this.carregando = false;
                         this.erro = true;
                         this.msgErro = "Sem dados no período selecionado";
@@ -577,25 +601,29 @@ export default {
             var t = 0;
             var aux = [];
             // To Excel
-            this.filename = "RastreamentoThing_" + this.thingNameCabeçalho + "_" + this.group + ".xls";
-            /*
-             *  JSON de criação das características do gráfico.
-             */
-            Object.keys(this.providertable[0]).forEach((n) => {
-                if (n == "category") {
-                    aux.push("Data");
-                    this.jsonfields["Data"] = "category";
-                } else {
-                    aux.push(n);
-                    this.jsonfields[n] = n;
-                }
-                console.log(aux[t]);
-                t++;
-            });
-            this.headers = aux
-            console.log(this.headers);
-            console.log(this.jsonfields);
-            this.refreshGraph();
+            setTimeout(() => {
+
+                this.filename = "RastreamentoThing_" + this.thingNameCabeçalho + "_" + this.group + ".xls";
+                /*
+                 *  JSON de criação das características do gráfico.
+                 */
+                Object.keys(this.providertable[0]).forEach((n) => {
+                    if (n == "category") {
+                        aux.push("Data");
+                        this.jsonfields["Data"] = "category";
+                    } else {
+                        aux.push(n);
+                        this.jsonfields[n] = n;
+                    }
+                    console.log(aux[t]);
+                    t++;
+                });
+                this.headers = aux
+                console.log(this.headers);
+                console.log(this.jsonfields);
+                this.refreshGraph();
+            }, 1500);
+
         },
 
 
@@ -624,10 +652,10 @@ export default {
                     obj2["type"] = "smoothedLine";
                     obj2["title"] = R.name;
                     obj2["valueField"] = R.name;
-                    // obj2["bulletColor"] = R.color;
-                    // obj2["fillColors"] = R.color;
-                    // obj2["legendColor"] = R.color;
-                    // obj2["lineColor"] = R.color;
+                    obj2["bulletColor"] = R.color;
+                    obj2["fillColors"] = R.color;
+                    obj2["legendColor"] = R.color;
+                    obj2["lineColor"] = R.color;
 
                     var i = 0;
 

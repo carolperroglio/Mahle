@@ -52,15 +52,51 @@ function showModal(id) {
   $refs[id].show();
 }
 
+function getCookies(keyToFind) {
+  var cookies = JSON.parse(JSON.stringify(document.cookie.split("; ")));
+  var cookieNewArray = [];
+  var secValue = "";
+
+  for (var x = 0; x < cookies.length; x++) {
+    var security = cookies[x].split("=")[0];
+
+    if (security == keyToFind) {
+      secValue = cookies[x].split("=")[1];
+      console.log("secvalue: " + secValue);
+      return secValue;
+    }
+    secValue = ""
+    return secValue;
+  }
+}
+
 axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
-    var sec = VueCookies.get("security");
+    var sec = getCookies("security");
+    // ver isso depois
+    var x = config["url"];
+    console.log("x: " + x);
+    if (
+      x.includes("/login") ||
+      x.includes("/fontawesome") ||
+      x.includes("/export") ||
+      x.includes("/api/things/")
+    ) {
+      console.log("é login ou things ou fontawesome");
+    } else {
+      if (sec.length == 0) {
+        console.log("sec" + sec);
+        VueCookies.set("status", "no-security");
+        window.location = "/login";
+      }
+    }
+
     // console.log(sec);
     config.headers.common["security"] = sec;
     config.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
     config.headers.common["Accept"] = "application/json";
-    config.headers.common['Cache-Control'] = 'no-cache';
+    config.headers.common["Cache-Control"] = "no-cache";
 
     return config;
   },
@@ -87,14 +123,23 @@ axios.interceptors.response.use(
       console.log("error.message: " + error.message);
       // Login.showModal('modaInfo');
       // showModal("modaInfo");
-    } else if (error.response.status != undefined && error.response.status == "404") {
+    } else if (
+      error.response.status != undefined &&
+      error.response.status == "404"
+    ) {
       VueCookies.set("status", "404");
       console.log("status code: " + error.response.status);
       // showModal("modaInfo");
-    } else if (error.response.status != undefined && error.response.status == "400") {
+    } else if (
+      error.response.status != undefined &&
+      error.response.status == "400"
+    ) {
       VueCookies.set("status", "400");
       console.log("status code: " + error.response.status);
-    } else if ( error.response.status != undefined && error.response.status == "500") {
+    } else if (
+      error.response.status != undefined &&
+      error.response.status == "500"
+    ) {
       VueCookies.set("status", "500");
       console.log("status code: " + error.response.status);
     } else {
