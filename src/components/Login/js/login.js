@@ -143,6 +143,10 @@ export default {
                     this.msgErro = "Login expirou - favor efetuar o login novamente";
                     this.showModal("modaInfo");
                     this.$router.push({ name: "Login" })
+                } else if (statuscode == "logoff") {
+                    this.erro = true;
+                    this.msgErro = "Log Off Realizado!";
+                    this.showModal("modaInfo");
                 }
             }, 1500);
 

@@ -141,13 +141,14 @@
     </div>
     <div class="form-row">
     <div class="form-group col-md-6" v-if="filterSelected == 'op'">
-    <label><b>OP </b></label>                         
+    <label><b>OPL </b></label>                         
         <input placeholder="Número da OP" class="form-control" 
         v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP={}" >                                                                                 
         <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]" 
         v-for="(op,index) in prosFim" :key="index" style="cursor:pointer">{{ op.productionOrderNumber }}</b-dropdown-item>
     </div>
     </div>
+    <div v-if="filterSelected != 'op'">
     <label><b>Início </b></label>  
     <div class="form-row">
         <div class="form-group col-md-4">
@@ -167,14 +168,15 @@
             <vue-timepicker format="HH:mm" v-model="timeFim"></vue-timepicker>
         </div>
     </div>
+    </div>
     <div class="modal-footer">
         <div class="btn-group" role="group">
             <button class="btn btn-success" @click.stop.prevent="getReportDate();" 
-            :disabled=" !date ||!timeIni ||!datef || !timeFim " v-if="filterSelected != 'op'">
+            :disabled="!date ||!timeIni ||!datef || !timeFim " v-if="filterSelected != 'op'">
                 <i class="fa fa-check-square"></i> Confirmar
             </button>
             <button class="btn btn-success" @click.stop.prevent="getReportOP();" 
-            :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !OP" v-if="filterSelected == 'op'">
+            :disabled="!OP" v-if="filterSelected == 'op'">
                 <i class="fa fa-check-square"></i> Confirmar
             </button>
         </div>

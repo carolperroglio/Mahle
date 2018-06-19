@@ -57,10 +57,7 @@
                                 <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                 </button>
-                                <button type="button" class="btn btn-success" @click.stop.prevent="showModal('cobreFosforoso'); ordem.type = 'input'">
-                                <i aria-hidden="true" class="fa fa-plus"></i> Registrar Cobre
-                                </button>
-                                <button type="button" class="btn btn-warning"  @click.stop.prevent="getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
+                                <button type="button" class="btn btn-warning"  @click.stop.prevent="cavaco ='';getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
                                 </button>
                                 <button v-if="productionOrder.status == 'approved'" type="button" class="btn btn-danger" @click.stop.prevent="getAnalysis();showModal('lastAnalysis'); ordem.type='input'">
@@ -155,6 +152,16 @@
         <!-- EXIBIR CÁLCULO  -->
          <b-modal size="lg" ref="exibirCalculo" hide-footer title="Cálculo da Análise Química Realizada">
             <form>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                    <label for="">Quantidade de cavaco utilizada:</label>
+                        <input type="number" class="form-control" v-model="cavaco">
+                    </div>
+                    <div class="col-md-2">
+                        <br>
+                        <button class="btn btn-warning" @click.stop.prevent="quantityToAddWhenUserCavaco()">Recalcular</button>
+                    </div>
+                </div>
                 <div v-if="calculoOK">
                     <div class="cabecalho-table-exibir-cálculo">
                     <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(calculos, 'key',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">

@@ -49,6 +49,7 @@ export default {
             // Limpando o chace de segurança no cookie
             VueCookies.remove('security');
             VueCookies.set('username', null);
+            VueCookies.set('status', "logoff");
             this.username = VueCookies.get('username');
             //chama o método que busca o username e atribui a nav
             app.default.methods.getUsername();

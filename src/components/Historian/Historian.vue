@@ -13,7 +13,7 @@
                 <h1 class="title-page-gp"><b>Relatório de Rastreamento</b></h1>
                 </li>
                 <li class="nav-item-hist nav-item-gp col-md-4">
-                <button type="button" class="btn btn-info"  @click.prevent="showModal('myModalEdit')">
+                <button type="button" class="btn btn-info"  @click.prevent="OP='';showModal('myModalEdit')">
                     Filtrar Busca
                 </button>
                 </li>
@@ -176,7 +176,7 @@
             <div class="form-group col-md-6" v-if="filterSelected == 'op'">
             <label><b>OP </b></label>                         
                 <input placeholder="Número da OP" class="form-control" 
-                v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP={}" >                                                                                 
+                v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP=''" >                                                                                 
                 <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]" 
                 v-for="(op,index) in prosFim" :key="index" style="cursor:pointer">{{ op.productionOrderNumber }}</b-dropdown-item>
 
@@ -191,7 +191,7 @@
             <div class="form-group col-md-6"  v-if="filterSelected == 'code'">
                 <label><b>Código da Receita </b></label>  
                 <input placeholder="Número da OP" class="form-control" 
-                v-model="recipeCode" @keyup="prosFim=getResults(urlGatewayRecipe,recipeCode, prosFim); OP={}" >                                                                                 
+                v-model="recipeCode" @keyup="prosFim=getResults(urlGatewayRecipe,recipeCode, prosFim); OP=''" >                                                                                 
                 <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;OP=r.recipeId;prosFim=[]" 
                 v-for="(r,index) in prosFim" :key="index" style="cursor:pointer">{{ r.recipeCode }}</b-dropdown-item>
 
@@ -201,7 +201,7 @@
                     </select> -->
                 </div>
             </div>
-            
+            <div v-show="filterSelected != 'op'"> 
             <label><b>Início </b></label>  
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -222,6 +222,7 @@
                 </div>
             </div>
             </div>
+            </div>
             <div class="modal-footer">
                 <div class="btn-group" role="group">
                     <button class="btn btn-success" @click.stop.prevent="getReportDate();" 
@@ -229,7 +230,7 @@
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
                     <button class="btn btn-success" @click.stop.prevent="getReportOP();" 
-                    :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !OP" v-if="filterSelected == 'op'">
+                    :disabled="!thingId || !OP" v-if="filterSelected == 'op'">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
                     <button class="btn btn-success" @click.stop.prevent="getReportCode();" 

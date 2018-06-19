@@ -366,26 +366,34 @@ export default {
 
             axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF)
                 .then((response) => {
-                    comsole.log(reponse)
-                    console.log('Entrou no retorno do get report op')
-                    this.data = response.data;
-                    this.tags = response.data.tags;
-                    this.tags.forEach((T) => {
-                        if (!this.groups.includes(T.group)) {
-                            this.groups.push(T.group);
-                        }
-                    })
-                    setTimeout(() => {
-                        this.editGroup(this.groups[0]);
-                        this.newGroup = this.groups[0];
+                    if (response.data.tags.length > 0) {
+
+                        console.log(response)
+                        console.log('Entrou no retorno do get report op')
+                        this.data = response.data;
+                        this.tags = response.data.tags;
+                        this.tags.forEach((T) => {
+                            if (!this.groups.includes(T.group)) {
+                                this.groups.push(T.group);
+                            }
+                        })
+                        setTimeout(() => {
+                            this.editGroup(this.groups[0]);
+                            this.newGroup = this.groups[0];
+                            this.carregando = false;
+                            this.created();
+                            this.hideModal('myModalEdit');
+                        }, 1000);
+                    } else {
                         this.carregando = false;
-                        this.created();
-                        this.hideModal('myModalEdit');
-                    }, 1000);
+                        this.erro = true;
+                        this.msgErro = "Sem dados no período selecionado";
+                        this.showModal("modalInfo");
+                    }
 
                 }).catch((error) => {
                     this.hideModal('myModalEdit');
-                    if (error.response.status == '404') {
+                    if (error.response != undefined && error.response.status == '404') {
                         this.carregando = false;
                         this.erro = true;
                         this.msgErro = "Sem dados no período selecionado";
