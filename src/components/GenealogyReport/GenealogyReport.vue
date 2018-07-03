@@ -1,21 +1,37 @@
 <template>
 <div>
-  <!--                       -->
+        <!--                       -->
         <!--                       -->
         <!--                       -->
         <!-- Busca de Produtos     -->
         <!--                       -->
         <!--                       -->
-        
-        <div class="fixed-top nav-genealogy">                                   
+        <nav class="fixed-top nav-cinza">
+            <ul class="nav d-flex align-items-center">
+                <li class="nav-item-hist nav-item-gp col-md-12">
+                <h1 class="title-page-gp"><b>Relatório de Genealogia de Liga</b></h1>
+                </li>
+                <li class="nav-item-hist nav-item-gp col-md-1">
+                <button type="button" class="btn btn-info"  @click.prevent="OP='';showModal('myModalEdit')">
+                    Filtrar Busca
+                </button>
+                </li>
+                <li class="nav-item-hist nav-item-gp col-md-2 col-lg-2">
+            <button type="button" class="btn btn-danger pull-left" @click.prevent="toPdf()">
+               <i class="fa fa-file-pdf-o"></i> Exportar para PDF
+            </button>
+            </li>
+            </ul>
+        </nav>
+        <!-- <div class="fixed-top nav-cinza">                                   
             <ul class="nav d-flex">
                 <li class="nav-item nav-item-genealogy col-sm-1.5 ">
                     <h3 class="title-page-gp"><b>Relatório de Genealogia de Liga</b></h3>
                 </li>                  
-            </ul>
+            </ul> -->
 
 
-            <div class="fundo-branco">
+            <!-- <div class="fundo-branco">
             <div class="container col-md-6">
                     <br>
                     <div class="row">
@@ -34,103 +50,166 @@
                         </div>
                     </div>                    
             </div>                         
-                <div class="cabecalho-table-gen">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'productName',0):organizar(produtos, 'productName',0);" class="ls2-cabecalhotabgenealogy">
-                        <b><font class="cursor-class" color="#ffffff">Ordem de Produção &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(produtos, 'productDescription',1):organizar(produtos, 'productDescription',1);" class="ls2-cabecalhotabgenealogy">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Produto Final &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(produtos, 'productCode',2):organizar(produtos, 'productCode',2);" class="ls2-cabecalhotabgenealogy">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Componentes &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                        </font></b></label>
-                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls2-cabecalhotabgenealogy">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Quantidade &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls2-cabecalhotabgenealogy">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Unidade &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls2-cabecalhotabgenealogy">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Lote &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls2-cabecalhotabgenealogy">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Data &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[7]==false?desorganizar(produtos, 'productGTIN',3):organizar(produtos, 'productGTIN',3);" class="ls2-cabecalhotabgenealogy">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Hora &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                </div> 
+            </div> -->
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-10 offset-1">
+
+        <b-card-header header-tag="header" class="p-1" role="tab">
+            <div class="row">
+            <div class="col-md-2">
+                <b>OP:</b> 213819819_Z 
             </div>
-
-
-
-            <div class="" style="">
-            
-            <div class="genealogy col">
-                <div id="load" v-show="carregando">
-                    <stretch background="#4d4d4d"></stretch>                
-                </div> 
-                
-                <div v-for="(p, index) in produtos" :class="{cinza: index%2==0}" :key="index">                                    
-                    <label class="ls ls2">
-                        {{p.productName}}</label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls2">
-                        {{p.productDescription}}</label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls2">
-                        {{p.productCode}}</label>&nbsp;&nbsp;&nbsp;
-                    <label class="ls ls2">
-                        {{p.productGTIN}}</label>&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-edit icon-right" style="font-size:21px; cursor:pointer" @click.stop.prevent="showModal2(p)" aria-hidden="true"></i>
-                </div>
-                <div class="paginacao" v-show="total>0">
-                    <nav aria-label="">
-                        <ul class="pagination justify-content-center">
-                            <li v-show="startat>0" class="page-item">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Previous</a>
-                            </li>
-                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
-                            </li>
-                            <li class="page-item" v-show="pages.length>1 && startat+20<total">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+            <div class="col-md-4">
+                <b>Data Inicio: </b> 25/06/2018 11:00
             </div>
+            <div class="col-md-4">
+                <b>Data Fim: </b> 25/06/2018 16:00
+            </div>
+            </div>
+        </b-card-header>
+      <div role="tablist">
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion1 variant="info">Rolo 1</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion1" visible accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <div class="row">
+          <div class="col md 4">
+            <h5>Ferramentas</h5>
             <br>
-        </div>               
+            <ul class="list-group">
+                <li class="list-group-item">Ferramenta 1</li>
+                <li class="list-group-item">Ferramenta 2</li>
+                <li class="list-group-item">Ferramenta 3</li>
+            </ul>
+          </div>
+          <div class="col md 6">
+            <h5>Materiais</h5>
+            <br>
+            <ul class="list-group">
+                <li class="list-group-item">Cobre - 900kg - 158198165</li>
+                <li class="list-group-item">Niquel - 100kg - 18156165</li>
+                <li class="list-group-item">Estanho - 500kg - 5191981</li>
+            </ul>
+          </div>
+          </div>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion2 variant="info">Rolo 2</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion2" accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <p class="card-text">
+            {{ text }}
+          </p>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion3 variant="info">Rolo 3</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion3" accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <p class="card-text">
+            {{ text }}
+          </p>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+  </div>
         </div>
+        <div class="col-md-10 offset-1">
+
+        <b-card-header header-tag="header" class="p-1" role="tab">
+            <div class="row">
+            <div class="col-md-2">
+                <b>OP:</b> 222134894_Z 
+            </div>
+            <div class="col-md-4">
+                <b>Data Inicio: </b> 25/06/2018 11:00
+            </div>
+            <div class="col-md-4">
+                <b>Data Fim: </b> 25/06/2018 16:00
+            </div>
+            </div>        </b-card-header>
+      <div role="tablist">
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion1 variant="info">Rolo 1</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion1" visible accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <div class="row">
+          <div class="col md 4">
+            <h5>Ferramentas</h5>
+            <br>
+            <ul class="list-group">
+                <li class="list-group-item">Ferramenta 1</li>
+                <li class="list-group-item">Ferramenta 2</li>
+                <li class="list-group-item">Ferramenta 3</li>
+            </ul>
+          </div>
+          <div class="col md 6">
+            <h5>Materiais</h5>
+            <br>
+            <ul class="list-group">
+                <li class="list-group-item">Cobre - 900kg - 158198165</li>
+                <li class="list-group-item">Niquel - 100kg - 18156165</li>
+                <li class="list-group-item">Estanho - 500kg - 5191981</li>
+            </ul>
+          </div>
+          </div>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion2 variant="info">Rolo 2</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion2" accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <p class="card-text">
+            {{ text }}
+          </p>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-btn block href="#" v-b-toggle.accordion3 variant="info">Rolo 3</b-btn>
+      </b-card-header>
+      <b-collapse id="accordion3" accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <p class="card-text">
+            {{ text }}
+          </p>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+  </div>
+        </div>
+            </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 </div>
 </template>
 

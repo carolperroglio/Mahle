@@ -290,23 +290,17 @@ export default {
                 // }
             }).catch((error) => {
                 this.hideModal('myModalEdit');
-                if (error.response != undefined) {
-                    if (error.response.status == '404') {
-                        this.carregando = false;
-                        this.erro = true;
-                        this.msgErro = "Sem dados no período selecionado";
-                        this.showModal("modalInfo");
-                    } else {
-                        this.carregando = false;
-                        this.erro = true;
-                        this.msgErro = error.message;
-                        this.showModal("modalInfo");
-                    }
+                if (error.response != undefined && error.response.status == '404') {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = "Sem dados no período selecionado";
+                    this.showModal("modalInfo");
+                } else {
+                    this.carregando = false;
+                    this.erro = true;
+                    this.msgErro = error.message;
+                    this.showModal("modalInfo");
                 }
-                this.carregando = false;
-                this.erro = true;
-                this.msgErro = error.message;
-                this.showModal("modalInfo");
             });
         },
         getReportCode() {
@@ -341,7 +335,7 @@ export default {
             }).catch((error) => {
                 this.carregando = false;
                 this.hideModal('myModalEdit');
-                if (error.response.status == '404') {
+                if (error.response != undefined && error.response.status == '404') {
                     this.carregando = false;
                     this.erro = true;
                     this.msgErro = "Sem dados no período selecionado";

@@ -10,7 +10,19 @@ import { Stretch } from 'vue-loading-spinner'
 import Vue from 'vue';
 import VeeValidate from 'vee-validate';
 import { setTimeout } from 'timers';
-
+import bCollapse from 'bootstrap-vue/es/components/collapse/collapse';
+import vBToggle from 'bootstrap-vue/es/directives/toggle/toggle';
+import vBtn from 'bootstrap-vue/es/components/button/button';
+// import { bCardHeader } from 'bootstrap-vue/es/components/card/card-header';
+// import { bCard } from 'bootstrap-vue/es/components/card/card';
+// import { bCardFooter } from 'bootstrap-vue/es/components/card/card-footer';
+// import { bCardGroup } from 'bootstrap-vue/es/components/card/card-group';
+// import { bCardBody } from 'bootstrap-vue/es/components/card/card-body';
+// import { Collapse } from 'bootstrap-vue/es/components';
+import { Card } from 'bootstrap-vue/es/components';
+import { Collapse } from 'bootstrap-vue/es/components';
+Vue.use(Card);
+Vue.use(Collapse);
 es6promisse.polyfill();
 
 function paginacao(response, este) {
@@ -66,7 +78,17 @@ export default {
             fieldFilter: '',
             order: '',
             errors: [],
-            ops: []
+            ops: [],
+            text: `
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+        brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+        tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+        wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+        vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+        synth nesciunt you probably haven't heard of them accusamus labore VHS.
+      `
 
         }
     },
@@ -77,12 +99,25 @@ export default {
         'date-picker': datePicker,
         'vue-timepicker': VueTimepicker,
         'downloadExcel': JsonExcel,
+        'b-btn': vBtn
+
     },
     directives: {
         'b-modal': bModalDirective,
-        VeeValidate
+        VeeValidate,
+        // 'b-collapse': bCollapse,
+        // Collapse,
+        // 'b-card': bCard,
+        // 'b-toggle': vBToggle,
+        // 'b-card-header': bCardHeader,
+        // 'b-footer': bCardFooter,
+        // 'b-card-group': bCardGroup,
+        // 'b-card-body': bCardBody
     },
     methods: {
+        collapse(id) {
+            this.$refs[id].collapse('show')
+        },
         showModal() {
             this.mensagemSuc = '';
             this.gReport = {};
