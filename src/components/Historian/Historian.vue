@@ -150,7 +150,7 @@
                 </table>
             </div> -->
 
-        <b-modal ref="myModalEdit" hide-footer title="Filtrar Busca">
+        <b-modal ref="myModalEdit" no-close-on-backdrop hide-footer title="Filtrar Busca">
             <div class="modal-body">
             <div class="form-row">
             <div class="form-group  col-md-6">
@@ -158,7 +158,7 @@
             <select class="form-control" v-model="filterSelected">   
                 <option value="" selected disabled>Buscar por:</option>
                 <option value="op" key="op">OP</option> 
-                <option value="code" key="code">Código da Receita</option> 
+                <option value="code" key="code">Código da Tira/Liga</option> 
                 <option value="date" key="date">Data</option> 
             </select>
             </div>
@@ -189,8 +189,8 @@
 
             </div>
             <div class="form-group col-md-6"  v-if="filterSelected == 'code'">
-                <label><b>Código da Receita </b></label>  
-                <input placeholder="Número da OP" class="form-control" 
+                <label><b>Código da Tira/Liga </b></label>  
+                <input class="form-control" 
                 v-model="recipeCode" @keyup="prosFim=getResults(urlGatewayRecipe,recipeCode, prosFim); OP=''" >                                                                                 
                 <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;OP=r.recipeId;prosFim=[]" 
                 v-for="(r,index) in prosFim" :key="index" style="cursor:pointer">{{ r.recipeCode }}</b-dropdown-item>

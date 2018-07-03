@@ -198,7 +198,7 @@
                                 Alarmes
                             </router-link>
                             <router-link to="/resampling" class="list-group-item" data-parent="#reports" v-b-toggle.sidebar> 
-                                Reamostragem
+                                Relatório de Análise Química
                             </router-link>
                         </b-collapse>
                     </b-collapse>   

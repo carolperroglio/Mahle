@@ -150,7 +150,7 @@
          </div>
         <!-- ||||||||||||||| -->
         <!-- EXIBIR CÁLCULO  -->
-         <b-modal size="lg" ref="exibirCalculo" hide-footer title="Cálculo da Análise Química Realizada">
+         <b-modal no-close-on-backdrop size="lg" ref="exibirCalculo" hide-footer title="Cálculo da Análise Química Realizada">
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-5">
@@ -191,7 +191,7 @@
          <!-- 
             CORREÇÃO - É EXIBIDA SE A OP FOI REPROVADA
           -->
-         <b-modal size="lg" ref="correction" hide-footer title="Correção">
+         <b-modal no-close-on-backdrop size="lg" ref="correction" hide-footer title="Correção">
             <form>
                 <div v-if="calculoOK">
                     <div class="cabecalho-table-exibir-cálculo">
@@ -229,7 +229,7 @@
          <!-- 
             LAST ANALYSYS - É EXIBIDA SE A OP FOI APROVADA
           -->
-         <b-modal size="lg" ref="lastAnalysis" hide-footer title="Última Análise">
+         <b-modal no-close-on-backdrop size="lg" ref="lastAnalysis" hide-footer title="Última Análise">
             <form>
                 <div v-if="calculoOK">
                     <div class="cabecalho-table-exibir-cálculo">
@@ -266,7 +266,7 @@
         <!--                                 -->
         <!--   Cadastro de orderHistorian    -->
         <!--               Modal             -->
-        <b-modal ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
+        <b-modal no-close-on-backdrop ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
             <form>
                 <div>
                     <div class="form-row" >
@@ -330,7 +330,7 @@
          <!--                                 -->
         <!--   Cadastro de orderHistorian    -->
         <!--               Modal             -->
-        <b-modal size="sm" ref="releaseToAnalysis" hide-footer title="Liberar para análise">
+        <b-modal no-close-on-backdrop size="sm" ref="releaseToAnalysis" hide-footer title="Liberar para análise">
             <form>
                 <div>
                     <div class="form-row">

@@ -94,7 +94,7 @@
                     </ul>
                 </nav>
             </div>
-        <b-modal ref="inicioOP" title="Realizar Cálculo" hide-footer>
+        <b-modal no-close-on-backdrop ref="inicioOP" title="Realizar Cálculo" hide-footer>
             <div class="form-row">
             <div class="form-group col-md-10 offset-1">
                 <label for="">Última OP Utilizada no Forno</label>

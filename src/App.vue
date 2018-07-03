@@ -70,7 +70,7 @@ function getCookies(keyToFind) {
   }
 }
 
-axios.interceptors.request.use(
+/*axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
     var sec = getCookies("security");
@@ -104,7 +104,7 @@ axios.interceptors.request.use(
     // Do something with request error
     return Promise.reject(error);
   }
-);
+);*/
 
 axios.interceptors.response.use(
   response => {

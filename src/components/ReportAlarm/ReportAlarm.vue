@@ -79,7 +79,7 @@
             </div>
         </div>
 
-        <b-modal ref="myModalEdit" hide-footer title="Filtrar Busca">
+        <b-modal no-close-on-backdrop ref="myModalEdit" hide-footer title="Filtrar Busca">
                     <div class="modal-body">
                     <div class="form-row">
                     <div class="form-group col-md-9">

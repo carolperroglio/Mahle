@@ -101,7 +101,7 @@ export default {
                     this.pFase = true;
                     this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                     this.orderPhaseProducts = this.productionOrdersRecipe.phases[0].phaseProducts;
-                    this.lote = "OPL";
+                    this.lote = "";
                 }
             }, 100);
 

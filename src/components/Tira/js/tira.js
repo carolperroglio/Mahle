@@ -159,6 +159,7 @@ export default {
                                 if (this.recipe.phases[i].phaseId != 46)
                                     this.phase = JSON.parse(JSON.stringify(this.recipe.phases[i]));                                                                    
                             this.getParametros(this.phase);
+                            this.ordenaParametros();
                             this.recipeCadastrada = true;
                         }else
                             this.recipe = {};                            
@@ -171,7 +172,46 @@ export default {
                 //
             }
         },
-
+        ordenaParametros(){
+            var temp = [];                          
+            for(var i=0; i<this.parametros.length; i++){
+                if(this.parametros[i]["parametro"] == "Larg Canal")
+                    temp[0] = this.parametros[i];
+                else if(this.parametros[i]["parametro"] == "t. pré-aquecim. (zona 1)")
+                    temp[1] = this.parametros[i];
+                else if(this.parametros[i]["parametro"] == "t. pré-aquecim. (zona 2)")
+                    temp[2] = this.parametros[i];    
+                else if(this.parametros[i]["parametro"] == "t. pré-aquecim. (zona 3)")
+                    temp[3] = this.parametros[i];
+                else if(this.parametros[i]["parametro"] == "t. forno de bronze (zona 4)")
+                    temp[4] = this.parametros[i];
+                else if(this.parametros[i]["parametro"] == "t. fusão / vazamento")
+                    temp[5] = this.parametros[i];
+                else if(this.parametros[i]["parametro"] == "t. óleo refrigeração")
+                    temp[6] = this.parametros[i];    
+                else if(this.parametros[i]["parametro"] == "pressão do óleo")
+                    temp[7] = this.parametros[i];        
+                else if(this.parametros[i]["parametro"] == "vazão óleo 1 e 2 (FCB1)")
+                    temp[8] = this.parametros[i]; 
+                else if(this.parametros[i]["parametro"] == "vazão óleo 3 (FCB1)")
+                    temp[9] = this.parametros[i];  
+                else if(this.parametros[i]["parametro"] == "vazão óleo 4 (FCB1)")
+                    temp[10] = this.parametros[i];  
+                else if(this.parametros[i]["parametro"] == "vazão óleo 5 e 6 (FCB1)")
+                    temp[11] = this.parametros[i]; 
+                else if(this.parametros[i]["parametro"] == "velocidade (FCB1)")
+                    temp[12] = this.parametros[i];
+                else if(this.parametros[i]["parametro"] == "t. ponto orvalho")
+                    temp[13] = this.parametros[i];
+                else if(this.parametros[i]["parametro"] == "esp. após fundir (ref.)")
+                    temp[14] = this.parametros[i]; 
+                else if(this.parametros[i]["parametro"] == "esp. fresa desbaste (ref.)")
+                    temp[15] = this.parametros[i];    
+                else if(this.parametros[i]["parametro"] == "largura recortada")
+                    temp[16] = this.parametros[i];                        
+            }     
+            this.parametros = temp;                           
+        },
         getParametros(phase) {            
             var j = 0;    
                     
