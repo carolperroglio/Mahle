@@ -27,9 +27,9 @@
         </div>
     </div>
     </div>
-<!-- MODAL PARA EXIBIR ERRO  -->
+<!-- MODAL PARA EXIBIR ERRO  no-close-on-backdrop  -->
 <b-modal ref="modaInfo" title="Mensagem" hide-footer>
-<p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
+    <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}} Ola mundo</p>
 </b-modal>
   </div>
 </template>

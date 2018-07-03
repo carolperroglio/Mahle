@@ -68,7 +68,7 @@
             </div>
         </div>
         <br>
-        <b-modal ref="myModalEdit" hide-footer title="Filtrar Busca">
+        <b-modal no-close-on-backdrop ref="myModalEdit" hide-footer title="Filtrar Busca">
             <div class="modal-body">
                 
             <label><b>Estação </b></label>  

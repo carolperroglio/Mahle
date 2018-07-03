@@ -3,7 +3,7 @@
     <nav class="fixed-top nav-cinza">
         <ul class="nav d-flex align-items-center">
             <li class="nav-item-hist nav-item-gp col-md-12">
-            <h1 class="title-page-gp"><b>Relatório de Reamostragem</b></h1>
+                <h1 class="title-page-gp"><b>Relatório de Análise Química</b></h1>
             </li>
             <li class="nav-item-hist nav-item-gp col-md-3 col-lg-2">
                 <button type="button" class="btn btn-info btn-lg"  @click.prevent="showModal('filterSearch')">
@@ -127,7 +127,7 @@
     </div> 
 
 <!-- MODAL PARA FILTRAR RELATÓRIO -->
-<b-modal ref="filterSearch" hide-footer title="Filtrar Busca">
+<b-modal no-close-on-backdrop ref="filterSearch" hide-footer title="Filtrar Busca">
     <div class="modal-body">
     <div class="form-row">
     <div class="form-group  col-md-6">

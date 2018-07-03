@@ -158,7 +158,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->
-        <b-modal ref="cadAco" hide-footer title="Registrar Aço" modal-header-close>
+        <b-modal no-close-on-backdrop ref="cadAco" hide-footer title="Registrar Aço" modal-header-close>
             <form>
                 <div>
                     <div class="form-row">
@@ -206,7 +206,7 @@
 
         <!-- MODAL CADASTRAR LIGA -->
         <!--                      -->
-        <b-modal ref="cadLiga" hide-footer title="Registrar Liga" modal-header-close>
+        <b-modal no-close-on-backdrop ref="cadLiga" hide-footer title="Registrar Liga" modal-header-close>
             <form>
                 <div>
                     <div class="form-row">
@@ -256,7 +256,7 @@
          </b-modal>
 
         <!-- MODAL CADASTRAR ROLO DE SAÍDA -->
-        <b-modal ref="cadRoloSaida" hide-footer title="Registrar Rolo de Saída" modal-header-close>
+        <b-modal no-close-on-backdrop ref="cadRoloSaida" hide-footer title="Registrar Rolo de Saída" modal-header-close>
             <form>
                 <div>
                     <div class="form-row">
