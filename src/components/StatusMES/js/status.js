@@ -142,7 +142,6 @@ export default {
         }
     },
     beforeMount: function() {
-        location.reload();
         this.getStatus();
         this.getThings();
         setInterval(() => {

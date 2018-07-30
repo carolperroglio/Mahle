@@ -65,6 +65,10 @@ export default {
             this.$router.push({
                 name: "UserGroup"
             });
+
+            setTimeout(() => {
+                location.reload();
+            }, 500);
         },
 
         login() {
