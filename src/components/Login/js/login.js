@@ -61,14 +61,16 @@ export default {
             //chama o método que busca o username e atribui a nav
             app.default.methods.getUsername();
             //redireciona para a tela principal STATUS DO MES
-            location.reload();
+            //VOLTAR ISSO PRA STATUSMES
             this.$router.push({
-                name: "StatusMES"
+                name: "UserGroup"
             });
 
-
-            // VueCookies.set
+            setTimeout(() => {
+                location.reload();
+            }, 500);
         },
+
         login() {
             this.carregando = true;
             this.keyhashed = this.hashKey(this.password, this);

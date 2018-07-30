@@ -80,7 +80,8 @@ export default {
             filterSelected: '',
             //
             prosFim: [],
-            opName: ''
+            opName: '',
+            headerName:''
         }
     },
     components: {
@@ -156,6 +157,33 @@ export default {
             var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
             return ticks;
         },
+        changeStatusEnglishToPortuguese: function(value) {
+            switch (value) {
+                case 'created':
+                    return "Criada"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativa"
+                    break;
+                case 'reproved':
+                    return "Reprovada"
+                    break;
+                case 'ended':
+                    return "Finalizada"
+                    break;
+                case 'waiting_approval':
+                    return "Em Análise"
+                    break;
+                case 'approved':
+                    return "Aprovada"
+                    break;
+                default:
+                    break;
+
+            }},
         getHeaderToPdf() {
             var headers = [{
                     'title': 'Data',
@@ -204,11 +232,10 @@ export default {
         // EXPORT TO PDF
         toPdf() {
 
-            var PDFprovider = this.tableAlarms;
-            var thingName = this.thingNameInTable;
+            var thingName = this.tableData[0].op;
             // OBTEM OS NOMES DAS COLUNAS DA TABELA
             var columns = this.getHeaderToPdf();
-
+            var tableValues = JSON.parse(JSON.stringify(this.tableData));
 
 
             var doc = new jsPDF('p', 'pt');
@@ -226,10 +253,11 @@ export default {
             doc.setFontSize(20);
             // ADICIONA LOGO MAHLE
             doc.addImage(imgLogo, "PNG", 510, 10, 60, 20); // ADICIONA TÍTULO                            
-            doc.text(35, 65, "Relatório de Reamostragem ")
-                // doc.addImage(table, 'PNG', 15, 70, 600, 400); //works
+            doc.text(35, 65, "Relatório de Reamostragem " + this.headerName)
 
-            // ADICIONA GRÁFICO                            
+            tableValues.forEach((obj)=>{
+                obj.status = this.changeStatusEnglishToPortuguese(obj.status);
+            });
 
             // ADICIONA TABELA
             doc.autoTable(columns, this.tableData, {
@@ -240,36 +268,60 @@ export default {
                     left: 10,
                     right: 20
                 },
+                styles:{
+                //cellPadding: 20,
+                        overflow: 'linebreak' 
+                },
                 columnStyles: {
                     dateI: {
                         columnWidth: 60,
+                        //cellPadding: 20,
+                        overflow: 'linebreak ' 
                     },
                     hour: {
                         columnWidth: 50,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
                     op: {
-                        columnWidth: 80,
+                        columnWidth: 50,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
                     numberAnalysis: {
                         columnWidth: 50,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
                     productName: {
                         columnWidth: 70,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
                     especification: {
                         columnWidth: 60,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
                     resultAnalysis: {
-                        columnWidth: 40,
+                        columnWidth: 60,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
                     status: {
                         columnWidth: 60,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
                     correction: {
                         columnWidth: 50,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
                     userName: {
                         columnWidth: 60,
+                        //cellPadding: 20,
+                        overflow: 'linebreak'                        
                     },
 
                     // etc
@@ -278,7 +330,7 @@ export default {
                 valign: 'middle',
                 tableWidth: 600
             });
-            doc.save("Relatório de Reamostragem" + Date.UTC() + ".pdf");
+            doc.save("Relatório de Reamostragem " + this.headerName + ".pdf");
 
         },
         // SEARCH BASED ON NAME
@@ -326,7 +378,7 @@ export default {
                 this.tableData = response.data.report;
                 this.hideModal('filterSearch');
                 this.carregando = false;
-
+                this.headerName = this.date + " - " + this.datef;
 
             }).catch((error) => {
                 if (error.response != undefined) {
@@ -372,6 +424,7 @@ export default {
                     this.tableData = response.data.report;
                     this.hideModal('filterSearch');
                     this.carregando = false;
+                this.headerName = this.tableData[0].op;
 
                 }).catch((error) => {
                     if (error.response != undefined && error.response.status == '404') {

@@ -174,6 +174,7 @@ export default {
          * CRUD Usergroup
          */
         getUsergroups() {
+            
             this.usergrouplist = [];
             axios.get(this.urlusergroup).then((response) => {
                 this.usergrouplist = response.data.values;
@@ -425,7 +426,7 @@ export default {
 
     },
     beforeMount: function() {
-        this.getUsergroups();
+this.getUsergroups();
         this.getUsers();
         this.getPermissions();
     }

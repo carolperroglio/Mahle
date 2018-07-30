@@ -262,6 +262,9 @@ export default {
                         doc.autoTable(columns, PDFprovider, {
                             // addPageContent: pageContent,
                             showHeader: 'everyPage',
+                            styles:{
+                                overflow: 'linebreak' 
+                            },
                             margin: {
                                 top: 480,
                                 left: 10,
