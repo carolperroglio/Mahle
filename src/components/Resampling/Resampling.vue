@@ -20,7 +20,7 @@
     <div id="load" v-show="carregando">
         <stretch background="#4d4d4d"></stretch>                
     </div> 
-    <div id="table-to-pdf"> 
+    <div id=""> 
     <div class="cabecalho-table-resampling"  v-show="!carregando" v-if="tableData.length > 0">
         <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(tableData, 'product',0):organizar(tableData, 'product',0);" class="ls2 col-md-1">
             <b><font class="cursor-class" color="#ffffff">Data 

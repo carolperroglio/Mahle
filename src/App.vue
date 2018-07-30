@@ -70,11 +70,12 @@ function getCookies(keyToFind) {
   }
 }
 
-/*axios.interceptors.request.use(
+axios.interceptors.request.use(
   function(config) {
-    // Do something before request is sent
+    //Do something before request is sent
     var sec = getCookies("security");
-    // ver isso depois
+    console.log("sec: " + sec);
+    //ver isso depois
     var x = config["url"];
     console.log("x: " + x);
     if (
@@ -88,11 +89,11 @@ function getCookies(keyToFind) {
       if (sec.length == 0) {
         console.log("sec" + sec);
         VueCookies.set("status", "no-security");
-        window.location = "/login";
+    console.log("no-security" );
+        // window.location = "/login";
       }
     }
 
-    // console.log(sec);
     config.headers.common["security"] = sec;
     config.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
     config.headers.common["Accept"] = "application/json";
@@ -101,10 +102,10 @@ function getCookies(keyToFind) {
     return config;
   },
   function(error) {
-    // Do something with request error
+    //Do something with request error
     return Promise.reject(error);
   }
-);*/
+);
 
 axios.interceptors.response.use(
   response => {
@@ -113,7 +114,6 @@ axios.interceptors.response.use(
   },
   function(error) {
     var statuscode = VueCookies.get("status");
-    //&& errorResponse.config && !errorResponse.config.__isRetryRequest
     if (statuscode == "401") {
       router.push({ name: "Login" });
       console.log("status code: " + statuscode);
@@ -168,17 +168,7 @@ export default {
       var username = VueCookies.get("username");
       return username;
     },
-    redirectToLogin() {
-      this.$router.push({ name: "Login" });
-    }
-    // showModal(id) {
-    //   this.$refs[id].show();
-    // }
   },
-  beforeMount() {
-    // Login.default.methods.showModal('modaInfo')
-    // this.showModal("modaInfo");
-  }
 };
 </script>
 

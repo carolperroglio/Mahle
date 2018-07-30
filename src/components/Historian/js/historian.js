@@ -404,7 +404,7 @@ export default {
 
             var headersss = this.headers;
             var PDFprovider = this.providertable;
-            var thingNameCabecalho = this.thingNameCabeçalho;
+            var thingNameCabecalho = this.thingNameCabeçalho + ' Grupo: ' + this.thingGroup;
 
 
             this.chart["export"].capture({}, function() {
@@ -426,7 +426,7 @@ export default {
                     doc.setFontSize(20);
                     doc.addImage(img, "PNG", 10, 10, 50, 20);
                     doc.addImage(imgLogo, "JPG", 510, 10, 60, 20);
-                    doc.text(35, 65, "Rastreamento " + thingNameCabecalho)
+                    doc.text(35, 65, thingNameCabecalho)
                     doc.addImage(this.grafico, "PNG", 10, 100, 600, 400);
                     var columns = [];
                     var title = "title";
@@ -503,22 +503,33 @@ export default {
             return ticks;
         },
         separateDateAndHour(providerar) {
+            // array que será atribuido a tabela
             var finalprovider = new Array();
+            // cópia do array que será usada para alterar as keys
             var copyprovider = new Array();
             copyprovider = JSON.parse(JSON.stringify(providerar));
+
             var objaux = new Object();
             // copyprovider = providerar.slice();
             copyprovider.forEach((obj) => {
+                // elimina a referencia do objeto para não alterar o principal
                 var newObj = JSON.parse(JSON.stringify(obj));
+                // pega o valor da data
                 var dt = newObj.category;
+                // armazena o tamanho da string da data + hora
                 var stringlength = dt.length;
+                // armazena apenas dia/mes/ano
                 var date = newObj.category = dt.substring(0, stringlength - 5);
+                //deleta category(Data) referente ao gráfico - e armazena só /dia/mes/ano (GRÁFICO)
                 delete newObj.category;
                 newObj.category = date;
+                // armazena hora e minutos
                 var hourformatted = dt.substring(stringlength - 5, stringlength);
+                // 
                 newObj.Hora = hourformatted;
-                objaux.category = newObj.category;
-                objaux.Hora = newObj.Hora;
+                // novo objeto é populado com Data e Hora
+                objaux.Data = date;
+                objaux.Hora = hourformatted;
                 for (var key in newObj) {
                     var newkey = '';
                     switch (key) {
@@ -533,35 +544,35 @@ export default {
                             objaux[newkey] = newObj[key]
                             break;
                         case 'Valor Medição':
-                            newkey = "vm"
+                            newkey = "VM"
                             objaux[newkey] = newObj[key]
                             break;
                         case 'LIE Limite superior de especific':
-                            newkey = 'lse'
+                            newkey = 'LSE'
                             objaux[newkey] = newObj[key]
                             break;
                         case 'LSE Limite superior de especificação':
-                            newkey = "lse"
+                            newkey = "LSE"
                             objaux[newkey] = newObj[key]
                             break;
                         case 'LSE Limite superior de especific':
-                            newkey = "lse"
+                            newkey = "LSC"
                             objaux[newkey] = newObj[key]
                             break;
                         case 'LSC Limite superior de controle':
-                            newkey = "lsc"
+                            newkey = "LSC"
                             objaux[newkey] = newObj[key]
                             break;
                         case 'LIC Limite inferior de controle':
-                            newkey = "lic"
+                            newkey = "LIC"
                             objaux[newkey] = newObj[key]
                             break;
                         case 'LIE Limite inferior de especific':
-                            newkey = "lie"
+                            newkey = "LIE"
                             objaux[newkey] = newObj[key]
                             break;
                         case 'LIE Limite inferior de especificação':
-                            newkey = "lie"
+                            newkey = "LIE"
                             objaux[newkey] = newObj[key]
                             break;
                             // default:
@@ -603,7 +614,7 @@ export default {
                  */
                 Object.keys(this.providertable[0]).forEach((n) => {
                     if (n == "category") {
-                        aux.push("Data");
+                        // aux.push("Data");
                         this.jsonfields["Data"] = "category";
                     } else {
                         aux.push(n);

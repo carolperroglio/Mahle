@@ -187,11 +187,12 @@ export default new Router({
             name: 'HomePage',
             component: HomePage
         },
-        {
-            path: '/',
-            name: 'StatusMES',
-            component: StatusMES
-        },
+        //VOLTAR ISSO PRA PATH: /
+        // {
+        //     path: '/',
+        //     name: 'StatusMES',
+        //     component: StatusMES
+        // },
         {
             path: '/historian',
             name: 'Historian',
@@ -225,7 +226,7 @@ export default new Router({
             component: User
         },
         {
-            path: '/usergroup',
+            path: '/',
             name: 'UserGroup',
             component: UserGroup
         },
