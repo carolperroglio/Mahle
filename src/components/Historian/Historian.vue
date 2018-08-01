@@ -116,19 +116,19 @@
         <div v-show="!carregando" class="table-margin-historian" id="table-historian">
         <div v-for="(t, index) in providertable" v-bind:class="{cinza: index%2==0}" :key="index">                                    
             <label class="ls2 col-md-1">
-                {{t.category}}</label>
+                {{t.Data}}</label>
             <label class="ls2 col-md-1">
                 {{t.Hora}}</label>
             <label class="ls2 col-md-1">
-                {{t.vm}}</label>
+                {{t.VM}}</label>
             <label class="ls2 col-md-2">
-                {{t.lse}}</label>
+                {{t.LSE}}</label>
             <label class="ls2 col-md-2">
-                {{t.lsc}}</label>
+                {{t.LSC}}</label>
             <label class="ls2 col-md-2">
-                {{t.lic}}</label>
+                {{t.LIC}}</label>
             <label class="ls2 col-md-2">
-                {{t.lie}}</label>
+                {{t.LIE}}</label>
         </div>
         </div>
         <!-- <tr class="" v-for="(obj,index1) in providertable" v-bind:key="index1" :class="{cinza: index1%2==0}"> -->

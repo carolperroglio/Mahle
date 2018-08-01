@@ -70,17 +70,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({
             'process.env': {
 
-                //IP MAHLE
-                // TOOLS_API: JSON.stringify(apimahle + ":8005"),
-                // OP_API: JSON.stringify(apimahle + ":8003"),
-                // THINGS_API: JSON.stringify(apimahle + ":8001"),
-                // PROD_HIST_API: JSON.stringify(apimahle + ":8006"),
-                // RECIPE_API: JSON.stringify(apimahle + ":8002"),
-                // STATUS_API: JSON.stringify(apimahle + ":8004"),
-                // HIST_BIGTABLE_API: JSON.stringify(apimahle + ":8011"),
-                // HIST_ALARM_API: JSON.stringify(apimahle + ":8012"),
-                // REPORT_API: JSON.stringify(apimahle + ":8007"), 
-                // LINE_PARAMETERS_API: JSON.stringify(apimahle + ":8013"),
 
                 //IP SPI
                 TOOLS_API: JSON.stringify(api + ":8005"),
@@ -95,6 +84,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
                 USER_API: JSON.stringify(api + ":8010"),
                 ANALYSIS_API: JSON.stringify(api + ":8014"),
+
                 USER_TRUE: true
                 //IP NUVEM
                 // TOOLS_API: JSON.stringify(api + ":8005"),
