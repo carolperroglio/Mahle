@@ -121,7 +121,7 @@
         </div>
         </div>
         </b-modal>
-        <b-modal ref="modalErro" title="" hide-footer="">
+        <b-modal ref="modalErro" no-close-on-backdrop title="" hide-footer="">
             <p :class="erro? 'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div>

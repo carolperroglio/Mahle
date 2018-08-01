@@ -253,7 +253,7 @@
 
             <!-- MODAL VISUALIZAR PARAMS -->
             <!--                         -->
-            <b-modal size="lg" ref="visualizarParams" hide-footer title="Visualizar OPL">
+            <b-modal no-close-on-backdrop size="lg" ref="visualizarParams" hide-footer title="Visualizar OPL">
                 <div v-if="opSelectedParams != ''">
                 <div class="form-row">
                     <div class="form-group col-md-3">
@@ -331,7 +331,7 @@
             </b-modal>
 
             <!-- MODAL PARA EXIBIR ERRO  -->
-            <b-modal ref="modalInfo" title="Mensagem" hide-footer>
+            <b-modal no-close-on-backdrop ref="modalInfo" title="Mensagem" hide-footer>
             <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
             </b-modal>
     </div>

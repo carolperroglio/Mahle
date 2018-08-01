@@ -123,7 +123,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+        <b-modal no-close-on-backdrop ref="modalErro" size="md" title="Erro" hide-footer="">
             <p class="alert alert-danger">Ocorreu um erro: {{erro}}</p>
         </b-modal>                                                                
     </div>

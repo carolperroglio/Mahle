@@ -66,7 +66,7 @@
         </label>
     </div>
     </div>
-    <b-modal size="lg" ref="viewHistory" hide-footer title="Histórico de Mudança de Status">
+    <b-modal no-close-on-backdrop size="lg" ref="viewHistory" hide-footer title="Histórico de Mudança de Status">
         <div class="modal-body">
             <div class="form-row">
             <!-- <div class="form-group col-md-4"> -->
@@ -173,7 +173,7 @@
     </b-modal>    
 
     <!-- Modal   ALTERAR STATUS DA FERRAMENTA-->
-        <b-modal ref="modalGerT" hide-footer title="Alterar Status da Ferramenta">
+        <b-modal no-close-on-backdrop ref="modalGerT" hide-footer title="Alterar Status da Ferramenta">
         <div class="modal-body">
             <div class="form-row">
                 <div class="col-md-6">
@@ -225,7 +225,7 @@
         </div>
     </b-modal>
     <!-- MODAL PARA EXIBIR ERRO  -->
-    <b-modal ref="modalInfo" title="Mensagem" hide-footer>
+    <b-modal no-close-on-backdrop ref="modalInfo" title="Mensagem" hide-footer>
     <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
     </b-modal>
 </div>

@@ -28,7 +28,7 @@
     </div>
     </div>
 <!-- MODAL PARA EXIBIR ERRO  no-close-on-backdrop  -->
-<b-modal ref="modaInfo" title="Mensagem" hide-footer>
+<b-modal no-close-on-backdrop ref="modaInfo" title="Mensagem" hide-footer>
     <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
 </b-modal>
   </div>

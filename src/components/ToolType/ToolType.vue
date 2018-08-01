@@ -77,7 +77,7 @@
         <!--                       -->
         <!--        modal          -->
 
-        <b-modal ref="myModalRef" hide-footer title="Criar Tipo de Ferramenta">
+        <b-modal no-close-on-backdrop ref="myModalRef" hide-footer title="Criar Tipo de Ferramenta">
                 
                     <div class="modal-body">
                         <div class="alert alert-success" role="alert" v-show="ttCreated">
@@ -133,7 +133,7 @@
          <!-- 
              EDITAR TOOLSTIP
           -->
-       <b-modal ref="myModalEdit" hide-footer title="Editar Tipo de Ferramenta">
+       <b-modal no-close-on-backdrop ref="myModalEdit" hide-footer title="Editar Tipo de Ferramenta">
          
                     <div class="modal-body">
                         <div class="alert alert-success" role="alert" v-show="ttUpdated">

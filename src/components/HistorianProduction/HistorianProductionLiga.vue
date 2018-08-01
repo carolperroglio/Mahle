@@ -352,7 +352,7 @@
             </form>
          </b-modal>
 
-         <b-modal ref="modalErro" title="" hide-footer="">
+         <b-modal no-close-on-backdrop ref="modalErro" title="" hide-footer="">
             <p :class="erro? 'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>
     </div>

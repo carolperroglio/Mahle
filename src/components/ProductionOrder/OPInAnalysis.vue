@@ -100,7 +100,7 @@
                     </ul>
                 </nav>
             </div>
-            <b-modal size="md" ref="realizarAnalise" hide-footer title="Realizar Análise">
+            <b-modal no-close-on-backdrop size="md" ref="realizarAnalise" hide-footer title="Realizar Análise">
                 <div class="form-row">
                 <div class="form-group col-md-5">
                     <select class="form-control" id="" disabled>
@@ -165,7 +165,7 @@
                 </div>
             </div>
             </b-modal>
-        <b-modal ref="modalErro" title="" hide-footer="">
+        <b-modal no-close-on-backdrop ref="modalErro" title="" hide-footer="">
             <p :class="erro?'alert alert-danger':'alert alert-success'">{{msgErro}}</p>
         </b-modal>
     </div>

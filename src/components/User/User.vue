@@ -89,7 +89,7 @@
                             <!--                             -->
                             <!-- MODALZÃO CRIAÇÃO DE USUÁRIO -->
                             <!--                             -->
-<b-modal size="md" ref="cadUser" hide-footer title="Cadastrar Usuário" modal-header-close>
+<b-modal no-close-on-backdrop size="md" ref="cadUser" hide-footer title="Cadastrar Usuário" modal-header-close>
 <div class="modal-body">
     <form>
         <p :class="userExist?'alert alert-danger':'alert alert-success'" v-if="showMsg">{{msgUser}}</p>
@@ -161,7 +161,7 @@
                             <!--                             -->
                             <!-- MODALZÃO EDITAR DE GRUPO DE USUÁRIO  -->
 
-<b-modal size="md" ref="editUser" hide-footer title="Editar Grupo de Usuário" modal-header-close>
+<b-modal no-close-on-backdrop size="md" ref="editUser" hide-footer title="Editar Grupo de Usuário" modal-header-close>
 <div class="modal-body">
     <form>
     <div class="form-group row">
@@ -215,7 +215,7 @@
 
 
 <!-- MODAL PARA CONFIRMAR DELETE  -->
-<b-modal ref="deleteUser" title="Deseja realmente excluir o usuário ?" hide-footer>
+<b-modal  no-close-on-backdrop ref="deleteUser" title="Deseja realmente excluir o usuário ?" hide-footer>
 <button class="btn btn-success" @click="deleteUser(objUser.userId);hideModal('deleteUser');">
     <i  class="fa fa-check-square" aria-hidden="true"></i>
     Confirmar
@@ -226,7 +226,7 @@
 </button>
 </b-modal>
 <!-- MODAL PARA CONFIRMAR EDIT  -->
-<b-modal ref="editUserConfirm" title="Deseja realmente editar este usuário ?" hide-footer>
+<b-modal no-close-on-backdrop ref="editUserConfirm" title="Deseja realmente editar este usuário ?" hide-footer>
 <button class="btn btn-success" @click="updateUser(objUser.userId);hideModal('editUserConfirm');">
     <i  class="fa fa-check-square" aria-hidden="true"></i>
     Confirmar
@@ -237,7 +237,7 @@
 </button>
 </b-modal>
 <!-- MODAL PARA EXIBIR ERRO  -->
-<b-modal ref="modaInfo" title="Mensagem" hide-footer>
+<b-modal no-close-on-backdrop ref="modaInfo" title="Mensagem" hide-footer>
 <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
 </b-modal>
 </div>
