@@ -44,20 +44,20 @@
                                     {{s.thingName}}
                                 </h4>
                                 <div>
-                                <label v-if="s.hasRedAlert == true">
-                                    <b>Parâmetro:</b>
-                                    <span v-for="(a, index) in s.alarms" v-bind:key="index" v-if="a.priority == 2">
-                                        {{a.alarmName}}, 
-                                    </span>
-                                </label>
-                                <label v-else-if="s.hasLowAlert == true">
-                                    <b>Parâmetro:</b>
-                                    <span v-for="(a, index) in s.alarms" v-bind:key="index"  v-if="a.priority == 1">
-                                        {{a.alarmName}}, 
-                                    </span>
-                                </label>
-                                                              
-                                <br>
+                                    <label v-if="s.hasRedAlert == true">
+                                        <b>Parâmetro:</b>
+                                        <span v-for="(a, index) in s.alarms" v-bind:key="index" v-if="a.priority == 2">
+                                            {{a.alarmName}}, 
+                                        </span>
+                                    </label>
+                                    <label v-else-if="s.hasLowAlert == true">
+                                        <b>Parâmetro:</b>
+                                        <span v-for="(a, index) in s.alarms" v-bind:key="index"  v-if="a.priority == 1">
+                                            {{a.alarmName}}, 
+                                        </span>
+                                    </label>
+                                                                
+                                    <br>
                                 </div>
                                 <br>
                                 <br>

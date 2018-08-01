@@ -200,6 +200,9 @@
                             <router-link to="/resampling" class="list-group-item" data-parent="#reports" v-b-toggle.sidebar> 
                                 Relatório de Análise Química
                             </router-link>
+                            <router-link to="/genealogyreport" class="list-group-item" data-parent="#reports" v-b-toggle.sidebar> 
+                                Relatório de Genealogia
+                            </router-link>
                         </b-collapse>
                     </b-collapse>   
                     </div>   

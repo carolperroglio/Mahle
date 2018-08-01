@@ -99,8 +99,8 @@ export default {
                 console.log(this.productionOrdersRecipe);
                 console.log(this.productionOrder);
                 // if (this.productionOrdersRecipe.recipeProduct != undefined) {
-                this.ordem.productId = this.productionOrdersRecipe.recipeProduct.product.productId;
-                this.ordem.productName = this.productionOrdersRecipe.recipeProduct.product.productName;
+                this.ordem.productId = 34; //this.productionOrdersRecipe.recipeProduct.product.productId;
+                this.ordem.productName = 'novo';//this.productionOrdersRecipe.recipeProduct.product.productName;
                 // }
                 this.ordem.productionOrderId = this.productionOrder.productionOrderId;
                 // if (this.orderHistorian.productsOutput != undefined) {

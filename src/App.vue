@@ -117,13 +117,13 @@ axios.interceptors.response.use(
     if (statuscode == "401") {
       router.push({ name: "Login" });
       console.log("status code: " + statuscode);
-    } else if (error.message == "Network Error") {
+    } /*else if (error.message == "Network Error") {
       VueCookies.set("status", "Network Error");
       router.push({ name: "Login" });
-      console.log("error.message: " + error.message);
+      console.log("error.message: " + error.message);*/
       // Login.showModal('modaInfo');
       // showModal("modaInfo");
-    } else if (
+     else if (
       error.response.status != undefined &&
       error.response.status == "404"
     ) {
@@ -164,11 +164,21 @@ export default {
     Login: Login
   },
   methods: {
-    getUsername() {
+    getUsername() {          
       var username = VueCookies.get("username");
       return username;
     },
   },
+  created(){
+    if(process.env.USER_TRUE){
+        VueCookies.set('security', 'credential.security', { expires: '12h' });
+        VueCookies.set('username','spi', { expires: '12h' });          
+    }
+  },
+  beforeMount() {
+    // Login.default.methods.showModal('modaInfo')
+    // this.showModal("modaInfo");
+  }
 };
 </script>
 

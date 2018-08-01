@@ -85,6 +85,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 USER_API: JSON.stringify(api + ":8010"),
                 ANALYSIS_API: JSON.stringify(api + ":8014"),
 
+                USER_TRUE: true
+                //IP NUVEM
+                // TOOLS_API: JSON.stringify(api + ":8005"),
+                // OP_API: JSON.stringify(api + ":8003"),
+                // THINGS_API: JSON.stringify(api + ":8001"),
+                // PROD_HIST_API: JSON.stringify(api + ":8006"),
+                // RECIPE_API: JSON.stringify(api + ":8003"),
+                // STATUS_API: JSON.stringify(api + ":8004"),
+                // HIST_BIGTABLE_API: JSON.stringify(api + ":8006"),
+                // HIST_ALARM_API: JSON.stringify(api + ":8012"),
+                // REPORT_API: JSON.stringify(api + ":8007"),
+                // LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
+                // USER_API: JSON.stringify(api + ":8010"),
             }
         }),
         new webpack.ProvidePlugin({

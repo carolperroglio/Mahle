@@ -289,7 +289,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show=" pReceita" @click.stop.prevent="ordem.type = 'output';cadastrarApont(ordem);">
+                            <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show="pReceita" @click.stop.prevent="ordem.type = 'output';cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="quantity = ''; unity = '';" class="btn btn-primary pull-right">

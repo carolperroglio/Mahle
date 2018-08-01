@@ -6,6 +6,7 @@ import ThingCreate from '@/components/things/ThingCreate'
 import GenerateProducts from '@/components/Products/GenerateProducts'
 import Alarms from '@/components/Alarms/Alarms'
 import Resampling from '@/components/Resampling/Resampling'
+import GenealogyReport from '@/components/GenealogyReport/GenealogyReport'
 import Tira from '@/components/Tira/Tira'
 import ListTira from '@/components/Tira/ListTira'
 import Liga from '@/components/Liga/Liga'
@@ -33,7 +34,6 @@ import ToolsManagement from '@/components/ToolsManagement/ToolsManagement'
 import StatusMES from '@/components/StatusMES/StatusMES'
 import Historian from '@/components/Historian/Historian'
 import HistorianAlarm from '@/components/HistorianAlarm/HistorianAlarm'
-import GenealogyReport from '@/components/GenealogyReport/GenealogyReport'
 import HistorianMain from '@/components/HistorianProduction/HistorianMain'
 import ReportAlarm from '@/components/ReportAlarm/ReportAlarm'
 import User from '@/components/User/User'
@@ -64,6 +64,11 @@ export default new Router({
             path: '/resampling',
             name: 'Resampling',
             component: Resampling
+        },
+        {
+            path: '/genealogyreport',
+            name: 'GenealogyReport',
+            component: GenealogyReport
         },
         {
             path: '/tira/:id',
@@ -203,12 +208,6 @@ export default new Router({
             path: '/historianalarms',
             name: 'Historianalarms',
             component: HistorianAlarm
-        },
-        {
-
-            path: '/genealogyReport',
-            name: 'GenealogyReport',
-            component: GenealogyReport
         },
         {
             path: '/historianMain',
