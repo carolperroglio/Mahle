@@ -487,6 +487,7 @@ export default {
                 data.username = VueCookies.get('username');
                 this.objetooo = data;
                 console.log('OP sendo criada!!!!!!!!');
+                console.log('JSON ' + data);
                 // Criando OP
                 setTimeout(() => {
                     axios.post(this.urlOp, data).then(response => {

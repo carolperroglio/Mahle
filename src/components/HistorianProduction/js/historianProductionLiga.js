@@ -357,7 +357,6 @@ export default {
                 }
                 this.orderHistorian = [];
             })
-
         },
 
         listaOp(p) {
@@ -390,6 +389,7 @@ export default {
                 console.log(error);
             })
         },
+
         dataConvert(dataTicks) {
             var epochTicks = 621355968000000000,
                 ticksPerMillisecond = 10000,

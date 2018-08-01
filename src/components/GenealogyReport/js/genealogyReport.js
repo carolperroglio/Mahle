@@ -39,7 +39,7 @@ function paginacao(response, este) {
 }
 
 export default {
-    name: "GenerateProducts",
+    name: "GenealogyReport",
     data() {
         return {
             id: "",
