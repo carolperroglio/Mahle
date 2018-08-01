@@ -148,7 +148,7 @@
         <!--       Parametro       -->
         <!--                       -->
         <!--                       -->                 
-        <b-modal ref="modalRemoveParameter" hide-footer title="Remover Parâmetro">            
+        <b-modal no-close-on-backdrop ref="modalRemoveParameter" hide-footer title="Remover Parâmetro">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja remover o Parametro !?</b>
             </div>    
@@ -174,7 +174,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->     
-        <b-modal ref="modalEditarParameter" hide-footer title="Editar Parâmetro">                    
+        <b-modal no-close-on-backdrop ref="modalEditarParameter" hide-footer title="Editar Parâmetro">                    
             <form>
                 <div>                    
                     <div class="form-row">
@@ -258,7 +258,7 @@
         <!--       Parametro       -->
         <!--                       -->
         <!--                       -->                 
-        <b-modal ref="modalEditarConfirm" hide-footer title="Editar Parâmetro">            
+        <b-modal no-close-on-backdrop ref="modalEditarConfirm" hide-footer title="Editar Parâmetro">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar o Parametro !?</b>
             </div>    
@@ -285,7 +285,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->     
-        <b-modal ref="modalCreateParameter" hide-footer title="Cadastrar Parâmetro">                    
+        <b-modal no-close-on-backdrop ref="modalCreateParameter" hide-footer title="Cadastrar Parâmetro">                    
             <form>
                 <div>                    
                     <div class="form-row">
@@ -373,7 +373,7 @@
         <!--       Parametro       -->
         <!--                       -->
         <!--                       -->                 
-        <b-modal ref="modalCreateConfirm" hide-footer title="Cadastrar Parâmetro">            
+        <b-modal no-close-on-backdrop ref="modalCreateConfirm" hide-footer title="Cadastrar Parâmetro">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja cadastrar o Parametro !?</b>
             </div>    
@@ -399,7 +399,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+        <b-modal no-close-on-backdrop ref="modalErro" size="md" title="Erro" hide-footer="">
             <p class="alert alert-danger">Ocorreu um erro: {{error}}</p>
         </b-modal>
 

@@ -67,7 +67,7 @@
         <!--                       -->
         <!--                       -->
         <!--        modal          -->
-         <b-modal ref="myModalRef" hide-footer title="Cadastro de Produtos">
+         <b-modal no-close-on-backdrop ref="myModalRef" hide-footer title="Cadastro de Produtos">
    
                    <div class="modal-body">
                          <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>

@@ -64,7 +64,7 @@
         </div>
 
         <!-- MODAL DE ASSOCIAÇÃO DE FERRAMENTAS-->
-        <b-modal ref="modalAssociate" hide-footer title="Associar Ferramenta" modal-header-close>
+        <b-modal ref="modalAssociate" no-close-on-backdrop hide-footer title="Associar Ferramenta" modal-header-close>
             <div class="modal-body">
             <div class="form-group row">
                 <div class="form-group col-sm-10">
@@ -93,7 +93,7 @@
         </div>
         </b-modal>
 
-        <b-modal ref="modalConfirmDissac" hide-footer title="Dessassociar Ferramenta">            
+        <b-modal ref="modalConfirmDissac" no-close-on-backdrop hide-footer title="Dessassociar Ferramenta">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja desassociar a Ferramenta ?</b>
             </div>    
@@ -111,7 +111,7 @@
             </div>
         </b-modal> 
          <!-- MODAL PARA EXIBIR ERRO  -->
-        <b-modal ref="modalErro" title="" hide-footer="">
+        <b-modal ref="modalErro" no-close-on-backdrop title="" hide-footer="">
             <p :class=" erro ? 'alert alert-danger':'alert alert-info'">{{msg}}</p>
         </b-modal>
     </div>  

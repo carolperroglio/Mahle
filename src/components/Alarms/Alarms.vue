@@ -118,7 +118,7 @@
             </div>                       
         </div> 
         
-    <b-modal ref="filterSearch" hide-footer title="Filtrar Busca">
+    <b-modal ref="filterSearch" no-close-on-backdrop hide-footer title="Filtrar Busca">
         <div class="modal-body">
         <div class="form-row">
         <div class="form-group  col-md-6">
@@ -185,7 +185,7 @@
         </div>
     </b-modal>
     <!-- MODAL PARA EXIBIR ERRO  -->
-    <b-modal ref="modalInfo" title="Mensagem" hide-footer>
+    <b-modal no-close-on-backdrop ref="modalInfo" title="Mensagem" hide-footer>
     <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
     </b-modal>
     </div>

@@ -32,7 +32,7 @@
                         </div>
                 </div>
             </div>
-        <b-modal ref="modalGerOP" hide-footer title="Editar Status">
+        <b-modal no-close-on-backdrop ref="modalGerOP" hide-footer title="Editar Status">
             
                     <form>
                         <div class="form-group">
@@ -72,7 +72,7 @@
                                     </div>
                                 </form>
         </b-modal>
-        <b-modal ref="confirmarEditar" hide-footer title="Tem certeza que deseja mudar o status?">
+        <b-modal no-close-on-backdrop ref="confirmarEditar" hide-footer title="Tem certeza que deseja mudar o status?">
                     <form>
                         <div class="form-group">
                         <div id="load" v-show="carregandost">

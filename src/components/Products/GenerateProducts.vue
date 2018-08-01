@@ -139,7 +139,7 @@
         <!--        Produto        -->
         <!--                       -->
         <!--                       -->
-        <b-modal ref="modalRemoveProduct" hide-footer title="Remover Produto">            
+        <b-modal no-close-on-backdrop ref="modalRemoveProduct" hide-footer title="Remover Produto">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja remover o Produto !?</b>
             </div>    
@@ -163,8 +163,8 @@
         <!--        Editar         -->
         <!--        Produto        -->
         <!--                       -->
-        <!--                       -->
-        <b-modal ref="modalEditarProduto" hide-footer title="Editar Produto"> 
+        <!--                        -->
+        <b-modal no-close-on-backdrop ref="modalEditarProduto" hide-footer title="Editar Produto"> 
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar o Produto!?</b>
             </div>    
@@ -188,7 +188,7 @@
         <!--       Produto         -->
         <!--                       -->
         <!--                       -->
-        <b-modal ref="modalCadastrarProduto" hide-footer title="Cadastrar Produto"> 
+        <b-modal no-close-on-backdrop ref="modalCadastrarProduto" hide-footer title="Cadastrar Produto"> 
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja cadastrar o Produto!?</b>
             </div>    
@@ -214,7 +214,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+        <b-modal no-close-on-backdrop ref="modalErro" size="md" title="Erro" hide-footer="">
             <p class="alert alert-danger">Ocorreu um erro: {{erro}}</p>
         </b-modal>
 
@@ -226,7 +226,7 @@
         <!--                                 -->
         <!--                                 -->
         <!--               Modal             -->        
-        <b-modal ref="myModalRef" hide-footer :title="cadEdit">                    
+        <b-modal no-close-on-backdrop ref="myModalRef" hide-footer :title="cadEdit">                    
             <form>
                 <div>
                     <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>

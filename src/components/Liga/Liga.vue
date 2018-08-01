@@ -125,7 +125,7 @@
         <!--                       -->
         <!--                       -->
         <!--        modal          -->
-        <b-modal ref="modalEditRecipe" hide-footer title="Editar Liga">            
+        <b-modal no-close-on-backdrop ref="modalEditRecipe" hide-footer title="Editar Liga">            
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -167,7 +167,7 @@
         <!--        edit           -->
         <!--        Liga           -->
         <!--                       -->
-        <b-modal ref="modalConfirmEditLiga" hide-footer title="Editar Liga">            
+        <b-modal no-close-on-backdrop ref="modalConfirmEditLiga" hide-footer title="Editar Liga">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar!?</b>
             </div>    
@@ -194,7 +194,7 @@
         <!--       da liga         -->
         <!--        modal          -->
         
-        <b-modal ref="modalcadProPhase" hide-footer title="Cadastrar Componente">            
+        <b-modal no-close-on-backdrop ref="modalcadProPhase" hide-footer title="Cadastrar Componente">            
             <div class="modal-body">
                 <div class="alert alert-danger form-control" v-show="mensagem!=''" role="alert">{{mensagem}}</div>
                 <div class="alert alert-success form-control" v-show="mensagemSuc!=''" role="alert">{{mensagemSuc}}</div>
@@ -249,7 +249,7 @@
         <!--        Produto        -->
         <!--                       -->
         <!--                       -->
-        <b-modal ref="modalConfirmEditarProduto" hide-footer title="Editar Produto"> 
+        <b-modal no-close-on-backdrop ref="modalConfirmEditarProduto" hide-footer title="Editar Produto"> 
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja editar o Componente!?</b>
             </div>    
@@ -274,7 +274,7 @@
         <!--        Liga           -->
         <!--                       -->
         <!--                       -->
-        <b-modal ref="modalRemoveLiga" hide-footer title="Remover Liga">            
+        <b-modal no-close-on-backdrop ref="modalRemoveLiga" hide-footer title="Remover Liga">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja remover a Liga!</b>
             </div>    
@@ -298,8 +298,8 @@
         <!--       Remove          -->
         <!--       Produtos        -->
         <!--                       -->
-        <!--                       -->
-        <b-modal ref="modalRemoveProdutos" hide-footer title="Remover Componente">            
+        <!--                       -->        
+        <b-modal no-close-on-backdrop ref="modalRemoveProdutos" hide-footer title="Remover Componente">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja remover o componente!</b>
             </div>    
@@ -325,7 +325,7 @@
         <!--                       -->
         <!--                       -->
         <!--                       -->
-        <b-modal ref="modalErro" size="md" title="Erro" hide-footer="">
+        <b-modal ref="modalErro" no-close-on-backdrop size="md" title="Erro" hide-footer="">
             <p class="alert alert-danger">Ocorreu um erro: {{erro}}</p>
         </b-modal> 
     </div>

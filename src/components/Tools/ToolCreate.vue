@@ -174,7 +174,7 @@
         <!--                                 -->
         <!--               Modal             -->
         
-        <b-modal ref="modalCadTool" hide-footer title="Cadastrar Ferramentas/Insumos">
+        <b-modal no-close-on-backdrop ref="modalCadTool" hide-footer title="Cadastrar Ferramentas/Insumos">
             <form>
                 <div class="form-row">
                 <div class="form-group col-md-6">
@@ -263,7 +263,7 @@
             <!--                            -->
             <!--                            -->
 
-        <b-modal ref="myModalRef" hide-footer title="Editar Ferramentas">
+        <b-modal no-close-on-backdrop ref="myModalRef" hide-footer title="Editar Ferramentas">
             <form>
                 <div class="form-row">
                 <div class="form-group col-md-6">
@@ -338,7 +338,7 @@
         </b-modal>
             <br>
             <!-- MODAL PARA EXIBIR ERRO  -->
-            <b-modal ref="modalErro" title="" hide-footer="">
+            <b-modal no-close-on-backdrop ref="modalErro" title="" hide-footer="">
                 <p :class="erro ? 'alert alert-danger':'alert alert-info'">{{msg}}</p>
             </b-modal>
         </div>
