@@ -65,17 +65,13 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <br><br><br>
-                <br><br><br>          
-                <br><br><br>
-                <br><br>
+                
                 <div class="row">
                     <div class="col-md-10 offset-1">
-
                         <b-card-header header-tag="header" class="p-1" role="tab">
                             <div class="row">
                             <div class="col-md-2">
-                                <b>OP:</b> 213819819_Z 
+                                <b>OP:</b> Tira000
                             </div>
                             <div class="col-md-4">
                                 <b>Data Inicio: </b> 25/06/2018 11:00
@@ -85,94 +81,107 @@
                             </div>
                             </div>
                         </b-card-header>
-                        <div role="tablist">
-                            <b-card no-body class="mb-1">
-                                <b-card-header header-tag="header" class="p-1" role="tab">
-
-                                    <b-btn block href="#" v-b-toggle.accordion variant="secondary">
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <b>OP:</b> 221212311_Z 
-                                            </div>
-                                            <!-- <div class="col-md-2">
-                                                <b>OPL:</b> 213819818_Z 
-                                            </div> -->
-                                            <div class="col-md-2">
-                                                <b>Receita Liga:</b> S-005 
-                                            </div>
-                                            <div class="col-md-3">
-                                                <b>Data Inicio: </b> 25/06/2018 11:00
-                                            </div>
-                                            <div class="col-md-3">
-                                                <b>Data Fim: </b> 25/06/2018 16:00
-                                            </div>
-                                        </div>
-                                    </b-btn>
-                                </b-card-header>
-                            </b-card>
+                        <div role="tablist">                            
                             <div role="tablist">
-                                <b-collapse id="accordion" visible accordion="my-accordion" role="tabpanel">
-                                    <b-card-header header-tag="header" class="p-1" role="tab">
-                                        <b-btn block disabled variant="info"><b> Rolo de Entrada</b> Rolo de Aco - <b>Lote: </b>1231654231</b-btn>
-                                    </b-card-header>
+                                <b-collapse id="accordion" visible accordion="my-accordion" role="tabpanel">                                    
                                     <b-card no-body  class="mb-1">
                                         <b-card-header header-tag="header" class="p-1" role="tab">
                                             <b-btn block v-b-toggle.collapse1_inner variant="info">Rolo 1</b-btn>
                                         </b-card-header>
-                                    </b-card>
+                                    </b-card>                                    
+                
                                     <b-collapse id=collapse1_inner class="mt-2">
-                                        <b-card>
-                                            <div class="row">
-                                            <div class="col-md-12">
-                                            <p class="text-center"><b>OPL:</b> 21231654_Z</p>
-
-                                            </div>
-                                            <div class="col md 4">
-                                            <b><h5>Ferramentas</h5></b>
-                                            <ul class="list-group">
-                                            <li class="list-group-item">Ferramenta 1</li>
-                                            <li class="list-group-item">Ferramenta 2</li>
-                                            <li class="list-group-item">Ferramenta 3</li>
-                                            </ul>
-                                            </div>
-                                            <div class="col md 6">
-                                            <b><h5>Materiais</h5></b>
-                                            <ul class="list-group">
-                                            <li class="list-group-item">Cobre - 900kg - 158198165</li>
-                                            <li class="list-group-item">Niquel - 100kg - 18156165</li>
-                                            <li class="list-group-item">Estanho - 500kg - 5191981</li>
-                                            </ul>
-                                            </div>
-                                            </div>
+                                        <b-card>                                            
                                             <br>
-                                            <div class="row">
-                                            <div class="col-md-12">
-                                            <p class="text-center"><b>OPL:</b> 21231844_Z</p>
-
+                                            <div class="row">     
+                                                <div class="col-md-12"> 
+                                                    <b> Materia Prima</b>
+                                                </div>                                                                                                                                             
+                                                <div class="col-md-6">    
+                                                    <b>OPL:</b> 21231844_Z
+                                                </div>
+                                               
+                                                <div class="col-md-6">                                     
+                                                    <b>Ferramentas</b>
+                                                </div>
+                                                <div class="col-md-6">                                            
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Elemento</th>
+                                                                <th>Quantidade</th>
+                                                                <th>Lote</th>
+                                                                <th>Data</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Cobre</td><td>900kg</td><td>158198165</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Niquel</td><td>100kg</td><td>18156165</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Estanho</td><td>500kg</td><td>5191981</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                        </tbody>    
+                                                    </table>
+                                                </div>
+                                                
+                                                <div class="col-md-6">                                                                                           
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Tipo</th>
+                                                                <th>Rastreamento</th>
+                                                                <th>Uso</th>
+                                                                <th>Data</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Cobre</td><td>900kg</td><td>158198165</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Niquel</td><td>100kg</td><td>18156165</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Estanho</td><td>500kg</td><td>5191981</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                        </tbody>    
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-12">                                     
+                                                    <p class="text text-center"><b>Rolos de entrada</b></p>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>N° do rolo</th>
+                                                                <th>Quantidade</th>
+                                                                <th>Lote</th>
+                                                                <th>Data</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Cobre</td><td>900kg</td><td>158198165</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Niquel</td><td>100kg</td><td>18156165</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Estanho</td><td>500kg</td><td>5191981</td><td>25/06/2018 11:00</td>
+                                                            </tr>
+                                                        </tbody>    
+                                                    </table>
+                                                </div>     
                                             </div>
-                                            <div class="col md 4">
-                                            <b><h5>Ferramentas</h5></b>
-                                            <ul class="list-group">
-                                            <li class="list-group-item">Ferramenta 1</li>
-                                            <li class="list-group-item">Ferramenta 2</li>
-                                            <li class="list-group-item">Ferramenta 3</li>
-                                            </ul>
-                                            </div>
-                                            <div class="col md 6">
-                                            <b><h5>Materiais</h5></b>
-                                            <ul class="list-group">
-                                            <li class="list-group-item">Cobre - 900kg - 158198165</li>
-                                            <li class="list-group-item">Niquel - 100kg - 18156165</li>
-                                            <li class="list-group-item">Estanho - 500kg - 5191981</li>
-                                            </ul>
-                                            </div>
-                                            </div>
-                                        </b-card>
-                                    </b-collapse>
-    
+                                        </b-card>                                        
+                                    </b-collapse>                                                                    
                                 </b-collapse>
-                            </div>
-                                
+                            </div>                                
                         </div>
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
@@ -243,66 +252,7 @@
                 </b-btn>
             </b-card-header>
         </b-card>
-        <div role="tablist">
-            <b-collapse id="accordion" visible accordion="my-accordion" role="tabpanel">
-                <b-card-header header-tag="header" class="p-1" role="tab">
-                    <b-btn block disabled variant="info"><b> Rolo de Entrada</b> Rolo de Aco - <b>Lote: </b>1231654231</b-btn>
-                </b-card-header>
-                <b-card no-body  class="mb-1">
-                    <b-card-header header-tag="header" class="p-1" role="tab">
-                        <b-btn block v-b-toggle.collapse1_inner variant="info">Rolo 1</b-btn>
-                    </b-card-header>
-                    <b-collapse id=collapse1_inner class="mt-2">
-                        <b-card>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p class="text-center"><b>OPL:</b> 21231654_Z</p>
-
-                                </div>
-                                <div class="col md 4">
-                                    <b><h5>Ferramentas</h5></b>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Ferramenta 1</li>
-                                        <li class="list-group-item">Ferramenta 2</li>
-                                        <li class="list-group-item">Ferramenta 3</li>
-                                    </ul>
-                                </div>
-                                <div class="col md 6">
-                                    <b><h5>Materiais</h5></b>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Cobre - 900kg - 158198165</li>
-                                        <li class="list-group-item">Niquel - 100kg - 18156165</li>
-                                        <li class="list-group-item">Estanho - 500kg - 5191981</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p class="text-center"><b>OPL:</b> 21231844_Z</p>
-                                </div>
-                                <div class="col md 4">
-                                    <b><h5>Ferramentas</h5></b>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Ferramenta 1</li>
-                                        <li class="list-group-item">Ferramenta 2</li>
-                                        <li class="list-group-item">Ferramenta 3</li>
-                                    </ul>
-                                </div>
-                                <div class="col md 6">
-                                    <b><h5>Materiais</h5></b>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Cobre - 900kg - 158198165</li>
-                                        <li class="list-group-item">Niquel - 100kg - 18156165</li>
-                                        <li class="list-group-item">Estanho - 500kg - 5191981</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </b-card>
-                    </b-collapse>
-                </b-card> 
-            </b-collapse>
-        </div>    
+        
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <b-btn block href="#" v-b-toggle.accordion2 variant="info">Rolo 2</b-btn>

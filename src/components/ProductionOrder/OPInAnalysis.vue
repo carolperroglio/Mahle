@@ -139,7 +139,7 @@
                 </div>
                 <div class="form-row" v-for="comp in components" :key="comp.productId">
                     <div class="form-group col-md-5">
-                        <input disabled v-model="comp.productName"  class="form-control" id="dropdownMenuButton" placeholder="Ex: Estanho" />
+                        <input disabled v-model="comp.productName" v-if="comp!='scrap'" class="form-control" id="dropdownMenuButton"/>
                     </div>
                     <div class="form-group col-md-5">
                         <input type="number" class="form-control" v-model="comp.value" @keyup="blockConfirmButton();">

@@ -120,6 +120,7 @@ export default {
                 var comp = {};
                 for (var x = 0; x < op.recipe.phases[0].phaseProducts.length; x++) {
                     if (op.recipe.phases[0].phaseProducts[x].product.productId != 70) {
+                        comp.type = op.recipe.phases[0].phaseProducts[x].phaseProductType;
                         comp.productId = op.recipe.phases[0].phaseProducts[x].product.productId;
                         comp.productName = op.recipe.phases[0].phaseProducts[x].product.productName;
                         comp.value = '';
@@ -129,6 +130,7 @@ export default {
                 console.log(this.components)
             })
         },
+
         getResults() {
             this.carregando = true;
             this.opInAnalysis = [];
