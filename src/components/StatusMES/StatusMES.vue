@@ -9,9 +9,6 @@
         </nav> -->
         <div class="row conteudo-status">
               <div class="container-fluid">
-                <!-- <div id="load" v-show="carregando">
-                    <stretch background="#4d4d4d"></stretch>
-                </div>  -->
                   <div class="status">
                     <div class=" col-md-11" style="margin-bottom:5%;">
                     <div class="card">
@@ -27,9 +24,6 @@
                             <div class="col-md-6">
                             Fora dos limites de controle: <i class="fa fa-square" style="color:#f5fc28" aria-hidden="true"></i>  
                             </div> 
-                            <!--<div class="col-md-3">
-                            Normal: <i class="fa fa-square" style="color:#90EE90" aria-hidden="true"></i>  
-                            </div>--> 
                             <div class="col-md-2">
                             Offline: <i class="fa fa-square" style="color:#b2b7b2" aria-hidden="true"></i>
                             </div> 

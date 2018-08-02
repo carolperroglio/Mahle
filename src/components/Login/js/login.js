@@ -63,10 +63,12 @@ export default {
             //redireciona para a tela principal STATUS DO MES
             //VOLTAR ISSO PRA STATUSMES
             this.$router.push({
-                name: "UserGroup"
+                name: "StatusMES"
             });
 
             setTimeout(() => {
+                //Just to confirm that it is going to assign the right route to reload
+                location.href = "http://localhost:8080/"
                 location.reload();
             }, 500);
         },
