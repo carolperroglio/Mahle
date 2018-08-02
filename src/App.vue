@@ -82,7 +82,7 @@ axios.interceptors.request.use(
       x.includes("/login") ||
       x.includes("/fontawesome") ||
       x.includes("/export") ||
-      x.includes("/api/things/")
+      x.includes("/api/things/") 
     ) {
       console.log("é login ou things ou fontawesome");
     } else {
