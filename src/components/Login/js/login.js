@@ -67,10 +67,8 @@ export default {
             });
 
             setTimeout(() => {
-                //Just to confirm that it is going to assign the right route to reload
-                location.href = "http://localhost:8080/"
                 location.reload();
-            }, 500);
+            }, 800);
         },
 
         login() {
