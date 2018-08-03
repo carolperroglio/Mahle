@@ -88,38 +88,38 @@
         <!--                       -->
         <div class="margin-table-parameters" v-show="!carregando && parametros.length>0">         
             <div v-for="(pro, index) in parametros" :class="{cinza: index%2==0}" :key="index">                     
-                <label class="ls2 item-cabecalho-table-parameters-sm">
+                <label class="item-cabecalho-table-parameters-sm">
                     <b><font color="#9BA6A5"></font></b>
                     {{pro.tagGroup}}
                 </label>                    
-                <label class="ls2 item-cabecalho-table-parameters-sm">
+                <label class="item-cabecalho-table-parameters-sm">
                     <b><font color="#9BA6A5"></font></b>
                     {{pro.value}}
                 </label>
-                <label class="ls2 item-cabecalho-table-parameters-sm">
+                <label class="item-cabecalho-table-parameters-sm">
                     <b><font color="#9BA6A5"></font></b>
                     {{pro.unit}}
                 </label>
-                <label class="ls2 item-cabecalho-table-parameters">
+                <label class="item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"></font></b>
                     {{pro.lie}}
                 </label>   
-                <label class="ls2 item-cabecalho-table-parameters">
+                <label class="item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"></font></b>
                     {{pro.lic}}
                 </label>            
-                <label class="ls2 item-cabecalho-table-parameters">
+                <label class="item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"></font></b>
                     {{pro.lsc}}
                 </label>
-                <label class="ls2 item-cabecalho-table-parameters">
+                <label class="item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"></font></b>
                     {{pro.lse}}
                 </label> 
-                <label class="ls2 item-cabecalho-table-parameters">
+                <label class="item-cabecalho-table-parameters">
                     <b><font color="#9BA6A5"></font></b>
-                    <i class= "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="deleteParameter=pro;showModal('modalRemoveParameter');"></i>&nbsp;&nbsp;&nbsp;                     
-                    <i class="fa fa-edit" style="font-size:21px; cursor:pointer" @click.stop.prevent="parametro=JSON.parse(JSON.stringify(pro));parametro.equip=buscaEquip(parametro.thingGroupId); showModal('modalEditarParameter')"></i>
+                    <i class= "fa fa-trash-o" style="font-size:20px; cursor:pointer; color:red;" @click.stop.prevent="deleteParameter=pro;showModal('modalRemoveParameter');"></i>                    
+                    <i class="fa fa-edit" style="font-size:20px; cursor:pointer" @click.stop.prevent="parametro=JSON.parse(JSON.stringify(pro));parametro.equip=buscaEquip(parametro.thingGroupId); showModal('modalEditarParameter')"></i>
                 </label>                                                                                                       
             </div>                                                                                                       
         </div>      
