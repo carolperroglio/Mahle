@@ -185,19 +185,19 @@
                         </div>
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
-                                <b-btn block href="#" v-b-toggle.accordion2 variant="info">Rolo 2</b-btn>
+                                <b-btn block  variant="info">Rolo 2</b-btn>
                             </b-card-header>
                             <b-collapse id="accordion2" accordion="my-accordion" role="tabpanel">
                                 <b-card-body>
-                                <p class="card-text">
-                                    {{ text }}
-                                </p>
+                                    <p class="card-text">
+                                        {{ text }}
+                                    </p>
                                 </b-card-body>
                             </b-collapse>
                         </b-card>
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
-                                <b-btn block href="#" v-b-toggle.accordion3 variant="info">Rolo 3</b-btn>
+                                <b-btn block href="#"  variant="info">Rolo 3</b-btn>
                             </b-card-header>
                             <b-collapse id="accordion3" accordion="my-accordion" role="tabpanel">
                                 <b-card-body>
@@ -211,77 +211,7 @@
                         
                     </div>
                 </div>
-            </div>
-        <!--  DOOOOOOOOOOOOOOOIS -->
-         <div class="col-md-12">
-
-            <b-card-header header-tag="header" class="p-1" role="tab">
-                <div class="row">
-                <div class="col-md-2">
-                    <b>OP:</b> 222134894_Z 
-                </div>
-                <div class="col-md-4">
-                    <b>Data Inicio: </b> 25/06/2018 11:00
-                </div>
-                <div class="col-md-4">
-                    <b>Data Fim: </b> 25/06/2018 16:00
-                </div>
-                </div>        
-            </b-card-header>
-        <div role="tablist">
-        <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-btn block href="#" v-b-toggle.accordion variant="secondary">
-                <div class="row">
-                <div class="col-md-2">
-                    <b>OP:</b> 221218249_Z 
-                </div>
-                <!-- <div class="col-md-2">
-                    <b>OPL:</b> 213819818_Z 
-                </div> -->
-                <div class="col-md-2">
-                    <b>Receita Liga:</b> S-005 
-                </div>
-                <div class="col-md-3">
-                    <b>Data Inicio: </b> 26/06/2018 11:00
-                </div>
-                <div class="col-md-3">
-                    <b>Data Fim: </b> 26/06/2018 16:00
-                </div>
-                </div>
-                </b-btn>
-            </b-card-header>
-        </b-card>
-        
-    <b-card no-body class="mb-1">
-      <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-btn block href="#" v-b-toggle.accordion2 variant="info">Rolo 2</b-btn>
-      </b-card-header>
-      <b-collapse id="accordion2" accordion="my-accordion" role="tabpanel">
-        <b-card-body>
-          <p class="card-text">
-            {{ text }}
-          </p>
-        </b-card-body>
-      </b-collapse>
-    </b-card>
-    <b-card no-body class="mb-1">
-      <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-btn block href="#" v-b-toggle.accordion3 variant="info">Rolo 3</b-btn>
-      </b-card-header>
-      <b-collapse id="accordion3" accordion="my-accordion" role="tabpanel">
-        <b-card-body>
-          <p class="card-text">
-            {{ text }}
-          </p>
-        </b-card-body>
-      </b-collapse>
-    </b-card>
-    
-    
-    
-  </div>
-        </div>
+            </div>                
         </div>
   <br>
   <br>
