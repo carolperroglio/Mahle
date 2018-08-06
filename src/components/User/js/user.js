@@ -187,6 +187,7 @@ export default {
                     console.log(userInfo);
                     axios.post(this.urluser, userInfo).then((response) => {
                         this.userlist = response.data.values;
+                        this.erro = false;
                         this.msgErro = "Usuário criado com Sucesso";
                         this.showModal("modaInfo");
                         this.getUsers();
@@ -199,7 +200,7 @@ export default {
                 }, 1000)
             } else {
                 this.erro = true;
-                this.msgErro = "Senhas não conferem"
+                this.msgErro = "Cadastro inválido"
                 this.showModal("modaInfo");
             }
         },
@@ -217,6 +218,7 @@ export default {
                     this.objUser.password = this.keyhashed;
                     console.log(this.objUser);
                     axios.put(this.urluser + id, this.objUser).then((response) => {
+                        this.erro = false;
                         this.msgErro = "Usuário atualizado com Sucesso";
                         this.showModal("modaInfo");
                         this.getUsers();
@@ -229,7 +231,7 @@ export default {
                 }, 1500)
             } else {
                 this.erro = true;
-                this.msgErro = "Senhas não conferem"
+                this.msgErro = "Cadastro inválido"
                 this.showModal("modaInfo");
             }
         },
@@ -238,6 +240,7 @@ export default {
             console.log("id:" + id);
 
             axios.delete(this.urluser + id, this.objUser).then((response) => {
+                this.erro = false;
                 this.msgErro = "Usuário excluido com Sucesso";
                 this.showModal("modaInfo");
                 this.getUsers();
