@@ -90,7 +90,7 @@ axios.interceptors.request.use(
         console.log("sec" + sec);
         VueCookies.set("status", "no-security");
     console.log("no-security" );
-        // window.location = "/login";
+        window.location = "/login";
       }
     }
 
