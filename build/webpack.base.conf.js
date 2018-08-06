@@ -62,7 +62,8 @@ module.exports = {
             Util: "exports-loader?Util!bootstrap/js/dist/util",
             Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
             Vue: ['vue/dist/vue.esm.js', 'default'],
-            moment: 'moment'
+            moment: 'moment',
+            VueCookies: 'vue-cookies'
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',

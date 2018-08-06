@@ -141,7 +141,7 @@
 <div class="modal-footer">
     <div class="btn-group" role="group">
         <button class="btn btn-success" :disabled="username == ''|| name == ''|| password == ''|| passwordconfirm == ''
-        || email == '' || userexist == false" @click="createUser();hideModal('cadUser');">
+        || email == '' || userExist == true" @click="createUser();hideModal('cadUser');">
             <i  class="fa fa-check-square" aria-hidden="true"></i>
             Confirmar
         </button>
