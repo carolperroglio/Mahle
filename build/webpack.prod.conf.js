@@ -14,7 +14,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const env = process.env.NODE_ENV === 'testing' ?
     require('../config/test.env') :
     require('../config/prod.env')
-const api = process.env.PROD_API_ADDRESS
+const api = "http://10.35.255.22"
 console.log("Build Env Prod:" + api)
 
 const webpackConfig = merge(baseWebpackConfig, {
