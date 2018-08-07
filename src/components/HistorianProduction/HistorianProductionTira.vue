@@ -57,7 +57,7 @@
                                     <b>Materiais Consumidos e Apontados</b>
                                     <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
                                     <div style="margin-right:1%" class="pull-right">
-                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity='';loteAco=''; showModal('cadAco'); ordem.type = 'input'">
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity='';loteAco='';codeAco = ''; showModal('cadAco'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
                                     </button>
                                     <button type="button" class="btn btn-success" @click.stop.prevent="getOP();quantity = ''; ordem.productId = '';productionOrderId=''; unity='';loteLiga=''; showModal('cadLiga'); ordem.type = 'input'">
@@ -101,7 +101,7 @@
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label>
-                                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(teste, 'date',3):organizar(teste, 'date',3);" class="ls2-cabecalho-ap-tira col-md-2">
+                                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(teste, 'date',3):organizar(teste, 'date',3);" class="ls2-cabecalho-ap-tira col-md-1">
                                         <b><font class="cursor-class" color="#ffffff">
                                             Data 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
@@ -113,6 +113,13 @@
                                             Hora 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
+                                        </font></b>
+                                    </label>
+                                    <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(teste, 'code',5):organizar(teste, 'code',5);" class="ls2-cabecalho-ap-tira col-md-1">
+                                        <b><font class="cursor-class" color="#ffffff">
+                                            Código 
+                                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label>
                                     <label class="ls2-cabecalho-ap-tira col-md-1">
@@ -134,14 +141,20 @@
                                         {{o.rolo}}</label>
                                     <label class="ls ls10  col-md-2">
                                         {{o.quantity}}</label>
-                                    <label class="ls ls10  col-md-2">
+                                    <label class="ls ls10  col-md-1">
                                         {{o.date}}</label>
                                     <label class="ls ls10  col-md-1">
                                         {{o.hour}}</label>  
+                                    <label class="ls ls10 col-md-1" v-if="o.code != undefined">
+                                        {{o.code}}</label> 
+                                    <label class="ls ls10 col-md-1" v-else>
+                                    </label>                                      
                                     <label class="ls ls10 col-md-1" v-if="o.username != undefined">
-                                    {{o.username}}</label> 
-                                    <label v-else>
+                                        {{o.username}}
+                                    </label> 
+                                    <label class="ls ls10 col-md-1" v-else>
                                     </label>  
+
                                 </div>
                                 </div>
                             </div>
@@ -181,20 +194,26 @@
                     <input type="text" required :value="unity = 'kg'" placeholder="Ex:kg" class="form-control form-control-sm">
                     </div>
                     </div>
-                    <div class="form-row">
+                <div class="form-row">
                     <div class="form-group col-md-5">
                     <label>
                         <b>OF: </b>
                     </label>
                     <input type="text"  v-model="loteAco" class="form-control form-control-sm">
                     </div>
+                     <div class="form-group col-md-5">
+                    <label>
+                        <b>Código: </b>
+                    </label>
+                    <input type="text"  v-model="codeAco" class="form-control form-control-sm">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-success" :disabled=" quantity=='' || loteAco=='' || unity==''" @click.stop.prevent="ordem.type = 'input';cadastrarApont(ordem);">
+                        <button class="btn btn-success" :disabled=" quantity=='' || loteAco=='' || codeAco=='' || unity==''" @click.stop.prevent="ordem.type = 'input';cadastrarApont(ordem);">
                             <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
-                        <button @click.stop.prevent="quantity = ''; loteAco = ''; unity = ''" class="btn btn-primary pull-right">
+                        <button @click.stop.prevent="quantity = ''; loteAco = ''; codeAco = ''; unity = ''" class="btn btn-primary pull-right">
                             <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                         </button>
                     </div>

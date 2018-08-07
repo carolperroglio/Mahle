@@ -62,6 +62,7 @@ export default {
             roloSaida: "",
             roloSaidaID: "",
             loteAco: "",
+            codeAco: "",
             loteLiga: "",
             noop: true,
             noRegister: ''
@@ -153,6 +154,7 @@ export default {
             // this.roloSaida = "";
             // this.roloSaidaID = "";
             this.loteAco = "";
+            this.codeAco = "";
             this.loteLiga = "";
         },
         cadastrarApont(ordem) {
@@ -180,18 +182,18 @@ export default {
             ordem.unity = this.unity;
             ordem.username = VueCookies.get('username');
 
-
+            ordem.code = this.codeAco;
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;
             } else if (this.loteLiga != undefined && this.ordem.type == "input") {
                 ordem.batch = this.loteLiga;
             } else if (this.loteAco != undefined && this.ordem.type == "input") {
-                ordem.batch = this.loteAco;
+                ordem.batch = this.loteAco;                
             }
             var teste = ordem;
             console.log(ordem);
             setTimeout(() => {
-                axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
+                axios.post('http://localhost:5006/api/producthistorian', ordem).then((response) => {
                     this.mensagemSuc = 'Produto apontado com sucesso.';
                     this.productionOrderId = this.ordem.productionOrderId;
                     this.carregando = false;
