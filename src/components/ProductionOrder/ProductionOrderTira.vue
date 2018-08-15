@@ -65,11 +65,9 @@
                                     <!-- <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases"> -->
                                     <ul class="list-group" v-if="recipeAdded.length != 0">
                                         <!-- <li class="list-group-item" > -->
-                                            <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>
-                                            <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>
-                                            
+                                        <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>
+                                        <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>                                           
                                     </ul>
-
                                 </div>
                                 <!-- Fim - </Mostra as fases da Receita>-->
                             </div>

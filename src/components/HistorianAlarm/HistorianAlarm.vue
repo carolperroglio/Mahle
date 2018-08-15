@@ -20,7 +20,8 @@
                 <label class="ls ls2">
                     <b>
                     <font color="#9BA6A5"> 
-                    {{msg}}</font></b>
+                        {{msg}}
+                    </font></b>
                 </label>&nbsp;&nbsp;&nbsp;
             </div>
             <div v-for="(h, index) in alarms" v-bind:key="index">

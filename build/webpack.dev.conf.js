@@ -13,8 +13,8 @@ const PORT = process.env.PORT && Number(process.env.PORT)
     // const api = process.env.DEV_API_ADDRESS
 
 // const api = process.env.DEV_API_ADDRESS;
-// const api = "http://35.170.191.75";
-const api = "http://192.168.11.242";
+const api = "http://35.170.191.75";
+//const api = "http://192.168.11.242";
 //'192.168.11.242'
 
 console.log("Build Env Dev:" + api)
@@ -85,7 +85,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 USER_API: JSON.stringify(api + ":8010"),
                 ANALYSIS_API: JSON.stringify(api + ":8014"),
 
-                USER_TRUE: false
+                USER_TRUE: true
                 //IP NUVEM
                 // TOOLS_API: JSON.stringify(api + ":8005"),
                 // OP_API: JSON.stringify(api + ":8003"),

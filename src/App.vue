@@ -1,5 +1,4 @@
 
-
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
@@ -28,6 +27,9 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import popper from ".././node_modules/popper.js/dist/umd/popper.js";
 import icones from ".././node_modules/font-awesome/css/font-awesome.min.css";
+import Datetime from 'vue-datetime'
+// You need a specific loader for CSS files
+import 'vue-datetime/dist/vue-datetime.css'
 var Login = require("./components/Login/Login");
 
 es6promisse.polyfill();
@@ -42,7 +44,7 @@ Vue.use({
 });
 Vue.use(Router);
 Vue.use(bModal);
-
+Vue.use(Datetime);
 Vue.config.productionTip = false;
 
 function showModal(id) {
@@ -66,7 +68,6 @@ function getCookies(keyToFind) {
     return secValue;
   }
 }
-
 axios.interceptors.request.use(
   function(config) {
     //Do something before request is sent
@@ -147,7 +148,7 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error);
   }
-);
+);*/
 
 export default {
   name: "app",

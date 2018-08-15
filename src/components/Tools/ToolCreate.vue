@@ -177,18 +177,18 @@
         <b-modal no-close-on-backdrop ref="modalCadTool" hide-footer title="Cadastrar Ferramentas/Insumos">
             <form>
                 <div class="form-row">
-                <div class="form-group col-md-6">
-                <label>
-                    <b>Nome </b>
-                </label>
-                <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control">
-                </div>
-                <div class="form-group col-md-6">
-                <label>
-                    <b>Descrição </b>
-                </label>
-                <input type="text" id="desc" class="form-control" v-model="ferramenta.description" placeholder="Ex: Ferramenta usada na Guilhotina">
-                </div>
+                    <div class="form-group col-md-6">
+                        <label>
+                            <b>Nome </b>
+                        </label>
+                        <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>
+                            <b>Descrição </b>
+                        </label>
+                        <input type="text" id="desc" class="form-control" v-model="ferramenta.description" placeholder="Ex: Ferramenta usada na Guilhotina">
+                    </div>
                 </div>
                 <div class="form-row">
                 <div class="form-group col-md-6">

@@ -89,8 +89,7 @@
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
-        </label>     
-                     
+        </label>                          
     </div>                                             
 
 

@@ -7,11 +7,22 @@
     height: 10.5%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+#load-genealogy {
+    margin: 18% 0 0 0%;
+}
+.auto-complete{
+    overflow:auto; 
+    position: absolute;
+    height: 300px;
+}
 
 label {
     margin-bottom: 0;
 }
 
+.row-conteudo{
+    margin-top: 17%; 
+}
 
 /* menu de navegação de produtos - busca de produtos*/
 

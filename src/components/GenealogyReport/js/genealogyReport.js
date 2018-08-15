@@ -2,25 +2,28 @@
 import axios from 'axios'
 import es6promisse from 'es6-promise'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
+import Datetime from 'vue-datetime'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import VueTimepicker from 'vue2-timepicker'
 import JsonExcel from 'vue-json-excel'
 import { Stretch } from 'vue-loading-spinner'
 import Vue from 'vue';
+import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 import VeeValidate from 'vee-validate';
 import { setTimeout } from 'timers';
 import bCollapse from 'bootstrap-vue/es/components/collapse/collapse';
 import vBToggle from 'bootstrap-vue/es/directives/toggle/toggle';
 import vBtn from 'bootstrap-vue/es/components/button/button';
-// import { bCardHeader } from 'bootstrap-vue/es/components/card/card-header';
-// import { bCard } from 'bootstrap-vue/es/components/card/card';
-// import { bCardFooter } from 'bootstrap-vue/es/components/card/card-footer';
-// import { bCardGroup } from 'bootstrap-vue/es/components/card/card-group';
-// import { bCardBody } from 'bootstrap-vue/es/components/card/card-body';
-// import { Collapse } from 'bootstrap-vue/es/components';
+import { bCardHeader } from 'bootstrap-vue/es/components/card/card-header';
+import { bCard } from 'bootstrap-vue/es/components/card/card';
+import { bCardFooter } from 'bootstrap-vue/es/components/card/card-footer';
+import { bCardGroup } from 'bootstrap-vue/es/components/card/card-group';
+import { bCardBody } from 'bootstrap-vue/es/components/card/card-body';
+//import { Collapse } from 'bootstrap-vue/es/components';
 import { Card } from 'bootstrap-vue/es/components';
 import { Collapse } from 'bootstrap-vue/es/components';
+
 Vue.use(Card);
 Vue.use(Collapse);
 es6promisse.polyfill();
@@ -44,10 +47,6 @@ export default {
         return {
             id: "",
             carregando: false,
-            quantityPage: 20,
-            startat: 0,
-            total: 0,
-            pages: [],
             date: '',
             datef: '',
             config: {
@@ -66,79 +65,64 @@ export default {
                 HH: "23",
                 mm: "59"
             },
-            cabecalhoSetas: [false, false, false, false],
-            pageAtual: 0,
-            gReports: [],
-            gReport: {},
-            urlOP: process.env.PROD_HIST_API + '/gateway/productionorders',
+            config : {
+                headers: { 'Cache-Control': 'no-cache' }
+            },
+            REPORT_API: process.env.REPORT_API + '',
+            RECIPE_API: process.env.RECIPE_API + '/api/recipes/v2?filters=recipeTypeId,1&filters=recipeCode,',
+            URL_OP: process.env.OP_API+'/api/productionorders/v2?filters=productionOrderTypeId,1&filters=productionOrderNumber,',
             mensagem: '',
             mensagemSuc: '',
             orderField: '',
             fieldValue: '',
             fieldFilter: '',
             order: '',
-            errors: [],
-            ops: [],
-            text: `
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-        brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-        tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-        wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-        vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-        synth nesciunt you probably haven't heard of them accusamus labore VHS.
-      `
-
+            erro: '',
+            genealogys: [],            
+            inicio: '',
+            fim:'',
+            op:'',
+            cod:'',
+            prosFim: [],
+            recipeCode:'',
+            t:''
         }
     },
     computed: {},
-    components: {
-        'b-modal': bModal,
+    components: {        
         Stretch,
+        'b-modal': bModal,
         'date-picker': datePicker,
         'vue-timepicker': VueTimepicker,
         'downloadExcel': JsonExcel,
-        'b-btn': vBtn
-
+        'b-btn': vBtn,
+        'date': Datetime,
+        'b-dropdown-item': bDropdownItem,
     },
     directives: {
         'b-modal': bModalDirective,
-        VeeValidate,
-        // 'b-collapse': bCollapse,
-        // Collapse,
-        // 'b-card': bCard,
-        // 'b-toggle': vBToggle,
-        // 'b-card-header': bCardHeader,
-        // 'b-footer': bCardFooter,
-        // 'b-card-group': bCardGroup,
-        // 'b-card-body': bCardBody
+        VeeValidate,        
     },
     methods: {
         collapse(id) {
             this.$refs[id].collapse('show')
         },
-        showModal() {
-            this.mensagemSuc = '';
-            this.gReport = {};
-            this.errors = [];
-            this.$refs.myModalRef.show()
+        showModal() {            
+            setTimeout(() => {
+                this.$refs.myModalEdit.show()
+            }, 200);
         },
         hideModal() {
             this.$refs.myModalRef.hide()
         },
-        showModal2(gReport) {
-            this.errors = [];
-            this.gReport = gReport;
-            this.$refs.myModalRef.show()
-        },
+        
         organizar(genealogy, campo, pos) {
             genealogy.sort(function(a, b) { console.log(a[campo]); return (a[campo] > b[campo]) ? 1 : ((b[campo] > a[campo]) ? -1 : 0); });
             for (var i = 0; i < this.cabecalhoSetas.length; i++)
                 if (i == pos)
                     this.cabecalhoSetas[i] = false;
 
-        },
+        },        
         desorganizar(genealogy, campo, pos) {
             genealogy.sort(function(a, b) { return (a[campo] > b[campo]) ? -1 : ((b[campo] > a[campo]) ? 1 : 0); });
             for (var i = 0; i < this.cabecalhoSetas.length; i++)
@@ -146,30 +130,44 @@ export default {
                     this.cabecalhoSetas[i] = true;
                 else
                     this.cabecalhoSetas[i] = false;
-        },
-        getOP() {
-            axios.get(this.urlOP).then((response) => {
-                var array = response.data;
-                array.forEach(obj => {
-                    if (obj.typeDescription == "Liga") {
-                        this.ops.push(obj);
-                    }
+        },       
 
-                });
+        verificaColapse(comp,id,mais, menos){                        
+            if($(id).hasClass('show')){                   
+                $(comp).removeClass(menos); 
+                $(comp).addClass(mais);                                                
+            }else{                
+                $(comp).removeClass(mais); 
+                $(comp).addClass(menos);
+            }
+        },
+
+        getGenealogy(fieldFilter, op, cod, dateIni, dateFim){
+            this.carregando =true;
+            var dIni, dFim;
+            if(fieldFilter != 'op'){
+                dIni = ((new Date(dateIni).getTime() * 10000) + 621355968000000000) - (new Date(dateIni).getTimezoneOffset() * 600000000);
+                dFim = ((new Date(dateFim).getTime() * 10000) + 621355968000000000) - (new Date(dateFim).getTimezoneOffset() * 600000000);
+            }
+            axios.get("http://localhost:5007/api/genealogy?fieldFilter="+fieldFilter+"&cod="+cod+"&startDate="+dIni+"&endDate="+dFim, this.config).then((response) => {                
+                this.genealogys = response.data;                                
+                this.carregando = false;
             }, (error) => {
+                this.carregando = false; 
+                this.erro = error               
+                console.log("Erro");
                 console.log(error);
             })
         },
+
+
         ticksToDate(dateTicks) {
             var epochTicks = 621355968000000000,
                 ticksPerMillisecond = 10000,
                 jsTicks = 0,
                 jsDate;
-
             jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
-
             jsDate = new Date(jsTicks);
-
             var dateFormatted = jsDate.getDate() + "/" +
                 (jsDate.getMonth() + 1) + "/" +
                 jsDate.getFullYear() + " " + jsDate.getHours() + ":" + jsDate.getMinutes();
@@ -185,9 +183,25 @@ export default {
             var date = new Date(dateToTransform);
             var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
             return ticks;
+        }, 
+        
+        getResults(url, name, pros) {
+            pros = [];
+            if (name.length >= 3) {
+                axios.get(url + name, this.config).then((response) => {
+                    if(response.data.values)
+                        response.data.values.forEach((pro) => {
+                            pros.push(pro);
+                        });
+                    else
+                        response.data.forEach((pro) => {
+                            pros.push(pro);
+                        });
+                }, (error) => {
+                    console.log(error);
+                })
+            }
+            return pros;
         },
-    },
-    beforeMount() {
-        this.getOP();
-    }
+    },    
 }
