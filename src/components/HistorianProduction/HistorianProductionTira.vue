@@ -82,7 +82,7 @@
                                     </label>
                                     <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(teste, 'lote',2):organizar(teste, 'lote',2);" class="ls2-cabecalho-ap-tira col-md-2">
                                         <b><font class="cursor-class" color="#ffffff">
-                                            OF/OPL 
+                                            OF/OPL
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                                         </font></b>
@@ -216,8 +216,7 @@
                         <button @click.stop.prevent="quantity = ''; loteAco = ''; codeAco = ''; unity = ''" class="btn btn-primary pull-right">
                             <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                         </button>
-                    </div>
-                    
+                    </div>                    
                 </div>
                 </div>
             </form>
@@ -257,12 +256,12 @@
                         <label>
                         <b>OF: </b>
                         </label>
-                        <input type="text" required :value="loteLiga = productionOrderId.productionOrderNumber" class="form-control form-control-sm" disabled>
+                        <input type="text" required v-model="loteLiga" class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity=='' || productionOrderId=='' || unity == ''" @click.stop.prevent="ordem.type = 'input';cadastrarApont(ordem);">
+                            <button class="btn btn-success" :disabled=" quantity=='' || productionOrderId=='' || unity == ''" @click.stop.prevent="ordem.type = 'input';codeAco=productionOrderId.productionOrderId;cadastrarApont(ordem);">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="quantity = ''; quantity = ''; unity = '';productionOrderId=''" class="btn btn-primary pull-right">

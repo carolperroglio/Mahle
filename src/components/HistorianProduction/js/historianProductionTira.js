@@ -183,17 +183,21 @@ export default {
             ordem.username = VueCookies.get('username');
 
             ordem.code = this.codeAco;
+            
             if (this.ordem.type == "output") {
                 ordem.batch = this.rolo;
+                ordem.productType = 'rolo';
             } else if (this.loteLiga != undefined && this.ordem.type == "input") {
                 ordem.batch = this.loteLiga;
+                ordem.productType = 'liga';               
             } else if (this.loteAco != undefined && this.ordem.type == "input") {
+                ordem.productType = 'rolo';
                 ordem.batch = this.loteAco;                
             }
             var teste = ordem;
             console.log(ordem);
             setTimeout(() => {
-                axios.post('http://localhost:5006/api/producthistorian', ordem).then((response) => {
+                axios.post(this.url+'/api/producthistorian', ordem).then((response) => {
                     this.mensagemSuc = 'Produto apontado com sucesso.';
                     this.productionOrderId = this.ordem.productionOrderId;
                     this.carregando = false;

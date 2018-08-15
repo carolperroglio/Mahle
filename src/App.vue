@@ -29,6 +29,9 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import bModal from "bootstrap-vue/es/components/modal/modal";
 import popper from ".././node_modules/popper.js/dist/umd/popper.js";
 import icones from ".././node_modules/font-awesome/css/font-awesome.min.css";
+import Datetime from 'vue-datetime'
+// You need a specific loader for CSS files
+import 'vue-datetime/dist/vue-datetime.css'
 var Login = require("./components/Login/Login");
 
 es6promisse.polyfill();
@@ -44,7 +47,7 @@ Vue.use({
 Vue.use(VueCookies);
 Vue.use(Router);
 Vue.use(bModal);
-
+Vue.use(Datetime);
 Vue.config.productionTip = false;
 
 function showModal(id) {
@@ -122,7 +125,7 @@ axios.interceptors.response.use(
       console.log("error.message: " + error.message);*/
       // Login.showModal('modaInfo');
       // showModal("modaInfo");
-     else if (
+     /*else if (
       error.response.status != undefined &&
       error.response.status == "404"
     ) {
@@ -147,7 +150,7 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error);
   }
-);
+);*/
 
 export default {
   name: "app",
