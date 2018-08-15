@@ -1,5 +1,4 @@
 
-
 <template>
   <div id="app">
     <!--<img src="./assets/logo.png">-->
@@ -20,7 +19,6 @@ import AmSerial from "amcharts3/amcharts/serial";
 // require.resolve( ".././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js");
 // require.resolve("amcharts3/amcharts/plugins/export/export.js");
 // require.resolve("amcharts3/amcharts/plugins/export/export.css");
-import VueCookies from "vue-cookies";
 import router from "./router";
 import Bootstrap from "bootstrap-vue";
 import es6promisse from "es6-promise";
@@ -44,7 +42,6 @@ Vue.use({
     Vue.prototype.$cookies = require("vue-cookies");
   }
 });
-Vue.use(VueCookies);
 Vue.use(Router);
 Vue.use(bModal);
 Vue.use(Datetime);
@@ -68,14 +65,14 @@ function getCookies(keyToFind) {
       console.log("secvalue: " + secValue);
       return secValue;
     }
-    secValue = ""
     return secValue;
   }
 }
 axios.interceptors.request.use(
   function(config) {
     //Do something before request is sent
-    var sec = getCookies("security");
+    // var sec = getCookies("security");
+    var sec = VueCookies.get("security");
     console.log("sec: " + sec);
     //ver isso depois
     var x = config["url"];
@@ -84,15 +81,16 @@ axios.interceptors.request.use(
       x.includes("/login") ||
       x.includes("/fontawesome") ||
       x.includes("/export") ||
-      x.includes("/api/things/") 
+      x.includes("/api/things/") ||
+      x.includes("/api/alarm/")
     ) {
-      console.log("é login ou things ou fontawesome");
+      console.log("é login ou things ou fontawesome ou alarms");
     } else {
-      if (sec.length == 0) {
+      if (sec == null) {
         console.log("sec" + sec);
         VueCookies.set("status", "no-security");
-    console.log("no-security" );
-        window.location = "/login";
+        console.log("no-security");
+        // window.location = "/login";
       }
     }
 
@@ -119,13 +117,13 @@ axios.interceptors.response.use(
     if (statuscode == "401") {
       router.push({ name: "Login" });
       console.log("status code: " + statuscode);
-    } /*else if (error.message == "Network Error") {
+    } else if (error.message == "Network Error") {
       VueCookies.set("status", "Network Error");
       router.push({ name: "Login" });
-      console.log("error.message: " + error.message);*/
+      console.log("error.message: " + error.message);
       // Login.showModal('modaInfo');
       // showModal("modaInfo");
-     /*else if (
+    } else if (
       error.response.status != undefined &&
       error.response.status == "404"
     ) {
@@ -166,15 +164,15 @@ export default {
     Login: Login
   },
   methods: {
-    getUsername() {          
+    getUsername() {
       var username = VueCookies.get("username");
       return username;
-    },
+    }
   },
-  created(){
-    if(process.env.USER_TRUE){
-        VueCookies.set('security', 'credential.security', { expires: '12h' });
-        VueCookies.set('username','spi', { expires: '12h' });          
+  created() {
+    if (process.env.USER_TRUE) {
+      VueCookies.set("security", "credential.security", { expires: "12h" });
+      VueCookies.set("username", "spi", { expires: "12h" });
     }
   },
   beforeMount() {
