@@ -233,7 +233,7 @@
                         <b>Liga: </b>
                     </label>
                     <input disabled type="text"  class="form-control form-control-sm" v-b-tooltip.hover title="NÃO HÁ OPS ATIVAS PARA A OP DE TIRA DESEJADA" placeholder="NÃO HÁ OPS DE LIGA PARA ESSA TIRA" v-if="listOP.length == 0">
-                    <select class="form-control form-control-sm" required v-model="productionOrderId" v-else >
+                    <select class="form-control form-control-sm" required v-model="productionOrderId" :change="loteLiga=p.productionOrderNumber" v-else >
                         <option v-for="(p,index) in listOP" :value="p" v-bind:key="index">{{ p.productionOrderNumber }}</option>
                     </select>
                     <!-- <input type="text" id="prodReceita" placeholder="nome" required v-model="ordem.productName" class="form-control form-control-sm" disabled> -->
@@ -256,7 +256,7 @@
                         <label>
                         <b>OF: </b>
                         </label>
-                        <input type="text" required v-model="loteLiga" class="form-control form-control-sm">
+                        <input type="text" :disabled="true" required v-model="loteLiga" class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="modal-footer">

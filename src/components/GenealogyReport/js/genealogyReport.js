@@ -144,13 +144,14 @@ export default {
 
         getGenealogy(fieldFilter, op, cod, dateIni, dateFim){
             this.carregando =true;
-            var dIni, dFim;
+            var dIni, dFim;            
             if(fieldFilter != 'op'){
                 dIni = ((new Date(dateIni).getTime() * 10000) + 621355968000000000) - (new Date(dateIni).getTimezoneOffset() * 600000000);
                 dFim = ((new Date(dateFim).getTime() * 10000) + 621355968000000000) - (new Date(dateFim).getTimezoneOffset() * 600000000);
             }
-            axios.get("http://localhost:5007/api/genealogy?fieldFilter="+fieldFilter+"&cod="+cod+"&startDate="+dIni+"&endDate="+dFim, this.config).then((response) => {                
+            axios.get(this.REPORT_API+"/api/genealogy?fieldFilter="+fieldFilter+"&cod="+cod+"&startDate="+dIni+"&endDate="+dFim+"&op="+op, this.config).then((response) => {                
                 this.genealogys = response.data;                                
+                //this.genealogy.sort(function(a, b) { console.log(a["nRolo"]); return (a['nRolo'] > b["nRolo"]) ? 1 : ((b["nRolo"] > a["nRolo"]) ? -1 : 0); });
                 this.carregando = false;
             }, (error) => {
                 this.carregando = false; 
