@@ -53,14 +53,14 @@
                 
                         <div>
                             <div class="card">
-                                <div class="card-header card-header-hp">
+                                <div class="card-header card-header-hp">                                    
                                     <b>Materiais Consumidos e Apontados</b>
                                     <!-- <button type="button" class="btn btn-success pull-right" @click.stop.prevent=" showModal('myModalRef'); ordem.type='input'"> -->
                                     <div style="margin-right:1%" class="pull-right">
                                     <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';lote = ''; unity='';loteAco='';codeAco = ''; showModal('cadAco'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Aço
                                     </button>
-                                    <button type="button" class="btn btn-success" @click.stop.prevent="getOP();quantity = ''; ordem.productId = '';productionOrderId=''; unity='';loteLiga=''; showModal('cadLiga'); ordem.type = 'input'">
+                                    <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = '';productionOrderId=''; unity='';loteLiga=''; showModal('cadLiga'); ordem.type = 'input'">
                                     <i aria-hidden="true" class="fa fa-plus"></i> Registrar Liga
                                     </button>
                                     <button type="button" class="btn btn-success" @click.stop.prevent="quantity = ''; ordem.productId = ''; ordem.productName = ''; unity=''; showModal('cadRoloSaida');pReceita = true; ordem.type = 'output'">
@@ -132,7 +132,7 @@
                             <div id="load2" v-show="carregando">
                                 <stretch background="#4d4d4d"></stretch>
                             </div> 
-                            <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}" v-show="teste.length > 0">
+                            <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}" v-show="teste.length > 0">{{quantity}}
                                     <label class="ls ls10 col-md-2">
                                         {{o.product}}</label>
                                     <label class="ls ls10  col-md-2">
@@ -210,7 +210,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-success" :disabled=" quantity=='' || loteAco=='' || codeAco=='' || unity==''" @click.stop.prevent="ordem.type = 'input';cadastrarApont(ordem);">
+                        <button class="btn btn-success" :disabled=" quantity=='' || loteAco=='' || codeAco=='' || unity==''" @click.stop.prevent="ordem.type = 'input';cadastrarApont(ordem, 'aco');">
                             <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>
                         <button @click.stop.prevent="quantity = ''; loteAco = ''; codeAco = ''; unity = ''" class="btn btn-primary pull-right">
@@ -232,9 +232,9 @@
                     <label>
                         <b>Liga: </b>
                     </label>
-                    <input disabled type="text"  class="form-control form-control-sm" v-b-tooltip.hover title="NÃO HÁ OPS ATIVAS PARA A OP DE TIRA DESEJADA" placeholder="NÃO HÁ OPS DE LIGA PARA ESSA TIRA" v-if="listOP.length == 0">
-                    <select class="form-control form-control-sm" required v-model="productionOrderId" :change="loteLiga=p.productionOrderNumber" v-else >
-                        <option v-for="(p,index) in listOP" :value="p" v-bind:key="index">{{ p.productionOrderNumber }}</option>
+                    <input disabled type="text"  class="form-control form-control-sm" v-b-tooltip.hover title="NÃO HÁ OPS ATIVAS PARA A OP DE TIRA DESEJADA" placeholder="NÃO HÁ OPS DE LIGA PARA ESSA TIRA" v-show="listOP.lengt==0">
+                    <select class="form-control form-control-sm" required v-model="productionOrderId" :change="loteLiga=productionOrderId.productionOrderNumber" v-if="listOP.length>0">                        
+                        <option v-for="(p,index) in listOP" :value="p" v-bind:key="index" >{{ p.productionOrderNumber }}</option>
                     </select>
                     <!-- <input type="text" id="prodReceita" placeholder="nome" required v-model="ordem.productName" class="form-control form-control-sm" disabled> -->
                     </div>
@@ -261,7 +261,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity=='' || productionOrderId=='' || unity == ''" @click.stop.prevent="ordem.type = 'input';codeAco=productionOrderId.productionOrderId;cadastrarApont(ordem);">
+                            <button class="btn btn-success" :disabled=" quantity=='' || productionOrderId=='' || unity == ''" @click.stop.prevent="ordem.type = 'input';codeAco=productionOrderId.productionOrderId;cadastrarApont(ordem, 'liga');">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="quantity = ''; quantity = ''; unity = '';productionOrderId=''" class="btn btn-primary pull-right">
@@ -307,7 +307,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show="pReceita" @click.stop.prevent="ordem.type = 'output';cadastrarApont(ordem);">
+                            <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show="pReceita" @click.stop.prevent="ordem.type = 'output';cadastrarApont(ordem, 'saida');">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="quantity = ''; unity = '';" class="btn btn-primary pull-right">

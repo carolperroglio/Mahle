@@ -68,7 +68,7 @@ function getCookies(keyToFind) {
     return secValue;
   }
 }
-axios.interceptors.request.use(
+/*axios.interceptors.request.use(
   function(config) {
     //Do something before request is sent
     // var sec = getCookies("security");
@@ -105,9 +105,9 @@ axios.interceptors.request.use(
     //Do something with request error
     return Promise.reject(error);
   }
-);
+);*/
 
-axios.interceptors.response.use(
+/*axios.interceptors.response.use(
   response => {
     // intercept the global error
     return response;
@@ -148,7 +148,7 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error);
   }
-);
+);*/
 
 export default {
   name: "app",

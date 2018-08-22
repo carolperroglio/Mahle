@@ -68,6 +68,7 @@ export default {
             config : {
                 headers: { 'Cache-Control': 'no-cache' }
             },
+            PROD_HIST_API: process.env.PROD_HIST_API,           
             REPORT_API: process.env.REPORT_API + '',
             RECIPE_API: process.env.RECIPE_API + '/api/recipes/v2?filters=recipeTypeId,1&filters=recipeCode,',
             URL_OP: process.env.OP_API+'/api/productionorders/v2?filters=productionOrderTypeId,1&filters=productionOrderNumber,',
@@ -149,8 +150,9 @@ export default {
                 dIni = ((new Date(dateIni).getTime() * 10000) + 621355968000000000) - (new Date(dateIni).getTimezoneOffset() * 600000000);
                 dFim = ((new Date(dateFim).getTime() * 10000) + 621355968000000000) - (new Date(dateFim).getTimezoneOffset() * 600000000);
             }
-            axios.get(this.REPORT_API+"/api/genealogy?fieldFilter="+fieldFilter+"&cod="+cod+"&startDate="+dIni+"&endDate="+dFim+"&op="+op, this.config).then((response) => {                
-                this.genealogys = response.data;                                
+            axios.get(PROD_HIST_API+"/api/producthistorian?startdate="+dIni+"&endDate="+dFim+"&cod="+cod+"&op="+op, this.config).then((response) => {                
+                this.genealogys = response.data;  
+                console.log(response);                              
                 //this.genealogy.sort(function(a, b) { console.log(a["nRolo"]); return (a['nRolo'] > b["nRolo"]) ? 1 : ((b["nRolo"] > a["nRolo"]) ? -1 : 0); });
                 this.carregando = false;
             }, (error) => {
@@ -169,10 +171,12 @@ export default {
                 jsDate;
             jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
             jsDate = new Date(jsTicks);
+            console.log(dateTicks);
             var dateFormatted = jsDate.getDate() + "/" +
                 (jsDate.getMonth() + 1) + "/" +
                 jsDate.getFullYear() + " " + jsDate.getHours() + ":" + jsDate.getMinutes();
             // var hours = jsDate.toString().slice(4, 21);
+            console.log(dateFormatted);
             return dateFormatted;
         },
 
