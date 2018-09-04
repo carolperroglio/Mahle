@@ -35,20 +35,20 @@
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                 </font></b>
             </label>
-            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="ls2 col-md-3">
+            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="ls2 col-md-6">
                 <b><font class="cursor-class" color="#ffffff">
                     Código da Tira &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                 </font></b>
             </label>
-            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2 col-md-3">
+            <!-- <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2 col-md-3">
                 <b><font class="cursor-class" color="#ffffff">
                     Descrição &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                 </font></b>
-            </label>                
+            </label>                 -->
         </div>
 
         <!--                         -->
@@ -60,12 +60,12 @@
                 <label class="ls2 col-md-3">
                     <b><font color="#9BA6A5"> </font></b> {{recipe.recipeName}}
                 </label>
-                <label class="ls2 col-md-3" style="margin-left:-1%">
+                <label class="ls2 col-md-6" style="margin-left:-1%">
                     <b><font color="#9BA6A5"> </font></b>{{recipe.recipeCode}}
                 </label>
-                <label class="ls2 col-md-3">
+                <!-- <label class="ls2 col-md-3">
                     <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
-                </label>  
+                </label>   -->
                 <label class="ls2 col-md-2">                                   
                     <router-link class="link-decoration" :to="{ name: 'Tira',params: { id: recipe.recipeId }}">
                         <i class="fa fa-eye" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">                        

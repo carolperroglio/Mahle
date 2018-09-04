@@ -49,16 +49,25 @@
                     <div class="auto-complete">
                         <b-dropdown-item @click.stop.prevent="opName=o.productionOrderNumber;op=o.productionOrderId;prosFim=[]" v-for="(o,index) in prosFim" :key="index" style="cursor:pointer">{{ o.productionOrderNumber }}</b-dropdown-item>
                     </div>
-                </li> 
+                </li>                
                 <li class="nav-item-genealogy col-sm-2">
                     <button class="btn btn-success btn-sm" :disabled="!fieldFilter || (fieldFilter=='date' && !inicio && !fim) || (fieldFilter=='op' && !op) || (fieldFilter=='cod' && !inicio && !fim && !cod)" @click.stop.prevent="getGenealogy(fieldFilter, op, cod, inicio, fim)">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
                 </li>
-                <li class="col-2 text-right">
-                    <button type="button" class="btn btn-outline-danger" @click.prevent="toPdf()">
+                <li class="ml-auto p-2">                
+                    <button type="button" class="btn btn-sm pull-left btn-outline-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="toPdfAutoTable()">
                         <i class="fa fa-file-pdf-o"></i> Exportar para PDF
+                    </button>  
+                    <button type="button" class="btn btn-sm pull-left btn-outline-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="exportTableToCSV('members.csv')">
+                        <i class="fa fa-file-pdf-o"></i> Exportar para Excel
                     </button>
+                    <!-- <download-excel class = "btn btn-outline-success btn-sm btn-sm pull-left" :data = "json_data"  name = "fileName">                    
+                        Download Excel                    
+                    </download-excel>                                       -->
+                    <!-- <download-excel class = "btn btn-outline-success btn-sm btn-sm pull-left" :disabled="!genealogys || genealogys.length==0" :data = genealogys :name = 'fileName'>
+                        <i class="fa fa-file-excel-o"></i> Exportar para Excel
+                    </download-excel> -->
                 </li>
             </ul>
         </nav>
@@ -68,7 +77,11 @@
             <p >por favor aguarde</p>
             <stretch class="" background="#4d4d4d"></stretch>                
         </div>
-        <div class="row row-conteudo" v-show="!carregando">            
+        <div id="load-genealogy" class="text-center" v-show="!carregando && genealogys!=null && genealogys.length==0">
+            <h1 >Nenhum registro encontrado !</h1>                        
+        </div>
+        
+        <div class="row row-conteudo" id="row-conteudo" v-show="!carregando">                            
             <div class="col-md-10 offset-1">                
                 <div class="card" v-for="(genealogy,index) in genealogys" v-bind:key="index">                    
                     <!--                 -->
@@ -77,12 +90,12 @@
                     <!-- <div class=" col-md-12"> -->
                     <div class="card-header">  
                         <nav id="navbar-exemplo2" class="navbar row navbar-light bg-light">
-                            <div class="col-md-0"><b>OP: </b>{{genealogy.orderId}}</div>
+                            <div class="col-md-0"><b>OP: </b>{{genealogy.productionOrderNumber}}</div>
                             <div class="col-md-3"><b>Data Inicio: </b> {{ticksToDate(genealogy.startDate)}}</div>
                             <div class="col-md-3"><b>Data Fim: </b>{{ticksToDate(genealogy.endDate)}}</div>
                             <div class="col-md-4 row"><b>Código da tira: </b><router-link class="link-decoration" :to="{ name: 'Tira',params: { id: genealogy.recipeid }}"><span class="text-primary cursor-class">{{genealogy.recipeCode}}</span></router-link></div>
                             <div class="col-md-0">
-                                <i class="cursor-class nav-link fa fa-expand" :id="'iconOutput'+genealogy.orderId" aria-hidden="true" @click="verificaColapse('#iconOutput'+genealogy.orderId,'#roloOutput'+(genealogy.orderId),'fa-expand','fa-compress')" v-b-toggle="'roloOutput'+(genealogy.orderId)"></i>
+                                <i class="cursor-class nav-link fa fa-expand" :id="'iconOutput'+genealogy.orderId" aria-hidden="true" @click="verificaColapse('#iconOutput'+genealogy.orderId,'#roloOutput'+(genealogy.orderId),'fa-expand','fa-compress')" v-b-toggle="'roloOutput'+genealogy.orderId"></i>
                             </div>                            
                         </nav>                                       
                     </div>
@@ -91,7 +104,7 @@
                     <!-- Inicio loop rolos saida -->
                     <!--                         -->
                     <b-collapse class="card-body row" :id="'roloOutput'+(genealogy.orderId)">
-                        <div class="row col-md-12" >
+                        <div class="row col-md-12 legenda" >
                             <div class="col-md-0" v-for="(outputRolo,indexOutput) in genealogy.outputRolls" :key="indexOutput">                                                                                                                         
                                 <b-btn class="btn btn-primary" aria-expanded="false" v-b-toggle="'rolo'+(genealogy.orderId+indexOutput)" variant="info"> <!--  @click="verificaColapse('#icon'+genealogy.orderId+indexOutput,'#rolo'+(genealogy.orderId+indexOutput),'fa-plus','fa-minus')"-->
                                     Rolo {{indexOutput+1}}
@@ -116,7 +129,7 @@
                                 <b-collapse :id="'materia'+index+''+indexOutput">
                                     <div v-for="(m, indexMateria) in outputRolo.ligas" :key="indexMateria">
                                         <div class="col-md-6">
-                                            <b>OPL:</b> {{m.order}}
+                                            <b>OPL:</b> {{m.orderNumber}}
                                         </div>  
                                         <table class="table table-hover">                                            
                                             <thead>

@@ -190,7 +190,7 @@ export default {
             var teste = ordem;
             console.log(ordem);
             setTimeout(() => {
-                axios.post(url+'/api/producthistorian', ordem).then((response) => {
+                axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
                     this.mensagemSuc = 'Produto apontado com sucesso.';
                     this.productionOrderId = this.ordem.productionOrderId;
                     this.carregando = false;
@@ -205,11 +205,12 @@ export default {
                     this.getResults();
                     this.cleanVariables();
                 }).catch((error) => {
-                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    if(error.response)
+                        this.msgErro = error.response.data;
+                    else
+                        this.msgErro = "Erro desconhecido. Verifique se as configurações da OP estão corretas";
                     this.showModal("modalErro");
-                    this.carregando = false;
-                    console.log(teste);
-
+                    this.carregando = false;                    
                 })
                 this.pReceita = false;
                 this.consumo = false;
@@ -314,7 +315,6 @@ export default {
                             }
                         }
                     }
-
                 }
                 if (this.productionOrder.recipe.recipeProduct != undefined) {
                     this.roloSaida = this.productionOrder.recipe.recipeProduct.product.productName;

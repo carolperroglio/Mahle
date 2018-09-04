@@ -71,7 +71,7 @@
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                 </font></b>
             </label>
-            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-2">
+            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Data
                     <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
@@ -85,9 +85,23 @@
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                 </font></b>
             </label> 
-            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-2">
+            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Hora Fim
+                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                </font></b>
+            </label>  
+            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    OP
+                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                </font></b>
+            </label>  
+            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    Rolo
                     <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                 </font></b>
@@ -102,92 +116,99 @@
         <!--                       -->
         <!--                       -->                            
         <div v-show="!carregando" class="alarms-produtos">
-            <div v-for="(t, index) in tableAlarms" v-bind:class="{cinza: index%2==0}" :key="index">                                    
+            <div v-for="(t, index) in tableAlarms" :class="{cinza: index%2==0}" :key="index">                                    
                 <label class="ls2 col-md-2">
-                    {{t.groupTag}}</label>
+                    {{t.groupTag}}
+                </label>
                 <label class="ls2 col-md-2">
-                    {{thingNameInTable}}</label>
+                    {{thingNameInTable}}
+                </label>
                 <label class="ls2 col-md-1">
-                    {{t.type}}</label>
+                    {{t.type}}
+                </label>
+                <label class="ls2 col-md-1">
+                    {{t.dateIni}}
+                </label>
                 <label class="ls2 col-md-2">
-                    {{t.dateIni}}</label>
-                <label class="ls2 col-md-2">
-                    {{t.hourIni}}</label>
-                <label class="ls2 col-md-2">
-                    {{t.dateEnd}}</label>
+                    {{t.hourIni}}
+                </label>
+                <label class="ls2 col-md-1">
+                    {{t.dateEnd}}
+                </label>
+                <label class="ls2 col-md-1">
+                    {{t.ordem}}
+                </label>
+                <label class="ls2 col-md-1">
+                    {{t.rolo}}
+                </label>
             </div>                       
         </div> 
         
-    <b-modal ref="filterSearch" no-close-on-backdrop hide-footer title="Filtrar Busca">
-        <div class="modal-body">
-        <div class="form-row">
-        <div class="form-group  col-md-6">
-        <label><b>Filtrar por</b></label>
-        <select class="form-control" v-model="filterSelected">   
-            <option value="" selected disabled>Buscar por:</option>
-            <option value="op" key="op">OP</option> 
-            <option value="date" key="date">Data</option> 
-        </select>
-        </div>
-        </div>
-        <div class="form-row">
-        <div class="form-group col-md-9">
-        <label><b>Equipamento </b></label>
-            <select class="form-control" v-model="thingId">    
-                <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
-                </option>
-            </select>
-        </div>
-        </div>
-        <div class="form-row">
-        <div class="form-group col-md-6" v-if="filterSelected == 'op'">
-        <label><b>OP </b></label>                         
-            <input placeholder="Número da OP" class="form-control" 
-            v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP={}" >                                                                                 
-            <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]" 
-            v-for="(op,index) in prosFim" :key="index" style="cursor:pointer">{{ op.productionOrderNumber }}</b-dropdown-item>
-        </div>
-        </div>
-        
-        <div v-show="filterSelected != 'op'">
-        <label><b>Início </b></label>  
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <date-picker v-model="date" :config="config"></date-picker>
+        <b-modal ref="filterSearch" no-close-on-backdrop hide-footer title="Filtrar Busca">
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group  col-md-6">
+                        <label><b>Filtrar por</b></label>
+                        <select class="form-control" v-model="filterSelected">   
+                            <option value="" selected disabled>Buscar por:</option>
+                            <option value="op" key="op">OP</option> 
+                            <option value="date" key="date">Data</option> 
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-9">
+                    <label><b>Equipamento </b></label>
+                        <select class="form-control" v-model="thingId">    
+                            <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6" v-if="filterSelected == 'op'">
+                        <label><b>OP </b></label>                         
+                        <input placeholder="Número da OP" class="form-control" 
+                        v-model="opName" @keyup="prosFim=getResults(URL_OP, opName, prosFim); OP={}" >                                                                                 
+                        <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]" 
+                        v-for="(op,index) in prosFim" :key="index" style="cursor:pointer">{{ op.productionOrderNumber }}</b-dropdown-item>
+                    </div>
+                </div>
+
+                <div v-if="filterSelected != 'op'">
+                    <label><b>Início </b></label>  
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <date-picker v-model="date" :config="config"></date-picker>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <vue-timepicker format="HH:mm" v-model="timeIni"></vue-timepicker>
+                        </div>
+                    </div>
+                    <br>
+                    <label><b>Fim </b></label>  
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <date-picker v-model="datef" :config="config2"></date-picker>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <vue-timepicker format="HH:mm" v-model="timeFim"></vue-timepicker>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group col-md-3">
-                <vue-timepicker format="HH:mm" v-model="timeIni"></vue-timepicker>
+            <div class="modal-footer">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-success" @click.stop.prevent="filterSelected=='op'?getReportByOP():getReportByDate();" :disabled="(filterSelected=='op' && !opName && !thingId) || (filterSelected!='op' && (!date ||!timeIni ||!datef || !timeFim || !thingId))" >
+                        <i class="fa fa-check-square"></i> Confirmar
+                    </button>               
+                </div>
             </div>
-        </div>
-        <br>
-        <label><b>Fim </b></label>  
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <date-picker v-model="datef" :config="config2"></date-picker>
-            </div>
-            <div class="form-group col-md-3">
-                <vue-timepicker format="HH:mm" v-model="timeFim"></vue-timepicker>
-            </div>
-        </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-            <div class="btn-group" role="group">
-                <button class="btn btn-success" @click.stop.prevent="getReportByDate();" 
-                :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
-                    <i class="fa fa-check-square"></i> Confirmar
-                </button>
-                <button class="btn btn-success" @click.stop.prevent="getReportByOP();" 
-                :disabled="!thingId || !OP" v-if="filterSelected == 'op'">
-                    <i class="fa fa-check-square"></i> Confirmar
-                </button>
-            </div>
-        </div>
-    </b-modal>
-    <!-- MODAL PARA EXIBIR ERRO  -->
-    <b-modal no-close-on-backdrop ref="modalInfo" title="Mensagem" hide-footer>
-    <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
-    </b-modal>
+        </b-modal>
+        <!-- MODAL PARA EXIBIR ERRO  -->
+        <b-modal no-close-on-backdrop ref="modalInfo" title="Mensagem" hide-footer>
+            <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
+        </b-modal>
     </div>
 </template>
 <script src="./js/alarms.js">

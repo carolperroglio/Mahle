@@ -43,12 +43,12 @@ export default {
             urlGatewayThings: ipReport + '/gateway/things',
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
             url: ipReport,
-            config: {
+            configCache: {
                 headers: {
                     'Cache-Control': 'no-cache'
                 }
             },
-
+            URL_OP: process.env.OP_API + '/api/productionorders/v2?filters=productionOrderTypeId,1&filters=productionOrderNumber,',
             cabecalhoSetas: [false, false, false, false, false],
             carregando: false,
             erro: '',
@@ -182,10 +182,15 @@ export default {
         getResults(url, name, pros) {
             pros = [];
             if (name.length >= 3) {
-                axios.get(url + name, this.config).then((response) => {
-                    response.data.forEach((pro) => {
-                        pros.push(pro);
-                    });
+                axios.get(url + name, this.configCache).then((response) => {
+                    if(response.data.values)
+                        response.data.values.forEach((pro) => {
+                            pros.push(pro);
+                        }); 
+                    else   
+                        response.data.forEach((pro) => {
+                            pros.push(pro);
+                        });
                 }, (error) => {
                     console.log(error);
                 })
@@ -217,6 +222,14 @@ export default {
                 {
                     'title': 'Hora Fim',
                     'dataKey': 'dateEnd'
+                },
+                {
+                    'title': 'ordem',
+                    'dataKey': 'ordem'
+                },
+                {
+                    'title': 'rolo',
+                    'dataKey': 'rolo'
                 },
             ];
 
@@ -297,9 +310,9 @@ export default {
                     this.thingNameInTable = t.thingName;
                 }
             });
-            axios.get(this.urlGatewayThings + '/' + this.thingId).then((response) => {
-                this.thingNameInTable = reponse.data.thingName;
-
+            console.log(this.thingNameInTable);
+            axios.get(this.urlGatewayThings + '/' + this.thingId, this.configCache).then((response) => {                
+                this.thingNameInTable = response.data.thingName;
             }, (error) => {
                 console.log(error);
             })
@@ -312,14 +325,18 @@ export default {
 
             axios.get(this.url + '/api/alarmreport?thingId=' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
                 this.jSONReport = response.data;
+                console.log("Teste");
+                console.log("Teste");
+                console.log("Teste");
 
+                console.log(this.jSONReport);
                 this.getThingNameById();
                 this.hideModal('filterSearch');
                 this.editGroup();
 
             }).catch((error) => {
                 if (error.response != undefined) {
-                    if (error.response.status == '404') {
+                    if (error.response.status == '404' || error.response.status == '400') {
                         this.carregando = false;
                         this.erro = true;
                         this.msgErro = "Sem dados no período selecionado";
@@ -336,7 +353,6 @@ export default {
         getReportByOP() {
             axios.get(this.url + '/api/alarmreport?thingId=' + this.thingId + '&opId=' + this.OP).then((response) => {
                 this.jSONReport = response.data;
-
                 this.getThingNameById();
                 this.hideModal('filterSearch');
                 this.editGroup();
@@ -358,8 +374,8 @@ export default {
         },
         getTable(groupselected) {
             var objTable = {};
-            this.tableAlarms = []
-
+            this.tableAlarms = [];
+            console.log(this.jSONReport);
             this.jSONReport.table.forEach(obj => {
                 if (groupselected == obj.groupTag) {
                     for (var x = 0; x < obj.data.length; x++) {
@@ -376,7 +392,8 @@ export default {
                             } else {
                                 objTable[key] = obj.data[x][key];
                             }
-                        }
+                        }                                   
+                        console.log(this.tableAlarms);
                         this.tableAlarms.push(objTable);
                         objTable = {};
                     }
@@ -391,7 +408,7 @@ export default {
             for (var x = 0; x < this.jSONReport.graphs.length; x++) {
                 this.groups.push(this.jSONReport.graphs[x].groupTag);
             }
-            console.log(this.groups);
+            
 
             this.makeGraph(this.groups);
         },

@@ -158,13 +158,13 @@
                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                         </font></b>
                     </label> 
-                    <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeName',3):organizar(opArrarKeep, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
+                    <!-- <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeName',3):organizar(opArrarKeep, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
                         <b><font class="cursor-class" color="#ffffff">
                             Nome da Tira &nbsp;&nbsp;&nbsp;
                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                         </font></b>
-                    </label>
+                    </label> -->
                     <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2" style="margin-left:1%">
                         <b><font class="cursor-class" color="#ffffff">
                             Descrição &nbsp;&nbsp;&nbsp;
@@ -181,28 +181,28 @@
                     </label> 
                 </div>   
                 <div class="table-margin"  v-show="!carregando">
-                <div v-for="(op, index) in opArrarKeep" v-bind:key="index" :class="{cinza: index%2==0}">
-                            <label class="ls ls1 col-md-2">
-                                {{op.productionOrderNumber}}
-                            </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2">
-                                {{op.recipeCode}}
-                            </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2">
-                                {{op.recipeName}}
-                            </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2 aling-lb">
-                                {{op.typeDescription}}
-                            </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2">
-                                {{op.currentStatus | filterStatus}}
-                            </label>&nbsp;&nbsp;&nbsp;
-                            <label class="ls ls1 col-md-2" v-if="op.hasProd == true">
-                                {{op.recipe.recipeProduct.product.productName}}
-                            </label>
-                            <label class="ls ls1 col-md-1">
-                                <i :id="op.recipe.recipeId" class="fa fa-eye" style="font-size: 22px; cursor: pointer;" @click="parametrosteste=[];recipes={};getGatewayRecipe(op)"></i>
-                            </label>
+                    <div v-for="(op, index) in opArrarKeep" v-bind:key="index" :class="{cinza: index%2==0}">
+                        <label class="ls ls1 col-md-2">
+                            {{op.productionOrderNumber}}
+                        </label>&nbsp;&nbsp;&nbsp;
+                        <label class="ls ls1 col-md-2">
+                            {{op.recipeCode}}
+                        </label>&nbsp;&nbsp;&nbsp;
+                        <!-- <label class="ls ls1 col-md-2">
+                            {{op.recipeName}}
+                        </label>&nbsp;&nbsp;&nbsp; -->
+                        <label class="ls ls1 col-md-2 aling-lb">
+                            {{op.typeDescription}}
+                        </label>&nbsp;&nbsp;&nbsp;
+                        <label class="ls ls1 col-md-2">
+                            {{op.currentStatus | filterStatus}}
+                        </label>&nbsp;&nbsp;&nbsp;
+                        <label class="ls ls1 col-md-2" v-if="op.hasProd == true">
+                            {{op.recipe.recipeProduct.product.productName}}
+                        </label>
+                        <label class="ls ls1 col-md-1">
+                            <i :id="op.recipe.recipeId" class="fa fa-eye" style="font-size: 22px; cursor: pointer;" @click="parametrosteste=[];recipes={};getGatewayRecipe(op)"></i>
+                        </label>
                     </div>
                 </div>
                 <div class="paginacao" v-show="total>0">

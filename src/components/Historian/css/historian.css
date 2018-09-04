@@ -61,21 +61,6 @@
     margin-bottom: 6%;
 }
 
-.td1,
-th1 {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    text-align: center;
-}
-
-.tr1:nth-child(even) {
-    background-color: #dddddd;
-}
-
-#constat {
-    padding: 0.5%;
-}
 
 @media only screen and (max-width: 800px) {
     .conteudo-history {

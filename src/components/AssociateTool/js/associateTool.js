@@ -43,6 +43,7 @@ export default {
             url: process.env.TOOLS_API,
             toolType: [],
             pos: 0,
+            contador: 1,
         }
     },
     computed: {},

@@ -132,9 +132,9 @@
                             <div id="load2" v-show="carregando">
                                 <stretch background="#4d4d4d"></stretch>
                             </div> 
-                            <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}" v-show="teste.length > 0">{{quantity}}
+                            <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}" v-show="teste.length > 0">
                                     <label class="ls ls10 col-md-2">
-                                        {{o.product}}</label>
+                                        {{o.product=='aco'?'aço': o.product}}</label>
                                     <label class="ls ls10  col-md-2">
                                         {{o.lote}}</label>
                                     <label class="ls ls10  col-md-1">
@@ -307,7 +307,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled=" quantity=='' ||  unity == '' ||roloSaida == ''" v-show="pReceita" @click.stop.prevent="ordem.type = 'output';cadastrarApont(ordem, 'saida');">
+                            <button class="btn btn-success" v-show="pReceita" @click.stop.prevent="ordem.type = 'output';cadastrarApont(ordem, 'saida');">
                                 <i  class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                             </button>
                             <button @click.stop.prevent="quantity = ''; unity = '';" class="btn btn-primary pull-right">

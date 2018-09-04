@@ -236,7 +236,7 @@ export default {
             this.dataentry = ''
         },
         getThings() {
-            console.log('getThings')
+            //console.log('getThings')
             axios.get(this.url).then((response) => {
                 this.things = response.data;
             }, (error) => {
@@ -271,18 +271,19 @@ export default {
             axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
                 '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
                 // if (response.data.length > 0) {
-                console.log('Entrou no retorno do get report date')
+                //console.log('Entrou no retorno do get report date')
                 this.data = response.data;
-                this.tags = response.data.tags;
+                this.tags = response.data.tags;                
                 this.tags.forEach((T) => {
                     if (!this.groups.includes(T.group)) {
                         this.groups.push(T.group);
                     }
                 })
+                
                 setTimeout(() => {
-
                     this.editGroup(this.groups[0]);
                     this.newGroup = this.groups[0];
+                    
                     this.carregando = false;
                     this.created();
                     this.hideModal('myModalEdit');
@@ -315,7 +316,7 @@ export default {
             var ticksF = this.dateToTicks(Fim);
 
             axios.get(this.urlReport + "/api/ReportParameter/RecipeCode/" + this.recipeCode + '?thingId' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
-                console.log('Entrou no retorno do get report code')
+                //console.log('Entrou no retorno do get report code')
 
                 this.data = response.data;
                 this.tags = response.data.tags;
@@ -362,8 +363,7 @@ export default {
                 .then((response) => {
                     if (response.data.tags.length > 0) {
 
-                        console.log(response)
-                        console.log('Entrou no retorno do get report op')
+                        
                         this.data = response.data;
                         this.tags = response.data.tags;
                         this.tags.forEach((T) => {
@@ -505,6 +505,8 @@ export default {
         separateDateAndHour(providerar) {
             // array que será atribuido a tabela
             var finalprovider = new Array();
+            console.log("NewOBJNewOBJ");                                        
+            console.log(providerar);
             // cópia do array que será usada para alterar as keys
             var copyprovider = new Array();
             copyprovider = JSON.parse(JSON.stringify(providerar));
@@ -530,6 +532,7 @@ export default {
                 // novo objeto é populado com Data e Hora
                 objaux.Data = date;
                 objaux.Hora = hourformatted;
+                
                 for (var key in newObj) {
                     var newkey = '';
                     switch (key) {
@@ -574,13 +577,22 @@ export default {
                         case 'LIE Limite inferior de especificação':
                             newkey = "LIE"
                             objaux[newkey] = newObj[key]
-                            break;
-                            // default:
-                            //     break;
+                            break;                           
+                        case 'ordem':
+                            newkey = "ordem"
+                            objaux[newkey] = newObj[key]
+                            break; 
+                        case 'rolo':
+                            newkey = "rolo"
+                            objaux[newkey] = newObj[key]
+                            break; 
                     }
-
+                    
                 }
-                finalprovider.push(objaux);
+                console.log("console.log(this.provider);");
+                console.log("console.log(this.provider);");
+                finalprovider.push(objaux);                
+                console.log(finalprovider);
                 objaux = {}
             });
 
@@ -594,17 +606,18 @@ export default {
             cache: false;
             this.group = grupo;
             this.provider = [];
-            console.log("console.log(this.provider);");
-            console.log(this.provider);
+            
+            //console.log(this.providertable[0]);
             this.graphProvider = [];
             this.headers = [];
             this.providerAux = [];
             this.jsonfields = {};
-            console.log(this.data);
+            //console.log(this.data);
 
             this.formatGraphData(this.data, this.group);
             var t = 0;
             var aux = [];
+            
             // To Excel
             setTimeout(() => {
 
@@ -620,9 +633,9 @@ export default {
                         aux.push(n);
                         this.jsonfields[n] = n;
                     }
-                    console.log(aux[t]);
+                    //console.log(aux[t]);
                     t++;
-                });
+                });                
                 this.headers = aux
                 console.log(this.headers);
                 console.log(this.jsonfields);
@@ -633,22 +646,25 @@ export default {
 
 
         formatGraphData(obj, group) {
-            obj.tags.forEach((R) => {
-                if (R.group == group) {
-                    this.thingGroup = R.group;
-                    this.thingId = obj.thingId;
-                    this.things.forEach((t) => {
-                        if (this.thingId == t.thingId) {
-                            this.thingNameCabeçalho = t.thingName;
-                        }
-                    })
+            obj.tags.forEach((R) => {                                
+                if (R.group == group || R.group == 'Linha') {
+                    if(R.group != 'Linha'){
+                        this.thingGroup = R.group;
+                        this.thingId = obj.thingId;
+                        this.things.forEach((t) => {
+                            if (this.thingId == t.thingId &&  R.group != 'Linha') {                            
+                                this.thingNameCabecalho = t.thingName;
+                            }
+                        })
+                    }
+
                     var dataObj2 = new Array();
                     var obj2 = new Object();
 
                     /**
                      * Criação do JSON de criação das características do gráfico.
                      * Cada linha terá um objeto com as características dentro do array
-                     */
+                     */                                        
                     obj2["path"] = "dist/amcharts/";
                     obj2["balloonColor"] = "#808080";
                     obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
@@ -664,30 +680,30 @@ export default {
 
                     var i = 0;
 
-                    console.log("R");
-                    console.log(R);
+                    //console.log("R");
+                    //.log(R);
 
                     R.timestamp.map(e => {
                         /**
                          * Criando o campo categoria do JSON do gráfico
                          * E adicionando a data á ele
                          * Para que cada ponto do eixo X seja uma data diferente
-                         */
-                        var dataObj = new Array();
+                         */                        
+                            var dataObj = new Array();
+                            var category = "category";
+                            var tagname = R.name;
 
-                        var category = "category";
-                        var tagname = R.name;
+                            var obj = new Object();
 
-                        var obj = new Object();
+                            obj[category] = this.ticksToDate(e);
+                            obj[tagname] = R.value[i];
 
-                        obj[category] = this.ticksToDate(e);
-                        obj[tagname] = R.value[i];
+                            dataObj = Object.assign(obj);
+                            console.log("Testinho");
+                            console.log(dataObj);
+                            this.providerAux.push(dataObj);
 
-                        dataObj = Object.assign(obj);
-                        console.log(dataObj);
-                        this.providerAux.push(dataObj);
-
-                        i++;
+                            i++;
                     })
 
                     /**
@@ -695,19 +711,19 @@ export default {
                      */
 
                     dataObj2 = Object.assign(obj2);
-                    console.log(dataObj2);
+                    
                     this.graphProvider.push(dataObj2);
-                    console.log("this.graphProvider");
-                    console.log(this.graphProvider);
-                    console.log(this.providerAux);
+                    // console.log("this.graphProvider");
+                    // console.log(this.graphProvider);
+                    // console.log(this.providerAux);
                 }
             });
 
             /**
              * Separar objetos por data, assim cada obj todas as tags com a mesma data
              */
-            console.log("this.providerAux.groupBy('category')");
-            console.log(this.providerAux.groupByProperties("category"));
+            //console.log("this.providerAux.groupBy('category')");
+            //console.log(this.providerAux.groupByProperties("category"));
 
             var groupArray = this.providerAux.groupByProperties("category");
 
@@ -742,9 +758,9 @@ export default {
 
 
         created() {
-            console.log('Entrou no created que chama o makeChart()')
-            console.log(this.graphProvider);
-            console.log(this.provider);
+            // console.log('Entrou no created que chama o makeChart()')
+            // console.log(this.graphProvider);
+            // console.log(this.provider);
 
             this.chart = window.AmCharts.makeChart("chartrast", {
                 "type": "serial",

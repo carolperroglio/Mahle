@@ -30,7 +30,7 @@ export default {
     data() {
         return {
             config: {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                headers: { 'Cache': 'no-cache' }
             },
             id: "",
             carregando: false,
@@ -56,7 +56,8 @@ export default {
             opNumber: '',
             cargaUtilizada: '',
             opSelected: {},
-            idOpAtual: ''
+            idOpAtual: '',
+            cr:false
         }
     },
     computed: {
@@ -154,18 +155,34 @@ export default {
         },
         sendCalculation(lastAnalysis) {
             console.log(lastAnalysis);
-            axios.put(this.urlAnalysis + '/api/CalculeAnalysis?productionOrderId=' + this.idOpAtual + '&furnaceQuantity=' + this.cargaUtilizada, lastAnalysis)
-                .then((response) => {
-                    this.erro = false;
-                    this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";
-                    this.showModal("modalErro");
-                }).catch((error) => {
-                    this.carregando = false;
-                    this.erro = true;
-                    this.msgErro = "Ocorreu um erro ao realizar o cálculo: " + error.message;
-                    this.showModal("modalErro");
-                })
+            axios.put(this.urlAnalysis + '/api/CalculeAnalysis?productionOrderId=' + this.idOpAtual + '&furnaceQuantity=' + this.cargaUtilizada, lastAnalysis).then((response) => {                
+                this.erro = false;
+                this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";
+                this.showModal("modalErro");
+            }).catch((error) => {
+                this.carregando = false;
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro ao realizar o cálculo: " + error.message;
+                this.showModal("modalErro");
+            });
         },
+
+        aponta(order, quantiti, id){            
+            //var produto = response.data.recipe.recipeProduct.product;
+            console.log(order);
+            var p = {type : 'input', username : VueCookies.get('username'), productionOrderId : this.idOpAtual, productId : 72, quantity : quantiti,unity : 'kg', batch : order.productionOrderNumber};            
+            axios.post(this.url + '/api/producthistorian', p).then((response) => {
+                this.erro = false;
+                this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";
+                this.showModal("modalErro");
+            }).catch((error) => {
+                this.carregando = false;
+                this.erro = true;
+                this.msgErro = "Ocorreu um erro ao apontar pé de banho: " + error.message;
+                this.showModal("modalErro");
+            });            
+        },
+
         getAnalysis(id, obj) {
             axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + id)
                 .then((response) => {
@@ -197,6 +214,7 @@ export default {
             //verifica se o operador selecionou a ultima análise realizada - pois não é obrigatório selecionar
             if (this.opSelected.productionOrderId == undefined) {
                 var idLastOp = '';
+                this.cargaUtilizada = 0;
             } else {
                 var idLastOp = this.opSelected.productionOrderId
             }
