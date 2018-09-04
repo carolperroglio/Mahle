@@ -110,7 +110,8 @@
                 <label v-if="pro.phaseProductType=='finished'" class="ls2 col-md-2">Elemento</label>                                    
                 <label v-if="pro.phaseProductType=='base_product'" class="ls2 col-md-2">Produto base</label>
                 <label v-if="pro.phaseProductType=='contaminent'" class="ls2 col-md-2">Contaminante</label>
-                <label v-if="pro.phaseProductType=='scrap'" class="ls2 col-md-2">Cavaco</label>            
+                <label v-if="pro.phaseProductType=='scrap'" class="ls2 col-md-2">Cavaco</label>   
+                <label v-if="pro.phaseProductType=='semi_finished'" class="ls2 col-md-2">Pé de banho</label>            
                 <label class="ls2 fim col-md-3">                        
                     <i class = "fa fa-trash-o" style="font-size:21px; cursor:pointer; color:red;" @click.stop.prevent="showModalRemoveProduto(pro, index)"></i>&nbsp;&nbsp;&nbsp;                                         
                 </label>
@@ -211,7 +212,8 @@
                             <option value="base_product">Produto Base</option>
                             <option value="finished" >Elemento</option>
                             <option value="contaminent" >Contaminante</option>                            
-                            <option value="scrap" >Cavaco</option>                            
+                            <option value="scrap" >Cavaco</option>   
+                            <option value="semi_finished" >Pé de banho</option>                            
                         </select>                            
                     </div>   
                 </div>                

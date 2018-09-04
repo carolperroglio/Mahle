@@ -479,6 +479,7 @@ export default {
         createOp: function(data) {
                 this.opArrarKeep = [];
                 // adiciona propriedades necessárias na op que são mandatory
+                console.log(this.recipeObj);
                 data.recipe = this.recipeObj;
                 console.log(this.recipeObj);
                 data.productionOrderTypeId = "1";
@@ -487,18 +488,21 @@ export default {
                 data.username = VueCookies.get('username');
                 this.objetooo = data;
                 console.log('OP sendo criada!!!!!!!!');
-                console.log('JSON ' + data);
-                // Criando OP
+                console.log(data);
+                //Criando OP
                 setTimeout(() => {
                     axios.post(this.urlOp, data).then(response => {
                             //this.opArray = response.data;
                             this.opCreated = true;
                             data.currentstatus = "active";
-
+                            console.log(response.data);
                             //Ativando OP
                             var id = response.data.productionOrderId;
                             axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active&username=" + data.username).then(response => {
-
+                                console.log("Post tags");
+                                
+                                //axios.post(this.url, {address: "Numero_ROLO",value: 1, workstation: "Linha"});    
+                                console.log("Fim post tags");
                                 // Desassociar OP anterior, a linha
                                 for (var i = 0; i < this.opArray.values.length; i++) {
                                     var OPId = this.opArray.values[i].productionOrderId;
@@ -517,7 +521,12 @@ export default {
                                 }
                                 //Associar OP criada a linha
                                 this.getOPTypeToAssoc(id);
-
+                                console.log("Entrou no esquema");
+                                axios.post("http://10.35.255.22:8013/api/interlevel", {address: "Numero_OP",value: data.productionOrderNumber,workstation: "Linha"}).then(response => {
+                                    axios.post("http://10.35.255.22:8013/api/interlevel", {address: "Codigo_TIRA",value: data.recipe.recipeCode,workstation: "Linha"}).then();
+                                    axios.post("http://10.35.255.22:8013/api/interlevel", {address: "Numero_ROLO",value: 0,workstation: "Linha"}).then();
+                                });
+                                console.log("Saiu no esquema");
                             })
                         })
                         .catch((error) => {

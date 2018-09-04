@@ -36,7 +36,7 @@
                     <div>
                     <div class="col-md-12">
                     <h4 class="ls11" :id="index + 1" >
-                        {{"Posição" + " " }} {{t.tool.position}}
+                        {{"Posição" + " " }} {{index+1}}
                     </h4>
                     <!-- <h4 class="ls11" :id="index + 1" v-else>
                         {{"Posição" + " " }} {{index + 1}}

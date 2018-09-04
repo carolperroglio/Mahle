@@ -19,10 +19,10 @@
                             <h3>Equipamento: {{thingNameCabeçalho}} Grupo: {{thingGroup}}</h3>
                         </div>
                         <div class="col-md-4">
-                       <button type="button" class="btn btn-info btn-sm btn-sm"  @click.prevent="showModal()">
-                            Filtrar Busca
-                       </button>
-                        
+                        <button type="button" class="btn btn-info btn-sm btn-sm"  @click.prevent="showModal()">
+                                Filtrar Busca
+                        </button>
+                            
                         </div>
                         <br>
                         <br>

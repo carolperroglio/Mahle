@@ -15,7 +15,8 @@ export default {
     data() {
         return {
             config: {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                headers: { 'Cache-Control': 'no-cache' }
             },
             id: "",
             carregando: false,
@@ -64,7 +65,8 @@ export default {
             cobreFosforoso: '',
             cargaUtilizadaForno: 0,
             prodChoose: '',
-            cavaco: ''
+            cavaco: '',
+            temp: {},
         }
     },
     computed: {
@@ -167,6 +169,7 @@ export default {
             this.calculos = newCalc;
         },
         getAnalysis() {
+            console.log("Entrou no last");
             axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.productionOrder.productionOrderId)
                 .then((response) => {
                     //pega a última análise de todas anáises
@@ -180,9 +183,7 @@ export default {
                         lastAnalysis = response.data.analysis[posLastAnalysis];
                         console.log("lastAnalysis: " + lastAnalysis)
                         this.lastAnalysis = lastAnalysis;
-
                     }
-
                     this.calculos = response.data.calculateInitial;
 
                     this.calculoOK = true
@@ -203,7 +204,10 @@ export default {
         // MUDA O STATUS DA OPL PARA EM ANÁLISES - FEITA PELO SETOR DE ANÁLISE QUÍMICA
         changeStatusToWaitingAnalysis() {
             this.productionOrder.username = VueCookies.get('username');
-
+            this.allProducts.forEach(element => {
+                console.log(element.quantity);
+                this.cargaUtilizadaForno += element.quantity;
+            });
             axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + this.productionOrder.productionOrderId +
                     "&state=waiting_approval&username=" + this.productionOrder.username + "&quantForno=" + this.cargaUtilizadaForno)
                 .then(response => {
@@ -254,7 +258,7 @@ export default {
                 ordem.batch = this.lote;
             }
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
-                // Se for necessário adicionar COBRE FOSFOROSO - SERÁ FEITO 2 POST - UM ESPECÍFICO PARA COBRE FOSFOROSO
+                // Se for necessário adicionar COBRE FOSFOROSO - SERÁ FEITO 2 POST - UM ESPECÍFICO PARA COBRE FOSFOROSO                
                 if (ordem.productId == '70') {
                     axios.post(this.urlParameters + '/api/WriteOrderLiga/AddCobre', this.productionOrder).then((response) => {
                         this.erro = false;
@@ -265,8 +269,7 @@ export default {
                         this.pFase = false;
                         this.rolo++;
                         this.ordem = {};
-                        console.log(response);
-                        this.getResults();
+                        console.log(response);                        
                     })
                 }
 
@@ -278,8 +281,17 @@ export default {
                 this.pFase = false;
                 this.rolo++;
                 this.ordem = {};
+                console.log("Teste");
+                console.log("teste");
                 console.log(response);
-                this.getResults();
+                location.reload();
+                // axios.get('http://35.170.191.75:8002/api/products/' + response.data.productId, this.config).then((response) => {
+                //     var data = new Date().getDate() + '/' + new Date().getMonth() + '/' + new Date().getFullYear();
+                //     var hora = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
+                //     this.allProducts.push({batch: this.lote, date: data,quantity : this.quantity, hour: hora, lote: this.lote, product: response.data.productName});
+                // });
+                
+                //this.getResults();
             }).catch((error) => {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro: " + error.message;
@@ -291,37 +303,26 @@ export default {
         },
         changeJson(obj, type) {
             this.allProducts = [];
-            var array = this.orderHistorianAllProducts.products;
             if (this.orderHistorianAllProducts.products == undefined) {
                 this.orderHistorianAllProducts.products = []
             }
             if (this.orderHistorianAllProducts.id != undefined) {
-                if (type == "in") {
+                console.log("Antes de add");
+                console.log(this.orderHistorianAllProducts);
+                if (type == "in" || type == "out") {
                     obj.rolo = "-";
                     obj.lote = obj.batch;
-                    this.orderHistorianAllProducts.products.push(obj)
-                } else if (type == "out") {
-                    obj.lote = "-";
-                    obj.rolo = obj.batch;
                     this.orderHistorianAllProducts.products.push(obj)
                 }
             } else {
-                if (type == "in") {
+                if (type == "in" || type == "out") {
                     obj.rolo = "-";
                     obj.lote = obj.batch;
                     this.orderHistorianAllProducts.id = this.orderHistorian.id;
                     this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
                     this.orderHistorianAllProducts.order = this.orderHistorian.order
                     this.orderHistorianAllProducts.products.push(obj)
-                } else if (type == "out") {
-                    obj.rolo = obj.batch;
-                    obj.lote = "-";
-                    this.orderHistorianAllProducts.id = this.orderHistorian.id;
-                    this.orderHistorianAllProducts.productionOrderId = this.orderHistorian.productionOrderId
-                    this.orderHistorianAllProducts.order = this.orderHistorian.order
-                    this.orderHistorianAllProducts.products.push(obj)
-                }
-
+                } 
             }
             this.allProducts = this.orderHistorianAllProducts.products
         },
@@ -341,7 +342,8 @@ export default {
                     this.rolo = parseInt(this.orderHistorian.productsOutput[i].batch) + 1;
                     this.orderHistorian.productsOutput[i].hour = this.hourConvert(this.orderHistorian.productsOutput[i].date);
                     this.orderHistorian.productsOutput[i].date = this.dataConvert(this.orderHistorian.productsOutput[i].date);
-                    this.changeJson(this.orderHistorian.productsOutput[i], "out");
+                    //this.changeJson(this.orderHistorian.productsOutput[i], "out");
+                    
                 }
                 this.rolo += 1;
 

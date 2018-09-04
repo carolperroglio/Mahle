@@ -11,8 +11,8 @@
                 <li class="nav-item-hist nav-item-gp col-md-12">
                     <h1 class="title-page-gp col-md-10"><b>Relatório de Genealogia de Tira</b></h1>                                                        
                 </li>
-                <li class="nav-item-genealogy col-md-0">
-                    <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                <li class="nav-item-genealogy col-sm-0">
+                    <select class="custom-select form-control form-control-sm" @change="cod='';op='';opName='';inicio='';fim='';recipeCode=''" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="cod">Código da Tira</option>
                         <option value="date">Data</option> 
@@ -23,7 +23,7 @@
                     <label><b>Código da Tira </b></label>      
                 </li>
                <li class="nav-item-genealogy col-sm-1" v-show="fieldFilter=='cod'">                                         
-                    <input class="form-control" v-model="recipeCode" @keyup="prosFim=getResults(RECIPE_API,recipeCode, prosFim); cod=''" >                                                                                 
+                    <input class="form-control form-control-sm" v-model="recipeCode" @keyup="prosFim=getResults(RECIPE_API,recipeCode, prosFim); cod=''" >                                                                                 
                     <div class="auto-complete">
                         <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;cod=r.recipeId;prosFim=[]" v-for="(r,index) in prosFim" :key="index">{{ r.recipeCode }}</b-dropdown-item>                                           
                     </div>
@@ -32,33 +32,42 @@
                     <label><b>Início </b></label>      
                 </li>
                <li class="nav-item-genealogy col-sm-1"  v-show="fieldFilter=='cod' || fieldFilter=='date'">
-                    <datetime type="datetime" input-class="form-control" v-model="inicio" format="yyyy-MM-dd HH:mm:ss"></datetime>     
+                    <datetime type="datetime" input-class="form-control form-control-sm" v-model="inicio" format="yyyy-MM-dd HH:mm:ss"></datetime>     
                 </li>              
                 <br>     
                 <li class="nav-item-genealogy form-group col-sm-0" v-show="fieldFilter=='cod' || fieldFilter=='date'">
                     <label><b>Fim </b></label>      
                 </li>                
                 <li class="nav-item-genealogy col-sm-1" v-show="fieldFilter=='cod' || fieldFilter=='date'">
-                    <datetime type="datetime" input-class="form-control" v-model="fim" format="yyyy-MM-dd HH:mm:ss"></datetime>     
+                    <datetime type="datetime" input-class="form-control form-control-sm" v-model="fim" format="yyyy-MM-dd HH:mm:ss"></datetime>     
                 </li>
                 <li class="nav-item-genealogy col-sm-0" v-show="fieldFilter=='op'">
                     <label><b>OP </b></label> 
                 </li>
                 <li class="nav-item-genealogy col-sm-1" v-if="fieldFilter=='op'">
-                    <input placeholder="Número da OP" class="form-control" v-model="opName" @keyup="prosFim=getResults(URL_OP,opName, prosFim); op=''" >                                                                                 
+                    <input placeholder="Número da OP" class="form-control form-control-sm" v-model="opName" @keyup="prosFim=getResults(URL_OP,opName, prosFim); op=''" >                                                                                 
                     <div class="auto-complete">
                         <b-dropdown-item @click.stop.prevent="opName=o.productionOrderNumber;op=o.productionOrderId;prosFim=[]" v-for="(o,index) in prosFim" :key="index" style="cursor:pointer">{{ o.productionOrderNumber }}</b-dropdown-item>
                     </div>
-                </li> 
+                </li>                
                 <li class="nav-item-genealogy col-sm-2">
-                    <button class="btn btn-success" :disabled="!fieldFilter || (fieldFilter=='date' && !inicio && !fim) || (fieldFilter=='op' && !op) || (fieldFilter=='cod' && !inicio && !fim && !cod)" @click.stop.prevent="getGenealogy(fieldFilter, op, cod, inicio, fim)">
+                    <button class="btn btn-success btn-sm" :disabled="!fieldFilter || (fieldFilter=='date' && !inicio && !fim) || (fieldFilter=='op' && !op) || (fieldFilter=='cod' && !inicio && !fim && !cod)" @click.stop.prevent="getGenealogy(fieldFilter, op, cod, inicio, fim)">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
                 </li>
-                <li class="col-2 text-right">
-                    <button type="button" class="btn btn-outline-danger" @click.prevent="toPdf()">
+                <li class="ml-auto p-2">                
+                    <button type="button" class="btn btn-sm pull-left btn-outline-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="toPdfAutoTable()">
                         <i class="fa fa-file-pdf-o"></i> Exportar para PDF
+                    </button>  
+                    <button type="button" class="btn btn-sm pull-left btn-outline-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="exportTableToCSV('members.csv')">
+                        <i class="fa fa-file-pdf-o"></i> Exportar para Excel
                     </button>
+                    <!-- <download-excel class = "btn btn-outline-success btn-sm btn-sm pull-left" :data = "json_data"  name = "fileName">                    
+                        Download Excel                    
+                    </download-excel>                                       -->
+                    <!-- <download-excel class = "btn btn-outline-success btn-sm btn-sm pull-left" :disabled="!genealogys || genealogys.length==0" :data = genealogys :name = 'fileName'>
+                        <i class="fa fa-file-excel-o"></i> Exportar para Excel
+                    </download-excel> -->
                 </li>
             </ul>
         </nav>
@@ -68,58 +77,59 @@
             <p >por favor aguarde</p>
             <stretch class="" background="#4d4d4d"></stretch>                
         </div>
-        <div class="row row-conteudo" v-show="!carregando">            
-            <div class="col-md-12">                
-                <div class="row" v-for="(genealogy,index) in genealogys" v-bind:key="index">                    
-                    
+        <div id="load-genealogy" class="text-center" v-show="!carregando && genealogys!=null && genealogys.length==0">
+            <h1 >Nenhum registro encontrado !</h1>                        
+        </div>
+        
+        <div class="row row-conteudo" id="row-conteudo" v-show="!carregando">                            
+            <div class="col-md-10 offset-1">                
+                <div class="card" v-for="(genealogy,index) in genealogys" v-bind:key="index">                    
                     <!--                 -->
                     <!-- Inicio loop ops -->
                     <!--                 -->                    
-                    <div class="col-md-10 offset-1">
-                        <b-card-header header-tag="header">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <b>OP:</b> {{genealogy.orderId}}
-                                </div>
-                                <div class="col-md-3">
-                                    <b>Data Inicio: </b> {{ticksToDate(genealogy.startDate)}}
-                                </div>
-                                <div class="col-md-3">
-                                    <b>Data Fim: </b> {{ticksToDate(genealogy.endDate)}}
-                                </div>
-                                <div class="col-md-2" v-if="genealogy.outputRolos.length">
-                                    <i class="cursor-class fa fa-expand" :id="'iconOutput'+genealogy.orderId" aria-hidden="true" @click="verificaColapse('#iconOutput'+genealogy.orderId,'#roloOutput'+(genealogy.orderId),'fa-expand','fa-compress')" v-b-toggle="'roloOutput'+(genealogy.orderId)"></i>
-                                </div>
-                            </div>
-                        </b-card-header>
+                    <!-- <div class=" col-md-12"> -->
+                    <div class="card-header">  
+                        <nav id="navbar-exemplo2" class="navbar row navbar-light bg-light">
+                            <div class="col-md-0"><b>OP: </b>{{genealogy.productionOrderNumber}}</div>
+                            <div class="col-md-3"><b>Data Inicio: </b> {{ticksToDate(genealogy.startDate)}}</div>
+                            <div class="col-md-3"><b>Data Fim: </b>{{ticksToDate(genealogy.endDate)}}</div>
+                            <div class="col-md-4 row"><b>Código da tira: </b><router-link class="link-decoration" :to="{ name: 'Tira',params: { id: genealogy.recipeid }}"><span class="text-primary cursor-class">{{genealogy.recipeCode}}</span></router-link></div>
+                            <div class="col-md-0">
+                                <i class="cursor-class nav-link fa fa-expand" :id="'iconOutput'+genealogy.orderId" aria-hidden="true" @click="verificaColapse('#iconOutput'+genealogy.orderId,'#roloOutput'+(genealogy.orderId),'fa-expand','fa-compress')" v-b-toggle="'roloOutput'+genealogy.orderId"></i>
+                            </div>                            
+                        </nav>                                       
+                    </div>
 
-                        <!--                         -->
-                        <!-- Inicio loop rolos saida -->
-                        <!--                         -->
-                        <b-collapse :id="'roloOutput'+(genealogy.orderId)">
-                            <div class="row">
-                                <div class="col-md-1" v-for="(outputRolo,indexOutput) in genealogy.outputRolos" :key="indexOutput">                                                                                                                         
-                                    <b-btn  @click="verificaColapse('#icon'+genealogy.orderId+indexOutput,'#rolo'+(genealogy.orderId+indexOutput),'fa-plus','fa-minus')"  v-b-toggle="'rolo'+(genealogy.orderId+indexOutput)" variant="info">
-                                        Rolo {{indexOutput+1}}
-                                        <i class="fa fa-plus" :id="'icon'+genealogy.orderId+indexOutput" aria-hidden="true" style="font-size:15px;"></i>
-                                    </b-btn>                                                                                                                                                                                                                                                               
-                                </div>                                
-                                <div class="col-md-1">                                       
-                                    <b-btn @click="verificaColapse('#iconTool'+index+genealogy.orderId,'#tool'+(index+''+genealogy.orderId),'fa-plus','fa-minus')" v-b-toggle="'tool'+index+''+genealogy.orderId">Ferramentas <i class="cursor-class fa fa-plus" :id="'iconTool'+index+genealogy.orderId" aria-hidden="true" style="font-size:15px;"></i></b-btn>                                    
-                                </div> 
-                            </div>
-                            <br>
-                            <div class="col-md-12" v-for="(outputRolo,indexOutput) in genealogy.outputRolos" :key="indexOutput">                                        
-                                <b-collapse :id="'rolo'+(genealogy.orderId+indexOutput)" class="row">                                                                                                                                                                                                                                                                                                                                                                                                       
-                                    <div class="row"> 
-                                        <div class="col-md-4">
-                                            <b-btn class="col-md-5" @click="verificaColapse('#iconMateria'+index+''+indexOutput,'#materia'+(index+''+indexOutput),'fa-plus','fa-minus')" v-b-toggle="'materia'+index+''+indexOutput">Materia Prima <i class="cursor-class fa fa-plus" :id="'iconMateria'+index+''+indexOutput" aria-hidden="true" style="font-size:15px;"></i></b-btn>
-                                        </div>                                           
+                    <!--                         -->
+                    <!-- Inicio loop rolos saida -->
+                    <!--                         -->
+                    <b-collapse class="card-body row" :id="'roloOutput'+(genealogy.orderId)">
+                        <div class="row col-md-12 legenda" >
+                            <div class="col-md-0" v-for="(outputRolo,indexOutput) in genealogy.outputRolls" :key="indexOutput">                                                                                                                         
+                                <b-btn class="btn btn-primary" aria-expanded="false" v-b-toggle="'rolo'+(genealogy.orderId+indexOutput)" variant="info"> <!--  @click="verificaColapse('#icon'+genealogy.orderId+indexOutput,'#rolo'+(genealogy.orderId+indexOutput),'fa-plus','fa-minus')"-->
+                                    Rolo {{indexOutput+1}}
+                                    <i class="fa fa-plus" :id="'icon'+genealogy.orderId+indexOutput" aria-hidden="true" style="font-size:14px;"></i>
+                                </b-btn>                                                                                                                                                                                                                                                                                               
+                            </div>                                                            
+                        </div>
+                        <br>
+                        <div class="col-md-12" v-for="(outputRolo,indexOutput) in genealogy.outputRolls" :key="indexOutput" aria-labelledby="headingOne" >                                        
+                            <b-collapse :id="'rolo'+(genealogy.orderId+indexOutput)" accordion="my-accordion" class="row">                                                                                                                                                                                                                                                                                                                                                                                                       
+                                <div class="row"> 
+                                    <div class="col-md-4">
+                                        <b-btn class="col-md-5" @click="verificaColapse('#iconMateria'+index+''+indexOutput,'#materia'+(index+''+indexOutput),'fa-plus','fa-minus')" v-b-toggle="'materia'+index+''+indexOutput">Materia Prima <i class="cursor-class fa fa-plus" :id="'iconMateria'+index+''+indexOutput" aria-hidden="true" style="font-size:15px;"></i></b-btn>
+                                    </div>   
+                                     <div class="col-md-4 offset-0">                                       
+                                        <b-btn class="col-md-5" @click="verificaColapse('#iconAco'+index+''+indexOutput,'#aco'+index+''+indexOutput,'fa-plus','fa-minus')" v-b-toggle="'aco'+index+''+indexOutput">Aço <i class="cursor-class fa fa-plus" :id="'iconAco'+index+''+indexOutput" aria-hidden="true" style="font-size:15px;"></i></b-btn>                                    
                                     </div> 
-                                    <b-collapse :id="'materia'+index+''+indexOutput">
-                                        <div v-for="(m, indexMateria) in outputRolo.ordersLiga" :key="indexMateria">
+                                    <div class="col-md-1">                                       
+                                        <b-btn @click="verificaColapse('#iconTool'+index+genealogy.orderId,'#tool'+(index+''+genealogy.orderId),'fa-plus','fa-minus')" v-b-toggle="'tool'+index+''+genealogy.orderId">Ferramentas <i class="cursor-class fa fa-plus" :id="'iconTool'+index+genealogy.orderId" aria-hidden="true" style="font-size:15px;"></i></b-btn>                                    
+                                    </div>                                       
+                                </div> 
+                                <b-collapse :id="'materia'+index+''+indexOutput">
+                                    <div v-for="(m, indexMateria) in outputRolo.ligas" :key="indexMateria">
                                         <div class="col-md-6">
-                                            <b>OPL:</b> {{m.order}}
+                                            <b>OPL:</b> {{m.orderNumber}}
                                         </div>  
                                         <table class="table table-hover">                                            
                                             <thead>
@@ -136,52 +146,48 @@
                                                 </tr>                                                
                                             </tbody>    
                                         </table> 
-                                        </div>
-                                    </b-collapse>                                                                                                      
-                                    
-                                    <div class="row"> 
-                                        <div class="col-md-4">                                       
-                                            <b-btn class="col-md-5" @click="verificaColapse('#iconAco'+index+''+indexOutput,'#aco'+index+''+indexOutput,'fa-plus','fa-minus')" v-b-toggle="'aco'+index+''+indexOutput">Aço <i class="cursor-class fa fa-plus" :id="'iconAco'+index+''+indexOutput" aria-hidden="true" style="font-size:15px;"></i></b-btn>                                    
-                                        </div>
                                     </div>
-                                    <b-collapse :id="'aco'+index+''+indexOutput">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>N° do rolo</th>
-                                                    <th>Quantidade</th>
-                                                    <th>Lote</th>
-                                                    <th>Data</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="(a, indexAco) in outputRolo.rolosInput" :key="indexAco">
-                                                    <td>{{a.numeroRolo}}</td><td>{{a.qtd}}</td><td>{{a.lote}}</td><td>{{ticksToDate(a.data)}}</td>
-                                                </tr>                                                
-                                            </tbody>    
-                                        </table>
-                                    </b-collapse>                                                                                                                    
-                                </b-collapse>                                 
-                            </div>        
-                            <b-collapse :id="'tool'+index+''+genealogy.orderId">                                                                                           
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Tipo</th>
-                                            <th>Rastreamento</th>
-                                            <th>Uso</th>
-                                            <th>Data</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(t, indexTool) in genealogy.tools" :key="indexTool">
-                                            <td>{{t.typeName}}</td><td>{{t.serialNumber}}</td><td>{{t.vidaUtil}}</td><td>{{ticksToDate(t.data)}}</td>
-                                        </tr>                                                
-                                    </tbody>    
-                                </table>
-                            </b-collapse>                                                                              
-                        </b-collapse>         
-                    </div>
+                                </b-collapse>                                                                                                      
+                                                             
+                                <b-collapse :id="'aco'+index+''+indexOutput">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>N° do rolo</th>
+                                                <th>Quantidade</th>
+                                                <th>Lote</th>
+                                                <th>Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(a, indexAco) in outputRolo.inputRolls" :key="indexAco">
+                                                <td>{{indexAco+1}}</td><td>{{a.quantity}}</td><td>{{a.batch}}</td><td>{{ticksToDate(a.startDate)}}</td>
+                                            </tr>                                                
+                                        </tbody>    
+                                    </table>
+                                </b-collapse> 
+                                <b-collapse :id="'tool'+index+''+genealogy.orderId">                                                                                           
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Tipo</th>
+                                                <th>Rastreamento</th>
+                                                <th>Uso</th>
+                                                <th>Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(t, indexTool) in outputRolo.tools" :key="indexTool">
+                                                <td>{{t.typeName}}</td><td>{{t.serialNumber}}</td><td>{{t.vidaUtil}}</td><td>{{ticksToDate(outputRolo.startDate)}}</td>
+                                            </tr>                                                
+                                        </tbody>    
+                                    </table>
+                                </b-collapse>                                                                                                                    
+                            </b-collapse>                                 
+                        </div>        
+                                                                                                    
+                    </b-collapse>         
+                <!-- </div> -->
                 </div>
             </div>                
         </div>     

@@ -157,7 +157,7 @@ export default {
             this.codeAco = "";
             this.loteLiga = "";
         },
-        cadastrarApont(ordem) {
+        cadastrarApont(ordem, type) {
             // MODELO JSON
             // {
             //     "type": "output",
@@ -166,38 +166,31 @@ export default {
             //     "quantity": 2.5,
             //     "batch": "lote"
             // }
-
-            if (this.loteAco != "" && this.loteAco != undefined) {
+            ordem.productType = type;
+            if (ordem.productType == 'aco') {
                 ordem.productId = 47;
-            } else if (this.loteLiga != "" && this.loteLiga != undefined) {
-                ordem.productId = this.productionOrderId.recipe.recipeProduct.product.productId;
-            } else {
+                ordem.code = this.codeAco;
+                ordem.batch = this.loteAco; 
+            } else if(ordem.productType == 'saida'){
+                ordem.batch = this.rolo;                
                 ordem.productId = this.roloSaidaID;
+                //ordem.productId = 27;
+            } else {
+                ordem.code = this.productionOrderId.productionOrderId; 
+                ordem.productId = this.productionOrderId.recipe.recipeProduct.product.productId;
+                ordem.batch = this.loteLiga;
             }
-
-
+            
             ordem.productionOrderId = this.productionOrder.productionOrderId;
             ordem.quantity = this.quantity;
             ordem.type = this.ordem.type;
             ordem.unity = this.unity;
             ordem.username = VueCookies.get('username');
-
-            ordem.code = this.codeAco;
-            
-            if (this.ordem.type == "output") {
-                ordem.batch = this.rolo;
-                ordem.productType = 'rolo';
-            } else if (this.loteLiga != undefined && this.ordem.type == "input") {
-                ordem.batch = this.loteLiga;
-                ordem.productType = 'liga';               
-            } else if (this.loteAco != undefined && this.ordem.type == "input") {
-                ordem.productType = 'rolo';
-                ordem.batch = this.loteAco;                
-            }
+                                                                                   
             var teste = ordem;
             console.log(ordem);
             setTimeout(() => {
-                axios.post(this.url+'/api/producthistorian', ordem).then((response) => {
+                axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
                     this.mensagemSuc = 'Produto apontado com sucesso.';
                     this.productionOrderId = this.ordem.productionOrderId;
                     this.carregando = false;
@@ -212,11 +205,12 @@ export default {
                     this.getResults();
                     this.cleanVariables();
                 }).catch((error) => {
-                    this.msgErro = "Ocorreu um erro: " + error.message;
+                    if(error.response)
+                        this.msgErro = error.response.data;
+                    else
+                        this.msgErro = "Erro desconhecido. Verifique se as configurações da OP estão corretas";
                     this.showModal("modalErro");
-                    this.carregando = false;
-                    console.log(teste);
-
+                    this.carregando = false;                    
                 })
                 this.pReceita = false;
                 this.consumo = false;
@@ -268,8 +262,9 @@ export default {
             this.orderHistorianAllProducts = [];
             this.lista = true;
             this.carregando = true;
+            
             axios.get(this.url + '/api/OrderHistorian/' + this.productionOrder.productionOrderId).then((response) => {
-
+                
                 console.log(response.data);
                 this.orderHistorian = response.data;
 
@@ -290,7 +285,7 @@ export default {
                 }
                 // this.rolo += 1;
                 console.log(this.orderHistorianAllProducts);
-                this.carregando = false;
+                this.carregando = false;                                                
             }).catch((error) => {
                 if (error.response.status == 404) {
                     this.noRegister = "Sem registros na tabela!"
@@ -300,7 +295,8 @@ export default {
                 }
                 this.carregando = false;
             })
-
+            this.getOP();
+            console.log("Listinha");
         },
         getResults(id) {
             var id = this.$route.params.id;
@@ -319,7 +315,6 @@ export default {
                             }
                         }
                     }
-
                 }
                 if (this.productionOrder.recipe.recipeProduct != undefined) {
                     this.roloSaida = this.productionOrder.recipe.recipeProduct.product.productName;
@@ -328,7 +323,7 @@ export default {
                 console.log(response.data);
                 this.listaOp(response.data);
                 // return response.data;
-                console.log(this.OPs);
+                console.log(this.OPs);                
             }).catch((error) => {
                 this.msgErro = "Ocorreu um erro: " + error.message;
                 this.showModal("modalErro");
@@ -347,54 +342,32 @@ export default {
             this.productionOrdersRecipe = p.recipe;
             this.order = true;
             this.carregando = true;
-            setTimeout(() => {
+            //setTimeout(() => {
                 this.listar();
-            }, 1000);
+            //}, 1000);
+            
         },
 
         getOP() {
             this.listOP = [];
+            
             axios.get(this.urlOP + "/api/productionorders/v2?&filters=currentStatus,approved&filters=productionOrderTypeId,2", this.config)
                 .then((response) => {
-
-                    response.data.values.forEach(obj => {
-                        //pego o ID do produto final da LIGA
-                        var prodligaid;
-                        if (obj.recipe.recipeProduct != undefined) {
-                            prodligaid = obj.recipe.recipeProduct.product.productId;
-                        }
-                        console.log("prodligaid");
-                        console.log(prodligaid);
-                        console.log("this.productionOrder");
-                        console.log(this.productionOrder);
-                        this.productionOrder.recipe.phases.forEach(phaseobjtira => {
-                            console.log("this.phaseobjtira");
-                            console.log(phaseobjtira);
-                            if (phaseobjtira.phaseId != 46) {
-                                // Verifico se o ID do produto final da LIGA é igual a algum ID do produto das fases da TIRA
-                                phaseobjtira.phaseProducts.forEach(phaseprod => {
-                                    console.log("this.phaseprod");
-                                    console.log(phaseprod);
-                                    if (phaseprod.product.productId == prodligaid) {
-                                        // this.noop = false;
-
-                                        this.listOP.push(obj);
-                                        console.log("this.listOP");
-                                        console.log(this.listOP);
-                                    }
+                    var listinha = response.data.values;
+                    listinha.forEach(ops => {                        
+                        console.log(ops);
+                        this.productionOrder.recipe.phases.forEach(pha => {
+                            var prodligaid = ops.recipe.recipeProduct.product.productId;
+                            if (pha.phaseId != 46) {
+                                pha.phaseProducts.forEach(pro => {
+                                    if(pro.product.productId == prodligaid)
+                                        this.listOP.push(ops);
                                 })
                             }
-
-
-                        });
-                        // if (obj.currentThing != undefined) {
-                    });
-
-                    if (this.listOP.length == 0) {
-                        this.noop = true;
-                    }
-
-
+                        })
+                    })
+                    console.log("Listinha2");
+                    console.log(this.listaOp);        
                 }).catch((error) => {
                     this.msgErro = "Ocorreu um erro: " + error.message;
                     this.showModal("modalErro");
@@ -454,6 +427,7 @@ export default {
     },
     beforeMount: function() {
         // this.getResults();
-        this.getResults();
+        this.getResults();    
+            
     }
 };

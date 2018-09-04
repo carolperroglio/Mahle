@@ -100,7 +100,10 @@ export default {
         blockConfirmButton() {
             this.blockConfirm = false
             var qtdPorcentagem = 0;
-
+            this.components.forEach(element => {
+                if(element.type == 'semi_finished' || element.type=='scrap')
+                    element.value = 0;
+            });
             for (var x = 0; x < this.components.length; x++) {
                 if (this.components[x].value.length == 0) {
                     this.blockConfirm = true
@@ -168,7 +171,7 @@ export default {
         realizarAnálise() {
             var components = this.components;
             var objComp = {};
-
+            
             if (this.cobre.cobreFosforoso != undefined) {
                 objComp = this.cobre
             }

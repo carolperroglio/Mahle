@@ -13,12 +13,6 @@ import axios from "axios";
 import Router from "vue-router";
 import AmCharts from "amcharts3";
 import AmSerial from "amcharts3/amcharts/serial";
-// import  ".././node_modules/amcharts3/amcharts/plugins/export/libs/fabric.js/fabric.js";
-// require.resolve( ".././node_modules/amcharts3/amcharts/plugins/export/libs/FileSaver.js/FileSaver.js");
-// require.resolve( ".././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js");
-// require.resolve( ".././node_modules/amcharts3/amcharts/plugins/export/libs/pdfmake/pdfmake.js");
-// require.resolve("amcharts3/amcharts/plugins/export/export.js");
-// require.resolve("amcharts3/amcharts/plugins/export/export.css");
 import router from "./router";
 import Bootstrap from "bootstrap-vue";
 import es6promisse from "es6-promise";
@@ -68,6 +62,7 @@ function getCookies(keyToFind) {
     return secValue;
   }
 }
+
 axios.interceptors.request.use(
   function(config) {
     //Do something before request is sent
@@ -148,7 +143,7 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error);
   }
-);*/
+);
 
 export default {
   name: "app",
@@ -183,9 +178,9 @@ export default {
 </script>
 
 <style>
-.progress {
+/* .progress {
   top: 38% !important;
   left: 15% !important;
   z-index: 1000;
-}
+} */
 </style>

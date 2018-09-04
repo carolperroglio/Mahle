@@ -53,7 +53,7 @@
                         <div class="card">
                             <div class="card-header card-header-hp">
                                 <b>Materiais Apontados</b>
-                                <div style="margin-right:1%" class="pull-right">
+                                <div style="margin-right:1%" class="pull-right">                                 
                                 <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
                                 </button>
@@ -66,7 +66,7 @@
                                 <button v-else type="button" class="btn btn-danger"  v-show="productionOrder.status == 'reproved'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
                                 <i aria-hidden="true" class="fa fa-eye"></i> Correção
                                 </button>
-                                <button type="button" class="btn btn-primary"  @click.stop.prevent="cargaUtilizadaForno = '';showModal('releaseToAnalysis')"
+                                <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()"
                                 v-if="productionOrder.status == 'active' || productionOrder.status == 'reproved'">
                                 <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
                                 </button>
@@ -122,8 +122,7 @@
                             <div id="load2" v-show="carregando">
                                 <stretch background="#4d4d4d"></stretch>
                             </div> 
-                            <div v-for="(o, index) in allProducts" v-bind:key="index" :class="{cinza: index%2==0}">
-                                
+                            <div v-for="(o, index) in allProducts" v-bind:key="index" :class="{cinza: index%2==0}">                                
                                 <label class="ls ls10 col-md-2">
                                     {{o.product}}</label>
                                 <label class="ls ls10 col-md-2">
@@ -141,8 +140,8 @@
                             </div>
                         </div>
                             
-                            </div>
                         </div>
+                    </div>
                 </div>
             </div>
                     
@@ -232,7 +231,7 @@
          <b-modal no-close-on-backdrop size="lg" ref="lastAnalysis" hide-footer title="Última Análise">
             <form>
                 <div v-if="calculoOK">
-                    <div class="cabecalho-table-exibir-cálculo">
+                <div class="cabecalho-table-exibir-cálculo">
                     <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(lastAnalysis, 'key',0):organizar(lastAnalysis, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
                         <b><font class="cursor-class" color="#ffffff">Material 
                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
@@ -273,8 +272,8 @@
                         <div class="form-group col-md-8">
                         <label><b>Escolha o produto: </b></label>
                         <select class="form-control form-control-sm" v-model="prodChoose" @change="prodRolo = ''">
-                            <option value="cobre"> Cobre</option>
-                            <option value="prodRecipe"> Produtos da receita</option>
+                            <option value="cobre"> Cobre Fosforoso</option>
+                            <option value="prodRecipe">Matéria prima da liga</option>
                         </select>
                         </div>
                     </div>
@@ -290,7 +289,7 @@
                         <b>Materiais </b>
                     </label>
                     <select class="form-control form-control-sm" v-model="prodRolo">
-                        <option v-for="(p,index) in orderPhaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
+                        <option v-if="p.phaseProductType != 'contaminent' && p.phaseProductType != 'semi_finished'" v-for="(p,index) in orderPhaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
                     </select>
                     </div>
                     <div class="form-group col-md-3">
@@ -322,30 +321,6 @@
                             <button @click.stop.prevent="quantity =''; lote = ''; unity = ''" class="btn btn-primary pull-right">
                                 <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
                             </button> 
-                        </div>
-                    </div>
-                </div>
-            </form>
-         </b-modal>
-         <!--                                 -->
-        <!--   Cadastro de orderHistorian    -->
-        <!--               Modal             -->
-        <b-modal no-close-on-backdrop size="sm" ref="releaseToAnalysis" hide-footer title="Liberar para análise">
-            <form>
-                <div>
-                    <div class="form-row">
-                    <div class="form-group col-md-12">
-                    <label>
-                        <b>Carga Utilizada do forno </b>
-                    </label>
-                    <input type="number" required v-model="cargaUtilizadaForno" class="form-control">
-                    </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="btn-group" role="group">
-                            <button class="btn btn-success" :disabled="!cargaUtilizadaForno" @click.stop.prevent="changeStatusToWaitingAnalysis()">
-                                <i  class="fa fa-check-square" aria-hidden="true"></i> Liberar
-                            </button>
                         </div>
                     </div>
                 </div>

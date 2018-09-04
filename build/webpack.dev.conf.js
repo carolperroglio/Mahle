@@ -73,7 +73,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
                 //IP SPI
                 TOOLS_API: JSON.stringify(api + ":8005"),
-                OP_API: JSON.stringify(api + ":8003"),
+                OP_API: JSON.stringify(api+":8003"),
                 THINGS_API: JSON.stringify(api + ":8001"),
                 PROD_HIST_API: JSON.stringify(api + ":8006"),
                 RECIPE_API: JSON.stringify(api + ":8002"),
@@ -84,7 +84,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
                 USER_API: JSON.stringify(api + ":8010"),
                 ANALYSIS_API: JSON.stringify(api + ":8014"),
-
+                
                 USER_TRUE: true
                 //IP NUVEM
                 // TOOLS_API: JSON.stringify(api + ":8005"),

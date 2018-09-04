@@ -45,6 +45,7 @@ export default {
         return {
             url: process.env.THINGS_API,
             urlHist: process.env.HIST_ALARM_API,
+            
             carregando: false,
             date: '',
             datef: '',
@@ -96,7 +97,9 @@ export default {
             data: [],
             headers: [],
             jsonfields: {},
-            msg: ''
+            msg: '',
+           
+
         }
     },
     components: {
