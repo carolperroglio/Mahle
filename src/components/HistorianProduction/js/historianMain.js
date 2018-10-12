@@ -170,7 +170,7 @@ export default {
         aponta(order, quantiti, id){            
             //var produto = response.data.recipe.recipeProduct.product;
             console.log(order);
-            var p = {type : 'input', username : VueCookies.get('username'), productionOrderId : this.idOpAtual, productId : 72, quantity : quantiti,unity : 'kg', batch : order.productionOrderNumber};            
+            var p = {type : 'input', username : VueCookies.get('username'), productionOrderId : this.idOpAtual, productId : 73, quantity : quantiti,unity : 'kg', batch : order.productionOrderNumber};            
             axios.post(this.url + '/api/producthistorian', p).then((response) => {
                 this.erro = false;
                 this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";

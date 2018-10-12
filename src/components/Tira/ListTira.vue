@@ -58,10 +58,10 @@
         <div class="table-listtira" v-show="!carregando">    
             <div v-for="(recipe,index) in recipes" v-bind:class="{cinza: index%2==0}" v-bind:key="index">
                 <label class="ls2 col-md-3">
-                    <b><font color="#9BA6A5"> </font></b> {{recipe.recipeName}}
+                    <b><font color="#9BA6A5"> </font></b>{{recipe.recipeCode}}                    
                 </label>
                 <label class="ls2 col-md-6" style="margin-left:-1%">
-                    <b><font color="#9BA6A5"> </font></b>{{recipe.recipeCode}}
+                    <b><font color="#9BA6A5"> </font></b> {{recipe.recipeDescription}}
                 </label>
                 <!-- <label class="ls2 col-md-3">
                     <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}

@@ -41,6 +41,7 @@
         "rijs.npm": "^2.0.0",
         "rijs.resdir": "^1.4.0",
         "serial": "0.0.9",
+        "sheetjs": "^1.0.21",
         "vee-validate": "^2.0.3",
         "vue": "^2.5.2",
         "vue-autocompleter": "^0.3.17",
@@ -58,6 +59,7 @@
         "vue-tiles": "0.0.2",
         "vue2-timepicker": "^0.1.4",
         "weekstart": "^1.0.0",
+        "xlsx": "^0.14.0",
         "xmldom": "^0.1.27"
     },
     "devDependencies": {

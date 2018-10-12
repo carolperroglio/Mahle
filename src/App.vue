@@ -135,7 +135,7 @@ axios.interceptors.response.use(
       error.response.status != undefined &&
       error.response.status == "500"
     ) {
-      VueCookies.set("status", "500");
+      //VueCookies.set("status", "500");
       console.log("status code: " + error.response.status);
     } else {
       VueCookies.set("status", "ok");

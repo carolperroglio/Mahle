@@ -586,6 +586,10 @@ export default {
                             newkey = "rolo"
                             objaux[newkey] = newObj[key]
                             break; 
+                        case 'codTira':
+                            newkey = "codTira"
+                            objaux[newkey] = newObj[key]
+                            break; 
                     }
                     
                 }
