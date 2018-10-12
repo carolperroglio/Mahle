@@ -231,6 +231,10 @@ export default {
                     'title': 'rolo',
                     'dataKey': 'rolo'
                 },
+                {
+                    'title': 'codTira',
+                    'dataKey': 'codTira'
+                },
             ];
 
             return headers;

@@ -151,8 +151,9 @@
         <!-- EXIBIR CÁLCULO  -->
          <b-modal no-close-on-backdrop size="lg" ref="exibirCalculo" hide-footer title="Cálculo da Análise Química Realizada">
             <form>
+                
                 <div class="form-row">
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-5">                    
                     <label for="">Quantidade de cavaco utilizada:</label>
                         <input type="number" class="form-control" v-model="cavaco">
                     </div>
@@ -215,6 +216,7 @@
                         {{l.value}}</label>
                 </div>
                 <div v-if="cobreFosforoso!= null">
+                    
                 <label class="ls ls10 col-md-4">
                     Cobre Fosforoso</label>
                 <label class="ls ls10 col-md-7">
@@ -222,6 +224,7 @@
                 </div>
                         
                 </div>
+                
             </form>
          </b-modal>
 
@@ -267,7 +270,7 @@
         <!--               Modal             -->
         <b-modal no-close-on-backdrop ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
             <form>
-                <div>
+                <div>                    
                     <div class="form-row" >
                         <div class="form-group col-md-8">
                         <label><b>Escolha o produto: </b></label>

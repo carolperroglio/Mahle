@@ -14,12 +14,15 @@
                     </div> -->
                     <div class="form-group row">
                         <div class="form-group col-sm-6">
-                        <label for="op">OP</label>
-                            <input required type="text" class="form-control" id="op" aria-describedby="prodorder" placeholder="ex:20405060" v-model="productionOrderObj.productionOrderNumber">
+                            <label for="op">OP</label>
+                            <input class="form-control" :class="{'is-invalid' : !productionOrderNumber}" id="op" placeholder="ex:20405060" v-model="productionOrderNumber">                            
+                            <div class="invalid-feedback" v-show="!productionOrderNumber">
+                                Digite a OP antes
+                            </div>
                         </div>
                         <div class="form-group col-sm-4">
                         <label for="desc">Descrição</label>
-                            <input type="text" disabled class="form-control" id="desc" v-model="descriptionTira" value="opDesc">
+                            <input disabled class="form-control" id="desc" v-model="descriptionTira" value="opDesc">
                         </div>
                     </div>
                     <!-- <div class="form-group row">
@@ -36,8 +39,8 @@
                     <div class="form-group row">
                         <div class="form-group col-md-12">
                         <label for="opType">Código da Tira</label>
-                        <input autocomplete="off" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" placeholder="Ex: Receita1" />
-                        <button class="btn btn-outline-success btn-sm col-md-1" :disabled="!productionOrderObj.productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
+                        <input autocomplete="off" :disabled="!productionOrderNumber" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                        <button class="btn btn-outline-success btn-sm col-md-1" :disabled="!productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </button>
                         <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeCode; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeCode }}</b-dropdown-item>
@@ -50,11 +53,11 @@
                     
                     <div id="accordion" role="tablist" v-if="recipeAdded">
                         <div class="card">
-                            <div class="card-header card-header-op" role="tab" id="headingOne">
+                            <div class="card-header card-header-op" style="text-align: center;" role="tab" id="headingOne">
                                 <h5 class="mb-0">
-                                    <a class="collapse-color" data-toggle="collapse" href="#recipeAdded" aria-expanded="true" aria-controls="recipeAdded">
-                                        {{recipeAdded}}
-                                    </a>
+                                    <span class="collapse-color" style="font-weight: bolder;text-decoration: none;" data-toggle="collapse" href="#recipeAdded" aria-expanded="true" aria-controls="recipeAdded">
+                                        {{recipeObj.recipeCode}}
+                                    </span>
                                 </h5>
                             </div>
 
@@ -65,8 +68,7 @@
                                     <!-- <ul class="list-group" v-for="(phases, index) in recipeObj.phases" v-bind:value="phases"> -->
                                     <ul class="list-group" v-if="recipeAdded.length != 0">
                                         <!-- <li class="list-group-item" > -->
-                                        <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>
-                                        <span><strong>Código:</strong> {{recipeObj.recipeCode}}</span>                                           
+                                        <span><strong>Descrição da Tira:</strong> {{recipeObj.recipeDescription}}</span>                                                                                 
                                     </ul>
                                 </div>
                                 <!-- Fim - </Mostra as fases da Receita>-->
@@ -81,7 +83,7 @@
             <!--                    -->
             <div class="modal-footer">
                 <div class="btn-group" role="group">
-                    <button class="btn btn-success" :disabled="!recipeAdded || !productionOrderObj.productionOrderNumber || productionOrderObj.productionOrderNumber == ' '" @click="createOp(productionOrderObj); hideModal('modalCadOP');">
+                    <button class="btn btn-success" :disabled="!recipeAdded || !productionOrderNumber" @click="productionOrderObj.productionOrderNumber=productionOrderNumber;createOp(productionOrderObj); hideModal('modalCadOP');">
                         <i  class="fa fa-check-square" aria-hidden="true"></i>
                         Confirmar
                     </button>

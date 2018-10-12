@@ -26,6 +26,8 @@ import jsPDF from 'jspdf';
 import logo from './logoMahle.jpeg';
 import html2canvas from 'html2canvas';
 import JsonExcel from 'vue-json-excel';
+import { StyleSheet } from 'sheetjs';
+import XLSX from 'xlsx';
 //import logo from ''
 
 Vue.use(Card);
@@ -55,22 +57,7 @@ export default {
             carregando: false,
             date: '',
             datef: '',
-            config: {
-                format: 'DD MM YYYY',
-                useCurrent: false,
-            },
-            config2: {
-                format: 'DD MM YYYY',
-                useCurrent: false,
-            },
-            timeIni: {
-                HH: "00",
-                mm: "00"
-            },
-            timeFim: {
-                HH: "23",
-                mm: "59"
-            },
+            
             configCache : {
                 headers: { 'Cache-Control': 'no-cache' }
             },
@@ -93,48 +80,7 @@ export default {
             prosFim: [],
             recipeCode:'',
             t:'',      
-            //jsonfields: { Data: 'category', Alto: 'alto', Baixo: 'baixo', Muitoalto: 'muito alto', Muitobaixo: 'muito alto', Offline: 'offline' },     
-            fileName: 'excel.xls',
-
-
-            json_fields: {
-                'Complete name': 'name',
-                'City': 'city',
-                'aniversario' : 'birthdate',
-                'Bairro':'country',
-                //'Telephone': 'phone.mobile',
-                'Telephone 2' : 'phone'
-            },
-            json_data: [
-                {
-                    'name': 'Tony Peña',
-                    'city': 'New York',
-                    'country': 'United States',
-                    'birthdate': '1978-03-15',
-                    'phone': [
-                        {'nome':'1-541-754-3010', 'numero':'(541) 754-3010'}
-                    ]
-                },
-                {
-                    'name': 'Thessaloniki',
-                    'city': 'Athens',
-                    'country': 'Greece',
-                    'birthdate': '1987-11-23',
-                    'phone': [
-                        {'nome':'1-541-754-3010', 'numero':'(541) 754-3010'}
-                    ]
-                }
-            ],                
-
-            json_meta: [
-                [
-                    {
-                        'key': 'charset',
-                        'value': 'utf-8'
-                    }
-                ]
-            ],
-        
+            //jsonfields: { Data: 'category', Alto: 'alto', Baixo: 'baixo', Muitoalto: 'muito alto', Muitobaixo: 'muito alto', Offline: 'offline' },                         
         }
     },
     computed: {},
@@ -147,6 +93,7 @@ export default {
         'b-btn': vBtn,
         'date': Datetime,
         'b-dropdown-item': bDropdownItem,
+        'XLSX': XLSX,
     },
     directives: {
         'b-modal': bModalDirective,
@@ -199,8 +146,7 @@ export default {
                 dFim = ((new Date(dateFim).getTime() * 10000) + 621355968000000000) - (new Date(dateFim).getTimezoneOffset() * 600000000);
             }
             axios.get(this.PROD_HIST_API+"/api/producthistorian?startdate="+dIni+"&endDate="+dFim+"&cod="+cod+"&op="+op, this.configCache).then((response) => {                
-                this.genealogys = response.data;  
-                console.log(response);                                 
+                this.genealogys = response.data;                                        
                 //this.genealogy.sort(function(a, b) { console.log(a["nRolo"]); return (a['nRolo'] > b["nRolo"]) ? 1 : ((b["nRolo"] > a["nRolo"]) ? -1 : 0); });
                 this.carregando = false;
             }, (error) => {
@@ -210,7 +156,142 @@ export default {
                 console.log(error);
             })
         },
+        
 
+        exportExcel () { // On Click Excel download button
+            var wb = XLSX.utils.book_new();
+            wb.Props = {
+                Title: 'Genealogia de produção de tiras',
+                Subject: '',
+                Author: 'Spi Integradora',
+                CreatedDate: new Date()
+            };
+            this.genealogys.forEach(g => {                                
+                //XLSX.utils.book_append_sheet(wb, animalWS, g.productionOrderNumber);
+                wb.SheetNames.push(g.productionOrderNumber);  
+                var data = [];
+                var i = 1;
+                g.outputRolls.forEach(saida => {   
+                    data.push([]);
+                    data.push([]);                                 
+                    data.push(["ROLO : "+ (i++), "QUANTIDADE : "+saida.quantity, "DATA INICIO : "+this.ticksToDate(saida.startDate), "DATA FIM : "+ this.ticksToDate(saida.endDate)]);                    
+                    data.push([]);                    
+                    data.push(["", "AÇO UTILIZADO"]);
+                    data.push(["QUANTIDADE","LOTE","DATA"]);                    
+                    saida.inputRolls.forEach(input => {
+                        data.push([input.quantity, input.batch, this.ticksToDate(input.startDate)]);    
+                    });                    
+                    data.push([]);                    
+                    data.push(["", "LIGAS UTILIZADAS"]);                    
+                    
+                    saida.ligas.forEach(liga => {                        
+                        data.push(["NUMERO DA ORDEM : "+ liga.orderNumber,"DATA : "+this.ticksToDate(liga.startDate), "QUANTIDADE : "+ liga.quantity]);                    
+                        data.push([]);
+                        data.push(["ELEMENTO","LOTE","QUANTIDADE","DATA"]);  
+                        liga.productsInput.forEach(produto => {
+                            data.push([produto.product, produto.batch,produto.quantity , this.ticksToDate(produto.date)]);
+                        });
+                        data.push([]);
+                    });
+                    //saida.tools
+                    data.push(["--------------------------------","--------------------------------","--------------------------------","--------------------------------"]);
+                });
+                
+                wb.Sheets[g.productionOrderNumber] = XLSX.utils.aoa_to_sheet(
+                    //["Inicio da ordem : "+g.startDate, "Fim da ordem : "+g.endDate, "Código da tira : "+g.recipeCode], 
+                    data                   
+                );                
+                // XLSX.utils.
+                console.log(wb.Sheets[g.productionOrderNumber]);                
+                
+            });                  
+            XLSX.writeFile(wb, 'book.xlsx');         
+        },
+
+        // s2ab(s){
+        //     console.log(s);
+        //     var buf = new ArrayBuffer(this.s2ab.length);
+        //     var view = new Uint8Array(buf);
+        //     for(var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+        //     return view;
+        // },
+
+
+        // toExcel(csv, filename){
+        //     console.log(csv);
+        //     var csvFile;
+        //     var downloadLink;
+                 
+        //     csvFile = new Blob([csv], {type: "octet-stream"});
+        //     downloadLink = document.createElement("a");  
+        //     downloadLink.download = filename;
+        //     downloadLink.href = window.URL.createObjectURL(csvFile);
+        //     downloadLink.style.display = "none";
+        //     document.body.appendChild(downloadLink);
+        //     downloadLink.click();        
+        // },
+
+        // exportTableToCSV(filename){
+        //     var csv = [];
+        //     var i, j=1;
+        //     this.genealogys.forEach(g => {
+        //         i=1;
+        //         csv.push("\n\n\n,OP : " + j);
+        //         csv.push("\nNumero da ordem : "+ g.productionOrderNumber +",Data inicio : "+this.ticksToDate(g.startDate)+",Data fim : "+this.ticksToDate(g.endDate)+",Codigo da receita : "+g.recipeCode);                
+        //         g.outputRolls.forEach(output => {                    
+        //             csv.push("\nROLO : " + (i++)+",Quantidade : " + output.quantity);
+        //             csv.push("\n\n,,ACO UTILIZADO");
+        //             csv.push(",Quantidade,Lote,Data");                    
+        //             output.inputRolls.forEach(input => {
+        //                 csv.push(","+input.quantity+","+input.batch+","+this.ticksToDate(input.startDate));
+        //             });
+        //             output.ligas.forEach(liga => {
+        //                 csv.push("\n,,LIGAS UTILIZADAS\n");                        
+        //                 csv.push(",,Numero da ordem : "+ liga.orderNumber +",Codigo da receita : "+liga.batch); 
+        //                 csv.push(",,Data inicio : "+this.ticksToDate(liga.startDate)+",Data fim : "+this.ticksToDate(liga.endDate));
+        //                 csv.push(",,ELEMENTOS"); 
+        //                 csv.push(",ELEMENTO,QUANTIDADE,LOTE,DATA");
+        //                 liga.productsInput.forEach(elemento => {
+        //                     csv.push(","+elemento.product+","+elemento.quantity+","+elemento.batch+","+this.ticksToDate(elemento.date));
+        //                 }); 
+        //             });
+        //         });
+        //         j++;
+        //     });                                 
+        //     this.toExcel(csv.join("\n"), filename);
+        // },
+
+
+
+
+
+
+
+
+        ticksToDate(dateTicks) {
+            var epochTicks = 621355968000000000,
+                ticksPerMillisecond = 10000,
+                jsTicks = 0,
+                jsDate;
+            jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
+            jsDate = new Date(jsTicks);            
+            var dateFormatted = jsDate.getDate() + "/" +
+                (jsDate.getMonth() + 1) + "/" +
+                jsDate.getFullYear() + " " + jsDate.getHours() + ":" + jsDate.getMinutes();
+            // var hours = jsDate.toString().slice(4, 21);            
+            return dateFormatted;
+        },
+
+        dateToTicks(dateTime) {
+            var dateToTransform = dateTime.slice(3, 6) +
+                dateTime.slice(0, 3) +
+                dateTime.slice(6, 10) +
+                dateTime.slice(10, 16);
+            var date = new Date(dateToTransform);
+            var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
+            return ticks;
+        }, 
+        
         toPdfAutoTable(){
             var pdfsize = 'a0';
             var pdf = new jsPDF('p', 'pt', 'A4');    
@@ -409,86 +490,8 @@ export default {
             });
             
             pdf.save("todos.pdf");
-
-
-        },
-        
-
-
-        toExcel(csv, filename){
-            console.log(csv);
-            var csvFile;
-            var downloadLink;
-                 
-            csvFile = new Blob([csv], {type: "text/csv"});
-            downloadLink = document.createElement("a");  
-            downloadLink.download = filename;
-            downloadLink.href = window.URL.createObjectURL(csvFile);
-            downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-
         },
 
-        exportTableToCSV(filename){
-            var csv = [];
-            var i;
-            this.genealogys.forEach(g => {
-                i=1;
-                csv.push("\n\nNumero da ordem : "+ g.productionOrderNumber +",Data inicio : "+this.ticksToDate(g.startDate)+",Data inicio : "+this.ticksToDate(g.endDate)+",Codigo da receita : "+g.recipeCode);                
-                g.outputRolls.forEach(output => {                    
-                    csv.push("\nRolo : " + (i++)+",Quantidade : " + output.quantity);
-                    csv.push(",,Aco");
-                    csv.push(",Quantidade,Lote,Data");                    
-                    output.inputRolls.forEach(input => {
-                        csv.push(","+input.quantity+","+input.batch+","+this.ticksToDate(input.startDate));
-                    });
-                });                
-            });
-            
-            // var rows = document.querySelectorAll("table tr");            
-            // for (var i = 0; i < rows.length; i++) {
-            //     var row = [];
-            //     var cols = rows[i].querySelectorAll("td, th");
-                
-            //     for (var j = 0; j < cols.length; j++) 
-            //         row.push(cols[j].innerText);
-                
-            //     csv.push(row.join(",")); 
-                       
-            // }        
-            // Download CSV file            
-            this.toExcel(csv.join("\n"), filename);
-        },
-
-
-
-        ticksToDate(dateTicks) {
-            var epochTicks = 621355968000000000,
-                ticksPerMillisecond = 10000,
-                jsTicks = 0,
-                jsDate;
-            jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
-            jsDate = new Date(jsTicks);
-            console.log(dateTicks);
-            var dateFormatted = jsDate.getDate() + "/" +
-                (jsDate.getMonth() + 1) + "/" +
-                jsDate.getFullYear() + " " + jsDate.getHours() + ":" + jsDate.getMinutes();
-            // var hours = jsDate.toString().slice(4, 21);
-            console.log(dateFormatted);
-            return dateFormatted;
-        },
-
-        dateToTicks(dateTime) {
-            var dateToTransform = dateTime.slice(3, 6) +
-                dateTime.slice(0, 3) +
-                dateTime.slice(6, 10) +
-                dateTime.slice(10, 16);
-            var date = new Date(dateToTransform);
-            var ticks = ((date.getTime() * 10000) + 621355968000000000) - (date.getTimezoneOffset() * 600000000);
-            return ticks;
-        }, 
-        
         getResults(url, name, pros) {
             pros = [];
             if (name.length >= 3) {
@@ -506,7 +509,6 @@ export default {
                 })
             }
             return pros;
-        },
-    }, 
-     
+        },        
+    },     
 }

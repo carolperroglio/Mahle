@@ -53,57 +53,64 @@
         <div class="cabecalho-table-alarms"  v-show="!carregando" v-if="tableAlarms.length > 0">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'product',0):organizar(produtos, 'product',0);" class="ls2 col-md-2">
                 <b><font class="cursor-class" color="#ffffff">Parâmetro
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                    
+                    
                 </font></b>
             </label>
             <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(produtos, 'minValue',1):organizar(produtos, 'minValue',1);" class="ls2 col-md-2">
                 <b><font class="cursor-class" color="#ffffff">
                     Equipamento
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                    
+                    
                 </font></b>
             </label>
             <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Tipo
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                    
+                    
                 </font></b>
             </label>
             <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Data
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                    
+                    
                 </font></b>
             </label>
-            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-2">
+            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Hora Início
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                
+                
                 </font></b>
             </label> 
             <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Hora Fim
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                
+                
                 </font></b>
             </label>  
             <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     OP
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                
+                    
                 </font></b>
             </label>  
             <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Rolo
-                    <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                
+                
+                </font></b>
+            </label>  
+            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    Tira
+                
+                
                 </font></b>
             </label>                
         </div>                                             
@@ -129,7 +136,7 @@
                 <label class="ls2 col-md-1">
                     {{t.dateIni}}
                 </label>
-                <label class="ls2 col-md-2">
+                <label class="ls2 col-md-1">
                     {{t.hourIni}}
                 </label>
                 <label class="ls2 col-md-1">
@@ -140,6 +147,9 @@
                 </label>
                 <label class="ls2 col-md-1">
                     {{t.rolo}}
+                </label>
+                <label class="ls2 col-md-1">
+                    {{t.codTira}}
                 </label>
             </div>                       
         </div> 

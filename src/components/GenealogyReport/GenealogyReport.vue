@@ -29,7 +29,7 @@
                     </div>
                 </li> 
                 <li class="nav-item-genealogy form-group col-sm-0" v-show="fieldFilter=='cod' || fieldFilter=='date'">
-                    <label><b>Início </b></label>      
+                    <label><b>Início  </b></label>      
                 </li>
                <li class="nav-item-genealogy col-sm-1"  v-show="fieldFilter=='cod' || fieldFilter=='date'">
                     <datetime type="datetime" input-class="form-control form-control-sm" v-model="inicio" format="yyyy-MM-dd HH:mm:ss"></datetime>     
@@ -51,15 +51,15 @@
                     </div>
                 </li>                
                 <li class="nav-item-genealogy col-sm-2">
-                    <button class="btn btn-success btn-sm" :disabled="!fieldFilter || (fieldFilter=='date' && !inicio && !fim) || (fieldFilter=='op' && !op) || (fieldFilter=='cod' && !inicio && !fim && !cod)" @click.stop.prevent="getGenealogy(fieldFilter, op, cod, inicio, fim)">
-                        <i class="fa fa-check-square"></i> Confirmar
+                    <button class="btn btn-primary btn-sm" :disabled="!fieldFilter || (fieldFilter=='date' && !inicio && !fim) || (fieldFilter=='op' && !op) || (fieldFilter=='cod' && !inicio && !fim && !cod)" @click.stop.prevent="getGenealogy(fieldFilter, op, cod, inicio, fim)">
+                        <i class="fa fa-search"></i> Buscar
                     </button>
                 </li>
                 <li class="ml-auto p-2">                
                     <button type="button" class="btn btn-sm pull-left btn-outline-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="toPdfAutoTable()">
                         <i class="fa fa-file-pdf-o"></i> Exportar para PDF
                     </button>  
-                    <button type="button" class="btn btn-sm pull-left btn-outline-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="exportTableToCSV('members.csv')">
+                    <button type="button" class="btn btn-sm pull-left btn-outline-success" :disabled="!genealogys || genealogys.length==0" @click.prevent="exportExcel('members.xlsx')">
                         <i class="fa fa-file-pdf-o"></i> Exportar para Excel
                     </button>
                     <!-- <download-excel class = "btn btn-outline-success btn-sm btn-sm pull-left" :data = "json_data"  name = "fileName">                    
@@ -136,7 +136,7 @@
                                                 <tr>
                                                     <th>Elemento</th>
                                                     <th>Quantidade</th>
-                                                    <th>Lote</th>
+                                                    <th>OF</th>
                                                     <th>Data</th>
                                                 </tr>
                                             </thead>

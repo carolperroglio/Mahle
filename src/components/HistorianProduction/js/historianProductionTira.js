@@ -173,8 +173,7 @@ export default {
                 ordem.batch = this.loteAco; 
             } else if(ordem.productType == 'saida'){
                 ordem.batch = this.rolo;                
-                ordem.productId = this.roloSaidaID;
-                //ordem.productId = 27;
+                ordem.productId = this.roloSaidaID;                
             } else {
                 ordem.code = this.productionOrderId.productionOrderId; 
                 ordem.productId = this.productionOrderId.recipe.recipeProduct.product.productId;
@@ -197,6 +196,14 @@ export default {
                     this.pReceita = false;
                     this.pFase = false;
                     // this.rolo++;
+                    
+                    if(ordem.productType=='saida'){
+                        axios.get("http://10.35.255.22:8013/api/interlevel?tag=Numero_ROLO").then((response)=>{
+                            var t = response.data.value;
+                            ++t;                    
+                            axios.post("http://10.35.255.22:8013/api/interlevel", {address: "Numero_ROLO",value: t,workstation: "Linha"}).then();
+                        });
+                    }
                     this.ordem = {};
                     console.log(ordem);
                     this.hideModal('cadAco');

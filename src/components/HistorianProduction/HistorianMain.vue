@@ -63,7 +63,7 @@
                     {{o.typeDescription}}</label>
                 <label v-if="o.typeDescription == 'Liga'" class="col-md-2">
                 <label class="ls ls10 col-md-6 router">
-                    <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
+                    <router-link class="btn btn-info" :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
                 </label>
                 </label>
                 <label v-if="o.typeDescription == 'Liga'" class="col-md-2" v-show="o.currentStatus == 'active'">
@@ -111,7 +111,7 @@
             </div>
             <div class="modal-footer row">
                 <div class="pull-left">
-                    <input type="checkbox" v-model="cr" value="true" id="scale"/> <label for="scale">Para opl sem pé de banho clique aqui</label>
+                    <input type="checkbox" v-model="cr" value="true" id="scale"/> <label for="scale">Para OPL sem pé de banho clique aqui</label>
                 </div>
                 <div class="btn-group pull-right" role="group">                    
                     <button class="btn  btn-success"  :disabled="opSelected.productionOrderNumber==null && cr==false" @click.stop.prevent="getLastAnalysis();(opSelected.productionOrderNumber!=null)?aponta(opSelected, cargaUtilizada):'';">

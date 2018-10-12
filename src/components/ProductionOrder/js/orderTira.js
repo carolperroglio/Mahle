@@ -87,8 +87,8 @@ export default {
             descriptionTira: "Tira",
             canAdd: false,
             msgErro: "",
-            erro: false
-
+            erro: false,
+            productionOrderNumber: ""
         }
     },
     components: {
@@ -524,7 +524,7 @@ export default {
                                 console.log("Entrou no esquema");
                                 axios.post("http://10.35.255.22:8013/api/interlevel", {address: "Numero_OP",value: data.productionOrderNumber,workstation: "Linha"}).then(response => {
                                     axios.post("http://10.35.255.22:8013/api/interlevel", {address: "Codigo_TIRA",value: data.recipe.recipeCode,workstation: "Linha"}).then();
-                                    axios.post("http://10.35.255.22:8013/api/interlevel", {address: "Numero_ROLO",value: 0,workstation: "Linha"}).then();
+                                    axios.post("http://10.35.255.22:8013/api/interlevel", {address: "Numero_ROLO",value: 1,workstation: "Linha"}).then();
                                 });
                                 console.log("Saiu no esquema");
                             })

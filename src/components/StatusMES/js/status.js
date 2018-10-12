@@ -76,10 +76,11 @@ export default {
         getThings() {
             axios.get(this.urlThings).then((response) => {
                 this.things = response.data;
+                this.getStatus();
             }, (error) => {
                 console.log(error);
             })
-        },
+        },        
         getStatus() {
             this.carregando = true;
             this.status = [];
@@ -87,20 +88,30 @@ export default {
                 axios.get(this.url).then(response => {
                     // this.status = response.data;
                     var alarms = [];
-
+                    //this.status[20]={};
                     response.data.forEach(s => {
+                        var t = '1';
+                        ++t;
+                        console.log("Aqui no t");  
+                        console.log(t);
                         if (s.thingId != 1 && s.thingId != 2) {
-
                             s.hasRedAlert = false;
                             s.hasLowAlert = false;
                             s.hasGreenAlert = false;
+                            var position;                                                        
                             for (var i = 0; i < this.things.length; i++) {
+                                ++t;
                                 if (s.thingId == this.things[i].thingId) {
                                     s.thingName = this.things[i].thingName;
-                                }
+                                    s.position = this.things[i].position;                                       
+                                }                                
                             }
                             this.status.push(s);
+                                                        
                         }
+                    });
+                    this.status.sort(function(a,b) {
+                        return a.position < b.position ? -1 : a.position > b.position ? 1 : 0;
                     });
                     this.status.forEach(s => {
                         for (var i = 0; i < s.alarms.length; i++) {
@@ -115,7 +126,6 @@ export default {
                             }
                         }
                     });
-
                     this.carregando = false;
                 }).catch(error => {
                     console.log(error);
@@ -141,12 +151,12 @@ export default {
             return string;
         }
     },
-    beforeMount: function() {
-        this.getStatus();
+    beforeMount: function() {        
         this.getThings();
+        
         setInterval(() => {
             this.getThings();
-            this.getStatus();
+            
         }, 30000)
 
     }

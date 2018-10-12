@@ -15,8 +15,7 @@ export default {
     data() {
         return {
             config: {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                headers: { 'Cache-Control': 'no-cache' }
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Cache-Control': 'no-cache' },
             },
             id: "",
             carregando: false,

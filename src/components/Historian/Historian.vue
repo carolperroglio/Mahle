@@ -112,16 +112,23 @@
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
                 </font></b>
             </label>  
-            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-2" >
+            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1" >
                 <b><font class="cursor-class" color="#ffffff">
                     OP
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
                 </font></b>
             </label> 
-            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-2">
+            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Rolo
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label> 
+            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-2">
+                <b><font class="cursor-class" color="#ffffff">
+                    Tira
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
                 </font></b>
@@ -143,10 +150,12 @@
                     {{t.LIC}}</label>
                 <label class="ls2 col-md-1">
                     {{t.LIE}}</label>
-                <label class="ls2 col-md-2">
+                <label class="ls2 col-md-1">
                     {{t.ordem}}</label>
-                <label class="ls2 col-md-2">
+                <label class="ls2 col-md-1">
                     {{t.rolo}}</label>
+                <label class="ls2 col-md-2">
+                    {{t.codTira}}</label>
             </div>
         </div>
         <!-- <tr class="" v-for="(obj,index1) in providertable" v-bind:key="index1" :class="{cinza: index1%2==0}"> -->
