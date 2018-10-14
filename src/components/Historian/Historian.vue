@@ -23,7 +23,7 @@
             <!-- <div class="container-fluid"> -->
             <div id="load" v-show="carregando">
             <stretch></stretch>
-            </div>    
+            </div>
 
                 <div class="history">
                 <div class="row">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 </div>
-                <!-- 
+                <!--
                     GRÁFICO
                     -->
                 <!-- <div class="col-md-11" > -->
@@ -45,7 +45,7 @@
 
         <div class="row conteudotabela">
             <div class="col-sm-2">
-            <select class="form-control-outline-secondary" v-model="newGroup" @change.prevent="editGroup(newGroup)">    
+            <select class="form-control-outline-secondary" v-model="newGroup" @change.prevent="editGroup(newGroup)">
                 <option v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
             </select>
             </div>
@@ -86,56 +86,56 @@
             </label>
             <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(providertable, 'maxValue',3):organizar(providertable, 'maxValue',3);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
-                    LSE Limite superior especifico	
+                    LSE Limite superior especifico
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i> -->
                 </font></b>
             </label>
             <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(providertable, 'maxValue',4):organizar(providertable, 'maxValue',4);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
-                    LSC Limite superior de controle	
+                    LSC Limite superior de controle
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i> -->
                 </font></b>
-            </label> 
+            </label>
             <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(providertable, 'maxValue',5):organizar(providertable, 'maxValue',5);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     LIC Limite inferior de controle
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i> -->
                 </font></b>
-            </label> 
+            </label>
             <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     LIE Limite inferior especifico
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
                 </font></b>
-            </label>  
+            </label>
             <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1" >
                 <b><font class="cursor-class" color="#ffffff">
                     OP
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
                 </font></b>
-            </label> 
+            </label>
             <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1">
                 <b><font class="cursor-class" color="#ffffff">
                     Rolo
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
                 </font></b>
-            </label> 
+            </label>
             <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-2">
                 <b><font class="cursor-class" color="#ffffff">
                     Tira
                     <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
                 </font></b>
-            </label> 
+            </label>
         </div>
         <div v-show="!carregando" class="table-margin-historian" id="table-historian">
-            <div v-for="(t, index) in providertable" :class="{cinza: index%2==0}" class="row" :key="index">                                    
+            <div v-for="(t, index) in providertable" :class="{cinza: index%2==0}" class="row" :key="index">
                 <label class="ls2 col-md-1">
                     {{t.Data}}</label>
                 <label class="ls2 col-md-1">
@@ -151,9 +151,9 @@
                 <label class="ls2 col-md-1">
                     {{t.LIE}}</label>
                 <label class="ls2 col-md-1">
-                    {{t.ordem}}</label>
+                    {{t.Ordem}}</label>
                 <label class="ls2 col-md-1">
-                    {{t.rolo}}</label>
+                    {{t.Rolo}}</label>
                 <label class="ls2 col-md-2">
                     {{t.codTira}}</label>
             </div>
@@ -173,7 +173,7 @@
                     <tr class="tr1 cabecalho-table-rastreamento">
                         <th class="th1 text-white ls2-cabecalho-rastreamento" v-for="(h, index) in headers" :key="index">{{h}}</th>
                     </tr>
-                    
+
                 </table>
             </div> -->
 
@@ -182,18 +182,18 @@
                 <div class="form-row">
                     <div class="form-group  col-md-6">
                         <label><b>Filtrar por</b></label>
-                        <select class="form-control" v-model="filterSelected">   
+                        <select class="form-control" v-model="filterSelected">
                             <option value="" selected disabled>Buscar por:</option>
-                            <option value="op" key="op">OP</option> 
-                            <option value="code" key="code">Código da Tira/Liga</option> 
-                            <option value="date" key="date">Data</option> 
+                            <option value="op" key="op">OP</option>
+                            <option value="code" key="code">Código da Tira/Liga</option>
+                            <option value="date" key="date">Data</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-9">
                         <label><b>Equipamento </b></label>
-                        <select class="form-control" v-model="thingId">    
+                        <select class="form-control" v-model="thingId">
                             <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
                             </option>
                         </select>
@@ -201,27 +201,27 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6" v-if="filterSelected == 'op'">
-                    <label><b>OP </b></label>                         
-                        <input placeholder="Número da OP" class="form-control" 
-                        v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP=''" >                                                                                 
-                        <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]" 
+                    <label><b>OP </b></label>
+                        <input placeholder="Número da OP" class="form-control"
+                        v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP=''" >
+                        <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]"
                             v-for="(op,index) in prosFim" :key="index" style="cursor:pointer">{{ op.productionOrderNumber }}</b-dropdown-item>
                     </div>
                 <div class="form-group col-md-6"  v-if="filterSelected == 'code'">
-                    <label><b>Código da Tira/Liga </b></label>  
-                    <input class="form-control" 
-                    v-model="recipeCode" @keyup="prosFim=getResults(urlGatewayRecipe,recipeCode, prosFim); OP=''" >                                                                                 
-                    <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;OP=r.recipeId;prosFim=[]" 
+                    <label><b>Código da Tira/Liga </b></label>
+                    <input class="form-control"
+                    v-model="recipeCode" @keyup="prosFim=getResults(urlGatewayRecipe,recipeCode, prosFim); OP=''" >
+                    <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;OP=r.recipeId;prosFim=[]"
                     v-for="(r,index) in prosFim" :key="index" style="cursor:pointer">{{ r.recipeCode }}</b-dropdown-item>
 
-                        <!-- <select class="form-control" v-model="recipeCode">    
+                        <!-- <select class="form-control" v-model="recipeCode">
                             <option v-for="(r,index) in recipeList" :value="r.recipeId" v-bind:key="index">{{ r.recipeName }}
                             </option>
                         </select> -->
                     </div>
                 </div>
-            <div v-show="filterSelected != 'op'"> 
-            <label><b>Início </b></label>  
+            <div v-show="filterSelected != 'op'">
+            <label><b>Início </b></label>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <date-picker v-model="date" :config="config"></date-picker>
@@ -231,7 +231,7 @@
                 </div>
             </div>
             <br>
-            <label><b>Fim </b></label>  
+            <label><b>Fim </b></label>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <date-picker v-model="datef" :config="config2"></date-picker>
@@ -244,15 +244,15 @@
             </div>
             <div class="modal-footer">
                 <div class="btn-group" role="group">
-                    <button class="btn btn-success" @click.stop.prevent="getReportDate();" 
+                    <button class="btn btn-success" @click.stop.prevent="getReportDate();"
                     :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId" v-if="filterSelected != 'op' && filterSelected != 'code'">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
-                    <button class="btn btn-success" @click.stop.prevent="getReportOP();" 
+                    <button class="btn btn-success" @click.stop.prevent="getReportOP();"
                     :disabled="!thingId || !OP" v-if="filterSelected == 'op'">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
-                    <button class="btn btn-success" @click.stop.prevent="getReportCode();" 
+                    <button class="btn btn-success" @click.stop.prevent="getReportCode();"
                     :disabled=" !date ||!timeIni ||!datef || !timeFim || !thingId || !recipeCode" v-if="filterSelected == 'code'">
                         <i class="fa fa-check-square"></i> Confirmar
                     </button>
