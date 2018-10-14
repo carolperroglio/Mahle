@@ -273,17 +273,17 @@ export default {
                 // if (response.data.length > 0) {
                 //console.log('Entrou no retorno do get report date')
                 this.data = response.data;
-                this.tags = response.data.tags;                
+                this.tags = response.data.tags;
                 this.tags.forEach((T) => {
                     if (!this.groups.includes(T.group)) {
                         this.groups.push(T.group);
                     }
                 })
-                
+
                 setTimeout(() => {
                     this.editGroup(this.groups[0]);
                     this.newGroup = this.groups[0];
-                    
+
                     this.carregando = false;
                     this.created();
                     this.hideModal('myModalEdit');
@@ -363,7 +363,7 @@ export default {
                 .then((response) => {
                     if (response.data.tags.length > 0) {
 
-                        
+
                         this.data = response.data;
                         this.tags = response.data.tags;
                         this.tags.forEach((T) => {
@@ -505,7 +505,7 @@ export default {
         separateDateAndHour(providerar) {
             // array que será atribuido a tabela
             var finalprovider = new Array();
-            console.log("NewOBJNewOBJ");                                        
+            console.log("NewOBJNewOBJ");
             console.log(providerar);
             // cópia do array que será usada para alterar as keys
             var copyprovider = new Array();
@@ -527,12 +527,12 @@ export default {
                 newObj.category = date;
                 // armazena hora e minutos
                 var hourformatted = dt.substring(stringlength - 5, stringlength);
-                // 
+                //
                 newObj.Hora = hourformatted;
                 // novo objeto é populado com Data e Hora
                 objaux.Data = date;
                 objaux.Hora = hourformatted;
-                
+
                 for (var key in newObj) {
                     var newkey = '';
                     switch (key) {
@@ -577,25 +577,25 @@ export default {
                         case 'LIE Limite inferior de especificação':
                             newkey = "LIE"
                             objaux[newkey] = newObj[key]
-                            break;                           
-                        case 'ordem':
-                            newkey = "ordem"
+                            break;
+                        case 'Ordem':
+                            newkey = "Ordem"
                             objaux[newkey] = newObj[key]
-                            break; 
-                        case 'rolo':
-                            newkey = "rolo"
+                            break;
+                        case 'Rolo':
+                            newkey = "Rolo"
                             objaux[newkey] = newObj[key]
-                            break; 
+                            break;
                         case 'codTira':
                             newkey = "codTira"
                             objaux[newkey] = newObj[key]
-                            break; 
+                            break;
                     }
-                    
+
                 }
                 console.log("console.log(this.provider);");
                 console.log("console.log(this.provider);");
-                finalprovider.push(objaux);                
+                finalprovider.push(objaux);
                 console.log(finalprovider);
                 objaux = {}
             });
@@ -610,7 +610,7 @@ export default {
             cache: false;
             this.group = grupo;
             this.provider = [];
-            
+
             //console.log(this.providertable[0]);
             this.graphProvider = [];
             this.headers = [];
@@ -621,7 +621,7 @@ export default {
             this.formatGraphData(this.data, this.group);
             var t = 0;
             var aux = [];
-            
+
             // To Excel
             setTimeout(() => {
 
@@ -639,7 +639,7 @@ export default {
                     }
                     //console.log(aux[t]);
                     t++;
-                });                
+                });
                 this.headers = aux
                 console.log(this.headers);
                 console.log(this.jsonfields);
@@ -650,25 +650,27 @@ export default {
 
 
         formatGraphData(obj, group) {
-            obj.tags.forEach((R) => {                                
+            obj.tags.forEach((R) => {
                 if (R.group == group || R.group == 'Linha') {
                     if(R.group != 'Linha'){
                         this.thingGroup = R.group;
                         this.thingId = obj.thingId;
                         this.things.forEach((t) => {
-                            if (this.thingId == t.thingId &&  R.group != 'Linha') {                            
+                            if (this.thingId == t.thingId &&  R.group != 'Linha') {
                                 this.thingNameCabecalho = t.thingName;
                             }
                         })
                     }
 
+
                     var dataObj2 = new Array();
                     var obj2 = new Object();
 
-                    /**
+                    if(R.name != 'Ordem' && R.name != 'Rolo'){
+                      /**
                      * Criação do JSON de criação das características do gráfico.
                      * Cada linha terá um objeto com as características dentro do array
-                     */                                        
+                     */
                     obj2["path"] = "dist/amcharts/";
                     obj2["balloonColor"] = "#808080";
                     obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
@@ -681,6 +683,7 @@ export default {
                     obj2["fillColors"] = R.color;
                     obj2["legendColor"] = R.color;
                     obj2["lineColor"] = R.color;
+                  }
 
                     var i = 0;
 
@@ -692,7 +695,7 @@ export default {
                          * Criando o campo categoria do JSON do gráfico
                          * E adicionando a data á ele
                          * Para que cada ponto do eixo X seja uma data diferente
-                         */                        
+                         */
                             var dataObj = new Array();
                             var category = "category";
                             var tagname = R.name;
@@ -715,12 +718,14 @@ export default {
                      */
 
                     dataObj2 = Object.assign(obj2);
-                    
-                    this.graphProvider.push(dataObj2);
+
+                    if(R.name != 'Ordem' && R.name != 'Rolo'){
+                      this.graphProvider.push(dataObj2);
+                    }
                     // console.log("this.graphProvider");
                     // console.log(this.graphProvider);
                     // console.log(this.providerAux);
-                }
+              }
             });
 
             /**

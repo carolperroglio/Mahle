@@ -8,8 +8,8 @@ const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-//const api = 'http://35.170.191.75'
-const api = process.env.API_ADDRESS
+const api = 'http://35.170.191.75'
+// const api = process.env.API_ADDRESS
     //const api = 'http://spi067'
 
 function resolve(dir) {
