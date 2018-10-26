@@ -15,9 +15,9 @@
                 </li>                   
                 
               
-                <li class="nav-item-prameters">
+                <!-- <li class="nav-item-prameters">
                     <button type="button" class="btn btn-success btn-lg" @click.stop.prevent="parameter={};thing={};tagGroup='';showModal('modalCreateParameter')"><i class="fa fa-plus" aria-hidden="true" ></i> Cadastrar Parâmetro</button>
-                </li>
+                </li> -->
             </ul>
         </div>                     
         <div id="load-parameters" v-show="carregando">
@@ -50,21 +50,21 @@
             </label>  
             <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    LIE <p class="font-size">Limite inferior de Especificação
+                    LIE <p class="font-size">Limite Inferior de Especificação
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                 </p></font></b>
             </label> 
             <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    LIC <p class="font-size">Limite inferior Controle
+                    LIC <p class="font-size">Limite Inferior de Controle
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                 </p></font></b>
             </label> 
             <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    LSC <p class="font-size">Limite superior Controle
+                    LSC <p class="font-size">Limite Superior de Controle
                         <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
                         <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
                     </p></font>
@@ -72,7 +72,7 @@
             </label>
             <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls2 item-cabecalho-table-parameters">
                 <b><font class="cursor-class" color="#ffffff">
-                    LSE <p class="font-size">Limite superior Especifico
+                    LSE <p class="font-size">Limite Superior de Especificação
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
                 </p></font></b>
@@ -182,13 +182,13 @@
                             <label>
                                 <b>Equipamento </b>
                             </label>
-                            <input class="fm form-control mr-sm-2" v-model="parametro.equip" type="text" disabled placeholder="Ex: 1010144">                                                        
+                            <input class="fm form-control mr-sm-2" v-model="parametro.equip" type="text" disabled>                                                        
                         </div>
                         <div class="form-group col-md-6">
                             <label>
                                 <b>Parâmetro </b>
                             </label>
-                            <input class="fm form-control mr-sm-2" v-model="parametro.tagGroup" type="text" disabled placeholder="Ex: 1010144">                                                        
+                            <input class="fm form-control mr-sm-2" v-model="parametro.tagGroup" type="text" disabled>                                                        
                         </div>                        
                     </div>
                     <div class="form-row">
@@ -196,14 +196,14 @@
                             <label>
                                 <b>Valor Nominal</b>
                             </label>
-                            <input class="fm form-control mr-sm-2" v-model="parametro.value" type="text" placeholder="Ex: 1010144">
+                            <input class="fm form-control mr-sm-2" v-model="parametro.value" type="text">                                                  
                         </div>
                         <div class="form-group col-md-3">
                             <label>
                                 <b>Unidade </b>
                             </label>
                             <br><br>
-                            <input type="text" class="fm form-control mr-sm-2" v-model="parametro.unit" placeholder="Ex: 941120000000">
+                            <input type="text" class="fm form-control mr-sm-2" v-model="parametro.unit" >
                             <br>
                         </div>
                     </div>
@@ -212,28 +212,28 @@
                             <label>
                                 <b>LIE </b>
                             </label>
-                            <input type="text" class="form-control form-control-sm" v-model="parametro.lie" placeholder="Ex: 941120000000">
+                            <input type="text" class="form-control form-control-sm" v-model="parametro.lie" >
                             <br>
                         </div>  
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LIC </b>
                             </label>
-                            <input type="text" class="form-control form-control-sm" v-model="parametro.lic" placeholder="Ex: 941120000000">
+                            <input type="text" class="form-control form-control-sm" v-model="parametro.lic" >
                             <br>
                         </div>
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LSC </b>
                             </label>
-                            <input type="text" class="form-control form-control-sm" v-model="parametro.lsc" placeholder="Ex: 941120000000">
+                            <input type="text" class="form-control form-control-sm" v-model="parametro.lsc" >
                             <br>
                         </div> 
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LSE </b>
                             </label>
-                            <input type="text" class="form-control form-control-sm" v-model="parametro.lse" placeholder="Ex: 941120000000">
+                            <input type="text" class="form-control form-control-sm" v-model="parametro.lse" >
                             <br>
                         </div>       
                     </div>   
@@ -311,14 +311,14 @@
                             <label>
                                 <b>Valor Nominal</b>
                             </label>
-                            <input class="fm form-control mr-sm-2" type="text" v-model="parameter.value" placeholder="Ex: 1010144">
+                            <input class="fm form-control mr-sm-2" type="text" v-model="parameter.value" >
                         </div>
                         <div class="form-group col-md-3">
                             <label>
                                 <b>Unidade </b>
                             </label>
                             <br><br>
-                            <input type="text" v-model="parameter.unit"  class="fm form-control mr-sm-2" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.unit"  class="fm form-control mr-sm-2" >
                             <br>
                         </div>
                     </div>
@@ -327,28 +327,28 @@
                             <label>
                                 <b>LIE </b>
                             </label>
-                            <input type="text" v-model="parameter.lie" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.lie" class="form-control form-control-sm">
                             <br>
                         </div>  
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LIC </b>
                             </label>
-                            <input type="text" v-model="parameter.lic" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.lic" class="form-control form-control-sm">
                             <br>
                         </div>
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LSC </b>
                             </label>
-                            <input type="text" v-model="parameter.lsc" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.lsc" class="form-control form-control-sm">
                             <br>
                         </div> 
                         <div class="form-group col-md-3">
                             <label>
                                 <b>LSE </b>
                             </label>
-                            <input type="text" v-model="parameter.lse" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" v-model="parameter.lse" class="form-control form-control-sm">
                             <br>
                         </div>       
                     </div>   

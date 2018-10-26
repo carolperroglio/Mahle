@@ -191,7 +191,7 @@ export default {
         getTool: function() {
             this.carregando = true;
 
-            axios.get(this.urlTool).then(response => {
+            axios.get(this.urlTool+"?orderField=" + this.orderField + "&order=" + this.order + "&fieldFilter=" + this.fieldFilter + "&fieldValue=" + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage).then(response => {
                 paginacao(response, this);
                 this.tools = response.data.values;
                 this.carregando = false;

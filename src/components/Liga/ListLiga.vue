@@ -10,19 +10,19 @@
                 <li class="nav-items-listliga col-md-12">
                     <h1 class="title-page-gp"><b>Gerenciamento de Liga</b></h1>
                 </li>
-                <li class="nav-items-listliga">
-                    <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                <!-- <li class="nav-items-listliga">
+                    <select class="form-control form-control-md" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="recipeName">Nome</option>
                         <option value="recipeCode">Código</option>
                     </select>
                 </li>
                 <li class="nav-items-listliga">
-                    <input class="form-control btn-md" type="search" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" v-model="fieldValue" aria-label="Busca">
+                    <input class="form-control btn-md" type="search" :disabled="fieldFilter=='' || fieldFilter==undefined" v-model="fieldValue" aria-label="Busca">
                 </li>
                 <li class="nav-items-listliga">
-                    <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
-                </li>
+                    <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar()"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                </li> -->
                 <li class="nav-items-listliga">                     
                     <router-link :to="{ name: 'Liga',params: { id: 0 }}" class="btn btn-success btn-md">
                         <i class="fa fa-plus" aria-hidden="true" ></i>
@@ -47,14 +47,7 @@
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                 </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2 col-md-3">
-                <b><font class="cursor-class" color="#ffffff">
-                    Descrição &nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                </font></b>
-            </label>                
+            </label>            
         </div>    
 
 
@@ -69,19 +62,16 @@
                 </label>
                 <label class="ls2 col-md-3">
                     <b><font color="#9BA6A5"> </font></b>{{recipe.recipeCode}}
-                </label>
-                <label class="ls2 col-md-3">
-                    <b><font color="#9BA6A5"> </font></b>{{recipe.recipeDescription}}
-                </label>  
-                <label class="ls2 col-md-2">                  
+                </label>                
+                <label class="ls2 col-md-2 offset-2">                  
                     <router-link class="link-decoration" :to="{ name: 'Liga',params: { id: recipe.recipeId }}">
                         <i class="fa fa-eye" style="font-size:22px; cursor:pointer" @click="id = recipe.recipeId">                        
                         </i>
                     </router-link> 
-                </label>               
+                </label>                               
             </div>
         </div>
-        <div class="paginacao" v-show="total>0">
+        <div class="paginacao" v-show="total>20">
             <nav aria-label="">
                 <ul class="pagination justify-content-center">
                     <li v-show="startat>0" class="page-item">

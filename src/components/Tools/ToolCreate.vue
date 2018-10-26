@@ -21,15 +21,15 @@
                         <option value="description">Descrição</option>
                         <option value="serialNumber">Número serial</option>
                         <option value="code">Código</option>
-                        <option value="lifeCycle">Vida Útil</option>
+                        <!-- <option value="lifeCycle">Vida Útil</option> -->
                         <!-- <option value="currentLife">Ciclo de vida atual</option> -->
-                        <option value="unitOfMeasurement">Unidade de Medida</option>
+                        <!-- <option value="unitOfMeasurement">Unidade de Medida</option> -->
                         <!-- <option value="typeName">Tipo</option> -->
-                        <option value="status">Status</option>
+                        <!-- <option value="status">Status</option> -->
                     </select>
                 </li>    
                 <li class="nav-item-tool col-md-2">
-                    <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-lg" placeholder="Ex: Faca">                              
+                    <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-lg">                              
                 </li> 
                 <li class="nav-item-tool col-md-6">        
                 <form class="form-inline my-3">
@@ -123,7 +123,7 @@
                 </font></b>
             </label>               
         </div>
-        <div class="margin-table-tc" style="margin-bottom: 5%;">
+        <div class="margin-table-tc" v-show="!carregando" style="margin-bottom: 5%;">
             <div v-for="(f, indexF) in ferramentas" :key="indexF" :class="{cinza: indexF%2==0}">
                 <label class="ls ls30 col-md-1">
                     {{f.name}}</label>
@@ -181,13 +181,13 @@
                         <label>
                             <b>Nome </b>
                         </label>
-                        <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramenta.name" id="nome" class="form-control">
+                        <input type="text" v-model="ferramenta.name" id="nome" class="form-control">
                     </div>
                     <div class="form-group col-md-6">
                         <label>
                             <b>Descrição </b>
                         </label>
-                        <input type="text" id="desc" class="form-control" v-model="ferramenta.description" placeholder="Ex: Ferramenta usada na Guilhotina">
+                        <input type="text" id="desc" class="form-control" v-model="ferramenta.description">
                     </div>
                 </div>
                 <div class="form-row">
@@ -195,13 +195,13 @@
                 <label>
                     <b>Número Serial </b>
                 </label>
-                <input type="text" id="sernum" class="form-control" v-model="ferramenta.serialNumber" placeholder="Ex:124856648">
+                <input type="text" id="sernum" class="form-control" v-model="ferramenta.serialNumber">
                 </div>
                 <div class="form-group col-md-6">
                     <label>
                         <b>Código: </b>
                     </label>
-                    <input type="text" id="code" class="form-control" v-model="ferramenta.code" placeholder="Ex:código">
+                    <input type="text" id="code" class="form-control" v-model="ferramenta.code" >
                 </div>
                 </div>
                 <div class="form-row">
@@ -232,7 +232,7 @@
                 <label>
                     <b>Vida Útil </b>
                 </label>
-                <input disabled class="form-control" type="text" :value="ferramenta.lifeCycle = tooltypeSelected.lifeCycle" placeholder="Ex: 100" id="lifec">
+                <input class="form-control" type="text" v-model="ferramenta.lifeCycle" id="lifec">
                 </div>
                 <div class="form-group col-md-5">
                 <label>
@@ -270,7 +270,7 @@
                 <label>
                     <b>Nome:</b>
                 </label>
-                <input type="text" placeholder="Ex: Facas de Guilhotina " v-model="ferramentaEdit.name" id="nome" class="form-control">
+                <input type="text" v-model="ferramentaEdit.name" id="nome" class="form-control">
                 </div>
                 <div class="form-group col-md-6">
                 <label>
@@ -284,13 +284,13 @@
                 <label>
                     <b>Número Serial: </b>
                 </label>
-                <input type="text" id="sernum" class="form-control" v-model="ferramentaEdit.serialNumber" placeholder="Ex: 124856648">
+                <input type="text" id="sernum" class="form-control" v-model="ferramentaEdit.serialNumber">
                 </div>
                 <div class="form-group col-md-4">
                 <label>
                     <b>Código: </b>
                 </label>
-                <input type="text" id="code" class="form-control" v-model="ferramentaEdit.code" placeholder="Ex: 4565">
+                <input type="text" id="code" class="form-control" v-model="ferramentaEdit.code">
                 </div>
                 </div>
                 <div class="form-row">
@@ -298,13 +298,13 @@
                 <label>
                     <b>Vida Útil: </b>
                 </label>
-                <input class="form-control" type="text" v-model="ferramentaEdit.lifeCycle" placeholder="Ex: 100" id="lifec" disabled>
+                <input class="form-control" type="text" v-model="ferramentaEdit.lifeCycle" id="lifec" disabled>
                 </div>
                 <div class="form-group col-md-5">
                 <label>
                     <b>Unidade de Medida: </b>
-                </label> {{ferramenta.unitOfMeasurement}}
-                <input type="text" id="unitMeas" v-model="ferramentaEdit.unitOfMeasurement" class="form-control" placeholder="Ex: minutos" disabled>                              
+                </label>
+                <input type="text" id="unitMeas" v-model="ferramentaEdit.unitOfMeasurement" class="form-control" disabled>                              
                 </div>
                 </div>
                 <div class="form-row">
@@ -312,13 +312,13 @@
                 <label>
                     <b>Tipo: </b>
                 </label>
-                <input type="text" id="unitMeas" v-model="ferramentaEdit.typeName" class="form-control" placeholder="Ex: minutos" disabled>                              
+                <input type="text" id="unitMeas" v-model="ferramentaEdit.typeName" class="form-control" disabled>                              
                 </div>
                 <div class="form-group col-md-6">
                 <label>
                     <b>Status: </b>
                 </label>
-                <input type="text" id="unitMeas" v-model="ferramentaEdit.status" class="form-control" placeholder="Ex: minutos" disabled>                              
+                <input type="text" id="unitMeas" v-model="ferramentaEdit.status" class="form-control" disabled>                              
                 </div>
                 </div>
 

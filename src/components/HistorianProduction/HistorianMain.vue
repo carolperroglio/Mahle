@@ -61,12 +61,12 @@
                     {{o.currentStatus | filterStatus}}</label>
                 <label class="ls ls10 col-md-2">
                     {{o.typeDescription}}</label>
-                <label v-if="o.typeDescription == 'Liga'" class="col-md-2">
-                <label class="ls ls10 col-md-6 router">
-                    <router-link class="btn btn-info" :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
+                <label v-if="o.typeDescription == 'Liga'"   class="col-md-2">
+                    <label class="ls ls10 col-md-6 router" v-show="o.showbutton==false">
+                        <router-link class="btn btn-info" :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
+                    </label>
                 </label>
-                </label>
-                <label v-if="o.typeDescription == 'Liga'" class="col-md-2" v-show="o.currentStatus == 'active'">
+                <label v-if="o.typeDescription == 'Liga'" class="col-md-2" v-show="o.currentStatus == 'active' && o.showbutton">
                 <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId">Realizar Cálculo</button>
                 </label>
                 <label  class="col-md-2" v-else-if="o.typeDescription == 'Tira'">
@@ -75,7 +75,7 @@
                 </label>
                 </label>
                 <label class="col-md-2"  v-show="o.currentStatus == 'approved' || o.currentStatus == 'dumping'">
-                <button class="btn btn-danger" @click="encerrarOP(o);">Encerrar OP</button>
+                <button class="btn btn-danger" @click="temp=o;showModal('modalEncerraOp')">Encerrar OP</button>
                 </label>
             </div>
             </div>
@@ -98,7 +98,7 @@
             <div class="form-row">
                 <div class="form-group col-md-10 offset-1">
                     <label for="">Última OP Utilizada no Forno</label>
-                    <input autocomplete="off" @keyup="getOPResult(opNumber)" v-model="opNumber"  class="form-control" placeholder="Ex: OPL123" />
+                    <input autocomplete="off" @keyup="getOPResult(opNumber)" v-model="opNumber"  class="form-control"/>
                     <b-dropdown-item @click.stop.prevent="opNumber = op.productionOrderNumber;ops=[];opSelected=op" 
                         v-for="(op,index) in ops" :key="index">{{ op.productionOrderNumber }}</b-dropdown-item>
                 </div>
@@ -106,15 +106,16 @@
             <div class="form-row" v-if="opSelected.productionOrderNumber">
                 <div class="form-group col-md-10 offset-1">
                     <label for="">Carga Utilizada</label>
-                    <input type="text" class="form-control" v-model="cargaUtilizada" placeholder="Ex: 1000">
+                    <input type="text" class="form-control" v-model="cargaUtilizada">
                 </div>
             </div>
             <div class="modal-footer row">
                 <div class="pull-left">
-                    <input type="checkbox" v-model="cr" value="true" id="scale"/> <label for="scale">Para OPL sem pé de banho clique aqui</label>
+                    <input type="checkbox" v-model="cr" value="true" id="scale"/> 
+                    <label for="scale">Para OPL sem pé de banho clique aqui</label>
                 </div>
                 <div class="btn-group pull-right" role="group">                    
-                    <button class="btn  btn-success"  :disabled="opSelected.productionOrderNumber==null && cr==false" @click.stop.prevent="getLastAnalysis();(opSelected.productionOrderNumber!=null)?aponta(opSelected, cargaUtilizada):'';">
+                    <button class="btn  btn-success"  :disabled="opSelected.productionOrderNumber==null && cr==false" @click.stop.prevent="getLastAnalysis(opSelected);(opSelected.productionOrderNumber!=null)?aponta(opSelected, cargaUtilizada):'';">
                         <i  class="fa fa-check-square" aria-hidden="true"></i>
                         Confirmar
                     </button>
@@ -124,6 +125,32 @@
                 </div>
             </div>
         </b-modal>
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--       Encerra         -->
+        <!--         OP           -->
+        <!--                       -->
+        <!--                       -->
+        <b-modal no-close-on-backdrop ref="modalEncerraOp" hide-footer title="Remover Liga">            
+            <div class="modal-body">
+                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja encerrar a OPL?</b>
+            </div>    
+            <div class="modal-footer">
+                <div>
+                    <div class="btn-group" role="group">
+                        <button @click.stop.prevent="encerrarOP(temp);" class="btn btn-success">
+                            <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
+                        </button>  
+                        <button @click.stop.prevent="hideModal('modalEncerraOp')" class="btn btn-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> Cancelar                            
+                        </button>                       
+                    </div>
+                </div>
+            </div>
+         </b-modal>
+
         <b-modal ref="modalErro" no-close-on-backdrop title="" hide-footer="">
             <p :class="erro? 'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>

@@ -21,7 +21,7 @@
         <div class="form-row">
             <div class="form-group col-md-8 offset-1">
                 <label for="">Última OP Utilizada no Forno</label>
-                <input autocomplete="off" @keyup="getOPResult(opNumber)" v-model="opNumber"  class="form-control" placeholder="Ex: OPL123" />
+                <input autocomplete="off" @keyup="getOPResult(opNumber)" v-model="opNumber"  class="form-control" />
                 <b-dropdown-item @click.stop.prevent="opNumber = op.productionOrderNumber;ops=[];opSelected=op" 
                 v-for="(op,index) in ops" :key="index">{{ op.productionOrderNumber }}</b-dropdown-item>
             </div>
@@ -29,7 +29,7 @@
         <div class="form-row">
             <div class="form-group col-md-8 offset-1">
                 <label for="">Carga Utilizada</label>
-                <input type="text" class="form-control" v-model="cargaUtilizada" placeholder="Ex: 1000">
+                <input type="text" class="form-control" v-model="cargaUtilizada" >
             </div>
         </div>
         <div class="form-row">

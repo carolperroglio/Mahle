@@ -60,13 +60,13 @@
  
 }
 
-@media (min-width:1400px) {
+@media (min-width: 1020px) {
     /*Cabeçalho da tabela*/
     .header-table-tira {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -0.5% 0 0 0;
+        margin: -2.5% 0 0 0;
         z-index: 4;
     }
     /* ok */
@@ -75,7 +75,34 @@
         color: black;
     }
     .margin-table-tira {
-        margin: 13% 0 6% 0;
+        margin: 16.5% 0 6% 0;
+        padding-top: 3%;
+    }
+        /*Relatório de Receitas - Configuração da listagem*/
+    .ls-tira {
+        width: 13%;
+        font-family: sans-serif;
+        font-size: 12px;
+        text-align: center;
+    }
+}
+
+@media (min-width:1400px) {
+    /*Cabeçalho da tabela*/
+    .header-table-tira {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -2% 0 0 0;
+        z-index: 4;
+    }
+    /* ok */
+    #dropdownMenuButton {
+        background-color: white;
+        color: black;
+    }
+    .margin-table-tira {
+        margin: 14.5% 0 6% 0;
         padding-top: 3%;
     }
     /*Relatório de Receitas - Configuração da listagem*/

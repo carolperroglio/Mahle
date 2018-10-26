@@ -46,6 +46,27 @@ export default {
             uSelected: {},
             pSelected: {},
             users2: '',
+            traducao:{
+                historian_production__allow_read : 'Apontamentos visualização',
+                historian_productio__allow_update : 'Apontamentos edição',
+                permissions__allow_read : 'Permissão visualização',
+                production_order__allow_read : 'Ordem de produção visualização',
+                production_order__allow_update : 'Ordem de produção edição',
+                products__allow_read : 'Matéria prima visualização',
+                products__allow_update : 'Matéria prima edição',
+                quality__allow_read : 'Análise química visualização',
+                quality__allow_update : 'Análise química edição',
+                recipes__allow_read : 'Gerenciamto liga e tira visualização',
+                recipes__allow_update : 'Gerenciamto liga e tira edição',
+                report__allow_read : 'Relatórios visualização',
+                report__allow_update : 'Relatórios edição',
+                tools__allow_read : 'Ferramentas visualização',
+                tools__allow_update : 'Ferramentas edição',
+                usergroups__allow_read : 'Grupo de usuários visualização',
+                usergroups__allow_update : 'Grupo de usuários edição',
+                user__allow_read : 'Usuários visualização',
+                user__allow_update : 'Usuários edição'
+            }
         }
     },
     components: {

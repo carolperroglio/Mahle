@@ -28,6 +28,19 @@
     }
 }
 
+@media (min-width:1200px) {
+    .table-margin-resampling {
+        margin: 22% 0 6% 0;
+    }
+    .cabecalho-table-resampling {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -5.3% 0 0 0;
+        z-index: 4;
+    }
+}
+
 @media (min-width:1900px) {
     .table-margin-resampling {
         margin: 18.5% 0 6% 0;

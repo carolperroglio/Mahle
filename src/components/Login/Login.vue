@@ -11,7 +11,7 @@
         <div class="form-row">
         <div class="form-group col-md-12">
         <label for="name">Nome do Usuário</label>
-        <input type="text" class="form-control" placeholder="Ex: mauricios" v-model="username">
+        <input type="text" class="form-control" v-model="username">
         </div>
         </div>
         <div class="form-row">

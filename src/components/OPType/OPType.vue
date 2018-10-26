@@ -21,7 +21,7 @@
                      <div class="card types">
                         <div v-for="(t, index) in Types" v-bind:key="index">
                         <div class="card-header card-header-optype">
-                        <i class= "fa fa-file-text" style="font-size:22px; cursor:pointer"></i><b>&nbsp&nbsp&nbspTipo {{ t.productionOrderTypeId }}</b> 
+                        <i class= "fa fa-file-text" style="font-size:22px; cursor:pointer"></i><b>&nbsp;&nbsp;&nbsp; Tipo {{ t.productionOrderTypeId }}</b> 
                         </div> 
                         <div class="card-body card-body-optype"> 
                             <label class="ls lsoptype">
@@ -48,7 +48,7 @@
                             <div class="btn-group" role="group">
 
                             <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal" @click.stop.prevent="showModal(t)">
-                            Editar &nbsp&nbsp <font size="4">&#x270d  </font>   
+                                Editar &nbsp;&nbsp; <font size="4">#x270d </font>   
                             </button>   
 
                             </div>
@@ -75,12 +75,12 @@
                         <div class="row">
                         <div class="col-md-6 editOP">
                             <label>Descrição</label>
-                            <input type="text" class="form-control" placeholder="Descrição" v-model="Type.typeDescription" disabled>
+                            <input type="text" class="form-control" v-model="Type.typeDescription" disabled>
                             </div>
                         
                         <div class="col-md-6 editOP">
                             <label>Descrição</label>
-                            <input type="text" class="form-control" placeholder="Descrição" v-model="Type.typeScope" disabled>
+                            <input type="text" class="form-control" v-model="Type.typeScope" disabled>
                         </div>
 
                         </div>

@@ -10,18 +10,30 @@ import { setTimeout } from 'timers';
 
 es6promisse.polyfill();
 
+// function paginacao(response, este) {
+//     este.pageAtual = este.startat / este.quantityPage;
+//     este.total = response.data.total;
+//     este.pages=[];
+//     let fim = Math.ceil(este.total / este.quantityPage);
+//     if (este.pageAtual > 11) {
+//         for (var i = este.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
+//             este.pages[i] = i;
+//     } else {
+//         for (var i = 0; i < fim; i++)
+//             este.pages[i] = i;
+//     }
+// }
+
 function paginacao(response, este) {
     este.pageAtual = este.startat / este.quantityPage;
     este.total = response.data.total;
-    este.pages=[];
     let fim = Math.ceil(este.total / este.quantityPage);
-    if (este.pageAtual > 11) {
-        for (var i = este.pageAtual - 5; i < este.pageAtual + 5 > fim ? este.pageAtual + 5 : fim; i++)
-            este.pages[i] = i;
-    } else {
-        for (var i = 0; i < fim; i++)
-            este.pages[i] = i;
-    }
+    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5;
+    var comeco = este.pageAtual - 5 > 0 ? este.pageAtual - 5 : 0;
+    este.pages = [];
+    var j = 0;    
+    for (var i = comeco; i < num; i++)
+        este.pages[j++] = i;                
 }
 
 export default {
@@ -30,7 +42,7 @@ export default {
         return {
             id: "",
             carregando: false,
-            quantityPage: 100,
+            quantityPage: 20,
             startat: 0,
             total: 0,
             pages: [],

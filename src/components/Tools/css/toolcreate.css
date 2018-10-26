@@ -138,12 +138,12 @@
     }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1024px){
     .cabecalho-table-tc {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -3% 0 0 0;
+        margin: -5% 0 0 0;
         z-index: 4;
     }
     .ls2-cabecalho-tc {
@@ -202,7 +202,76 @@
         vertical-align: middle;
     }
     .margin-table-tc {
+        margin-top: 21.5%;
+        margin-bottom: 3%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .cabecalho-table-tc {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -3.5% 0 0 0;
+        z-index: 4;
+    }
+    .ls2-cabecalho-tc {
+        /* width: 24.2%; */
+        width: 100%;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        margin-bottom: 0.3%;
+    }
+    #load {
+        margin-left: 50%;
+    }
+    .nav-item-tool {
+        padding-left: 0.5%;
+    }
+    .title-page-tool {
+        text-align: left;
+        color: rgb(68, 68, 70);
+        font-family: sans-serif;
+        font-size: 22px;
+        text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
+        position: fixed;
+        top: 14%;
+        margin-left: 0.5%;
+    }
+    /*Listagem de ferramentas*/
+    input {
+        position: relative;
+    }
+    .ferramentas {
+        position: relative;
         margin-top: 16%;
+        padding-bottom: 5%;
+        left: 1%;
+        width: 98%;
+    }
+    .paginacao2 {
+        position: fixed;
+        z-index: 2;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    .msg {
+        position: relative;
+        width: 50%;
+    }
+    .cursor-class {
+        cursor: pointer;
+    }
+    /*Listagem de ferramentas*/
+    .ls30 {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .margin-table-tc {
+        margin-top: 18.3%;
         margin-bottom: 3%;
     }
 }

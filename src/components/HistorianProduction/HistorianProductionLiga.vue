@@ -54,29 +54,25 @@
                             <div class="card-header card-header-hp">
                                 <b>Materiais Apontados</b>
                                 <div style="margin-right:1%" class="pull-right">                                 
-                                <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity ==''; showModal('myModalRef'); ordem.type='input'">
-                                <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
-                                </button>
-                                <button type="button" class="btn btn-warning"  @click.stop.prevent="cavaco ='';getAnalysis();showModal('exibirCalculo'); ordem.type='input'">
-                                <i aria-hidden="true" class="fa fa-eye"></i> Exibir Cálculo
-                                </button>
-                                <button v-if="productionOrder.status == 'approved'" type="button" class="btn btn-danger" @click.stop.prevent="getAnalysis();showModal('lastAnalysis'); ordem.type='input'">
-                                <i aria-hidden="true" class="fa fa-eye"></i> Exibir Última Análise
-                                </button>
-                                <button v-else type="button" class="btn btn-danger"  v-show="productionOrder.status == 'reproved'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
-                                <i aria-hidden="true" class="fa fa-eye"></i> Correção
-                                </button>
-                                <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()"
-                                v-if="productionOrder.status == 'active' || productionOrder.status == 'reproved'">
-                                <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
-                                </button>
+                                    <button type="button" class="btn btn-success"  @click.stop.prevent="ordem.quantity =='';getAnalysis();showModal('myModalRef'); ordem.type='input'">
+                                        <i aria-hidden="true" class="fa fa-plus"></i> Registrar Matéria-Prima
+                                    </button>                                
+                                    <button v-if="productionOrder.status == 'approved'" type="button" class="btn btn-danger" @click.stop.prevent="getAnalysis();showModal('lastAnalysis'); ordem.type='input'">
+                                        <i aria-hidden="true" class="fa fa-eye"></i> Exibir Última Análise
+                                    </button>
+                                    <button v-else type="button" class="btn btn-danger"  v-show="productionOrder.status == 'reproved'" @click.stop.prevent="getAnalysis();showModal('correction'); ordem.type='input'">
+                                        <i aria-hidden="true" class="fa fa-eye"></i> Correção
+                                    </button>
+                                    <button type="button" class="btn btn-primary"  @click.stop.prevent="changeStatusToWaitingAnalysis()" v-if="productionOrder.status == 'active' || productionOrder.status == 'reproved'">
+                                        <i class="fa fa-flask" aria-hidden="true"></i> Liberar para Análise
+                                    </button>
                                 </div>
                             </div>
                         <div class="card-body card-body-hp">
                             
                         <div class="fundo-branco-ap-liga">
                             <p class="col-md-10" v-show="allProducts.length == 0">
-                                    {{noRegister}}
+                                {{noRegister}}
                             </p>
                             <div class="cabecalho-table-ap-liga" v-if="allProducts.length > 0">
                                 <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(allProducts, 'product',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-2">
@@ -146,85 +142,43 @@
             </div>
                     
             </div>
-         </div>
-        <!-- ||||||||||||||| -->
-        <!-- EXIBIR CÁLCULO  -->
-         <b-modal no-close-on-backdrop size="lg" ref="exibirCalculo" hide-footer title="Cálculo da Análise Química Realizada">
-            <form>
-                
-                <div class="form-row">
-                    <div class="form-group col-md-5">                    
-                    <label for="">Quantidade de cavaco utilizada:</label>
-                        <input type="number" class="form-control" v-model="cavaco">
-                    </div>
-                    <div class="col-md-2">
-                        <br>
-                        <button class="btn btn-warning" @click.stop.prevent="quantityToAddWhenUserCavaco()">Recalcular</button>
-                    </div>
-                </div>
-                <div v-if="calculoOK">
-                    <div class="cabecalho-table-exibir-cálculo">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(calculos, 'key',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
-                        <b><font class="cursor-class" color="#ffffff">Material 
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(calculos, 'value',1):organizar(allProducts, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-7">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Quantidade necessária a ser adicionada no forno(Kg)
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                </div>
-                <div v-for="(c, index) in calculos" v-bind:key="index" :class="{cinza: index%2==0}">
-                    <label class="ls ls10 col-md-4">
-                        {{c.key}}</label>
-                    <label class="ls ls10 col-md-7">
-                        {{c.value}}</label>
-                </div>
-                </div>
-            </form>
-         </b-modal>
+         </div>        
 
          <!-- 
             CORREÇÃO - É EXIBIDA SE A OP FOI REPROVADA
           -->
          <b-modal no-close-on-backdrop size="lg" ref="correction" hide-footer title="Correção">
             <form>
-                <div v-if="calculoOK">
-                    <div class="cabecalho-table-exibir-cálculo">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(lastAnalysis, 'key',0):organizar(lastAnalysis, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
-                        <b><font class="cursor-class" color="#ffffff">Material 
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(lastAnalysis, 'value',1):organizar(lastAnalysis, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-7">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Quantidade necessária a ser adicionada no forno(Kg)
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
+                <div v-show="true">
+                    <div class="cabecalho-table-exibir-cálculo" >
+                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(lastAnalysis, 'key',0):organizar(lastAnalysis, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
+                            <b><font class="cursor-class" color="#ffffff">Material 
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(lastAnalysis, 'value',1):organizar(lastAnalysis, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-7">
+                            <b><font class="cursor-class" color="#ffffff">
+                                Quantidade necessária a ser adicionada no forno(Kg)
+                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                            </font></b>
+                        </label>
+                    </div>
+
+                    <div v-for="(l, index) in lastAnalysis.messages" v-bind:key="index" :class="{cinza: index%2==0}">
+                        <label class="ls ls10 col-md-4">
+                            {{l.key}}</label>
+                        <label class="ls ls10 col-md-7">
+                            {{l.value}}</label>
+                    </div>
+                    <div v-if="cobreFosforoso!= null">                        
+                        <label class="ls ls10 col-md-4">
+                            Cobre Fosforoso</label>
+                        <label class="ls ls10 col-md-7">
+                            {{cobreFosforoso}}</label>
+                    </div> 
                 </div>
-                <div v-for="(l, index) in lastAnalysis.messages" v-bind:key="index" :class="{cinza: index%2==0}">
-                    <label class="ls ls10 col-md-4">
-                        {{l.key}}</label>
-                    <label class="ls ls10 col-md-7">
-                        {{l.value}}</label>
-                </div>
-                <div v-if="cobreFosforoso!= null">
-                    
-                <label class="ls ls10 col-md-4">
-                    Cobre Fosforoso</label>
-                <label class="ls ls10 col-md-7">
-                    {{cobreFosforoso}}</label>
-                </div>
-                        
-                </div>
-                
             </form>
          </b-modal>
 
@@ -269,53 +223,79 @@
         <!--   Cadastro de orderHistorian    -->
         <!--               Modal             -->
         <b-modal no-close-on-backdrop ref="myModalRef" hide-footer title="Registrar Matéria-Prima">
+            <div v-show="!carregandoAnalysis">
+                <div class="cabecalho-table-exibir-cálculo">
+                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(calculos, 'key',0):organizar(allProducts, 'product',0);" class="ls2-cabecalho-ap-liga col-md-4">
+                        <b><font class="cursor-class" color="#ffffff">Material 
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(calculos, 'value',1):organizar(allProducts, 'quantity',1);" class="ls2-cabecalho-ap-liga col-md-7">
+                        <b><font class="cursor-class" color="#ffffff">
+                            Quantidade necessária a ser adicionada no forno(Kg)
+                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
+                        </font></b>
+                    </label>
+                </div>
+                <div v-for="(c, index) in calculos" v-bind:key="index" :class="{cinza: index%2==0}">
+                    <label class="ls ls10 col-md-4">
+                        {{c.key}}</label>
+                    <label class="ls ls10 col-md-7">
+                        {{c.value}}</label>
+                </div>                
+            </div>
+            <div v-show="carregandoAnalysis" class="row">                        
+                <stretch class="col-md-12" background="#4d4d4d"></stretch>
+            </div>                 
+            <br/><br/>
             <form>
                 <div>                    
                     <div class="form-row" >
-                        <div class="form-group col-md-8">
-                        <label><b>Escolha o produto: </b></label>
-                        <select class="form-control form-control-sm" v-model="prodChoose" @change="prodRolo = ''">
-                            <option value="cobre"> Cobre Fosforoso</option>
-                            <option value="prodRecipe">Matéria prima da liga</option>
-                        </select>
+                        <div class="form-group col-md-6">
+                            <label><b>Escolha o produto: </b></label>
+                            <select class="form-control form-control-sm" v-model="prodChoose" @change="prodRolo = ''">
+                                <option value="cobre"> Cobre Fosforoso</option>
+                                <option value="prodRecipe">Matéria prima da liga</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6" v-if="prodChoose == 'cobre'">
+                            <label>Material</label>
+                            <select class="form-control form-control-sm" v-model="prodRolo">
+                                <option value="70">Cobre Fosforoso</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6" v-else>
+                            <label>
+                                <b>Materiais </b>
+                            </label>
+                            <select class="form-control form-control-sm" v-model="prodRolo">
+                                <option v-if="p.phaseProductType != 'contaminent' && p.phaseProductType != 'semi_finished'" v-for="(p,index) in orderPhaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-row">
-                    <div class="form-group col-md-6" v-if="prodChoose == 'cobre'">
-                        <label>Material</label>
-                        <select class="form-control form-control-sm" v-model="prodRolo">
-                            <option value="70">Cobre Fosforoso</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6" v-else>
-                    <label>
-                        <b>Materiais </b>
-                    </label>
-                    <select class="form-control form-control-sm" v-model="prodRolo">
-                        <option v-if="p.phaseProductType != 'contaminent' && p.phaseProductType != 'semi_finished'" v-for="(p,index) in orderPhaseProducts" :value="p.product.productId" v-bind:key="index">{{ p.product.productName }}</option>
-                    </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                    <label>
-                        <b>Quantidade </b>
-                    </label>
-                    <input type="number" required v-model="quantity" placeholder="Ex:5" class="form-control form-control-sm">
-                    </div>
-                    <div class="form-group col-md-3">
-                    <label>
-                        <b>Unidade </b>
-                    </label>
-                    <input type="text" required :value="unity ='kg'" placeholder="Ex:kg" class="form-control form-control-sm">
-                    </div>
-                    </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-5">
-                    <label>
-                        <b>Lote </b>
-                    </label>
-                    <input type="text" required v-model="lote" class="form-control form-control-sm">
-                    </div>
-                    </div>
+                    
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>Quantidade </b>
+                            </label>
+                            <input type="number" required v-model="quantity" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>
+                                <b>Unidade </b>
+                            </label>
+                            <input type="text" required :value="unity ='kg'"  class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>
+                                <b>Lote </b>
+                            </label>
+                            <input type="text" required v-model="lote" class="form-control form-control-sm">
+                        </div>                        
+                    </div>                   
                     <div class="modal-footer">
                         <div class="btn-group" role="group">
                             <button class="btn btn-success" :disabled="!quantity ||prodRolo == ''||lote ==''|| unity ==''" @click.stop.prevent="cadastrarApont(ordem);hideModal('myModalRef')">

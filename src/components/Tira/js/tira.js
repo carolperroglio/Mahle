@@ -175,7 +175,7 @@ export default {
         ordenaParametros(){
             var temp = [];                          
             for(var i=0; i<this.parametros.length; i++){
-                if(this.parametros[i]["parametro"] == "Larg Canal")
+                if(this.parametros[i]["parametro"] == "largura de canal")
                     temp[0] = this.parametros[i];
                 else if(this.parametros[i]["parametro"] == "t. pré-aquecim. (zona 1)")
                     temp[1] = this.parametros[i];

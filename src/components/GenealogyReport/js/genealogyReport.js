@@ -177,12 +177,12 @@ export default {
                     data.push(["ROLO : "+ (i++), "QUANTIDADE : "+saida.quantity, "DATA INICIO : "+this.ticksToDate(saida.startDate), "DATA FIM : "+ this.ticksToDate(saida.endDate)]);                    
                     data.push([]);                    
                     data.push(["", "AÇO UTILIZADO"]);
-                    data.push(["QUANTIDADE","LOTE","DATA"]);                    
+                    data.push(["QUANTIDADE","OF","DATA"]);                    
                     saida.inputRolls.forEach(input => {
                         data.push([input.quantity, input.batch, this.ticksToDate(input.startDate)]);    
                     });                    
                     data.push([]);                    
-                    data.push(["", "LIGAS UTILIZADAS"]);                    
+                    data.push(["", "MATÉRIA PRIMA"]);                    
                     
                     saida.ligas.forEach(liga => {                        
                         data.push(["NUMERO DA ORDEM : "+ liga.orderNumber,"DATA : "+this.ticksToDate(liga.startDate), "QUANTIDADE : "+ liga.quantity]);                    
@@ -208,65 +208,12 @@ export default {
             XLSX.writeFile(wb, 'book.xlsx');         
         },
 
-        // s2ab(s){
-        //     console.log(s);
-        //     var buf = new ArrayBuffer(this.s2ab.length);
-        //     var view = new Uint8Array(buf);
-        //     for(var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-        //     return view;
-        // },
 
-
-        // toExcel(csv, filename){
-        //     console.log(csv);
-        //     var csvFile;
-        //     var downloadLink;
-                 
-        //     csvFile = new Blob([csv], {type: "octet-stream"});
-        //     downloadLink = document.createElement("a");  
-        //     downloadLink.download = filename;
-        //     downloadLink.href = window.URL.createObjectURL(csvFile);
-        //     downloadLink.style.display = "none";
-        //     document.body.appendChild(downloadLink);
-        //     downloadLink.click();        
-        // },
-
-        // exportTableToCSV(filename){
-        //     var csv = [];
-        //     var i, j=1;
-        //     this.genealogys.forEach(g => {
-        //         i=1;
-        //         csv.push("\n\n\n,OP : " + j);
-        //         csv.push("\nNumero da ordem : "+ g.productionOrderNumber +",Data inicio : "+this.ticksToDate(g.startDate)+",Data fim : "+this.ticksToDate(g.endDate)+",Codigo da receita : "+g.recipeCode);                
-        //         g.outputRolls.forEach(output => {                    
-        //             csv.push("\nROLO : " + (i++)+",Quantidade : " + output.quantity);
-        //             csv.push("\n\n,,ACO UTILIZADO");
-        //             csv.push(",Quantidade,Lote,Data");                    
-        //             output.inputRolls.forEach(input => {
-        //                 csv.push(","+input.quantity+","+input.batch+","+this.ticksToDate(input.startDate));
-        //             });
-        //             output.ligas.forEach(liga => {
-        //                 csv.push("\n,,LIGAS UTILIZADAS\n");                        
-        //                 csv.push(",,Numero da ordem : "+ liga.orderNumber +",Codigo da receita : "+liga.batch); 
-        //                 csv.push(",,Data inicio : "+this.ticksToDate(liga.startDate)+",Data fim : "+this.ticksToDate(liga.endDate));
-        //                 csv.push(",,ELEMENTOS"); 
-        //                 csv.push(",ELEMENTO,QUANTIDADE,LOTE,DATA");
-        //                 liga.productsInput.forEach(elemento => {
-        //                     csv.push(","+elemento.product+","+elemento.quantity+","+elemento.batch+","+this.ticksToDate(elemento.date));
-        //                 }); 
-        //             });
-        //         });
-        //         j++;
-        //     });                                 
-        //     this.toExcel(csv.join("\n"), filename);
-        // },
-
-
-
-
-
-
-
+        addZero(i){
+            if(i<10)
+                i='0'+i;
+            return i;
+        },
 
         ticksToDate(dateTicks) {
             var epochTicks = 621355968000000000,
@@ -275,10 +222,11 @@ export default {
                 jsDate;
             jsTicks = (dateTicks - epochTicks) / ticksPerMillisecond;
             jsDate = new Date(jsTicks);            
-            var dateFormatted = jsDate.getDate() + "/" +
-                (jsDate.getMonth() + 1) + "/" +
-                jsDate.getFullYear() + " " + jsDate.getHours() + ":" + jsDate.getMinutes();
+            var dateFormatted = this.addZero(jsDate.getDate()) + "/" +
+                (this.addZero(jsDate.getMonth() + 1)) + "/" +
+                jsDate.getFullYear() + " " + this.addZero(jsDate.getHours()) + ":" + this.addZero(jsDate.getMinutes());
             // var hours = jsDate.toString().slice(4, 21);            
+
             return dateFormatted;
         },
 
@@ -488,8 +436,12 @@ export default {
                     });                                    
                 });                                                                                                
             });
-            
-            pdf.save("todos.pdf");
+            if(this.fieldFilter=='cod')
+                pdf.save("genealogia-tira-"+this.cod+".pdf");
+            else if(this.fieldFilter=='date')
+                pdf.save("genealogia-periodo-"+this.inicio+"-ate-"+this.fim+".pdf");
+            else if(this.fieldFilter=='op')
+                pdf.save("genealogia-ordem-"+this.op+".pdf");
         },
 
         getResults(url, name, pros) {

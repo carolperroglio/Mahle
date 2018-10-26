@@ -15,7 +15,7 @@
          <div class="form-row nav-ass-tool">
          <div class="form-group col-md-2">
             <label for="">Nome da Thing:</label>
-                <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <input @keyup="Tools=getTools(tool)" v-model="tool" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                            <ul class="list-group">
                            <b-dropdown-item class="" v-if="notSelected" @click.stop.prevent="toolName = t.name;
                                                                               toolId = t.id;

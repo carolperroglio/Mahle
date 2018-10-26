@@ -1,6 +1,5 @@
 <template>
-    <div>
-          
+    <div>          
         <!--               -->
         <!--               -->
         <!--               -->
@@ -14,16 +13,16 @@
                     <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>               
                 <li class="nav-items-tira form-group col-md-0 margin-nav">                    
-                    <b>Nome da Tira</b>                    
+                    <b>Descrição da Tira</b>                    
                 </li>
-                <li class="nav-items-tira form-group col-md-2">
-                    <input type="text" class="form-control form-control-md" v-model="recipe.recipeName" size='9' :disabled="true" required placeholder="Nome da Tira">                        
+                <li class="nav-items-tira form-group col-md-3">
+                    <input type="text" class="form-control form-control-md" v-model="recipe.recipeDescription" size='9' :disabled="true" required >                        
                 </li>                  
                 <li class="nav-items-tira form-group col-md-0  margin-nav">                 
                     <b>Código</b>                                                           
                 </li>                                     
                 <li class="nav-items-tira form-group col-md-2">
-                    <input type="text" class="form-control form-control-md" required v-model="recipe.recipeCode" :disabled="true" size='12' placeholder="Código da receita">    
+                    <input type="text" class="form-control form-control-md" required v-model="recipe.recipeCode" :disabled="true" size='12'>    
                 </li>
             </ul>                 
         </div>     
@@ -56,22 +55,22 @@
             </label>  
             <label class="ls-tira">
                 <b><font class="cursor-class" color="#ffffff">
-                    LIE <p class="font-size">Limite inferior da Especificação
+                    LIE <p class="font-size">Limite Inferior de Especificação
                 </p></font></b>
             </label> 
             <label class="ls-tira">
                <b><font class="cursor-class" color="#ffffff">
-                    LIC <p class="font-size">Limite inferior de Controle 
+                    LIC <p class="font-size">Limite Inferior de Controle 
                 </p></font></b>
             </label> 
             <label class="ls-tira">
                <b><font class="cursor-class" color="#ffffff">
-                    LSC <p class="font-size">Limite superior de Controle
+                    LSC <p class="font-size">Limite Superior de Controle
             </p></font></b>
             </label>
             <label class="ls-tira">
                 <b><font class="cursor-class" color="#ffffff">
-                    LSE <p class="font-size">Limite superior de Especificação 
+                    LSE <p class="font-size">Limite Superior de Especificação 
                 </p></font></b>
             </label>                              
         </div>

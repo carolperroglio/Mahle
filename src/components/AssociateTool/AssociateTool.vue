@@ -10,58 +10,37 @@
         <!--                                 -->
         <div class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
-            <li class="nav-prod nav-item-gp col-md-12">
-                <h1 class="title-page-gp"><b>Associação de Ferramenta</b></h1>
-            </li>
-            <li class="colmd2">
-                <p></p>
-            </li>
-            <!-- <label for="">Nome da ferramenta:</label>
-                <input @keyup="Tools=getTools(tool)" v-model="tool" placeholder="Ferramenta" class="btn btn-outline-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
-                    <ul class="list-group">
-                    <b-dropdown-item class="" v-if="notSelected" @click.stop.prevent="toolName = t.name;
-                        toolId = t.id;
-                        tool = t.name;
-                        typeId = t.typeId;
-                        notSelected = false;  
-                        openSelectGroup()" v-for="(t,index) in Tools" v-bind:key="index">
-                        <li class="list-group-item">{{t.name}}</li>
-                    </b-dropdown-item>   -->                           
+                <li class="nav-prod nav-item-gp col-md-12">
+                    <h1 class="title-page-gp"><b>Associação de Ferramenta</b></h1>
+                </li>
+                <li class="offset-10">
+                    <div class="">
+                        <router-link :to="{name: 'ToolTypeAssoc'}" class="btn offset-6 btn-primary"><i class="fa fa-arrow-left"></i> Voltar</router-link>
+                    </div>
+                </li>                   
             </ul> 
         </div>  
-
-        <div class="container-assoc">
-            <div  v-for="(t,index) in tools" :key="t.position"  id="constat">
-                <div class="tileConfigAssTool">
-                    <div>
-                    <div class="col-md-12">
-                    <h4 class="ls11" :id="index + 1" >
-                        {{"Posição" + " " }} {{index+1}}
-                    </h4>
-                    <!-- <h4 class="ls11" :id="index + 1" v-else>
-                        {{"Posição" + " " }} {{index + 1}}
-                    </h4> -->
-                    <p :id="index + 1" v-if="t.tool.currentThing != undefined">
-                    <!-- <p :id="index + 1" v-if="t.id != ''"> -->
-                        Código: {{t.tool.code}}
-                    </p>
+        
+        <div class="row mb-5 mx-4" style="margin-top :14rem;">                
+            <div class="col-md-2" v-for="(t, index) in tools" :key="t.position">
+                <div class="card mx-2 my-2" style="box-shadow: 8px 8px 8px rgba(0,0,0,0.5);">         
+                    <div class="card-header text-center">
+                        <h4 :id="index + 1" >
+                            {{"Posição" + " " }} {{index+1}}
+                        </h4>               
                     </div>
-                    <div class="btn-view-pos">
-                        <button class="btn btn-danger btn-block" v-if="t.tool.currentThing != undefined" @click.stop.prevent="showModal('modalConfirmDissac');fSelected = t.tool">
-                            Dessassociar
-                        </button>
-                        <button class="btn btn-success btn-block" v-if="t.tool.currentThing == undefined" @click.stop.prevent="showModal('modalAssociate'); pos = t.tool.pos">
-                            Associar
-                        </button>
-                    </div>
+                    <div class="card-body">                                                        
+                        <p :id="index + 1">                            
+                            {{t.tool.currentThing != undefined?'Código: '+t.tool.code:'Sem ferramenta'}}
+                        </p>                                                                                    
+                        <button class="btn btn-block" :class="[t.tool.currentThing != undefined? 'btn-danger': 'btn-success']" @click.stop.prevent="t.tool.currentThing != undefined?showModal('modalConfirmDissac'):showModal('modalAssociate');t.tool.currentThing != undefined?fSelected = t.tool:pos = t.tool.pos">
+                            {{t.tool.currentThing != undefined?'Desassociar': 'Associar'}}
+                        </button>                        
                     </div>
                 </div>
-        </div>
-        </div>
-        <br>
-        <div class="row container-fluid">
-            <router-link :to="{name: 'ToolTypeAssoc'}" class="btn btn-info"><i class="fa fa-arrow-left"></i> Voltar</router-link>
-        </div>
+            </div>
+        </div>                            
+        
 
         <!-- MODAL DE ASSOCIAÇÃO DE FERRAMENTAS-->
         <b-modal ref="modalAssociate" no-close-on-backdrop hide-footer title="Associar Ferramenta" modal-header-close>
@@ -69,7 +48,7 @@
             <div class="form-group row">
                 <div class="form-group col-sm-10">
                 <label for="ferramentas">Ferramentas</label>
-                    <select class="form-control" aria-placeholder="tipo de ordem" v-model="fSelected">
+                    <select class="form-control" v-model="fSelected">
                         <option value="" selected disabled  v-show="toolList.length > 0">Selecione</option>
                         <option v-for="(t,index) in toolList" v-bind:value="t" v-bind:key="index" v-if="toolList.length > 0">
                             {{ t.name }}
@@ -93,7 +72,7 @@
         </div>
         </b-modal>
 
-        <b-modal ref="modalConfirmDissac" no-close-on-backdrop hide-footer title="Dessassociar Ferramenta">            
+        <b-modal ref="modalConfirmDissac" no-close-on-backdrop hide-footer title="Desassociar Ferramenta">            
             <div class="modal-body">
                 <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja desassociar a Ferramenta ?</b>
             </div>    

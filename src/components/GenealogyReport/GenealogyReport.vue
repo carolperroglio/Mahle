@@ -12,7 +12,7 @@
                     <h1 class="title-page-gp col-md-10"><b>Relatório de Genealogia de Tira</b></h1>                                                        
                 </li>
                 <li class="nav-item-genealogy col-sm-0">
-                    <select class="custom-select form-control form-control-sm" @change="cod='';op='';opName='';inicio='';fim='';recipeCode=''" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                    <select class="custom-select form-control form-control-sm" @change="cod='';op='';opName='';inicio='';fim='';recipeCode=''" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="cod">Código da Tira</option>
                         <option value="date">Data</option> 
@@ -31,35 +31,35 @@
                 <li class="nav-item-genealogy form-group col-sm-0" v-show="fieldFilter=='cod' || fieldFilter=='date'">
                     <label><b>Início  </b></label>      
                 </li>
-               <li class="nav-item-genealogy col-sm-1"  v-show="fieldFilter=='cod' || fieldFilter=='date'">
+                <li class="nav-item-genealogy col-sm-2"  v-show="fieldFilter=='cod' || fieldFilter=='date'">
                     <datetime type="datetime" input-class="form-control form-control-sm" v-model="inicio" format="yyyy-MM-dd HH:mm:ss"></datetime>     
                 </li>              
                 <br>     
                 <li class="nav-item-genealogy form-group col-sm-0" v-show="fieldFilter=='cod' || fieldFilter=='date'">
                     <label><b>Fim </b></label>      
                 </li>                
-                <li class="nav-item-genealogy col-sm-1" v-show="fieldFilter=='cod' || fieldFilter=='date'">
+                <li class="nav-item-genealogy col-sm-2" v-show="fieldFilter=='cod' || fieldFilter=='date'">
                     <datetime type="datetime" input-class="form-control form-control-sm" v-model="fim" format="yyyy-MM-dd HH:mm:ss"></datetime>     
                 </li>
                 <li class="nav-item-genealogy col-sm-0" v-show="fieldFilter=='op'">
                     <label><b>OP </b></label> 
                 </li>
                 <li class="nav-item-genealogy col-sm-1" v-if="fieldFilter=='op'">
-                    <input placeholder="Número da OP" class="form-control form-control-sm" v-model="opName" @keyup="prosFim=getResults(URL_OP,opName, prosFim); op=''" >                                                                                 
+                    <input class="form-control form-control-sm" v-model="opName" @keyup="prosFim=getResults(URL_OP,opName, prosFim); op=''" >                                                                                 
                     <div class="auto-complete">
                         <b-dropdown-item @click.stop.prevent="opName=o.productionOrderNumber;op=o.productionOrderId;prosFim=[]" v-for="(o,index) in prosFim" :key="index" style="cursor:pointer">{{ o.productionOrderNumber }}</b-dropdown-item>
                     </div>
                 </li>                
-                <li class="nav-item-genealogy col-sm-2">
+                <li class="nav-item-genealogy col-sm-1">
                     <button class="btn btn-primary btn-sm" :disabled="!fieldFilter || (fieldFilter=='date' && !inicio && !fim) || (fieldFilter=='op' && !op) || (fieldFilter=='cod' && !inicio && !fim && !cod)" @click.stop.prevent="getGenealogy(fieldFilter, op, cod, inicio, fim)">
                         <i class="fa fa-search"></i> Buscar
                     </button>
                 </li>
-                <li class="ml-auto p-2">                
-                    <button type="button" class="btn btn-sm pull-left btn-outline-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="toPdfAutoTable()">
+                <li class="ml-auto">                
+                    <button type="button" class="btn btn-sm pull-left btn-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="toPdfAutoTable()">
                         <i class="fa fa-file-pdf-o"></i> Exportar para PDF
                     </button>  
-                    <button type="button" class="btn btn-sm pull-left btn-outline-success" :disabled="!genealogys || genealogys.length==0" @click.prevent="exportExcel('members.xlsx')">
+                    <button type="button" class="btn btn-sm pull-left btn-success" :disabled="!genealogys || genealogys.length==0" @click.prevent="exportExcel('members.xlsx')">
                         <i class="fa fa-file-pdf-o"></i> Exportar para Excel
                     </button>
                     <!-- <download-excel class = "btn btn-outline-success btn-sm btn-sm pull-left" :data = "json_data"  name = "fileName">                    
@@ -127,7 +127,7 @@
                                     </div>                                       
                                 </div> 
                                 <b-collapse :id="'materia'+index+''+indexOutput">
-                                    <div v-for="(m, indexMateria) in outputRolo.ligas" :key="indexMateria">
+                                    <div v-for="(m, indexMateria) in outputRolo.ligas" :key="indexMateria"><br>
                                         <div class="col-md-6">
                                             <b>OPL:</b> {{m.orderNumber}}
                                         </div>  
@@ -136,7 +136,7 @@
                                                 <tr>
                                                     <th>Elemento</th>
                                                     <th>Quantidade</th>
-                                                    <th>OF</th>
+                                                    <th>Lote</th>
                                                     <th>Data</th>
                                                 </tr>
                                             </thead>
@@ -155,7 +155,7 @@
                                             <tr>
                                                 <th>N° do rolo</th>
                                                 <th>Quantidade</th>
-                                                <th>Lote</th>
+                                                <th>OF</th>
                                                 <th>Data</th>
                                             </tr>
                                         </thead>

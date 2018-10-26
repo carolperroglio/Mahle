@@ -36,7 +36,16 @@ export default {
             lista2: false,
             carregando: false,
             url: process.env.TOOLS_API,
-            toolType: []
+            toolType: [],            
+            desbobinador:[],                 
+            formadoraDeCanal:[],                                                
+            fornoDeBronze:[],            
+            fusao:[],                
+            resfriamento:[],            
+            fresaDeDesbaste:[],
+            tesoura:[],            
+            tracionador:[],                                   
+            orderTools : ['8','9','6','5','4','17','7','16','21','14','15','2','10','13','19','18','3','12','11','20']
         }
     },
     computed: {},
@@ -53,31 +62,39 @@ export default {
         getTools(name) {
             var array = [];
             if (name.length < 3) { return; }
-            axios.get(this.url + '/api/tool?fieldFilter=name&fieldValue=' + name).then((response) => {
-                response.data.values.forEach((pro) => {
-                    array.push(pro);
-                    console.log(response);
-                });
-            }, (error) => {
-                console.log(error);
-            })
+                axios.get(this.url + '/api/tool?fieldFilter=name&fieldValue=' + name).then((response) => {
+                    response.data.values.forEach((pro) => {
+                        array.push(pro);
+                        console.log(response);
+                    });
+                }, (error) => {
+                    console.log(error);
+                })
             return array;
-        },
-        getAllTools() {
-            axios.get(this.url + '/api/tool').then((response) => {
-                response.data.values.forEach((pro) => {
-                    this.AllTools.push(pro);
-                });
-                console.log(this.AllTools);
-            }, (error) => {
-                console.log(error);
-            })
-        },
+        },        
         getToolType() {
             this.carregando = true;
             this.group = true;
-            axios.get(this.url + '/api/tooltype/').then((response) => {
-                this.toolType = response.data;
+            axios.get(this.url + '/api/tooltype/').then((response) => {                
+                // var valida = true; var j = 0;
+                // this.orderTools.forEach((o)=>{
+                //     j=0;valida=true;
+                //     while(valida && j<response.data.length){                                                     
+                //         if(o == response.data[j].toolTypeId){                            
+                //             this.toolType.push(response.data[j]);                                 
+                //             valida = false;
+                //         }
+                //         ++j;
+                //     }
+                // })                
+                this.desbobinador.push(response.data.filter((x)=>{if (x.toolTypeId==8||x.toolTypeId==9) return x}));
+                this.formadoraDeCanal.push(response.data.filter((x)=>{if (x.toolTypeId==6||x.toolTypeId==5||x.toolTypeId==4) return x}));
+                this.fornoDeBronze.push(response.data.filter((x)=>{if (x.toolTypeId==17||x.toolTypeId==7) return x}));
+                this.fusao.push(response.data.filter((x)=>{if (x.toolTypeId==16||x.toolTypeId==21||x.toolTypeId==14) return x}));
+                this.resfriamento.push(response.data.filter((x)=>{if (x.toolTypeId==15||x.toolTypeId==2||x.toolTypeId==10||x.toolTypeId==13||x.toolTypeId==19||x.toolTypeId==18) return x}));
+                this.fresaDeDesbaste.push(response.data.filter((x)=>{if (x.toolTypeId==3||x.toolTypeId==12) return x}));
+                this.tesoura.push(response.data.filter((x)=>{if (x.toolTypeId==11) return x}));
+                this.tracionador.push(response.data.filter((x)=>{if (x.toolTypeId==20) return x}));
             }, (error) => {
                 console.log(error);
             })
@@ -128,7 +145,7 @@ export default {
                 this.carregando = false;
             })
 
-        },
+        },        
         getStatus(status) {
             var state = {
                 'available': "Disponível",
@@ -142,7 +159,7 @@ export default {
         },
     },
     beforeMount: function() {
-        this.getAllTools();
+        //this.getAllTools();
         this.getToolType();
     }
 };

@@ -143,7 +143,7 @@ export default {
                 console.log(error);
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro: " + error.message;
-                this.showModal("modalInfo");
+                //this.showModal("modalInfo");
             })
             return array;
         },
@@ -187,11 +187,53 @@ export default {
 
             console.log(this.opArray);
         },
+
+        ordenaParametros(t){
+            var temp = [];     
+            console.log(t);                     
+            for(var i=0; i<t.length; i++){
+                if(t[i]["parametro"] == "largura de canal")
+                    temp[0] = t[i];
+                else if(t[i]["parametro"] == "t. pré-aquecim. (zona 1)")
+                    temp[1] = t[i];
+                else if(t[i]["parametro"] == "t. pré-aquecim. (zona 2)")
+                    temp[2] = t[i];    
+                else if(t[i]["parametro"] == "t. pré-aquecim. (zona 3)")
+                    temp[3] = t[i];
+                else if(t[i]["parametro"] == "t. forno de bronze (zona 4)")
+                    temp[4] = t[i];
+                else if(t[i]["parametro"] == "t. fusão / vazamento")
+                    temp[5] = t[i];
+                else if(t[i]["parametro"] == "t. óleo refrigeração")
+                    temp[6] = t[i];    
+                else if(t[i]["parametro"] == "pressão do óleo")
+                    temp[7] = t[i];        
+                else if(t[i]["parametro"] == "vazão óleo 1 e 2 (FCB1)")
+                    temp[8] = t[i]; 
+                else if(t[i]["parametro"] == "vazão óleo 3 (FCB1)")
+                    temp[9] = t[i];  
+                else if(t[i]["parametro"] == "vazão óleo 4 (FCB1)")
+                    temp[10] = t[i];  
+                else if(t[i]["parametro"] == "vazão óleo 5 e 6 (FCB1)")
+                    temp[11] = t[i]; 
+                else if(t[i]["parametro"] == "velocidade (FCB1)")
+                    temp[12] = t[i];
+                else if(t[i]["parametro"] == "t. ponto orvalho")
+                    temp[13] = t[i];
+                else if(t[i]["parametro"] == "esp. após fundir (ref.)")
+                    temp[14] = t[i]; 
+                else if(t[i]["parametro"] == "esp. fresa desbaste (ref.)")
+                    temp[15] = t[i];    
+                else if(t[i]["parametro"] == "largura recortada")
+                    temp[16] = t[i];                        
+            }     
+            this.parametrosteste = temp;                           
+        },
+
         getGatewayRecipe: function(obj) {
-
             var id = obj.recipe.recipeId;
-            this.opSelectedParams = obj;
-
+            this.opSelectedParams = obj;            
+            
             for (var count = 0; count < this.opSelectedParams.recipe.phases.length; count++)
                 if (this.opSelectedParams.recipe.phases[count].phaseId != 46)
                     if (this.opSelectedParams.recipe.phases[count].phaseParameters.length > 0) {
@@ -277,6 +319,7 @@ export default {
                 console.log("this.parametrosteste[xy].parametro = this.parametersteste[this.vetNomesteste[xy]][0].tag.tagGroup");
                 console.log(this.parametrosteste[xy].parametro = this.parametersteste[this.vetNomesteste[xy]][0].tag.tagGroup);
             }
+            this.ordenaParametros(this.parametrosteste);
             setTimeout(() => {
                 this.showModal('visualizarParams');
                 console.log("parametrosteste");
@@ -362,7 +405,6 @@ export default {
             this.getRecipeGateway(id);
         },
         seeProduct: function(index) {
-            debugger;
             // getRecipeGateway(index);
             this.productArray = this.recipeObj.phases[index].phaseProducts;
         },

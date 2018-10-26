@@ -81,7 +81,20 @@ export default {
             //
             prosFim: [],
             opName: '',
-            headerName:''
+            headerName:'',
+            json_fields: {
+                'Data': 'dateI',
+                'Hora': 'hour',
+                'OPL': 'op',
+                'N° da amostra': 'numberAnalysis',
+                'Produto': 'productName',
+                'Especificado(%)': 'op',
+                'Resultado da Análise': 'op',
+                'Resultado': 'status',
+                'Correção':'correction',
+                'Usuário': 'userName'
+            },
+            tableExcel: [],
         }
     },
     components: {
@@ -222,7 +235,7 @@ export default {
                     'dataKey': 'correction'
                 },
                 {
-                    'title': 'Usuário(%)',
+                    'title': 'Usuário',
                     'dataKey': 'userName'
                 },
             ];
@@ -253,7 +266,7 @@ export default {
             doc.setFontSize(20);
             // ADICIONA LOGO MAHLE
             doc.addImage(imgLogo, "PNG", 510, 10, 60, 20); // ADICIONA TÍTULO                            
-            doc.text(35, 65, "Relatório de Reamostragem " + this.headerName)
+            doc.text(35, 65, "Relatório de Análise Química " + this.headerName)
 
             tableValues.forEach((obj)=>{
                 obj.status = this.changeStatusEnglishToPortuguese(obj.status);
@@ -376,6 +389,23 @@ export default {
                     obj.especification = obj.recipeMax + ' - ' + obj.recipeMin
                 });
                 this.tableData = response.data.report;
+                console.log(this.tableData);
+                var j=0;
+                this.tableData.forEach((x)=>{
+                    this.tableExcel[j++] = {
+                        'Data': x.dateI,
+                        'Hora': x.hour,
+                        'OPL': x.op,
+                        'N° da amostra': x.numberAnalysis,
+                        'Produto': x.productName,
+                        'Especificado(%)': x.especification,
+                        'Resultado da Análise': x.resultAnalysis,
+                        'Resultado': this.filterStatus(x.status),
+                        'Correção':x.correction,
+                        'Usuário': x.userName                        
+                    }
+                })
+                
                 this.hideModal('filterSearch');
                 this.carregando = false;
                 this.headerName = this.date + " - " + this.datef;
@@ -440,6 +470,34 @@ export default {
                     }
                 });
         },
+        filterStatus(value) {
+            switch (value) {
+                case 'created':
+                    return "Criada"
+                    break;
+                case 'available':
+                    return "Disponível"
+                    break;
+                case 'active':
+                    return "Ativa"
+                    break;
+                case 'reproved':
+                    return "Reprovada"
+                    break;
+                case 'ended':
+                    return "Finalizada"
+                    break;
+                case 'waiting_approval':
+                    return "Em Análise"
+                    break;
+                case 'approved':
+                    return "Aprovada"
+                    break;
+                default:
+                    break;
+
+            }
+        }
     },
     filters: {
         filterStatus: function(value) {

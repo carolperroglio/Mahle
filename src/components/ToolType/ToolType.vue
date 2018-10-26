@@ -13,7 +13,7 @@
                     </select>
                 </li>    
                 <li class="nav-prod col-md-2">
-                    <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-lg" placeholder="Ex: Faca">                              
+                    <input type="text" id="valor" v-model="fieldValue" class="form-control form-control-lg">                              
                 </li> 
                 <li class="nav-prod col-md-6">        
                 <form class="form-inline my-3">
@@ -86,17 +86,17 @@
                         <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="">Ferramenta</label>
-                            <input type="text" class="form-control" v-model="tooltype.name" placeholder="Ex: Ferramenta Guilhotina">
+                            <input type="text" class="form-control" v-model="tooltype.name" >
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Descrição</label>
-                            <input type="text" class="form-control" v-model="tooltype.description" placeholder="Ex:21721098">
+                            <input type="text" class="form-control" v-model="tooltype.description" >
                         </div>
                         </div>
                         <div class="form-row">
                            <div class="col-md-6">
                             <label for="opType" class="col-form-label">Estação</label>
-                                    <select class="form-control mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="groupSelected">
+                                    <select class="form-control mr-sm-2.5" v-model="groupSelected">
                                         <option value="" selected disabled>Selecione um grupo</option>
                                         <option v-for="(tgroup,index) in thingsGroup" v-bind:value="tgroup" :key="index">
                                             {{ tgroup.groupName }}
@@ -145,17 +145,17 @@
                         <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="">Ferramenta</label>
-                            <input type="text" class="form-control" v-model="tooltypeUp.name" placeholder="Nome">
+                            <input type="text" class="form-control" v-model="tooltypeUp.name" >
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Descrição</label>
-                            <input type="text" class="form-control" v-model="tooltypeUp.description" placeholder="Código">
+                            <input type="text" class="form-control" v-model="tooltypeUp.description">
                         </div>
                         </div>
                         <div class="form-row">
                            <div class="col-md-6">
                             <label for="opType" class="col-form-label">Grupo</label>
-                                    <select class="form-control mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="groupSelected">
+                                    <select class="form-control mr-sm-2.5" v-model="groupSelected">
                                         <option value="" selected disabled>Selecione um grupo</option>
                                         <option v-for="(tgroup,index) in thingsGroup" v-bind:value="tgroup" :key="index">
                                             {{ tgroup.groupName }}

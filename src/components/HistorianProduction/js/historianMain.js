@@ -154,10 +154,13 @@ export default {
             }
         },
         sendCalculation(lastAnalysis) {
-            console.log(lastAnalysis);
+            console.log("Entrouuu");
             axios.put(this.urlAnalysis + '/api/CalculeAnalysis?productionOrderId=' + this.idOpAtual + '&furnaceQuantity=' + this.cargaUtilizada, lastAnalysis).then((response) => {                
                 this.erro = false;
-                this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";
+                this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para registrar matéria-prima";
+                for(var i=0; i<this.orderHistorian.length; i++)                
+                    if(this.orderHistorian[i].productionOrderId == this.idOpAtual)
+                        this.orderHistorian[i].showbutton = false;
                 this.showModal("modalErro");
             }).catch((error) => {
                 this.carregando = false;
@@ -173,7 +176,7 @@ export default {
             var p = {type : 'input', username : VueCookies.get('username'), productionOrderId : this.idOpAtual, productId : 73, quantity : quantiti,unity : 'kg', batch : order.productionOrderNumber};            
             axios.post(this.url + '/api/producthistorian', p).then((response) => {
                 this.erro = false;
-                this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para visualizar o cálculo";
+                this.msgErro = "Cálculo realizado com sucesso! Clique em realizar apontamento para registrar matéria-prima";
                 this.showModal("modalErro");
             }).catch((error) => {
                 this.carregando = false;
@@ -183,29 +186,37 @@ export default {
             });            
         },
 
-        getAnalysis(id, obj) {
-            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + id)
-                .then((response) => {
-                    obj.showbutton = false;
-                    var newobj = obj;
-                    newobj.showbutton = true;
-                    obj = Object.assign({}, newobj)
-                    console.log(obj);
-                    // return true;
+        getAnalysis(i) {    
+            console.log("Sucesso"+i);                                            
+            axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.orderHistorian[i].productionOrderId).then((response) => {
+                //obj.showbutton = false;
+                // var newobj = obj;
+                // //newobj.showbutton = false;
+                // obj = Object.assign({}, newobj)
+                console.log("Teste");
+                this.orderHistorian[i].showbutton = false;
+                
+                if(i<this.orderHistorian.length)                
+                    this.getAnalysis(++i);
+                // return true;
 
-                }).catch((error) => {
-                    if (error.response.status != '404') {
-                        this.erro = true;
-                        this.msgErro = "Ocorreu um erro ao obter a última análise - " + error.message;
-                        this.showModal('modalErro');
-                    } else if (error.response.status == '404') {
-                        var newobj = obj;
-                        newobj.showbutton = true;
-                        obj = Object.assign({}, newobj)
-                        console.log(obj);
-                        // return false;
-                    }
-                })
+            }).catch((error) => {
+                if (error.response.status != '404') {
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao obter a última análise - " + error.message;
+                    this.showModal('modalErro');
+                    if(i<this.orderHistorian.length)                
+                        this.getAnalysis(++i);
+                } else if (error.response.status == '404') {
+                    //var newobj = obj;
+                    this.orderHistorian[i].showbutton = true;
+                    //obj = Object.assign({}, newobj)
+                    console.log(this.orderHistorian[i]);
+                    if(i<this.orderHistorian.length)                
+                        this.getAnalysis(++i);
+                    // return false;
+                }
+            })                
         },
         getLastAnalysis() {
             var lastAnalysis = {};
@@ -252,6 +263,8 @@ export default {
             axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,waiting_approval' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
                 .then((response) => {
                     console.log(response.data);
+                    for(var i=0; i<response.data.values.length; i++)
+                        response.data.values[i].showbutton = false;
                     response.data.values.forEach((pro) => {
                         if (pro.currentThing) {
                             pro.thingName = pro.currentThing.thingName
@@ -264,7 +277,8 @@ export default {
                     axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,active' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
                         .then((response) => {
                             console.log(response.data);
-
+                            for(var i=0; i<response.data.values.length; i++)
+                                response.data.values[i].showbutton = false;
                             response.data.values.forEach((pro) => {
                                 if (pro.currentThing) {
                                     pro.thingName = pro.currentThing.thingName
@@ -277,6 +291,8 @@ export default {
                             axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,approved' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
                                 .then((response) => {
                                     console.log(response.data);
+                                    for(var i=0; i<response.data.values.length; i++)
+                                        response.data.values[i].showbutton = false;
                                     response.data.values.forEach((pro) => {
                                         if (pro.currentThing) {
                                             pro.thingName = pro.currentThing.thingName
@@ -287,21 +303,16 @@ export default {
                                     this.carregando = true;
                                     axios.get(this.urlOP + '/api/productionorders/v2?&filters=currentStatus,reproved' + '&startat=' + this.startat + '&quantity=' + this.quantityPage, config)
                                         .then((response) => {
+                                            for(var i=0; i<response.data.values.length; i++)
+                                                response.data.values[i].showbutton = false;
                                             console.log(response.data);
                                             response.data.values.forEach((pro) => {
                                                 if (pro.currentThing) {
                                                     pro.thingName = pro.currentThing.thingName
                                                     this.orderHistorian.push(pro);
-                                                }
-                                            });
-
-                                            this.orderHistorian.forEach((obj) => {
-                                                setTimeout(() => {
-                                                    var value = false;
-                                                    value = this.getAnalysis(obj.productionOrderId, obj);
-                                                }, 500);
-
-                                            })
+                                                }                                                
+                                            }); 
+                                            this.getAnalysis(0);                                           
                                             this.carregando = false;
                                         })
                                 })
@@ -346,7 +357,7 @@ export default {
             }
         },
     },
-    beforeMount: function() {
+    created: function() {
         this.getResults();
     }
 };

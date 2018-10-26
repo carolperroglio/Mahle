@@ -5,18 +5,31 @@ import bModal from 'bootstrap-vue/es/components/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
 es6promisse.polyfill();
 
-function paginacao(total, este) {
+// function paginacao(response, este) {
+//     debugger;
+//     este.pageAtual = este.startat / 20;
+//     este.total = response.data.total;
+//     let fim = Math.ceil(este.total / 20);
+//     este.pages = [];
+//     if (este.pageAtual > 11) {
+//         for (var i = este.pageAtual - 5; i < este.pageAtual + 5 > fim ? fim : este.pageAtual + 5 ; i++)
+//             este.pages[i] = i;
+//     } else {
+//         for (var i = 0; i < fim; i++)
+//             este.pages[i] = i;
+//     }
+// }
+
+function paginacao(response, este) {
     este.pageAtual = este.startat / este.quantityPage;
-    este.total = total;
+    este.total = response.data.total;
     let fim = Math.ceil(este.total / este.quantityPage);
-    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
-    if (este.pageAtual > 11) {
-        for (var i = este.pageAtual - 5; i < num; i++)
-            este.pages[i] = i;
-    } else {
-        for (var i = 0; i < num; i++)
-            este.pages[i] = i;
-    }
+    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5;
+    var comeco = este.pageAtual - 5 > 0 ? este.pageAtual - 5 : 0;
+    este.pages = [];
+    var j = 0;    
+    for (var i = comeco; i < num; i++)
+        este.pages[j++] = i;                
 }
 
 var ipServer = process.env.RECIPE_API;
@@ -31,7 +44,7 @@ export default {
             phases: [],
             cabecalhoSetas: [false, false, false],
             carregando: false,
-            quantityPage: 300,
+            quantityPage: 20,
             startat: 0,
             total: 0,
             pages: [],
@@ -144,11 +157,11 @@ export default {
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
             };
-            this.recipes = [];
-            setTimeout(() => {}, 500);
+            this.recipes = [];            
             axios.get(this.urlRecipes + "v2?filters=recipeTypeId,1&filters=orderField," + this.orderField + "&filters=order," + this.order + "&filters=" + this.fieldFilter + "," + this.fieldValue + "&startat=" + this.startat + "&quantity=" + this.quantityPage, config).then((response) => {
                 this.recipes = response.data.values;
-                this.carregando = false;
+                paginacao(response, this);
+                this.carregando = false;                
             }, (error) => {
                 this.carregando = false;
                 this.codigosErro(error.response.status);

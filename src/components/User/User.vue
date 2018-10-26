@@ -9,7 +9,7 @@
             <form class="form-inline my-3 form-control-sm">
                 <!-- Button trigger modal -->
                 <div class="col-md-3">
-                    <button @click="showModal('cadUser');cleanVariableCreate()" type="button" class="btn btn-success btn-lg">
+                    <button @click="showModal('cadUser');objUser={}" type="button" class="btn btn-success btn-lg">
                         <i class="fa fa-plus"></i> Cadastrar Usuário
                     </button>
                 </div>
@@ -79,16 +79,16 @@
         </label>
         <label class="ls1-user col-md-1">
             <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUser = u;showModal('deleteUser')"></i>
-            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUser = u;objUser.password = '';showModal('editUser')"></i>
+            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUser = u; objUser.password = ''; objUser.passwordconfirm = ''; showModal('editUser')"></i>
         </label>
     </div>
     </div>  
     <br>
 
 
-                            <!--                             -->
-                            <!-- MODALZÃO CRIAÇÃO DE USUÁRIO -->
-                            <!--                             -->
+                <!--                             -->
+                <!-- MODALZÃO CRIAÇÃO DE USUÁRIO -->
+                <!--                             -->
 <b-modal no-close-on-backdrop size="md" ref="cadUser" hide-footer title="Cadastrar Usuário" modal-header-close>
 <div class="modal-body">
     <form>
@@ -96,42 +96,36 @@
     <div class="form-group row">
         <div class="form-group col-md-10">
         <label for="name">Nome </label>
-            <input required type="text" class="form-control" id="name"  placeholder="Ex: Mauricio" v-model="name">
+            <input required type="text" class="form-control" id="name"  v-model="objUser.name">
         </div>
     </div>
     <div class="form-group row">
         <div class="form-group col-md-8">
         <label for="username">Nome de usuário</label>
-            <input required type="text" class="form-control" id="username" placeholder="Ex: mauriciot" v-model="username">
+            <input required type="text" class="form-control" id="username"  v-model="objUser.username">
         </div>
         <div class="form-group col-md-4">
             <br>
-        <button class="btn btn-success" @click.stop.prevent="checkUser(username)"> 
+        <button class="btn btn-success" @click.stop.prevent="checkUser(objUser.username)"> 
             Validar nome 
         </button>
         </div>  
     </div>
     <div class="form-group row">
         <div class="form-group col-md-6">
-        <label for="password">Senha</label>
-         <!-- <vue-password v-model="user.password"
-                    classes="input"
-                    :user-inputs="[user.email]">
-      </vue-password> -->
-      <input required type="password" class="form-control" min="8" max="15" id="password" v-model="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" ref="ruleForm">
-            <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 8 caractéres, uma letra e um número</p>
-            <!-- <input required type="password" class="form-control" min="8" max="15" id="password" v-model="password"> -->
-            <!-- <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 6 caractéres, uma letra e um número</p> -->
+        <label for="password">Senha</label>         
+      <input required type="password" class="form-control" min="8" max="15" id="password" v-model="objUser.password" ref="ruleForm">
+            <p v-if="objUser.password.length < 6" class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 6 caractéres, uma letra e um número</p>            
         </div>
         <div class="form-group col-md-6">
         <label for="passwordconfirm">Confirmar senha</label>
-            <input required type="password" class="form-control"  min="8" max="15" id="passwordconfirm" v-model="passwordconfirm">
+            <input required type="password" class="form-control" min="8" max="15" id="passwordconfirm" v-model="objUser.passwordconfirm">
         </div>
     </div>
     <div class="form-group row">
         <div class="form-group col-md-8">
         <label for="desc">E-mail</label>
-            <input required type="email" class="form-control" placeholder="Ex: mauriocio@empresa.com.br" id="email" v-model="email">
+            <input required type="email" class="form-control" id="email" v-model="objUser.email">
         </div>
     </div>
     </form>
@@ -140,12 +134,11 @@
 <!--                    -->
 <div class="modal-footer">
     <div class="btn-group" role="group">
-        <button class="btn btn-success" :disabled="username == ''|| name == ''|| password == ''|| passwordconfirm == ''
-        || email == '' || userExist == true" @click="createUser();hideModal('cadUser');">
+        <button class="btn btn-success" :disabled="!objUser.username || !objUser.name || !objUser.password || !objUser.passwordconfirm || !objUser.email || userExist == true" @click="createUser(objUser);hideModal('cadUser');">
             <i  class="fa fa-check-square" aria-hidden="true"></i>
             Confirmar
         </button>
-        <button @click.stop.prevent="username = ''; name = ''; password = ''; passwordconfirm = ''; email = ''" class="btn btn-primary pull-right">
+        <button @click.stop.prevent="objUser.username = ''; objUser.name = ''; objUser.password = ''; objUser.passwordconfirm = ''; objUser.email = ''" class="btn btn-primary pull-right">
             <i class="fa fa-eraser" aria-hidden="true"></i> Limpar                          
         </button> 
     </div>
@@ -167,21 +160,17 @@
     <div class="form-group row">
     <div class="form-group col-md-6">
     <label for="nameedit">Nome </label>
-        <input required type="text" class="form-control" id="nameedit"  placeholder="Ex: Mauricio" v-model="objUser.name">
+        <input required type="text" class="form-control" id="nameedit"  v-model="objUser.name">
     </div>
     <div class="form-group col-md-6">
     <label for="usernameedit">Nome de usuário</label>
-        <input required type="text" class="form-control" id="usernameedit" placeholder="Ex: mauriciot" v-model="objUser.username">
+        <input required type="text" class="form-control" id="usernameedit"  v-model="objUser.username">
     </div>  
     </div>
     <div class="form-group row">
         <div class="form-group col-md-6">
-        <label for="passwordedit">Senha</label>
-         <!-- <vue-password v-model="user.password"
-                    classes="input"
-                    :user-inputs="[user.email]">
-      </vue-password> -->
-            <input required type="password" class="form-control" min="8" max="15" id="passwordedit" v-model="objUser.password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" ref="ruleFormEdit">
+        <label for="passwordedit">Senha</label>         
+            <input required type="password" class="form-control" min="8" max="15" id="passwordedit" v-model="objUser.password" ref="ruleFormEdit">
             <p v-if="password.length < 6 && name.length > 0 && username.length > 0 " class="alert-danger" style="font-size:12px">A senha deve conter no mínimo 6 caractéres, uma letra e um número</p>
         </div>
         <div class="form-group col-md-6">
@@ -192,7 +181,7 @@
     <div class="form-group row">
         <div class="form-group col-md-8">
         <label for="desc">E-mail</label>
-            <input required type="email" class="form-control" placeholder="Ex: mauriocio@empresa.com.br" id="email" v-model="objUser.email">
+            <input required type="email" class="form-control" id="email" v-model="objUser.email">
         </div>
     </div>
     </form>
@@ -201,8 +190,7 @@
 <!--                    -->
 <div class="modal-footer">
     <div class="btn-group" role="group">
-        <button class="btn btn-success" :disabled="objUser.username == ''|| objUser.name == ''|| objUser.password == ''|| objUser.passwordconfirm == ''
-        || objUser.email == ''" @click="updateUser(objUser.userId);hideModal('cadUser');">
+        <button class="btn btn-success" :disabled="!objUser.username || !objUser.name || !objUser.password || !objUser.passwordconfirm || !objUser.email" @click="updateUser(objUser);hideModal('cadUser');">
             <i  class="fa fa-check-square" aria-hidden="true"></i>
             Confirmar
         </button>

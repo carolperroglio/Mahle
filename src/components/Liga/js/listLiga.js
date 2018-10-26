@@ -3,20 +3,20 @@ import es6promisse from '../../../.././node_modules/es6-promise/dist/es6-promise
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import { Stretch } from 'vue-loading-spinner'
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
 es6promisse.polyfill();
 
-function paginacao(total, este) {
+function paginacao(response, este) {
     este.pageAtual = este.startat / este.quantityPage;
-    este.total = total;
+    este.total = response.data.total;
     let fim = Math.ceil(este.total / este.quantityPage);
-    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
-    if (este.pageAtual > 11) {
-        for (var i = este.pageAtual - 5; i < num; i++)
-            este.pages[i] = i;
-    } else {
-        for (var i = 0; i < num; i++)
-            este.pages[i] = i;
-    }
+    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5;
+    var comeco = este.pageAtual - 5 > 0 ? este.pageAtual - 5 : 0;
+    este.pages = [];
+    var j = 0;    
+    for (var i = comeco; i < num; i++)
+        este.pages[j++] = i;                
 }
 
 var ipServer = process.env.RECIPE_API;
@@ -138,7 +138,7 @@ export default {
         //
         // PAGINAÇÃO //
         //
-        buscar(id = "") {
+        buscar() {
             this.carregando = true;
             var config = {
                 headers: { 'Cache-Control': 'no-cache' }
@@ -149,7 +149,7 @@ export default {
                     for (var i = 0; i < response.data.values.length; i++)
                         if (response.data.values[i].recipeTypeId == 2)
                             this.recipes.push(response.data.values[i]);
-                    paginacao(this.recipes.length, this);
+                    paginacao(response, this);
                     for (var i = 0; i < this.recipes.length; i++)
                         if (this.recipes[i].recipeDescription == undefined)
                             this.recipes[i].recipeDescription = '';

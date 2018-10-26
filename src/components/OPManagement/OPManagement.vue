@@ -51,15 +51,15 @@
                                         <label>
                                             <b>Nº Ordem de produção: </b>
                                         </label>
-                                        <input type="text" id="desc" class="form-control form-control-sm" v-model="OP.productionOrderNumber" placeholder="001" disabled>
+                                        <input type="text" id="desc" class="form-control form-control-sm" v-model="OP.productionOrderNumber" disabled>
                                         <label>
                                             <b>Quantidade: </b>
                                         </label>
-                                        <input type="text" id="sernum" class="form-control form-control-sm" v-model="OP.quantity" placeholder="1" disabled>
+                                        <input type="text" id="sernum" class="form-control form-control-sm" v-model="OP.quantity"  disabled>
                                          <label>
                                             <b>Descrição: </b>
                                         </label>
-                                        <input type="text" id="code" class="form-control form-control-sm" v-model="OP.typeDescription" placeholder="código" disabled>
+                                        <input type="text" id="code" class="form-control form-control-sm" v-model="OP.typeDescription" disabled>
                                         <br>
                                         <div class="btn-group" role="group">
                                                 <button class="btn btn-warning" style="color: white" @click.stop.prevent="showModalConfirmEditar()">

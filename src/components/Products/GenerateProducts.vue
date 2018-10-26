@@ -15,7 +15,7 @@
                     <h1 class="title-page-gp"><b>Cadastro de Matéria-Prima</b></h1>
                 </li>                   
                 <li class="nav-item-products">
-                    <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
+                    <select class="form-control form-control-md" v-model="fieldFilter">                        
                         <option value="" selected disabled>Campo para busca</option>
                         <option value="productName">Nome</option>
                         <option value="productDescription">Descrição</option>
@@ -24,7 +24,7 @@
                     </select>
                 </li>
                 <li class="nav-item-products">
-                    <input class="form-control btn-md" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" aria-label="Busca">
+                    <input class="form-control btn-md" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" aria-label="Busca">
                 </li>
                 <li class="nav-item-products">
                     <button type="button" class="btn btn-primary btn-md"  @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
@@ -241,13 +241,13 @@
                             <label>
                                 <b>Nome </b>
                             </label>
-                            <input type="text" placeholder="Ex: Estanho" v-model="produto.productName" id="nome" class="form-control form-control-sm">
+                            <input type="text" v-model="produto.productName" id="nome" class="form-control form-control-sm">
                         </div>
                         <div class="form-group col-md-6">
                             <label>
                                 <b>Descrição </b>
                             </label>
-                            <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription" placeholder="Ex: Estanho Metálico">
+                            <input type="text" id="desc" class="form-control form-control-sm" v-model="produto.productDescription">
                         </div>
                     </div>
                     <div class="form-row">
@@ -255,13 +255,13 @@
                             <label>
                                 <b>Código </b>
                             </label>
-                            <input class="form-control form-control-sm" type="text" v-model="produto.productCode" placeholder="Ex: 1010144" id="cod">
+                            <input class="form-control form-control-sm" type="text" v-model="produto.productCode" id="cod">
                         </div>
                         <div class="form-group col-md-6">
                             <label>
                                 <b>Código de barras </b>
                             </label>
-                            <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" placeholder="Ex: 941120000000">
+                            <input type="text" id="gs1" v-model="produto.productGTIN" class="form-control form-control-sm" >
                             <br>
                         </div>
                     </div>

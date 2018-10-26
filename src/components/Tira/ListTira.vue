@@ -11,14 +11,12 @@
                     <h1 class="title-page-gp"><b>Gerenciamento de Tira</b></h1>
                 </li>
                 <li class="nav-item-tira">
-                    <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                        
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="recipeName">Nome</option>                        
-                        <option value="recipeCode">Código</option>                        
+                    <select class="form-control form-control-md" aria-placeholder="Escolha o campo \/" v-model="fieldFilter">                                                                                          
+                        <option selected value="recipeCode">Código</option>                        
                     </select>
                 </li>
                 <li class="nav-item-tira">
-                    <input class="form-control btn-md" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" :placeholder="mudaPlace(fieldFilter)" aria-label="Busca">
+                    <input class="form-control btn-md" type="search" v-model="fieldValue" :disabled="fieldFilter=='' || fieldFilter==undefined" aria-label="Busca">
                 </li> 
                 <li class="nav-item-tira">
                     <button type="button" class="btn btn-primary btn-md" @click.stop.prevent="buscar(id)"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
@@ -30,25 +28,18 @@
         </div>       
         <div class="header-table-listtira" v-show="!carregando">
             <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(recipes, 'recipeName',0):organizar(recipes, 'recipeName',0);" class="ls2 col-md-3">
-                <b><font class="cursor-class" color="#ffffff">Nome da Tira &nbsp;&nbsp;&nbsp;
+                <b><font class="cursor-class" color="#ffffff">Código da Tira &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
                 </font></b>
             </label>
             <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(recipes, 'recipeCode',1):organizar(recipes, 'recipeCode',1);" class="ls2 col-md-6">
                 <b><font class="cursor-class" color="#ffffff">
-                    Código da Tira &nbsp;&nbsp;&nbsp;
+                    Descrição da Tira &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
                     <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
                 </font></b>
-            </label>
-            <!-- <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(recipes, 'recipeDescription',2):organizar(recipes, 'recipeDescription',2);" class="ls2 col-md-3">
-                <b><font class="cursor-class" color="#ffffff">
-                    Descrição &nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                </font></b>
-            </label>                 -->
+            </label>            
         </div>
 
         <!--                         -->

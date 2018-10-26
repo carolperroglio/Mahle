@@ -25,7 +25,7 @@ import Datetime from 'vue-datetime'
 // You need a specific loader for CSS files
 import 'vue-datetime/dist/vue-datetime.css'
 var Login = require("./components/Login/Login");
-
+window.Vue = Vue;
 es6promisse.polyfill();
 Vue.use("vue-cookies");
 Vue.use("vue-router");
@@ -39,6 +39,7 @@ Vue.use({
 Vue.use(Router);
 Vue.use(bModal);
 Vue.use(Datetime);
+
 Vue.config.productionTip = false;
 
 function showModal(id) {
@@ -111,10 +112,20 @@ axios.interceptors.response.use(
     var statuscode = VueCookies.get("status");
     if (statuscode == "401") {
       router.push({ name: "Login" });
-      console.log("status code: " + statuscode);
-    } else if (error.message == "Network Error") {
-      VueCookies.set("status", "Network Error");
+      console.log("status code: " + statuscode);      
+    } else if (statuscode == "no-security") {
       router.push({ name: "Login" });
+      console.log("status code: " + statuscode);    
+    } else if (statuscode == "Cannot read property 'status' of undefined") {            
+      console.log("status code: " + statuscode);    
+      VueCookies.remove('security');
+      VueCookies.set('username', null);
+      VueCookies.set('status', 'logoff');                  
+      //redireciona para a tela principal STATUS DO MES            
+      router.push( { name: "Login" } );      
+    } else if (error.message == "No Security Header in the request") {
+      VueCookies.set("status", "No Security Header in the request");
+      router.push({ name: "Login" });      
       console.log("error.message: " + error.message);
       // Login.showModal('modaInfo');
       // showModal("modaInfo");
@@ -144,7 +155,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 export default {
   name: "app",
   data() {
@@ -166,8 +176,9 @@ export default {
   },
   created() {
     if (process.env.USER_TRUE) {
-      VueCookies.set("security", "credential.security", { expires: "12h" });
-      VueCookies.set("username", "spi", { expires: "12h" });
+      VueCookies.set("security", "credential.security", Infinity);
+      VueCookies.set("username", "spi", Infinity);
+      VueCookies.set("status", "ok");
     }
   },
   beforeMount() {

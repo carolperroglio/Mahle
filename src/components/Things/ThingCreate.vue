@@ -9,31 +9,31 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label" for="id">Id</label>
                             <div class="col-lg-8">
-                                <input  type="text" class="form-control" id="id" placeholder="Id" />                        
+                                <input  type="text" class="form-control" id="id" />                        
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label" for="name">Nome</label>
                             <div class="col-lg-8">
-                                <input type="text" class="form-control" id="name" placeholder="Nome" />
+                                <input type="text" class="form-control" id="name" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label" for="desc">Descrição</label>
                             <div class="col-lg-8">
-                                <input type="text" class="form-control" id="desc" placeholder="Descrição" />
+                                <input type="text" class="form-control" id="desc"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label" for="code">Código</label>
                             <div class="col-lg-8">
-                                <input type="text" class="form-control" id="code" placeholder="Código" />
+                                <input type="text" class="form-control" id="code"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label" for="position">Posição</label>
                             <div class="col-lg-8">
-                                <input type="text" class="form-control" id="position" placeholder="Posição" />
+                                <input type="text" class="form-control" id="position" />
                             </div>
                         </div>
                         

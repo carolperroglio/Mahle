@@ -8,7 +8,7 @@ import VueCookies from 'vue-cookies'
 Vue.use(VueCookies);
 es6promisse.polyfill();
 
-function paginacao(response, este) {
+function paginacao(response, este) {    
     este.pageAtual = este.startat / 20;
     este.total = response.data.total;
     let fim = Math.ceil(este.total / 20);
@@ -113,9 +113,7 @@ export default {
         },
         cadastrar(ferramenta) {
             ferramenta.username = VueCookies.get('username');
-
             console.log(ferramenta);
-
             axios.post(this.url, ferramenta).then((response) => {
                 this.msg = ferramenta.name + ' cadastrada com sucesso.';
                 this.erro = false;
@@ -130,7 +128,6 @@ export default {
                 this.msg = "Erro ao cadastrar ferramentas:" + error.message;
                 this.showModal("modalErro");
             })
-
         },
         listar() {
             this.carregando = true;

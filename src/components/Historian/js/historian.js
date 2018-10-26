@@ -1,4 +1,6 @@
 import Vue from 'vue'
+window.Vue = Vue
+
 import axios from '../../../.././node_modules/axios/index.js'
 import AmCharts from 'amcharts3'
 import AmSerial from 'amcharts3/amcharts/serial'
@@ -26,6 +28,9 @@ import JsonExcel from 'vue-json-excel'
 import PrintJs from 'print-js'
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import dt from 'datatables.net';
+require('../../../.././node_modules/vuejs-datatable');
+
 import html2canvas from 'html2canvas';
 import 'vue-tiles/dist/vue-tiles.css'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -51,6 +56,7 @@ import {
 import {
     error
 } from 'util';
+import {ServerTable, ClientTable, Event} from 'vue-tables-2';
 
 // import 'amcharts3/amcharts/plugins/export/libs/xlsx/xlsx.js	'
 es6promisse.polyfill();
@@ -97,6 +103,8 @@ Array.prototype.groupByProperties = function(properties) {
     }
     return groups;
 };
+//window.Vue;
+Vue.use(ClientTable, {}, false, 'bootstrap4');
 
 var ipReport = process.env.REPORT_API;
 
@@ -176,7 +184,110 @@ export default {
             msgErro: '',
             cabecalhoSetas: [false, false, false, false, false, false, false],
             chart: {},
-            grafico: ''
+            grafico: '',
+            active: false,            
+            // tableData: {
+            //     options: {
+            //         // Global sort option
+            //       sortable: true,
+            //       // Global edit option
+            //       editable: true,
+            //       // How many items will be shown in each page
+            //       pageCount: 20,                  
+            //     },
+            // },
+            // columns:[
+            //     {label:'Data', field:'Data'},
+            //     {label:'Hora', field:'Hora'},
+            //     {label:'Valor', field:'VM'},
+            //     {label:'LSE Limite Superior de Especificação', field:'LSE'},
+            //     {label:'LSC Limite Superior de Controle', field:'LSC'},
+            //     {label:'LIC Limite Inferior de Controle', field:'LIC'},
+            //     {label:'LIE Limite Inferior de Especificação', field:'LIE'},
+            //     {label:'OP', field:'ordem'},
+            //     {label:'Rolo', field:'rolo'},
+            //     {label:'Tira', field:'codTira'}
+            // ]            
+            // columns: ['Data', 'Hora', 'VM', 'LSE', 'LSC', 'LIC',
+            // 'LIE', 'ordem', 'rolo', 'tira'],
+            // tableData: [
+
+            // ],
+            filter: '',
+            table_columns: [
+                {label: 'id', field: 'id'},
+                {label: 'Username', field: 'user.username', headerClass: 'class-in-header second-class'},
+                {label: 'First Name', field: 'user.first_name'},
+                {label: 'Last Name', field: 'user.last_name'},
+                {label: 'Email', field: 'user.email'},
+                {label: 'address', representedAs: function(row){
+                    return row.address + '<br />' + row.city + ', ' + row.state;
+                }, interpolate: true}
+            ],
+            table_rows: [
+                //...
+                {
+                    "id": 1,
+                    "user": {
+                        "username": "dprice0",
+                        "first_name": "Daniel",
+                        "last_name": "Price",
+                        "email": "dprice0@blogs.com"
+                    },
+                    "address": "3 Toban Park",
+                    "city": "Pocatello",
+                    "state": "Idaho"
+                },
+                {
+                    "id": 1,
+                    "user": {
+                        "username": "dprice0",
+                        "first_name": "Daniel",
+                        "last_name": "Price",
+                        "email": "dprice0@blogs.com"
+                    },
+                    "address": "3 Toban Park",
+                    "city": "Pocatello",
+                    "state": "Idaho"
+                },
+                {
+                    "id": 1,
+                    "user": {
+                        "username": "teste",
+                        "first_name": "Daniel",
+                        "last_name": "Price",
+                        "email": "dprice0@blogs.com"
+                    },
+                    "address": "3 Toban Park",
+                    "city": "Pocatello",
+                    "state": "Idaho"
+                },
+                {
+                    "id": 1,
+                    "user": {
+                        "username": "cabeca",
+                        "first_name": "Daniel",
+                        "last_name": "Price",
+                        "email": "dprice0@blogs.com"
+                    },
+                    "address": "3 Toban Park",
+                    "city": "teste",
+                    "state": "Idaho"
+                },
+                {
+                    "id": 1,
+                    "user": {
+                        "username": "dprice0",
+                        "first_name": "Daniel",
+                        "last_name": "Price",
+                        "email": "dprice0@blogs.com"
+                    },
+                    "address": "3 Toban Park",
+                    "city": "Pocatello",
+                    "state": "Idaho"
+                }
+                //...
+            ]
         }
     },
     components: {
@@ -191,12 +302,23 @@ export default {
         'vue-timepicker': VueTimepicker,
         'downloadExcel': JsonExcel,
         'b-dropdown-item': bDropdownItem,
+        
         Stretch
     },
     directives: {
         'b-toggle': vBToggle,
         'v-b-toggle': vBToggle,
-        'b-modal': bModalDirective
+        'b-modal': bModalDirective,
+        'scroll':{
+            inserted: function (el, binding) {
+                let f = function (evt) {
+                    if (binding.value(evt, el)) {
+                        window.removeEventListener('scroll', f)
+                    }
+                }
+                window.addEventListener('scroll', f);
+            }
+        }
     },
     methods: {
         showModal(id) {
@@ -239,10 +361,14 @@ export default {
             //console.log('getThings')
             axios.get(this.url).then((response) => {
                 this.things = response.data;
+                this.things=this.things.sort(function(a,b) {
+                    return a.position < b.position ? -1 : a.position > b.position ? 1 : 0;
+                });
+                console.log(this.things);
             }, (error) => {
                 console.log(error);
-            })
-        },
+            })            
+        },        
         getOP() {
             axios.get(this.urlReport + "/gateway/productionorders").then((response) => {
                 this.opList = response.data;
@@ -578,12 +704,12 @@ export default {
                             newkey = "LIE"
                             objaux[newkey] = newObj[key]
                             break;
-                        case 'Ordem':
-                            newkey = "Ordem"
+                        case 'ordem':
+                            newkey = "ordem"
                             objaux[newkey] = newObj[key]
                             break;
-                        case 'Rolo':
-                            newkey = "Rolo"
+                        case 'rolo':
+                            newkey = "rolo"
                             objaux[newkey] = newObj[key]
                             break;
                         case 'codTira':
@@ -601,9 +727,18 @@ export default {
             });
 
             this.providertable = finalprovider;
+
         },
         refreshGraph() {
             this.created();
+        },
+
+        handleScroll(){
+            if (window.scrollY > 500) 
+                this.active=true;                
+            else
+                this.active=false;     
+
         },
 
         editGroup(grupo) {
@@ -639,10 +774,10 @@ export default {
                     }
                     //console.log(aux[t]);
                     t++;
-                });
+                });                
                 this.headers = aux
                 console.log(this.headers);
-                console.log(this.jsonfields);
+                console.log("JsonFields = " + this.jsonfields);
                 this.refreshGraph();
             }, 1500);
 
@@ -666,24 +801,24 @@ export default {
                     var dataObj2 = new Array();
                     var obj2 = new Object();
 
-                    if(R.name != 'Ordem' && R.name != 'Rolo'){
-                      /**
-                     * Criação do JSON de criação das características do gráfico.
-                     * Cada linha terá um objeto com as características dentro do array
-                     */
-                    obj2["path"] = "dist/amcharts/";
-                    obj2["balloonColor"] = "#808080";
-                    obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
-                    obj2["color"] = "#000000";
-                    obj2["lineThickness"] = 3;
-                    obj2["type"] = "smoothedLine";
-                    obj2["title"] = R.name;
-                    obj2["valueField"] = R.name;
-                    obj2["bulletColor"] = R.color;
-                    obj2["fillColors"] = R.color;
-                    obj2["legendColor"] = R.color;
-                    obj2["lineColor"] = R.color;
-                  }
+                    if(R.name != 'ordem' && R.name != 'rolo' && R.name != 'codTira'){
+                        /**
+                         * Criação do JSON de criação das características do gráfico.
+                         * Cada linha terá um objeto com as características dentro do array
+                         */
+                        obj2["path"] = "dist/amcharts/";
+                        obj2["balloonColor"] = "#808080";
+                        obj2["balloonText"] = "[[title]] em [[category]]:[[value]]";
+                        obj2["color"] = "#000000";
+                        obj2["lineThickness"] = 3;
+                        obj2["type"] = "smoothedLine";
+                        obj2["title"] = R.name;
+                        obj2["valueField"] = R.name;
+                        obj2["bulletColor"] = R.color;
+                        obj2["fillColors"] = R.color;
+                        obj2["legendColor"] = R.color;
+                        obj2["lineColor"] = R.color;
+                    }
 
                     var i = 0;
 
@@ -696,21 +831,21 @@ export default {
                          * E adicionando a data á ele
                          * Para que cada ponto do eixo X seja uma data diferente
                          */
-                            var dataObj = new Array();
-                            var category = "category";
-                            var tagname = R.name;
+                        var dataObj = new Array();
+                        var category = "category";
+                        var tagname = R.name;
 
-                            var obj = new Object();
+                        var obj = new Object();
 
-                            obj[category] = this.ticksToDate(e);
-                            obj[tagname] = R.value[i];
+                        obj[category] = this.ticksToDate(e);
+                        obj[tagname] = R.value[i];
 
-                            dataObj = Object.assign(obj);
-                            console.log("Testinho");
-                            console.log(dataObj);
-                            this.providerAux.push(dataObj);
+                        dataObj = Object.assign(obj);
+                        console.log("Testinho");
+                        console.log(dataObj);
+                        this.providerAux.push(dataObj);
 
-                            i++;
+                        i++;
                     })
 
                     /**
@@ -719,7 +854,7 @@ export default {
 
                     dataObj2 = Object.assign(obj2);
 
-                    if(R.name != 'Ordem' && R.name != 'Rolo'){
+                    if(R.name != 'ordem' && R.name != 'rolo' && R.name != 'codTira'){
                       this.graphProvider.push(dataObj2);
                     }
                     // console.log("this.graphProvider");
@@ -831,9 +966,8 @@ export default {
                 })
             }
             return pros;
-        },
-    },
-
+        },      
+    },    
     /*****************/
     /*               */
     /*               */
@@ -845,6 +979,7 @@ export default {
     beforeMount: function() {
         this.showModal('myModalEdit');
         this.getThings();
+        this.init();
     },
 
 }

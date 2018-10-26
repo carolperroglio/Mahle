@@ -87,8 +87,16 @@ export default {
             idAllowed: "",
             canAdd: false,
             msgErro: "",
-            erro: false
-
+            erro: false,
+            status : {
+                approved : 'Aprovada',
+                ended : 'Finalizada',
+                created : 'Criada',
+                reproved : 'Reprovada',
+                loading : 'Aguardando Aprovação',
+                waiting_approval : 'Aguardando Aprovação',
+                available : 'Disponível'
+            }
         }
     },
     components: {
@@ -126,6 +134,7 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        
         /*****************/
         /*               */
         /*Busca OP       */
@@ -462,7 +471,7 @@ export default {
                     var id = response.data.productionOrderId;
                     axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + id + "&state=active&username=" + data.username).then(response => {
 
-                        // Dessassociar OP anterior, a linha
+                        // Desassociar OP anterior, a linha
                         for (var i = 0; i < this.opArray.values.length; i++) {
                             if (this.opArray.values[i].currentThingId != undefined) {
                                 var currentID = this.opArray.values[i].currentThingId

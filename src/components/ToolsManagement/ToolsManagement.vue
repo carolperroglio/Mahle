@@ -34,15 +34,15 @@
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
             </font></b>
         </label> 
-        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(ferramentas, 'status',3):organizar(ferramentas, 'status',3);" class="ls2-cabecalho-tm col-md-2">
+        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(ferramentas, 'status',3):organizar(ferramentas, 'status',3);" class="ls2-cabecalho-tm col-md-2">
             <b><font class="cursor-class" color="#ffffff">
                 Status
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
+                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
             </font></b>
         </label> 
     </div>
-    <div class="table-margin-tm"> 
+    <div class="table-margin-tm" v-show="!carregando"> 
     <div v-for="(t,index) in tools" :key="index" :class="{cinza: index%2==0}">
         <label class="ls20 col-md-2">
             {{t.name}}
@@ -65,6 +65,22 @@
             <i class="fa fa-eye" style="font-size:20px;cursor:pointer" @click="date = '';datef = '';toolsHistory = [];toolId = t;showModal('viewHistory')"></i>
         </label>
     </div>
+    </div>
+
+    <div class="paginacao fixed-bottom" v-show="pages.length>1">
+        <nav aria-label="">
+            <ul class="pagination justify-content-center">
+                <li v-show="startat>0" class="page-item">
+                    <a class="page-link" href="#" @click.stop.prevent="getTool(startat-=20, quantityPage)">Anterior</a>
+                </li>
+                <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index2) in pages" v-bind:key="index2">
+                    <a class="page-link" href="#" @click.stop.prevent="getTool(startat=num*20, quantityPage)">{{num+1}}</a>
+                </li>
+                <li class="page-item" v-show="pages.length>1 && startat+20<total">
+                    <a class="page-link" href="#" @click.stop.prevent="getTool(startat+=20, quantityPage)">Próximo</a>
+                </li>
+            </ul>
+        </nav>
     </div>
     <b-modal no-close-on-backdrop size="lg" ref="viewHistory" hide-footer title="Histórico de Mudança de Status">
         <div class="modal-body">
@@ -134,40 +150,40 @@
         </label> 
         <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(toolsHistory, 'timeStampTicks',5):organizar(toolsHistory, 'timeStampTicks',3);" class="ls2-cabecalho-tm-modal col-md-2">
             <b><font class="cursor-class" color="#ffffff">
-                Data
+                Data/Hora
                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
             </font></b>
         </label> 
     </div>
     <div class="table-margin-tm-modal"> 
-    <div v-for="(t,index) in toolsHistory" :key="index" :class="{cinza: index%2==0}">
-        <label class="ls20 col-md-2">
-            {{t.tool.name}}
-        </label>
-        <label class="ls20 col-md-2">
-            {{t.tool.description}}
-        </label>
-        <label class="ls20 col-md-2">
-            {{t.previousState | StatusName}}
-        </label>
-        <label class="ls20 col-md-2">
-            {{t.nextState | StatusName}}
-        </label>
-        <label class="ls20 col-md-1">
-            {{t.previoustLife}}
-        </label>
-        <label class="ls20 col-md-2">
-            {{t.timeStampTicks}}
-        </label>
-        <hr>
-        <label class="ls20 col-md-3">
-            <b>Username</b> : {{t.username}}
-        </label>
-        <label class="col-md-8" v-if="t.justificationNeeded">
-            <b>Justificativa</b> : {{t.justification.text}}
-        </label>
-    </div>
+        <div v-for="(t,index) in toolsHistory" :key="index" :class="{cinza: index%2==0}">
+            <label class="ls20 col-md-2">
+                {{t.tool.name}}
+            </label>
+            <label class="ls20 col-md-2">
+                {{t.tool.description}}
+            </label>
+            <label class="ls20 col-md-2">
+                {{t.previousState | StatusName}}
+            </label>
+            <label class="ls20 col-md-2">
+                {{t.nextState | StatusName}}
+            </label>
+            <label class="ls20 col-md-1">
+                {{t.previoustLife}}
+            </label>
+            <label class="ls20 col-md-2">
+                {{t.timeStampTicks}}
+            </label>
+            <hr>
+            <label class="ls20 col-md-3">
+                <b>Username</b> : {{t.username}}
+            </label>
+            <label class="col-md-8" v-if="t.justificationNeeded">
+                <b>Justificativa</b> : {{t.justification.text}}
+            </label>
+        </div>
     </div>
     </div>
     </b-modal>    
@@ -215,7 +231,7 @@
                 </div>
             <div class="form-row" v-show="needJustification">
                 <label for="">Motivo</label>
-                <textarea  type="textarea" class="form-control" v-model="obj.text" placeholder="Escreva o motivo da mudança de status"/>
+                <textarea  type="textarea" class="form-control" v-model="obj.text" />
             </div>
         </div>
         <div class="modal-footer">
@@ -226,7 +242,7 @@
     </b-modal>
     <!-- MODAL PARA EXIBIR ERRO  -->
     <b-modal no-close-on-backdrop ref="modalInfo" title="Mensagem" hide-footer>
-    <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
+        <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
     </b-modal>
 </div>
 </template>

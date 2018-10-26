@@ -16,19 +16,19 @@
                     <b>Nome <br>da Liga</b>
                 </li>
                 <li class="nav-items-liga form-group col-sm-1">
-                    <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" :disabled="recipeCadastrada" required placeholder="Nome da liga">
+                    <input type="text" class="form-control form-control-sm" v-model="recipe.recipeName" :disabled="recipeCadastrada" required >
                 </li>
                 <li class="nav-items-liga form-group col-sm-0">
                     <b>Código <br>da Liga</b>
                 </li>       
                 <li class="nav-items-liga col-sm-2">
-                    <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" placeholder="Código da liga">         
+                    <input type="text" class="form-control form-control-sm" required v-model="recipe.recipeCode" :disabled="recipeCadastrada" >         
                 </li>                                    
                 <li class="nav-items-liga col-sm-0" id="produtoR">                        
                     <b>Produto <br>Final</b>
                 </li>                 
                 <li class="nav-items-liga form-group col-sm-2">               
-                    <input :disabled="recipeCadastrada" placeholder="Nome do produto" class="form-control" 
+                    <input :disabled="recipeCadastrada" class="form-control" 
                         v-model="productRecipeName" @keyup="prosFim=getResults(urlProducts, productRecipeName, prosFim);  recipeProduct={}">
                     <div style="position: absolute;">
                         <b-dropdown-item @click.stop.prevent="recipeProduct=p;productRecipeName=recipeProduct.productName;prosFim=[]" 
@@ -131,17 +131,17 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="">Nome da Liga</label>
-                        <input type="text" class="form-control form-control-sm" v-model="recipeTemp.recipeName" placeholder="Nome">
+                        <input type="text" class="form-control form-control-sm" v-model="recipeTemp.recipeName" >
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">Código da Liga</label>
-                        <input type="text" class="form-control form-control-sm" v-model="recipeTemp.recipeCode" placeholder="Código">
+                        <input type="text" class="form-control form-control-sm" v-model="recipeTemp.recipeCode" >
                     </div> 
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="">Escolha o produto</label>
-                        <input placeholder="Nome do produto" class="form-control form-control-sm" v-model="productRecipeNameEdit" 
+                        <input class="form-control form-control-sm" v-model="productRecipeNameEdit" 
                             @keyup="prosFimEdit=getResults(urlProducts, productRecipeNameEdit, prosFimEdit); recipeProductEdit={}" >                                                                                 
                         <b-dropdown-item @click.stop.prevent="recipeProductEdit=p;productRecipeNameEdit=recipeProductEdit.productName;prosFimEdit=[]" 
                             v-for="(p,index) in prosFimEdit" v-bind:key="index" style="cursor:pointer">{{ p.productName }}</b-dropdown-item>                        
@@ -202,7 +202,7 @@
                 <div class="form-row"> 
                     <div class="form-group col-md-6">
                         <label>Nome do produto </label>
-                        <input @keyup="pros=getResults(urlProducts, productPhaseName, pros);delete phaseProduct.productId;" v-model="productPhaseName" placeholder="Nome do produto"  class="fm form-control mr-sm-0" id="dropdownMenuButton"/>
+                        <input @keyup="pros=getResults(urlProducts, productPhaseName, pros);delete phaseProduct.productId;" v-model="productPhaseName"  class="fm form-control mr-sm-0" id="dropdownMenuButton"/>
                         <b-dropdown-item id="dropdownMenuButton" @click.stop.prevent="phaseProduct.productId=p.productId; phaseProduct.product=p; productPhaseName=p.productName; pros=[];" v-for="(p,index) in pros" v-bind:key="index">{{p.productName}}</b-dropdown-item>
                     </div>                                                                                          
                     <div class="form-group col-md-6">
@@ -220,11 +220,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Mín(%) </label><br>
-                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.minValue" placeholder="Valor mínimo" />
+                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.minValue" />
                     </div>
                     <div class="form-group col-md-6">
                         <label>Máx(%) </label><br>
-                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.maxValue" placeholder="Valor máximo" />
+                        <input class="fm form-control mr-sm-2" v-model="phaseProduct.maxValue" />
                     </div>
                 </div>                
             </div>

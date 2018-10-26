@@ -98,7 +98,6 @@ export default new Router({
             component: ListLiga
         },
         {
-
             path: '/prodOrderTira',
             name: 'ProductionOrderTira',
             component: ProductionOrderTira

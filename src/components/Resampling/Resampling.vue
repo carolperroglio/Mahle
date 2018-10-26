@@ -11,9 +11,14 @@
                 </button>
             </li>
             <li class="nav-item-hist nav-item-gp col-md-3 col-lg-2"  v-if="tableData.length > 0">
-            <button type="button" class="btn btn-danger btn-lg pull-left" @click.prevent="toPdf()">
-               <i class="fa fa-file-pdf-o"></i> Exportar para PDF
-            </button>
+                <button type="button" class="btn btn-danger btn-lg pull-left" @click.prevent="toPdf()">
+                <i class="fa fa-file-pdf-o"></i> Exportar para PDF
+                </button>
+            </li>
+            <li class="nav-item-hist nav-item-gp col-md-3 col-lg-2"  v-if="tableData.length > 0">
+                <download-excel class   = "btn btn-success btn-lg pull-left" :data = "tableExcel" :name = "headerName">
+                    <i class="fa fa-file-excel-o"></i> Exportar para Excel
+                </download-excel>
             </li>
         </ul>
     </nav>
@@ -141,7 +146,7 @@
     <div class="form-row">
     <div class="form-group col-md-6" v-if="filterSelected == 'op'">
     <label><b>OPL </b></label>                         
-        <input placeholder="Número da OP" class="form-control" 
+        <input class="form-control" 
         v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP={}" >                                                                                 
         <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]" 
         v-for="(op,index) in prosFim" :key="index" style="cursor:pointer">{{ op.productionOrderNumber }}</b-dropdown-item>

@@ -15,13 +15,13 @@
                     <div class="form-group row">
                         <div class="form-group col-sm-6">
                             <label for="op">OP</label>
-                            <input class="form-control" :class="{'is-invalid' : !productionOrderNumber}" id="op" placeholder="ex:20405060" v-model="productionOrderNumber">                            
+                            <input class="form-control" :class="{'is-invalid' : !productionOrderNumber}" id="op" placeholder="" v-model="productionOrderNumber">                            
                             <div class="invalid-feedback" v-show="!productionOrderNumber">
-                                Digite a OP antes
+                                Digite a OP
                             </div>
                         </div>
                         <div class="form-group col-sm-4">
-                        <label for="desc">Descrição</label>
+                        <label for="desc">Tipo</label>
                             <input disabled class="form-control" id="desc" v-model="descriptionTira" value="opDesc">
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                     <div class="form-group row">
                         <div class="form-group col-md-12">
                         <label for="opType">Código da Tira</label>
-                        <input autocomplete="off" :disabled="!productionOrderNumber" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" placeholder="Ex: Receita1" />
+                        <input autocomplete="off" :disabled="!productionOrderNumber" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" />
                         <button class="btn btn-outline-success btn-sm col-md-1" :disabled="!productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </button>
@@ -55,7 +55,7 @@
                         <div class="card">
                             <div class="card-header card-header-op" style="text-align: center;" role="tab" id="headingOne">
                                 <h5 class="mb-0">
-                                    <span class="collapse-color" style="font-weight: bolder;text-decoration: none;" data-toggle="collapse" href="#recipeAdded" aria-expanded="true" aria-controls="recipeAdded">
+                                    <span class="collapse-color" style="text-align:center; font-weight: bolder; text-decoration: none;" data-toggle="collapse" href="#recipeAdded" aria-expanded="true" aria-controls="recipeAdded">
                                         {{recipeObj.recipeCode}}
                                     </span>
                                 </h5>
@@ -112,13 +112,14 @@
                 <select class="form-control form-control-lg" aria-placeholder="Escolha o campo \/" v-model="fieldFilter" @change="fieldValue = ''">
                     <option value="" selected disabled>Buscar por:</option>
                     <option value="productionOrderNumber">OP</option>
-                    <option value="typeDescription">Descrição</option>
+                    <option value="productionOrderRecipeCode">Código da Tira</option>
+                    <!-- <option value="typeDescription">Descrição</option> -->
                     <!-- <option value="recipeCode">Código</option> -->
-                    <!-- <option value="currentStatus">Status</option> -->
+                    <!-- <option value="currentstatus">Status</option> -->
                 </select>
             </li>
                 <li class="nav-prod col-md-2">
-                    <input class="form-control relative btn-lg col-md-auto" type="search" :disabled="!fieldFilter" v-model="fieldValue" placeholder="Ex:OP1" aria-label="Busca">
+                    <input class="form-control relative btn-lg col-md-auto" type="search" :disabled="!fieldFilter" v-model="fieldValue" aria-label="Busca">
                 </li>
                 <li class="nav-prod col-md-6">
                     <form class="form-inline my-3 form-control-sm">
@@ -127,7 +128,7 @@
                         </div>
                         <!-- Button trigger modal -->
                         <div class="col-md-3">
-                            <button @click="productionOrderObj.productionOrderNumber = ''; recipeAdded = ''; idAllowed  = '';recipeName='';showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-lg">
+                            <button @click="productionOrderObj.productionOrderNumber = '';productionOrderNumber=''; recipeAdded = ''; idAllowed  = '';recipeName='';showModal('modalCadOP'); getRecipes(); getOpType()" type="button" class="btn btn-success btn-lg">
                                 <i class="fa fa-plus"></i> Cadastrar Ordem de Produção
                             </button>
                         </div>
@@ -159,15 +160,8 @@
                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                         </font></b>
-                    </label> 
-                    <!-- <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(opArrarKeep, 'recipeName',3):organizar(opArrarKeep, 'recipeName',3);" class="ls2-cabecalho-po col-md-2">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Nome da Tira &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label> -->
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-2" style="margin-left:1%">
+                    </label>                     
+                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-4" style="margin-left:1%">
                         <b><font class="cursor-class" color="#ffffff">
                             Descrição &nbsp;&nbsp;&nbsp;
                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
@@ -193,13 +187,13 @@
                         <!-- <label class="ls ls1 col-md-2">
                             {{op.recipeName}}
                         </label>&nbsp;&nbsp;&nbsp; -->
-                        <label class="ls ls1 col-md-2 aling-lb">
-                            {{op.typeDescription}}
+                        <label class="ls ls1 col-md-4 aling-lb">
+                            {{op.recipe.recipeDescription}}
                         </label>&nbsp;&nbsp;&nbsp;
                         <label class="ls ls1 col-md-2">
                             {{op.currentStatus | filterStatus}}
                         </label>&nbsp;&nbsp;&nbsp;
-                        <label class="ls ls1 col-md-2" v-if="op.hasProd == true">
+                        <label class="ls ls1 col-md" v-if="op.hasProd == true">
                             {{op.recipe.recipeProduct.product.productName}}
                         </label>
                         <label class="ls ls1 col-md-1">
@@ -227,30 +221,26 @@
             <!-- MODAL VISUALIZAR PARAMS -->
             <b-modal no-close-on-backdrop size="lg" ref="visualizarParams" hide-footer title="Visualizar Ordem de Produção de Tira" class="">
                 <div v-if="opSelectedParams != ''">
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="">OP</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.productionOrderNumber" disabled>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="">Status</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.status" disabled>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="">OP</label>
+                            <input type="text" class="form-control" v-model="opSelectedParams.productionOrderNumber" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Status</label>
+                            <input type="text" class="form-control" v-model="opSelectedParams.status" disabled>
+                        </div>
                     </div>
                     <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="">Código da Tira</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeCode" disabled>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="">Nome da Tira</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeName" disabled>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="">Descrição</label>
-                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeDescription" disabled>
-                    </div>
-                    </div>
-                </div>
+                        <div class="form-group col-md-4">
+                            <label for="">Código da Tira</label>
+                            <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeCode" disabled>
+                        </div>                    
+                        <div class="form-group col-md-6">
+                            <label for="">Descrição da Tira</label>
+                            <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeDescription" disabled>
+                        </div>
+                    </div>                
                 </div>
                     <form>
                     <!-- <div class="fundo-branco-po"> -->
@@ -277,28 +267,28 @@
                         </label> 
                         <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametrosteste, 'lie',3):organizar(parametrosteste, 'lie',3);" class="ls2-cabecalho-po  width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
-                                LIE <p class="font-size">Limite inferior da Especificação 
+                                LIE <p class="font-size">Limite Inferior de Especificação 
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label>
                         <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametrosteste, 'lic',4):organizar(parametrosteste, 'lic',4);" class="ls2-cabecalho-po  width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
-                                LIC <p class="font-size">Limite inferior de Controle 
+                                LIC <p class="font-size">Limite Inferior de Controle 
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label> 
                         <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametrosteste, 'lsc',5):organizar(parametrosteste, 'lsc',5);" class="ls2-cabecalho-po  width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
-                                LSC <p class="font-size">Limite superior de Controle
+                                LSC <p class="font-size">Limite Superior de Controle
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>
                         </label> 
                         <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametrosteste, 'lse',6):organizar(parametrosteste, 'lse',6);" class="ls2-cabecalho-po  width-table-context">
                             <b><font class="cursor-class" color="#ffffff">
-                                LSE <p class="font-size">Limite superior de Especificação 
+                                LSE <p class="font-size">Limite Superior de Especificação 
                                 <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
                                 <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
                             </p></font></b>

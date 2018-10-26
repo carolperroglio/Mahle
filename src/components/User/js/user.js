@@ -36,7 +36,10 @@ export default {
             cabecalhoSetas: [false, false, false, false, false],
             msgErro: "",
             /*OBJ UPDATE USER*/
-            objUser: {},
+            objUser: {
+                username:'',                
+                password: ''                
+            },
             /* ---------------*/
             erro: false,
             keyhashed: "",
@@ -100,7 +103,7 @@ export default {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
         },
-        hashKey(keytohash, este) {
+        hashKey(keytohash) {
             // encripta
             var key = pbkdf2.pbkdf2Sync(keytohash, 'salt', 1, 32, 'sha512')
             key = key.toString('hex');
@@ -168,20 +171,18 @@ export default {
 
             })
         },
-        createUser() {
+
+        createUser(objUser) {
             // this.keyhashed;
-            this.hashKey(this.password, this);
-            // Verifica se a senha possui pelo menos um número e uma letra
-            var isValid = this.validateForm();
-            console.log("isValid: " + isValid);
+            this.hashKey(objUser.password);                        
             //Verifica se as senhas conferem para cadastrar o usuário
-            if (this.objUser.password == this.objUser.passwordconfirm && isValid) {
+            if (this.objUser.password == this.objUser.passwordconfirm) {
                 setTimeout(() => {
                     var userInfo = {
-                        username: this.username,
-                        name: this.name,
+                        username: objUser.username,
+                        name: objUser.name,
                         password: this.keyhashed,
-                        email: this.email,
+                        email: objUser.email,
                         enabled: true,
                     }
                     console.log(userInfo);
@@ -204,20 +205,13 @@ export default {
                 this.showModal("modaInfo");
             }
         },
-        updateUser(id) {
-            console.log(this.objUser);
-            console.log("id:" + id);
-
-            this.hashKey(this.objUser.password, this);
-            // Verifica se a senha possui pelo menos um número e uma letra
-            var isValid = this.validateForm();
-            console.log("isValid: " + isValid);
+        updateUser(objUser) {            
+            this.hashKey(objUser.password, this);                        
             //Verifica se as senhas conferem para cadastrar o usuário
-            if (this.objUser.password == this.objUser.passwordconfirm && isValid) {
+            if (objUser.password == objUser.passwordconfirm) {
                 setTimeout(() => {
-                    this.objUser.password = this.keyhashed;
-                    console.log(this.objUser);
-                    axios.put(this.urluser + id, this.objUser).then((response) => {
+                    objUser.password = this.keyhashed;                    
+                    axios.put(this.urluser + objUser.userId, this.objUser).then((response) => {
                         this.erro = false;
                         this.msgErro = "Usuário atualizado com Sucesso";
                         this.showModal("modaInfo");

@@ -99,7 +99,7 @@ export default {
                             } else {
 
                             }
-
+                            
                             // Se a posição da tool associada for igual a alguma posição
                             // no array de positions allowed para aquele tooltype, esta posição
                             // será eliminada(assigned to null) do array de positions allowed

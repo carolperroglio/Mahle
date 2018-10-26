@@ -224,8 +224,8 @@ export default {
                     'dataKey': 'dateEnd'
                 },
                 {
-                    'title': 'ordem',
-                    'dataKey': 'ordem'
+                    'title': 'Ordem',
+                    'dataKey': 'Ordem'
                 },
                 {
                     'title': 'rolo',
@@ -387,7 +387,7 @@ export default {
                             objTable["thingId"] = obj.thingId;
                             objTable["groupTag"] = obj.groupTag;
                             objTable["thingName"] = this.thingNameInTable;
-
+                            
                             if (key == 'dateIni') {
                                 objTable[key] = this.ticksToDate(obj.data[x][key], false, false);
                                 objTable["hourIni"] = this.ticksToDate(obj.data[x][key], false, true);
@@ -516,6 +516,8 @@ export default {
     },
     beforeMount() {
         this.getThings();
-        // this.getReport();
+        setTimeout(() => {
+            this.showModal('filterSearch');
+        },500);
     },
 }

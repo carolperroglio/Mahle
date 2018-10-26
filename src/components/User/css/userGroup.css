@@ -171,15 +171,30 @@
     }
 }
 
-@media (min-width:1900px) {
+
+@media (min-width:1200px) {
     .table-margin-usergroup {
-        margin: 15.5% 0 6% 0;
+        margin: 17.0% 0 6% 0;
     }
     .cabecalho-table-po-usergroup {
         position: fixed;
         width: 100%;
         background-color: black;
-        margin: -2% 0 0 0;
+        margin: -0.8% 0 0 0;
+        z-index: 4;
+    }
+}
+
+
+@media (min-width:1900px) {
+    .table-margin-usergroup {
+        margin: 16.0% 0 6% 0;
+    }
+    .cabecalho-table-po-usergroup {
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        margin: -1.8% 0 0 0;
         z-index: 4;
     }
     .cabecalho-table-po-modal-usergroup {

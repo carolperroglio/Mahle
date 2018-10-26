@@ -1,0 +1,95 @@
+<div class="cabecalho-table-rastreamento row" id="cabecalho-rastreamento" v-show="!carregando" v-if="providertable.length > 0">
+            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(providertable, 'product',0):organizar(providertable, 'product',0);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">Data
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(providertable, 'minValue',1):organizar(providertable, 'minValue',1);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    Hora
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(providertable, 'maxValue',2):organizar(providertable, 'maxValue',2);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    Valor Medição
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(providertable, 'maxValue',3):organizar(providertable, 'maxValue',3);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    LSE Limite Superior de Especificação
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(providertable, 'maxValue',4):organizar(providertable, 'maxValue',4);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    LSC Limite Superior de Controle
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(providertable, 'maxValue',5):organizar(providertable, 'maxValue',5);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    LIC Limite Inferior de Controle
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    LIE Limite Inferior de Especificação
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1" >
+                <b><font class="cursor-class" color="#ffffff">
+                    OP
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1">
+                <b><font class="cursor-class" color="#ffffff">
+                    Rolo
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-2">
+                <b><font class="cursor-class" color="#ffffff">
+                    Tira
+                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
+                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
+                </font></b>
+            </label>
+        </div>
+        <div v-show="!carregando" class="table-margin-historian" id="table-historian">
+            <div v-for="(t, index) in providertable" :class="{cinza: index%2==0}" class="row" :key="index">
+                <label class="ls2 col-md-1">
+                    {{t.Data}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.Hora}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.VM}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.LSE}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.LSC}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.LIC}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.LIE}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.ordem}}</label>
+                <label class="ls2 col-md-1">
+                    {{t.rolo}}</label>
+                <label class="ls2 col-md-2">
+                    {{t.codTira}}</label>
+            </div>
+        </div>

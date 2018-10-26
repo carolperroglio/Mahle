@@ -66,6 +66,7 @@ export default {
             prodChoose: '',
             cavaco: '',
             temp: {},
+            carregandoAnalysis : false
         }
     },
     computed: {
@@ -167,7 +168,8 @@ export default {
             }
             this.calculos = newCalc;
         },
-        getAnalysis() {
+        getAnalysis() {            
+            this.carregandoAnalysis = true;
             console.log("Entrou no last");
             axios.get(this.urlAnalysis + '/api/ProductionOrderQuality/productionOrder/' + this.productionOrder.productionOrderId)
                 .then((response) => {
@@ -184,9 +186,11 @@ export default {
                         this.lastAnalysis = lastAnalysis;
                     }
                     this.calculos = response.data.calculateInitial;
-
-                    this.calculoOK = true
-
+                    setTimeout(() => {
+                        this.carregandoAnalysis = false;    
+                    }, 500);
+                    this.calculoOK = true    
+                    
                 }).catch((error) => {
                     if (error.response.status == '404') {
                         this.erro = true;
@@ -197,6 +201,9 @@ export default {
                         this.msgErro = "Ocorreu um erro ao obter a última análise - " + error.message;
                         this.showModal('modalErro');
                     }
+                    setTimeout(() => {
+                        this.carregandoAnalysis = false;
+                    }, 500);
                 })
         },
         //
@@ -232,17 +239,10 @@ export default {
                     this.showModal('modalErro');
                 })
         },
-        cadastrarApont(ordem) {
-            // MODELO JSON
-            // {
-            //     "type": "output",
-            //     "productionOrderId": 1,
-            //     "productId": 6,
-            //     "quantity": 2.5,
-            //     "batch": "lote",
-            //     "unity": 5
-            // }
 
+
+        cadastrarApont(ordem) {
+            
             ordem.productionOrderId = this.productionOrder.productionOrderId;
             ordem.quantity = this.quantity;
             ordem.type = this.ordem.type;
@@ -270,27 +270,21 @@ export default {
                         this.ordem = {};
                         console.log(response);                        
                     })
+                }else{
+                    axios.put(this.urlAnalysis + '/api/calculeanalysis/recalculate?productionOrderId='+ordem.productionOrderId+'&productId='+this.prodRolo+'&quantityInput='+this.quantity).then((response) => {
+                        this.getAnalysis();
+                        this.erro = false;
+                        this.msgErro = 'Produto apontado com sucesso.';
+                        this.productionOrderId = this.ordem.productionOrderId;
+                        this.carregando = false;
+                        this.pReceita = false;
+                        this.pFase = false;
+                        this.rolo++;
+                        this.ordem = {};                    
+                        console.log(response);
+                        location.reload();
+                    });                
                 }
-
-                this.erro = false;
-                this.msgErro = 'Produto apontado com sucesso.';
-                this.productionOrderId = this.ordem.productionOrderId;
-                this.carregando = false;
-                this.pReceita = false;
-                this.pFase = false;
-                this.rolo++;
-                this.ordem = {};
-                console.log("Teste");
-                console.log("teste");
-                console.log(response);
-                location.reload();
-                // axios.get('http://35.170.191.75:8002/api/products/' + response.data.productId, this.config).then((response) => {
-                //     var data = new Date().getDate() + '/' + new Date().getMonth() + '/' + new Date().getFullYear();
-                //     var hora = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
-                //     this.allProducts.push({batch: this.lote, date: data,quantity : this.quantity, hour: hora, lote: this.lote, product: response.data.productName});
-                // });
-                
-                //this.getResults();
             }).catch((error) => {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro: " + error.message;
@@ -300,6 +294,8 @@ export default {
             this.pReceita = false;
             this.consumo = false;
         },
+
+
         changeJson(obj, type) {
             this.allProducts = [];
             if (this.orderHistorianAllProducts.products == undefined) {

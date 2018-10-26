@@ -54,10 +54,9 @@ export default {
             return key;
         },
         storeUser(credential) {
-
             // Armazenando a chave de segurança no cookie
-            VueCookies.set('security', credential.security, { expires: '12h' });
-            VueCookies.set('username', this.username, { expires: '12h' });
+            VueCookies.set('security', credential.security, Infinity);
+            VueCookies.set('username', this.username, Infinity);
             //chama o método que busca o username e atribui a nav
             app.default.methods.getUsername();
             //redireciona para a tela principal STATUS DO MES
@@ -65,7 +64,6 @@ export default {
             this.$router.push({
                 name: "StatusMES"
             });
-
             setTimeout(() => {
                 location.reload();
             }, 800);
@@ -88,7 +86,7 @@ export default {
 
                 axios.post(this.urllogin, obj)
                     .then((response) => {
-                        VueCookies.set('status', "200");
+                        VueCookies.set('status', "200", Infinity);
                         this.carregando = false;
                         var credential = response.data;
                         // store the username,password, and security in the scope (this)

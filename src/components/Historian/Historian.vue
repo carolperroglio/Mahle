@@ -10,154 +10,144 @@
         <nav class="fixed-top nav-cinza">
             <ul class="nav d-flex align-items-center">
                 <li class="nav-item-hist nav-item-gp col-md-12">
-                <h1 class="title-page-gp"><b>Relatório de Rastreamento</b></h1>
+                    <h1 class="title-page-gp"><b>Relatório de Rastreamento</b></h1>
                 </li>
-                <li class="nav-item-hist nav-item-gp col-md-4">
-                <button type="button" class="btn btn-info"  @click.prevent="OP='';showModal('myModalEdit')">
-                    Filtrar Busca
-                </button>
+
+                <li class="col-md-4">
+                    <button type="button" class="btn btn-info"  @click.prevent="OP='';showModal('myModalEdit')">
+                        Filtrar Busca
+                    </button>
+                </li>                
+                <li class="mr-1">
+                    <button type="button" class="btn btn-danger btn-sm btn-sm pull-left" @click.prevent="toPdf()">
+                        <i class="fa fa-file-pdf-o"></i> Exportar para PDF
+                    </button>
+                </li>
+                <li class="mr-1">
+                    <download-excel class   = "btn btn-success btn-sm btn-sm pull-left" :data   = providertable :fields = jsonfields :name = filename>
+                        <i class="fa fa-file-excel-o"></i> Exportar para Excel
+                    </download-excel>
+                </li>
+                <li>
+                    <select class="form-control form-control-sm pull-left" v-model="newGroup" @change.prevent="editGroup(newGroup)">
+                        <option v-show="g!='Linha' && g!='Alarme'" v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
+                    </select>
                 </li>
             </ul>
         </nav>
         <!-- <div class="row conteudo-history"> -->
             <!-- <div class="container-fluid"> -->
             <div id="load" v-show="carregando">
-            <stretch></stretch>
+                <stretch></stretch>
             </div>
 
-                <div class="history">
+            <div class="history">
                 <div class="row">
                     <div class="col-md-8">
                         <h3>Equipamento: {{thingNameCabeçalho}} Grupo: {{thingGroup}}</h3>
                     </div>
                 </div>
-                </div>
+            </div>
                 <!--
                     GRÁFICO
                     -->
                 <!-- <div class="col-md-11" > -->
-                    <div id="chartrast" style="width:100%; height:500px"></div>
+                    <div id="chartrast" style="width:100%; height:500px;margin-top:-3%;"></div>
                 <!-- </div> -->
               <!-- </div> -->
             <!-- </div> -->
         <!-- </div> -->
-        <!-- </div> -->
+        <!-- </div> -->        
+        <!-- <div class="form-group">
+            <label for="filter" class="sr-only">Filter</label>
+            <input type="text" class="form-control" v-model="filter">
+        </div>
+        <datatable :columns="table_columns" :data="table_rows" :filter-by="filter"></datatable>
+        
+     -->
 
-        <div class="row conteudotabela">
-            <div class="col-sm-2">
-            <select class="form-control-outline-secondary" v-model="newGroup" @change.prevent="editGroup(newGroup)">
-                <option v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
-            </select>
-            </div>
-            <div class="col-sm-2 offset-md-4">
-            <button type="button" class="btn btn-danger btn-sm btn-sm pull-left" @click.prevent="toPdf()">
-               <i class="fa fa-file-pdf-o"></i> Exportar para PDF
-            </button>
-            </div>
-            <div class="col-sm-2">
-            <download-excel
-                class   = "btn btn-success btn-sm btn-sm pull-left"
-                :data   = providertable
-                :fields = jsonfields
-                :name = filename><i class="fa fa-file-excel-o"></i> Exportar para Excel
-            </download-excel>
-            </div>
-        </div>
-        <div class="cabecalho-table-rastreamento row" id="cabecalho-rastreamento" v-show="!carregando" v-if="providertable.length > 0">
-            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(providertable, 'product',0):organizar(providertable, 'product',0);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">Data
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(providertable, 'minValue',1):organizar(providertable, 'minValue',1);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Hora
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(providertable, 'maxValue',2):organizar(providertable, 'maxValue',2);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Valor Medição
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(providertable, 'maxValue',3):organizar(providertable, 'maxValue',3);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    LSE Limite superior especifico
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(providertable, 'maxValue',4):organizar(providertable, 'maxValue',4);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    LSC Limite superior de controle
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(providertable, 'maxValue',5):organizar(providertable, 'maxValue',5);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    LIC Limite inferior de controle
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    LIE Limite inferior especifico
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1" >
-                <b><font class="cursor-class" color="#ffffff">
-                    OP
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Rolo
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(providertable, 'maxValue',6):organizar(providertable, 'maxValue',6);" class="ls2 col-md-2">
-                <b><font class="cursor-class" color="#ffffff">
-                    Tira
-                    <!-- <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i> -->
-                </font></b>
-            </label>
-        </div>
-        <div v-show="!carregando" class="table-margin-historian" id="table-historian">
-            <div v-for="(t, index) in providertable" :class="{cinza: index%2==0}" class="row" :key="index">
-                <label class="ls2 col-md-1">
-                    {{t.Data}}</label>
-                <label class="ls2 col-md-1">
-                    {{t.Hora}}</label>
-                <label class="ls2 col-md-1">
-                    {{t.VM}}</label>
-                <label class="ls2 col-md-1">
-                    {{t.LSE}}</label>
-                <label class="ls2 col-md-1">
-                    {{t.LSC}}</label>
-                <label class="ls2 col-md-1">
-                    {{t.LIC}}</label>
-                <label class="ls2 col-md-1">
-                    {{t.LIE}}</label>
-                <label class="ls2 col-md-1">
-                    {{t.Ordem}}</label>
-                <label class="ls2 col-md-1">
-                    {{t.Rolo}}</label>
-                <label class="ls2 col-md-2">
-                    {{t.codTira}}</label>
-            </div>
-        </div>
+        <!-- <table class="table" id="tabela" style="width:100%;"> 
+            <thead >
+                <tr class="cabecalho-tabela-scroll" style="background-color: black;width:100%; ">
+                    <th >Data</th>
+                    <th>Hora</th>
+                    <th>Valor Medição</th>
+                    <th>LSE Limite Superior de Especificação</th>
+                    <th>LSC Limite Superior de Controle</th>
+                    <th>LIC Limite Inferior de Controle</th>
+                    <th>LIE Limite Inferior de Especificação</th>
+                    <th>OP</th>
+                    <th>Rolo</th>
+                    <th>Tira</th>
+                </tr>
+            </thead>
+            <tbody v-scroll="handleScroll">
+                <tr v-for="(t, index) in providertable" :key="index">
+                    <td>{{t.Data}}</td>
+                    <td>{{t.Hora}}</td>
+                    <td>{{t.VM}}</td>
+                    <td>{{t.LSE}}</td>
+                    <td>{{t.LSC}}</td>
+                    <td>{{t.LIC}}</td>
+                    <td>{{t.LIE}}</td>
+                    <td>{{t.ordem}}</td>
+                    <td>{{t.rolo}}</td>
+                    <td>{{t.codTira}}</td>
+                </tr>
+            </tbody>
+        </table>
+ -->
+
+        <!-- // <table class="table" v-show="active" style="width:100%;"> 
+        //     <thead >
+        //         <tr class="cabecalho-tabela-scroll" style="background-color: black;width:100%; ">
+        //             <th >Data</th>
+        //             <th>Hora</th>
+        //             <th>Valor Medição</th>
+        //             <th>LSE Limite Superior de Especificação</th>
+        //             <th>LSC Limite Superior de Controle</th>
+        //             <th>LIC Limite Inferior de Controle</th>
+        //             <th>LIE Limite Inferior de Especificação</th>
+        //             <th>OP</th>
+        //             <th>Rolo</th>
+        //             <th>Tira</th>
+        //         </tr>
+        //     </thead>        
+        // </table> -->
+
+        <!-- <v-client-table :data="providertable" :columns="columns" :options="options"></v-client-table> -->
+
+        <table class="table table-striped mb-5" id="tabela">
+            <thead id="teste">
+                <tr style="background-color: black;">
+                    <td>Data</td>
+                    <td>Hora</td>
+                    <td>Valor Medição</td>
+                    <td>LSE Limite Superior de Especificação</td>
+                    <td>LSC Limite Superior de Controle</td>
+                    <td>LIC Limite Inferior de Controle</td>
+                    <td>LIE Limite Inferior de Especificação</td>
+                    <td>OP</td>
+                    <td>Rolo</td>
+                    <td>Tira</td>
+                </tr>
+            </thead>
+            <tbody v-scroll="handleScroll">
+                <tr v-for="(t, index) in providertable" :key="index">
+                    <td>{{t.Data}}</td>
+                    <td>{{t.Hora}}</td>
+                    <td>{{t.VM}}</td>
+                    <td>{{t.LSE}}</td>
+                    <td>{{t.LSC}}</td>
+                    <td>{{t.LIC}}</td>
+                    <td>{{t.LIE}}</td>
+                    <td>{{t.ordem}}</td>
+                    <td>{{t.rolo}}</td>
+                    <td>{{t.codTira}}</td>
+                </tr>
+                                  
+            </tbody>
+        </table>
         <!-- <tr class="" v-for="(obj,index1) in providertable" v-bind:key="index1" :class="{cinza: index1%2==0}"> -->
             <!-- <td :class="key == 'Data'?'col-md-1':''" v-for="(value, key, index2) in obj" v-bind:key="index2">{{ value }}</td>
             <td class="col-md-1" v-for="(value, key, index2) in obj" v-bind:key="index2" v-if="key == 'Hora'">{{ value }}</td> -->
@@ -194,15 +184,14 @@
                     <div class="form-group col-md-9">
                         <label><b>Equipamento </b></label>
                         <select class="form-control" v-model="thingId">
-                            <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
-                            </option>
+                            <option v-if="t.thingId==11 || t.thingId==12 || t.thingId==13 || t.thingId==14 || t.thingId==17 || t.thingId==21 || t.thingId==22 || t.thingId==26" v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6" v-if="filterSelected == 'op'">
                     <label><b>OP </b></label>
-                        <input placeholder="Número da OP" class="form-control"
+                        <input class="form-control"
                         v-model="opName" @keyup="prosFim=getResults(urlGatewayOP,opName, prosFim); OP=''" >
                         <b-dropdown-item @click.stop.prevent="opName=op.productionOrderNumber;OP=op.productionOrderId;prosFim=[]"
                             v-for="(op,index) in prosFim" :key="index" style="cursor:pointer">{{ op.productionOrderNumber }}</b-dropdown-item>
@@ -212,7 +201,7 @@
                     <input class="form-control"
                     v-model="recipeCode" @keyup="prosFim=getResults(urlGatewayRecipe,recipeCode, prosFim); OP=''" >
                     <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;OP=r.recipeId;prosFim=[]"
-                    v-for="(r,index) in prosFim" :key="index" style="cursor:pointer">{{ r.recipeCode }}</b-dropdown-item>
+                        v-for="(r,index) in prosFim" :key="index" style="cursor:pointer">{{ r.recipeCode }}</b-dropdown-item>
 
                         <!-- <select class="form-control" v-model="recipeCode">
                             <option v-for="(r,index) in recipeList" :value="r.recipeId" v-bind:key="index">{{ r.recipeName }}

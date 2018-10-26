@@ -82,7 +82,7 @@
                                     </label>
                                     <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(teste, 'lote',2):organizar(teste, 'lote',2);" class="ls2-cabecalho-ap-tira col-md-2">
                                         <b><font class="cursor-class" color="#ffffff">
-                                            OF/OPL
+                                            OF/OP/OPL
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                                         </font></b>
@@ -94,7 +94,7 @@
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label> 
-                                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(teste, 'quantity',1):organizar(teste, 'quantity',1);" class="ls2-cabecalho-ap-tira col-md-2">
+                                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(teste, 'quantity',1):organizar(teste, 'quantity',1);" class="ls2-cabecalho-ap-tira col-md-1">
                                         <b><font class="cursor-class" color="#ffffff">
                                             Quantidade 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
@@ -115,7 +115,7 @@
                                             <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
                                         </font></b>
                                     </label>
-                                    <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(teste, 'code',5):organizar(teste, 'code',5);" class="ls2-cabecalho-ap-tira col-md-1">
+                                    <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(teste, 'code',5):organizar(teste, 'code',5);" class="ls2-cabecalho-ap-tira col-md-2">
                                         <b><font class="cursor-class" color="#ffffff">
                                             Código 
                                             <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
@@ -134,28 +134,26 @@
                             </div> 
                             <div v-for="(o, index) in teste" v-bind:key="index" :class="{cinza: index%2==0}" v-show="teste.length > 0">
                                     <label class="ls ls10 col-md-2">
-                                        {{o.product=='aco'?'aço': o.product}}</label>
+                                        {{o.product=='aco'?'Aço': o.product}}</label>
                                     <label class="ls ls10  col-md-2">
-                                        {{o.lote}}</label>
-                                    <label class="ls ls10  col-md-1">
+                                        {{o.productType=='saida'?productionOrder.productionOrderNumber:o.lote}}</label>
+                                    <label class="ls ls10 col-md-1">
                                         {{o.rolo}}</label>
-                                    <label class="ls ls10  col-md-2">
+                                    <label class="ls ls10  col-md-1">
                                         {{o.quantity}}</label>
                                     <label class="ls ls10  col-md-1">
                                         {{o.date}}</label>
                                     <label class="ls ls10  col-md-1">
                                         {{o.hour}}</label>  
-                                    <label class="ls ls10 col-md-1" v-if="o.code != undefined">
-                                        {{o.code}}</label> 
-                                    <label class="ls ls10 col-md-1" v-else>
-                                    </label>                                      
+                                    <label class="ls ls10 col-md-2">
+                                        {{o.productType=='saida'?productionOrder.recipe.recipeCode:o.code}}</label>                                                        
                                     <label class="ls ls10 col-md-1" v-if="o.username != undefined">
                                         {{o.username}}
                                     </label> 
                                     <label class="ls ls10 col-md-1" v-else>
                                     </label>  
 
-                                </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -179,19 +177,19 @@
                     <label>
                         <b>Rolo de Aço: </b>
                     </label>
-                    <input type="text" id="prodReceita" placeholder="Sem produto registrado!" required  :value="prodRolo" class="form-control form-control-sm" disabled>
+                    <input type="text" id="prodReceita" required  :value="prodRolo=='aco'?'Aço':prodRolo" class="form-control form-control-sm" disabled>
                     </div>
                     <div class="form-group col-md-3">
                     <label>
                         <b>Quantidade: </b>
                     </label>
-                    <input type="number" required v-model="quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                    <input type="number" required v-model="quantity" class="form-control form-control-sm">
                     </div>
                     <div class="form-group col-md-2">
                     <label>
                         <b>Unidade: </b>
                     </label>
-                    <input type="text" required :value="unity = 'kg'" placeholder="Ex:kg" class="form-control form-control-sm">
+                    <input type="text" required :value="unity = 'kg'" class="form-control form-control-sm">
                     </div>
                     </div>
                 <div class="form-row">
@@ -242,13 +240,13 @@
                     <label>
                         <b>Quantidade: </b>
                     </label>
-                    <input type="number" required v-model="quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                    <input type="number" required v-model="quantity" class="form-control form-control-sm">
                     </div>
                     <div class="form-group col-md-2">
                     <label>
                         <b>Unidade: </b>
                     </label>
-                    <input type="text" required :value="unity = 'kg'" placeholder="Ex:kg" class="form-control form-control-sm">
+                    <input type="text" required :value="unity = 'kg'"  class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="form-row">
@@ -288,13 +286,13 @@
                     <label>
                         <b>Quantidade: </b>
                     </label>
-                    <input type="number" required v-model="quantity" placeholder="Ex:5" class="form-control form-control-sm">
+                    <input type="number" required v-model="quantity" class="form-control form-control-sm">
                     </div>
                     <div class="form-group col-md-2">
                     <label>
                         <b>Unidade: </b>
                     </label>
-                    <input type="text" required :value="unity = 'kg'" placeholder="Ex:kg" class="form-control form-control-sm">
+                    <input type="text" required :value="unity = 'kg'"  class="form-control form-control-sm">
                     </div>
                     </div>
                     <div class="form-row">
