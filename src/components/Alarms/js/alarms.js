@@ -18,6 +18,7 @@ require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/pdfma
 require('../../../.././node_modules/amcharts3/amcharts/plugins/export/libs/jszip/jszip.js')
 require('../../../.././node_modules/amcharts3/amcharts/plugins/export/export.js')
 require('../../../.././node_modules/amcharts3/amcharts/plugins/export/export.css')
+var download = require('../../../.././node_modules/js-file-download');
 import {
     Stretch
 } from 'vue-loading-spinner'
@@ -35,12 +36,14 @@ var ipServerThing = process.env.THINGS_API;
 
 //TROCAR PRA PORTA IP DO ENDPOINT DE RELATÓRIOS DE ALARMES
 var ipReport = process.env.REPORT_API;
-
+var thingADDRESS = process.env.THINGS_API;
 export default {
     name: "Alarms",
     data() {
         return {
-            urlGatewayThings: ipReport + '/gateway/things',
+            urlParams: process.env.REPORT_PARAMS,
+            urlGatewayThings: ipReport + '/gateway/things',            
+            urlThings: thingADDRESS + '/api/things',
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
             url: ipReport,
             configCache: {
@@ -93,7 +96,8 @@ export default {
             // to download to excel
             jsonfields: { Data: 'category', Alto: 'alto', Baixo: 'baixo', Muitoalto: 'muito alto', Muitobaixo: 'muito alto', Offline: 'offline' },
             // to usenin export to PDF
-            chart: ''
+            chart: '',
+            active: false
         }
     },
     components: {
@@ -103,7 +107,20 @@ export default {
         'b-dropdown': bDropdown,
         'b-dropdown-item': bDropdownItem,
         'b-modal': bModal,
-        Stretch
+        Stretch,
+        
+    },
+    directives: {
+        'scroll':{
+            inserted: function (el, binding) {
+                let f = function (evt) {
+                    if (binding.value(evt, el)) {
+                        window.removeEventListener('scroll', f);
+                    }
+                }
+                window.addEventListener('scroll', f);
+            }
+        }
     },
     methods: {
         showModal(id) {
@@ -130,6 +147,14 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
+        handleScroll(){
+            if (window.scrollY > 530) {                                
+                this.active=true;      
+            }          
+            else
+                this.active=false;     
+        },
+
         /*
             TICKS CONVERTER
         */
@@ -199,7 +224,8 @@ export default {
         },
         //SET THE COLUMN HEADER
         getHeaderToPdf() {
-            var headers = [{
+            var headers = [
+                {
                     'title': 'Parâmetro',
                     'dataKey': 'type'
                 },
@@ -258,7 +284,7 @@ export default {
                         this.grafico.src = data;
                         console.log("Export");
 
-                        var doc = new jsPDF('p', 'pt');
+                        var doc = new jsPDF('l', 'pt');
                         var img = new Image();
                         var imgLogo = new Image();
                         img.src = logo;
@@ -273,8 +299,9 @@ export default {
                         // ADICIONA TÍTULO                            
                         doc.text(35, 65, "Relatório de Alarmes " + thingName)
                             // ADICIONA GRÁFICO                            
-                        doc.addImage(this.grafico, "PNG", 10, 100, 550, 300);
-
+                        doc.addImage(this.grafico, "PNG", 10, 100, 800, 300);
+                        doc.autoTable([],[]);
+                        doc.addPage();
                         // ADICIONA TABELA
                         doc.autoTable(columns, PDFprovider, {
                             // addPageContent: pageContent,
@@ -283,14 +310,14 @@ export default {
                                 overflow: 'linebreak' 
                             },
                             margin: {
-                                top: 480,
-                                left: 10,
-                                right: 20
+                                //top: 480,
+                                left: 2,
+                                //right: 20
                             },
                             halign: 'middle', // left, center, right
                             valign: 'middle',
-                            columnWidth: 20,
-                            tableWidth: 600
+                            //columnWidth: 15,
+                            tableWidth: 800
                         });
 
                         // doc.addImage(table, "PNG", 20, 550, 600, 200);
@@ -300,10 +327,26 @@ export default {
                 });
             }, 1500);
         },
-        //
+        toExcel(tableAlarms,groupselected, equipamento){
+            groupselected = groupselected==undefined?'todos':groupselected;
+            axios.post(this.urlParams + '/api/alarm?tipo=excel&equipamento='+equipamento+'&grupo='+groupselected, tableAlarms, {responseType: 'arraybuffer'}).then((response) => {                        
+                const url = window.URL.createObjectURL(new Blob([response.data],{type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"}));                        
+                download(response.data,'relatoriodealarmes.xls');                        
+                this.carregando = false;
+            }).catch((error) => {                                              
+                this.carregando = false;                    
+                this.erro = true;
+                this.msgErro = "Erro ao baixar relatório\nMenssagem : ";
+                this.msgErro += error.message;
+                this.showModal("modalInfo");
+            });       
+        },
         getThings() {
-            axios.get(this.urlGatewayThings).then((response) => {
+            axios.get(this.urlThings).then((response) => {
                 this.things = response.data;
+                this.things = this.thisngs.sort(function(a,b) {
+                    return a.position < b.position ? -1 : a.position > b.position ? 1 : 0;
+                });
             }, (error) => {
                 console.log(error);
             })
@@ -479,6 +522,8 @@ export default {
                 },
                 "type": "serial",
                 "categoryField": "category",
+                "addClassNames": true,
+                "fontSize": 20,
                 "chartCursor": {},
                 "graphs": this.graphs,
                 "guides": [],

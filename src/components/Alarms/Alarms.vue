@@ -12,26 +12,25 @@
                 <li class="nav-items-alarms col-md-12">
                     <h1 style="margin: 1.5% 0 1.5% 2%; " class="title-page-gp"><b>Relatório de Alarmes</b></h1>
                 </li>
-                <li class="mx-5 my-1">
-                    <button type="button" class="btn btn-info btn-sm"  @click.prevent="showModal('filterSearch')">
+                <li class="col-md-4 mb-1">
+                    <button type="button" class="btn btn-info"  @click.prevent="showModal('filterSearch')">
                         Filtrar Busca
                     </button>
-                </li>    
-                
-                <li class="offset-6 mr-1">                    
-                    <button type="button" class="btn btn-danger btn-sm pull-right" @click.prevent="toPdf()">
+                </li>                    
+                <li class="mr-1 mb-1">                    
+                    <button type="button" class="btn btn-danger pull-right" @click.prevent="toPdf()">
                         <i class="fa fa-file-pdf-o"></i> Exportar para PDF
                     </button>
                 </li>
-                <li class="mr-1">                    
-                    <download-excel
-                        class   = "btn btn-success btn-sm pull-right"
-                        :data   = dataProvider
-                        :fields = jsonfields
-                        name = 'alarmsreport.xls'><i class="fa fa-file-excel-o"></i> Exportar para Excel
-                    </download-excel>    
+                <li class="mr-1 mb-1">                    
+                    <!-- <download-excel class = "btn btn-success pull-right" :data   = dataProvider :fields = jsonfields name = 'alarmsreport.xls'>
+                        <i class="fa fa-file-excel-o"></i> Exportar para Excel
+                    </download-excel>     -->
+                    <button class = "btn btn-success pull-right" @click.prevent="toExcel(tableAlarms,groupselected, 'equipamento')">
+                        <i class="fa fa-file-excel-o"></i> Exportar para Excel
+                    </button>    
                 </li>                
-                <li class="mr-1">                    
+                <li class="mr-1 mb-1">                    
                     <select class="form-control form-control-sm" v-model="groupselected" @change.prevent="makeGraph(groupselected)">    
                         <option v-for="(g,index) in groups" :value="g" v-bind:key="index" >{{g}}</option>
                     </select>
@@ -41,117 +40,68 @@
                 </li>                      -->
             </ul>
         </div>
+        <table v-if="tableAlarms.length>0 && active" class="table table-responsive mb-5 w-100 d-block d-md-table" id="header_table_fixed">
+            <thead>
+                <tr style="background-color: black; color: white">
+                    <th>Parâmetro</th>
+                    <th>Equipamento</th>
+                    <th>Tipo</th>
+                    <th>Data</th>
+                    <th>Hora Início</th>
+                    <th>Hora Fim</th>
+                    <th>OP</th>
+                    <th>Rolo</th>
+                    <th>Tira</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="color: rgba(0,0,0,0.0); height: 0px !important;" class="hide">
+                    <td>{{tableAlarms[0].groupTag}}</td>
+                    <td>{{thingNameInTable}}</td>
+                    <td>{{tableAlarms[0].type}}</td>
+                    <td>{{tableAlarms[0].dateIni}}</td>
+                    <td>{{tableAlarms[0].hourIni}}</td>
+                    <td>{{tableAlarms[0].dateEnd}}</td>
+                    <td>{{tableAlarms[0].Ordem}}</td>
+                    <td>{{tableAlarms[0].rolo}}</td>
+                    <td>{{tableAlarms[0].codTira}}</td>
+                </tr>
+            </tbody>
+        </table>
         <div id="load" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>                
         </div>            
         <!-- GRÁFICO DOS ALARMES -->
-        <div id="chartAlarm" style="width: 100%; height: 400px;margin-top: 15%;"></div>                           
-        
-        <!-- Botão para escolher o grupo a ser exibido -->                     
-        <!-- TABELA DOS ALARMES -->
-        <div class="cabecalho-table-alarms"  v-show="!carregando" v-if="tableAlarms.length > 0">
-            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(produtos, 'product',0):organizar(produtos, 'product',0);" class="ls2 col-md-2">
-                <b><font class="cursor-class" color="#ffffff">Parâmetro
-                    
-                    
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(produtos, 'minValue',1):organizar(produtos, 'minValue',1);" class="ls2 col-md-2">
-                <b><font class="cursor-class" color="#ffffff">
-                    Equipamento
-                    
-                    
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Tipo
-                    
-                    
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Data
-                    
-                    
-                </font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Hora Início
+        <div id="chartAlarm" style="width: 100%; height: 400px;margin-top: 15%;font-weight: 900;font-size: 20pt;"></div>                           
                 
-                
-                </font></b>
-            </label> 
-            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Hora Fim
-                
-                
-                </font></b>
-            </label>  
-            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    OP
-                
-                    
-                </font></b>
-            </label>  
-            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Rolo
-                
-                
-                </font></b>
-            </label>  
-            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(produtos, 'maxValue',2):organizar(produtos, 'maxValue',2);" class="ls2 col-md-1">
-                <b><font class="cursor-class" color="#ffffff">
-                    Tira
-                
-                
-                </font></b>
-            </label>                
-        </div>                                             
-
-        <!--                       -->
-        <!--                       -->
-        <!--                       -->
-        <!-- Listagem dos produtos -->
-        <!--                       -->
-        <!--                       -->
-        <!--                       -->                            
-        <div v-show="!carregando" class="alarms-produtos">
-            <div v-for="(t, index) in tableAlarms" :class="{cinza: index%2==0}" :key="index">                                    
-                <label class="ls2 col-md-2">
-                    {{t.groupTag}}
-                </label>
-                <label class="ls2 col-md-2">
-                    {{thingNameInTable}}
-                </label>
-                <label class="ls2 col-md-1">
-                    {{t.type}}
-                </label>
-                <label class="ls2 col-md-1">
-                    {{t.dateIni}}
-                </label>
-                <label class="ls2 col-md-1">
-                    {{t.hourIni}}
-                </label>
-                <label class="ls2 col-md-1">
-                    {{t.dateEnd}}
-                </label>
-                <label class="ls2 col-md-1">
-                    {{t.Ordem}}
-                </label>
-                <label class="ls2 col-md-1">
-                    {{t.rolo}}
-                </label>
-                <label class="ls2 col-md-1">
-                    {{t.codTira}}
-                </label>
-            </div>                       
-        </div> 
+        <table v-show="!carregando" v-if="tableAlarms.length>0" class="table table-striped table-responsive mb-5 w-100 d-block d-md-table" id="tabela">
+            <thead>
+                <tr style="background-color: black; color: white">
+                    <th>Parâmetro</th>
+                    <th>Equipamento</th>
+                    <th>Tipo</th>
+                    <th>Data</th>
+                    <th>Hora Início</th>
+                    <th>Hora Fim</th>
+                    <th>OP</th>
+                    <th>Rolo</th>
+                    <th>Tira</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(t, index) in tableAlarms" :key="index" v-scroll="handleScroll">
+                    <td>{{t.groupTag}}</td>
+                    <td>{{thingNameInTable}}</td>
+                    <td>{{t.type}}</td>
+                    <td>{{t.dateIni}}</td>
+                    <td>{{t.hourIni}}</td>
+                    <td>{{t.dateEnd}}</td>
+                    <td>{{t.Ordem}}</td>
+                    <td>{{t.rolo}}</td>
+                    <td>{{t.codTira}}</td>
+                </tr>                
+            </tbody>
+        </table>       
         
         <b-modal ref="filterSearch" no-close-on-backdrop hide-footer title="Filtrar Busca">
             <div class="modal-body">
@@ -169,7 +119,7 @@
                     <div class="form-group col-md-9">
                     <label><b>Equipamento </b></label>
                         <select class="form-control" v-model="thingId">    
-                            <option v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
+                            <option v-if="t.thingId==8 || t.thingId==10 || t.thingId==11 || t.thingId==12 || t.thingId==13|| t.thingId==14 || t.thingId==15 || t.thingId==17 || t.thingId==18 || t.thingId==19 || t.thingId==21 || t.thingId==22 || t.thingId==26" v-for="(t,index) in things" :value="t.thingId" v-bind:key="index">{{ t.thingName }}
                             </option>
                         </select>
                     </div>

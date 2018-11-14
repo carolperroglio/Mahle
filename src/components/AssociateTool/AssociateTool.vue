@@ -15,7 +15,7 @@
                 </li>
                 <li class="offset-10">
                     <div class="">
-                        <router-link :to="{name: 'ToolTypeAssoc'}" class="btn offset-6 btn-primary"><i class="fa fa-arrow-left"></i> Voltar</router-link>
+                        <router-link :to="{name: 'ToolTypeAssoc'}" class="btn offset-6 btn-primary mb-2"><i class="fa fa-arrow-left"></i> Voltar</router-link>
                     </div>
                 </li>                   
             </ul> 
@@ -39,8 +39,7 @@
                     </div>
                 </div>
             </div>
-        </div>                            
-        
+        </div>                                    
 
         <!-- MODAL DE ASSOCIAÇÃO DE FERRAMENTAS-->
         <b-modal ref="modalAssociate" no-close-on-backdrop hide-footer title="Associar Ferramenta" modal-header-close>

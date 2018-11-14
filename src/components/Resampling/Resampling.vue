@@ -5,20 +5,21 @@
             <li class="nav-item-hist nav-item-gp col-md-12">
                 <h1 class="title-page-gp"><b>Relatório de Análise Química</b></h1>
             </li>
-            <li class="nav-item-hist nav-item-gp col-md-3 col-lg-2">
-                <button type="button" class="btn btn-info btn-lg"  @click.prevent="showModal('filterSearch')">
+            <li class="col-md-4 mb-1"> 
+                <button type="button" class="btn btn-info"  @click.prevent="showModal('filterSearch')">
                     Filtrar Busca
                 </button>
             </li>
-            <li class="nav-item-hist nav-item-gp col-md-3 col-lg-2"  v-if="tableData.length > 0">
-                <button type="button" class="btn btn-danger btn-lg pull-left" @click.prevent="toPdf()">
+            <li class="mr-1 mb-1">       
+                <button type="button" class="btn btn-danger" @click.prevent="toPdf()">
                 <i class="fa fa-file-pdf-o"></i> Exportar para PDF
                 </button>
-            </li>
-            <li class="nav-item-hist nav-item-gp col-md-3 col-lg-2"  v-if="tableData.length > 0">
-                <download-excel class   = "btn btn-success btn-lg pull-left" :data = "tableExcel" :name = "headerName">
+                <!-- <download-excel class   = "btn btn-success" :data = "tableExcel" :name = "headerName">
                     <i class="fa fa-file-excel-o"></i> Exportar para Excel
-                </download-excel>
+                </download-excel> -->
+                <button class="btn btn-success" @click.prevent="toExcel(tableData)">
+                    <i class="fa fa-file-excel-o"></i> Exportar para Excel
+                </button>
             </li>
         </ul>
     </nav>

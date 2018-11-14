@@ -21,7 +21,7 @@
         <div class="row ml-1" style="margin-top: 14rem; margin-bottom: 4rem;">                
             <div class="card mx-3 my-3"  style="box-shadow: 8px 8px 8px rgba(0,0,0,0.5);"> 
                 <div class="card-header">
-                    <h4 class="ls11" style="font-weight:bold">Desbobinadores</h4>
+                    <h4 class="ls11" style="font-weight:bold">Desbobinador</h4>
                 </div>
                 <div class="card-body row">                    
                     <div v-for="(tt, index) in desbobinador[0]" v-bind:key="index" class="card">                                                                                            

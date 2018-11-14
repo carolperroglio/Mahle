@@ -12,20 +12,31 @@ Vue.use(VueCookies);
 es6promisse.polyfill();
 
 
+// function paginacao(response, este) {
+//     este.pageAtual = este.startat / este.quantityPage;
+//     este.total = response.data.total;
+//     let fim = Math.ceil(este.total / este.quantityPage);
+//     var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
+//     if (este.pageAtual > 11) {
+//         for (var i = este.pageAtual - 5; i < num; i++)
+//             este.pages[i] = i;
+//     } else {
+//         for (var i = 0; i < num; i++)
+//             este.pages[i] = i;
+//     }
+// }
+
 function paginacao(response, este) {
     este.pageAtual = este.startat / este.quantityPage;
     este.total = response.data.total;
     let fim = Math.ceil(este.total / este.quantityPage);
-    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
-    if (este.pageAtual > 11) {
-        for (var i = este.pageAtual - 5; i < num; i++)
-            este.pages[i] = i;
-    } else {
-        for (var i = 0; i < num; i++)
-            este.pages[i] = i;
-    }
+    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5;
+    var comeco = este.pageAtual - 5 > 0 ? este.pageAtual - 5 : 0;
+    este.pages = [];
+    var j = 0;    
+    for (var i = comeco; i < num; i++)
+        este.pages[j++] = i;                
 }
-
 // Endereço IP do Servidor com as APIs
 var ipServerRecipe = process.env.RECIPE_API;
 var ipServer = process.env.OP_API;
@@ -60,7 +71,7 @@ export default {
             productionOrderObj: {},
             recipeAdded: '',
             carregando: false,
-            quantityPage: 100,
+            quantityPage: 20,
             startat: 0,
             total: 0,
             pages: [],
@@ -506,8 +517,7 @@ export default {
                 //Desativar OP anterior
                 axios.put(this.url + "/api/productionorders/statemanagement/id?productionOrderId=" + idOP + "&state=ended&username=" + op.username)
                     .then(response => {
-                        this.getDisAssoc(currentID, OPId, obj);
-                        console.log("OP Desativada" + response.statusText)
+                        this.getDisAssoc(currentID, OPId, obj);                        
                     }).catch((error) => {
                         console.log(error);
                         this.erro = true;

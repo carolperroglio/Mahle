@@ -98,8 +98,8 @@
     {
         "toolTypeName": "Forno de Bronze",
         "toolTypeId": 17,
-        "positionQtd": 2,
-        "positions": [42, 43]
+        "positionQtd": 1,
+        "positions": [42]
     },
     {
         "toolTypeName": "Filtros de papel",

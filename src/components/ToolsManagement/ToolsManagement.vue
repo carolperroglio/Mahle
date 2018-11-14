@@ -57,9 +57,9 @@
             {{t.status | StatusName}}
         </label>
         <label class="ls20 col-md-2" style="margin-top:0.2%">
-        <button type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t);obj.text = ''">
-            Alterar Status da Ferramenta
-        </button>
+            <button v-if="t.status!='in_use'" type="button" class="btn btn-success btn-sm"  @click="catchToolToChange(t);obj.text = ''">
+                Alterar Status da Ferramenta
+            </button>
         </label>
         <label for="" class="ls20 col-md-1">
             <i class="fa fa-eye" style="font-size:20px;cursor:pointer" @click="date = '';datef = '';toolsHistory = [];toolId = t;showModal('viewHistory')"></i>

@@ -16,25 +16,16 @@
                     </li>                    
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historian"><i class= "fa fa-bar-chart" style="font-size:44px; cursor:pointer"></i>  <br>Rastreamento de processo</router-link>
-                    </li> 
-                    <!-- <li class="nav-item-cab col-md-2">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/statusManagement"><i class= "fa fa-cogs" style="font-size:44px; cursor:pointer"></i>  <br>Ferramentas</router-link>
-                    </li>  -->
+                    </li>                     
                     <li class="nav-item-cab col-md-2">
                         <router-link class="nav-link bg-dark active btn-config" router-link to="/historianMain"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos</router-link>
-                    </li> 
-                    <!-- <li class="nav-item-cab col-md-1.5">
-                        <router-link class="nav-link bg-dark active btn-config" router-link to="/historianProductionTira"><i class= "fa fa-keyboard-o" style="font-size:44px; cursor:pointer"></i>  <br>Apontamentos Tira</router-link>
-                    </li>  -->
-                    <li class="nav-item-cab col-md-1" v-show="username != 'null' && username != null">
-                        <router-link to="#" class="nav-link bg-dark active btn-config">
-                            <i class= "fa fa-user bgcolor" style="font-size:20px; cursor:pointer"></i> <br>
-                        <p style="font-size:15px; cursor:pointer"> {{username}}  </p>
-                        
-                        </router-link>
+                    </li>                     
+                    <li class="nav-item-cab col-md-1 bgcolor" v-show="username != 'null' && username != null">                        
+                        <i class= "fa fa-user bgcolor-u-delete" style="font-size:30px; cursor:pointer"></i><br>
+                        <p style="font-size:15px; cursor:pointer"> {{username}}  </p>                                                
                     </li>
                     <li class="nav-item-cab col-md-1 bgcolor" @click.stop.prevent="Logout()" v-show="username != 'null' && username != null ">
-                        <i class="fa fa-user-times bgcolor-u-delete" style="font-size:20px; cursor:pointer" ></i><br>  
+                        <i class="fa fa-user-times bgcolor-u-delete" style="font-size:30px; cursor:pointer" ></i><br>  
                         <p style="font-size:15px; cursor:pointer"> Logout </p>
                     </li> 
                 </ul>    
@@ -67,21 +58,11 @@
         </div>   
             
                 <b-collapse class="fixed-top col-md-6 p-l-0 p-r-0" id="sidebar" >
-                   
-                        <!-- <div class="list-group-item collapsed" cursor="pointer" v-b-toggle.menu2><i class="fa fa-odnoklassniki"></i> 
-                            OPERADOR
-                            <i class="fa fa-chevron-down pull-right"></i>
-                        </div> -->
-                        <!-- <b-collapse id="menu2">    -->
+                                          
                             <router-link to="/login"  class="list-group-item collapsed" cursor="pointer" v-b-toggle.sidebar> 
                                 <i class="fa fa-user-circle"></i> Login 
                                 
-                            </router-link>                   
-                            <!-- <button to="" @click.stop.prevent="Logout()"  class="list-group-item collapsed" cursor="pointer" v-b-toggle.sidebar> 
-                                <i class="fa fa-user-times"></i> Logout 
-                            </button> -->
-                        <!-- </b-collapse> -->
-
+                            </router-link>                                           
                         <router-link to="/user" class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.sidebar>
                             <i class="fa fa-user-md"></i> 
                             <span class="hidden-sm-down">  
@@ -100,13 +81,7 @@
                             <span class="hidden-sm-down">  
                                 MATÉRIAS-PRIMAS
                             </span>
-                        </router-link>
-                        <!--Bye bye receitas <router-link to="/listRecipes" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer">
-                            <i class="fa fa-book"></i> 
-                            <span class="hidden-sm-down">  
-                                RECEITA
-                            </span>
-                        </router-link>-->
+                        </router-link>                        
                         <router-link to="/listtira" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
                             <i class="fa fa-bars"></i> 
                             <span class="hidden-sm-down">  
@@ -124,13 +99,7 @@
                             <span class="hidden-sm-down">  
                                 PARAMETROS DE LINHA
                             </span>
-                        </router-link>
-                        <!-- <router-link to="/historianalarms" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" cursor="pointer" v-b-toggle.sidebar>
-                            <i class="fa fa-bell"></i> 
-                            <span class="hidden-sm-down">  
-                                ALARMES
-                            </span>
-                        </router-link> -->
+                        </router-link>                        
 
                         <div class="list-group-item collapsed" data-parent="#sidebar" v-b-toggle.menu1 cursor="pointer">
                             <i class="fa fa-cogs"></i> 
@@ -142,16 +111,10 @@
                         <b-collapse id="menu1">
                             <router-link to="/toolCreate" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Cadastro de Ferramentas/Insumos 
-                            </router-link>
-                            <!-- <router-link to="/toolType" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
-                                Tipo de Ferramentas/Insumos 
-                            </router-link> -->
+                            </router-link>                            
                             <router-link to="/toolTypeAssoc" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Associação de Ferramentas/Insumos 
-                            </router-link>
-                            <!-- <router-link to="/inUseTools" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
-                                Ferramentas/Insumos em uso
-                            </router-link> -->
+                            </router-link>                            
                             <router-link to="/ToolsManagement" class="list-group-item" data-parent="#menu1" v-b-toggle.sidebar> 
                                 Gerenciamento de Ferramentas/Insumos
                             </router-link>
@@ -198,10 +161,10 @@
                                 Alarmes
                             </router-link>
                             <router-link to="/resampling" class="list-group-item" data-parent="#reports" v-b-toggle.sidebar> 
-                                Relatório de Análise Química
+                                Análise Química
                             </router-link>
                             <router-link to="/genealogyreport" class="list-group-item" data-parent="#reports" v-b-toggle.sidebar> 
-                                Relatório de Genealogia
+                                Genealogia
                             </router-link>
                         </b-collapse>
                     </b-collapse>   

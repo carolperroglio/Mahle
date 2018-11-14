@@ -1,48 +1,21 @@
 @import url("./../../genericcss/generico.css");
 
 /* menu de navegação de OP */
+.collapse-color {
+    color: #6a7989;
+}
 
-@import url("./../../genericcss/generico.css");
+a:hover {
+    color: #929fac;
+}
+
+#tabela-users-group{
+    margin-top: 18rem;
+    text-align: center;
+}
+
 @media (min-width: 768px) {
-    .table-margin-usergroup {
-        margin: 31% 0 6% 0;
-    }
-    .cabecalho-table-po-usergroup {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -4.2% 0 0 0;
-        z-index: 4;
-    }
-    .cabecalho-table-po-modal-usergroup {
-        width: 100%;
-        padding: 0 0 0 0.1%;
-        background-color: black;
-        margin: 0 0 0 0;
-        padding: 0 0 0 0.2%;
-    }
-    .width-table-context-usergroup {
-        /* width: 13%; */
-        text-align: center;
-        margin-left: 1%;
-    }
-    .width-table-context-wider-usergroup {
-        /* width: 16%; */
-        text-align: center;
-    }
-    .col1-5 {
-        width: 10%;
-    }
-    .font-size {
-        font-size: 12px;
-    }
-    .ls2-cabecalho-po-usergroup {
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        margin-bottom: 0.3%;
-        margin-left: 0.2%;
-    }
+                
     .nav-prod {
         padding-left: 0.5%;
     }
@@ -55,78 +28,11 @@
         position: fixed;
         top: 12%;
         left: 0.9%;
-    }
-    .collapse-color {
-        color: #6a7989;
-    }
-    a:hover {
-        color: #929fac;
-    }
-    .card-body-op {
-        padding-top: 0.1%;
-        margin-bottom: 1%;
-        padding-left: 0.8%;
-    }
-    .paginacao-op-usergroup {
-        position: fixed;
-        z-index: 2;
-        text-align: center;
-        width: 100%;
-        margin-bottom: 2%;
-        background-color: #ffffff;
-    }
-    .card-header {
-        padding-top: 0.5%;
-        padding-bottom: 0.5%;
-    }
-    .ls1-usergroup {
-        text-align: center;
-    }
-    .aling-lb-l {
-        margin-left: 0.1%;
-    }
+    }        
 }
 
 @media (min-width: 960px) {
-    .table-margin-usergroup {
-        margin: 19% 0 6% 0;
-    }
-    .cabecalho-table-po-usergroup {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -2.5% 0 0 0;
-        z-index: 4;
-    }
-    .cabecalho-table-po-modal-usergroup {
-        width: 100%;
-        padding: 0 0 0 0.1%;
-        background-color: black;
-        margin: 0 0 0 0;
-        padding: 0 0 0 0.2%;
-    }
-    .width-table-context-usergroup {
-        /* width: 13%; */
-        text-align: center;
-        margin-left: 1%;
-    }
-    .width-table-context-wider-usergroup {
-        /* width: 16%; */
-        text-align: center;
-    }
-    .col1-5 {
-        width: 10%;
-    }
-    .font-size {
-        font-size: 12px;
-    }
-    .ls2-cabecalho-po-usergroup {
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        margin-bottom: 0.3%;
-        margin-left: 0.2%;
-    }
+    
     .nav-prod {
         padding-left: 0.5%;
     }
@@ -139,93 +45,11 @@
         position: fixed;
         top: 12%;
         left: 0.9%;
-    }
-    .collapse-color {
-        color: #6a7989;
-    }
-    a:hover {
-        color: #929fac;
-    }
-    .card-body-op {
-        padding-top: 0.1%;
-        margin-bottom: 1%;
-        padding-left: 0.8%;
-    }
-    .paginacao-op-usergroup {
-        position: fixed;
-        z-index: 2;
-        text-align: center;
-        width: 100%;
-        margin-bottom: 2%;
-        background-color: #ffffff;
-    }
-    .card-header {
-        padding-top: 0.5%;
-        padding-bottom: 0.5%;
-    }
-    .ls1-usergroup {
-        text-align: center;
-    }
-    .aling-lb-l {
-        margin-left: 0.1%;
-    }
+    }    
 }
-
-
-@media (min-width:1200px) {
-    .table-margin-usergroup {
-        margin: 17.0% 0 6% 0;
-    }
-    .cabecalho-table-po-usergroup {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -0.8% 0 0 0;
-        z-index: 4;
-    }
-}
-
 
 @media (min-width:1900px) {
-    .table-margin-usergroup {
-        margin: 16.0% 0 6% 0;
-    }
-    .cabecalho-table-po-usergroup {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -1.8% 0 0 0;
-        z-index: 4;
-    }
-    .cabecalho-table-po-modal-usergroup {
-        width: 100%;
-        padding: 0 0 0 0.1%;
-        background-color: black;
-        margin: 0 0 0 0;
-        padding: 0 0 0 0.2%;
-    }
-    .width-table-context-usergroup {
-        /* width: 13%; */
-        text-align: center;
-        margin-left: 1%;
-    }
-    .width-table-context-wider-usergroup {
-        /* width: 16%; */
-        text-align: center;
-    }
-    .col1-5 {
-        width: 10%;
-    }
-    .font-size {
-        font-size: 12px;
-    }
-    .ls2-cabecalho-po-usergroup {
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        margin-bottom: 0.3%;
-        margin-left: 0.2%;
-    }
+    
     .nav-prod {
         padding-left: 0.5%;
     }
@@ -238,30 +62,5 @@
         position: fixed;
         top: 12%;
         left: 0.9%;
-    }
-    .collapse-color {
-        color: #6a7989;
-    }
-    a:hover {
-        color: #929fac;
-    }
-    .card-body-op {
-        padding-top: 0.1%;
-        margin-bottom: 1%;
-        padding-left: 0.8%;
-    }
-    .paginacao-op-usergroup {
-        position: fixed;
-        z-index: 2;
-        text-align: center;
-        width: 100%;
-        margin-bottom: 2%;
-        background-color: #ffffff;
-    }
-    .ls1-usergroup {
-        text-align: center;
-    }
-    .aling-lb-l {
-        margin-left: 0.7%;
-    }
+    }    
 }

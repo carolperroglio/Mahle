@@ -11,7 +11,7 @@ import { setTimeout } from 'timers';
 import pbkdf2 from 'pbkdf2'
 import crypto from 'crypto'
 import VueCookies from 'vue-cookies'
-Vue.use(VueCookies);
+Vue.use(VueCookies); 
 Vue.component(VuePassword)
 es6promisse.polyfill();
 
@@ -249,7 +249,7 @@ export default {
          * END CRUD USER
          */
     },
-    beforeMount: function() {
+    created: function() {
         this.b64EncodeUnicode('✓ à la mode');
         this.getUsers();
     }

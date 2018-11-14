@@ -57,7 +57,8 @@ export default {
             cargaUtilizada: '',
             opSelected: {},
             idOpAtual: '',
-            cr:false
+            cr:false,
+            title: ''
         }
     },
     computed: {
@@ -105,7 +106,7 @@ export default {
 
             axios.put(this.urlOP + '/api/productionorders/AssociateProductionOrder/disassociate?thingId=' + idThing + '&productionOrderId=' + idOP, op)
                 .then((response) => {
-                    console.log("Desassociou !!!")
+                    console.log("Desassociou !!!");
                 }).catch((error) => {
                     console.log(error);
                     this.carregando = false;
@@ -115,6 +116,27 @@ export default {
                     console.log("OP Desassociação Falhou" + error.message)
                 })
         },
+
+        encerrarOPTira(temp){  
+            this.carregando = true;
+            this.hideModal('modalEncerraOp');
+            console.log(temp);                                              
+            temp.username = VueCookies.get('username');
+            axios.put(this.urlOP + "/api/productionorders/statemanagement/id?productionOrderId=" + temp.productionOrderId + "&state=ended&username=" + temp.username).then(response => {
+                    axios.post("http://10.35.255.22:8013/api/interlevel", {address: "TriggerMesPlc",value: 4,workstation: "Linha"}).then(response => {});                
+                    this.getDisAssoc(temp.currentThingId, temp.productionOrderId, temp); 
+                    this.getResults();
+                    this.carregando = false;                       
+                }).catch((error) => {
+                    this.carregando = false;                       
+                    console.log(error);
+                    this.erro = true;
+                    this.msgErro = "Ocorreu um erro ao desativar a OP: " + error.message;
+                    this.showModal("modalInfo");
+                    console.log("OP Desativada Falhou" + response.statusText)
+                })                             
+        },
+
         encerrarOP(op) {
             op.username = VueCookies.get('username');
 

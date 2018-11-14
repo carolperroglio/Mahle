@@ -84,7 +84,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 LINE_PARAMETERS_API: JSON.stringify(api + ":8013"),
                 USER_API: JSON.stringify(api + ":8010"),
                 ANALYSIS_API: JSON.stringify(api + ":8014"),
-                
+                REPORT_PARAMS:  JSON.stringify(api + ":8052"),
                 USER_TRUE: true
                 //IP NUVEM
                 // TOOLS_API: JSON.stringify(api + ":8005"),

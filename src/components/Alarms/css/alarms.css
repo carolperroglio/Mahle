@@ -1,4 +1,7 @@
 @import url("./../../genericcss/generico.css");
+.table-responsive {
+    display: table;
+}
 @media (min-width: 768px) {
     /*Menu de cadastro da receita*/
     .nav-items-alarms {
@@ -84,4 +87,10 @@
         padding-left: 15%;
     }
     /*Box das Fases*/
+}
+#header_table_fixed{
+    position: fixed;    
+    top:23.2%;
+    text-align: center;
+    z-index: 1000;
 }

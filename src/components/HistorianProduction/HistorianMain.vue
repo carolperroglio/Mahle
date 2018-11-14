@@ -21,86 +21,59 @@
         <div id="load" v-show="carregando">
             <stretch background="#4d4d4d"></stretch>
         </div> 
-        <h3 style="text-align:center"></h3>
-            <div class="cabecalho-table-ap" v-show="!carregando">
-                <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(orderHistorian, 'productionOrderNumber',0):organizar(orderHistorian, 'productionOrderNumber',0);" class="ls2-cabecalho-ap col-md-2">
-                    <b><font class="cursor-class" color="#ffffff">OP 
-                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                    </font></b>
-                </label>
-                <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(orderHistorian, 'thingName',1):organizar(orderHistorian, 'thingName',1);" class="ls2-cabecalho-ap col-md-2">
-                    <b><font class="cursor-class" color="#ffffff">
-                        Estação 
-                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                    </font></b>
-                </label>
-                 <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(orderHistorian, 'currentStatus',3):organizar(orderHistorian, 'currentStatus',1);" class="ls2-cabecalho-ap col-md-1">
-                    <b><font class="cursor-class" color="#ffffff">
-                        Status 
-                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                    </font></b>
-                </label>
-                <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(orderHistorian, 'typeDescription',2):organizar(orderHistorian, 'typeDescription',2);" class="ls2-cabecalho-ap col-md-2">
-                    <b><font class="cursor-class" color="#ffffff">
-                        Tipo de Ordem 
-                        <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                    </font></b>
-                </label>
-            </div>
-            <div class="table-margin-hm" v-show="!carregando">
-            <div v-for="(o, index) in orderHistorian" v-bind:key="index" :class="{cinza: index%2==0}">
-                <label class="ls ls10 col-md-2">
-                    {{o.productionOrderNumber}}</label>
-                <label class="ls ls10 col-md-2">
-                    {{o.thingName}} </label>
-                <label class="ls ls10 col-md-1">
-                    {{o.currentStatus | filterStatus}}</label>
-                <label class="ls ls10 col-md-2">
-                    {{o.typeDescription}}</label>
-                <label v-if="o.typeDescription == 'Liga'"   class="col-md-2">
-                    <label class="ls ls10 col-md-6 router" v-show="o.showbutton==false">
-                        <router-link class="btn btn-info" :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
-                    </label>
-                </label>
-                <label v-if="o.typeDescription == 'Liga'" class="col-md-2" v-show="o.currentStatus == 'active' && o.showbutton">
-                <button class="btn btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId">Realizar Cálculo</button>
-                </label>
-                <label  class="col-md-2" v-else-if="o.typeDescription == 'Tira'">
-                <label class="ls ls10 col-md-6 router" >
-                    <router-link class="btn btn-info"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">Realizar Apontamento</router-link>
-                </label>
-                </label>
-                <label class="col-md-2"  v-show="o.currentStatus == 'approved' || o.currentStatus == 'dumping'">
-                <button class="btn btn-danger" @click="temp=o;showModal('modalEncerraOp')">Encerrar OP</button>
-                </label>
-            </div>
-            </div>
-            <div class="paginacao" v-show="total>0">
-                <nav aria-label="">
-                    <ul class="pagination justify-content-center">
-                        <li v-show="startat>0" class="page-item">
-                            <a class="page-link" href="#" @click.stop.prevent="getResults(startat-=20, quantityPage)">Anterior</a>
-                        </li>
-                        <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
-                            <a class="page-link" href="#" @click.stop.prevent="getResults(startat=num*20, quantityPage)">{{num+1}}</a>
-                        </li>
-                        <li class="page-item" v-show="pages.length>1 && startat+20<total">
-                            <a class="page-link" href="#" @click.stop.prevent="getResults(startat+=20, quantityPage)">Próximo</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+
+
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Table          -->
+        <!--       Registros       -->
+        <!--         OP            -->
+        <!--                       -->
+        <!--                       -->
+        <table v-if="!carregando && orderHistorian.length>0" class="table table-responsive w-100 d-block d-md-table table-striped apontamentos mb-5" id="tabela">
+            <thead id="teste">
+                <tr style="background-color: black; color: white;">
+                    <th>OP</th>
+                    <th>Estação</th>
+                    <th>Status</th>
+                    <th>Tipo de Ordem</th>
+                    <th></th>
+                    <th></th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(o, index) in orderHistorian" v-bind:key="index">
+                    <td>{{o.productionOrderNumber}}</td>
+                    <td>{{o.thingName}}</td>
+                    <td>{{o.currentStatus | filterStatus}}</td>
+                    <td>{{o.typeDescription}}</td>  
+                    <td>
+                        <router-link v-if="o.typeDescription == 'Liga' && o.showbutton==false"  class="btn  btn-info" :to="{ name: 'HistorianProductionLiga', params: { id: o.productionOrderId }}">Realizar Apontamento</router-link>
+                        <router-link v-if="o.typeDescription == 'Tira'" class="btn  btn-info"  :to="{ name: 'HistorianProductionTira', params:{id: o.productionOrderId}}">Realizar Apontamento</router-link>
+                    </td>
+                    <td>
+                        <button v-if="o.typeDescription == 'Liga'" v-show="o.currentStatus == 'active' && o.showbutton" class="btn  btn-warning" @click="showModal('inicioOP'); idOpAtual = o.productionOrderId">Realizar Cálculo</button>                        
+                        <button v-if="o.currentStatus == 'approved' || o.currentStatus == 'dumping' || o.typeDescription == 'Tira'" class="btn  btn-danger" @click="temp=o;title=(o.typeDescription=='Tira'?'OP':'OPL');showModal('modalEncerraOp')">Encerrar OP</button>
+                    </td>                  
+                </tr>                                  
+            </tbody>
+        </table>       
+        
+
+        <!--                       -->
+        <!--                       -->
+        <!--        Modal          -->
+        <!--       Encerra         -->
+        <!--         OP           -->
+        <!--                       -->
+        <!--                       -->
         <b-modal no-close-on-backdrop ref="inicioOP" title="Realizar Cálculo" hide-footer>
             <div class="form-row">
                 <div class="form-group col-md-10 offset-1">
-                    <label for="">Última OP Utilizada no Forno</label>
+                    <label for="">Última OPL Utilizada no Forno</label>
                     <input autocomplete="off" @keyup="getOPResult(opNumber)" v-model="opNumber"  class="form-control"/>
-                    <b-dropdown-item @click.stop.prevent="opNumber = op.productionOrderNumber;ops=[];opSelected=op" 
-                        v-for="(op,index) in ops" :key="index">{{ op.productionOrderNumber }}</b-dropdown-item>
+                    <b-dropdown-item @click.stop.prevent="opNumber = op.productionOrderNumber; ops=[]; opSelected=op" v-for="(op,index) in ops" :key="index">{{ op.productionOrderNumber }}</b-dropdown-item>
                 </div>
             </div>
             <div class="form-row" v-if="opSelected.productionOrderNumber">
@@ -126,21 +99,22 @@
             </div>
         </b-modal>
 
+
         <!--                       -->
         <!--                       -->
         <!--        Modal          -->
         <!--       Encerra         -->
-        <!--         OP           -->
+        <!--         OP            -->
         <!--                       -->
         <!--                       -->
-        <b-modal no-close-on-backdrop ref="modalEncerraOp" hide-footer title="Remover Liga">            
+        <b-modal no-close-on-backdrop ref="modalEncerraOp" hide-footer :title="'Encerrar '+title">            
             <div class="modal-body">
-                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja encerrar a OPL?</b>
+                <i class="fa fa-times" aria-hidden="true" style="font-size:23px; color:red;"></i> <b>Tem certeza que deseja encerrar a {{title}}?</b>
             </div>    
             <div class="modal-footer">
                 <div>
                     <div class="btn-group" role="group">
-                        <button @click.stop.prevent="encerrarOP(temp);" class="btn btn-success">
+                        <button @click.stop.prevent="temp.typeDescription=='Tira'?encerrarOPTira(temp):encerrarOP(temp);" class="btn btn-success">
                             <i class="fa fa-check-square" aria-hidden="true"></i> Confirmar
                         </button>  
                         <button @click.stop.prevent="hideModal('modalEncerraOp')" class="btn btn-danger">
@@ -150,7 +124,7 @@
                 </div>
             </div>
          </b-modal>
-
+        
         <b-modal ref="modalErro" no-close-on-backdrop title="" hide-footer="">
             <p :class="erro? 'alert alert-danger':'alert alert-info'">{{msgErro}}</p>
         </b-modal>

@@ -1,92 +1,44 @@
 @import url("./../../genericcss/generico.css");
+
 @media (min-width: 768px) {
     .history {
         margin-left: 2%;
         margin-top: 17%;
     }
 }
-
 @media (min-width: 968px) {
     .history {
         margin-left: 2%;
         margin-top: 10%;
     }
 }
-
 @media (min-width: 1400px) {
     .history {
         margin-left: 2%;
         margin-top: 9%;
     }
 }
-
-.cabecalho-table-rastreamento {
-    /* Tabela */
-    width: 100%;
-    background-color: black;
-    margin: 6% 0 0 0;
-    z-index: 4;
-}
-
-.ls2-cabecalho-rastreamento {
-    width: 18%;
-    font-family: sans-serif;
-    font-size: 14px;
-    margin-bottom: 0.3%;
-}
-
 .history {
     margin-left: 2%;
     margin-top: 16%;
 }
-
 .cabecalho-tabela-scroll{
     position: fixed;    
     top:25%;
 }
+#tabela{
+    text-align: center;
+}
 
 /*Tabela teste*/
-thead{
-    background-color: black;
-    color:white;
-    font-weight: 500;
-}
-tr{
-    text-align:center;
-}
-body{
-    overflow-x: hidden;
-}
-
-
 .nav-item-hist {
     margin-top: 1%;
     margin-left: 1%;
 }
 
-.conteudo-history {
-    margin-top: 12%;
-    width: 100%;
-    padding-bottom: 5%;
-    margin-left: 5%;
-}
-
-.conteudotabela {
-    margin-left: 10%;
-}
-
-.table-margin-historian {
-    margin-top: 0.5%;
-    margin-bottom: 6%;
-}
-
-
-@media only screen and (max-width: 800px) {
-    .conteudo-history {
-        margin-top: 22%;
-    }
-    .nav-item-stat {
-        font-size: 16px;
-        top: 21%;
-    }
+#header_table_fixed{
+    position: fixed;    
+    top:23.2%;
+    text-align: center;
+    z-index: 1000;
 }

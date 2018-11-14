@@ -25,105 +25,37 @@
         </div>                                                                          
         
 
-        
-
-        <div class="cabecalho-table-parameters"  v-show="!carregando && parametros.length>0">
-            <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametros, 'parametro',0):organizar(parametros, 'parametro',0);" class="ls2 item-cabecalho-table-parameters-sm">
-                <b><font class="cursor-class" color="#ffffff">Parâmetro
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                </font></b>
-            </label>                    
-            <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametros, 'vn',1):organizar(parametros, 'vn',1);" class="ls2 item-cabecalho-table-parameters-sm">
-                <b><font class="cursor-class" color="#ffffff">
-                    <p class="">Valor Nominal
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                </p></font></b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametros, 'unidade',2):organizar(parametros, 'unidade',2);" class="ls2 item-cabecalho-table-parameters-sm">
-                <b><font class="cursor-class" color="#ffffff">
-                    <p class="">Unidade
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                </p></font></b>
-            </label>  
-            <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametros, 'lie',3):organizar(parametros, 'lie',3);" class="ls2 item-cabecalho-table-parameters">
-                <b><font class="cursor-class" color="#ffffff">
-                    LIE <p class="font-size">Limite Inferior de Especificação
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                </p></font></b>
-            </label> 
-            <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametros, 'lic',4):organizar(parametros, 'lic',4);" class="ls2 item-cabecalho-table-parameters">
-                <b><font class="cursor-class" color="#ffffff">
-                    LIC <p class="font-size">Limite Inferior de Controle
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-                </p></font></b>
-            </label> 
-            <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametros, 'lsc',5):organizar(parametros, 'lsc',5);" class="ls2 item-cabecalho-table-parameters">
-                <b><font class="cursor-class" color="#ffffff">
-                    LSC <p class="font-size">Limite Superior de Controle
-                        <i class="fa fa-sort-desc" v-if="cabecalhoSetas[5]==false" aria-hidden="true"></i>
-                        <i class="fa fa-sort-asc" v-if="cabecalhoSetas[5]==true" aria-hidden="true"></i>
-                    </p></font>
-                </b>
-            </label>
-            <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametros, 'lse',6):organizar(parametros, 'lse',6);" class="ls2 item-cabecalho-table-parameters">
-                <b><font class="cursor-class" color="#ffffff">
-                    LSE <p class="font-size">Limite Superior de Especificação
-                    <i class="fa fa-sort-desc" v-if="cabecalhoSetas[6]==false" aria-hidden="true"></i>
-                    <i class="fa fa-sort-asc" v-if="cabecalhoSetas[6]==true" aria-hidden="true"></i>
-                </p></font></b>
-            </label>                              
-        </div>
-
-        <!--                       -->
-        <!--                       -->
-        <!--                       -->
-        <!--   Listagem de fase    -->
-        <!--                       -->
-        <!--                       -->
-        <!--                       -->
-        <div class="margin-table-parameters" v-show="!carregando && parametros.length>0">         
-            <div v-for="(pro, index) in parametros" :class="{cinza: index%2==0}" :key="index">                     
-                <label class="item-cabecalho-table-parameters-sm">
-                    <b><font color="#9BA6A5"></font></b>
-                    {{pro.tagGroup}}
-                </label>                    
-                <label class="item-cabecalho-table-parameters-sm">
-                    <b><font color="#9BA6A5"></font></b>
-                    {{pro.value}}
-                </label>
-                <label class="item-cabecalho-table-parameters-sm">
-                    <b><font color="#9BA6A5"></font></b>
-                    {{pro.unit}}
-                </label>
-                <label class="item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"></font></b>
-                    {{pro.lie}}
-                </label>   
-                <label class="item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"></font></b>
-                    {{pro.lic}}
-                </label>            
-                <label class="item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"></font></b>
-                    {{pro.lsc}}
-                </label>
-                <label class="item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"></font></b>
-                    {{pro.lse}}
-                </label> 
-                <label class="item-cabecalho-table-parameters">
-                    <b><font color="#9BA6A5"></font></b>
-                    <i class= "fa fa-trash-o" style="font-size:20px; cursor:pointer; color:red;" @click.stop.prevent="deleteParameter=pro;showModal('modalRemoveParameter');"></i>                    
-                    <i class="fa fa-edit" style="font-size:20px; cursor:pointer" @click.stop.prevent="parametro=JSON.parse(JSON.stringify(pro));parametro.equip=buscaEquip(parametro.thingGroupId); showModal('modalEditarParameter')"></i>
-                </label>                                                                                                       
-            </div>                                                                                                       
-        </div>      
-            
+        <table v-if="!carregando && parametros.length>0" class="table table-responsive w-100 d-block d-md-table table-sm table-striped mb-5" id="tabela-parametros-linha">
+            <thead id="teste">
+                <tr style="background-color: black; color: white;">
+                    <th>Parâmetro</th>
+                    <th>Valor Nominal</th>
+                    <th>Unidade</th>
+                    <th>LIE</th>
+                    <th>LIC</th>
+                    <th>LSC</th> 
+                    <th>LSE</th> 
+                    <th></th>                  
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(pro, index) in parametros" v-bind:key="index">
+                    <td>{{pro.tagGroup}}</td>
+                    <td>{{pro.value}}</td>
+                    <td>{{pro.unit}}</td>
+                    <td>{{pro.lie}}</td>  
+                    <td>{{pro.lic}}</td>
+                    <td>{{pro.lsc}}</td>  
+                    <td>{{pro.lse}}</td>
+                    <td>
+                        <b><font color="#9BA6A5"></font></b>
+                        <i class= "fa fa-trash-o" style="font-size:20px; cursor:pointer; color:red;" @click.stop.prevent="deleteParameter=pro;showModal('modalRemoveParameter');"></i>                    
+                        <i class="fa fa-edit" style="font-size:20px; cursor:pointer" @click.stop.prevent="parametro=JSON.parse(JSON.stringify(pro));parametro.equip=buscaEquip(parametro.thingGroupId); showModal('modalEditarParameter')"></i>
+                    </td>                
+                </tr>                                  
+            </tbody>
+        </table>    
+      
         <div class="paginacao" v-show="total>0">
             <nav aria-label="">
                 <ul class="pagination justify-content-center">
@@ -194,13 +126,13 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>
-                                <b>Valor Nominal</b>
+                                <b>Valor <br>Nominal</b>
                             </label>
                             <input class="fm form-control mr-sm-2" v-model="parametro.value" type="text">                                                  
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label>
-                                <b>Unidade </b>
+                                <b>Unidade </b><br>
                             </label>
                             <br><br>
                             <input type="text" class="fm form-control mr-sm-2" v-model="parametro.unit" >
@@ -406,10 +338,5 @@
     </div>
 </template>
 
-
-
-<script src="./js/listlineParameters.js">
-</script>
-<style>
-@import url("./css/listlineparameters.css");
-</style> 
+<script src="./js/listlineParameters.js"></script>
+<style>@import url("./css/listlineparameters.css");</style> 

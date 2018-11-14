@@ -13,20 +13,22 @@
                     <div class=" col-md-11" style="margin-bottom:5%;">
                         <div class="card">
                             <div class="card-header">
-                                Legendas
+                                Painel de Alarmes
                             </div>
                             <div class="card-body">
                                 <div class="row">
-
-                                    <div class="col-md-4">
-                                        Fora do especificado: <i class="fa fa-square" style="color:#ed0404" aria-hidden="true"></i>
-                                    </div> 
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
+                                        Dentro dos limites de controle: <i class="fa fa-square" style="color:#90EE90" aria-hidden="true"></i>
+                                    </div>                                     
+                                    <div class="col-md-3">
                                         Fora dos limites de controle: <i class="fa fa-square" style="color:#f5fc28" aria-hidden="true"></i>  
                                     </div> 
-                                    <div class="col-md-2">
-                                        Offline: <i class="fa fa-square" style="color:#b2b7b2" aria-hidden="true"></i>
+                                    <div class="col-md-3">
+                                        Fora dos limites de especificação: <i class="fa fa-square" style="color:#ed0404" aria-hidden="true"></i>
                                     </div> 
+                                    <div class="col-md-3">
+                                        Offline: <i class="fa fa-square" style="color:#b2b7b2" aria-hidden="true"></i>
+                                    </div>                                     
                                 </div>
                             </div>
                         </div>

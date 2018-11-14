@@ -8,10 +8,7 @@
         <b-modal no-close-on-backdrop ref="modalCadOP" hide-footer title="Cadastrar Ordem de Produção de Tira" modal-header-close>
                                        
             <div class="modal-body">
-                <form>
-                    <!-- <div class="alert alert-success" role="alert" v-if="opCreated">
-                        OP criada com sucesso !
-                    </div> -->
+                <form>                  
                     <div class="form-group row">
                         <div class="form-group col-sm-6">
                             <label for="op">OP</label>
@@ -24,28 +21,16 @@
                         <label for="desc">Tipo</label>
                             <input disabled class="form-control" id="desc" v-model="descriptionTira" value="opDesc">
                         </div>
-                    </div>
-                    <!-- <div class="form-group row">
-                        <div class="form-group col-sm-6">
-                        <label for="opType" >Tipo de Ordem</label>
-                            <select class="form-control form-control-sm mr-sm-2.5" aria-placeholder="tipo de ordem" v-model="opSelected">
-                                <option value="" selected disabled>Tipo de Ordem</option>
-                                <option v-for="(opType,index) in opTypeArray" v-bind:value="opType.productionOrderTypeId" v-bind:key="index" @click.stop="VOpType = opTypeArray[index].typeDescription">
-                                    {{ opType.typeDescription }}
-                                </option>
-                            </select>
-                        </div>
-                    </div> -->
+                    </div>                    
                     <div class="form-group row">
                         <div class="form-group col-md-12">
-                        <label for="opType">Código da Tira</label>
-                        <input autocomplete="off" :disabled="!productionOrderNumber" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" />
-                        <button class="btn btn-outline-success btn-sm col-md-1" :disabled="!productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
-                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        </button>
-                        <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeCode; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeCode }}</b-dropdown-item>
-                        </div>
-                        
+                            <label for="opType" class="col-12">Código da Tira</label>
+                            <input autocomplete="off" :disabled="!productionOrderNumber" @keyup="recipeArray=getResults(urlRecipeSearch, recipeName)" v-model="recipeName"  class="btn btn-outline-secondary col-md-9" id="dropdownMenuButton" />
+                            <button class="btn btn-outline-success btn-sm col-md-1" :disabled="!productionOrderNumber || !recipeName || !canAdd" @click.stop.prevent="addRecipe(recipeSelected.recipeName, recipeSelected.recipeId)">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </button>
+                            <b-dropdown-item @click.stop.prevent="recipeSelected=recipe;recipeName = recipeSelected.recipeCode; recipeArray=[]; msg=true" v-for="(recipe,index) in recipeArray" :key="index">{{ recipe.recipeCode }}</b-dropdown-item>
+                        </div>                        
                     </div>
 
                     <!--  Acordion que mostra qual   -->
@@ -147,193 +132,121 @@
              <p class="col-md-10" v-show="opArrarKeep.length == 0" v-if="!carregando">
                 Sem Ordens de Produção Cadastradas
             </p>
-                <div class="cabecalho-table-po"  v-show="!carregando" v-if="opArrarKeep.length > 0">
-                    <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(opArrarKeep, 'productionOrderNumber',0):organizar(opArrarKeep, 'productionOrderNumber',0);" class="ls2-cabecalho-po col-md-2">
-                        <b><font class="cursor-class" color="#ffffff">OP &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(opArrarKeep, 'recipeCode',4):organizar(opArrarKeep, 'recipeCode',4);" class="ls2-cabecalho-po col-md-2">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Código da Tira &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>                     
-                    <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(opArrarKeep, 'typeDescription',1):organizar(opArrarKeep, 'typeDescription',1);" class="ls2-cabecalho-po col-md-4" style="margin-left:1%">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Descrição &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label>
-                    <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(opArrarKeep, 'quantity',2):organizar(opArrarKeep, 'quantity',2);" class="ls2-cabecalho-po col-md-2">
-                        <b><font class="cursor-class" color="#ffffff">
-                            Status&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                            <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                        </font></b>
-                    </label> 
-                </div>   
-                <div class="table-margin"  v-show="!carregando">
-                    <div v-for="(op, index) in opArrarKeep" v-bind:key="index" :class="{cinza: index%2==0}">
-                        <label class="ls ls1 col-md-2">
-                            {{op.productionOrderNumber}}
-                        </label>&nbsp;&nbsp;&nbsp;
-                        <label class="ls ls1 col-md-2">
-                            {{op.recipeCode}}
-                        </label>&nbsp;&nbsp;&nbsp;
-                        <!-- <label class="ls ls1 col-md-2">
-                            {{op.recipeName}}
-                        </label>&nbsp;&nbsp;&nbsp; -->
-                        <label class="ls ls1 col-md-4 aling-lb">
-                            {{op.recipe.recipeDescription}}
-                        </label>&nbsp;&nbsp;&nbsp;
-                        <label class="ls ls1 col-md-2">
-                            {{op.currentStatus | filterStatus}}
-                        </label>&nbsp;&nbsp;&nbsp;
-                        <label class="ls ls1 col-md" v-if="op.hasProd == true">
-                            {{op.recipe.recipeProduct.product.productName}}
-                        </label>
-                        <label class="ls ls1 col-md-1">
+
+
+            <table v-if="!carregando && opArrarKeep.length>0" class="table w-100 d-block d-md-table table-responsive table-sm table-striped " id="tabela-op-tira">
+                <thead id="teste">
+                    <tr style="background-color: black; color: white;">
+                        <th>OP</th>
+                        <th>Código da Tira</th>
+                        <th>Descrição</th>
+                        <th>Status</th> 
+                        <th></th>
+                        <th></th>                               
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(op, index) in opArrarKeep" v-bind:key="index">
+                        <td>{{op.productionOrderNumber}}</td>
+                        <td>{{op.recipeCode}}</td>
+                        <td>{{op.recipe.recipeDescription}}</td>
+                        <td>{{op.currentStatus | filterStatus}}</td>
+                        <td>{{op.hasProd == true?op.recipe.recipeProduct.product.productName:''}}</td>  
+                        <td>
                             <i :id="op.recipe.recipeId" class="fa fa-eye" style="font-size: 22px; cursor: pointer;" @click="parametrosteste=[];recipes={};getGatewayRecipe(op)"></i>
-                        </label>
-                    </div>
-                </div>
-                <div class="paginacao" v-show="total>0">
-                    <nav aria-label="">
-                        <ul class="pagination justify-content-center">
-                            <li v-show="startat>0" class="page-item">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Anterior</a>
-                            </li>
-                            <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
-                            </li>
-                            <li class="page-item" v-show="pages.length>1 && startat+20<total">
-                                <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Próximo</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+                        </td>                                      
+                    </tr>                                  
+                </tbody>
+            </table>    
+            <div class="paginacao" v-show="total > 0">
+                <nav aria-label="">
+                    <ul class="pagination justify-content-center">
+                        <li v-show="startat>0" class="page-item">
+                            <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=quantityPage, quantityPage)">Anterior</a>
+                        </li>
+                        <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
+                            <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*quantityPage, quantityPage)">{{num+1}}</a>
+                        </li>
+                        <li class="page-item" v-show="pages.length>1 && startat+quantityPage<total">
+                            <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=quantityPage, quantityPage)">Próxima</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>  
+            <!-- <div class="paginacao" v-show="total>0">
+                <nav aria-label="">
+                    <ul class="pagination justify-content-center">
+                        <li v-show="startat>0" class="page-item">
+                            <a class="page-link" href="#" @click.stop.prevent="buscar(startat-=20, quantityPage)">Anterior</a>
+                        </li>
+                        <li class="page-item" v-bind:class="{active:num==pageAtual}" v-for="(num, index) in pages" v-bind:key="index">
+                            <a class="page-link" href="#" @click.stop.prevent="buscar(startat=num*20, quantityPage)">{{num+1}}</a>
+                        </li>
+                        <li class="page-item" v-show="pages.length>1 && startat+20<total">
+                            <a class="page-link" href="#" @click.stop.prevent="buscar(startat+=20, quantityPage)">Próximo</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div> -->
+        </div>
 
             <!-- MODAL VISUALIZAR PARAMS -->
-            <b-modal no-close-on-backdrop size="lg" ref="visualizarParams" hide-footer title="Visualizar Ordem de Produção de Tira" class="">
-                <div v-if="opSelectedParams != ''">
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="">OP</label>
-                            <input type="text" class="form-control" v-model="opSelectedParams.productionOrderNumber" disabled>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="">Status</label>
-                            <input type="text" class="form-control" v-model="opSelectedParams.status" disabled>
-                        </div>
+        <b-modal no-close-on-backdrop size="lg" ref="visualizarParams" hide-footer title="Visualizar Ordem de Produção de Tira" class="">
+            <div v-if="opSelectedParams != ''">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="">OP</label>
+                        <input type="text" class="form-control" v-model="opSelectedParams.productionOrderNumber" disabled>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="">Código da Tira</label>
-                            <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeCode" disabled>
-                        </div>                    
-                        <div class="form-group col-md-6">
-                            <label for="">Descrição da Tira</label>
-                            <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeDescription" disabled>
-                        </div>
-                    </div>                
-                </div>
-                    <form>
-                    <!-- <div class="fundo-branco-po"> -->
-                    <div class="cabecalho-table-po-modal col-md-12">
-                        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(parametrosteste, 'parametro',0):organizar(parametrosteste, 'parametro',0);" class="ls2-cabecalho-po col-md-2">
-                            <b><font class="cursor-class" color="#ffffff"><p>Parâmetro
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-                            </p></font></b>
-                        </label>
-                        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(parametrosteste, 'vn',1):organizar(parametrosteste, 'vn',1);" class="ls2-cabecalho-po col-md-1">
-                            <b><font class="cursor-class" color="#ffffff">
-                                <p>Valor
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-                            </p></font></b>
-                        </label>
-                        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(parametrosteste, 'unidade',2):organizar(parametrosteste, 'unidade',2);" class="ls2-cabecalho-po col-md-1">
-                            <b><font class="cursor-class" color="#ffffff">
-                                <p>Unidade
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-                            </p></font></b>
-                        </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(parametrosteste, 'lie',3):organizar(parametrosteste, 'lie',3);" class="ls2-cabecalho-po  width-table-context">
-                            <b><font class="cursor-class" color="#ffffff">
-                                LIE <p class="font-size">Limite Inferior de Especificação 
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                            </p></font></b>
-                        </label>
-                        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(parametrosteste, 'lic',4):organizar(parametrosteste, 'lic',4);" class="ls2-cabecalho-po  width-table-context">
-                            <b><font class="cursor-class" color="#ffffff">
-                                LIC <p class="font-size">Limite Inferior de Controle 
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                            </p></font></b>
-                        </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[5]==false?desorganizar(parametrosteste, 'lsc',5):organizar(parametrosteste, 'lsc',5);" class="ls2-cabecalho-po  width-table-context">
-                            <b><font class="cursor-class" color="#ffffff">
-                                LSC <p class="font-size">Limite Superior de Controle
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                            </p></font></b>
-                        </label> 
-                        <label @click.stop.prevent="cabecalhoSetas[6]==false?desorganizar(parametrosteste, 'lse',6):organizar(parametrosteste, 'lse',6);" class="ls2-cabecalho-po  width-table-context">
-                            <b><font class="cursor-class" color="#ffffff">
-                                LSE <p class="font-size">Limite Superior de Especificação 
-                                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-                            </p></font></b>
-                        </label> 
+                    <div class="form-group col-md-4">
+                        <label for="">Status</label>
+                        <input type="text" class="form-control" v-model="opSelectedParams.status" disabled>
                     </div>
-                    <div class="table-margin-params">
-                    <div v-for="(pro, index) in parametrosteste" v-bind:class="{cinza: index%2==0}" :key="index">                     
-                    <label class="width-table-context-wider col-md-2">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.parametro}}
-                    </label>                    
-                    <label class="width-table-context col-md-1">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.vn}}
-                    </label>
-                    <label class="width-table-context col-md-1">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.unidade}}
-                    </label>
-                    <label class="width-table-context" >
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.lie}}
-                    </label>   
-                    <label class="width-table-context" >
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.lic}}
-                    </label>            
-                    <label class="width-table-context" >
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.lsc}}
-                    </label>
-                    <label class="width-table-context" style="margin-left:-0.5%">
-                    <b><font color="#9BA6A5"> </font></b>
-                        {{pro.lse}}
-                    </label>                                                                                        
                 </div>
-                </div>
-                <!-- </div>   -->
-                    </form>
-            </b-modal>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="">Código da Tira</label>
+                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeCode" disabled>
+                    </div>                    
+                    <div class="form-group col-md-6">
+                        <label for="">Descrição da Tira</label>
+                        <input type="text" class="form-control" v-model="opSelectedParams.recipe.recipeDescription" disabled>
+                    </div>
+                </div>                
+            </div>
+            <form>
+                <table v-if="!carregando && parametrosteste.length>0" class="table w-100 d-block d-md-table table-responsive table-sm table-striped" id="tabela-op-tira-parametros">
+                    <thead id="teste">
+                        <tr style="background-color: black; color: white;">
+                            <th>Parâmetro</th>
+                            <th>Valor</th>
+                            <th>Unidade</th>
+                            <th>LIE</th> 
+                            <th>LIC</th>
+                            <th>LSC</th> 
+                            <th>LSE</th>                               
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(pro, index) in parametrosteste" v-bind:key="index">
+                            <td>{{pro.parametro}}</td>
+                            <td>{{pro.vn}}</td>
+                            <td>{{pro.unidade}}</td>
+                            <td>{{pro.lie}}</td>
+                            <td>{{pro.lic}}</td>  
+                            <td>{{pro.lsc}}</td>                                      
+                            <td>{{pro.lse}}</td>
+                        </tr>                                  
+                    </tbody>
+                </table> 
+               
+            </form>
+        </b-modal>
 
-            <!-- MODAL PARA EXIBIR ERRO  -->
-            <b-modal no-close-on-backdrop ref="modalInfo" title="Mensagem" hide-footer>
+        <!-- MODAL PARA EXIBIR ERRO  -->
+        <b-modal no-close-on-backdrop ref="modalInfo" title="Mensagem" hide-footer>
             <p :class="erro ? 'alert alert-danger': 'alert alert-info'">{{msgErro}}</p>
-            </b-modal>
+        </b-modal>
     </div>
 
 

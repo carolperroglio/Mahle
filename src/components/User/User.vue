@@ -18,71 +18,34 @@
         </ul>
     </nav>
     <div id="load" v-show="carregando">
-    <stretch></stretch>
+        <stretch></stretch>
     </div>
-    <div class="cabecalho-table-po-user"  v-show="!carregando">
-        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(userlist, 'name',0):organizar(userlist, 'name',0);" class="ls2-cabecalho-po-user col-md-2">
-            <b><font class="cursor-class" color="#ffffff">Nome &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-            </font></b>
-        </label>
-        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(userlist, 'email',1):organizar(userlist, 'email',1);" class="ls2-cabecalho-po-user col-md-2">
-            <b><font class="cursor-class" color="#ffffff">
-                E-mail &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-            </font></b>
-        </label>
-        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(userlist, 'username',2):organizar(userlist, 'username',2);" class="ls2-cabecalho-po-user col-md-2">
-            <b><font class="cursor-class" color="#ffffff">
-                Nome do Usuário &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-            </font></b>
-        </label>
-        <label @click.stop.prevent="cabecalhoSetas[3]==false?desorganizar(userlist, 'enabled',3):organizar(userlist, 'enabled',3);" class="ls2-cabecalho-po-user col-md-1">
-            <b><font class="cursor-class" color="#ffffff">
-                Ativo &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[3]==true" aria-hidden="true"></i>
-            </font></b>
-        </label>
-        <label @click.stop.prevent="cabecalhoSetas[4]==false?desorganizar(userlist, 'userGroup',4):organizar(userlist, 'userGroup',4);" class="ls2-cabecalho-po-user col-md-2">
-            <b><font class="cursor-class" color="#ffffff">
-                Grupo do Usuário &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[4]==true" aria-hidden="true"></i>
-            </font></b>
-        </label>
-        
-    </div>   
-    <div class="table-margin-user"  v-show="!carregando">
-    <div v-for="(u, index) in userlist" v-bind:key="index" :class="{cinza: index%2==0}">
-        <label class="ls1-user col-md-2">
-            {{u.name}}
-        </label>
-        <label class="ls1-user col-md-2">
-            {{u.email}}
-        </label>
-        <label class="ls1-user col-md-2">
-            {{u.username}}
-        </label>
-        <label class="ls1-user col-md-1" v-show="u.enabled">
-            <i class="fa fa-check" aria-hidden="true"></i>
-        </label>
-        <label class="ls1-user col-md-2" v-if="u.userGroup != null">
-            {{u.userGroup.name}}
-        </label>
-        <label class="ls1-user col-md-2" v-else>
-            -
-        </label>
-        <label class="ls1-user col-md-1">
-            <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUser = u;showModal('deleteUser')"></i>
-            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUser = u; objUser.password = ''; objUser.passwordconfirm = ''; showModal('editUser')"></i>
-        </label>
+    <div v-show="!carregando && userlist.length==0" id="tabela-users">
+        <h1>Sem registros de usuários</h1>
     </div>
-    </div>  
+    <table v-if="!carregando && userlist.length>0" class="table table-responsive w-100 d-block d-md-table table-sm table-striped mb-5" id="tabela-users">
+        <thead id="teste">
+            <tr style="background-color: black; color: white;">
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Nome do Usuário</th>                
+                <th>Grupo do Usuário</th>
+                <th></th>              
+            </tr>
+        </thead>
+        <tbody>       
+            <tr v-for="(us, index) in userlist" v-bind:key="index">                
+                <td>{{us.name}}</td>
+                <td>{{us.email}}</td>
+                <td>{{us.username}}</td>
+                <td>{{us.userGroup?us.userGroup.name:'-'}}</td>                                  
+                <td>
+                    <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUser = us;showModal('deleteUser')"></i>
+                    <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUser = us; objUser.password = ''; objUser.passwordconfirm = ''; showModal('editUser')"></i>
+                </td>                
+            </tr>                                  
+        </tbody>
+    </table>
     <br>
 
 

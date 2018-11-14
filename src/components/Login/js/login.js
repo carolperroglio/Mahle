@@ -128,19 +128,29 @@ export default {
         returnToScreen() {
             var statuscode = VueCookies.get('status');
             setTimeout(() => {
-                if (statuscode == 404) {
+                if (statuscode == undefined) {
+                    this.erro = true;
+                    this.msgErro = "Problema de comunicação \n Tente novamente";
+                    this.showModal("modaInfo");
+                    this.$router.push({ name: "Login" })
+                }else if (statuscode == 404) {
                     this.erro = true;
                     this.msgErro = "Senha inválida";
                     this.showModal("modaInfo");
                     this.$router.push({ name: "Login" })
+                } else if (statuscode == 401) {
+                    this.erro = true;
+                    this.msgErro = "Sem permissão de acesso";
+                    this.showModal("modaInfo");
+                    this.$router.push({ name: "Login" })
                 } else if (statuscode == "Network Error") {
                     this.erro = true;
-                    this.msgErro = "Sem acesso a esta tela";
+                    this.msgErro = "Problema de comunicação \n Tente novamente";
                     this.showModal("modaInfo");
                     this.$router.push({ name: "Login" })
                 } else if (statuscode == "no-security") {
                     this.erro = true;
-                    this.msgErro = "Login expirou - favor efetuar o login novamente";
+                    this.msgErro = "Deslogado !";
                     this.showModal("modaInfo");
                     this.$router.push({ name: "Login" })
                 } else if (statuscode == "logoff") {

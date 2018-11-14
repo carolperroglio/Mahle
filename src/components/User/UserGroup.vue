@@ -20,57 +20,40 @@
         </ul>
     </nav>
     <div id="load" v-show="carregando">
-    <stretch></stretch>
+        <stretch></stretch>
     </div>
-    <div class="cabecalho-table-po-usergroup"  v-show="!carregando">
-        <label @click.stop.prevent="cabecalhoSetas[0]==false?desorganizar(usergrouplist, 'name',0):organizar(usergrouplist, 'name',0);" class="ls2-cabecalho-po-usergroup col-md-3">
-            <b><font class="cursor-class" color="#ffffff">Nome do Grupo &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[0]==true" aria-hidden="true"></i>
-            </font></b>
-        </label>
-        <label @click.stop.prevent="cabecalhoSetas[1]==false?desorganizar(usergrouplist, 'description',1):organizar(usergrouplist, 'description',1);" class="ls2-cabecalho-po-usergroup col-md-3">
-            <b><font class="cursor-class" color="#ffffff">
-                Descrição &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[1]==true" aria-hidden="true"></i>
-            </font></b>
-        </label>
-        <label @click.stop.prevent="cabecalhoSetas[2]==false?desorganizar(usergrouplist, 'enabled',2):organizar(usergrouplist, 'enabled',2);" class="ls2-cabecalho-po-usergroup col-md-2">
-            <b><font class="cursor-class" color="#ffffff">
-                Ativo &nbsp;&nbsp;&nbsp;
-                <i class="fa fa-sort-desc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==false" aria-hidden="true"></i>
-                <i class="fa fa-sort-asc pull-right" style="font-size:21px;" v-if="cabecalhoSetas[2]==true" aria-hidden="true"></i>
-            </font></b>
-        </label>
-    </div>   
-    <div class="table-margin-usergroup"  v-show="!carregando">
-    <div v-for="(u, index) in usergrouplist" v-bind:key="index" :class="{cinza: index%2==0}">
-        <label class="ls1-usergroup col-md-3">
-            {{u.name}}
-        </label>
-        <label class="ls1-usergroup col-md-3">
-            {{u.description}}
-        </label>
-        <label class="ls1-usergroup col-md-2" v-if="u.enabled">
-            <i class="fa fa-check" aria-hidden="true"></i>
-        </label>
-        <label class="ls1-usergroup col-md-2" v-else>
-            <i class="fa fa-remove" aria-hidden="true"></i>
-        </label>
-        <label class="ls1-usergroup col-md-1">
-            <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUserGroup = u;showModal('deleteUsergroup')"></i>
-            <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUserGroup = u;checkPermissionList(u);checkUserList(u);
-            showModal('editUserGroup');uSelected = {};pSelected={};"></i>
-        </label>
+    <div v-show="!carregando && usergrouplist.length==0" id="tabela-users-group">
+        <h1>Sem registros de grupos</h1>
     </div>
-    </div>  
+    <table v-if="!carregando && usergrouplist.length>0" class="table table-responsive w-100 d-block d-md-table table-sm table-striped" id="tabela-users-group">
+        <thead id="teste">
+            <tr style="background-color: black; color: white;">
+                <th>Nome do Grupo</th>
+                <th>Descrição</th>
+                <th>Ativo</th>                       
+                <th></th>                      
+            </tr>
+        </thead>
+        <tbody>       
+            <tr v-for="(u, index) in usergrouplist" v-bind:key="index">                  
+                <td>{{u.name}}</td>
+                <td>{{u.description}}</td>                
+                <td>
+                    <i class="fa fa-check" v-if="u.enabled" aria-hidden="true"></i>
+                    <i class="fa fa-remove" v-if="!u.enabled" aria-hidden="true"></i>                               
+                </td>
+                <td>
+                    <i class="fa fa-trash" style="font-size:21px; cursor:pointer;color:red" @click.stop.prevent="objUserGroup = u;showModal('deleteUsergroup')"></i>
+                    <i class="fa fa-edit cursor" style="font-size:21px; cursor:pointer;" @click.stop.prevent="objUserGroup = u;checkPermissionList(u);checkUserList(u);showModal('editUserGroup');uSelected = {};pSelected={};"></i>
+                </td>                
+            </tr>                                  
+        </tbody>
+    </table>
     <br>
 
-
-                            <!--                             -->
+                            <!--                                      -->
                             <!-- MODALZÃO CRIAÇÃO DE GRUPO DE USUÁRIO -->
-                            <!--                             -->
+                            <!--                                      -->
 <b-modal no-close-on-backdrop size="lg" ref="cadUserGroup" hide-footer title="Cadastrar Grupo de Usuário" modal-header-close>
 <div class="modal-body">
     <form>

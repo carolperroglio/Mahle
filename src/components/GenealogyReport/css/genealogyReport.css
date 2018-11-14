@@ -12,8 +12,10 @@
 }
 .auto-complete{
     overflow:auto; 
-    position: absolute;
-    height: 300px;
+    position: absolute;    
+    z-index: 1000;
+    background-color: white;
+    width: 430px;
 }
 
 label {

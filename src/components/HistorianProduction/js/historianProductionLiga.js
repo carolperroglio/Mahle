@@ -258,19 +258,20 @@ export default {
             }
             axios.post(this.url + '/api/producthistorian', ordem).then((response) => {
                 // Se for necessário adicionar COBRE FOSFOROSO - SERÁ FEITO 2 POST - UM ESPECÍFICO PARA COBRE FOSFOROSO                
-                if (ordem.productId == '70') {
-                    axios.post(this.urlParameters + '/api/WriteOrderLiga/AddCobre', this.productionOrder).then((response) => {
-                        this.erro = false;
-                        this.msgErro = 'Produto apontado com sucesso.';
-                        this.productionOrderId = this.ordem.productionOrderId;
-                        this.carregando = false;
-                        this.pReceita = false;
-                        this.pFase = false;
-                        this.rolo++;
-                        this.ordem = {};
-                        console.log(response);                        
-                    })
-                }else{
+                // if (ordem.productId == '70') {
+                //     axios.post(this.urlParameters + '/api/WriteOrderLiga/AddCobre', this.productionOrder).then((response) => {
+                //         this.erro = false;
+                //         this.msgErro = 'Produto apontado com sucesso.';
+                //         this.productionOrderId = this.ordem.productionOrderId;
+                //         this.carregando = false;
+                //         this.pReceita = false;
+                //         this.pFase = false;
+                //         this.rolo++;
+                //         this.ordem = {};
+                //         console.log(response); 
+                //         location.reload();                       
+                //     })
+                // }else{
                     axios.put(this.urlAnalysis + '/api/calculeanalysis/recalculate?productionOrderId='+ordem.productionOrderId+'&productId='+this.prodRolo+'&quantityInput='+this.quantity).then((response) => {
                         this.getAnalysis();
                         this.erro = false;
@@ -281,10 +282,10 @@ export default {
                         this.pFase = false;
                         this.rolo++;
                         this.ordem = {};                    
-                        console.log(response);
-                        location.reload();
+                        console.log(response); 
+                        location.reload();                       
                     });                
-                }
+                // }                
             }).catch((error) => {
                 this.erro = true;
                 this.msgErro = "Ocorreu um erro: " + error.message;

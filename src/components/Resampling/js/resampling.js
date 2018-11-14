@@ -14,7 +14,7 @@ import autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import logo from './onyx.jpeg'
 import logoMahle from './loooogomahle.png'
-
+var download = require('../../../.././node_modules/js-file-download');
 es6promisse.polyfill();
 
 //faz a paginação
@@ -39,6 +39,7 @@ export default {
     name: "Reamostragem",
     data() {
         return {
+            urlParams: process.env.REPORT_PARAMS,
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
             urlGatewayThings: ipReport + '/gateway/things',
             url: ipReport,
@@ -431,6 +432,19 @@ export default {
                     this.showModal("modalInfo");
                 }
             });
+        },
+        toExcel(table){            
+            axios.post(this.urlParams + '/api/resampling?tipo=excel', table, {responseType: 'arraybuffer'}).then((response) => {                        
+                const url = window.URL.createObjectURL(new Blob([response.data],{type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"}));                        
+                download(response.data,'relatoriodeanalises.xls');                        
+                this.carregando = false;
+            }).catch((error) => {                                              
+                this.carregando = false;                    
+                this.erro = true;
+                this.msgErro = "Erro ao baixar relatório\nMenssagem : ";
+                this.msgErro += error.message;
+                this.showModal("modalInfo");
+            }); 
         },
         getReportOP() {
             this.providertable = [];

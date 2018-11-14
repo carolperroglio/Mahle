@@ -75,23 +75,12 @@ export default {
         getToolType() {
             this.carregando = true;
             this.group = true;
-            axios.get(this.url + '/api/tooltype/').then((response) => {                
-                // var valida = true; var j = 0;
-                // this.orderTools.forEach((o)=>{
-                //     j=0;valida=true;
-                //     while(valida && j<response.data.length){                                                     
-                //         if(o == response.data[j].toolTypeId){                            
-                //             this.toolType.push(response.data[j]);                                 
-                //             valida = false;
-                //         }
-                //         ++j;
-                //     }
-                // })                
+            axios.get(this.url + '/api/tooltype/').then((response) => {                                              
                 this.desbobinador.push(response.data.filter((x)=>{if (x.toolTypeId==8||x.toolTypeId==9) return x}));
                 this.formadoraDeCanal.push(response.data.filter((x)=>{if (x.toolTypeId==6||x.toolTypeId==5||x.toolTypeId==4) return x}));
-                this.fornoDeBronze.push(response.data.filter((x)=>{if (x.toolTypeId==17||x.toolTypeId==7) return x}));
-                this.fusao.push(response.data.filter((x)=>{if (x.toolTypeId==16||x.toolTypeId==21||x.toolTypeId==14) return x}));
-                this.resfriamento.push(response.data.filter((x)=>{if (x.toolTypeId==15||x.toolTypeId==2||x.toolTypeId==10||x.toolTypeId==13||x.toolTypeId==19||x.toolTypeId==18) return x}));
+                this.fornoDeBronze.push(response.data.filter((x)=>{if (x.toolTypeId==17||x.toolTypeId==15||x.toolTypeId==14) return x}));
+                this.fusao.push(response.data.filter((x)=>{if (x.toolTypeId==16||x.toolTypeId==21||x.toolTypeId==7) return x}));
+                this.resfriamento.push(response.data.filter((x)=>{if (x.toolTypeId==2||x.toolTypeId==10||x.toolTypeId==13||x.toolTypeId==19||x.toolTypeId==18) return x}));
                 this.fresaDeDesbaste.push(response.data.filter((x)=>{if (x.toolTypeId==3||x.toolTypeId==12) return x}));
                 this.tesoura.push(response.data.filter((x)=>{if (x.toolTypeId==11) return x}));
                 this.tracionador.push(response.data.filter((x)=>{if (x.toolTypeId==20) return x}));

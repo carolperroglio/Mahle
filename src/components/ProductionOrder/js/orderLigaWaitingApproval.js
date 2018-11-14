@@ -97,26 +97,40 @@ export default {
                 else
                     this.cabecalhoSetas[i] = false;
         },
-        blockConfirmButton() {
-            this.blockConfirm = false
-            var qtdPorcentagem = 0;
-            this.components.forEach(element => {
-                if(element.type == 'semi_finished' || element.type=='scrap')
-                    element.value = 0;
-            });
-            for (var x = 0; x < this.components.length; x++) {
-                if (this.components[x].value.length == 0) {
-                    this.blockConfirm = true
-                }
-                qtdPorcentagem = qtdPorcentagem + parseFloat(this.components[x].value);
-                console.log(qtdPorcentagem);
-            }
-
-            if (qtdPorcentagem < 99.8) {
-                this.blockConfirm = true;
-            }
-
+        blockConfirmButton() {                        
+            
+            var x =0; var cont =0;
+            var valida = true;
+            while (x<this.components.length && valida)
+                if (this.components[x++].type=='base_product'){
+                    this.components.forEach(element => {
+                        if(element.type!='base_product')
+                            cont+=Number(element.value);
+                    })                
+                    valida=false;
+                    console.log(cont);
+                    this.components[x-1].value = 100-cont;   
+                }            
         },
+        blockConfirmTeste(){
+            var cont = 0;
+            this.components.forEach((element) => {                
+                if((element.type=='contaminent' || element.type=="finished" || element.type=='base_product') && (element.value=='' || isNaN(element.value)))
+                    return true;
+                else if(element.type=='contaminent' || element.type=="finished")
+                    cont += Number(element.value);
+                else if(element.type=='base_product')
+                    if(Number(element.value)<0)
+                        return true;
+                    else
+                        cont += Number(element.value);
+            });
+            if(cont==100)
+                return false;
+            else
+                return true;
+        },
+
         getProductsOP(op) {
             axios.get(this.urlAnalysis + "/gateway/productionorder/" + this.idOP).then((response) => {
                 op = response.data;
@@ -169,6 +183,21 @@ export default {
             this.cobre = {};
         },
         realizarAnálise() {
+            var teste = true;
+            this.components.forEach((element)=>{
+                if(element.type == 'scrap' || element.type == 'semi_finished')
+                    element.value = 0;
+                else if(element.value == undefined || element.value == ''){
+                    this.erro = true;
+                    this.msgErro = "Preencha todos os campos em caso de 0 digite 0 !";
+                    this.showModal("modalErro");
+                    this.carregando = false;
+                    teste =false;
+                    return false;
+                }
+            });
+            if(!teste)
+                return;
             var components = this.components;
             var objComp = {};
             
@@ -222,6 +251,7 @@ export default {
             }
         },
     },
+    
     filters: {
         filterStatus: function(value) {
             switch (value) {
@@ -234,7 +264,11 @@ export default {
             }
         },
     },
-    beforeMount: function() {
+
+    created: function() {
         this.getResults();
+        setInterval(() => {            
+            this.getResults();            
+        }, 3000000);        
     }
 }

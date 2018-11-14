@@ -11,63 +11,18 @@
                 <li class="nav-item-hist nav-item-gp col-md-12">
                     <h1 class="title-page-gp col-md-10"><b>Relatório de Genealogia de Tira</b></h1>                                                        
                 </li>
-                <li class="nav-item-genealogy col-sm-0">
-                    <select class="custom-select form-control form-control-sm" @change="cod='';op='';opName='';inicio='';fim='';recipeCode=''" v-model="fieldFilter">                        
-                        <option value="" selected disabled>Campo para busca</option>
-                        <option value="cod">Código da Tira</option>
-                        <option value="date">Data</option> 
-                        <option value="op">OP</option>                                               
-                    </select>
-                </li>    
-                <li class="nav-item-genealogy form-group col-sm-0" v-show="fieldFilter=='cod'">
-                    <label><b>Código da Tira </b></label>      
+                <li class="col-md-4 mb-1">             
+                    <button type="button" class="btn btn-primary" @click.prevent="showModal('myModalEdit')">Filtrar Busca</button>                      
                 </li>
-               <li class="nav-item-genealogy col-sm-1" v-show="fieldFilter=='cod'">                                         
-                    <input class="form-control form-control-sm" v-model="recipeCode" @keyup="prosFim=getResults(RECIPE_API,recipeCode, prosFim); cod=''" >                                                                                 
-                    <div class="auto-complete">
-                        <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;cod=r.recipeId;prosFim=[]" v-for="(r,index) in prosFim" :key="index">{{ r.recipeCode }}</b-dropdown-item>                                           
-                    </div>
-                </li> 
-                <li class="nav-item-genealogy form-group col-sm-0" v-show="fieldFilter=='cod' || fieldFilter=='date'">
-                    <label><b>Início  </b></label>      
-                </li>
-                <li class="nav-item-genealogy col-sm-2"  v-show="fieldFilter=='cod' || fieldFilter=='date'">
-                    <datetime type="datetime" input-class="form-control form-control-sm" v-model="inicio" format="yyyy-MM-dd HH:mm:ss"></datetime>     
-                </li>              
-                <br>     
-                <li class="nav-item-genealogy form-group col-sm-0" v-show="fieldFilter=='cod' || fieldFilter=='date'">
-                    <label><b>Fim </b></label>      
-                </li>                
-                <li class="nav-item-genealogy col-sm-2" v-show="fieldFilter=='cod' || fieldFilter=='date'">
-                    <datetime type="datetime" input-class="form-control form-control-sm" v-model="fim" format="yyyy-MM-dd HH:mm:ss"></datetime>     
-                </li>
-                <li class="nav-item-genealogy col-sm-0" v-show="fieldFilter=='op'">
-                    <label><b>OP </b></label> 
-                </li>
-                <li class="nav-item-genealogy col-sm-1" v-if="fieldFilter=='op'">
-                    <input class="form-control form-control-sm" v-model="opName" @keyup="prosFim=getResults(URL_OP,opName, prosFim); op=''" >                                                                                 
-                    <div class="auto-complete">
-                        <b-dropdown-item @click.stop.prevent="opName=o.productionOrderNumber;op=o.productionOrderId;prosFim=[]" v-for="(o,index) in prosFim" :key="index" style="cursor:pointer">{{ o.productionOrderNumber }}</b-dropdown-item>
-                    </div>
-                </li>                
-                <li class="nav-item-genealogy col-sm-1">
-                    <button class="btn btn-primary btn-sm" :disabled="!fieldFilter || (fieldFilter=='date' && !inicio && !fim) || (fieldFilter=='op' && !op) || (fieldFilter=='cod' && !inicio && !fim && !cod)" @click.stop.prevent="getGenealogy(fieldFilter, op, cod, inicio, fim)">
-                        <i class="fa fa-search"></i> Buscar
-                    </button>
-                </li>
-                <li class="ml-auto">                
-                    <button type="button" class="btn btn-sm pull-left btn-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="toPdfAutoTable()">
+                
+                <li class="mr-1">               
+                    <button type="button" class="btn btn-danger" :disabled="!genealogys || genealogys.length==0" @click.prevent="toPdfAutoTable()">
                         <i class="fa fa-file-pdf-o"></i> Exportar para PDF
                     </button>  
-                    <button type="button" class="btn btn-sm pull-left btn-success" :disabled="!genealogys || genealogys.length==0" @click.prevent="exportExcel('members.xlsx')">
+                    <button type="button" class="btn btn-success" :disabled="!genealogys || genealogys.length==0" @click.prevent="exportExcel('members.xlsx')">
                         <i class="fa fa-file-pdf-o"></i> Exportar para Excel
                     </button>
-                    <!-- <download-excel class = "btn btn-outline-success btn-sm btn-sm pull-left" :data = "json_data"  name = "fileName">                    
-                        Download Excel                    
-                    </download-excel>                                       -->
-                    <!-- <download-excel class = "btn btn-outline-success btn-sm btn-sm pull-left" :disabled="!genealogys || genealogys.length==0" :data = genealogys :name = 'fileName'>
-                        <i class="fa fa-file-excel-o"></i> Exportar para Excel
-                    </download-excel> -->
+                
                 </li>
             </ul>
         </nav>
@@ -93,7 +48,7 @@
                             <div class="col-md-0"><b>OP: </b>{{genealogy.productionOrderNumber}}</div>
                             <div class="col-md-3"><b>Data Inicio: </b> {{ticksToDate(genealogy.startDate)}}</div>
                             <div class="col-md-3"><b>Data Fim: </b>{{ticksToDate(genealogy.endDate)}}</div>
-                            <div class="col-md-4 row"><b>Código da tira: </b><router-link class="link-decoration" :to="{ name: 'Tira',params: { id: genealogy.recipeid }}"><span class="text-primary cursor-class">{{genealogy.recipeCode}}</span></router-link></div>
+                            <div class="col-md-4 row"><b>Código da tira : &nbsp;</b><router-link class="link-decoration" :to="{ name: 'Tira',params: { id: genealogy.recipeid }}"><span class="text-primary cursor-class">{{genealogy.recipeCode}}</span></router-link></div>
                             <div class="col-md-0">
                                 <i class="cursor-class nav-link fa fa-expand" :id="'iconOutput'+genealogy.orderId" aria-hidden="true" @click="verificaColapse('#iconOutput'+genealogy.orderId,'#roloOutput'+(genealogy.orderId),'fa-expand','fa-compress')" v-b-toggle="'roloOutput'+genealogy.orderId"></i>
                             </div>                            
@@ -137,7 +92,7 @@
                                                     <th>Elemento</th>
                                                     <th>Quantidade</th>
                                                     <th>Lote</th>
-                                                    <th>Data</th>
+                                                    <th>Data/Hora</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -156,7 +111,7 @@
                                                 <th>N° do rolo</th>
                                                 <th>Quantidade</th>
                                                 <th>OF</th>
-                                                <th>Data</th>
+                                                <th>Data/Hora</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -173,7 +128,7 @@
                                                 <th>Tipo</th>
                                                 <th>Rastreamento</th>
                                                 <th>Uso</th>
-                                                <th>Data</th>
+                                                <th>Data/Hora</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -192,6 +147,50 @@
             </div>                
         </div>     
     <br>
+
+    <b-modal ref="myModalEdit" no-close-on-backdrop hide-footer title="Filtrar Busca">
+        <div class="modal-body">
+            <div class="row">                
+                <div class="col-8">
+                    <label><b>Filtrar Por </b></label>   
+                    <select class="custom-select form-control form-control-lg" @change="cod='';op='';opName='';inicio='';fim='';recipeCode=''" v-model="fieldFilter">                        
+                        <option value="" selected disabled>Campo para busca</option>
+                        <option value="cod">Código da Tira</option>
+                        <option value="date">Data</option> 
+                        <option value="op">OP</option>                                               
+                    </select>
+                </div>                        
+                <div class="col-12" v-show="fieldFilter=='cod'">
+                    <label for="tira"><b>Código da Tira </b></label>                                  
+                    <input id="tira" class="form-control form-control-lg" v-model="recipeCode" @keyup="prosFim=getResults(RECIPE_API,recipeCode, prosFim); cod=''" >                                                                                 
+                    <div class="auto-complete" v-show="prosFim.length>0">
+                        <b-dropdown-item @click.stop.prevent="recipeCode=r.recipeCode;cod=r.recipeId;prosFim=[]" v-for="(r,index) in prosFim" :key="index">{{ r.recipeCode }}</b-dropdown-item>                                           
+                    </div>
+                </div>
+                <div class="col-12" v-show="fieldFilter=='op'">
+                    <label><b>OP </b></label>                         
+                    <input class="form-control form-control-lg" v-model="opName" @keyup="prosFim=getResults(URL_OP,opName, prosFim); op=''" >                                                                                 
+                    <div class="auto-complete">
+                        <b-dropdown-item @click.stop.prevent="opName=o.productionOrderNumber;op=o.productionOrderId;prosFim=[]" v-for="(o,index) in prosFim" :key="index" style="cursor:pointer">{{ o.productionOrderNumber }}</b-dropdown-item>
+                    </div>
+                </div>
+                <div class="col-6" v-show="fieldFilter=='cod' || fieldFilter=='date'">
+                    <label><b>Início  </b></label>                              
+                    <datetime type="datetime" input-class="form-control form-control-lg" v-model="inicio" format="yyyy-MM-dd HH:mm:ss"></datetime>                         
+                </div>
+                <div class="col-6" v-show="fieldFilter=='cod' || fieldFilter=='date'">
+                    <label><b>Fim </b></label>                  
+                    <datetime type="datetime" input-class="form-control form-control-lg" v-model="fim" format="yyyy-MM-dd HH:mm:ss"></datetime>                 
+                </div>                            
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary btn-sm" :disabled="!fieldFilter || (fieldFilter=='date' && !inicio && !fim) || (fieldFilter=='op' && !op) || (fieldFilter=='cod' && !inicio && !fim && !cod)" @click.stop.prevent="getGenealogy(fieldFilter, op, cod, inicio, fim)">
+                <i class="fa fa-search"></i> Buscar
+            </button>        
+        </div>
+    </b-modal>
+
     <!--                       -->
     <!--                       -->
     <!--        Modal          -->

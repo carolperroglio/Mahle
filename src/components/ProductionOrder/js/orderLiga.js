@@ -11,20 +11,30 @@ Vue.use(VueCookies);
 es6promisse.polyfill();
 
 
+// function paginacao(response, este) {
+//     este.pageAtual = este.startat / este.quantityPage;
+//     este.total = response.data.total;
+//     let fim = Math.ceil(este.total / este.quantityPage);
+//     var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
+//     if (este.pageAtual > 11) {
+//         for (var i = este.pageAtual - 5; i < num; i++)
+//             este.pages[i] = i;
+//     } else {
+//         for (var i = 0; i < num; i++)
+//             este.pages[i] = i;
+//     }
+// }
 function paginacao(response, este) {
     este.pageAtual = este.startat / este.quantityPage;
     este.total = response.data.total;
     let fim = Math.ceil(este.total / este.quantityPage);
-    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5
-    if (este.pageAtual > 11) {
-        for (var i = este.pageAtual - 5; i < num; i++)
-            este.pages[i] = i;
-    } else {
-        for (var i = 0; i < num; i++)
-            este.pages[i] = i;
-    }
+    var num = este.pageAtual + 5 > fim ? fim : este.pageAtual + 5;
+    var comeco = este.pageAtual - 5 > 0 ? este.pageAtual - 5 : 0;
+    este.pages = [];
+    var j = 0;    
+    for (var i = comeco; i < num; i++)
+        este.pages[j++] = i;                
 }
-
 // Endereço IP do Servidor com as APIs
 var ipServerRecipe = process.env.RECIPE_API;
 var ipServer = process.env.OP_API;
@@ -89,12 +99,12 @@ export default {
             msgErro: "",
             erro: false,
             status : {
+                active : 'Ativa',
                 approved : 'Aprovada',
                 ended : 'Finalizada',
                 created : 'Criada',
-                reproved : 'Reprovada',
-                loading : 'Aguardando Aprovação',
-                waiting_approval : 'Aguardando Aprovação',
+                reproved : 'Reprovada',                
+                waiting_approval : 'Em Análise',
                 available : 'Disponível'
             }
         }
@@ -447,7 +457,6 @@ export default {
                     this.showModal("modalInfo");
                     console.log("OP Desativada Falhou" + response.statusText)
                 })
-
         },
         createOp: function(data) {
             // adiciona propriedades necessárias na op que são mandatory

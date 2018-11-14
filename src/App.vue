@@ -103,9 +103,12 @@ axios.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use(
-  response => {
+axios.interceptors.response.use((response) => {
     // intercept the global error
+    // if (reponse!=undefined && reponse.status!=undefined && reponse.status==404) {
+    //   router.push({ name: "Login" });
+    //   console.log( response);      
+    // }
     return response;
   },
   function(error) {
@@ -116,13 +119,6 @@ axios.interceptors.response.use(
     } else if (statuscode == "no-security") {
       router.push({ name: "Login" });
       console.log("status code: " + statuscode);    
-    } else if (statuscode == "Cannot read property 'status' of undefined") {            
-      console.log("status code: " + statuscode);    
-      VueCookies.remove('security');
-      VueCookies.set('username', null);
-      VueCookies.set('status', 'logoff');                  
-      //redireciona para a tela principal STATUS DO MES            
-      router.push( { name: "Login" } );      
     } else if (error.message == "No Security Header in the request") {
       VueCookies.set("status", "No Security Header in the request");
       router.push({ name: "Login" });      
@@ -148,6 +144,13 @@ axios.interceptors.response.use(
     ) {
       //VueCookies.set("status", "500");
       console.log("status code: " + error.response.status);
+    } else if (statuscode == "Cannot read property 'status' of undefined") {            
+      console.log("status code: " + statuscode);    
+      VueCookies.remove('security');
+      VueCookies.set('username', null);
+      VueCookies.set('status', 'logoff');                  
+      //redireciona para a tela principal STATUS DO MES            
+      router.push( { name: "Login" } );      
     } else {
       VueCookies.set("status", "ok");
       console.log("status code: " + statuscode);

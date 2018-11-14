@@ -1,52 +1,27 @@
     /* menu de navegação de OP */
     
     @import url("./../../genericcss/generico.css");
-    body{
-        overflow: hidden;
+    #tabela-op-liga{
+        text-align:center; 
+        margin-top:14rem;
+        margin-bottom: 6rem;
     }
-    @media (min-width: 768px) {
-        .table-margin-liga {
-            margin: 32% 0 6% 0;
-        }
-        .cabecalho-table-po-liga1 {
-            position: fixed;
-            width: 100%;
-            background-color: black;
-            margin: 23.8% 0 0 0;
-            z-index: 4;
-        }
+    .table-responsive {
+        display: table;
+    }
+    .collapse-color {
+        color: #6a7989;
+    }
+    a:hover {
+        color: #929fac;
+    }
+    @media (min-width: 768px) {        
         .cabecalho-table-po-modal-liga {                        
             background-color: black;            
-        }
-        .width-table-context-liga {
-            text-align: center;
-            margin-left: 1%;
-        }
-        .width-table-context-wider-liga {
-            text-align: center;
-        }
-        .col1-5 {
-            width: 10%;
-        }
-        .font-size {
-            font-size: 12px;
-        }
-        .ls2-cabecalho-po-liga {
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            margin-bottom: 0.3%;
-            margin-left: 1%;
-        }
+        }                     
         .nav-prod {
             padding-left: 0.5%;
-        }
-        .collapse-color {
-            color: #6a7989;
-        }
-        a:hover {
-            color: #929fac;
-        }
+        }             
         .card-body-op {
             padding-top: 0.1%;
             margin-bottom: 1%;
@@ -63,61 +38,17 @@
         .card-header {
             padding-top: 0.5%;
             padding-bottom: 0.5%;
-        }
-        .ls1 {
-            text-align: center;
-            vertical-align: middle;
-        }
-        .aling-lb-l {
-            margin-left: 0.1%;
         }
     }
     
     @media (min-width: 960px) {
-        .table-margin-liga {
-            margin: 17% 0 6% 0;
-        }
-        .cabecalho-table-po-liga1 {
-            position: fixed;
-            width: 100%;
-            background-color: black;
-            margin: 14.5% 0 0 0;
-            z-index: 4;
-        }
+        
         .cabecalho-table-po-modal-liga {
             background-color: black;    
-        }
-        .width-table-context-liga {
-            /* width: 13%; */
-            text-align: center;
-            margin-left: 1%;
-        }
-        .width-table-context-wider-liga {
-            /* width: 16%; */
-            text-align: center;
-        }
-        .col1-5 {
-            width: 10%;
-        }
-        .font-size {
-            font-size: 12px;
-        }
-        .ls2-cabecalho-po-liga {
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            margin-bottom: 0.3%;
-            margin-left: 1%;
-        }
+        }                                  
         .nav-prod {
             padding-left: 0.5%;
-        }
-        .collapse-color {
-            color: #6a7989;
-        }
-        a:hover {
-            color: #929fac;
-        }
+        }              
         .card-body-op {
             padding-top: 0.1%;
             margin-bottom: 1%;
@@ -134,86 +65,18 @@
         .card-header {
             padding-top: 0.5%;
             padding-bottom: 0.5%;
-        }
-        .ls1 {
-            text-align: center;
-            vertical-align: middle;
-        }
-        .aling-lb-l {
-            margin-left: 0.1%;
-        }
+        }        
     }
     
-    @media (min-width: 1000px){
-        .table-margin-liga {
-            margin: 18.5% 0 6% 0;
-        }
 
-        .cabecalho-table-po-liga1 {
-            position: fixed;
-            width: 100%;
-            background-color: black;
-            margin: 16% 0 0 0;
-            z-index: 4;
-        }
-    }
-
-    @media (min-width: 1100px){
-        .table-margin-liga {
-            margin: 17% 0 6% 0;
-        }
-
-        .cabecalho-table-po-liga1 {
-            position: fixed;
-            width: 100%;
-            background-color: black;
-            margin: 15% 0 0 0;
-            z-index: 4;
-        }
-
+    @media (min-width: 1100px){        
+   
         .cabecalho-table-po-modal-liga {                        
             background-color: black;            
-        }
-
-        .width-table-context-liga {
-            /* width: 13%; */
-            text-align: center;
-            margin-left: 1%;
-        }
-
-        .width-table-context-wider-liga {
-            /* width: 16%; */
-            text-align: center;
-        }
-        
-        .col1-5 {
-            width: 10%;
-        }
-        
-        .font-size {
-            font-size: 12px;
-        }
-        
-        .ls2-cabecalho-po-liga {
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            margin-bottom: 0.3%;
-            margin-left: 1%;
-        }
-        
+        }                       
         .nav-prod {
             padding-left: 0.5%;
-        }
-        
-        .collapse-color {
-            color: #6a7989;
-        }
-        
-        a:hover {
-            color: #929fac;
-        }
-        
+        }                                     
         .card-body-op {
             padding-top: 0.1%;
             margin-bottom: 1%;
@@ -228,92 +91,24 @@
             margin-bottom: 2%;
             background-color: #ffffff;
         }
-        
+        #tabela-op-liga{
+            text-align:center; 
+            margin-top:16rem;
+        }
         .card-header {
             padding-top: 0.5%;
             padding-bottom: 0.5%;
-        }
-        
-        .ls1 {
-            text-align: center;
-            vertical-align: middle;
-        }
-        
-        .aling-lb-l {
-            margin-left: 0.1%;
-        }
-        
+        }      
     }
 
-    @media (min-width:1400px) {
-        .table-margin-liga {
-            margin: 16% 0 6% 0;
-        }
-
-        .cabecalho-table-po-liga1 {
-            position: fixed;
-            width: 100%;
-            background-color: black;
-            margin: 14% 0 0 0;
-            z-index: 4;
-        }
+    @media (min-width:1400px) {           
 
         .cabecalho-table-po-modal-liga {            
             background-color: black;            
-        }
-
-        .width-table-context-liga {
-            /* width: 13%; */
-            text-align: center;
-            margin-left: 1%;
-        }
-
-        .width-table-context-wider-liga {
-            /* width: 16%; */
-            text-align: center;
-        }
-
-        .col1-5 {
-            width: 10%;
-        }
-
-        .font-size {
-            font-size: 12px;
-        }
-        
-        .ls2-cabecalho-po-liga {
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            margin-bottom: 0.3%;
-            margin-left: 1%;
-        }
-        .ls2-cabecalho-analysis {
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            margin-bottom: 0.3%;
-            /* margin-left: 1%; */
-        }
+        }                
         .nav-prod {
             padding-left: 0.5%;
-        }
-        .title-page-op {
-            text-align: left;
-            color: rgb(68, 68, 70);
-            font-family: sans-serif;
-            font-size: 22px;
-            text-shadow: 1.5px 1.5px 2px #eee, 1.5px 1.5px 0px #707070;
-            position: fixed;
-            top: 12%;
-            left: 0.9%;
-        }
-        .collapse-color {
-            color: #6a7989;
-        }
-        a:hover {
-            color: #929fac;
-        }
+        }           
         .card-body-op {
             padding-top: 0.1%;
             margin-bottom: 1%;
@@ -331,23 +126,4 @@
             padding-top: 0.5%;
             padding-bottom: 0.5%;
         }
-        .ls1 {
-            text-align: center;
-            vertical-align: middle;
-        }
-        .aling-lb-l {
-            margin-left: 0.7%;
-        }
-    }
-    /* @media (min-width:1900px) {
-        .table-margin-liga {
-            margin: 13.8% 0 6% 0 !important;
-        }
-        .cabecalho-table-po-liga1 {
-            position: fixed;
-            width: 100%;
-            background-color: black;
-            margin: 13% 0 0 0 !important;
-            z-index: 4;
-        }
-    } */
+    } 

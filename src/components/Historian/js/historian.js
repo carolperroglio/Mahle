@@ -30,7 +30,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import dt from 'datatables.net';
 require('../../../.././node_modules/vuejs-datatable');
-
+var download = require('../../../.././node_modules/js-file-download');
 import html2canvas from 'html2canvas';
 import 'vue-tiles/dist/vue-tiles.css'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -103,18 +103,17 @@ Array.prototype.groupByProperties = function(properties) {
     }
     return groups;
 };
-//window.Vue;
-Vue.use(ClientTable, {}, false, 'bootstrap4');
-
 var ipReport = process.env.REPORT_API;
+var thingADDRESS = process.env.THINGS_API;
 
 export default {
     name: "Historian",
     data() {
         return {
             api: process.env.API_ADDRESS,
-            url: ipReport + '/gateway/things',
+            url: thingADDRESS + '/api/things',
             urlHist: process.env.HIST_BIGTABLE_API,
+            urlParams: process.env.REPORT_PARAMS,
             urlReport: ipReport,
             urlGatRec: process.env.OP_API,
             urlGatewayOP: ipReport + '/gateway/productionorder?fieldFilter=productionOrderNumber&fieldValue=',
@@ -152,7 +151,7 @@ export default {
             ticksFim: '',
             fieldFilter: '',
             fieldValue: '',
-            thingId: '',
+            thingT: {},
             thingGroup: '',
             thingName: '',
             filename: '',
@@ -181,49 +180,13 @@ export default {
             opName: '',
             prosFim: [],
             erro: '',
+            OPgeral: {},            
             msgErro: '',
             cabecalhoSetas: [false, false, false, false, false, false, false],
             chart: {},
             grafico: '',
-            active: false,            
-            // tableData: {
-            //     options: {
-            //         // Global sort option
-            //       sortable: true,
-            //       // Global edit option
-            //       editable: true,
-            //       // How many items will be shown in each page
-            //       pageCount: 20,                  
-            //     },
-            // },
-            // columns:[
-            //     {label:'Data', field:'Data'},
-            //     {label:'Hora', field:'Hora'},
-            //     {label:'Valor', field:'VM'},
-            //     {label:'LSE Limite Superior de Especificação', field:'LSE'},
-            //     {label:'LSC Limite Superior de Controle', field:'LSC'},
-            //     {label:'LIC Limite Inferior de Controle', field:'LIC'},
-            //     {label:'LIE Limite Inferior de Especificação', field:'LIE'},
-            //     {label:'OP', field:'ordem'},
-            //     {label:'Rolo', field:'rolo'},
-            //     {label:'Tira', field:'codTira'}
-            // ]            
-            // columns: ['Data', 'Hora', 'VM', 'LSE', 'LSC', 'LIC',
-            // 'LIE', 'ordem', 'rolo', 'tira'],
-            // tableData: [
-
-            // ],
-            filter: '',
-            table_columns: [
-                {label: 'id', field: 'id'},
-                {label: 'Username', field: 'user.username', headerClass: 'class-in-header second-class'},
-                {label: 'First Name', field: 'user.first_name'},
-                {label: 'Last Name', field: 'user.last_name'},
-                {label: 'Email', field: 'user.email'},
-                {label: 'address', representedAs: function(row){
-                    return row.address + '<br />' + row.city + ', ' + row.state;
-                }, interpolate: true}
-            ],
+            active: false,                
+            filter: '',      
             table_rows: [
                 //...
                 {
@@ -313,7 +276,7 @@ export default {
             inserted: function (el, binding) {
                 let f = function (evt) {
                     if (binding.value(evt, el)) {
-                        window.removeEventListener('scroll', f)
+                        window.removeEventListener('scroll', f);
                     }
                 }
                 window.addEventListener('scroll', f);
@@ -385,16 +348,15 @@ export default {
         },
         getReportDate() {
             this.providertable = [];
-            this.groups = [];
-
+            this.groups = [];            
             this.carregando = true;
-
+            this.hideModal('myModalEdit');
             var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
             var ticksI = this.dateToTicks(Ini);
             var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
             var ticksF = this.dateToTicks(Fim);
 
-            axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingId +
+            axios.get(this.urlReport + "/api/ReportParameter/Date?thingId=" + this.thingT.thingId +
                 '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
                 // if (response.data.length > 0) {
                 //console.log('Entrou no retorno do get report date')
@@ -405,14 +367,13 @@ export default {
                         this.groups.push(T.group);
                     }
                 })
-
                 setTimeout(() => {
                     this.editGroup(this.groups[0]);
-                    this.newGroup = this.groups[0];
-
+                    this.newGroup = this.groups[0];                    
                     this.carregando = false;
                     this.created();
-                    this.hideModal('myModalEdit');
+                    this.thingNameCabeçalho = this.thingT.thingName;
+                    
                 }, 1000);
                 // }
             }).catch((error) => {
@@ -429,6 +390,7 @@ export default {
                     this.showModal("modalInfo");
                 }
             });
+            
         },
         getReportCode() {
             this.providertable = [];
@@ -441,7 +403,7 @@ export default {
             var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
             var ticksF = this.dateToTicks(Fim);
 
-            axios.get(this.urlReport + "/api/ReportParameter/RecipeCode/" + this.recipeCode + '?thingId' + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
+            axios.get(this.urlReport + "/api/ReportParameter/RecipeCode/" + this.recipeCode + '?thingId' + this.thingT.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF).then((response) => {
                 //console.log('Entrou no retorno do get report code')
 
                 this.data = response.data;
@@ -454,8 +416,9 @@ export default {
                 setTimeout(() => {
                     this.editGroup(this.groups[0]);
                     this.newGroup = this.groups[0];
-                    this.carregando = false;
+                    this.carregando = false;                    
                     this.created();
+                    this.thingNameCabeçalho = this.thingT.thingName;
                     this.hideModal('myModalEdit');
                 }, 1000);
 
@@ -475,63 +438,140 @@ export default {
                 }
             });
         },
+
+        getDatesOP(id){
+            this.datas = {};
+            axios.get(this.urlGatRec + "/api/ProductionOrdersHistStates?ProductionOrderId="+id).then((response)=>{
+                response.data.forEach((estado)=>{
+                    if(estado.state == 'active')
+                        this.datas.inicio = estado.date;                    
+                    else if(estado.state == 'ended')
+                        this.datas.fim = estado.date;
+                });
+                if(!this.datas.fim)
+                    this.datas.fim = ((new Date().getTime() * 10000) + 621355968000000000) - (new Date().getTimezoneOffset() * 600000000);
+            }).catch((error) => {
+                
+            });
+        },
+        toExcel(providertable,thingNameCabeçalho, thingGroup){
+            thingNameCabeçalho = thingNameCabeçalho==undefined?'todos':thingNameCabeçalho;
+            thingGroup = thingGroup==undefined?'todos':thingGroup
+            axios.post(this.urlParams + '/api/historian?tipo=excel&equipamento='+thingNameCabeçalho+'&grupo='+thingGroup, providertable, {responseType: 'arraybuffer'}).then((response) => {                        
+                const url = window.URL.createObjectURL(new Blob([response.data],{type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"}));                        
+                download(response.data,'relatoriodeparametros.xls');                        
+                this.carregando = false;
+            }).catch((error) => {                                              
+                this.carregando = false;                    
+                this.erro = true;
+                this.msgErro = "Erro ao baixar relatório\nMenssagem : ";
+                this.msgErro += error.message;
+                this.showModal("modalInfo");
+            }); 
+        },
         getReportOP() {
             this.providertable = [];
             this.carregando = true;
             this.groups = [];
-
-            var Ini = this.date.toString() + ' ' + this.timeIni.HH + ':' + this.timeIni.mm;
-            var ticksI = this.dateToTicks(Ini);
-            var Fim = this.datef.toString() + ' ' + this.timeFim.HH + ':' + this.timeFim.mm;
-            var ticksF = this.dateToTicks(Fim);
-
-            axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingId + '&startDate=' + ticksI + '&endDate=' + ticksF)
-                .then((response) => {
-                    if (response.data.tags.length > 0) {
-
-
-                        this.data = response.data;
-                        this.tags = response.data.tags;
-                        this.tags.forEach((T) => {
-                            if (!this.groups.includes(T.group)) {
-                                this.groups.push(T.group);
+            axios.get(this.urlGatRec + "/api/ProductionOrdersHistStates?ProductionOrderId="+this.OP)
+                .then((response)=>{                
+                    var datas = {};
+                    response.data.forEach((estado)=>{
+                        if(estado.state == 'active')
+                            datas.inicio = estado.date;                    
+                        else if(estado.state == 'ended')
+                            datas.fim = estado.date;
+                    });
+                    if(!datas.fim)
+                        datas.fim = ((new Date().getTime() * 10000) + 621355968000000000) - (new Date().getTimezoneOffset() * 600000000);
+                    axios.get(this.urlReport + "/api/ReportParameter/ProductionOrder/" + this.OP + "?thingId=" + this.thingT.thingId + '&startDate=' + datas.inicio + '&endDate=' + datas.fim)
+                        .then((response) => {
+                            if (response.data.tags.length > 0) {
+                                this.data = response.data;
+                                this.tags = response.data.tags;
+                                this.tags.forEach((T) => {
+                                    if (!this.groups.includes(T.group)) {
+                                        this.groups.push(T.group);
+                                    }
+                                })
+                                setTimeout(() => {
+                                    this.editGroup(this.groups[0]);
+                                    this.newGroup = this.groups[0];
+                                    this.carregando = false;
+                                    this.created();
+                                    this.thingNameCabeçalho = this.thingT.thingName;
+                                    this.hideModal('myModalEdit');
+                                }, 1000);
+                            } else {
+                                this.carregando = false;
+                                this.erro = true;
+                                this.msgErro = "Sem dados no período selecionado";
+                                this.showModal("modalInfo");
                             }
-                        })
-                        setTimeout(() => {
-                            this.editGroup(this.groups[0]);
-                            this.newGroup = this.groups[0];
-                            this.carregando = false;
-                            this.created();
-                            this.hideModal('myModalEdit');
-                        }, 1000);
-                    } else {
-                        this.carregando = false;
-                        this.erro = true;
-                        this.msgErro = "Sem dados no período selecionado";
-                        this.showModal("modalInfo");
-                    }
 
-                }).catch((error) => {
-                    this.hideModal('myModalEdit');
-                    if (error.response != undefined && error.response.status == '404') {
-                        this.carregando = false;
-                        this.erro = true;
-                        this.msgErro = "Sem dados no período selecionado";
-                        this.showModal("modalInfo");
-                    } else {
-                        this.carregando = false;
-                        this.erro = true;
-                        this.msgErro = error.message;
-                        this.showModal("modalInfo");
-                    }
-                });
+                        }).catch((error) => {
+                            this.hideModal('myModalEdit');
+                            if (error.response != undefined && error.response.status == '404') {
+                                this.carregando = false;
+                                this.erro = true;
+                                this.msgErro = "Sem dados no período selecionado";
+                                this.showModal("modalInfo");
+                            } else {
+                                this.carregando = false;
+                                this.erro = true;
+                                this.msgErro = error.message;
+                                this.showModal("modalInfo");
+                            }
+                        });
+                    }).catch((error) => {
+                
+                    });
         },
+        
+        getReportGeral(){
+            this.carregando = true;                  
+            this.hideModal("myModalGeral");
+            axios.get(this.urlGatRec + "/api/ProductionOrdersHistStates?ProductionOrderId="+this.OPgeral)
+                .then((response)=>{                                    
+                    var datas = {};
+                    response.data.forEach((estado)=>{
+                        if(estado.state == 'active')
+                            datas.inicio = estado.date;                    
+                        else if(estado.state == 'ended')
+                            datas.fim = estado.date;
+                    });
+                    if(!datas.fim)
+                        datas.fim = ((new Date().getTime() * 10000) + 621355968000000000) - (new Date().getTimezoneOffset() * 600000000);
+                                    
+                    axios.get(this.urlParams + '/api/reportparameter?startdate='+datas.inicio+'&enddate='+datas.fim, {responseType: 'arraybuffer'}).then((response) => {                        
+                        const url = window.URL.createObjectURL(new Blob([response.data],{type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"}));                        
+                        download(response.data,'relatoriogeral.xls');                        
+                        this.carregando = false;
+                    }).catch((error) => {                                              
+                        this.carregando = false;                    
+                        this.erro = true;
+                        this.msgErro = "Erro ao baixar relatório\nMenssagem : ";
+                        this.msgErro += error.message;
+                        this.showModal("modalInfo");
+                    });                     
+            }).catch((error) => {
+                this.hideModal("myModalGeral");
+                this.carregando = false; 
+                this.erro = true;
+                this.msgErro = "Erro ao buscar informações da OP\nMenssagem : ";
+                this.msgErro += error.message;
+                this.showModal("modalInfo");
+            });
+            
+        },
+
+
         toPdf() {
 
             var headersss = this.headers;
             var PDFprovider = this.providertable;
             var thingNameCabecalho = this.thingNameCabeçalho + ' Grupo: ' + this.thingGroup;
-
+            
 
             this.chart["export"].capture({}, function() {
                 this.grafico = new Image();
@@ -542,7 +582,7 @@ export default {
                     this.grafico.src = data;
                     console.log("Export");
 
-                    var doc = new jsPDF('p', 'pt');
+                    var doc = new jsPDF('l', 'pt');
                     var img = new Image();
                     var imgLogo = new Image();
                     img.src = logo;
@@ -550,10 +590,10 @@ export default {
 
 
                     doc.setFontSize(20);
-                    doc.addImage(img, "PNG", 10, 10, 50, 20);
-                    doc.addImage(imgLogo, "JPG", 510, 10, 60, 20);
+                    doc.addImage(img, "PNG", 10, 10, 80, 20);
+                    doc.addImage(imgLogo, "JPG", 510, 10, 80, 20);
                     doc.text(35, 65, thingNameCabecalho)
-                    doc.addImage(this.grafico, "PNG", 10, 100, 600, 400);
+                    doc.addImage(this.grafico, "PNG", 10, 100, 800, 400);
                     var columns = [];
                     var title = "title";
                     var dataKey = "dataKey";
@@ -566,20 +606,21 @@ export default {
                             columns.push(obj);
                         }
                     })
-
+                    doc.autoTable([],[]);
+                    doc.addPage();
                     console.log(columns);
                     doc.autoTable(columns, PDFprovider, {
                         // addPageContent: pageContent,
                         showHeader: 'everyPage',
                         margin: {
-                            top: 530,
-                            left: 20,
-                            right: 20
+                            //top: 530,
+                            left: 11,
+                            right: 100
                         },
                         halign: 'middle', // left, center, right
                         valign: 'middle',
-                        columnWidth: 20,
-                        tableWidth: 600
+                        columnWidth: 30,
+                        tableWidth: 810
                     });
 
                     // doc.addImage(table, "PNG", 20, 550, 600, 200);
@@ -620,6 +661,7 @@ export default {
         },
 
         dateToTicks(dateTime) {
+            console.log(dateTime);
             var dateToTransform = dateTime.slice(3, 6) +
                 dateTime.slice(0, 3) +
                 dateTime.slice(6, 10) +
@@ -734,11 +776,11 @@ export default {
         },
 
         handleScroll(){
-            if (window.scrollY > 500) 
-                this.active=true;                
+            if (window.scrollY > 530) {                
+                this.active=true;      
+            }          
             else
                 this.active=false;     
-
         },
 
         editGroup(grupo) {
@@ -789,9 +831,9 @@ export default {
                 if (R.group == group || R.group == 'Linha') {
                     if(R.group != 'Linha'){
                         this.thingGroup = R.group;
-                        this.thingId = obj.thingId;
+                        this.thingT.thingId = obj.thingId;
                         this.things.forEach((t) => {
-                            if (this.thingId == t.thingId &&  R.group != 'Linha') {
+                            if (this.thingT.thingId == t.thingId &&  R.group != 'Linha') {
                                 this.thingNameCabecalho = t.thingName;
                             }
                         })
@@ -909,12 +951,13 @@ export default {
             this.chart = window.AmCharts.makeChart("chartrast", {
                 "type": "serial",
                 "categoryField": "category",
+                "addClassNames": true,
                 "autoMarginOffset": 40,
                 "marginRight": 60,
                 "marginTop": 60,
                 "startDuration": 0,
                 "borderColor": "#C67373",
-                "fontSize": 13,
+                "fontSize": 16,
                 "theme": "light",
                 "libs": {
                     "autoLoad": false
@@ -977,9 +1020,8 @@ export default {
     /*****************/
 
     beforeMount: function() {
-        this.showModal('myModalEdit');
-        this.getThings();
-        this.init();
+        //this.showModal('myModalEdit');
+        this.getThings();        
     },
 
 }

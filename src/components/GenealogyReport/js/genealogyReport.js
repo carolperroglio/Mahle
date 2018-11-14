@@ -165,7 +165,7 @@ export default {
                 Subject: '',
                 Author: 'Spi Integradora',
                 CreatedDate: new Date()
-            };
+            };            
             this.genealogys.forEach(g => {                                
                 //XLSX.utils.book_append_sheet(wb, animalWS, g.productionOrderNumber);
                 wb.SheetNames.push(g.productionOrderNumber);  
@@ -187,7 +187,7 @@ export default {
                     saida.ligas.forEach(liga => {                        
                         data.push(["NUMERO DA ORDEM : "+ liga.orderNumber,"DATA : "+this.ticksToDate(liga.startDate), "QUANTIDADE : "+ liga.quantity]);                    
                         data.push([]);
-                        data.push(["ELEMENTO","LOTE","QUANTIDADE","DATA"]);  
+                        data.push(["<b>ELEMENTO</b>","LOTE","QUANTIDADE","DATA"]);  
                         liga.productsInput.forEach(produto => {
                             data.push([produto.product, produto.batch,produto.quantity , this.ticksToDate(produto.date)]);
                         });
@@ -200,11 +200,14 @@ export default {
                 wb.Sheets[g.productionOrderNumber] = XLSX.utils.aoa_to_sheet(
                     //["Inicio da ordem : "+g.startDate, "Fim da ordem : "+g.endDate, "Código da tira : "+g.recipeCode], 
                     data                   
-                );                
+                ); 
+                wb.Sheets[g.productionOrderNumber]['!cols'] = [{wch:30},{wch:30},{wch:30},{wch:30},{wch:30},{wch:30},];
+                console.log(wb.Sheets[g.productionOrderNumber]['!cols']);
                 // XLSX.utils.
                 console.log(wb.Sheets[g.productionOrderNumber]);                
                 
-            });                  
+            });  
+            
             XLSX.writeFile(wb, 'book.xlsx');         
         },
 
@@ -463,4 +466,7 @@ export default {
             return pros;
         },        
     },     
+    beforeMount(){
+        this.showModal('myModalEdit');
+    }
 }

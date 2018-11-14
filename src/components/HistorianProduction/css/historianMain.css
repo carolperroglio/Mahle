@@ -1,126 +1,18 @@
 @import url("./../../genericcss/generico.css");
-@media (min-width: 768px) {
-    .cabecalho-table-ap {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -6.2% 0 0 0;
-        z-index: 4;
-    }
-    .ls2-cabecalho-ap {
-        /* width: 24.2%; */
-        width: 100%;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        margin-bottom: 0.3%;
-        margin-left: 0.2%;
-    }
-    .router {
-        margin: 0.1% 0 0.1% 5%;
-    }
-    .table-size {
-        width: 98.2%;
-    }
-    .nav-item-hp {
-        margin-left: 2%;
-        margin-top: 4%;
-    }
-    .ls10 {
-        text-align: center;
-        vertical-align: middle;
-        padding-bottom: 0.5%;
-    }
-    .table-margin-hm {
-        margin-top: 28.5%;
-        margin-bottom: 6%;
-    }
+ 
+.router {
+    margin: 0.1% 0 0.1% 5%;
 }
-
-@media (min-width: 960px) {
-    .cabecalho-table-ap {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -2% 0 0 0;
-        z-index: 4;
-    }
-    .ls2-cabecalho-ap {
-        /* width: 24.2%; */
-        width: 100%;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        margin-bottom: 0.3%;
-        margin-left: 0.2%;
-    }
-    .router {
-        margin: 0.1% 0 0.1% 5%;
-    }
-    .table-size {
-        width: 98.2%;
-    }
-    .nav-item-hp {
-        margin-left: 2%;
-        margin-top: 4%;
-    }
-    .ls10 {
-        text-align: center;
-        vertical-align: middle;
-    }
-    .table-margin-hm {
-        margin-top: 18%;
-        margin-bottom: 6%;
-    }
-    .cabecalho-table-ap {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -2.2% 0 0 0;
-        z-index: 4;
-    }
+.apontamentos{
+    margin-top:16rem; 
+    text-align:center;
+    width: 100%;
 }
-
-@media (min-width: 1400px) {
-    .cabecalho-table-ap {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -2% 0 0 0;
-        z-index: 4;
-    }
-    .ls2-cabecalho-ap {
-        /* width: 24.2%; */
-        width: 100%;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        margin-bottom: 0.3%;
-        margin-left: 0.2%;
-    }
-    .router {
-        margin: 0.1% 0 0.1% 5%;
-    }
-    .table-size {
-        width: 98.2%;
-    }
-    .nav-item-hp {
-        margin-left: 2%;
-        margin-top: 4%;
-    }
-    .ls10 {
-        text-align: center;
-        vertical-align: middle;
-    }
-    .table-margin-hm {
-        margin-top: 15.5%;
-        margin-bottom: 6%;
-    }
-    .cabecalho-table-ap {
-        position: fixed;
-        width: 100%;
-        background-color: black;
-        margin: -2.2% 0 0 0;
-        z-index: 4;
+.table-responsive {
+    display: table;
+}
+@media screen and (min-width: 1900px) {
+    .apontamentos{
+        margin-top:18rem;
     }
 }
